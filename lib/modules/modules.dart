@@ -1,2 +1,3 @@
 export 'home/home.dart';
-export 'notfound/not_found_page.dart';
+export 'splash/splash.dart';
+export 'unknown/unknown_page.dart';

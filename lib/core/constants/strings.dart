@@ -9,6 +9,8 @@ const String typoRoundFont = 'TypoRound';
 ///==================== Images ====================
 
 const String appLogoImg = 'assets/images/app-logo.png';
+const String appLogoWhiteImg = 'assets/images/pooulp-logo-full-white.png';
+
 const String appLogoSymbolImg = 'assets/images/app-logo-symbol.png';
 const String appLogoTextImg = 'assets/images/app-logo-text.png';
 const String socialMediaBrowsingImg = 'assets/images/social-media-browsing.png';
@@ -31,6 +33,7 @@ const double double10 = 10.0;
 const double double12 = 12.0;
 const double double16 = 16.0;
 const double double32 = 32.0;
+const double double48 = 48.0;
 
 double getWidth = Get.width;
 double getHeight = Get.height;

@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
+import 'core/core.dart';
+import 'routes/routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.light,
+  );
   runApp(const MyApp());
 }
 
@@ -9,10 +22,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      builder: (context, child) => GestureDetector(
+        onTap: () {
+          unFocusKeyBoard(context);
+        },
+        child: child,
+      ),
+      initialRoute: Routes.splashRoute,
+      getPages: AppPages.routes,
+      unknownRoute: AppPages.unknownRoute,
       title: 'Pooulp Flutter',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: ThemeManager.createTheme(
+        AppThemeLight(),
       ),
       home: const MyHomePage(title: 'Pooulp Flutter Demo Home Page'),
     );
@@ -49,10 +71,23 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
+              style: TextStyle(
+                fontFamily: typoRoundFont,
+                fontSize: 20,
+              ),
+            ),
+            const Text(
+              'You have pushed the button this many times:',
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            MaterialButton(
+              child: const Text('home'),
+              onPressed: () {
+                Get.toNamed(Routes.homeRoute);
+              },
             ),
           ],
         ),

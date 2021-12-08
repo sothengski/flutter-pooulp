@@ -1,4 +1,4 @@
-package com.example.pooulp_flutter
+package com.soteca.pooulp_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -8,5 +8,5 @@ class Routes {
   static const feedRoute = '/feed';
   static const myOffersRoute = '/myOffer';
   static const settingsRoute = '/settings';
-  static const notFoundRoute = '/notfound';
+  static const unknownRoute = '/unknown';
 }

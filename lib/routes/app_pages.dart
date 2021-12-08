@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pooulp_flutter/modules/modules.dart';
 
+import '../modules/modules.dart';
 import 'routes.dart';
 
 class AppPages {
@@ -8,16 +8,16 @@ class AppPages {
   static String splashRoute = Routes.splashRoute;
 
   static final unknownRoute = GetPage(
-    name: Routes.notFoundRoute,
-    page: () => const NotfoundPage(),
+    name: Routes.unknownRoute,
+    page: () => const UnknownRoutePage(),
   );
 
   static final List<GetPage> routes = [
-    // GetPage(
-    //   name: Routes.splashRoute,
-    //   page: () => const SplashPage(),
-    //   binding: SplashBinding(),
-    // ),
+    GetPage(
+      name: Routes.splashRoute,
+      page: () => const SplashPage(),
+      binding: SplashBinding(),
+    ),
     GetPage(
       name: Routes.homeRoute,
       page: () => const HomePage(),

@@ -9,7 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
+    // DeviceOrientation.portraitDown,
   ]);
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light,
@@ -29,9 +29,11 @@ class MyApp extends StatelessWidget {
         },
         child: child,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: Routes.splashRoute,
       getPages: AppPages.routes,
       unknownRoute: AppPages.unknownRoute,
+      defaultTransition: Transition.fade,
       title: 'Pooulp Flutter',
       theme: ThemeManager.createTheme(
         AppThemeLight(),

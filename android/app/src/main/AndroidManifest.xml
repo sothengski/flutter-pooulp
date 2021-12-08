@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pooulp_flutter">
+    package="com.soteca.pooulp_flutter">
    <application
-        android:label="pooulp_flutter"
+        android:label="Pooulp"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

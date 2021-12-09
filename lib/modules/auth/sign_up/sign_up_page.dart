@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/core.dart';
-import '../../routes/routes.dart';
-import 'home.dart';
+import '../../../core/core.dart';
+import '../../modules.dart';
 
-class HomePage extends GetView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+class SignUpPage extends GetView<SignUpController> {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('home'),
+        title: const Text('SignIn'),
       ),
       body: Center(
         child: Column(
@@ -29,15 +28,9 @@ class HomePage extends GetView<HomeController> {
               'You have pushed the button this many times:',
             ),
             Text(
-              'Home',
+              'SignIn',
               style: Theme.of(context).textTheme.headline4,
             ),
-            MaterialButton(
-              onPressed: () {
-                Get.toNamed(Routes.signInRoute);
-              },
-              child: const Text('Sign In'),
-            )
           ],
         ),
       ),

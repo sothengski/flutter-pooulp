@@ -6,6 +6,10 @@ const String typoRoundFont = 'TypoRound';
 
 ///==================== Icons ====================
 
+const String facebookLogoImg = 'assets/icons/facebook-logo.png';
+const String googleLogoImg = 'assets/icons/google-logo.png';
+const String linkedInLogoImg = 'assets/icons/linkedin-logo.png';
+
 ///==================== Images ====================
 
 const String appLogoImg = 'assets/images/app-logo.png';
@@ -34,6 +38,7 @@ const double double12 = 12.0;
 const double double16 = 16.0;
 const double double32 = 32.0;
 const double double48 = 48.0;
+const double double72 = 72.0;
 
 double getWidth = Get.width;
 double getHeight = Get.height;

@@ -28,15 +28,15 @@ class AppPages {
     //   page: () => const OnBoardingPage(),
     //   binding: OnboardingBinding(),
     // ),
-    // GetPage(
-    //   name: Routes.signUpRoute,
-    //   page: () => const SignUpPage(),
-    //   binding: SignUpBinding(),
-    // ),
-    // GetPage(
-    //   name: Routes.signInRoute,
-    //   page: () => const SignInPage(),
-    //   binding: SignInBinding(),
-    // ),
+    GetPage(
+      name: Routes.signUpRoute,
+      page: () => const SignUpPage(),
+      binding: SignUpBinding(),
+    ),
+    GetPage(
+      name: Routes.signInRoute,
+      page: () => const SignInPage(),
+      binding: SignInBinding(),
+    ),
   ];
 }

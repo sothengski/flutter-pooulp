@@ -36,6 +36,7 @@ const double double8 = 8.0;
 const double double10 = 10.0;
 const double double12 = 12.0;
 const double double16 = 16.0;
+const double double24 = 24.0;
 const double double32 = 32.0;
 const double double48 = 48.0;
 const double double72 = 72.0;

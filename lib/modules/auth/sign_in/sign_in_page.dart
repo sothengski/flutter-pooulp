@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/core.dart';
 
+import '../../../core/core.dart';
+import '../../../routes/app_routes.dart';
 import '../../modules.dart';
 
 class SignInPage extends GetView<SignInController> {
@@ -11,6 +12,10 @@ class SignInPage extends GetView<SignInController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: GestureDetector(
         onTap: () => unFocusKeyBoard(context),
         child: SizedBox(
@@ -21,9 +26,6 @@ class SignInPage extends GetView<SignInController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: getHeight * 0.1,
-                ),
                 const Padding(
                   padding: EdgeInsets.only(
                     left: double72,
@@ -33,9 +35,9 @@ class SignInPage extends GetView<SignInController> {
                     image: AssetImage(appLogoWhiteImg),
                   ),
                 ),
-                SizedBox(
-                  height: getHeight * 0.03,
-                ),
+                // SizedBox(
+                //   height: getHeight * 0.05,
+                // ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: SignInForm(),
@@ -48,13 +50,16 @@ class SignInPage extends GetView<SignInController> {
                   marginTop: double16,
                   marginBottom: double16,
                 ),
-                const CustomTextWidget(
-                  text: "Register Now!",
-                  color: AppColors.whiteColor,
-                  textDecoration: TextDecoration.underline,
-                  fontWeight: FontWeight.w300,
-                  fontSize: 16,
-                  marginBottom: double16,
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.signUpRoute),
+                  child: const CustomTextWidget(
+                    text: "Register Now!",
+                    color: AppColors.whiteColor,
+                    textDecoration: TextDecoration.underline,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                    marginBottom: double16,
+                  ),
                 ),
               ],
             ),

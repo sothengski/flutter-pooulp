@@ -66,7 +66,7 @@ class CustomMaterialButton extends StatelessWidget {
         onPressed: onPressed,
         child: CustomTextWidget(
           text: text,
-          color: AppColors.whiteColor,
+          color: textColor,
           fontSize: fontSize,
           fontWeight: fontWeight,
         ),

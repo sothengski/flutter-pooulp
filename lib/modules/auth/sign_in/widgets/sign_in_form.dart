@@ -9,14 +9,13 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomContainerWidget(
       child: Padding(
-        padding: const EdgeInsets.all(double16),
+        padding: const EdgeInsets.all(double24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const CustomTextWidget(
               text: 'Login',
-              marginTop: 20.0,
-              fontSize: 20.0,
+              fontSize: 24.0,
               fontWeight: FontWeight.w700,
               color: AppColors.primaryColor,
             ),

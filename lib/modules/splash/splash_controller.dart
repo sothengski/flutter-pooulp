@@ -15,11 +15,11 @@ class SplashController extends GetxController {
       () => {
         // if (AuthServices().isUserLoggedIn() == true)
         //   {
-        Get.offNamed(Routes.homeRoute),
+        // Get.offNamed(Routes.homeRoute),
         //   }
         // else
         //   {
-        //     Get.offNamed(Routes.signInRoute),
+        Get.offNamed(Routes.signInRoute),
         //   }
       },
     );

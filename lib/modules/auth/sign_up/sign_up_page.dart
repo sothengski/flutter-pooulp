@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../core/core.dart';
 import '../../modules.dart';
 
-class SignUpPage extends GetView<SignUpController> {
+class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   @override
@@ -49,13 +48,11 @@ class SignUpPage extends GetView<SignUpController> {
                     textColor: AppColors.primaryColor,
                     buttonColor: AppColors.whiteColor,
                     onPressed: () {
-                      customSnackbar(
-                        msgTitle: "Click Student Button.",
-                        msgContent: "Click Student Button Description.",
-                      );
                       customGeneralDialog(
                         context: context,
-                        widget: const SignUpForm(),
+                        widget: const SignUpForm(
+                          userType: "Student",
+                        ),
                       );
                     },
                   ),
@@ -69,13 +66,12 @@ class SignUpPage extends GetView<SignUpController> {
                     textColor: AppColors.primaryColor,
                     buttonColor: AppColors.whiteColor,
                     onPressed: () {
-                      customSnackbar(
-                        msgTitle: "Click Enterprise Button.",
-                        msgContent: "Click Enterprise Button Description.",
-                      );
                       customGeneralDialog(
                         context: context,
-                        widget: const SignUpForm(),
+                        widget: const SignUpForm(
+                          userType: "Professional",
+                          isStudent: false,
+                        ),
                       );
                     },
                   ),

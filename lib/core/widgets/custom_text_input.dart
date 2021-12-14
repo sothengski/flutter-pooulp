@@ -18,6 +18,7 @@ class CustomTextInput extends StatelessWidget {
   final String? errorText;
   final bool? enabled;
   final bool? obscureText;
+  final bool? suffixIcon;
   final Widget? inputIcon;
   final IconData? prefixIcon;
   final TextCapitalization? textCapitalization;
@@ -28,7 +29,7 @@ class CustomTextInput extends StatelessWidget {
   final bool? counter;
   // final ValueChanged<String> onChanged;
   final bool? showPassword;
-  final Function? changeShowPassword;
+  final VoidCallback? changeShowPassword;
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatterList;
   final bool? enableSuggestions;
@@ -56,6 +57,7 @@ class CustomTextInput extends StatelessWidget {
     this.onValidator,
     this.onChanged,
     this.obscureText = false,
+    this.suffixIcon = false,
     this.inputIcon,
     this.prefixIcon,
     this.textCapitalization,
@@ -97,7 +99,7 @@ class CustomTextInput extends StatelessWidget {
             )
           else
             const SizedBox.shrink(),
-          const SizedBox(height: 5.0),
+          const SizedBox(height: double4),
           Row(
             children: <Widget>[
               inputIcon ?? const SizedBox.shrink(),
@@ -128,7 +130,9 @@ class CustomTextInput extends StatelessWidget {
                       height: double.minPositive,
                     ),
                     counterText: "",
-                    // counter: counter == true ? null : Container(),
+                    counter: counter == true
+                        ? null
+                        : Container(), // Validate Message
                     // focusColor: primaryColor,
                     // errorText: errorText,
                     errorStyle: const TextStyle(
@@ -140,14 +144,22 @@ class CustomTextInput extends StatelessWidget {
                     //   // color: primaryColor,
                     // ),
                     prefixText: " ",
-                    suffixIcon: obscureText!
-                        ? IconButton(
-                            icon: const Icon(
-                              Icons.visibility_outlined,
-                              color: AppColors.grey400Color,
-                            ),
-                            onPressed: () => changeShowPassword,
-                          )
+                    suffixIcon: suffixIcon!
+                        ? obscureText == true
+                            ? IconButton(
+                                icon: const Icon(
+                                  Icons.visibility_outlined,
+                                  color: AppColors.grey400Color,
+                                ),
+                                onPressed: changeShowPassword,
+                              )
+                            : IconButton(
+                                icon: const Icon(
+                                  Icons.visibility_off_outlined,
+                                  color: AppColors.grey400Color,
+                                ),
+                                onPressed: changeShowPassword,
+                              )
                         : null,
                     filled: isFilled,
                     fillColor: fillColor,

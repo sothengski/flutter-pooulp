@@ -7,6 +7,8 @@ class SignUpBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<SignUpController>(
       () => SignUpController(),
+      fenix: true,
     );
+    // Get.put<SignUpController>(SignUpController());
   }
 }

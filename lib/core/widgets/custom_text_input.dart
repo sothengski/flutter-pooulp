@@ -41,6 +41,7 @@ class CustomTextInput extends StatelessWidget {
   final double? height;
   final Color? fillColor;
   final bool? isFilled;
+  final double? borderRadius;
 
   const CustomTextInput({
     this.controller,
@@ -79,6 +80,7 @@ class CustomTextInput extends StatelessWidget {
     this.height = 80.0,
     this.fillColor = AppColors.grey100Color,
     this.isFilled = false,
+    this.borderRadius = 8.0,
   });
 
   @override
@@ -130,14 +132,14 @@ class CustomTextInput extends StatelessWidget {
                       height: double.minPositive,
                     ),
                     counterText: "",
-                    counter: counter == true
-                        ? null
-                        : Container(), // Validate Message
+                    // counter: counter == true
+                    //     ? null
+                    //     : Container(), // Validate Message
                     // focusColor: primaryColor,
                     // errorText: errorText,
-                    errorStyle: const TextStyle(
-                      fontSize: 16.0,
-                    ),
+                    // errorStyle: const TextStyle(
+                    //   fontSize: 16.0,
+                    // ),
 
                     // prefixIcon: Icon(
                     //   prefixIcon,
@@ -163,31 +165,36 @@ class CustomTextInput extends StatelessWidget {
                         : null,
                     filled: isFilled,
                     fillColor: fillColor,
-
-                    border: const OutlineInputBorder(
-                      // borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(
-                          10.0,
-                        ),
-                      ),
-                    ),
                     hintText: hintText,
                     hintStyle: const TextStyle(
                       color: AppColors.grey400Color,
                     ),
 
+                    border: OutlineInputBorder(
+                      // borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          borderRadius!,
+                        ),
+                      ),
+                    ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(borderRadius!),
                       borderSide: const BorderSide(
                         width: 1.5,
                         color: AppColors.grey800Color,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(borderRadius!),
                       borderSide: const BorderSide(
                         color: AppColors.grey300Color,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(borderRadius!),
+                      borderSide: const BorderSide(
+                        color: AppColors.redColor,
                       ),
                     ),
                     // contentPadding: const EdgeInsets.only(

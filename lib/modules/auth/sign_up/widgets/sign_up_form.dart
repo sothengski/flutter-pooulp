@@ -74,9 +74,9 @@ class SignUpForm extends GetView<SignUpController> {
                               CustomTextInput(
                                 controller: controller.tokenCtrl,
                                 inputTitle: "Token",
-                                hintText: "Token",
+                                hintText: "Enter the Token",
                                 isFilled: true,
-                                topPadding: double16,
+                                topPadding: double12,
                                 validator: Validator().notEmptyValidator,
                               ),
                               CustomTextInput(
@@ -84,7 +84,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 inputTitle: "First name",
                                 hintText: "Enter your first name",
                                 isFilled: true,
-                                topPadding: double16,
+                                topPadding: double12,
                                 validator: Validator().notEmptyValidator,
                                 // onChanged: (value) => null,
                                 // onSaved: (value) => controller
@@ -95,7 +95,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 inputTitle: "Last name",
                                 hintText: "Enter your last name",
                                 isFilled: true,
-                                topPadding: double16,
+                                topPadding: double12,
                                 validator: Validator().notEmptyValidator,
                               ),
                               CustomTextInput(
@@ -103,13 +103,13 @@ class SignUpForm extends GetView<SignUpController> {
                                 inputTitle: "Email",
                                 hintText: "Enter your email",
                                 isFilled: true,
-                                topPadding: double16,
+                                topPadding: double12,
                                 validator: Validator().emailValidator,
                               ),
                               Row(
                                 children: [
                                   Expanded(
-                                    flex: 35,
+                                    flex: 40,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -120,19 +120,24 @@ class SignUpForm extends GetView<SignUpController> {
                                           textAlign: TextAlign.left,
                                           // marginBottom: double4,
                                         ),
+                                        const SizedBox(
+                                          height: 3.0,
+                                        ),
                                         GestureDetector(
                                           onTap: () => Get.bottomSheet(
                                             Container(
-                                              height: getHeight * 0.4,
+                                              height: getHeight * 0.5,
                                               decoration: const ShapeDecoration(
                                                 color: AppColors.whiteColor,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(16),
-                                                    topRight:
-                                                        Radius.circular(16),
+                                                    topLeft: Radius.circular(
+                                                      16,
+                                                    ),
+                                                    topRight: Radius.circular(
+                                                      16,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -148,51 +153,118 @@ class SignUpForm extends GetView<SignUpController> {
                                               ),
                                             ),
                                           ),
-                                          child: Card(
-                                            color: AppColors.grey100Color,
-                                            // margin: const EdgeInsets.all(5),
-                                            elevation: 0,
-                                            shape: RoundedRectangleBorder(
-                                              side: const BorderSide(
-                                                color: AppColors.grey300Color,
-                                                width: 1.5,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            clipBehavior:
-                                                Clip.antiAliasWithSaveLayer,
-                                            child: Container(
-                                              alignment: Alignment.centerLeft,
-                                              height: 60,
-                                              child: Obx(
-                                                () => Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                    left: double16,
+                                          child: Container(
+                                            alignment: Alignment.centerLeft,
+                                            // height: 60,
+                                            // color: AppColors.grey100Color,
+                                            padding: EdgeInsets.zero,
+                                            child: FormField(
+                                              validator: (_) {
+                                                if (controller.selectedCountry
+                                                            .value.phoneCode !=
+                                                        null &&
+                                                    controller.phoneNumberCtrl
+                                                        .text.isNotEmpty) {
+                                                  return null;
+                                                }
+                                                return '';
+                                              },
+                                              builder: (
+                                                FormFieldState<String> state,
+                                              ) {
+                                                return InputDecorator(
+                                                  // alignedDropdown: true,
+                                                  decoration: InputDecoration(
+                                                    fillColor:
+                                                        AppColors.grey100Color,
+                                                    filled: true,
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        8.0,
+                                                      ),
+                                                    ),
+                                                    errorText: state.hasError
+                                                        ? state.errorText
+                                                        : null,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        8.0,
+                                                      ),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                        color: AppColors
+                                                            .grey300Color,
+                                                      ),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        8.0,
+                                                      ),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                        color: AppColors
+                                                            .red900Color,
+                                                      ),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        8.0,
+                                                      ),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                        color: AppColors
+                                                            .grey800Color,
+                                                      ),
+                                                    ),
                                                   ),
-                                                  child: controller
-                                                              .selectedCountry
-                                                              .value
-                                                              .phoneCode ==
-                                                          null
-                                                      ? const CustomTextWidget(
-                                                          text: "Country Code",
-                                                          color: AppColors
-                                                              .grey400Color,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        )
-                                                      : CustomTextWidget(
-                                                          text: controller
-                                                              .selectedCountry
-                                                              .value
-                                                              .displayCountryCode,
-                                                          color: AppColors
-                                                              .blackColor,
-                                                        ),
-                                                ),
-                                              ),
+                                                  child: Obx(
+                                                    () => controller
+                                                                .selectedCountry
+                                                                .value
+                                                                .phoneCode ==
+                                                            null
+                                                        ? const CustomTextWidget(
+                                                            text:
+                                                                "Country Code",
+                                                            color: AppColors
+                                                                .grey400Color,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          )
+                                                        : Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                height: 15.0,
+                                                                child:
+                                                                    CircleFlag(
+                                                                  controller
+                                                                      .selectedCountry
+                                                                      .value
+                                                                      .isoCode
+                                                                      .toString(),
+                                                                ),
+                                                              ),
+                                                              CustomTextWidget(
+                                                                marginLeft: 4.0,
+                                                                text: controller
+                                                                    .selectedCountry
+                                                                    .value
+                                                                    .displayCountryCode,
+                                                                color: AppColors
+                                                                    .blackColor,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           ),
                                         ),
@@ -200,11 +272,11 @@ class SignUpForm extends GetView<SignUpController> {
                                     ),
                                   ),
                                   Expanded(
-                                    flex: 65,
+                                    flex: 60,
                                     child: CustomTextInput(
                                       controller: controller.phoneNumberCtrl,
                                       inputTitle: "",
-                                      hintText: 'Phone Number',
+                                      hintText: 'Enter Phone Number',
                                       isFilled: true,
                                       topPadding: double12,
                                       leftPadding: double4,
@@ -227,9 +299,9 @@ class SignUpForm extends GetView<SignUpController> {
                                 inputTitle: "Password",
                                 hintText: "Enter your password",
                                 suffixIcon: true,
-                                obscureText: controller.showPassword.value,
+                                obscureText: !controller.showPassword.value,
                                 isFilled: true,
-                                topPadding: double16,
+                                topPadding: double12,
                                 validator: Validator().passwordValidator,
                                 inputFormatterList: [
                                   FilteringTextInputFormatter.deny(
@@ -247,9 +319,9 @@ class SignUpForm extends GetView<SignUpController> {
                                 hintText: "Enter your password confirmation",
                                 suffixIcon: true,
                                 obscureText:
-                                    controller.showPasswordConfirmation.value,
+                                    !controller.showPasswordConfirmation.value,
                                 isFilled: true,
-                                topPadding: double16,
+                                topPadding: double12,
                                 bottomPadding:
                                     isStudent == true ? double32 : 0.0,
                                 validator: Validator().passwordValidator,
@@ -272,7 +344,7 @@ class SignUpForm extends GetView<SignUpController> {
                                   inputTitle: "Enterprise Name",
                                   hintText: "Enter your enterprise name",
                                   isFilled: true,
-                                  topPadding: double16,
+                                  topPadding: double12,
                                   validator: Validator().notEmptyValidator,
                                 ),
                               if (isStudent == true)
@@ -283,20 +355,33 @@ class SignUpForm extends GetView<SignUpController> {
                                   inputTitle: "Enterprise ID",
                                   hintText: "Enter your enterprise ID",
                                   isFilled: true,
-                                  topPadding: double16,
+                                  topPadding: double12,
                                   bottomPadding: double32,
                                   // validator: Validator().password,
                                 ),
-                              CustomMaterialButton(
-                                text: "Register",
-                                fontSize: 20.0,
-                                buttonWidth: getWidth,
-                                onPressed: () {
-                                  unFocusKeyBoard(context);
-                                  controller.registerButtonOnClick(
-                                    userType: userType,
-                                  );
-                                },
+                              Obx(
+                                () => Visibility(
+                                  visible:
+                                      controller.isSubmitBtnProcessing.value,
+                                  child: const LoadingWidget(),
+                                ),
+                              ),
+                              Obx(
+                                () => Visibility(
+                                  visible:
+                                      !controller.isSubmitBtnProcessing.value,
+                                  child: CustomMaterialButton(
+                                    text: "Register",
+                                    fontSize: 20.0,
+                                    buttonWidth: getWidth,
+                                    onPressed: () {
+                                      unFocusKeyBoard(context);
+                                      controller.registerButtonOnClick(
+                                        userType: userType,
+                                      );
+                                    },
+                                  ),
+                                ),
                               ),
                               Row(
                                 children: const [

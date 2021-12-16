@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 // matching various patterns for kinds of data
 class Validator {
-  Validator();
+  // Validator();
   static const String emptySpaceRegExpPattern = r'^\S+$';
   static const String avoidSpaceRegExpPattern = r'\s';
   static const String emailRegExpPattern =
@@ -16,10 +16,15 @@ class Validator {
       r"^[a-zA-Z0-9]+\.+[a-zA-Z0-9]"; //user.name
   static const String numberRegExpPattern = r'^\d+$';
 
+  static const requiredFieldMsg = "This field is required.";
+  static const formatNotValid = "format is not valid.";
   String? emailValidator(String? value) {
     final RegExp regex = RegExp(emailRegExpPattern);
-    if (!regex.hasMatch(value!)) {
-      return 'validator.email'.tr;
+
+    if (value!.isEmpty || regex.hasMatch(emptySpaceRegExpPattern)) {
+      return requiredFieldMsg;
+    } else if (!regex.hasMatch(value)) {
+      return "Email $formatNotValid (e.g: a@xyz.co)";
     } else {
       return null;
     }
@@ -28,7 +33,7 @@ class Validator {
   String? passwordValidator(String? value) {
     final RegExp regex = RegExp(length6RegExppattern);
     if (value!.isEmpty || regex.hasMatch(emptySpaceRegExpPattern)) {
-      return 'validator.passwordRequired'.tr;
+      return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {
       return 'Password should be 6~15 characters.';
     } else {
@@ -39,7 +44,7 @@ class Validator {
   String? nameValidator(String? value) {
     final RegExp regex = RegExp(noNumberRegExpPattern);
     if (value!.isEmpty) {
-      return 'validator.fieldRequired'.tr;
+      return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {
       return 'validator.name'.tr;
     } else {
@@ -50,7 +55,7 @@ class Validator {
   String? userNameValidator(String? value) {
     final RegExp regex = RegExp(userNameRegExpPattern);
     if (value!.isEmpty) {
-      return 'validator.usernameRequired'.tr;
+      return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {
       return 'validator.name';
     } else {
@@ -62,7 +67,7 @@ class Validator {
     const String pattern = r'^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$';
     final RegExp regex = RegExp(pattern);
     if (value!.isEmpty) {
-      return 'validator.customerRequired'.tr;
+      return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {
       return 'validator.number'.tr;
     } else {
@@ -74,7 +79,7 @@ class Validator {
     const String pattern = r'(^[0-9]{6,15}$)';
     final RegExp regex = RegExp(pattern);
     if (value!.isEmpty) {
-      return 'validator.customerRequired'.tr;
+      return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {
       return 'validator.number'.tr;
     } else {
@@ -85,11 +90,19 @@ class Validator {
   String? phoneNumberValidator(String? value) {
     final RegExp regExp = RegExp(phoneNumberRegExpPattern);
     if (value!.isEmpty) {
-      return 'Please enter phone number';
+      return requiredFieldMsg;
     } else if (!regExp.hasMatch(value)) {
-      return 'Please enter valid phone number';
+      return "Phone Number $formatNotValid";
     }
     return null;
+  }
+
+  bool? isPhoneNumberValidate(String? value) {
+    final RegExp regExp = RegExp(phoneNumberRegExpPattern);
+    if (value!.isEmpty || !regExp.hasMatch(value)) {
+      return false;
+    }
+    return true;
   }
 
   String amount(String value) {
@@ -103,7 +116,7 @@ class Validator {
 
   String? notEmptyValidator(String? value) {
     if (value!.isEmpty) {
-      return 'validator.fieldRequired'.tr;
+      return requiredFieldMsg;
     } else {
       return null;
     }

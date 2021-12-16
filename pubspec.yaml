@@ -10,9 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  get: ^4.5.1
-  phone_form_field: ^4.3.1
-  # country_code_picker: ^2.0.2
+  get: ^4.6.1
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:

@@ -5,7 +5,7 @@ class CircleFlag extends StatelessWidget {
   final String? countryCode;
   final double? size;
 
-  CircleFlag(String countryCode, {this.size})
+  CircleFlag(String countryCode, {this.size = 40.0})
       : countryCode = countryCode.toLowerCase();
 
   @override

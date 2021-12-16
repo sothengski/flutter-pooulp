@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../../data/data.dart';
 
 import 'sign_up.dart';
 
@@ -10,5 +11,9 @@ class SignUpBinding implements Bindings {
       fenix: true,
     );
     // Get.put<SignUpController>(SignUpController());
+
+    Get.lazyPut<AuthProvider>(
+      () => AuthProvider(),
+    );
   }
 }

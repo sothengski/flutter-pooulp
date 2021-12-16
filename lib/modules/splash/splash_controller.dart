@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../../core/core.dart';
 import '../../routes/routes.dart';
 

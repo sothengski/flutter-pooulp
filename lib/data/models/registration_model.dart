@@ -64,16 +64,16 @@ class RegistrationModel {
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        'firstName': firstName,
-        'lastName': lastName,
+        'first_name': firstName,
+        'last_name': lastName,
         'email': email,
-        'phone1CountryCode': phone1CountryCode,
+        'phone1_country_code': phone1CountryCode,
         'phone1': phone1,
         'password': password,
-        'passwordConfirmation': passwordConfirmation,
-        'uiLanguage': uiLanguage,
-        'accountType': accountType,
-        'invitationToken': invitationToken,
+        'password_confirmation': passwordConfirmation,
+        'ui_language': uiLanguage,
+        'account_type': accountType,
+        'invitation_token': invitationToken,
         'enterprise_name': enterpriseName,
         'enterprise_id': enterpriseID,
       }..removeWhere((_, v) => v == null);

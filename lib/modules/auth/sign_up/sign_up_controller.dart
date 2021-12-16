@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
+import '../../../routes/routes.dart';
 
 class SignUpController extends GetxController {
+  final authProvider = Get.find<AuthProvider>();
+
   final registrationFormKey = GlobalKey<FormState>();
   final formFieldKey = GlobalKey<FormFieldState>();
 
@@ -27,8 +30,11 @@ class SignUpController extends GetxController {
   RxBool showPassword = false.obs;
   RxBool showPasswordConfirmation = false.obs;
   RxBool registerLoading = false.obs;
+  RxBool isSubmitBtnProcessing = false.obs;
 
   late List<String> countries;
+
+  late LoginModel loginRepsonseData;
 
   @override
   void dispose() {
@@ -66,6 +72,7 @@ class SignUpController extends GetxController {
     enterpriseNameCtrl.clear();
     enterpriseIDCtrl.clear();
     tokenCtrl.clear();
+    isSubmitBtnProcessing.value = false;
   }
 
   bool matchingPassword() {
@@ -73,6 +80,10 @@ class SignUpController extends GetxController {
       return true;
     }
     return false;
+  }
+
+  bool swithcingBoolValueRegisterBtn({bool? value}) {
+    return isSubmitBtnProcessing.value = value!;
   }
 
   dynamic registerButtonOnClick({String? userType}) async {
@@ -85,6 +96,7 @@ class SignUpController extends GetxController {
           bgColor: AppColors.redColor,
         );
       } else {
+        swithcingBoolValueRegisterBtn(value: true);
         final registrationInputData = RegistrationModel(
           firstName: firstNameCtrl.text.trim(),
           lastName: lastNameCtrl.text.trim(),
@@ -94,17 +106,47 @@ class SignUpController extends GetxController {
           password: passwordCtrl.text.trim(),
           passwordConfirmation: passwordConfirmationCtrl.text.trim(),
           uiLanguage: "en",
-          accountType: userType,
+          accountType: userType!.toLowerCase(),
           invitationToken: tokenCtrl.text.trim(),
           enterpriseName: enterpriseNameCtrl.text.trim(),
           enterpriseID: enterpriseIDCtrl.text.trim(),
         );
-        print("registrationInputData: $registrationInputData");
+        loginRepsonseData = await authProvider.postNewUserRegistrationAPI(
+          registrationData: registrationInputData,
+        );
+        swithcingBoolValueRegisterBtn(value: false);
+        // if (loginRepsonseData.token != null) {
+        // customSnackbar(
+        //   msgTitle: "Successful Register.",
+        //   msgContent: ".",
+        //   bgColor: AppColors.greenColor,
+        // );
+        Get.dialog(
+          const CustomAlertDialog(
+            // title: 'signUp.successfulTitleMgs'.tr,
+            // content: 'signUp.successfulContentMgs'.tr,
+            title: "SUCCESS!",
+            content: "You're now a member of Pooulp.",
+            routePath: Routes.homeRoute,
+            type: AlertDialogType.success,
+            buttonLabel: "Continue",
+          ),
+          barrierDismissible: true,
+        );
+        clearData();
+        // } else {
+        //   customSnackbar(
+        //     msgTitle: "OOPS!",
+        //     msgContent: "Something went wrong.",
+        //     bgColor: AppColors.redColor,
+        //   );
+        // }
+
       }
     } else {
       customSnackbar(
-        msgTitle: "Please check your input data.",
-        msgContent: "Please fill out the require fields.",
+        msgTitle: "Please Complete the required fields.",
+        msgContent: "",
         bgColor: AppColors.redColor,
       );
     }

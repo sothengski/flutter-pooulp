@@ -25,7 +25,11 @@ class CountryListSelector extends StatelessWidget {
         const SizedBox(
           height: 70,
           width: double.infinity,
-          child: CustomTextWidget(text: "search"),
+          child: CustomTextWidget(
+            text: "search",
+            textAlign: TextAlign.center,
+            marginTop: double10,
+          ),
           // SearchBox(
           //   autofocus: widget.searchAutofocus,
           //   onChanged: _onSearch,
@@ -44,12 +48,10 @@ class CountryListSelector extends StatelessWidget {
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     final CountryModel country = countryList[index];
-
                     return ListTile(
                       key: Key(country.isoCode.toString()),
                       leading: CircleFlag(
                         country.isoCode.toString(),
-                        size: 40,
                       ),
                       title: Align(
                         alignment: AlignmentDirectional.centerStart,

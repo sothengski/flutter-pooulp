@@ -63,7 +63,7 @@ class CountryListSelector extends StatelessWidget {
                       subtitle: Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          country.displayCountryCode,
+                          country.phoneCode!,
                           textDirection: TextDirection.ltr,
                           textAlign: TextAlign.start,
                         ),

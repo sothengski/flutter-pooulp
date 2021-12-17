@@ -7,7 +7,7 @@ class CustomTextInput extends StatelessWidget {
   final TextEditingController? controller;
   final String? inputTitle;
   final String? hintText;
-  final TextInputType? inputType;
+  final TextInputType? keyboardType;
   final TextInputAction? inputAction;
   final Function? onSubmitted;
   final bool? isLastField;
@@ -47,7 +47,7 @@ class CustomTextInput extends StatelessWidget {
     this.controller,
     this.inputTitle,
     this.hintText,
-    this.inputType,
+    this.keyboardType = TextInputType.text,
     this.inputAction = TextInputAction.next,
     this.isLastField = false,
     this.onSubmitted,
@@ -118,7 +118,7 @@ class CustomTextInput extends StatelessWidget {
                   // maxLines: obscureText ? 1 : null,
                   initialValue: initialText,
                   enabled: enabled,
-                  keyboardType: inputType,
+                  keyboardType: keyboardType,
                   obscureText: obscureText!,
                   // obscureText: !showPassword,
                   cursorColor: AppColors.blackColor,

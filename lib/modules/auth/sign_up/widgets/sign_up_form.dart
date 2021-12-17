@@ -105,6 +105,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 isFilled: true,
                                 topPadding: double12,
                                 validator: Validator().emailValidator,
+                                keyboardType: TextInputType.emailAddress,
                               ),
                               Row(
                                 children: [
@@ -269,6 +270,7 @@ class SignUpForm extends GetView<SignUpController> {
                                       controller: controller.phoneNumberCtrl,
                                       inputTitle: "",
                                       hintText: 'Enter Phone Number',
+                                      keyboardType: TextInputType.phone,
                                       isFilled: true,
                                       topPadding: double12,
                                       leftPadding: double4,
@@ -281,6 +283,11 @@ class SignUpForm extends GetView<SignUpController> {
                                         FilteringTextInputFormatter.deny(
                                           RegExp(
                                             Validator.avoidSpaceRegExpPattern,
+                                          ),
+                                        ),
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(
+                                            Validator.numberRegExpPattern,
                                           ),
                                         ),
                                       ],

@@ -249,7 +249,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                                 text: controller
                                                                     .selectedCountry
                                                                     .value
-                                                                    .displayCountryCode,
+                                                                    .phoneCode,
                                                                 color: AppColors
                                                                     .blackColor,
                                                               ),

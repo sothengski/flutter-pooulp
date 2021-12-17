@@ -145,7 +145,7 @@ class SignUpController extends GetxController {
           firstName: firstNameCtrl.text.trim(),
           lastName: lastNameCtrl.text.trim(),
           email: emailCtrl.text.trim(),
-          phone1CountryCode: selectedCountry.value.displayCountryCode,
+          phone1CountryCode: selectedCountry.value.phoneCode,
           phone1: phoneNumberCtrl.text.trim(),
           password: passwordCtrl.text.trim(),
           passwordConfirmation: passwordConfirmationCtrl.text.trim(),

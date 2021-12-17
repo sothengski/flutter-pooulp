@@ -9,7 +9,7 @@ class Validator {
   static const String emailRegExpPattern =
       r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
   static const String phoneNumberRegExpPattern = r'(^(?:[+0]9)?[0-9]{8,12}$)';
-  static const String length6RegExppattern = r'^.{6,}$';
+  static const String lengthMin6RegExppattern = r'^.{6,}$';
   static const String noNumberRegExpPattern =
       r"^[a-zA-Z]+(([',. -][a-zA-Z ])[a-zA-Z]*)*$";
   static const String userNameRegExpPattern =
@@ -32,7 +32,7 @@ class Validator {
   }
 
   String? passwordValidator(String? value) {
-    final RegExp regex = RegExp(length6RegExppattern);
+    final RegExp regex = RegExp(lengthMin6RegExppattern);
     if (value!.isEmpty || regex.hasMatch(emptySpaceRegExpPattern)) {
       return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {

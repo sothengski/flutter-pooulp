@@ -75,11 +75,19 @@ class SignUpController extends GetxController {
     isSubmitBtnProcessing.value = false;
   }
 
-  bool matchingPassword() {
+  bool isMatchingPassword() {
     if (passwordCtrl.text.trim() == passwordConfirmationCtrl.text.trim()) {
       return true;
     }
     return false;
+  }
+
+  String? matchingPasswords() {
+    if (isMatchingPassword()) {
+      return Validator().passwordValidator(passwordConfirmationCtrl.text);
+    } else {
+      return 'Mismatched passwords.';
+    }
   }
 
   bool swithcingBoolValueRegisterBtn({bool? value}) {
@@ -125,7 +133,7 @@ class SignUpController extends GetxController {
   dynamic registerButtonOnClick({String? userType}) async {
     registerLoading.value = true;
     if (registrationFormKey.currentState!.validate()) {
-      if (!matchingPassword()) {
+      if (!isMatchingPassword()) {
         customSnackbar(
           msgTitle: "Please check your password.",
           msgContent: "Your password does not match.",

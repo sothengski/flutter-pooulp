@@ -86,6 +86,42 @@ class SignUpController extends GetxController {
     return isSubmitBtnProcessing.value = value!;
   }
 
+  String? isPhoneNumberValidate({bool? isPhoneNumberField = false}) {
+    if (selectedCountry.value.phoneCode == null ||
+        phoneNumberCtrl.text.isEmpty ||
+        Validator().isPhoneNumberValidate(
+              phoneNumberCtrl.text,
+            ) ==
+            false) {
+      if (selectedCountry.value.phoneCode == null &&
+          phoneNumberCtrl.text.isEmpty) {
+        return isPhoneNumberField == false
+            ? "This field is required."
+            : "This field is required.";
+      }
+      if (selectedCountry.value.phoneCode == null &&
+          Validator().isPhoneNumberValidate(
+                phoneNumberCtrl.text,
+              ) ==
+              false) {
+        return isPhoneNumberField == false
+            ? "This field is required."
+            : '${Validator().phoneNumberValidator(phoneNumberCtrl.text)}';
+      }
+      if (selectedCountry.value.phoneCode == null) {
+        return isPhoneNumberField == false ? "This field is required." : "";
+      }
+      if (phoneNumberCtrl.text.isEmpty) {
+        return isPhoneNumberField == false ? "" : "This field is required.";
+      }
+      //else condition
+      return isPhoneNumberField == false
+          ? ''
+          : '${Validator().phoneNumberValidator(phoneNumberCtrl.text)}';
+    }
+    return null;
+  }
+
   dynamic registerButtonOnClick({String? userType}) async {
     registerLoading.value = true;
     if (registrationFormKey.currentState!.validate()) {

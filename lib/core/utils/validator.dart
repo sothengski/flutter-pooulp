@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 // matching various patterns for kinds of data
 class Validator {
-  // Validator();
+  Validator();
   static const String emptySpaceRegExpPattern = r'^\S+$';
   static const String avoidSpaceRegExpPattern = r'\s';
   static const String emailRegExpPattern =
@@ -18,6 +18,7 @@ class Validator {
 
   static const requiredFieldMsg = "This field is required.";
   static const formatNotValid = "format is not valid.";
+
   String? emailValidator(String? value) {
     final RegExp regex = RegExp(emailRegExpPattern);
 
@@ -97,7 +98,7 @@ class Validator {
     return null;
   }
 
-  bool? isPhoneNumberValidate(String? value) {
+  bool isPhoneNumberValidate(String? value) {
     final RegExp regExp = RegExp(phoneNumberRegExpPattern);
     if (value!.isEmpty || !regExp.hasMatch(value)) {
       return false;

@@ -159,16 +159,8 @@ class SignUpForm extends GetView<SignUpController> {
                                             // color: AppColors.grey100Color,
                                             padding: EdgeInsets.zero,
                                             child: FormField(
-                                              validator: (_) {
-                                                if (controller.selectedCountry
-                                                            .value.phoneCode !=
-                                                        null &&
-                                                    controller.phoneNumberCtrl
-                                                        .text.isNotEmpty) {
-                                                  return null;
-                                                }
-                                                return '';
-                                              },
+                                              validator: (_) => controller
+                                                  .isPhoneNumberValidate(),
                                               builder: (
                                                 FormFieldState<String> state,
                                               ) {
@@ -280,8 +272,10 @@ class SignUpForm extends GetView<SignUpController> {
                                       isFilled: true,
                                       topPadding: double12,
                                       leftPadding: double4,
-                                      validator:
-                                          Validator().phoneNumberValidator,
+                                      validator: (_) =>
+                                          controller.isPhoneNumberValidate(
+                                        isPhoneNumberField: true,
+                                      ),
                                       maxLength: 13,
                                       inputFormatterList: [
                                         FilteringTextInputFormatter.deny(

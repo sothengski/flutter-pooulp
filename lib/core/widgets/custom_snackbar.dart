@@ -13,6 +13,12 @@ void customSnackbar({
   Get.snackbar(
     msgTitle.toString(),
     msgContent.toString(),
+    messageText: CustomTextWidget(
+      text: msgContent,
+      fontWeight: FontWeight.w500,
+      color: textColor,
+      maxLine: 5,
+    ),
     snackPosition: SnackPosition.TOP,
     duration: duration,
     backgroundColor: bgColor,

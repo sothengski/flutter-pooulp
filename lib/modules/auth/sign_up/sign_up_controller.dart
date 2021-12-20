@@ -5,7 +5,7 @@ import '../../../core/core.dart';
 import '../../../data/data.dart';
 import '../../../routes/routes.dart';
 
-class SignUpController extends GetxController {
+class SignUpController extends GetxController with StateMixin<dynamic> {
   final authProvider = Get.find<AuthProvider>();
 
   final registrationFormKey = GlobalKey<FormState>();
@@ -141,7 +141,7 @@ class SignUpController extends GetxController {
         );
       } else {
         swithcingBoolValueRegisterBtn(value: true);
-        final registrationInputData = RegistrationModel(
+        final registrationInputData = UserModel(
           firstName: firstNameCtrl.text.trim(),
           lastName: lastNameCtrl.text.trim(),
           email: emailCtrl.text.trim(),
@@ -155,37 +155,35 @@ class SignUpController extends GetxController {
           enterpriseName: enterpriseNameCtrl.text.trim(),
           enterpriseID: enterpriseIDCtrl.text.trim(),
         );
-        loginRepsonseData = await authProvider.postNewUserRegistrationAPI(
+        authProvider
+            .registerNewUserAPI(
           registrationData: registrationInputData,
+        )
+            .then(
+          (Response value) {
+            Get.dialog(
+              const CustomAlertDialog(
+                title: "SUCCESS!",
+                content: "You're now a member of Pooulp.",
+                routePath: Routes.homeRoute,
+                type: AlertDialogType.success,
+                buttonLabel: "Continue",
+              ),
+              barrierDismissible: true,
+            );
+            clearData();
+            change(value, status: RxStatus.success());
+          },
+          onError: (error) {
+            customSnackbar(
+              msgTitle: "OOPS!",
+              msgContent: "Something went wrong.\n$error",
+              bgColor: AppColors.redColor,
+            );
+            change(null, status: RxStatus.error(error.toString()));
+          },
         );
         swithcingBoolValueRegisterBtn(value: false);
-        // if (loginRepsonseData.token != null) {
-        // customSnackbar(
-        //   msgTitle: "Successful Register.",
-        //   msgContent: ".",
-        //   bgColor: AppColors.greenColor,
-        // );
-        Get.dialog(
-          const CustomAlertDialog(
-            // title: 'signUp.successfulTitleMgs'.tr,
-            // content: 'signUp.successfulContentMgs'.tr,
-            title: "SUCCESS!",
-            content: "You're now a member of Pooulp.",
-            routePath: Routes.homeRoute,
-            type: AlertDialogType.success,
-            buttonLabel: "Continue",
-          ),
-          barrierDismissible: true,
-        );
-        clearData();
-        // } else {
-        //   customSnackbar(
-        //     msgTitle: "OOPS!",
-        //     msgContent: "Something went wrong.",
-        //     bgColor: AppColors.redColor,
-        //   );
-        // }
-
       }
     } else {
       customSnackbar(

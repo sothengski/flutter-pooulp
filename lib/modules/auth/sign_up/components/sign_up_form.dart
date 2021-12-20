@@ -156,8 +156,6 @@ class SignUpForm extends GetView<SignUpController> {
                                           ),
                                           child: Container(
                                             alignment: Alignment.centerLeft,
-                                            // height: 60,
-                                            // color: AppColors.grey100Color,
                                             padding: EdgeInsets.zero,
                                             child: FormField(
                                               validator: (_) => controller
@@ -253,6 +251,10 @@ class SignUpForm extends GetView<SignUpController> {
                                                                 color: AppColors
                                                                     .blackColor,
                                                               ),
+                                                              // const Icon(
+                                                              //   Icons
+                                                              //       .arrow_drop_down,
+                                                              // ),
                                                             ],
                                                           ),
                                                   ),

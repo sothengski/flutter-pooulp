@@ -16,8 +16,13 @@ class Validator {
       r"^[a-zA-Z0-9]+\.+[a-zA-Z0-9]"; //user.name
   static const String numberRegExpPattern = r'^\d+$';
 
+  static const requiredMsg = "This is required.";
   static const requiredFieldMsg = "This field is required.";
+
   static const formatNotValid = "format is not valid.";
+  static const inValidFieldMsg = "This is invalid.";
+
+  static const enterAValidField = "Please enter a valid";
 
   String? emailValidator(String? value) {
     final RegExp regex = RegExp(emailRegExpPattern);
@@ -25,7 +30,7 @@ class Validator {
     if (value!.isEmpty || regex.hasMatch(emptySpaceRegExpPattern)) {
       return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {
-      return "Email $formatNotValid (e.g: a@xyz.co)";
+      return "$enterAValidField Email(e.g: a@xyz.co)";
     } else {
       return null;
     }
@@ -93,7 +98,7 @@ class Validator {
     if (value!.isEmpty) {
       return requiredFieldMsg;
     } else if (!regExp.hasMatch(value)) {
-      return "Phone Number $formatNotValid";
+      return "$enterAValidField Phone number.";
     }
     return null;
   }

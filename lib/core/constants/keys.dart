@@ -14,6 +14,6 @@ class APIEndPoints {
   // 'http://uat-api.pooulp.eu'; //QAS BASEURL
   // 'pooulp.eu'; //Production BASEURL
 
-  static const String signInEndPoint = '$baseUrlPooulp/login';
-  static const String registerNewUserEndPoint = '$baseUrlPooulp/register';
+  static const String signInEndPoint = '/login';
+  static const String registerNewUserEndPoint = '/register';
 }

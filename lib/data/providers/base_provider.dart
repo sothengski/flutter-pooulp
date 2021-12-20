@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../core/core.dart';
 
 class BaseProvider extends GetConnect {
   @override
@@ -8,7 +9,7 @@ class BaseProvider extends GetConnect {
     // final String userToken = AuthService().getToken();
 
     //1.base_url
-    httpClient.baseUrl = '';
+    httpClient.baseUrl = APIEndPoints.baseUrlPooulp;
     //2.
     httpClient.defaultContentType = "application/json";
     httpClient.timeout = const Duration(seconds: 45);

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class RegistrationModel {
+class UserModel {
   final String? firstName;
   final String? lastName;
   final String? email;
@@ -20,7 +20,7 @@ class RegistrationModel {
   // final List<int>? spokenLanguagesList;
   // final List<String>? fields;
 
-  const RegistrationModel({
+  const UserModel({
     required this.firstName,
     required this.lastName,
     required this.email,
@@ -41,11 +41,11 @@ class RegistrationModel {
     // this.fields,
   });
 
-  factory RegistrationModel.fromJson(String str) =>
-      RegistrationModel.fromMap(json.decode(str) as Map<String, dynamic>);
+  factory UserModel.fromJson(String str) =>
+      UserModel.fromMap(json.decode(str) as Map<String, dynamic>);
 
-  factory RegistrationModel.fromMap(Map<String, dynamic> map) {
-    return RegistrationModel(
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
       firstName: map['first_name'] as String?,
       lastName: map['last_name'] as String?,
       email: map['email'] as String?,

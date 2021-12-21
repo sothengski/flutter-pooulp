@@ -14,7 +14,7 @@ class CountryModel {
   /// returns "+ [phoneCode]"
   // String get displayCountryCode => '+ $phoneCode';
 
-  factory CountryModel.fromMap(Map<String, String> map) => CountryModel(
+  factory CountryModel.fromJson(Map<String, String> map) => CountryModel(
         name: map['name'],
         isoCode: map['isoCode'],
         iso3Code: map['iso3Code'],

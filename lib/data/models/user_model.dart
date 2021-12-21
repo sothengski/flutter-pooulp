@@ -21,15 +21,15 @@ class UserModel {
   // final List<String>? fields;
 
   const UserModel({
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.phone1CountryCode,
-    required this.phone1,
-    required this.password,
-    required this.passwordConfirmation,
-    required this.uiLanguage,
-    required this.accountType,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phone1CountryCode,
+    this.phone1,
+    this.password,
+    this.passwordConfirmation,
+    this.uiLanguage,
+    this.accountType,
     this.invitationToken,
     this.enterpriseName,
     this.enterpriseID,
@@ -41,10 +41,10 @@ class UserModel {
     // this.fields,
   });
 
-  factory UserModel.fromJson(String str) =>
-      UserModel.fromMap(json.decode(str) as Map<String, dynamic>);
+  factory UserModel.userFromJson(String str) =>
+      UserModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
+  factory UserModel.fromJson(Map<String, dynamic> map) {
     return UserModel(
       firstName: map['first_name'] as String?,
       lastName: map['last_name'] as String?,
@@ -61,9 +61,9 @@ class UserModel {
     );
   }
 
-  String toJson() => json.encode(toMap());
+  String userToJson() => json.encode(toJson());
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         'first_name': firstName,
         'last_name': lastName,
         'email': email,

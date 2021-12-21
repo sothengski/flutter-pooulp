@@ -1,80 +1,71 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
 import '../data.dart';
 
-// abstract class IAuthProvider {
-//   Future<Response<LoginModel>> postNewUserRegistrationAPI({
-//     required RegistrationModel? registrationData,
-//   });
-// }
-
 class AuthProvider extends BaseProvider {
-  Future<Response<LoginModel>> loginAPI({
+  Future<LoginModel> loginAPI({
     required UserModel? loginData,
   }) async {
-    final dataResponse = await post(
-      APIEndPoints.signInEndPoint,
-      loginData!.toJson(),
-    );
-    print('Response Data: ${dataResponse.body}');
-
-    if (dataResponse.hasError) {
-      return Future.error(dataResponse.body.toString());
+    try {
+      final dataResponse = await post(
+        APIEndPoints.signInEndPoint,
+        loginData!.userToJson(),
+      );
+      if (dataResponse.hasError) {
+        throw responseBodyHandler(resp: dataResponse);
+      } else {
+        final data = json.decode(dataResponse.bodyString.toString());
+        return LoginModel.fromJson(data as Map<String, dynamic>);
+      }
+    } catch (e) {
+      return Future.error(e.toString());
     }
-    return dataResponse.body
-        as Response<LoginModel>; //LoginModel.fromJson(dataResponse.toString());
   }
 
-  //implements IAuthProvider {
-  // @override
-  // Future<Response<LoginModel>> postNewUserRegistrationAPI({
-  //   required RegistrationModel? registrationData,
-  // }) async {
-  //   final response = await post(
-  //     "/register",
-  //     registrationData,
-  //   );
-  //   final data = LoginModel.fromJson(response.body.toString());
-  //   return Response(
-  //     statusCode: response.statusCode,
-  //     statusText: response.statusText,
-  //     body: data,
-  //   );
-  // }
-  Future<Response<LoginModel>> registerNewUserAPI({
+  Future<LoginModel> registerNewUserAPI({
     required UserModel? registrationData,
   }) async {
-    // LoginModel? retrievedResponse;
-    // try {
-    final dataResponse = await post(
-      APIEndPoints.registerNewUserEndPoint,
-      registrationData!.toJson(),
-    );
-    print('User created: ${dataResponse.body}');
-
-    if (dataResponse.hasError) {
-      return Future.error(dataResponse.body.toString());
-      // throw Exception('Error: ${dataResponse.statusText}');
+    try {
+      final dataResponse = await post(
+        APIEndPoints.registerNewUserEndPoint,
+        registrationData!.userToJson(),
+      );
+      if (dataResponse.hasError) {
+        throw responseBodyHandler(resp: dataResponse);
+        // return Future.error(dataResponse.body.toString());
+        // throw Exception('Error: ${dataResponse.statusText}');
+      } else {
+        final data = json.decode(dataResponse.bodyString.toString());
+        return LoginModel.fromJson(data as Map<String, dynamic>);
+      }
+    } catch (e) {
+      return Future.error(e.toString());
     }
-    // if (response.statusCode! < 205) {
-    //   final apiResponse = json.decode(response.bodyString.toString());
-    //   return LoginModel.fromMap(apiResponse as Map<String, dynamic>);
-    // } else {
-    //   customSnackbar(
-    //     msgTitle: "Failure to register!",
-    //     msgContent: "${response.body}",
-    //     duration: const Duration(seconds: 5),
-    //     bgColor: AppColors.redAccent400Color,
-    //   );
-    //   throw "${response.statusCode}";
-    // }
-    // } catch (e) {
-    //   print('Error creating user: $e');
-    // return Future.error(e.toString());
-    // }
+  }
 
-    return dataResponse.body
-        as Response<LoginModel>; //LoginModel.fromJson(dataResponse.toString());
+  Object responseBodyHandler({Response? resp}) {
+    return '''${resp!.body['invitation_token']?[0] != null ? "\n- ${resp.body['invitation_token']?[0]}" : ""}'''
+            '''${resp.body['email'] != null ? "\n- ${resp.body!['email']?[0]}" : ""}'''
+            '''${resp.body!['password'] != null ? "\n- ${resp.body!['password']?[0]}" : ""}'''
+            '''${resp.body['message'] != null ? "\n- ${resp.body!['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}" : ""}'''
+        // "${reps.body['code'] != null ? "\n- ${reps.body!['code']}" : ""}"
+        ;
   }
 }
+
+// RESPONSE CODES#
+// 200: Success
+// 202: Accepted
+// 400: Bad request (missing or invalid params)
+// 401: Unauthorized (invalid API key)
+// 402: Payment required (organization disabled or usage exceeded)
+// 403: Forbidden (insufficient permissions)
+// 404: Not found
+// 409: Conflict
+// 429: Too many requests (rate limit exceeded, no state change, or selective throttling)
+// 451: Unavailable for legal reasons (country blacklisted)
+// 500: Internal server error
+// 503: Service temporarily unavailable

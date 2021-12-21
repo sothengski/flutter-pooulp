@@ -13,10 +13,10 @@ class LoginModel {
     this.accountType,
   });
 
-  factory LoginModel.fromJson(String str) =>
-      LoginModel.fromMap(json.decode(str) as Map<String, dynamic>);
+  factory LoginModel.loginFromJson(String str) =>
+      LoginModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
-  factory LoginModel.fromMap(Map<String, dynamic> map) {
+  factory LoginModel.fromJson(Map<String, dynamic> map) {
     return LoginModel(
       token: map['token'] as String?,
       tokenType: map['tokenType'] as String?,
@@ -25,9 +25,9 @@ class LoginModel {
     );
   }
 
-  String toJson() => json.encode(toMap());
+  String logintoJson() => json.encode(toJson());
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         'token': token,
         'tokenType': tokenType,
         'expireIn': expireIn,
@@ -42,25 +42,6 @@ class LoginModel {
       tokenType: $tokenType,
       expireIn: $expireIn,
       accountType: $accountType)''';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is LoginModel &&
-        other.token == token &&
-        other.tokenType == tokenType &&
-        other.expireIn == expireIn &&
-        other.accountType == accountType;
-  }
-
-  @override
-  int get hashCode {
-    return token.hashCode ^
-        tokenType.hashCode ^
-        expireIn.hashCode ^
-        accountType.hashCode;
   }
 }
 

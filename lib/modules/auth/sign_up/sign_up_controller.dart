@@ -29,7 +29,6 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
 
   RxBool showPassword = false.obs;
   RxBool showPasswordConfirmation = false.obs;
-  RxBool registerLoading = false.obs;
   RxBool isSubmitBtnProcessing = false.obs;
 
   late List<String> countries;
@@ -131,7 +130,6 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
   }
 
   dynamic registerButtonOnClick({String? userType}) async {
-    registerLoading.value = true;
     if (registrationFormKey.currentState!.validate()) {
       if (!isMatchingPassword()) {
         customSnackbar(
@@ -160,7 +158,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
           registrationData: registrationInputData,
         )
             .then(
-          (Response value) {
+          (value) {
             Get.dialog(
               const CustomAlertDialog(
                 title: "SUCCESS!",
@@ -176,11 +174,14 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
           },
           onError: (error) {
             customSnackbar(
-              msgTitle: "OOPS!",
-              msgContent: "Something went wrong.\n$error",
+              msgTitle: "Something went wrong!",
+              msgContent: "$error",
               bgColor: AppColors.redColor,
             );
-            change(null, status: RxStatus.error(error.toString()));
+            change(
+              null,
+              status: RxStatus.error(error.toString()),
+            );
           },
         );
         swithcingBoolValueRegisterBtn(value: false);

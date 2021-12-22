@@ -6,7 +6,7 @@ import '../../core/core.dart';
 import '../data.dart';
 
 class AuthProvider extends BaseProvider {
-  Future<LoginModel> loginAPI({
+  Future<LoginModel> logInAPI({
     required UserModel? loginData,
   }) async {
     try {
@@ -19,6 +19,26 @@ class AuthProvider extends BaseProvider {
       } else {
         final data = json.decode(dataResponse.bodyString.toString());
         return LoginModel.fromJson(data as Map<String, dynamic>);
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future<String> logOutAPI() async {
+    try {
+      final Response dataResponse = await post(
+        APIEndPoints.signOutEndPoint,
+        {},
+      );
+      if (dataResponse.hasError) {
+        throw responseBodyHandler(resp: dataResponse);
+      } else {
+        customSnackbar(
+          msgTitle: "Log Out Successfully!",
+          msgContent: "${dataResponse.bodyString}",
+        );
+        return dataResponse.bodyString.toString();
       }
     } catch (e) {
       return Future.error(e.toString());

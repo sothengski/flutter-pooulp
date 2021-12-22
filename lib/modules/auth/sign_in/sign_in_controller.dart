@@ -48,7 +48,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
         password: passwordCtrl.text.trim(),
       );
       authProvider
-          .loginAPI(
+          .logInAPI(
         loginData: loginData,
       )
           .then(
@@ -66,16 +66,6 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
               bgColor: AppColors.redColor,
             );
           }
-          // Get.dialog(
-          //   const CustomAlertDialog(
-          //     title: "SUCCESS!",
-          //     content: "You're now a member of Pooulp.",
-          //     routePath: Routes.homeRoute,
-          //     type: AlertDialogType.success,
-          //     buttonLabel: "Continue",
-          //   ),
-          //   barrierDismissible: true,
-          // );
           clearData();
           change(
             value,

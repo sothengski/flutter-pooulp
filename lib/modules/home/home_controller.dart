@@ -4,6 +4,8 @@ import '../../data/data.dart';
 import '../../routes/routes.dart';
 
 class HomeController extends GetxController {
+  final authProvider = Get.find<AuthProvider>();
+
   late LoginModel? userToken;
 
   @override
@@ -14,6 +16,7 @@ class HomeController extends GetxController {
 
   void signOut() {
     AuthServices().removeToken();
+    authProvider.logOutAPI();
     Get.offAllNamed(Routes.signInRoute);
   }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../core.dart';
 
@@ -12,6 +11,7 @@ class CustomAlertDialog extends StatelessWidget {
   final String? buttonLabel;
   final String? routePath;
   final AlertDialogType? type;
+  final VoidCallback? onPressed;
 
   const CustomAlertDialog({
     Key? key,
@@ -21,6 +21,7 @@ class CustomAlertDialog extends StatelessWidget {
     this.buttonLabel = 'Dismiss',
     this.routePath = '',
     this.type = AlertDialogType.info,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -60,13 +61,7 @@ class CustomAlertDialog extends StatelessWidget {
                 minWidth: getWidth / 3,
                 height: 35,
                 elevation: 5.0,
-                onPressed: () {
-                  routePath == ''
-                      ? Get.back()
-                      : Get.offAllNamed(
-                          routePath.toString(),
-                        );
-                },
+                onPressed: onPressed,
                 child: CustomTextWidget(
                   text: buttonLabel, //"Done",
                   color: AppColors.whiteColor,

@@ -305,6 +305,8 @@ class SignUpForm extends GetView<SignUpController> {
                                 obscureText: !controller.showPassword.value,
                                 isFilled: true,
                                 topPadding: double12,
+                                bottomPadding:
+                                    isStudent == true ? double32 : 0.0,
                                 validator: Validator().passwordValidator,
                                 maxLength: 15,
                                 inputFormatterList: [
@@ -317,31 +319,31 @@ class SignUpForm extends GetView<SignUpController> {
                                   boolValue: controller.showPassword.value,
                                 ),
                               ),
-                              CustomTextInput(
-                                controller: controller.passwordConfirmationCtrl,
-                                inputTitle: "Password Confirmation",
-                                hintText: "Enter your password confirmation",
-                                suffixIcon: true,
-                                obscureText:
-                                    !controller.showPasswordConfirmation.value,
-                                isFilled: true,
-                                topPadding: double12,
-                                bottomPadding:
-                                    isStudent == true ? double32 : 0.0,
-                                validator: (_) =>
-                                    controller.matchingPasswords(),
-                                maxLength: 15,
-                                inputFormatterList: [
-                                  FilteringTextInputFormatter.deny(
-                                    RegExp(Validator.avoidSpaceRegExpPattern),
-                                  ),
-                                ],
-                                changeShowPassword: () => controller
-                                    .showPasswordConfirmationBoolSwitching(
-                                  boolValue:
-                                      controller.showPasswordConfirmation.value,
-                                ),
-                              ),
+                              // CustomTextInput(
+                              //   controller: controller.passwordConfirmationCtrl,
+                              //   inputTitle: "Password Confirmation",
+                              //   hintText: "Enter your password confirmation",
+                              //   suffixIcon: true,
+                              //   obscureText:
+                              //       !controller.showPasswordConfirmation.value,
+                              //   isFilled: true,
+                              //   topPadding: double12,
+                              //   bottomPadding:
+                              //       isStudent == true ? double32 : 0.0,
+                              //   validator: (_) =>
+                              //       controller.matchingPasswords(),
+                              //   maxLength: 15,
+                              //   inputFormatterList: [
+                              //     FilteringTextInputFormatter.deny(
+                              //       RegExp(Validator.avoidSpaceRegExpPattern),
+                              //     ),
+                              //   ],
+                              //   changeShowPassword: () => controller
+                              //       .showPasswordConfirmationBoolSwitching(
+                              //     boolValue:
+                              //         controller.showPasswordConfirmation.value,
+                              //   ),
+                              // ),
                               if (isStudent == true)
                                 Container()
                               else

@@ -7,7 +7,7 @@ class AppPages {
   AppPages._(); //this is to prevent anyone from instantiating this object
   static String splashRoute = Routes.splashRoute;
 
-  static final unknownRoute = GetPage(
+  static final GetPage<dynamic> unknownRoute = GetPage<dynamic>(
     name: Routes.unknownRoute,
     page: () => const UnknownRoutePage(),
   );

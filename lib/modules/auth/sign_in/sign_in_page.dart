@@ -25,7 +25,7 @@ class SignInPage extends GetView<SignInController> {
             physics: const BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.only(
                     left: double72,
@@ -53,7 +53,7 @@ class SignInPage extends GetView<SignInController> {
                 GestureDetector(
                   onTap: () => Get.toNamed(Routes.signUpRoute),
                   child: const CustomTextWidget(
-                    text: "Register Now!",
+                    text: 'Register Now!',
                     color: AppColors.whiteColor,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,

@@ -10,7 +10,7 @@ class AuthProvider extends BaseProvider {
     required UserModel? loginData,
   }) async {
     try {
-      final dataResponse = await post(
+      final Response dataResponse = await post(
         APIEndPoints.signInEndPoint,
         loginData!.userToJson(),
       );
@@ -29,7 +29,7 @@ class AuthProvider extends BaseProvider {
     required UserModel? registrationData,
   }) async {
     try {
-      final dataResponse = await post(
+      final Response dataResponse = await post(
         APIEndPoints.registerNewUserEndPoint,
         registrationData!.userToJson(),
       );

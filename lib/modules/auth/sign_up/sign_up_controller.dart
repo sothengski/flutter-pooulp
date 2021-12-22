@@ -6,10 +6,10 @@ import '../../../data/data.dart';
 import '../../../routes/routes.dart';
 
 class SignUpController extends GetxController with StateMixin<dynamic> {
-  final authProvider = Get.find<AuthProvider>();
+  final AuthProvider authProvider = Get.find<AuthProvider>();
 
-  final registrationFormKey = GlobalKey<FormState>();
-  final formFieldKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormState> registrationFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> formFieldKey = GlobalKey<FormFieldState>();
 
   TextEditingController firstNameCtrl = TextEditingController();
   TextEditingController lastNameCtrl = TextEditingController();
@@ -89,8 +89,8 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
     }
   }
 
-  bool swithcingBoolValueRegisterBtn({bool? value}) {
-    return isSubmitBtnProcessing.value = value!;
+  bool swithcingBoolValueRegisterBtn({bool? boolValue}) {
+    return isSubmitBtnProcessing.value = boolValue!;
   }
 
   String? isPhoneNumberValidate({bool? isPhoneNumberField = false}) {
@@ -103,8 +103,8 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
       if (selectedCountry.value.phoneCode == null &&
           phoneNumberCtrl.text.isEmpty) {
         return isPhoneNumberField == false
-            ? "This field is required."
-            : "This field is required.";
+            ? 'This field is required.'
+            : 'This field is required.';
       }
       if (selectedCountry.value.phoneCode == null &&
           Validator().isPhoneNumberValidate(
@@ -112,14 +112,14 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
               ) ==
               false) {
         return isPhoneNumberField == false
-            ? "This field is required."
+            ? 'This field is required.'
             : '${Validator().phoneNumberValidator(phoneNumberCtrl.text)}';
       }
       if (selectedCountry.value.phoneCode == null) {
-        return isPhoneNumberField == false ? "This field is required." : "";
+        return isPhoneNumberField == false ? 'This field is required.' : '';
       }
       if (phoneNumberCtrl.text.isEmpty) {
-        return isPhoneNumberField == false ? "" : "This field is required.";
+        return isPhoneNumberField == false ? '' : 'This field is required.';
       }
       //else condition
       return isPhoneNumberField == false
@@ -133,13 +133,13 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
     if (registrationFormKey.currentState!.validate()) {
       if (!isMatchingPassword()) {
         customSnackbar(
-          msgTitle: "Please check your password.",
-          msgContent: "Your password does not match.",
+          msgTitle: 'Please check your password.',
+          msgContent: 'Your password does not match.',
           bgColor: AppColors.redColor,
         );
       } else {
-        swithcingBoolValueRegisterBtn(value: true);
-        final registrationInputData = UserModel(
+        swithcingBoolValueRegisterBtn(boolValue: true);
+        final UserModel registrationInputData = UserModel(
           firstName: firstNameCtrl.text.trim(),
           lastName: lastNameCtrl.text.trim(),
           email: emailCtrl.text.trim(),
@@ -147,7 +147,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
           phone1: phoneNumberCtrl.text.trim(),
           password: passwordCtrl.text.trim(),
           passwordConfirmation: passwordConfirmationCtrl.text.trim(),
-          uiLanguage: "en",
+          uiLanguage: 'en',
           accountType: userType!.toLowerCase(),
           invitationToken: tokenCtrl.text.trim(),
           enterpriseName: enterpriseNameCtrl.text.trim(),
@@ -158,14 +158,14 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
           registrationData: registrationInputData,
         )
             .then(
-          (value) {
+          (LoginModel value) {
             Get.dialog(
               const CustomAlertDialog(
-                title: "SUCCESS!",
+                title: 'SUCCESS!',
                 content: "You're now a member of Pooulp.",
                 routePath: Routes.homeRoute,
                 type: AlertDialogType.success,
-                buttonLabel: "Continue",
+                buttonLabel: 'Continue',
               ),
               barrierDismissible: true,
             );
@@ -174,8 +174,8 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
           },
           onError: (error) {
             customSnackbar(
-              msgTitle: "Something went wrong!",
-              msgContent: "$error",
+              msgTitle: 'Something went wrong!',
+              msgContent: '$error',
               bgColor: AppColors.redColor,
             );
             change(
@@ -184,12 +184,12 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
             );
           },
         );
-        swithcingBoolValueRegisterBtn(value: false);
+        swithcingBoolValueRegisterBtn(boolValue: false);
       }
     } else {
       customSnackbar(
-        msgTitle: "Please Complete the required fields.",
-        msgContent: "",
+        msgTitle: 'Please Complete the required fields.',
+        msgContent: '',
         bgColor: AppColors.redColor,
       );
     }

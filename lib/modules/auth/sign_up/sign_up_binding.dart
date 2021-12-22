@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../../../data/data.dart';
 
+import '../../../data/data.dart';
 import 'sign_up.dart';
 
 class SignUpBinding implements Bindings {

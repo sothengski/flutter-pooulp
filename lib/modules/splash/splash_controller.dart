@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
+import '../../data/data.dart';
 import '../../routes/routes.dart';
 
 class SplashController extends GetxController {
@@ -11,17 +12,19 @@ class SplashController extends GetxController {
   }
 
   Future<void> checkAuth() async {
+    final bool isHomeNavigate = AuthServices().isUserLoggedIn();
+
     await Future.delayed(
       duration2s,
-      () => {
-        // if (AuthServices().isUserLoggedIn() == true)
-        //   {
-        // Get.offNamed(Routes.homeRoute),
-        //   }
-        // else
-        //   {
-        Get.offNamed(Routes.signInRoute),
-        //   }
+      () async => {
+        if (isHomeNavigate == true)
+          {
+            Get.offNamed(Routes.homeRoute),
+          }
+        else
+          {
+            Get.offNamed(Routes.signInRoute),
+          }
       },
     );
   }

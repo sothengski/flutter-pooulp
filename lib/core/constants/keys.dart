@@ -17,3 +17,9 @@ class APIEndPoints {
   static const String signInEndPoint = '/login';
   static const String registerNewUserEndPoint = '/register';
 }
+
+class LocalStorage {
+  static const credentialName = 'Pooulp';
+  static const authTokenData = "authUserData";
+  static const isLogged = 'isLogged';
+}

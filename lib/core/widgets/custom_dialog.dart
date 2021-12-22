@@ -15,11 +15,11 @@ class CustomAlertDialog extends StatelessWidget {
 
   const CustomAlertDialog({
     Key? key,
-    this.title = "",
-    this.content = "",
+    this.title = '',
+    this.content = '',
     this.icon,
-    this.buttonLabel = "Dismiss",
-    this.routePath = "",
+    this.buttonLabel = 'Dismiss',
+    this.routePath = '',
     this.type = AlertDialogType.info,
   }) : super(key: key);
 
@@ -61,7 +61,7 @@ class CustomAlertDialog extends StatelessWidget {
                 height: 35,
                 elevation: 5.0,
                 onPressed: () {
-                  routePath == ""
+                  routePath == ''
                       ? Get.back()
                       : Get.offAllNamed(
                           routePath.toString(),
@@ -84,15 +84,15 @@ class CustomAlertDialog extends StatelessWidget {
 String getButtonLabelForType({AlertDialogType? type}) {
   switch (type) {
     case AlertDialogType.warning:
-      return "Dismiss";
+      return 'Dismiss';
     case AlertDialogType.success:
-      return "Continue";
+      return 'Continue';
     case AlertDialogType.error:
-      return "Try again";
+      return 'Try again';
     case AlertDialogType.info:
-      return "Dismiss";
+      return 'Dismiss';
     default:
-      return "Dismiss";
+      return 'Dismiss';
   }
 }
 

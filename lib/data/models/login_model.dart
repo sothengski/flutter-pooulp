@@ -19,20 +19,20 @@ class LoginModel {
   factory LoginModel.fromJson(Map<String, dynamic> map) {
     return LoginModel(
       token: map['token'] as String?,
-      tokenType: map['tokenType'] as String?,
-      expireIn: map['expireIn']?.toInt() as int?,
-      accountType: map['accountType'] as String?,
+      tokenType: map['token_type'] as String?,
+      expireIn: map['expires_in']?.toInt() as int?,
+      accountType: map['account_type'] as String?,
     );
   }
 
   String logintoJson() => json.encode(toJson());
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'token': token,
-        'tokenType': tokenType,
-        'expireIn': expireIn,
-        'accountType': accountType,
-      }..removeWhere((_, v) => v == null);
+        'token_type': tokenType,
+        'expires_in': expireIn,
+        'account_type': accountType,
+      }..removeWhere((_, dynamic v) => v == null);
 
   @override
   String toString() {

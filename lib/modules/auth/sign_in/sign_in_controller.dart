@@ -30,8 +30,8 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
   bool showPasswordBoolSwitching({bool? boolValue}) =>
       showPassword.value = !boolValue!;
 
-  bool swithcingBoolValueLoginBtn({bool? value}) {
-    return isSubmitBtnProcessing.value = value!;
+  bool swithcingBoolValueLoginBtn({bool? boolValue}) {
+    return isSubmitBtnProcessing.value = boolValue!;
   }
 
   void clearData() {
@@ -42,7 +42,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
 
   dynamic loginButtonOnClick() async {
     if (signInFormKey.currentState!.validate()) {
-      swithcingBoolValueLoginBtn(value: true);
+      swithcingBoolValueLoginBtn(boolValue: true);
       final loginData = UserModel(
         email: emailCtrl.text.trim(),
         password: passwordCtrl.text.trim(),
@@ -52,26 +52,38 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
         loginData: loginData,
       )
           .then(
-        (value) {
-          swithcingBoolValueLoginBtn(value: false);
-          Get.dialog(
-            const CustomAlertDialog(
-              title: "SUCCESS!",
-              content: "You're now a member of Pooulp.",
-              routePath: Routes.homeRoute,
-              type: AlertDialogType.success,
-              buttonLabel: "Continue",
-            ),
-            barrierDismissible: true,
+        (value) async {
+          swithcingBoolValueLoginBtn(boolValue: false);
+          final bool loginStatus = await AuthServices().saveUserToken(
+            bodyData: value,
           );
-          // clearData();
+          if (loginStatus == true) {
+            Get.offAllNamed(Routes.homeRoute);
+          } else {
+            customSnackbar(
+              msgTitle: "Can't save user Data",
+              msgContent: "Can't save user Data",
+              bgColor: AppColors.redColor,
+            );
+          }
+          // Get.dialog(
+          //   const CustomAlertDialog(
+          //     title: "SUCCESS!",
+          //     content: "You're now a member of Pooulp.",
+          //     routePath: Routes.homeRoute,
+          //     type: AlertDialogType.success,
+          //     buttonLabel: "Continue",
+          //   ),
+          //   barrierDismissible: true,
+          // );
+          clearData();
           change(
             value,
             status: RxStatus.success(),
           );
         },
         onError: (error) {
-          swithcingBoolValueLoginBtn(value: false);
+          swithcingBoolValueLoginBtn(boolValue: false);
           customSnackbar(
             msgTitle: "Something went wrong!",
             msgContent: "$error",

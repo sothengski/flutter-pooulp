@@ -160,14 +160,28 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
           .then(
         (LoginModel value) {
           Get.dialog(
-            const CustomAlertDialog(
+            CustomAlertDialog(
               title: 'SUCCESS!',
               content: "You're now a member of Pooulp.",
               routePath: Routes.homeRoute,
               type: AlertDialogType.success,
               buttonLabel: 'Continue',
+              onPressed: () async {
+                final bool loginStatus = await AuthServices().saveUserToken(
+                  bodyData: value,
+                );
+                if (loginStatus == true) {
+                  Get.offAllNamed(Routes.homeRoute);
+                } else {
+                  customSnackbar(
+                    msgTitle: "Can't save user Data",
+                    msgContent: "Can't save user Data",
+                    bgColor: AppColors.redColor,
+                  );
+                }
+              },
             ),
-            barrierDismissible: true,
+            // barrierDismissible: true,
           );
           clearData();
           change(value, status: RxStatus.success());

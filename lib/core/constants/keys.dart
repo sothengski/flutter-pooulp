@@ -15,6 +15,8 @@ class APIEndPoints {
   // 'pooulp.eu'; //Production BASEURL
 
   static const String signInEndPoint = '/login';
+  static const String signOutEndPoint = '/logout';
+
   static const String registerNewUserEndPoint = '/register';
 }
 

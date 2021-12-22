@@ -9,9 +9,17 @@ import '../data.dart';
 class AuthServices extends GetxService {
   final GetStorage boxStorage = GetStorage(LocalStorage.credentialName);
   dynamic auth;
+  LoginModel? loginTokenData;
 
   String? getStringToken() {
-    return boxStorage.read(LocalStorage.authTokenData);
+    auth = boxStorage.read(LocalStorage.authTokenData);
+    if (auth != null) {
+      auth = json.decode(auth.toString());
+      loginTokenData = LoginModel.fromJson(auth as Map<String, dynamic>);
+      return loginTokenData!.token.toString();
+    } else {
+      return '';
+    }
   }
 
   LoginModel? getToken() {

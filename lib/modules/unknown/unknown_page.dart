@@ -10,10 +10,10 @@ class UnknownRoutePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Not Found Page"),
+        title: const Text('Not Found Page'),
       ),
       body: ListTile(
-        title: const Text("Not Found Page Please go back to home page"),
+        title: const Text('Not Found Page Please go back to home page'),
         subtitle: const Text('Go to Home Page'),
         onTap: () => Get.offAllNamed(Routes.splashRoute),
       ),

@@ -1,0 +1,108 @@
+# Automatically generated on 2021-12-09 UTC from https://codemagic.io/app/61b053a8f16a59d23967415e/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
+workflows:
+  default-workflow:
+    name: Default Workflow
+    max_build_duration: 60
+    environment:
+      group:
+        - firebase-token
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - |
+        # set up debug keystore
+        rm -f ~/.android/debug.keystore
+        keytool -genkeypair \
+          -alias androiddebugkey \
+          -keypass android \
+          -keystore ~/.android/debug.keystore \
+          -storepass android \
+          -dname 'CN=Android Debug,O=Android,C=US' \
+          -keyalg 'RSA' \
+          -keysize 2048 \
+          -validity 10000
+      - |
+        # set up local properties
+        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - flutter packages pub get
+      - flutter build apk --release
+      - find . -name "Podfile" -execdir pod install \;
+      - flutter build ios --release --no-codesign
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/bundle/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - "*.snap"
+      - build/windows/**/*.msix
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - sotheng@viazul.hk
+      firebase:
+        firebase_token: $FIREBASE_TOKEN
+        ios:
+          app_id: 1:555779830620:ios:43b616d8396a90a1cec799
+          groups:
+            - androidTesters
+        android:
+          app_id: 1:555779830620:android:2ade25bbd5d014f2cec799
+          groups:
+            - androidTesters
+          artifact_type: apk
+  dev-workflow:
+    name: Dev Workflow
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - |
+        # set up debug keystore
+        rm -f ~/.android/debug.keystore
+        keytool -genkeypair \
+          -alias androiddebugkey \
+          -keypass android \
+          -keystore ~/.android/debug.keystore \
+          -storepass android \
+          -dname 'CN=Android Debug,O=Android,C=US' \
+          -keyalg 'RSA' \
+          -keysize 2048 \
+          -validity 10000
+      - |
+        # set up local properties
+        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - flutter packages pub get
+      - flutter build apk --release
+      - find . -name "Podfile" -execdir pod install \;
+      - flutter build ios --release --no-codesign
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/bundle/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - "*.snap"
+      - build/windows/**/*.msix
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - sotheng@viazul.hk
+      firebase:
+        firebase_token: Encrypted(Z0FBQUFBQmhzWXBKOW5WTGQ4aDR5MzVmODA0cmtKdlNfdGFhdHdNRElBTldqd3JIM0hDWm1aYnhNOFJOYU5tQjNkaUIxUnNnR2pJS1dfZXRIUDB2eGY1azdRSHNwcm1uZDUxeHBSVUF2RjRYY3VhS3UxemdVMFRTS2ljLThLVjZpQkNwR2tOSlFuMW9DRTJyUGZNM2dhUUlVYjJ3UFNJU3lvUnlQWjd6M3RXeEFwb1pMTV8teXpTUDFaVHlnS3htdDAxOS1pYzk0YnVSM0RwSE5SSnQyZGMtRHdSSUU0QUdqZz09)
+        ios:
+          app_id: 1:555779830620:ios:43b616d8396a90a1cec799
+          groups:
+            - androidTesters
+        android:
+          app_id: 1:555779830620:android:2ade25bbd5d014f2cec799
+          groups:
+            - androidTesters
+          artifact_type: apk

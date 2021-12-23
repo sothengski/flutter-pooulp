@@ -10,7 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  get: ^4.5.1
+  get: ^4.6.1
+  get_storage: ^2.0.3
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -24,6 +26,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/flags/
 
   fonts:
     - family: TypoRound

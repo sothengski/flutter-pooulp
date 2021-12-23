@@ -7,7 +7,7 @@ class AppPages {
   AppPages._(); //this is to prevent anyone from instantiating this object
   static String splashRoute = Routes.splashRoute;
 
-  static final unknownRoute = GetPage(
+  static final GetPage<dynamic> unknownRoute = GetPage<dynamic>(
     name: Routes.unknownRoute,
     page: () => const UnknownRoutePage(),
   );
@@ -28,15 +28,15 @@ class AppPages {
     //   page: () => const OnBoardingPage(),
     //   binding: OnboardingBinding(),
     // ),
-    // GetPage(
-    //   name: Routes.signUpRoute,
-    //   page: () => const SignUpPage(),
-    //   binding: SignUpBinding(),
-    // ),
-    // GetPage(
-    //   name: Routes.signInRoute,
-    //   page: () => const SignInPage(),
-    //   binding: SignInBinding(),
-    // ),
+    GetPage(
+      name: Routes.signUpRoute,
+      page: () => const SignUpPage(),
+      binding: SignUpBinding(),
+    ),
+    GetPage(
+      name: Routes.signInRoute,
+      page: () => const SignInPage(),
+      binding: SignInBinding(),
+    ),
   ];
 }

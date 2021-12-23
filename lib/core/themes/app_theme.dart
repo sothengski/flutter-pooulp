@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 // import 'package:flutter/services.dart';
 
 import '../core.dart';
@@ -41,6 +42,11 @@ mixin ThemeManager {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         hintColor: theme.colors.hintColor,
         textTheme: theme.textTheme.data,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: theme.colors.highlightColor,
+          selectionColor: theme.colors.focusColor,
+          selectionHandleColor: theme.colors.enabledColor,
+        ),
         cardColor: theme.colors.colorScheme?.surface,
         bottomAppBarColor: theme.colors.iconColor,
         tabBarTheme: TabBarTheme(
@@ -91,6 +97,7 @@ mixin ThemeManager {
         ),
         unselectedWidgetColor: theme.colors.buttonTextColor,
         inputDecorationTheme: InputDecorationTheme(
+          prefixStyle: TextStyle(color: theme.colors.iconColor),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(8.0),

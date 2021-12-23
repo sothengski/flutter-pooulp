@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/core.dart';
 
+import '../../core/core.dart';
 import 'home.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -17,27 +17,46 @@ class HomePage extends GetView<HomeController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-              style: TextStyle(
+            Text(
+              'token:${controller.userToken!.token}',
+              style: const TextStyle(
                 fontFamily: typoRoundFont,
                 fontSize: 20,
               ),
             ),
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              'tokenType:${controller.userToken!.tokenType}',
+              style: const TextStyle(
+                fontFamily: typoRoundFont,
+                fontSize: 20,
+              ),
             ),
             Text(
-              'Home',
-              style: Theme.of(context).textTheme.headline4,
+              'expireIn:${controller.userToken!.expireIn}',
+              style: const TextStyle(
+                fontFamily: typoRoundFont,
+                fontSize: 20,
+              ),
             ),
+            Text(
+              'accountType:${controller.userToken!.accountType}',
+              style: const TextStyle(
+                fontFamily: typoRoundFont,
+                fontSize: 20,
+              ),
+            ),
+            MaterialButton(
+              onPressed: () {
+                controller.signOut();
+              },
+              child: const CustomTextWidget(
+                text: 'Sign Out',
+                fontSize: 24.0,
+                marginTop: 20.0,
+              ),
+            )
           ],
         ),
-      ),
-      floatingActionButton: const FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }

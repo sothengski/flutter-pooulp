@@ -35,8 +35,8 @@ class AuthProvider extends BaseProvider {
         throw responseBodyHandler(resp: dataResponse);
       } else {
         customSnackbar(
-          msgTitle: "Log Out Successfully!",
-          msgContent: "${dataResponse.bodyString}",
+          msgTitle: 'Log Out Successfully!',
+          msgContent: '${dataResponse.bodyString}',
         );
         return dataResponse.bodyString.toString();
       }

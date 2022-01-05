@@ -176,7 +176,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
                   customSnackbar(
                     msgTitle: "Can't save user Data",
                     msgContent: "Can't save user Data",
-                    bgColor: ColorManager.red,
+                    bgColor: ColorsManager.red,
                   );
                 }
               },
@@ -190,7 +190,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
           customSnackbar(
             msgTitle: 'Something went wrong!',
             msgContent: '$error',
-            bgColor: ColorManager.red,
+            bgColor: ColorsManager.red,
           );
           change(
             null,
@@ -204,7 +204,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
       customSnackbar(
         msgTitle: 'Please Complete the required fields.',
         msgContent: '',
-        bgColor: ColorManager.red,
+        bgColor: ColorsManager.red,
       );
     }
   }

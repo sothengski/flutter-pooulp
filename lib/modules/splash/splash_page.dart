@@ -14,11 +14,11 @@ class SplashPage extends GetView<SplashController> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          color: ColorManager.primary,
+          color: ColorsManager.primary,
           child: const Padding(
             padding: EdgeInsets.only(
-              left: double48,
-              right: double48,
+              left: AppSize.s48,
+              right: AppSize.s48,
             ),
             child: Image(
               image: AssetImage(ImageAssets.appLogoWhite),

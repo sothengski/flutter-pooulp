@@ -15,7 +15,7 @@ class SplashController extends GetxController {
     final bool isHomeNavigate = AuthServices().isUserLoggedIn();
 
     await Future.delayed(
-      duration2s,
+      DurationConstant.d2000ms,
       () async => {
         if (isHomeNavigate == true)
           {

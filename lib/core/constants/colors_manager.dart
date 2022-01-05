@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ///==================== Colors ====================
-class ColorManager {
+class ColorsManager {
   static const primary = Color(0xFFFF7E65);
   static const primary75 = Color(0xFFFF9E8B); //primaryColor with 75% Opacity
   static const primary50 = Color(0xFFFFBFB3); //primaryColor with 50% Opacity

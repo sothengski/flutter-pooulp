@@ -18,7 +18,7 @@ class CustomContainerWidget extends StatelessWidget {
     this.rightTitle,
     this.titleFontSize = 14.0,
     this.titleLeftRightPadding = 0,
-    this.titleColor = AppColors.blackColor,
+    this.titleColor = ColorManager.black,
     this.titleFontWeight = FontWeight.w600,
     this.child,
     this.onTap,
@@ -42,7 +42,7 @@ class CustomContainerWidget extends StatelessWidget {
               1,
             ),
             // color: Colors.blueGrey[50],
-            // color: primaryColor,
+            // color: primary,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -62,7 +62,7 @@ class CustomContainerWidget extends StatelessWidget {
             ),
           ),
           Card(
-            color: AppColors.whiteColor,
+            color: ColorManager.white,
             elevation: 5,
             margin: const EdgeInsets.all(5),
             shape: RoundedRectangleBorder(

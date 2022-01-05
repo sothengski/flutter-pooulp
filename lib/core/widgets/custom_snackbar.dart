@@ -7,8 +7,8 @@ void customSnackbar({
   String? msgTitle = '--Title--',
   String? msgContent = '--Content--',
   Duration duration = duration4s,
-  Color textColor = AppColors.whiteColor,
-  Color bgColor = AppColors.grey800Color,
+  Color textColor = ColorManager.white,
+  Color bgColor = ColorManager.grey800,
 }) {
   Get.snackbar(
     msgTitle.toString(),

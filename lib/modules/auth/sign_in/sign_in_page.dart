@@ -11,7 +11,7 @@ class SignInPage extends GetView<SignInController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: ColorManager.primary,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -44,7 +44,7 @@ class SignInPage extends GetView<SignInController> {
                 ),
                 const CustomTextWidget(
                   text: "Don't have an account yet?",
-                  color: AppColors.whiteColor,
+                  color: ColorManager.white,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
                   marginTop: double16,
@@ -54,7 +54,7 @@ class SignInPage extends GetView<SignInController> {
                   onTap: () => Get.toNamed(Routes.signUpRoute),
                   child: const CustomTextWidget(
                     text: 'Register Now!',
-                    color: AppColors.whiteColor,
+                    color: ColorManager.white,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,
                     fontSize: 16,

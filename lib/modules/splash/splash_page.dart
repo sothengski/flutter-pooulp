@@ -14,7 +14,7 @@ class SplashPage extends GetView<SplashController> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          color: AppColors.primaryColor,
+          color: ColorManager.primary,
           child: const Padding(
             padding: EdgeInsets.only(
               left: double48,

@@ -4,21 +4,6 @@ import 'package:get/get.dart';
 
 const String typoRoundFont = 'TypoRound';
 
-///==================== Icons ====================
-
-const String facebookLogoImg = 'assets/icons/facebook-logo.png';
-const String googleLogoImg = 'assets/icons/google-logo.png';
-const String linkedInLogoImg = 'assets/icons/linkedin-logo.png';
-
-///==================== Images ====================
-
-const String appLogoImg = 'assets/images/app-logo.png';
-const String appLogoWhiteImg = 'assets/images/pooulp-logo-full-white.png';
-
-const String appLogoSymbolImg = 'assets/images/app-logo-symbol.png';
-const String appLogoTextImg = 'assets/images/app-logo-text.png';
-const String socialMediaBrowsingImg = 'assets/images/social-media-browsing.png';
-
 ///==================== Texts ====================
 
 const String appNameText = 'Pooulp';

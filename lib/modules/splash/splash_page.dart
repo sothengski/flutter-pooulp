@@ -21,7 +21,7 @@ class SplashPage extends GetView<SplashController> {
               right: double48,
             ),
             child: Image(
-              image: AssetImage(appLogoWhiteImg),
+              image: AssetImage(ImageAssets.appLogoWhite),
               // height: 150,
               // width: 150,
             ),

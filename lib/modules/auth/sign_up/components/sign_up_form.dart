@@ -50,7 +50,7 @@ class SignUpForm extends GetView<SignUpController> {
                     right: double72,
                   ),
                   child: Image(
-                    image: AssetImage(appLogoWhiteImg),
+                    image: AssetImage(ImageAssets.appLogoWhite),
                   ),
                 ),
                 Padding(
@@ -428,21 +428,26 @@ class SignUpForm extends GetView<SignUpController> {
                                       radius: 30.0,
                                       backgroundColor: AppColors.whiteColor,
                                       child: Image(
-                                        image: AssetImage(googleLogoImg),
+                                        image:
+                                            AssetImage(ImageAssets.googleLogo),
                                       ),
                                     ),
                                     CircleAvatar(
                                       radius: 30.0,
                                       backgroundColor: AppColors.whiteColor,
                                       child: Image(
-                                        image: AssetImage(linkedInLogoImg),
+                                        image: AssetImage(
+                                          ImageAssets.linkedInLogo,
+                                        ),
                                       ),
                                     ),
                                     CircleAvatar(
                                       radius: 30.0,
                                       backgroundColor: AppColors.whiteColor,
                                       child: Image(
-                                        image: AssetImage(facebookLogoImg),
+                                        image: AssetImage(
+                                          ImageAssets.facebookLogo,
+                                        ),
                                       ),
                                     ),
                                   ],

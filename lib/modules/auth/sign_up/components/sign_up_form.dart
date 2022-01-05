@@ -19,7 +19,7 @@ class SignUpForm extends GetView<SignUpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: ColorManager.primary,
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
@@ -69,7 +69,7 @@ class SignUpForm extends GetView<SignUpController> {
                                     "Create ${isStudent == true ? 'Student' : 'Enterprise'} Account",
                                 fontSize: 24.0,
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.primaryColor,
+                                color: ColorManager.primary,
                               ),
                               CustomTextInput(
                                 controller: controller.tokenCtrl,
@@ -129,7 +129,7 @@ class SignUpForm extends GetView<SignUpController> {
                                             Container(
                                               height: getHeight * 0.5,
                                               decoration: const ShapeDecoration(
-                                                color: AppColors.whiteColor,
+                                                color: ColorManager.white,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.only(
@@ -167,7 +167,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                   // alignedDropdown: true,
                                                   decoration: InputDecoration(
                                                     fillColor:
-                                                        AppColors.grey100Color,
+                                                        ColorManager.grey100,
                                                     filled: true,
                                                     border: OutlineInputBorder(
                                                       borderRadius:
@@ -186,8 +186,8 @@ class SignUpForm extends GetView<SignUpController> {
                                                       ),
                                                       borderSide:
                                                           const BorderSide(
-                                                        color: AppColors
-                                                            .grey300Color,
+                                                        color: ColorManager
+                                                            .grey300,
                                                       ),
                                                     ),
                                                     errorBorder:
@@ -198,8 +198,8 @@ class SignUpForm extends GetView<SignUpController> {
                                                       ),
                                                       borderSide:
                                                           const BorderSide(
-                                                        color: AppColors
-                                                            .red900Color,
+                                                        color:
+                                                            ColorManager.red900,
                                                       ),
                                                     ),
                                                     focusedBorder:
@@ -210,8 +210,8 @@ class SignUpForm extends GetView<SignUpController> {
                                                       ),
                                                       borderSide:
                                                           const BorderSide(
-                                                        color: AppColors
-                                                            .grey800Color,
+                                                        color: ColorManager
+                                                            .grey800,
                                                       ),
                                                     ),
                                                   ),
@@ -224,8 +224,8 @@ class SignUpForm extends GetView<SignUpController> {
                                                         ? const CustomTextWidget(
                                                             text:
                                                                 "Country Code",
-                                                            color: AppColors
-                                                                .grey400Color,
+                                                            color: ColorManager
+                                                                .grey400,
                                                             fontWeight:
                                                                 FontWeight.w600,
                                                           )
@@ -248,8 +248,9 @@ class SignUpForm extends GetView<SignUpController> {
                                                                     .selectedCountry
                                                                     .value
                                                                     .phoneCode,
-                                                                color: AppColors
-                                                                    .blackColor,
+                                                                color:
+                                                                    ColorManager
+                                                                        .black,
                                                               ),
                                                               // const Icon(
                                                               //   Icons
@@ -396,7 +397,7 @@ class SignUpForm extends GetView<SignUpController> {
                                   Expanded(
                                     child: Divider(
                                       thickness: 1,
-                                      color: AppColors.grey600Color,
+                                      color: ColorManager.grey600,
                                     ),
                                   ),
                                   SizedBox(width: 10),
@@ -410,7 +411,7 @@ class SignUpForm extends GetView<SignUpController> {
                                   Expanded(
                                     child: Divider(
                                       thickness: 1,
-                                      color: AppColors.grey600Color,
+                                      color: ColorManager.grey600,
                                     ),
                                   ),
                                 ],
@@ -426,7 +427,7 @@ class SignUpForm extends GetView<SignUpController> {
                                   children: const [
                                     CircleAvatar(
                                       radius: 30.0,
-                                      backgroundColor: AppColors.whiteColor,
+                                      backgroundColor: ColorManager.white,
                                       child: Image(
                                         image:
                                             AssetImage(ImageAssets.googleLogo),
@@ -434,7 +435,7 @@ class SignUpForm extends GetView<SignUpController> {
                                     ),
                                     CircleAvatar(
                                       radius: 30.0,
-                                      backgroundColor: AppColors.whiteColor,
+                                      backgroundColor: ColorManager.white,
                                       child: Image(
                                         image: AssetImage(
                                           ImageAssets.linkedInLogo,
@@ -443,7 +444,7 @@ class SignUpForm extends GetView<SignUpController> {
                                     ),
                                     CircleAvatar(
                                       radius: 30.0,
-                                      backgroundColor: AppColors.whiteColor,
+                                      backgroundColor: ColorManager.white,
                                       child: Image(
                                         image: AssetImage(
                                           ImageAssets.facebookLogo,
@@ -462,7 +463,7 @@ class SignUpForm extends GetView<SignUpController> {
                 ),
                 const CustomTextWidget(
                   text: "You already have an account?",
-                  color: AppColors.whiteColor,
+                  color: ColorManager.white,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
                   marginTop: double16,
@@ -474,7 +475,7 @@ class SignUpForm extends GetView<SignUpController> {
                   ),
                   child: const CustomTextWidget(
                     text: "Login",
-                    color: AppColors.whiteColor,
+                    color: ColorManager.white,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,
                     fontSize: 16,

@@ -9,14 +9,14 @@ class LoadingWidget extends StatelessWidget {
 
   const LoadingWidget({
     Key? key,
-    this.color = AppColors.primaryColor,
+    this.color = ColorManager.primary,
     this.size = 50.0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // color: backgroundColor,
+      // color: background,
       child: Center(
         child: SpinKitFadingCircle(
           color: color,

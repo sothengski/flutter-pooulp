@@ -9,7 +9,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: ColorManager.primary,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -35,7 +35,7 @@ class SignUpPage extends StatelessWidget {
                 children: [
                   const CustomTextWidget(
                     text: "Register an account as",
-                    color: AppColors.whiteColor,
+                    color: ColorManager.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 20,
                     // marginTop: double4,
@@ -45,8 +45,8 @@ class SignUpPage extends StatelessWidget {
                     text: "Student",
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
-                    textColor: AppColors.primaryColor,
-                    buttonColor: AppColors.whiteColor,
+                    textColor: ColorManager.primary,
+                    buttonColor: ColorManager.white,
                     onPressed: () {
                       customGeneralDialog(
                         context: context,
@@ -63,8 +63,8 @@ class SignUpPage extends StatelessWidget {
                     text: "Enterprise",
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
-                    textColor: AppColors.primaryColor,
-                    buttonColor: AppColors.whiteColor,
+                    textColor: ColorManager.primary,
+                    buttonColor: ColorManager.white,
                     onPressed: () {
                       customGeneralDialog(
                         context: context,

@@ -47,7 +47,7 @@ class CustomAlertDialog extends StatelessWidget {
               CustomTextWidget(
                 text: title,
                 fontSize: 24.0,
-                color: AppColors.primaryColor,
+                color: ColorManager.primary,
               ),
               const SizedBox(height: 15.0),
               CustomTextWidget(
@@ -57,14 +57,14 @@ class CustomAlertDialog extends StatelessWidget {
               const SizedBox(height: 5.0),
               const Divider(),
               MaterialButton(
-                color: AppColors.primaryColor.withOpacity(0.75),
+                color: ColorManager.primary.withOpacity(0.75),
                 minWidth: getWidth / 3,
                 height: 35,
                 elevation: 5.0,
                 onPressed: onPressed,
                 child: CustomTextWidget(
                   text: buttonLabel, //"Done",
-                  color: AppColors.whiteColor,
+                  color: ColorManager.white,
                   fontSize: 16,
                 ),
               ),

@@ -23,7 +23,7 @@ class SignInForm extends GetView<SignInController> {
                   text: 'Login',
                   fontSize: 24.0,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.primaryColor,
+                  color: ColorManager.primary,
                 ),
                 CustomTextInput(
                   controller: controller.emailCtrl,
@@ -58,7 +58,7 @@ class SignInForm extends GetView<SignInController> {
                   alignment: Alignment.centerRight,
                   child: CustomTextWidget(
                     text: 'Forget password?',
-                    color: AppColors.primaryColor,
+                    color: ColorManager.primary,
                     textDecoration: TextDecoration.underline,
                     marginTop: double16,
                     marginBottom: double16,
@@ -89,7 +89,7 @@ class SignInForm extends GetView<SignInController> {
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: AppColors.grey600Color,
+                        color: ColorManager.grey600,
                       ),
                     ),
                     SizedBox(width: 10),
@@ -103,7 +103,7 @@ class SignInForm extends GetView<SignInController> {
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: AppColors.grey600Color,
+                        color: ColorManager.grey600,
                       ),
                     ),
                   ],
@@ -118,21 +118,21 @@ class SignInForm extends GetView<SignInController> {
                     children: const [
                       CircleAvatar(
                         radius: 30.0,
-                        backgroundColor: AppColors.whiteColor,
+                        backgroundColor: ColorManager.white,
                         child: Image(
                           image: AssetImage(ImageAssets.googleLogo),
                         ),
                       ),
                       CircleAvatar(
                         radius: 30.0,
-                        backgroundColor: AppColors.whiteColor,
+                        backgroundColor: ColorManager.white,
                         child: Image(
                           image: AssetImage(ImageAssets.linkedInLogo),
                         ),
                       ),
                       CircleAvatar(
                         radius: 30.0,
-                        backgroundColor: AppColors.whiteColor,
+                        backgroundColor: ColorManager.white,
                         child: Image(
                           image: AssetImage(ImageAssets.facebookLogo),
                         ),

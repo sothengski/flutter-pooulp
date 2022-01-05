@@ -67,51 +67,51 @@ class LightColors implements IColors {
   ButtonThemeData? buttonTheme;
 
   LightColors() {
-    primaryColor = AppColors.primaryColor; //appBar text Color
-    appBarColor = AppColors.primaryColor; //appBar BgColor
-    accentColor = AppColors.grey800Color;
-    scaffoldBackgroundColor = AppColors.grey100Color; //bgBody
-    tabBarColor = AppColors.yellowAccentColor;
-    tabbarNormalColor = AppColors.green900Color;
-    tabbarSelectedColor = AppColors.red200Color;
+    primaryColor = ColorManager.primary; //appBar text Color
+    appBarColor = ColorManager.primary; //appBar BgColor
+    accentColor = ColorManager.grey800;
+    scaffoldBackgroundColor = ColorManager.grey100; //bgBody
+    tabBarColor = ColorManager.yellowAccent;
+    tabbarNormalColor = ColorManager.green900;
+    tabbarSelectedColor = ColorManager.red200;
     colorScheme = const ColorScheme.light().copyWith(
-      onPrimary: AppColors.whiteColor,
-      onSecondary: AppColors
-          .primary25Color, //Icon Color inside floatingButton and Bg on Card Widget
-      onSurface: AppColors.grey300Color, //border around the OutlinedButton
+      onPrimary: ColorManager.white,
+      onSecondary: ColorManager
+          .primary25, //Icon Color inside floatingButton and Bg on Card Widget
+      onSurface: ColorManager.grey300, //border around the OutlinedButton
     );
     brightness = Brightness.light;
-    buttonTextColor = AppColors.whiteColor;
-    iconColor = AppColors.whiteColor; //iconColor on drawer and action icons
-    enabledColor = AppColors.grey100Color;
-    errorColor = AppColors.redColor;
-    fillColor = AppColors.primary25Color;
-    focusColor = AppColors.primary50Color;
-    disabledColor = AppColors.grey100Color;
-    highlightColor = AppColors.grey600Color;
-    hoverColor = AppColors.grey300Color;
-    focusErrorColor = AppColors.redColor;
+    buttonTextColor = ColorManager.white;
+    iconColor = ColorManager.white; //iconColor on drawer and action icons
+    enabledColor = ColorManager.grey100;
+    errorColor = ColorManager.red;
+    fillColor = ColorManager.primary25;
+    focusColor = ColorManager.primary50;
+    disabledColor = ColorManager.grey100;
+    highlightColor = ColorManager.grey600;
+    hoverColor = ColorManager.grey300;
+    focusErrorColor = ColorManager.red;
 
     // textTheme: _lightTextTheme,
     //     visualDensity: VisualDensity.adaptivePlatformDensity,
-    //     accentColor: theme.colors.colors.yellowPrimaryColor,
-    //     hintColor: theme.colors.colors.darkBluePrimaryColor,
+    //     accentColor: theme.colors.colors.yellowPrimary,
+    //     hintColor: theme.colors.colors.darkBluePrimary,
     //     fontFamily: theme.textTheme.fontFamily,
     //     textTheme: theme.textTheme.data,
     //     cardColor: theme.colors.colorScheme?.onSecondary,
-    //     bottomAppBarColor: theme.colors.scaffoldBackgroundColor,
+    //     bottomAppBarColor: theme.colors.scaffoldBackground,
     //     tabBarTheme: TabBarTheme(
     //       indicator: const BoxDecoration(),
-    //       labelColor: theme.colors.tabbarSelectedColor,
-    //       unselectedLabelColor: theme.colors.tabbarNormalColor,
+    //       labelColor: theme.colors.tabbarSelected,
+    //       unselectedLabelColor: theme.colors.tabbarNormal,
     //     ),
     //     // floatingActionButtonTheme: FloatingActionButtonThemeData(
-    //     //     foregroundColor: theme.colors.colors.whiteColor,
+    //     //     foregroundColor: theme.colors.colors.white,
     //     //     backgroundColor: theme.colors.colors.mediumGreyBold),
     //     appBarTheme: AppBarTheme(
-    //       backgroundColor: theme.colors.appBarColor,
+    //       backgroundColor: theme.colors.appBar,
     //     ),
-    //     scaffoldBackgroundColor: theme.colors.scaffoldBackgroundColor,
+    //     scaffoldBackgroundColor: theme.colors.scaffoldBackground,
     //     colorScheme: theme.colors.colorScheme,
   }
 }

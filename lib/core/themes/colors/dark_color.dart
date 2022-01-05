@@ -77,7 +77,7 @@ class DarkColors implements IColors {
   //   tabbarNormalColor = colors.lighterGrey;
   //   tabbarSelectedColor = colors.greenColor;
   //   colorScheme = const ColorScheme.dark().copyWith(
-  //     onPrimary: colors.greenColor,
+  //     onPrimary: colors.green,
   //     onSecondary: colors.darkGrey,
   //   );
   //   brightness = Brightness.dark;

@@ -59,7 +59,10 @@ class TextThemeDark implements ITextTheme {
     this.displayColor,
   }) {
     data = const TextTheme(
-      headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+      headline6: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.normal,
+      ),
       subtitle1: TextStyle(fontSize: 16.0),
     ).apply(bodyColor: primaryColor);
   }

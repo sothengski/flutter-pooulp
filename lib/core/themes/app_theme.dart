@@ -9,7 +9,7 @@ class AppThemeDark extends ITheme {
   late final ITextTheme textTheme;
   AppThemeDark() {
     textTheme = TextThemeDark(
-      primaryColor: AppColors.whiteColor,
+      primaryColor: ColorManager.white,
     );
   }
   @override

@@ -78,7 +78,7 @@ class CustomTextInput extends StatelessWidget {
     this.rightPadding = 0.0,
     this.bottomPadding = 0.0,
     this.height = 80.0,
-    this.fillColor = AppColors.grey100Color,
+    this.fillColor = ColorsManager.grey100,
     this.isFilled = false,
     this.borderRadius = 8.0,
   });
@@ -101,7 +101,7 @@ class CustomTextInput extends StatelessWidget {
             )
           else
             const SizedBox.shrink(),
-          const SizedBox(height: double4),
+          const SizedBox(height: AppSize.s4),
           Row(
             children: <Widget>[
               inputIcon ?? const SizedBox.shrink(),
@@ -121,7 +121,7 @@ class CustomTextInput extends StatelessWidget {
                   keyboardType: keyboardType,
                   obscureText: obscureText!,
                   // obscureText: !showPassword,
-                  cursorColor: AppColors.blackColor,
+                  cursorColor: ColorsManager.black,
                   maxLength: maxLength,
                   focusNode: focusNodeName,
                   autocorrect: autocorrect!,
@@ -135,7 +135,7 @@ class CustomTextInput extends StatelessWidget {
                     // counter: counter == true
                     //     ? null
                     //     : Container(), // Validate Message
-                    // focusColor: primaryColor,
+                    // focusColor: primary,
                     // errorText: errorText,
                     // errorStyle: const TextStyle(
                     //   fontSize: 16.0,
@@ -143,7 +143,7 @@ class CustomTextInput extends StatelessWidget {
 
                     // prefixIcon: Icon(
                     //   prefixIcon,
-                    //   // color: primaryColor,
+                    //   // color: primary,
                     // ),
                     prefixText: " ",
                     suffixIcon: suffixIcon!
@@ -151,14 +151,14 @@ class CustomTextInput extends StatelessWidget {
                             ? IconButton(
                                 icon: const Icon(
                                   Icons.visibility_outlined,
-                                  color: AppColors.grey400Color,
+                                  color: ColorsManager.grey400,
                                 ),
                                 onPressed: changeShowPassword,
                               )
                             : IconButton(
                                 icon: const Icon(
                                   Icons.visibility_off_outlined,
-                                  color: AppColors.grey400Color,
+                                  color: ColorsManager.grey400,
                                 ),
                                 onPressed: changeShowPassword,
                               )
@@ -167,7 +167,7 @@ class CustomTextInput extends StatelessWidget {
                     fillColor: fillColor,
                     hintText: hintText,
                     hintStyle: const TextStyle(
-                      color: AppColors.grey400Color,
+                      color: ColorsManager.grey400,
                     ),
 
                     border: OutlineInputBorder(
@@ -182,19 +182,19 @@ class CustomTextInput extends StatelessWidget {
                       borderRadius: BorderRadius.circular(borderRadius!),
                       borderSide: const BorderSide(
                         width: 1.5,
-                        color: AppColors.grey800Color,
+                        color: ColorsManager.grey800,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(borderRadius!),
                       borderSide: const BorderSide(
-                        color: AppColors.grey300Color,
+                        color: ColorsManager.grey300,
                       ),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(borderRadius!),
                       borderSide: const BorderSide(
-                        color: AppColors.redColor,
+                        color: ColorsManager.red,
                       ),
                     ),
                     // contentPadding: const EdgeInsets.only(
@@ -280,7 +280,7 @@ class CustomTextInput extends StatelessWidget {
   //     ),
   //     prefixText: " ",
   //     filled: true,
-  //     fillColor: AppColors.grey100Color,
+  //     fillColor: AppColors.grey100,
   //     border: const OutlineInputBorder(
   //       borderSide: BorderSide.none,
   //       borderRadius: BorderRadius.all(

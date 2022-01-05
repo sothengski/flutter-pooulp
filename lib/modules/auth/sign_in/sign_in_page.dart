@@ -11,7 +11,7 @@ class SignInPage extends GetView<SignInController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: ColorsManager.primary,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -28,11 +28,11 @@ class SignInPage extends GetView<SignInController> {
               children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.only(
-                    left: double72,
-                    right: double72,
+                    left: AppSize.s72,
+                    right: AppSize.s72,
                   ),
                   child: Image(
-                    image: AssetImage(appLogoWhiteImg),
+                    image: AssetImage(ImageAssets.appLogoWhite),
                   ),
                 ),
                 // SizedBox(
@@ -44,21 +44,21 @@ class SignInPage extends GetView<SignInController> {
                 ),
                 const CustomTextWidget(
                   text: "Don't have an account yet?",
-                  color: AppColors.whiteColor,
+                  color: ColorsManager.white,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
-                  marginTop: double16,
-                  marginBottom: double16,
+                  marginTop: AppSize.s16,
+                  marginBottom: AppSize.s16,
                 ),
                 GestureDetector(
                   onTap: () => Get.toNamed(Routes.signUpRoute),
                   child: const CustomTextWidget(
                     text: 'Register Now!',
-                    color: AppColors.whiteColor,
+                    color: ColorsManager.white,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
-                    marginBottom: double16,
+                    marginBottom: AppSize.s16,
                   ),
                 ),
               ],

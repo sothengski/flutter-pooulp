@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:pooulp_flutter/data/data.dart';
+
 import '../../core/core.dart';
+import '../data.dart';
 
 class BaseProvider extends GetConnect {
   @override

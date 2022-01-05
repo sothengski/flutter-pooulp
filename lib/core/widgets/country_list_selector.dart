@@ -28,7 +28,7 @@ class CountryListSelector extends StatelessWidget {
           child: CustomTextWidget(
             text: "search",
             textAlign: TextAlign.center,
-            marginTop: double10,
+            marginTop: AppSize.s10,
           ),
           // SearchBox(
           //   autofocus: widget.searchAutofocus,

@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:555779830620:android:b665636edc9eeebdcec799",
+        "android_client_info": {
+          "package_name": "com.idcrmltd.pooulp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555779830620-8m9grnkjt09om4a9f8hbmt6cv04d442l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8RE1swmAbuixGjXYl1ogcV8-1Be1D1Q4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555779830620-8m9grnkjt09om4a9f8hbmt6cv04d442l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "555779830620-1a2jec49l0bhm3tph857g8saptcrvc7s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.idcrmltd.pooulp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:555779830620:android:2ade25bbd5d014f2cec799",
         "android_client_info": {
           "package_name": "com.soteca.pooulp_flutter"
@@ -29,6 +65,13 @@
             {
               "client_id": "555779830620-8m9grnkjt09om4a9f8hbmt6cv04d442l.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "555779830620-1a2jec49l0bhm3tph857g8saptcrvc7s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.idcrmltd.pooulp"
+              }
             }
           ]
         }

@@ -19,7 +19,7 @@ class SignUpForm extends GetView<SignUpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: ColorsManager.primary,
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
@@ -46,18 +46,18 @@ class SignUpForm extends GetView<SignUpController> {
                 const Padding(
                   padding: EdgeInsets.only(
                     top: 100.0,
-                    left: double72,
-                    right: double72,
+                    left: AppSize.s72,
+                    right: AppSize.s72,
                   ),
                   child: Image(
-                    image: AssetImage(appLogoWhiteImg),
+                    image: AssetImage(ImageAssets.appLogoWhite),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomContainerWidget(
                     child: Padding(
-                      padding: const EdgeInsets.all(double24),
+                      padding: const EdgeInsets.all(AppSize.s24),
                       child: Obx(
                         () => Form(
                           key: controller.registrationFormKey,
@@ -69,14 +69,14 @@ class SignUpForm extends GetView<SignUpController> {
                                     "Create ${isStudent == true ? 'Student' : 'Enterprise'} Account",
                                 fontSize: 24.0,
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.primaryColor,
+                                color: ColorsManager.primary,
                               ),
                               CustomTextInput(
                                 controller: controller.tokenCtrl,
                                 inputTitle: "Token",
                                 hintText: "Enter the Token",
                                 isFilled: true,
-                                topPadding: double12,
+                                topPadding: AppSize.s12,
                                 validator: Validator().notEmptyValidator,
                               ),
                               CustomTextInput(
@@ -84,7 +84,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 inputTitle: "First name",
                                 hintText: "Enter your first name",
                                 isFilled: true,
-                                topPadding: double12,
+                                topPadding: AppSize.s12,
                                 validator: Validator().notEmptyValidator,
                                 // onChanged: (value) => null,
                                 // onSaved: (value) => controller
@@ -95,7 +95,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 inputTitle: "Last name",
                                 hintText: "Enter your last name",
                                 isFilled: true,
-                                topPadding: double12,
+                                topPadding: AppSize.s12,
                                 validator: Validator().notEmptyValidator,
                               ),
                               CustomTextInput(
@@ -103,7 +103,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 inputTitle: "Email",
                                 hintText: "Enter your email",
                                 isFilled: true,
-                                topPadding: double12,
+                                topPadding: AppSize.s12,
                                 validator: Validator().emailValidator,
                                 keyboardType: TextInputType.emailAddress,
                               ),
@@ -117,9 +117,9 @@ class SignUpForm extends GetView<SignUpController> {
                                       children: [
                                         const CustomTextWidget(
                                           text: 'Phone Number',
-                                          marginTop: double12,
+                                          marginTop: AppSize.s12,
                                           textAlign: TextAlign.left,
-                                          // marginBottom: double4,
+                                          // marginBottom: AppSize.s4,
                                         ),
                                         const SizedBox(
                                           height: 3.0,
@@ -129,7 +129,7 @@ class SignUpForm extends GetView<SignUpController> {
                                             Container(
                                               height: getHeight * 0.5,
                                               decoration: const ShapeDecoration(
-                                                color: AppColors.whiteColor,
+                                                color: ColorsManager.white,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.only(
@@ -167,7 +167,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                   // alignedDropdown: true,
                                                   decoration: InputDecoration(
                                                     fillColor:
-                                                        AppColors.grey100Color,
+                                                        ColorsManager.grey100,
                                                     filled: true,
                                                     border: OutlineInputBorder(
                                                       borderRadius:
@@ -186,8 +186,8 @@ class SignUpForm extends GetView<SignUpController> {
                                                       ),
                                                       borderSide:
                                                           const BorderSide(
-                                                        color: AppColors
-                                                            .grey300Color,
+                                                        color: ColorsManager
+                                                            .grey300,
                                                       ),
                                                     ),
                                                     errorBorder:
@@ -198,8 +198,8 @@ class SignUpForm extends GetView<SignUpController> {
                                                       ),
                                                       borderSide:
                                                           const BorderSide(
-                                                        color: AppColors
-                                                            .red900Color,
+                                                        color: ColorsManager
+                                                            .red900,
                                                       ),
                                                     ),
                                                     focusedBorder:
@@ -210,8 +210,8 @@ class SignUpForm extends GetView<SignUpController> {
                                                       ),
                                                       borderSide:
                                                           const BorderSide(
-                                                        color: AppColors
-                                                            .grey800Color,
+                                                        color: ColorsManager
+                                                            .grey800,
                                                       ),
                                                     ),
                                                   ),
@@ -224,8 +224,8 @@ class SignUpForm extends GetView<SignUpController> {
                                                         ? const CustomTextWidget(
                                                             text:
                                                                 "Country Code",
-                                                            color: AppColors
-                                                                .grey400Color,
+                                                            color: ColorsManager
+                                                                .grey400,
                                                             fontWeight:
                                                                 FontWeight.w600,
                                                           )
@@ -248,8 +248,9 @@ class SignUpForm extends GetView<SignUpController> {
                                                                     .selectedCountry
                                                                     .value
                                                                     .phoneCode,
-                                                                color: AppColors
-                                                                    .blackColor,
+                                                                color:
+                                                                    ColorsManager
+                                                                        .black,
                                                               ),
                                                               // const Icon(
                                                               //   Icons
@@ -274,8 +275,8 @@ class SignUpForm extends GetView<SignUpController> {
                                       hintText: 'Enter Phone Number',
                                       keyboardType: TextInputType.phone,
                                       isFilled: true,
-                                      topPadding: double12,
-                                      leftPadding: double4,
+                                      topPadding: AppSize.s12,
+                                      leftPadding: AppSize.s4,
                                       validator: (_) =>
                                           controller.isPhoneNumberValidate(
                                         isPhoneNumberField: true,
@@ -304,9 +305,9 @@ class SignUpForm extends GetView<SignUpController> {
                                 suffixIcon: true,
                                 obscureText: !controller.showPassword.value,
                                 isFilled: true,
-                                topPadding: double12,
+                                topPadding: AppSize.s12,
                                 bottomPadding:
-                                    isStudent == true ? double32 : 0.0,
+                                    isStudent == true ? AppSize.s32 : 0.0,
                                 validator: Validator().passwordValidator,
                                 maxLength: 15,
                                 inputFormatterList: [
@@ -327,9 +328,9 @@ class SignUpForm extends GetView<SignUpController> {
                               //   obscureText:
                               //       !controller.showPasswordConfirmation.value,
                               //   isFilled: true,
-                              //   topPadding: double12,
+                              //   topPadding: AppSize.s12,
                               //   bottomPadding:
-                              //       isStudent == true ? double32 : 0.0,
+                              //       isStudent == true ? AppSize.s32 : 0.0,
                               //   validator: (_) =>
                               //       controller.matchingPasswords(),
                               //   maxLength: 15,
@@ -352,7 +353,7 @@ class SignUpForm extends GetView<SignUpController> {
                                   inputTitle: "Enterprise Name",
                                   hintText: "Enter your enterprise name",
                                   isFilled: true,
-                                  topPadding: double12,
+                                  topPadding: AppSize.s12,
                                   validator: Validator().notEmptyValidator,
                                 ),
                               if (isStudent == true)
@@ -363,8 +364,8 @@ class SignUpForm extends GetView<SignUpController> {
                                   inputTitle: "Enterprise ID",
                                   hintText: "Enter your enterprise ID",
                                   isFilled: true,
-                                  topPadding: double12,
-                                  bottomPadding: double32,
+                                  topPadding: AppSize.s12,
+                                  bottomPadding: AppSize.s32,
                                   // validator: Validator().password,
                                 ),
                               Obx(
@@ -396,29 +397,29 @@ class SignUpForm extends GetView<SignUpController> {
                                   Expanded(
                                     child: Divider(
                                       thickness: 1,
-                                      color: AppColors.grey600Color,
+                                      color: ColorsManager.grey600,
                                     ),
                                   ),
                                   SizedBox(width: 10),
                                   CustomTextWidget(
                                     text: 'Or',
                                     fontSize: 20.0,
-                                    marginTop: double16,
-                                    marginBottom: double16,
+                                    marginTop: AppSize.s16,
+                                    marginBottom: AppSize.s16,
                                   ),
                                   SizedBox(width: 10),
                                   Expanded(
                                     child: Divider(
                                       thickness: 1,
-                                      color: AppColors.grey600Color,
+                                      color: ColorsManager.grey600,
                                     ),
                                   ),
                                 ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                  left: double48,
-                                  right: double48,
+                                  left: AppSize.s48,
+                                  right: AppSize.s48,
                                 ),
                                 child: Row(
                                   mainAxisAlignment:
@@ -426,23 +427,28 @@ class SignUpForm extends GetView<SignUpController> {
                                   children: const [
                                     CircleAvatar(
                                       radius: 30.0,
-                                      backgroundColor: AppColors.whiteColor,
+                                      backgroundColor: ColorsManager.white,
                                       child: Image(
-                                        image: AssetImage(googleLogoImg),
+                                        image:
+                                            AssetImage(ImageAssets.googleLogo),
                                       ),
                                     ),
                                     CircleAvatar(
                                       radius: 30.0,
-                                      backgroundColor: AppColors.whiteColor,
+                                      backgroundColor: ColorsManager.white,
                                       child: Image(
-                                        image: AssetImage(linkedInLogoImg),
+                                        image: AssetImage(
+                                          ImageAssets.linkedInLogo,
+                                        ),
                                       ),
                                     ),
                                     CircleAvatar(
                                       radius: 30.0,
-                                      backgroundColor: AppColors.whiteColor,
+                                      backgroundColor: ColorsManager.white,
                                       child: Image(
-                                        image: AssetImage(facebookLogoImg),
+                                        image: AssetImage(
+                                          ImageAssets.facebookLogo,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -457,11 +463,11 @@ class SignUpForm extends GetView<SignUpController> {
                 ),
                 const CustomTextWidget(
                   text: "You already have an account?",
-                  color: AppColors.whiteColor,
+                  color: ColorsManager.white,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
-                  marginTop: double16,
-                  marginBottom: double16,
+                  marginTop: AppSize.s16,
+                  marginBottom: AppSize.s16,
                 ),
                 GestureDetector(
                   onTap: () => Get.offAllNamed(
@@ -469,11 +475,11 @@ class SignUpForm extends GetView<SignUpController> {
                   ),
                   child: const CustomTextWidget(
                     text: "Login",
-                    color: AppColors.whiteColor,
+                    color: ColorsManager.white,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
-                    marginBottom: double48,
+                    marginBottom: AppSize.s48,
                   ),
                 ),
               ],

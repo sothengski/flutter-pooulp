@@ -28,7 +28,7 @@ workflows:
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - flutter packages pub get
-      - flutter build apk --release
+      - flutter build apk --split-per-abi #flutter build apk --release
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --release --no-codesign
     artifacts:
@@ -47,11 +47,11 @@ workflows:
       firebase:
         firebase_token: $FIREBASE_TOKEN
         ios:
-          app_id: 1:555779830620:ios:43b616d8396a90a1cec799
+          app_id: 1:555779830620:ios:c1f375dc712b91d8cec799
           groups:
             - androidTesters
         android:
-          app_id: 1:555779830620:android:2ade25bbd5d014f2cec799
+          app_id: 1:555779830620:android:b665636edc9eeebdcec799
           groups:
             - androidTesters
           artifact_type: apk
@@ -98,11 +98,11 @@ workflows:
       firebase:
         firebase_token: Encrypted(Z0FBQUFBQmhzWXBKOW5WTGQ4aDR5MzVmODA0cmtKdlNfdGFhdHdNRElBTldqd3JIM0hDWm1aYnhNOFJOYU5tQjNkaUIxUnNnR2pJS1dfZXRIUDB2eGY1azdRSHNwcm1uZDUxeHBSVUF2RjRYY3VhS3UxemdVMFRTS2ljLThLVjZpQkNwR2tOSlFuMW9DRTJyUGZNM2dhUUlVYjJ3UFNJU3lvUnlQWjd6M3RXeEFwb1pMTV8teXpTUDFaVHlnS3htdDAxOS1pYzk0YnVSM0RwSE5SSnQyZGMtRHdSSUU0QUdqZz09)
         ios:
-          app_id: 1:555779830620:ios:43b616d8396a90a1cec799
+          app_id: 1:555779830620:ios:c1f375dc712b91d8cec799
           groups:
             - androidTesters
         android:
-          app_id: 1:555779830620:android:2ade25bbd5d014f2cec799
+          app_id: 1:555779830620:android:b665636edc9eeebdcec799
           groups:
             - androidTesters
           artifact_type: apk

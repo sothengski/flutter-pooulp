@@ -63,7 +63,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
             customSnackbar(
               msgTitle: "Can't save user Data",
               msgContent: "Can't save user Data",
-              bgColor: AppColors.redColor,
+              bgColor: ColorsManager.red,
             );
           }
           clearData();
@@ -77,7 +77,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
           customSnackbar(
             msgTitle: "Something went wrong!",
             msgContent: "$error",
-            bgColor: AppColors.redColor,
+            bgColor: ColorsManager.red,
           );
           change(
             null,

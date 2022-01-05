@@ -20,28 +20,28 @@ class HomePage extends GetView<HomeController> {
             Text(
               'token:${controller.userToken!.token}',
               style: const TextStyle(
-                fontFamily: typoRoundFont,
+                fontFamily: FontConstants.typoRound,
                 fontSize: 20,
               ),
             ),
             Text(
               'tokenType:${controller.userToken!.tokenType}',
               style: const TextStyle(
-                fontFamily: typoRoundFont,
+                fontFamily: FontConstants.typoRound,
                 fontSize: 20,
               ),
             ),
             Text(
               'expireIn:${controller.userToken!.expireIn}',
               style: const TextStyle(
-                fontFamily: typoRoundFont,
+                fontFamily: FontConstants.typoRound,
                 fontSize: 20,
               ),
             ),
             Text(
               'accountType:${controller.userToken!.accountType}',
               style: const TextStyle(
-                fontFamily: typoRoundFont,
+                fontFamily: FontConstants.typoRound,
                 fontSize: 20,
               ),
             ),

@@ -32,7 +32,7 @@ class SignInPage extends GetView<SignInController> {
                     right: double72,
                   ),
                   child: Image(
-                    image: AssetImage(appLogoWhiteImg),
+                    image: AssetImage(ImageAssets.appLogoWhite),
                   ),
                 ),
                 // SizedBox(

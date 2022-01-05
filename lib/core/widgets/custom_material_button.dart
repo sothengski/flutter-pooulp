@@ -26,14 +26,14 @@ class CustomMaterialButton extends StatelessWidget {
 
   const CustomMaterialButton({
     Key? key,
-    this.buttonColor = ColorManager.primary,
+    this.buttonColor = ColorsManager.primary,
     this.onPrimaryColor,
     this.shadowColor,
     this.sideColor = Colors.transparent,
     this.sideWidth = 1.0,
     this.elevation,
     this.text = '',
-    this.textColor = ColorManager.white,
+    this.textColor = ColorsManager.white,
     this.fontFamily,
     this.fontWeight,
     this.fontSize = 12.0,

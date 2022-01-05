@@ -9,7 +9,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.primary,
+      backgroundColor: ColorsManager.primary,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -24,8 +24,8 @@ class SignUpPage extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(
-                  left: double72,
-                  right: double72,
+                  left: AppSize.s72,
+                  right: AppSize.s72,
                 ),
                 child: Image(
                   image: AssetImage(ImageAssets.appLogoWhite),
@@ -35,18 +35,18 @@ class SignUpPage extends StatelessWidget {
                 children: [
                   const CustomTextWidget(
                     text: "Register an account as",
-                    color: ColorManager.white,
+                    color: ColorsManager.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 20,
-                    // marginTop: double4,
-                    marginBottom: double32,
+                    // marginTop: AppSize.s4,
+                    marginBottom: AppSize.s32,
                   ),
                   CustomMaterialButton(
                     text: "Student",
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
-                    textColor: ColorManager.primary,
-                    buttonColor: ColorManager.white,
+                    textColor: ColorsManager.primary,
+                    buttonColor: ColorsManager.white,
                     onPressed: () {
                       customGeneralDialog(
                         context: context,
@@ -63,8 +63,8 @@ class SignUpPage extends StatelessWidget {
                     text: "Enterprise",
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
-                    textColor: ColorManager.primary,
-                    buttonColor: ColorManager.white,
+                    textColor: ColorsManager.primary,
+                    buttonColor: ColorsManager.white,
                     onPressed: () {
                       customGeneralDialog(
                         context: context,

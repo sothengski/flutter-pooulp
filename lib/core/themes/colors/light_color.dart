@@ -67,30 +67,30 @@ class LightColors implements IColors {
   ButtonThemeData? buttonTheme;
 
   LightColors() {
-    primaryColor = ColorManager.primary; //appBar text Color
-    appBarColor = ColorManager.primary; //appBar BgColor
-    accentColor = ColorManager.grey800;
-    scaffoldBackgroundColor = ColorManager.grey100; //bgBody
-    tabBarColor = ColorManager.yellowAccent;
-    tabbarNormalColor = ColorManager.green900;
-    tabbarSelectedColor = ColorManager.red200;
+    primaryColor = ColorsManager.primary; //appBar text Color
+    appBarColor = ColorsManager.primary; //appBar BgColor
+    accentColor = ColorsManager.grey800;
+    scaffoldBackgroundColor = ColorsManager.grey100; //bgBody
+    tabBarColor = ColorsManager.yellowAccent;
+    tabbarNormalColor = ColorsManager.green900;
+    tabbarSelectedColor = ColorsManager.red200;
     colorScheme = const ColorScheme.light().copyWith(
-      onPrimary: ColorManager.white,
-      onSecondary: ColorManager
+      onPrimary: ColorsManager.white,
+      onSecondary: ColorsManager
           .primary25, //Icon Color inside floatingButton and Bg on Card Widget
-      onSurface: ColorManager.grey300, //border around the OutlinedButton
+      onSurface: ColorsManager.grey300, //border around the OutlinedButton
     );
     brightness = Brightness.light;
-    buttonTextColor = ColorManager.white;
-    iconColor = ColorManager.white; //iconColor on drawer and action icons
-    enabledColor = ColorManager.grey100;
-    errorColor = ColorManager.red;
-    fillColor = ColorManager.primary25;
-    focusColor = ColorManager.primary50;
-    disabledColor = ColorManager.grey100;
-    highlightColor = ColorManager.grey600;
-    hoverColor = ColorManager.grey300;
-    focusErrorColor = ColorManager.red;
+    buttonTextColor = ColorsManager.white;
+    iconColor = ColorsManager.white; //iconColor on drawer and action icons
+    enabledColor = ColorsManager.grey100;
+    errorColor = ColorsManager.red;
+    fillColor = ColorsManager.primary25;
+    focusColor = ColorsManager.primary50;
+    disabledColor = ColorsManager.grey100;
+    highlightColor = ColorsManager.grey600;
+    hoverColor = ColorsManager.grey300;
+    focusErrorColor = ColorsManager.red;
 
     // textTheme: _lightTextTheme,
     //     visualDensity: VisualDensity.adaptivePlatformDensity,

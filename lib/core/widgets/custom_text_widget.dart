@@ -48,7 +48,7 @@ class CustomTextWidget extends StatelessWidget {
         marginBottom!,
       ),
       child: Text(
-        text ?? emptyText,
+        text ?? AppStrings.emptyText,
         overflow: TextOverflow.ellipsis,
         softWrap: false,
         style: textStyle ??

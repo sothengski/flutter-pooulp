@@ -9,7 +9,7 @@ class LoadingWidget extends StatelessWidget {
 
   const LoadingWidget({
     Key? key,
-    this.color = ColorManager.primary,
+    this.color = ColorsManager.primary,
     this.size = 50.0,
   }) : super(key: key);
 

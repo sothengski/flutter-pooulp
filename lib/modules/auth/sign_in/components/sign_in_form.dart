@@ -12,7 +12,7 @@ class SignInForm extends GetView<SignInController> {
   Widget build(BuildContext context) {
     return CustomContainerWidget(
       child: Padding(
-        padding: const EdgeInsets.all(double24),
+        padding: const EdgeInsets.all(AppSize.s24),
         child: Obx(
           () => Form(
             key: controller.signInFormKey,
@@ -23,14 +23,14 @@ class SignInForm extends GetView<SignInController> {
                   text: 'Login',
                   fontSize: 24.0,
                   fontWeight: FontWeight.w700,
-                  color: ColorManager.primary,
+                  color: ColorsManager.primary,
                 ),
                 CustomTextInput(
                   controller: controller.emailCtrl,
                   inputTitle: "Email",
                   hintText: "Enter your email",
                   isFilled: true,
-                  topPadding: double12,
+                  topPadding: AppSize.s12,
                   validator: Validator().emailValidator,
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -41,7 +41,7 @@ class SignInForm extends GetView<SignInController> {
                   suffixIcon: true,
                   obscureText: !controller.showPassword.value,
                   isFilled: true,
-                  topPadding: double12,
+                  topPadding: AppSize.s12,
                   validator: Validator().passwordValidator,
                   maxLength: 15,
                   inputFormatterList: [
@@ -58,10 +58,10 @@ class SignInForm extends GetView<SignInController> {
                   alignment: Alignment.centerRight,
                   child: CustomTextWidget(
                     text: 'Forget password?',
-                    color: ColorManager.primary,
+                    color: ColorsManager.primary,
                     textDecoration: TextDecoration.underline,
-                    marginTop: double16,
-                    marginBottom: double16,
+                    marginTop: AppSize.s16,
+                    marginBottom: AppSize.s16,
                   ),
                 ),
                 Obx(
@@ -89,50 +89,50 @@ class SignInForm extends GetView<SignInController> {
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: ColorManager.grey600,
+                        color: ColorsManager.grey600,
                       ),
                     ),
                     SizedBox(width: 10),
                     CustomTextWidget(
                       text: 'Or',
                       fontSize: 20.0,
-                      marginTop: double16,
-                      marginBottom: double16,
+                      marginTop: AppSize.s16,
+                      marginBottom: AppSize.s16,
                     ),
                     SizedBox(width: 10),
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: ColorManager.grey600,
+                        color: ColorsManager.grey600,
                       ),
                     ),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    left: double48,
-                    right: double48,
+                    left: AppSize.s48,
+                    right: AppSize.s48,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       CircleAvatar(
                         radius: 30.0,
-                        backgroundColor: ColorManager.white,
+                        backgroundColor: ColorsManager.white,
                         child: Image(
                           image: AssetImage(ImageAssets.googleLogo),
                         ),
                       ),
                       CircleAvatar(
                         radius: 30.0,
-                        backgroundColor: ColorManager.white,
+                        backgroundColor: ColorsManager.white,
                         child: Image(
                           image: AssetImage(ImageAssets.linkedInLogo),
                         ),
                       ),
                       CircleAvatar(
                         radius: 30.0,
-                        backgroundColor: ColorManager.white,
+                        backgroundColor: ColorsManager.white,
                         child: Image(
                           image: AssetImage(ImageAssets.facebookLogo),
                         ),

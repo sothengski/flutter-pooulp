@@ -1,9 +1,5 @@
 import 'package:get/get.dart';
 
-///==================== Fonts ====================
-
-const String typoRoundFont = 'TypoRound';
-
 ///==================== Texts ====================
 
 const String appNameText = 'Pooulp';

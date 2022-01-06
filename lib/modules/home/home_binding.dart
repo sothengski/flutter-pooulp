@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../data/data.dart';
-import 'home.dart';
+import '../modules.dart';
 
 class HomeBinding implements Bindings {
   @override
@@ -12,6 +12,18 @@ class HomeBinding implements Bindings {
 
     Get.lazyPut<AuthProvider>(
       () => AuthProvider(),
+    );
+
+    Get.lazyPut<FeedController>(
+      () => FeedController(),
+    );
+
+    Get.lazyPut<OfferController>(
+      () => OfferController(),
+    );
+
+    Get.lazyPut<ProfileController>(
+      () => ProfileController(),
     );
   }
 }

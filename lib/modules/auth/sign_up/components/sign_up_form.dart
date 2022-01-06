@@ -54,7 +54,7 @@ class SignUpForm extends GetView<SignUpController> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(AppSize.s8),
                   child: CustomContainerWidget(
                     child: Padding(
                       padding: const EdgeInsets.all(AppSize.s24),
@@ -172,7 +172,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                     border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                        8.0,
+                                                        AppSize.s8,
                                                       ),
                                                     ),
                                                     errorText: state.hasError
@@ -182,7 +182,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                        8.0,
+                                                        AppSize.s8,
                                                       ),
                                                       borderSide:
                                                           const BorderSide(
@@ -194,7 +194,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                        8.0,
+                                                        AppSize.s8,
                                                       ),
                                                       borderSide:
                                                           const BorderSide(
@@ -206,7 +206,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                        8.0,
+                                                        AppSize.s8,
                                                       ),
                                                       borderSide:
                                                           const BorderSide(

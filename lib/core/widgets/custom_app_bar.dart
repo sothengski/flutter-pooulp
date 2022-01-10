@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../core.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -9,12 +8,16 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final Color titleColor;
   final bool centerTitle;
   final Color? backgroundColor;
+  final List<Widget>? actions;
+  final double? elevation;
 
   CustomAppBar({
-    required this.title,
+    this.title = '',
     this.titleColor = Colors.white,
     this.centerTitle = true,
     this.backgroundColor,
+    this.actions,
+    this.elevation,
     Key? key,
   })  : preferredSize = const Size.fromHeight(60.0),
         super(key: key);
@@ -28,8 +31,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         color: titleColor,
       ),
       backgroundColor: backgroundColor,
-      systemOverlayStyle:
-          SystemUiOverlayStyle.dark, // this makes status bar text color black
+      elevation: elevation,
+      actions: actions,
     );
   }
 }

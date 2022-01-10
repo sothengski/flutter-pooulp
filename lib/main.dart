@@ -15,7 +15,11 @@ Future<void> main() async {
     // DeviceOrientation.portraitDown,
   ]);
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.light,
+    SystemUiOverlayStyle.dark,
+    // const SystemUiOverlayStyle(
+    //   systemNavigationBarColor: Colors.blue, // navigation bar color
+    //   statusBarColor: Colors.pink, // status bar color
+    // ),
   );
   runApp(const MyApp());
 }

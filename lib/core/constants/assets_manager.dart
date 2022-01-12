@@ -17,6 +17,7 @@ class ImageAssets {
   static const String appLogoText = '$imagePath/app-logo-text.png';
   static const String coverImg = '$imagePath/cover-img.png';
   static const String coverImgBubbles = '$imagePath/cover-img-bubbles.png';
+  static const String diagonalLinePng = '$imagePath/diagonal-lines.png';
 
   static const String socialMediaBrowsing =
       '$imagePath/social-media-browsing.png';

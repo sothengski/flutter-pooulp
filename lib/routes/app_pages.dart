@@ -38,5 +38,10 @@ class AppPages {
       page: () => const SignInPage(),
       binding: SignInBinding(),
     ),
+    GetPage(
+      name: Routes.settingsRoute,
+      page: () => const SettingPage(),
+      binding: SettingBinding(),
+    ),
   ];
 }

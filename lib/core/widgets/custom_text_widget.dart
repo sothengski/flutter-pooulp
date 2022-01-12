@@ -25,7 +25,7 @@ class CustomTextWidget extends StatelessWidget {
     this.color,
     this.fontFamily,
     this.fontWeight,
-    this.fontSize,
+    this.fontSize = 14.0,
     this.marginLeft = 0.0,
     this.marginTop = 0.0,
     this.marginBottom = 0.0,

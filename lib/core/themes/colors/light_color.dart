@@ -91,7 +91,6 @@ class LightColors implements IColors {
     highlightColor = ColorsManager.grey600;
     hoverColor = ColorsManager.grey300;
     focusErrorColor = ColorsManager.red;
-    iconColor = ColorsManager.primary;
     // textTheme: _lightTextTheme,
     //     visualDensity: VisualDensity.adaptivePlatformDensity,
     //     accentColor: theme.colors.colors.yellowPrimary,

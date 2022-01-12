@@ -12,7 +12,7 @@ class ProfileHeader extends StatelessWidget {
 
   const ProfileHeader({
     this.profileImg = ImageAssets.appLogoSymbol,
-    this.coverImg = ImageAssets.coverImgBubbles,
+    this.coverImg = ImageAssets.coverImg,
     this.userName = 'John Appleseed',
     this.userRole = 'Student',
     this.numberStarRate = 4.75,
@@ -28,6 +28,15 @@ class ProfileHeader extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: AppSize.s24),
           width: double.infinity,
           height: headerHigh,
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage(
+          //       coverImg!,
+          //     ),
+          //     scale: 2,
+          //     repeat: ImageRepeat.repeat,
+          //   ),
+          // ),
           child: Image(
             image: AssetImage(
               coverImg!,
@@ -101,6 +110,7 @@ class ProfileHeader extends StatelessWidget {
                       ),
                       const Icon(
                         Icons.star,
+                        color: ColorsManager.grey600,
                       ),
                       CustomTextWidget(
                         text: '$numberStarRate/5',

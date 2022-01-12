@@ -11,6 +11,7 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        backgroundColor: ColorsManager.primary,
         body: SafeArea(
           child: IndexedStack(
             index: controller.currentIndex.value,
@@ -24,7 +25,7 @@ class HomePage extends GetView<HomeController> {
         bottomNavigationBar: Obx(
           () => CustomAnimatedBottomBar(
             containerHeight: 70,
-            backgroundColor: ColorsManager.white,
+            backgroundColor: ColorsManager.grey100,
             selectedIndex: controller.currentIndex.value,
             itemCornerRadius: 32,
             curve: Curves.easeIn,

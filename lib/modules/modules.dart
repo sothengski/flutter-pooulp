@@ -1,4 +1,8 @@
 export 'auth/auth.dart';
+export 'feed/feed.dart';
 export 'home/home.dart';
+export 'offer/offer.dart';
+export 'profile/profile.dart';
+export 'setting/setting.dart';
 export 'splash/splash.dart';
 export 'unknown/unknown_page.dart';

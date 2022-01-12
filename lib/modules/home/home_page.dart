@@ -2,60 +2,55 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
-import 'home.dart';
+import '../modules.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('home'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'token:${controller.userToken!.token}',
-              style: const TextStyle(
-                fontFamily: FontConstants.typoRound,
-                fontSize: 20,
+    return Obx(
+      () => Scaffold(
+        backgroundColor: ColorsManager.primary,
+        body: SafeArea(
+          child: IndexedStack(
+            index: controller.currentIndex.value,
+            children: const [
+              FeedPage(),
+              OfferPage(),
+              ProfilePage(),
+            ],
+          ),
+        ),
+        bottomNavigationBar: Obx(
+          () => CustomAnimatedBottomBar(
+            containerHeight: 70,
+            backgroundColor: ColorsManager.grey100,
+            selectedIndex: controller.currentIndex.value,
+            itemCornerRadius: 32,
+            curve: Curves.easeIn,
+            items: <BottomNavBarItem>[
+              BottomNavBarItem(
+                activeIcon: const Icon(Icons.explore),
+                inActiveIcon: const Icon(Icons.explore_outlined),
+                title: const Text('Feed'),
+                activeColor: ColorsManager.primary,
               ),
-            ),
-            Text(
-              'tokenType:${controller.userToken!.tokenType}',
-              style: const TextStyle(
-                fontFamily: FontConstants.typoRound,
-                fontSize: 20,
+              BottomNavBarItem(
+                activeIcon: const Icon(Icons.description),
+                inActiveIcon: const Icon(Icons.description_outlined),
+                title: const Text('My Offers'),
+                activeColor: ColorsManager.primary,
               ),
-            ),
-            Text(
-              'expireIn:${controller.userToken!.expireIn}',
-              style: const TextStyle(
-                fontFamily: FontConstants.typoRound,
-                fontSize: 20,
+              BottomNavBarItem(
+                activeIcon: const Icon(Icons.person),
+                inActiveIcon: const Icon(Icons.person_outlined),
+                title: const Text('Profile'),
+                activeColor: ColorsManager.primary,
               ),
-            ),
-            Text(
-              'accountType:${controller.userToken!.accountType}',
-              style: const TextStyle(
-                fontFamily: FontConstants.typoRound,
-                fontSize: 20,
-              ),
-            ),
-            MaterialButton(
-              onPressed: () {
-                controller.signOut();
-              },
-              child: const CustomTextWidget(
-                text: 'Sign Out',
-                fontSize: 24.0,
-                marginTop: 20.0,
-              ),
-            )
-          ],
+            ],
+            onItemSelected: (index) => controller.pageNavigate(index: index),
+          ),
         ),
       ),
     );

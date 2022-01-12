@@ -8,6 +8,9 @@ class HomeController extends GetxController {
 
   late LoginModel? userToken;
 
+  // int currentIndex = 0;
+  RxInt currentIndex = 0.obs;
+
   @override
   void onInit() {
     getToken();
@@ -22,5 +25,9 @@ class HomeController extends GetxController {
 
   void getToken() {
     userToken = AuthServices().getToken();
+  }
+
+  void pageNavigate({int? index = 0}) {
+    currentIndex.value = index!;
   }
 }

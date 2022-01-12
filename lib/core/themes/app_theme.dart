@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// import 'package:flutter/services.dart';
-
 import '../core.dart';
 
 class AppThemeDark extends ITheme {
@@ -129,6 +127,9 @@ mixin ThemeManager {
           ),
           fillColor: theme.colors.fillColor,
           focusColor: theme.colors.focusColor,
+        ),
+        iconTheme: IconThemeData(
+          color: theme.colors.iconColor,
         ),
       );
 }

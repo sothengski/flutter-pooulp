@@ -16,6 +16,10 @@ Future<void> main() async {
   ]);
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light,
+    // const SystemUiOverlayStyle(
+    //   systemNavigationBarColor: Colors.blue, // navigation bar color
+    //   statusBarColor: Colors.pink, // status bar color
+    // ),
   );
   runApp(const MyApp());
 }
@@ -26,12 +30,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      builder: (context, child) => GestureDetector(
-        onTap: () {
-          unFocusKeyBoard(context);
-        },
-        child: child,
-      ),
+      // builder: (context, child) => GestureDetector(
+      //   onTap: () {
+      //     unFocusKeyBoard(context);
+      //   },
+      //   child: child,
+      // ),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child!,
+        );
+      },
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.splashRoute,
       getPages: AppPages.routes,

@@ -395,7 +395,7 @@ class ProfilePage extends GetView<ProfileController> {
                     color: ColorsManager.grey800,
                     size: AppSize.s24,
                   ),
-                  child: Column(),
+                  // child: Column(),
                 ),
               ),
               //===== Certificates Widget =====//

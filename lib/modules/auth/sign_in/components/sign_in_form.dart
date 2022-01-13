@@ -12,6 +12,7 @@ class SignInForm extends GetView<SignInController> {
   Widget build(BuildContext context) {
     return CustomContainerWidget(
       elevation: 0.0,
+      childPadding: 16.0,
       child: Obx(
         () => Form(
           key: controller.signInFormKey,

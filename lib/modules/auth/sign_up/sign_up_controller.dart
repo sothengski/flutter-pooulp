@@ -139,7 +139,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
       //   );
       // } else {
       swithcingBoolValueRegisterBtn(boolValue: true);
-      final UserModel registrationInputData = UserModel(
+      final ProfileModel registrationInputData = ProfileModel(
         firstName: firstNameCtrl.text.trim(),
         lastName: lastNameCtrl.text.trim(),
         email: emailCtrl.text.trim(),

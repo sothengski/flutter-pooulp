@@ -54,9 +54,10 @@ class SignUpForm extends GetView<SignUpController> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(AppSize.s8),
+                  padding: const EdgeInsets.all(AppSize.s16),
                   child: CustomContainerWidget(
                     elevation: 0.0,
+                    childPadding: 16.0,
                     child: Obx(
                       () => Form(
                         key: controller.registrationFormKey,

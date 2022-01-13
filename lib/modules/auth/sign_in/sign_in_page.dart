@@ -39,7 +39,7 @@ class SignInPage extends GetView<SignInController> {
                 //   height: getHeight * 0.05,
                 // ),
                 const Padding(
-                  padding: EdgeInsets.all(AppSize.s8),
+                  padding: EdgeInsets.all(AppSize.s12),
                   child: SignInForm(),
                 ),
                 const CustomTextWidget(

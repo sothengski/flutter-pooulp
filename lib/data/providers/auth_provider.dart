@@ -7,7 +7,7 @@ import '../data.dart';
 
 class AuthProvider extends BaseProvider {
   Future<LoginModel> logInAPI({
-    required UserModel? loginData,
+    required ProfileModel? loginData,
   }) async {
     try {
       final Response dataResponse = await post(
@@ -46,7 +46,7 @@ class AuthProvider extends BaseProvider {
   }
 
   Future<LoginModel> registerNewUserAPI({
-    required UserModel? registrationData,
+    required ProfileModel? registrationData,
   }) async {
     try {
       final Response dataResponse = await post(

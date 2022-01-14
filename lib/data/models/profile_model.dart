@@ -27,6 +27,19 @@ class ProfileModel {
   final String? addressLatitude;
   final String? addressLongitude;
 
+  final String? id; //enterprise
+  final String? name; //enterprise
+  final String? subsidiaryOf; //enterprise
+  final String? schoolID; //enterprise
+  final String? logoUrn; //enterprise
+  final DateTime? createdAt; //enterprise
+  final DateTime? updatedAt; //enterprise
+  final String? facebookLink; //enterprise
+  final String? linkedinLink; //enterprise
+  final String? whatsAppLink; //enterprise
+  final int? statusCode; //enterprise
+  final String? uuid; //enterprise
+
   // final List<int>? spokenLanguagesList;
   // final List<String>? fields;
 
@@ -55,6 +68,18 @@ class ProfileModel {
     this.addressCountry,
     this.addressLatitude,
     this.addressLongitude,
+    this.id,
+    this.name,
+    this.subsidiaryOf,
+    this.schoolID,
+    this.logoUrn,
+    this.createdAt,
+    this.updatedAt,
+    this.facebookLink,
+    this.linkedinLink,
+    this.whatsAppLink,
+    this.statusCode,
+    this.uuid,
   });
 
   factory ProfileModel.userFromJson(String str) =>
@@ -87,6 +112,22 @@ class ProfileModel {
         addressCountry: json['address_country'] as String?,
         addressLatitude: json['address_latitude'] as String?,
         addressLongitude: json['address_longitude'] as String?,
+        id: json['id'] as String?,
+        name: json['name'] as String?,
+        subsidiaryOf: json['subsidiary_of'] as String?,
+        schoolID: json['school_id'] as String?,
+        logoUrn: json['logo_urn'] as String?,
+        createdAt: json['created_at'] != null
+            ? DateTime.parse(json['created_at'].toString())
+            : null,
+        updatedAt: json['updated_at'] != null
+            ? DateTime.parse(json['updated_at'].toString())
+            : null,
+        facebookLink: json['facebook_link'] as String?,
+        linkedinLink: json['linkedin_link'] as String?,
+        whatsAppLink: json['whatsapp_link'] as String?,
+        statusCode: json['statecode'] as int?,
+        uuid: json['uuid'] as String?,
       );
 
   String userToJson() => json.encode(toJson());
@@ -116,6 +157,18 @@ class ProfileModel {
         'address_country': addressCountry,
         'address_latitude': addressLatitude,
         'address_longitude': addressLongitude,
+        'id': id,
+        'name': name,
+        'subsidiary_of': subsidiaryOf,
+        'school_id': schoolID,
+        'logo_urn': logoUrn,
+        'created_at': createdAt?.toString(),
+        'updated_at': updatedAt?.toString(),
+        'facebook_link': facebookLink,
+        'linkedin_link': linkedinLink,
+        'whatsapp_link': whatsAppLink,
+        'statecode': statusCode,
+        'uuid': uuid,
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -145,7 +198,19 @@ class ProfileModel {
       addressZip: $addressZip,
       addressCountry: $addressCountry,
       addressLatitude: $addressLatitude,
-      addressLongitude: $addressLongitude
+      addressLongitude: $addressLongitude,
+      id: $id, 
+      name: $name, 
+      subsidiaryOf: $subsidiaryOf, 
+      schoolID: $schoolID, 
+      logoUrn: $logoUrn, 
+      createdAt: $createdAt, 
+      updatedAt: $updatedAt, 
+      facebookLink: $facebookLink, 
+      linkedinLink: $linkedinLink, 
+      whatsAppLink: $whatsAppLink, 
+      statusCode: $statusCode, 
+      uuid: $uuid,
     )''';
   }
 }

@@ -28,7 +28,7 @@ class SignUpPage extends StatelessWidget {
                   right: AppSize.s72,
                 ),
                 child: Image(
-                  image: AssetImage(ImageAssets.appLogoWhite),
+                  image: AssetImage(AssetsManager.appLogoWhite),
                 ),
               ),
               Column(

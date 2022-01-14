@@ -11,8 +11,8 @@ class ProfileHeader extends StatelessWidget {
   final double? headerHigh;
 
   const ProfileHeader({
-    this.profileImg = ImageAssets.appLogoSymbol,
-    this.coverImg = ImageAssets.coverImg,
+    this.profileImg = AssetsManager.appLogoSymbol,
+    this.coverImg = AssetsManager.coverImg,
     this.userName = 'John Appleseed',
     this.userRole = 'Student',
     this.numberStarRate = 4.75,

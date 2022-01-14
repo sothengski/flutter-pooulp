@@ -15,6 +15,14 @@ class SignInPage extends GetView<SignInController> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.flag),
+            color: ColorsManager.grey300,
+            tooltip: 'Language',
+            onPressed: () => changeLanguageDialog(context),
+          ),
+        ],
       ),
       body: GestureDetector(
         onTap: () => unFocusKeyBoard(context),
@@ -32,7 +40,7 @@ class SignInPage extends GetView<SignInController> {
                     right: AppSize.s72,
                   ),
                   child: Image(
-                    image: AssetImage(ImageAssets.appLogoWhite),
+                    image: AssetImage(AssetsManager.appLogoWhite),
                   ),
                 ),
                 // SizedBox(

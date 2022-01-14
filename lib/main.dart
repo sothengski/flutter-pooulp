@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'core/core.dart';
+import 'data/data.dart';
 import 'routes/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init(LocalStorage.credentialName);
-
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,
@@ -21,11 +21,18 @@ Future<void> main() async {
     //   statusBarColor: Colors.pink, // status bar color
     // ),
   );
-  runApp(const MyApp());
+  await initialConfig();
+  final storage = Get.find<StorageServices>();
+
+  runApp(MyApp(storageServices: storage));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final StorageServices? storageServices;
+  const MyApp({
+    Key? key,
+    this.storageServices,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +58,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeManager.createTheme(
         AppThemeLight(),
       ),
+      locale: storageServices!.languageCode == 'km'
+          ? const Locale('km', 'KH')
+          : storageServices!.languageCode == 'zh'
+              ? const Locale('zh', 'ZH')
+              : const Locale('en', 'US'),
+
+      fallbackLocale: LocalizationService.fallbackLocale,
+      translations: LocalizationService(),
       // home: const MyHomePage(title: 'Pooulp Flutter Demo Home Page'),
     );
   }

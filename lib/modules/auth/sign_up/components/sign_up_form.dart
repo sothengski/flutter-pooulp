@@ -50,7 +50,7 @@ class SignUpForm extends GetView<SignUpController> {
                     right: AppSize.s72,
                   ),
                   child: Image(
-                    image: AssetImage(ImageAssets.appLogoWhite),
+                    image: AssetImage(AssetsManager.appLogoWhite),
                   ),
                 ),
                 Padding(
@@ -425,7 +425,8 @@ class SignUpForm extends GetView<SignUpController> {
                                     radius: 30.0,
                                     backgroundColor: ColorsManager.white,
                                     child: Image(
-                                      image: AssetImage(ImageAssets.googleLogo),
+                                      image:
+                                          AssetImage(AssetsManager.googleLogo),
                                     ),
                                   ),
                                   CircleAvatar(
@@ -433,7 +434,7 @@ class SignUpForm extends GetView<SignUpController> {
                                     backgroundColor: ColorsManager.white,
                                     child: Image(
                                       image: AssetImage(
-                                        ImageAssets.linkedInLogo,
+                                        AssetsManager.linkedInLogo,
                                       ),
                                     ),
                                   ),
@@ -442,7 +443,7 @@ class SignUpForm extends GetView<SignUpController> {
                                     backgroundColor: ColorsManager.white,
                                     child: Image(
                                       image: AssetImage(
-                                        ImageAssets.facebookLogo,
+                                        AssetsManager.facebookLogo,
                                       ),
                                     ),
                                   ),

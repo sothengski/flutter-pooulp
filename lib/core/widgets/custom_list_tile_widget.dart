@@ -27,6 +27,7 @@ class CustomListTileWidget extends StatelessWidget {
   final double? leftRightPadding;
   final double? topPadding;
   final double? bottomPadding;
+  final Color? backgroundColor;
 
   const CustomListTileWidget({
     this.text1 = '',
@@ -53,6 +54,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.leftRightPadding = 0.0,
     this.topPadding = 10.0,
     this.bottomPadding = 0.0,
+    this.backgroundColor = ColorsManager.white,
     Key? key,
   }) : super(key: key);
 
@@ -62,6 +64,7 @@ class CustomListTileWidget extends StatelessWidget {
       onTap: onClick,
       child: Container(
         decoration: BoxDecoration(
+          color: backgroundColor,
           border: leftWidget == null && isDivider == true
               ? const Border(
                   bottom: BorderSide(

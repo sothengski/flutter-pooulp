@@ -19,6 +19,13 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
 
   late LoginModel loginRepsonseData;
 
+  // @override
+  // void onInit() {
+  //   final String lang = StorageServices().readData('language') as String;
+  //   print('lang: $lang');
+  //   super.onInit();
+  // }
+
   @override
   void dispose() {
     super.dispose();

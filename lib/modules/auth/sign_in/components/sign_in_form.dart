@@ -19,15 +19,15 @@ class SignInForm extends GetView<SignInController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CustomTextWidget(
-                text: 'Login',
+              CustomTextWidget(
+                text: 'auth.logIn'.tr,
                 fontSize: 24.0,
                 fontWeight: FontWeight.w700,
                 color: ColorsManager.primary,
               ),
               CustomTextInput(
                 controller: controller.emailCtrl,
-                inputTitle: "Email",
+                inputTitle: 'auth.email'.tr,
                 hintText: "Enter your email",
                 isFilled: true,
                 topPadding: AppSize.s12,
@@ -36,7 +36,7 @@ class SignInForm extends GetView<SignInController> {
               ),
               CustomTextInput(
                 controller: controller.passwordCtrl,
-                inputTitle: "Password",
+                inputTitle: 'auth.password'.tr,
                 hintText: "Enter your password",
                 suffixIcon: true,
                 obscureText: !controller.showPassword.value,
@@ -119,21 +119,21 @@ class SignInForm extends GetView<SignInController> {
                       radius: 30.0,
                       backgroundColor: ColorsManager.white,
                       child: Image(
-                        image: AssetImage(ImageAssets.googleLogo),
+                        image: AssetImage(AssetsManager.googleLogo),
                       ),
                     ),
                     CircleAvatar(
                       radius: 30.0,
                       backgroundColor: ColorsManager.white,
                       child: Image(
-                        image: AssetImage(ImageAssets.linkedInLogo),
+                        image: AssetImage(AssetsManager.linkedInLogo),
                       ),
                     ),
                     CircleAvatar(
                       radius: 30.0,
                       backgroundColor: ColorsManager.white,
                       child: Image(
-                        image: AssetImage(ImageAssets.facebookLogo),
+                        image: AssetImage(AssetsManager.facebookLogo),
                       ),
                     ),
                   ],

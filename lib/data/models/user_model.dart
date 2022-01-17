@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import '../data.dart';
 
-UserModel userModelFromJson(String str) =>
-    UserModel.fromJson(json.decode(str) as Map<String, dynamic>);
+UserModel userModelFromJson(String str) => UserModel.fromJson(
+      json.decode(str) as Map<String, dynamic>,
+    );
 
-String userModelToJson(UserModel data) => json.encode(data.toJson());
+String userModelToJson(UserModel data) => json.encode(
+      data.toJson(),
+    );
 
 class UserModel {
   final int? id;
@@ -29,9 +32,16 @@ class UserModel {
         uuid: json["uuid"] as String?,
         email: json["email"] as String?,
         isActivated: json["is_activated"] as bool?,
-        profile: ProfileModel.fromJson(json["profile"] as Map<String, dynamic>),
-        enterprise:
-            ProfileModel.fromJson(json["enterprise"] as Map<String, dynamic>),
+        profile: json["profile"] == null
+            ? null
+            : ProfileModel.fromJson(
+                json["profile"] as Map<String, dynamic>,
+              ),
+        enterprise: json["enterprise"] == null
+            ? null
+            : ProfileModel.fromJson(
+                json["enterprise"] as Map<String, dynamic>,
+              ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,7 +51,20 @@ class UserModel {
         "is_activated": isActivated,
         "profile": profile?.toJson(),
         "enterprise": enterprise?.toJson(),
-      };
+      }..removeWhere((_, v) => v == null);
+
+  @override
+  String toString() {
+    return '''
+    UserModel(
+      id: $id,
+      uuid: $uuid,
+      email: $email,
+      isActivated: $isActivated,
+      profile: $profile,
+      enterprise: $enterprise,
+    )''';
+  }
 }
 
 ///==================== User API Schema ====================

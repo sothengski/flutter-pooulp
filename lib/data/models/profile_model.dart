@@ -27,7 +27,7 @@ class ProfileModel {
   final String? addressLatitude;
   final String? addressLongitude;
 
-  final String? id; //enterprise
+  final int? id; //enterprise
   final String? name; //enterprise
   final String? subsidiaryOf; //enterprise
   final String? schoolID; //enterprise
@@ -82,15 +82,27 @@ class ProfileModel {
     this.uuid,
   });
 
+  String get fullName => '$firstName $lastName';
+
+  String get fullPhone1Format =>
+      phone1CountryCode == null || phone1CountryCode == ''
+          ? ''
+          : '($phone1CountryCode) $phone1';
+
+  String get fullPhone2Format =>
+      phone2CountryCode == null || phone2CountryCode == ''
+          ? ''
+          : '($phone2CountryCode) $phone2';
+
   factory ProfileModel.userFromJson(String str) =>
       ProfileModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         firstName: json['first_name'] as String?,
         lastName: json['last_name'] as String?,
-        email: json['email'] as String?,
-        phone1CountryCode: json['phone1_country_code'] as String?,
-        phone1: json['phone1'] as String?,
+        email: json['email'] as String? ?? '',
+        phone1CountryCode: json['phone1_country_code'] as String? ?? '',
+        phone1: json['phone1'] as String? ?? '',
         password: json['password'] as String?,
         passwordConfirmation: json['password_confirmation'] as String?,
         uiLanguage: json['ui_language'] as String?,
@@ -98,7 +110,7 @@ class ProfileModel {
         invitationToken: json['invitation_token'] as String?,
         enterpriseName: json['enterprise_name'] as String?,
         enterpriseID: json['enterprise_id'] as String?,
-        description: json['description'] as String?,
+        description: json['description'] as String? ?? '',
         phone2CountryCode: json['phone2_country_code'] as String?,
         phone2: json['phone2'] as String?,
         birthDate: json['birthdate'] != null
@@ -112,7 +124,7 @@ class ProfileModel {
         addressCountry: json['address_country'] as String?,
         addressLatitude: json['address_latitude'] as String?,
         addressLongitude: json['address_longitude'] as String?,
-        id: json['id'] as String?,
+        id: json['id'] as int?,
         name: json['name'] as String?,
         subsidiaryOf: json['subsidiary_of'] as String?,
         schoolID: json['school_id'] as String?,

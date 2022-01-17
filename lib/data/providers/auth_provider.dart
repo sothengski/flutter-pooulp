@@ -11,7 +11,7 @@ class AuthProvider extends BaseProvider {
   }) async {
     try {
       final Response dataResponse = await post(
-        APIEndPoints.signInEndPoint,
+        APIEndPoints.signIn,
         loginData!.userToJson(),
       );
       if (dataResponse.hasError) {
@@ -28,7 +28,7 @@ class AuthProvider extends BaseProvider {
   Future<String> logOutAPI() async {
     try {
       final Response dataResponse = await post(
-        APIEndPoints.signOutEndPoint,
+        APIEndPoints.signOut,
         {},
       );
       if (dataResponse.hasError) {
@@ -50,7 +50,7 @@ class AuthProvider extends BaseProvider {
   }) async {
     try {
       final Response dataResponse = await post(
-        APIEndPoints.registerNewUserEndPoint,
+        APIEndPoints.registerNewUser,
         registrationData!.userToJson(),
       );
       if (dataResponse.hasError) {

@@ -45,9 +45,10 @@ class SignUpForm extends GetView<SignUpController> {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(
-                    top: 100.0,
+                    top: kBottomNavigationBarHeight + 48,
                     left: AppSize.s72,
                     right: AppSize.s72,
+                    bottom: AppSize.s24,
                   ),
                   child: Image(
                     image: AssetImage(AssetsManager.appLogoWhite),

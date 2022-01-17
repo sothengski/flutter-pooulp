@@ -16,82 +16,24 @@ class UserProfileComponent extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        ///===== Profile Header Widget =====//
-        const ProfileHeader(
-          userName: 'Sotheng',
-          userRole: 'Student ',
+        ///===== Profile Header Component =====//
+        ProfileHeader(
+          userName: controller.userInfoRepsonse.value.profile!.fullName,
+          userRole: controller.userInfoRepsonse.value.profile!.accountType,
         ),
-        //===== Profile Header Widget =====//
+        //===== Profile Header Component =====//
 
-        ///===== Personal Information Widget =====//
-        Padding(
-          padding: const EdgeInsets.only(
-            left: AppSize.s12,
-            right: AppSize.s12,
-            top: AppSize.s12,
-            bottom: AppSize.s12,
-          ),
-          child: CustomContainerWidget(
-            leftTitle: 'Personal Information'.toUpperCase(),
-            titleFontSize: AppSize.s16,
-            rightWidget: const Icon(
-              Icons.edit,
-              color: ColorsManager.grey800,
-              size: AppSize.s24,
-            ),
-            child: Column(
-              children: const [
-                CustomListTileWidget(
-                  text1: 'Email',
-                  text2: 'john.appleseed@example.com',
-                  isLauching: true,
-                  text2Color: ColorsManager.blue,
-                  leftWidget: CustomBoxWidget(
-                    insideObj: Icon(
-                      Icons.email,
-                      color: ColorsManager.grey,
-                      size: AppSize.s24,
-                    ),
-                    backgroundColor: ColorsManager.white,
-                  ),
-                ),
-                CustomListTileWidget(
-                  text1: 'Phone',
-                  text2: '(+33) 06 78 8945 18',
-                  isLauching: true,
-                  text2Color: ColorsManager.blue,
-                  leftWidget: CustomBoxWidget(
-                    insideObj: Icon(
-                      Icons.phone,
-                      color: ColorsManager.grey,
-                      size: AppSize.s24,
-                    ),
-                    backgroundColor: ColorsManager.white,
-                  ),
-                ),
-                CustomListTileWidget(
-                  text1: 'Video presentation link',
-                  text2: 'https://www.youtube.com/watch?v=a79iLjV-HKw',
-                  isLauching: true,
-                  text2Color: ColorsManager.blue,
-                  bottomPadding: 8.0,
-                  isDivider: false,
-                  leftWidget: CustomBoxWidget(
-                    insideObj: Icon(
-                      Icons.video_library,
-                      color: ColorsManager.grey,
-                      size: AppSize.s24,
-                    ),
-                    backgroundColor: ColorsManager.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        ///===== Personal Information Component =====//
+        ContactInformationComponent(
+          headerTitle: 'Personal Information',
+          email: controller.userInfoRepsonse.value.email,
+          phone: controller.userInfoRepsonse.value.profile!.fullPhone1Format,
+          videoPreentationLink:
+              controller.userInfoRepsonse.value.profile!.description,
         ),
-        //===== Personal Information Widget =====//
+        //===== Personal Information Component =====//
 
-        ///===== Education Widget =====//
+        ///===== Education Component =====//
         Padding(
           padding: const EdgeInsets.only(
             left: AppSize.s12,
@@ -147,9 +89,9 @@ class UserProfileComponent extends StatelessWidget {
             ),
           ),
         ),
-        //===== Education Widget =====//
+        //===== Education Component =====//
 
-        ///===== Professional Widget =====//
+        ///===== Professional Component =====//
         Padding(
           padding: const EdgeInsets.only(
             left: AppSize.s12,
@@ -195,9 +137,9 @@ class UserProfileComponent extends StatelessWidget {
             ),
           ),
         ),
-        //===== Professional Widget =====//
+        //===== Professional Component =====//
 
-        ///===== Personal Widget =====//
+        ///===== Personal Component =====//
         Padding(
           padding: const EdgeInsets.only(
             left: AppSize.s12,
@@ -217,9 +159,9 @@ class UserProfileComponent extends StatelessWidget {
             child: Column(),
           ),
         ),
-        //===== Personal Widget =====//
+        //===== Personal Component =====//
 
-        ///===== Skills Widget =====//
+        ///===== Skills Component =====//
         Padding(
           padding: const EdgeInsets.only(
             left: AppSize.s12,
@@ -285,9 +227,9 @@ class UserProfileComponent extends StatelessWidget {
             ),
           ),
         ),
-        //===== Skills Widget =====//
+        //===== Skills Component =====//
 
-        ///===== Languages Widget =====//
+        ///===== Languages Component =====//
         Padding(
           padding: const EdgeInsets.only(
             left: AppSize.s12,
@@ -309,9 +251,9 @@ class UserProfileComponent extends StatelessWidget {
             ),
           ),
         ),
-        //===== Languages Widget =====//
+        //===== Languages Component =====//
 
-        ///===== Achievement Widget =====//
+        ///===== Achievement Component =====//
         Padding(
           padding: const EdgeInsets.only(
             left: AppSize.s12,
@@ -357,9 +299,9 @@ class UserProfileComponent extends StatelessWidget {
             ),
           ),
         ),
-        //===== Achievement Widget =====//
+        //===== Achievement Component =====//
 
-        ///===== Certificates Widget =====//
+        ///===== Certificates Component =====//
         Padding(
           padding: const EdgeInsets.only(
             left: AppSize.s12,
@@ -379,18 +321,7 @@ class UserProfileComponent extends StatelessWidget {
             // child: Column(),
           ),
         ),
-        //===== Certificates Widget =====//
-
-        MaterialButton(
-          onPressed: () {
-            controller.homeController.signOut();
-          },
-          child: const CustomTextWidget(
-            text: 'Sign Out',
-            fontSize: 24.0,
-            marginTop: 20.0,
-          ),
-        )
+        //===== Certificates Component =====//
       ],
     );
   }

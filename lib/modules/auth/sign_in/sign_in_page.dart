@@ -38,16 +38,14 @@ class SignInPage extends GetView<SignInController> {
                   padding: EdgeInsets.only(
                     left: AppSize.s72,
                     right: AppSize.s72,
+                    bottom: AppSize.s24,
                   ),
                   child: Image(
                     image: AssetImage(AssetsManager.appLogoWhite),
                   ),
                 ),
-                // SizedBox(
-                //   height: getHeight * 0.05,
-                // ),
                 const Padding(
-                  padding: EdgeInsets.all(AppSize.s12),
+                  padding: EdgeInsets.all(AppSize.s16),
                   child: SignInForm(),
                 ),
                 const CustomTextWidget(

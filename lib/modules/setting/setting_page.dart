@@ -13,7 +13,21 @@ class SettingPage extends GetView<SettingController> {
       appBar: CustomAppBar(
         title: 'Setting Page',
       ),
-      body: const Center(child: Text('Setting Page')),
+      body: Column(
+        children: [
+          const Center(child: Text('Setting Page')),
+          MaterialButton(
+            onPressed: () {
+              controller.homeController.signOut();
+            },
+            child: const CustomTextWidget(
+              text: 'Sign Out',
+              fontSize: 24.0,
+              marginTop: 20.0,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

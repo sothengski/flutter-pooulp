@@ -1,3 +1,4 @@
+export 'components/contact_information_component.dart';
 export 'components/enterprise_profile_component.dart';
 export 'components/profile_header.dart';
 export 'components/user_profile_component.dart';

@@ -14,10 +14,13 @@ class APIEndPoints {
   // 'http://uat-api.pooulp.eu'; //QAS BASEURL
   // 'pooulp.eu'; //Production BASEURL
 
-  static const String signInEndPoint = '/login';
-  static const String signOutEndPoint = '/logout';
+  static const String signIn = '/login';
+  static const String signOut = '/logout';
 
-  static const String registerNewUserEndPoint = '/register';
+  static const String registerNewUser = '/register';
+
+  static const String userInfo = '/users/me';
+  static const String studentInfo = '/users/me/student_profile';
 }
 
 class LocalStorage {

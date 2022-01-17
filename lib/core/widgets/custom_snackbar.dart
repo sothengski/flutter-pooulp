@@ -6,7 +6,7 @@ import '../core.dart';
 void customSnackbar({
   String? msgTitle = '--Title--',
   String? msgContent = '--Content--',
-  Duration duration = DurationConstant.d4000ms,
+  Duration duration = DurationConstant.d4000,
   Color textColor = ColorsManager.white,
   Color bgColor = ColorsManager.grey800,
 }) {

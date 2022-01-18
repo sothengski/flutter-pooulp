@@ -34,60 +34,8 @@ class UserProfileComponent extends StatelessWidget {
         //===== Personal Information Component =====//
 
         ///===== Education Component =====//
-        Padding(
-          padding: const EdgeInsets.only(
-            left: AppSize.s12,
-            right: AppSize.s12,
-            // top: AppSize.s4,
-            bottom: AppSize.s12,
-          ),
-          child: CustomContainerWidget(
-            leftTitle: 'Education'.toUpperCase(),
-            titleFontSize: AppSize.s16,
-            // isRightWidget: true,
-            rightWidget: const Icon(
-              Icons.add,
-              color: ColorsManager.grey800,
-              size: AppSize.s24,
-            ),
-            child: Column(
-              children: const [
-                CustomListTileWidget(
-                  text1: 'Central Lille',
-                  text1Color: ColorsManager.grey850,
-                  text1FontWeight: FontWeightManager.medium,
-                  text1FontSize: AppSize.s16,
-                  text2: 'Master of Science - Computer Science',
-                  text2Color: ColorsManager.grey800,
-                  text3: 'Dec 2020 - July 2022 at Villeneuve d’Ascq - France',
-                  leftWidget: CustomBoxWidget(),
-                  rightWidget: Icon(
-                    Icons.edit,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s20,
-                  ),
-                ),
-                CustomListTileWidget(
-                  text1: 'Paragon International University',
-                  text1Color: ColorsManager.grey850,
-                  text1FontWeight: FontWeightManager.medium,
-                  text1FontSize: AppSize.s16,
-                  text2:
-                      'Bachelor of Science - Management of Information Systems',
-                  text2Color: ColorsManager.grey800,
-                  text3: 'Oct 2015 - July 2020 at Phnom Penh - Cambodia',
-                  bottomPadding: 8.0,
-                  isDivider: false,
-                  leftWidget: CustomBoxWidget(),
-                  rightWidget: Icon(
-                    Icons.edit,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s20,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        const EducationInformationComponent(
+          headerTitle: 'education',
         ),
         //===== Education Component =====//
 
@@ -323,6 +271,73 @@ class UserProfileComponent extends StatelessWidget {
         ),
         //===== Certificates Component =====//
       ],
+    );
+  }
+}
+
+class EducationInformationComponent extends StatelessWidget {
+  final String? headerTitle;
+
+  const EducationInformationComponent({
+    this.headerTitle = '',
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: AppSize.s12,
+        right: AppSize.s12,
+        // top: AppSize.s4,
+        bottom: AppSize.s12,
+      ),
+      child: CustomContainerWidget(
+        leftTitle: '$headerTitle'.toUpperCase(),
+        titleFontSize: AppSize.s16,
+        // isRightWidget: true,
+        rightWidget: const Icon(
+          Icons.add,
+          color: ColorsManager.grey800,
+          size: AppSize.s24,
+        ),
+        child: Column(
+          children: const [
+            CustomListTileWidget(
+              text1: 'Central Lille',
+              text1Color: ColorsManager.grey850,
+              text1FontWeight: FontWeightManager.medium,
+              text1FontSize: AppSize.s16,
+              text2: 'Master of Science - Computer Science',
+              text2Color: ColorsManager.grey800,
+              text3: 'Dec 2020 - July 2022 at Villeneuve d’Ascq - France',
+              leftWidget: CustomBoxWidget(),
+              rightWidget: Icon(
+                Icons.edit,
+                color: ColorsManager.grey800,
+                size: AppSize.s20,
+              ),
+            ),
+            CustomListTileWidget(
+              text1: 'Paragon International University',
+              text1Color: ColorsManager.grey850,
+              text1FontWeight: FontWeightManager.medium,
+              text1FontSize: AppSize.s16,
+              text2: 'Bachelor of Science - Management of Information Systems',
+              text2Color: ColorsManager.grey800,
+              text3: 'Oct 2015 - July 2020 at Phnom Penh - Cambodia',
+              bottomPadding: 8.0,
+              isDivider: false,
+              leftWidget: CustomBoxWidget(),
+              rightWidget: Icon(
+                Icons.edit,
+                color: ColorsManager.grey800,
+                size: AppSize.s20,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

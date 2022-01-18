@@ -1,14 +1,6 @@
 import 'dart:convert';
 
-import '../data.dart';
-
-UserModel userModelFromJson(String str) => UserModel.fromJson(
-      json.decode(str) as Map<String, dynamic>,
-    );
-
-String userModelToJson(UserModel data) => json.encode(
-      data.toJson(),
-    );
+import '../../data.dart';
 
 class UserModel {
   final int? id;
@@ -27,30 +19,36 @@ class UserModel {
     this.enterprise,
   });
 
+  factory UserModel.fromRawJson(String str) => UserModel.fromJson(
+        json.decode(str) as Map<String, dynamic>,
+      );
+
+  String toRawJson() => json.encode(toJson());
+
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json["id"] as int?,
-        uuid: json["uuid"] as String?,
-        email: json["email"] as String?,
-        isActivated: json["is_activated"] as bool?,
-        profile: json["profile"] == null
+        id: json['id'] as int?,
+        uuid: json['uuid'] as String?,
+        email: json['email'] as String?,
+        isActivated: json['is_activated'] as bool?,
+        profile: json['profile'] == null
             ? null
             : ProfileModel.fromJson(
-                json["profile"] as Map<String, dynamic>,
+                json['profile'] as Map<String, dynamic>,
               ),
-        enterprise: json["enterprise"] == null
+        enterprise: json['enterprise'] == null
             ? null
             : ProfileModel.fromJson(
-                json["enterprise"] as Map<String, dynamic>,
+                json['enterprise'] as Map<String, dynamic>,
               ),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "uuid": uuid,
-        "email": email,
-        "is_activated": isActivated,
-        "profile": profile?.toJson(),
-        "enterprise": enterprise?.toJson(),
+        'id': id,
+        'uuid': uuid,
+        'email': email,
+        'is_activated': isActivated,
+        'profile': profile?.toJson(),
+        'enterprise': enterprise?.toJson(),
       }..removeWhere((_, v) => v == null);
 
   @override

@@ -12,7 +12,7 @@ class AuthProvider extends BaseProvider {
     try {
       final Response dataResponse = await post(
         APIEndPoints.signIn,
-        loginData!.userToJson(),
+        loginData!.toRawJson(),
       );
       if (dataResponse.hasError) {
         throw responseBodyHandler(resp: dataResponse);
@@ -51,7 +51,7 @@ class AuthProvider extends BaseProvider {
     try {
       final Response dataResponse = await post(
         APIEndPoints.registerNewUser,
-        registrationData!.userToJson(),
+        registrationData!.toRawJson(),
       );
       if (dataResponse.hasError) {
         throw responseBodyHandler(resp: dataResponse);

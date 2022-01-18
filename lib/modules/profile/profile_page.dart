@@ -58,9 +58,7 @@ class ProfilePage extends GetView<ProfileController> {
               padding: const EdgeInsets.only(bottom: AppSize.s32),
               child: Container(
                 child: controller.enterpriseSwitching.value == true
-                    ? EnterpriseProfileComponent(
-                        controller: controller,
-                      )
+                    ? EnterpriseProfileComponent(controller: controller)
                     : UserProfileComponent(controller: controller),
               ),
             ),

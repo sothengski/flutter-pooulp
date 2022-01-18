@@ -94,8 +94,10 @@ class ProfileModel {
           ? ''
           : '($phone2CountryCode) $phone2';
 
-  factory ProfileModel.userFromJson(String str) =>
+  factory ProfileModel.fromRawJson(String str) =>
       ProfileModel.fromJson(json.decode(str) as Map<String, dynamic>);
+
+  String toRawJson() => json.encode(toJson());
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         firstName: json['first_name'] as String?,
@@ -141,8 +143,6 @@ class ProfileModel {
         statusCode: json['statecode'] as int?,
         uuid: json['uuid'] as String?,
       );
-
-  String userToJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() => {
         'first_name': firstName,

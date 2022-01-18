@@ -5,6 +5,7 @@ import '../data.dart';
 
 abstract class IUserInfoProvider {
   Future<UserModel> getUserInfo();
+  // Future<>
 }
 
 class UserInfoProvider extends BaseProvider implements IUserInfoProvider {

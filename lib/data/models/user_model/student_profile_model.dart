@@ -60,7 +60,7 @@ class StudentProfileModel {
         whatsappLink: json['whatsapp_link'] as String?,
         youtubeLink: json['youtube_link'] as String?,
         gender: json['gender'] as String?,
-        skills: json['skills'] != null
+        skills: json['skills'] != null || json['skills'] != []
             ? (json['skills'] as List)
                 .map(
                   (i) => SkillModel.fromJson(
@@ -69,16 +69,17 @@ class StudentProfileModel {
                 )
                 .toList()
             : [],
-        spokenLanguages: json['spoken_languages'] != null
-            ? (json['spoken_languages'] as List)
-                .map(
-                  (i) => FieldModel.fromJson(
-                    i as Map<String, dynamic>,
-                  ),
-                )
-                .toList()
-            : [],
-        educations: json['educations'] != null
+        spokenLanguages:
+            json['spoken_languages'] != null || json['spoken_languages'] != []
+                ? (json['spoken_languages'] as List)
+                    .map(
+                      (i) => FieldModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList()
+                : [],
+        educations: json['educations'] != null || json['educations'] != []
             ? (json['educations'] as List)
                 .map(
                   (i) => EducationModel.fromJson(
@@ -87,7 +88,7 @@ class StudentProfileModel {
                 )
                 .toList()
             : [],
-        experiences: json['experiences'] != null
+        experiences: json['experiences'] != null || json['experiences'] != []
             ? (json['experiences'] as List)
                 .map(
                   (i) => ExperienceModel.fromJson(
@@ -96,7 +97,7 @@ class StudentProfileModel {
                 )
                 .toList()
             : [],
-        achievements: json['achievements'] != null
+        achievements: json['achievements'] != null || json['achievements'] != []
             ? (json['achievements'] as List)
                 .map(
                   (i) => AchievementModel.fromJson(
@@ -105,7 +106,7 @@ class StudentProfileModel {
                 )
                 .toList()
             : [],
-        certificates: json['certificates'] != null
+        certificates: json['certificates'] != null || json['certificates'] != []
             ? (json['certificates'] as List)
                 .map(
                   (i) => CertificateModel.fromJson(
@@ -114,7 +115,7 @@ class StudentProfileModel {
                 )
                 .toList()
             : [],
-        periods: json['periods'] != null
+        periods: json['periods'] != null || json['periods'] != []
             ? (json['periods'] as List)
                 .map(
                   (i) => PeriodModel.fromJson(
@@ -136,25 +137,25 @@ class StudentProfileModel {
         'whatsapp_link': whatsappLink,
         'youtube_link': youtubeLink,
         'gender': gender,
-        'skills': skills != null
+        'skills': skills != null || skills != []
             ? List<dynamic>.from(skills!.map((x) => x.toJson()))
             : null,
-        'spoken_languages': spokenLanguages != null
+        'spoken_languages': spokenLanguages != null || spokenLanguages != []
             ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
             : null,
-        'educations': educations != null
+        'educations': educations != null || educations != []
             ? List<dynamic>.from(educations!.map((x) => x.toJson()))
             : null,
-        'experiences': experiences != null
+        'experiences': experiences != null || experiences != []
             ? List<dynamic>.from(experiences!.map((x) => x.toJson()))
             : null,
-        'achievements': achievements != null
+        'achievements': achievements != null || achievements != []
             ? List<dynamic>.from(achievements!.map((x) => x.toJson()))
             : null,
-        'certificates': certificates != null
+        'certificates': certificates != null || certificates != []
             ? List<dynamic>.from(certificates!.map((x) => x.toJson()))
             : null,
-        'periods': periods != null
+        'periods': periods != null || periods != []
             ? List<dynamic>.from(periods!.map((x) => x.toJson()))
             : null,
       }..removeWhere((_, v) => v == null);

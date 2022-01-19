@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../../core/core.dart';
+
 class ExperienceModel {
   final int? id;
   final String? type;
@@ -12,7 +14,7 @@ class ExperienceModel {
   final String? addressCity;
   final String? addressCountry;
   // final dynamic? job;
-  final List<dynamic>? tags;
+  // final List<dynamic>? tags;
 
   ExperienceModel({
     this.id,
@@ -26,8 +28,14 @@ class ExperienceModel {
     this.addressCity,
     this.addressCountry,
     // this.job,
-    this.tags,
+    // this.tags,
   });
+
+  String? get attendedFrom => dateFormatDashYYYYMMDD(date: dateStart);
+  String? get attendedTo => dateFormatDashYYYYMMDD(date: dateEnd);
+  String? get attendedFromTo => '$attendedFrom - $attendedTo';
+
+  String? get companyCityAndCountry => '$addressCity - $addressCountry';
 
   factory ExperienceModel.fromRawJson(String str) => ExperienceModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
@@ -53,11 +61,11 @@ class ExperienceModel {
         addressCountry: json['address_country'] as String?,
         // job: json['job']as String?,
         // tags: json['fields'] != null
-        tags: List<dynamic>.from(
-          json['tags'].map(
-            (x) => x,
-          ) as List,
-        ).toList(),
+        // tags: List<dynamic>.from(
+        //   json['tags'].map(
+        //     (x) => x,
+        //   ) as List,
+        // ).toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,18 +74,19 @@ class ExperienceModel {
         'name': name,
         'description': description,
         'company': company,
-        'date_start':
-            "${dateStart!.year.toString().padLeft(4, '0')}-${dateStart!.month.toString().padLeft(2, '0')}-${dateStart!.day.toString().padLeft(2, '0')}",
-        'date_end': dateEnd == null
-            ? null
-            : "${dateEnd!.year.toString().padLeft(4, '0')}-${dateEnd!.month.toString().padLeft(2, '0')}-${dateEnd!.day.toString().padLeft(2, '0')}",
+        'date_start': dateStart != null
+            ? "${dateStart!.year.toString().padLeft(4, '0')}-${dateStart!.month.toString().padLeft(2, '0')}-${dateStart!.day.toString().padLeft(2, '0')}"
+            : null,
+        'date_end': dateEnd != null
+            ? "${dateEnd!.year.toString().padLeft(4, '0')}-${dateEnd!.month.toString().padLeft(2, '0')}-${dateEnd!.day.toString().padLeft(2, '0')}"
+            : null,
         'completed': completed,
         'address_city': addressCity,
         'address_country': addressCountry,
         // 'job': job,
-        'tags': tags != null
-            ? List<dynamic>.from(tags!.map((x) => x.toJson()))
-            : [],
+        // 'tags': tags != null
+        //     ? List<dynamic>.from(tags!.map((x) => x.toJson()))
+        //     : [],
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -94,7 +103,7 @@ class ExperienceModel {
       completed: $completed,
       addressCity: $addressCity,       
       addressCountry: $addressCountry,
-      tags: $tags
     )''';
+    // tags: $tags
   }
 }

@@ -35,7 +35,7 @@ class PeriodModel {
               )
             : null,
         isCustom: json['is_custom'] as int?,
-        weekly: json['weekly'] == null
+        weekly: json['weekly'] == null || json['weekly'] == []
             ? (json['weekly'] as List)
                 .map(
                   (i) => WeeklyModel.fromJson(
@@ -53,7 +53,7 @@ class PeriodModel {
         'to':
             "${to!.year.toString().padLeft(4, '0')}-${to!.month.toString().padLeft(2, '0')}-${to!.day.toString().padLeft(2, '0')}",
         'is_custom': isCustom,
-        'weekly': weekly != null
+        'weekly': weekly != null || weekly != []
             ? List<dynamic>.from(weekly!.map((x) => x.toJson()))
             : [],
       };

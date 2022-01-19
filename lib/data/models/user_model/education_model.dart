@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../../core/core.dart';
 import '../../data.dart';
 
 class EducationModel {
@@ -27,6 +28,13 @@ class EducationModel {
     this.fields,
   });
 
+  String? get attendedFrom => dateFormatDashYYYYMMDD(date: dateStart);
+  String? get attendedTo => dateFormatDashYYYYMMDD(date: dateEnd);
+  String? get attendedFromTo => '$attendedFrom - $attendedTo';
+
+  String? get schoolCityAndCountry =>
+      '${school!.addressCity} - ${school!.addressCountry}';
+
   factory EducationModel.fromRawJson(String str) => EducationModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
       );
@@ -51,7 +59,7 @@ class EducationModel {
                 json['school'] as Map<String, dynamic>,
               )
             : null,
-        fields: json['fields'] != null
+        fields: json['fields'] != null || json['fields'] != []
             ? (json['fields'] as List)
                 .map(
                   (i) => FieldModel.fromJson(
@@ -74,7 +82,7 @@ class EducationModel {
             "${dateEnd!.year.toString().padLeft(4, '0')}-${dateEnd!.month.toString().padLeft(2, '0')}-${dateEnd!.day.toString().padLeft(2, '0')}",
         'completed': completed,
         'school': school?.toJson(),
-        'fields': fields != null
+        'fields': fields != null || fields != []
             ? List<dynamic>.from(fields!.map((x) => x.toJson()))
             : null,
       }..removeWhere((_, v) => v == null);

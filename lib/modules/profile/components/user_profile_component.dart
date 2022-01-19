@@ -19,7 +19,7 @@ class UserProfileComponent extends StatelessWidget {
         ///===== Profile Header Component =====//
         ProfileHeader(
           userName: controller.userInfoRepsonse.value.profile!.fullName,
-          userRole: controller.userInfoRepsonse.value.profile!.accountType,
+          // userRole: controller.userInfoRepsonse.value.profile!.accountType,
         ),
         //===== Profile Header Component =====//
 
@@ -34,9 +34,10 @@ class UserProfileComponent extends StatelessWidget {
         //===== Personal Information Component =====//
 
         ///===== Education Component =====//
-        const EducationInformationComponent(
-          headerTitle: 'education',
-        ),
+        // EducationInformationComponent(
+        //   headerTitle: 'education',
+        //   educationList: controller.studentInfoRepsonse.value.educations,
+        // ),
         //===== Education Component =====//
 
         ///===== Professional Component =====//
@@ -131,7 +132,7 @@ class UserProfileComponent extends StatelessWidget {
               children: [
                 CustomList(
                   title: 'Soft Skill',
-                  subtitleList: controller.skillList,
+                  subtitleList: controller.mockSkillList,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(
@@ -148,26 +149,27 @@ class UserProfileComponent extends StatelessWidget {
                         marginBottom: 5.0,
                         fontWeight: FontWeight.w600,
                       ),
-                      CustomTextWidget(
-                        text: '• Power Point - Novice',
-                        marginBottom: 5.0,
-                      ),
-                      CustomTextWidget(
-                        text: '• HTML - Competent',
-                        marginBottom: 5.0,
-                      ),
-                      CustomTextWidget(
-                        text: '• ExpressJS - Proficient',
-                        marginBottom: 5.0,
-                      ),
-                      CustomTextWidget(
-                        text: '• Presentation - Expert',
-                        marginBottom: 5.0,
-                      ),
-                      CustomTextWidget(
-                        text: '• E-trade - Expert',
-                        marginBottom: 5.0,
-                      ),
+
+                      // CustomTextWidget(
+                      //   text: '• Power Point - Novice',
+                      //   marginBottom: 5.0,
+                      // ),
+                      // CustomTextWidget(
+                      //   text: '• HTML - Competent',
+                      //   marginBottom: 5.0,
+                      // ),
+                      // CustomTextWidget(
+                      //   text: '• ExpressJS - Proficient',
+                      //   marginBottom: 5.0,
+                      // ),
+                      // CustomTextWidget(
+                      //   text: '• Presentation - Expert',
+                      //   marginBottom: 5.0,
+                      // ),
+                      // CustomTextWidget(
+                      //   text: '• E-trade - Expert',
+                      //   marginBottom: 5.0,
+                      // ),
                     ],
                   ),
                 )
@@ -195,7 +197,7 @@ class UserProfileComponent extends StatelessWidget {
               size: AppSize.s24,
             ),
             child: CustomList(
-              subtitleList: controller.languagesList,
+              subtitleList: controller.mockLanguageList,
             ),
           ),
         ),
@@ -275,69 +277,78 @@ class UserProfileComponent extends StatelessWidget {
   }
 }
 
-class EducationInformationComponent extends StatelessWidget {
-  final String? headerTitle;
+// class EducationInformationComponent extends StatelessWidget {
+//   final String? headerTitle;
+//   final String? schoolName;
+//   final String? degreeTitle;
+//   final String? dateAttendAndSchoolLocation;
+//   final List<EducationModel>? educationList;
 
-  const EducationInformationComponent({
-    this.headerTitle = '',
-    Key? key,
-  }) : super(key: key);
+//   const EducationInformationComponent({
+//     this.headerTitle = '',
+//     this.schoolName = '',
+//     this.degreeTitle,
+//     this.dateAttendAndSchoolLocation,
+//     this.educationList,
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: AppSize.s12,
-        right: AppSize.s12,
-        // top: AppSize.s4,
-        bottom: AppSize.s12,
-      ),
-      child: CustomContainerWidget(
-        leftTitle: '$headerTitle'.toUpperCase(),
-        titleFontSize: AppSize.s16,
-        // isRightWidget: true,
-        rightWidget: const Icon(
-          Icons.add,
-          color: ColorsManager.grey800,
-          size: AppSize.s24,
-        ),
-        child: Column(
-          children: const [
-            CustomListTileWidget(
-              text1: 'Central Lille',
-              text1Color: ColorsManager.grey850,
-              text1FontWeight: FontWeightManager.medium,
-              text1FontSize: AppSize.s16,
-              text2: 'Master of Science - Computer Science',
-              text2Color: ColorsManager.grey800,
-              text3: 'Dec 2020 - July 2022 at Villeneuve d’Ascq - France',
-              leftWidget: CustomBoxWidget(),
-              rightWidget: Icon(
-                Icons.edit,
-                color: ColorsManager.grey800,
-                size: AppSize.s20,
-              ),
-            ),
-            CustomListTileWidget(
-              text1: 'Paragon International University',
-              text1Color: ColorsManager.grey850,
-              text1FontWeight: FontWeightManager.medium,
-              text1FontSize: AppSize.s16,
-              text2: 'Bachelor of Science - Management of Information Systems',
-              text2Color: ColorsManager.grey800,
-              text3: 'Oct 2015 - July 2020 at Phnom Penh - Cambodia',
-              bottomPadding: 8.0,
-              isDivider: false,
-              leftWidget: CustomBoxWidget(),
-              rightWidget: Icon(
-                Icons.edit,
-                color: ColorsManager.grey800,
-                size: AppSize.s20,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return CustomContainerWidget(
+//       leftMargin: AppSize.s12,
+//       rightMargin: AppSize.s12,
+//       // topMargin: AppSize.s12,
+//       bottomMargin: AppSize.s12,
+//       leftTitle: '$headerTitle'.toUpperCase(),
+//       titleFontSize: AppSize.s16,
+//       // isRightWidget: true,
+//       rightWidget: const Icon(
+//         Icons.add,
+//         color: ColorsManager.grey800,
+//         size: AppSize.s24,
+//       ),
+//       child: educationList == null
+//           ? Container()
+//           : Column(
+//               children: educationList!
+//                   .map(
+//                     (e) => CustomListTileWidget(
+//                       text1: e.school!.name,
+//                       text1Color: ColorsManager.grey850,
+//                       text1FontWeight: FontWeightManager.medium,
+//                       text1FontSize: AppSize.s16,
+//                       text2: e.degree,
+//                       text2Color: ColorsManager.grey800,
+//                       text3: '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
+//                       leftWidget: const CustomBoxWidget(),
+//                       rightWidget: const Icon(
+//                         Icons.edit,
+//                         color: ColorsManager.grey800,
+//                         size: AppSize.s20,
+//                       ),
+//                     ),
+//                   )
+//                   .toList(),
+//               //     // CustomListTileWidget(
+//               //     //   text1: 'Paragon International University',
+//               //     //   text1Color: ColorsManager.grey850,
+//               //     //   text1FontWeight: FontWeightManager.medium,
+//               //     //   text1FontSize: AppSize.s16,
+//               //     //   text2: 'Bachelor of Science - Management of Information Systems',
+//               //     //   text2Color: ColorsManager.grey800,
+//               //     //   text3: 'Oct 2015 - July 2020 at Phnom Penh - Cambodia',
+//               //     //   bottomPadding: 8.0,
+//               //     //   isDivider: false,
+//               //     //   leftWidget: CustomBoxWidget(),
+//               //     //   rightWidget: Icon(
+//               //     //     Icons.edit,
+//               //     //     color: ColorsManager.grey800,
+//               //     //     size: AppSize.s20,
+//               //     //   ),
+//               //     // ),
+//               //   ],
+//             ),
+//     );
+//   }
+// }

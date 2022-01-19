@@ -14,7 +14,7 @@ class ProfileHeader extends StatelessWidget {
     this.profileImg = AssetsManager.appLogoSymbol,
     this.coverImg = AssetsManager.coverImg,
     this.userName = '...',
-    this.userRole = '...',
+    this.userRole = '',
     this.numberStarRate = 0.0,
     this.headerHigh = 100,
     Key? key,

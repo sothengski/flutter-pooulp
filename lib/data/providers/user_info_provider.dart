@@ -5,7 +5,7 @@ import '../data.dart';
 
 abstract class IUserInfoProvider {
   Future<UserModel> getUserInfo();
-  // Future<>
+  Future<StudentProfileModel> getStudentProfileInfo();
 }
 
 class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
@@ -18,7 +18,27 @@ class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
       } else {
-        return UserModel.fromJson(dataResponse.body as Map<String, dynamic>);
+        return UserModel.fromJson(
+          dataResponse.body as Map<String, dynamic>,
+        );
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<StudentProfileModel> getStudentProfileInfo() async {
+    try {
+      final Response dataResponse = await get(
+        APIEndPoints.studentInfo,
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        return StudentProfileModel.fromJson(
+          dataResponse.body as Map<String, dynamic>,
+        );
       }
     } catch (e) {
       return Future.error(e.toString());

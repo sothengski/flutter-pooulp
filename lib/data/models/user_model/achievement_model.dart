@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../../core/core.dart';
+
 import '../../data.dart';
 
 class AchievementModel {
@@ -16,6 +18,8 @@ class AchievementModel {
     this.dateCompletion,
     this.fields,
   });
+  String? get dateCompletionFormat =>
+      dateFormatDashYYYYMMDD(date: dateCompletion);
 
   factory AchievementModel.fromRawJson(String str) =>
       AchievementModel.fromJson(json.decode(str) as Map<String, dynamic>);
@@ -30,7 +34,7 @@ class AchievementModel {
         dateCompletion: json['date_completion'] != null
             ? DateTime.parse(json['date_completion'].toString())
             : null,
-        fields: json['fields'] != null
+        fields: json['fields'] != null || json['fields'] != []
             ? (json['fields'] as List)
                 .map(
                   (i) => FieldModel.fromJson(
@@ -48,9 +52,9 @@ class AchievementModel {
         // 'date_completion': dateCompletion?.toString(),
         'date_completion':
             "${dateCompletion!.year.toString().padLeft(4, '0')}-${dateCompletion!.month.toString().padLeft(2, '0')}-${dateCompletion!.day.toString().padLeft(2, '0')}",
-        'fields': fields != null
+        'fields': fields != null || fields != []
             ? List<dynamic>.from(fields!.map((x) => x.toJson()))
-            : [],
+            : null,
       }..removeWhere((_, v) => v == null);
 
   @override

@@ -68,7 +68,7 @@ class CustomListTileWidget extends StatelessWidget {
           border: leftWidget == null && isDivider == true
               ? const Border(
                   bottom: BorderSide(
-                    color: ColorsManager.grey300,
+                    color: ColorsManager.grey100,
                   ),
                 )
               : null,
@@ -128,7 +128,7 @@ class CustomListTileWidget extends StatelessWidget {
                               fontSize: text1FontSize,
                               fontWeight: text1FontWeight,
                               marginBottom: 5.0,
-                              maxLine: 2,
+                              maxLine: 3,
                             ),
                           if (text2 == '')
                             Container()

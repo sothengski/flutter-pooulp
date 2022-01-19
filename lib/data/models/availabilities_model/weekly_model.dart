@@ -21,7 +21,7 @@ class WeeklyModel {
   factory WeeklyModel.fromJson(Map<String, dynamic> json) => WeeklyModel(
         day: json['day'] as int?,
         dayLabel: json['day_label'] as String?,
-        slots: json['slots'] != null
+        slots: json['slots'] != null || json['slots'] != []
             ? (json['slots'] as List)
                 .map(
                   (i) => SlotModel.fromJson(
@@ -35,7 +35,7 @@ class WeeklyModel {
   Map<String, dynamic> toJson() => {
         'day': day,
         'day_label': dayLabel,
-        'slots': slots != null
+        'slots': slots != null || slots != []
             ? List<dynamic>.from(slots!.map((x) => x.toJson()))
             : [],
       }..removeWhere((_, v) => v == null);

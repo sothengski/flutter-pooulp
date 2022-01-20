@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import '../../../core/core.dart';
-
 import '../../data.dart';
 
 class AchievementModel {

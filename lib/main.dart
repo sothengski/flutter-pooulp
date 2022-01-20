@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 
 import 'core/core.dart';
 import 'data/data.dart';
+import 'modules/modules.dart';
 import 'routes/routes.dart';
 
 Future<void> main() async {
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
       //   },
       //   child: child,
       // ),
+      initialBinding: NetworkBinding(),
       builder: (context, child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),

@@ -61,11 +61,6 @@ class ProfileController extends GetxController {
     bool? refresh = false,
   }) async {
     studentInfoRepsonse.value = await userInfoProvider.getStudentProfileInfo();
-    // debugPrint('studentInfoRepsonse: $studentInfoRepsonse');
-    // skillList.addAll(studentInfoRepsonse.value.skills!.toList());
-    // // debugPrint('skillList: $skillList');
-    // languageList.addAll(studentInfoRepsonse.value.spokenLanguages!.toList());
-    // debugPrint('languageList: $languageList');
     return studentInfoRepsonse;
   }
 

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import '../../core/core.dart';
 import '../data.dart';
 
 abstract class IUserInfoProvider {
@@ -13,7 +12,7 @@ class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
   Future<UserModel> getUserInfo() async {
     try {
       final Response dataResponse = await get(
-        APIEndPoints.userInfo,
+        API.paths[Endpoint.userInfo].toString(),
       );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
@@ -31,7 +30,7 @@ class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
   Future<StudentProfileModel> getStudentProfileInfo() async {
     try {
       final Response dataResponse = await get(
-        APIEndPoints.studentInfo,
+        API.paths[Endpoint.studentInfo].toString(),
       );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";

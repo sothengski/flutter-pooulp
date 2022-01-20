@@ -63,6 +63,9 @@ class ProfilePage extends GetView<ProfileController> {
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
+                            //update the Network State
+                            // GetBuilder<GetXNetworkManager>(builder: (builder)=>Text((_networkManager.connectionType == 0 )? 'No Internet' : (_networkManager.connectionType == 1) ? 'You are Connected to Wifi' : 'You are Connected to Mobile Internet',style: TextStyle(fontSize: 30),)),
+
                             ///===== Profile Header Component =====//
                             ProfileHeader(
                               userName: controller

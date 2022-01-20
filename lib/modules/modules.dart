@@ -1,6 +1,7 @@
 export 'auth/auth.dart';
 export 'feed/feed.dart';
 export 'home/home.dart';
+export 'network/network.dart';
 export 'offer/offer.dart';
 export 'profile/profile.dart';
 export 'setting/setting.dart';

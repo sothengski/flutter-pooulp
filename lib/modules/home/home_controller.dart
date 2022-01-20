@@ -8,8 +8,7 @@ class HomeController extends GetxController {
 
   late LoginModel? userToken;
 
-  // int currentIndex = 0;
-  RxInt currentIndex = 2.obs;
+  RxInt currentIndex = 0.obs;
 
   @override
   void onInit() {

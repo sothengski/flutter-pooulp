@@ -45,18 +45,20 @@ class SignUpForm extends GetView<SignUpController> {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(
-                    top: 100.0,
+                    top: kBottomNavigationBarHeight + 48,
                     left: AppSize.s72,
                     right: AppSize.s72,
+                    bottom: AppSize.s24,
                   ),
                   child: Image(
-                    image: AssetImage(ImageAssets.appLogoWhite),
+                    image: AssetImage(AssetsManager.appLogoWhite),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(AppSize.s8),
+                  padding: const EdgeInsets.all(AppSize.s16),
                   child: CustomContainerWidget(
                     elevation: 0.0,
+                    childPadding: 16.0,
                     child: Obx(
                       () => Form(
                         key: controller.registrationFormKey,
@@ -424,7 +426,8 @@ class SignUpForm extends GetView<SignUpController> {
                                     radius: 30.0,
                                     backgroundColor: ColorsManager.white,
                                     child: Image(
-                                      image: AssetImage(ImageAssets.googleLogo),
+                                      image:
+                                          AssetImage(AssetsManager.googleLogo),
                                     ),
                                   ),
                                   CircleAvatar(
@@ -432,7 +435,7 @@ class SignUpForm extends GetView<SignUpController> {
                                     backgroundColor: ColorsManager.white,
                                     child: Image(
                                       image: AssetImage(
-                                        ImageAssets.linkedInLogo,
+                                        AssetsManager.linkedInLogo,
                                       ),
                                     ),
                                   ),
@@ -441,7 +444,7 @@ class SignUpForm extends GetView<SignUpController> {
                                     backgroundColor: ColorsManager.white,
                                     child: Image(
                                       image: AssetImage(
-                                        ImageAssets.facebookLogo,
+                                        AssetsManager.facebookLogo,
                                       ),
                                     ),
                                   ),

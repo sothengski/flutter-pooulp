@@ -31,7 +31,7 @@ class CustomBoxWidget extends StatelessWidget {
               Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(ImageAssets.appLogoSymbol),
+                    image: AssetImage(AssetsManager.appLogoSymbol),
                     opacity: 0.75,
                     fit: BoxFit.scaleDown,
                   ),

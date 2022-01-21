@@ -25,6 +25,7 @@ class AuthServices extends GetxService {
   LoginModel? getToken() {
     auth = boxStorage.read(LocalStorage.authTokenData);
     auth = json.decode(auth.toString());
+    //TODO:: Prevent auth == null
     return LoginModel.fromJson(auth as Map<String, dynamic>);
   }
 

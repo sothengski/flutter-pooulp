@@ -1,7 +1,7 @@
 const String imagePath = "assets/images";
 const String iconPath = "assets/icons";
 
-class ImageAssets {
+class AssetsManager {
   ///==================== Icons ====================
 
   static const String facebookLogo = '$iconPath/facebook-logo.png';

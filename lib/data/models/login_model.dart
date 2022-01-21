@@ -13,19 +13,19 @@ class LoginModel {
     this.accountType,
   });
 
-  factory LoginModel.loginFromJson(String str) =>
+  factory LoginModel.fromRawJson(String str) =>
       LoginModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
-  factory LoginModel.fromJson(Map<String, dynamic> map) {
+  String toRawJson() => json.encode(toJson());
+
+  factory LoginModel.fromJson(Map<String, dynamic> json) {
     return LoginModel(
-      token: map['token'] as String?,
-      tokenType: map['token_type'] as String?,
-      expireIn: map['expires_in']?.toInt() as int?,
-      accountType: map['account_type'] as String?,
+      token: json['token'] as String?,
+      tokenType: json['token_type'] as String?,
+      expireIn: json['expires_in']?.toInt() as int?,
+      accountType: json['account_type'] as String?,
     );
   }
-
-  String logintoJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'token': token,

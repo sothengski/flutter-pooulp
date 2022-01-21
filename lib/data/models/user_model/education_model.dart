@@ -1,0 +1,106 @@
+import 'dart:convert';
+
+import '../../../core/core.dart';
+import '../../data.dart';
+
+class EducationModel {
+  final int? id;
+  final String? name;
+  final String? description;
+  final String? degree;
+  final int? studyingYear;
+  final DateTime? dateStart;
+  final DateTime? dateEnd;
+  final bool? completed;
+  final SchoolModel? school;
+  final List<FieldModel>? fields;
+
+  EducationModel({
+    this.id,
+    this.name,
+    this.description,
+    this.degree,
+    this.studyingYear,
+    this.dateStart,
+    this.dateEnd,
+    this.completed,
+    this.school,
+    this.fields,
+  });
+
+  String? get attendedFrom => dateFormatDashYYYYMMDD(date: dateStart);
+  String? get attendedTo => dateFormatDashYYYYMMDD(date: dateEnd);
+  String? get attendedFromTo => '$attendedFrom - $attendedTo';
+
+  String? get schoolCityAndCountry =>
+      '${school!.addressCity} - ${school!.addressCountry}';
+
+  factory EducationModel.fromRawJson(String str) => EducationModel.fromJson(
+        json.decode(str) as Map<String, dynamic>,
+      );
+
+  String toRawJson() => json.encode(toJson());
+
+  factory EducationModel.fromJson(Map<String, dynamic> json) => EducationModel(
+        id: json['id'] as int?,
+        name: json['name'] as String?,
+        description: json['description'] as String?,
+        degree: json['degree'] as String?,
+        studyingYear: json['studying_year'] as int?,
+        dateStart: json['date_start'] != null
+            ? DateTime.parse(json['date_start'].toString())
+            : null,
+        dateEnd: json['date_end'] != null
+            ? DateTime.parse(json['date_end'].toString())
+            : null,
+        completed: json['completed'] as bool?,
+        school: json['school'] != null
+            ? SchoolModel.fromJson(
+                json['school'] as Map<String, dynamic>,
+              )
+            : null,
+        fields: json['fields'] != null || json['fields'] != []
+            ? (json['fields'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList()
+            : [],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'description': description,
+        'degree': degree,
+        'studying_year': studyingYear,
+        'date_start':
+            "${dateStart!.year.toString().padLeft(4, '0')}-${dateStart!.month.toString().padLeft(2, '0')}-${dateStart!.day.toString().padLeft(2, '0')}",
+        'date_end':
+            "${dateEnd!.year.toString().padLeft(4, '0')}-${dateEnd!.month.toString().padLeft(2, '0')}-${dateEnd!.day.toString().padLeft(2, '0')}",
+        'completed': completed,
+        'school': school?.toJson(),
+        'fields': fields != null || fields != []
+            ? List<dynamic>.from(fields!.map((x) => x.toJson()))
+            : null,
+      }..removeWhere((_, v) => v == null);
+
+  @override
+  String toString() {
+    return '''
+    EducationModel(
+      id: $id,
+      name: $name,
+      description: $description,
+      degree: $degree,
+      studyingYear: $studyingYear,
+      dateStart: $dateStart,
+      dateEnd: $dateEnd,
+      completed: $completed,
+      school: $school,
+      fields: $fields,
+    )''';
+  }
+}

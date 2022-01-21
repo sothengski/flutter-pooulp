@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
+import '../../data/data.dart';
 import '../../routes/routes.dart';
 import 'profile.dart';
 
@@ -10,407 +11,512 @@ class ProfilePage extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorsManager.grey100,
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      appBar: CustomAppBar(
-        // title: 'Profile Page',
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            color: ColorsManager.white,
-            tooltip: 'Settings',
-            onPressed: () => {Get.toNamed(Routes.settingsRoute)},
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: AppSize.s32),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ///===== Profile Header Widget =====//
-              const ProfileHeader(
-                userName: 'Sotheng',
-                userRole: 'Student ',
-              ),
-              //===== Profile Header Widget =====//
-
-              ///===== Personal Information Widget =====//
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.s12,
-                  right: AppSize.s12,
-                  top: AppSize.s12,
-                  bottom: AppSize.s12,
-                ),
-                child: CustomContainerWidget(
-                  leftTitle: 'Personal Information'.toUpperCase(),
-                  titleFontSize: AppSize.s16,
-                  rightWidget: const Icon(
-                    Icons.edit,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s24,
-                  ),
-                  child: Column(
-                    children: const [
-                      CustomListTileWidget(
-                        text1: 'Email',
-                        text2: 'john.appleseed@example.com',
-                        isLauching: true,
-                        text2Color: ColorsManager.blue,
-                        leftWidget: CustomBoxWidget(
-                          insideObj: Icon(
-                            Icons.email,
-                            color: ColorsManager.grey,
-                            size: AppSize.s24,
-                          ),
-                          backgroundColor: ColorsManager.white,
-                        ),
-                      ),
-                      CustomListTileWidget(
-                        text1: 'Phone',
-                        text2: '(+33) 06 78 8945 18',
-                        isLauching: true,
-                        text2Color: ColorsManager.blue,
-                        leftWidget: CustomBoxWidget(
-                          insideObj: Icon(
-                            Icons.phone,
-                            color: ColorsManager.grey,
-                            size: AppSize.s24,
-                          ),
-                          backgroundColor: ColorsManager.white,
-                        ),
-                      ),
-                      CustomListTileWidget(
-                        text1: 'Video presentation link',
-                        text2: 'https://www.youtube.com/watch?v=a79iLjV-HKw',
-                        isLauching: true,
-                        text2Color: ColorsManager.blue,
-                        bottomPadding: 8.0,
-                        isDivider: false,
-                        leftWidget: CustomBoxWidget(
-                          insideObj: Icon(
-                            Icons.video_library,
-                            color: ColorsManager.grey,
-                            size: AppSize.s24,
-                          ),
-                          backgroundColor: ColorsManager.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              //===== Personal Information Widget =====//
-
-              ///===== Education Widget =====//
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.s12,
-                  right: AppSize.s12,
-                  // top: AppSize.s4,
-                  bottom: AppSize.s12,
-                ),
-                child: CustomContainerWidget(
-                  leftTitle: 'Education'.toUpperCase(),
-                  titleFontSize: AppSize.s16,
-                  // isRightWidget: true,
-                  rightWidget: const Icon(
-                    Icons.add,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s24,
-                  ),
-                  child: Column(
-                    children: const [
-                      CustomListTileWidget(
-                        text1: 'Central Lille',
-                        text1Color: ColorsManager.grey850,
-                        text1FontWeight: FontWeightManager.medium,
-                        text1FontSize: AppSize.s16,
-                        text2: 'Master of Science - Computer Science',
-                        text2Color: ColorsManager.grey800,
-                        text3:
-                            'Dec 2020 - July 2022 at Villeneuve d’Ascq - France',
-                        leftWidget: CustomBoxWidget(),
-                        rightWidget: Icon(
-                          Icons.edit,
-                          color: ColorsManager.grey800,
-                          size: AppSize.s20,
-                        ),
-                      ),
-                      CustomListTileWidget(
-                        text1: 'Paragon International University',
-                        text1Color: ColorsManager.grey850,
-                        text1FontWeight: FontWeightManager.medium,
-                        text1FontSize: AppSize.s16,
-                        text2:
-                            'Bachelor of Science - Management of Information Systems',
-                        text2Color: ColorsManager.grey800,
-                        text3: 'Oct 2015 - July 2020 at Phnom Penh - Cambodia',
-                        bottomPadding: 8.0,
-                        isDivider: false,
-                        leftWidget: CustomBoxWidget(),
-                        rightWidget: Icon(
-                          Icons.edit,
-                          color: ColorsManager.grey800,
-                          size: AppSize.s20,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              //===== Education Widget =====//
-
-              ///===== Professional Widget =====//
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.s12,
-                  right: AppSize.s12,
-                  // top: AppSize.s4,
-                  bottom: AppSize.s12,
-                ),
-                child: CustomContainerWidget(
-                  leftTitle: 'Professional Experiences'.toUpperCase(),
-                  titleFontSize: AppSize.s16,
-                  // isRightWidget: true,
-                  rightWidget: const Icon(
-                    Icons.add,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s24,
-                  ),
-                  child: Column(
-                    children: const [
-                      CustomListTileWidget(
-                        text1: 'Automation internship',
-                        text1Color: ColorsManager.grey850,
-                        text1FontWeight: FontWeightManager.medium,
-                        text1FontSize: AppSize.s16,
-                        text2: 'Orange France',
-                        text2Color: ColorsManager.grey800,
-                        text3:
-                            "Dec 2020 - July 2022 at Villeneuve d'Ascq - France",
-                        bottomPadding: 8.0,
-                        isDivider: false,
-                        leftWidget: CustomBoxWidget(
-                          insideObj: Icon(
-                            Icons.work,
-                            color: ColorsManager.primary75,
-                            size: AppSize.s20,
-                          ),
-                        ),
-                        rightWidget: Icon(
-                          Icons.edit,
-                          color: ColorsManager.grey800,
-                          size: AppSize.s20,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              //===== Professional Widget =====//
-
-              ///===== Personal Widget =====//
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.s12,
-                  right: AppSize.s12,
-                  // top: AppSize.s4,
-                  bottom: AppSize.s12,
-                ),
-                child: CustomContainerWidget(
-                  leftTitle: 'Personal Experiences'.toUpperCase(),
-                  titleFontSize: AppSize.s16,
-                  // isRightWidget: true,
-                  rightWidget: const Icon(
-                    Icons.add,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s24,
-                  ),
-                  child: Column(),
-                ),
-              ),
-              //===== Personal Widget =====//
-
-              ///===== Skills Widget =====//
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.s12,
-                  right: AppSize.s12,
-                  // top: AppSize.s4,
-                  bottom: AppSize.s12,
-                ),
-                child: CustomContainerWidget(
-                  leftTitle: 'Skills'.toUpperCase(),
-                  titleFontSize: AppSize.s16,
-                  // isRightWidget: true,
-                  rightWidget: const Icon(
-                    Icons.edit,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s24,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomList(
-                        title: 'Soft Skill',
-                        subtitleList: controller.skillList,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(
-                          24.0,
-                          0.0,
-                          8.0,
-                          8.0,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            CustomTextWidget(
-                              text: 'Hard Skill',
-                              marginBottom: 5.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            CustomTextWidget(
-                              text: '• Power Point - Novice',
-                              marginBottom: 5.0,
-                            ),
-                            CustomTextWidget(
-                              text: '• HTML - Competent',
-                              marginBottom: 5.0,
-                            ),
-                            CustomTextWidget(
-                              text: '• ExpressJS - Proficient',
-                              marginBottom: 5.0,
-                            ),
-                            CustomTextWidget(
-                              text: '• Presentation - Expert',
-                              marginBottom: 5.0,
-                            ),
-                            CustomTextWidget(
-                              text: '• E-trade - Expert',
-                              marginBottom: 5.0,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              //===== Skills Widget =====//
-
-              ///===== Languages Widget =====//
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.s12,
-                  right: AppSize.s12,
-                  // top: AppSize.s4,
-                  bottom: AppSize.s12,
-                ),
-                child: CustomContainerWidget(
-                  leftTitle: 'Languages'.toUpperCase(),
-                  titleFontSize: AppSize.s16,
-                  // isRightWidget: true,
-                  rightWidget: const Icon(
-                    Icons.edit,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s24,
-                  ),
-                  child: CustomList(
-                    subtitleList: controller.languagesList,
-                  ),
-                ),
-              ),
-              //===== Languages Widget =====//
-
-              ///===== Achievement Widget =====//
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.s12,
-                  right: AppSize.s12,
-                  // top: AppSize.s4,
-                  bottom: AppSize.s12,
-                ),
-                child: CustomContainerWidget(
-                  leftTitle: 'Achievement'.toUpperCase(),
-                  titleFontSize: AppSize.s16,
-                  // isRightWidget: true,
-                  rightWidget: const Icon(
-                    Icons.add,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s24,
-                  ),
-                  child: Column(
-                    children: const [
-                      CustomListTileWidget(
-                        text1: 'TOEIC',
-                        text1Color: ColorsManager.grey850,
-                        text1FontWeight: FontWeightManager.medium,
-                        text1FontSize: AppSize.s16,
-                        text2: 'Dec 2020 - July 2022',
-                        text2Color: ColorsManager.grey800,
-                        text3: 'I scored 970 points out of 990 on the TOEIC.',
-                        bottomPadding: 8.0,
-                        isDivider: false,
-                        leftWidget: CustomBoxWidget(
-                          insideObj: Icon(
-                            Icons.assignment,
-                            color: ColorsManager.primary75,
-                            size: AppSize.s20,
-                          ),
-                        ),
-                        rightWidget: Icon(
-                          Icons.edit,
-                          color: ColorsManager.grey800,
-                          size: AppSize.s20,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              //===== Achievement Widget =====//
-
-              ///===== Certificates Widget =====//
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.s12,
-                  right: AppSize.s12,
-                  // top: AppSize.s4,
-                  bottom: AppSize.s12,
-                ),
-                child: CustomContainerWidget(
-                  leftTitle: 'Certificates'.toUpperCase(),
-                  titleFontSize: AppSize.s16,
-                  // isRightWidget: true,
-                  rightWidget: const Icon(
-                    Icons.add,
-                    color: ColorsManager.grey800,
-                    size: AppSize.s24,
-                  ),
-                  child: Column(),
-                ),
-              ),
-              //===== Certificates Widget =====//
-
-              MaterialButton(
-                onPressed: () {
-                  controller.homeController.signOut();
-                },
-                child: const CustomTextWidget(
-                  text: 'Sign Out',
-                  fontSize: 24.0,
-                  marginTop: 20.0,
+    return Obx(
+      () => Scaffold(
+        backgroundColor: ColorsManager.grey100,
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        appBar: CustomAppBar(
+          // title: 'Profile Page',
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          actions: [
+            if (controller.homeController.userToken!.accountType == 'student')
+              Container()
+            else if (controller.enterpriseSwitching.value == true)
+              IconButton(
+                icon: const Icon(Icons.person),
+                color: ColorsManager.grey300,
+                tooltip: 'User Profile',
+                onPressed: () => controller.enterpriseSwitching.value =
+                    controller.updateSwitchingToggle(
+                  switchingNewValue: controller.enterpriseSwitching.value,
                 ),
               )
-            ],
+            else
+              IconButton(
+                icon: const Icon(Icons.location_city),
+                color: ColorsManager.grey300,
+                tooltip: 'Enterprise Profile',
+                onPressed: () => controller.enterpriseSwitching.value =
+                    controller.updateSwitchingToggle(
+                  switchingNewValue: controller.enterpriseSwitching.value,
+                ),
+              ),
+            IconButton(
+              icon: const Icon(Icons.settings),
+              color: ColorsManager.grey300,
+              tooltip: 'Settings',
+              onPressed: () => {Get.toNamed(Routes.settingsRoute)},
+            ),
+          ],
+        ),
+        body: RefreshIndicator(
+          onRefresh: () => controller.onRefresh(),
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.only(bottom: AppSize.s32),
+            child: Container(
+              child: controller.enterpriseSwitching.value == true
+                  ? EnterpriseProfileComponent(controller: controller)
+                  : controller.isProcessingUserInfoRepsonse.value == true
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            //update the Network State
+                            // GetBuilder<GetXNetworkManager>(builder: (builder)=>Text((_networkManager.connectionType == 0 )? 'No Internet' : (_networkManager.connectionType == 1) ? 'You are Connected to Wifi' : 'You are Connected to Mobile Internet',style: TextStyle(fontSize: 30),)),
+
+                            ///===== Profile Header Component =====//
+                            ProfileHeader(
+                              userName: controller
+                                  .userInfoRepsonse.value.profile!.fullName,
+                              // userRole: controller.userInfoRepsonse.value.profile!.accountType,
+                            ),
+                            //===== Profile Header Component =====//
+
+                            ///===== Personal Information Component =====//
+                            ContactInformationComponent(
+                              headerTitle: 'Personal Information',
+                              email: controller.userInfoRepsonse.value.email,
+                              phone: controller.userInfoRepsonse.value.profile!
+                                  .fullPhone1Format,
+                              videoPreentationLink: controller
+                                  .userInfoRepsonse.value.profile!.description,
+                            ),
+                            //===== Personal Information Component =====//
+
+                            if (controller
+                                    .isProcessingStudentInfoRepsonse.value ==
+                                true)
+                              Wrap(
+                                children: [
+                                  ///===== Education Component =====//
+                                  CustomContainerWidget(
+                                    leftMargin: AppSize.s12,
+                                    rightMargin: AppSize.s12,
+                                    // topMargin: AppSize.s12,
+                                    bottomMargin: AppSize.s12,
+                                    leftTitle: 'Education'.toUpperCase(),
+                                    titleFontSize: AppSize.s16,
+                                    // isRightWidget: true,
+                                    rightWidget: const Icon(
+                                      Icons.add,
+                                      color: ColorsManager.grey800,
+                                      size: AppSize.s24,
+                                    ),
+                                    child: Column(
+                                      children: controller
+                                          .studentInfoRepsonse.value.educations!
+                                          .map(
+                                            (e) => CustomListTileWidget(
+                                              text1: e.school!.name,
+                                              text1Color: ColorsManager.grey850,
+                                              text1FontWeight:
+                                                  FontWeightManager.medium,
+                                              text1FontSize: AppSize.s16,
+                                              text2: e.degree,
+                                              text2Color: ColorsManager.grey800,
+                                              text3:
+                                                  '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
+                                              // bottomPadding: 8.0,
+                                              leftWidget:
+                                                  const CustomBoxWidget(),
+                                              // leftWidget: const CustomBoxWidget(
+                                              //   insideObj: Icon(
+                                              //     Icons.school,
+                                              //     color:
+                                              //         ColorsManager.primary75,
+                                              //     size: AppSize.s20,
+                                              //   ),
+                                              // ),
+                                              rightWidget: const Icon(
+                                                Icons.edit,
+                                                color: ColorsManager.grey800,
+                                                size: AppSize.s20,
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                  //===== Education Component =====//
+
+                                  ///===== Professional Component =====//
+                                  CustomContainerWidget(
+                                    leftMargin: AppSize.s12,
+                                    rightMargin: AppSize.s12,
+                                    // topMargin: AppSize.s12,
+                                    bottomMargin: AppSize.s12,
+                                    leftTitle: 'Professional Experiences'
+                                        .toUpperCase(),
+                                    titleFontSize: AppSize.s16,
+                                    // isRightWidget: true,
+                                    rightWidget: const Icon(
+                                      Icons.add,
+                                      color: ColorsManager.grey800,
+                                      size: AppSize.s24,
+                                    ),
+                                    child: Column(
+                                      children: controller.studentInfoRepsonse
+                                          .value.experiences!
+                                          .map(
+                                            (e) => e.type == 'professional'
+                                                ? CustomListTileWidget(
+                                                    text1: e.name,
+                                                    text1Color:
+                                                        ColorsManager.grey850,
+                                                    text1FontWeight:
+                                                        FontWeightManager
+                                                            .medium,
+                                                    text1FontSize: AppSize.s16,
+                                                    text2: e.company,
+                                                    text2Color:
+                                                        ColorsManager.grey800,
+                                                    text3:
+                                                        '${e.attendedFromTo} at ${e.companyCityAndCountry}',
+                                                    // bottomPadding: 8.0,
+                                                    leftWidget:
+                                                        const CustomBoxWidget(
+                                                      insideObj: Icon(
+                                                        Icons.work,
+                                                        color: ColorsManager
+                                                            .primary75,
+                                                        size: AppSize.s20,
+                                                      ),
+                                                    ),
+                                                    rightWidget: const Icon(
+                                                      Icons.edit,
+                                                      color:
+                                                          ColorsManager.grey800,
+                                                      size: AppSize.s20,
+                                                    ),
+                                                  )
+                                                : Container(),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                  //===== Professional Component =====//
+
+                                  ///===== Personal Component =====//
+                                  CustomContainerWidget(
+                                    leftMargin: AppSize.s12,
+                                    rightMargin: AppSize.s12,
+                                    // topMargin: AppSize.s12,
+                                    bottomMargin: AppSize.s12,
+                                    leftTitle: 'Professional Experiences'
+                                        .toUpperCase(),
+                                    titleFontSize: AppSize.s16,
+                                    // isRightWidget: true,
+                                    rightWidget: const Icon(
+                                      Icons.add,
+                                      color: ColorsManager.grey800,
+                                      size: AppSize.s24,
+                                    ),
+                                    child: Column(
+                                      children: controller.studentInfoRepsonse
+                                          .value.experiences!
+                                          .map(
+                                            (e) => e.type == 'personal'
+                                                ? CustomListTileWidget(
+                                                    text1: e.name,
+                                                    text1Color:
+                                                        ColorsManager.grey850,
+                                                    text1FontWeight:
+                                                        FontWeightManager
+                                                            .medium,
+                                                    text1FontSize: AppSize.s16,
+                                                    text2: e.company,
+                                                    text2Color:
+                                                        ColorsManager.grey800,
+                                                    text3:
+                                                        '${e.attendedFromTo} at ${e.companyCityAndCountry}',
+                                                    // bottomPadding: 8.0,
+                                                    leftWidget:
+                                                        const CustomBoxWidget(
+                                                      insideObj: Icon(
+                                                        Icons.work,
+                                                        color: ColorsManager
+                                                            .primary75,
+                                                        size: AppSize.s20,
+                                                      ),
+                                                    ),
+                                                    rightWidget: const Icon(
+                                                      Icons.edit,
+                                                      color:
+                                                          ColorsManager.grey800,
+                                                      size: AppSize.s20,
+                                                    ),
+                                                  )
+                                                : Container(),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                  //===== Personal Component =====//
+
+                                  ///===== Skills Component =====//
+                                  CustomContainerWidget(
+                                    leftMargin: AppSize.s12,
+                                    rightMargin: AppSize.s12,
+                                    // topMargin: AppSize.s12,
+                                    bottomMargin: AppSize.s12,
+                                    leftTitle: 'Skills'.toUpperCase(),
+                                    titleFontSize: AppSize.s16,
+                                    // isRightWidget: true,
+                                    rightWidget: const Icon(
+                                      Icons.edit,
+                                      color: ColorsManager.grey800,
+                                      size: AppSize.s24,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        // CustomList(
+                                        //   title: 'Soft Skill',
+                                        //   subtitleList:
+                                        //       controller.mockSkillList,
+                                        // ),
+                                        Container(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            24.0,
+                                            0.0,
+                                            8.0,
+                                            8.0,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const CustomTextWidget(
+                                                text: 'Soft Skill',
+                                                marginBottom: 5.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: controller
+                                                    .studentInfoRepsonse
+                                                    .value
+                                                    .skills!
+                                                    .map(
+                                                      (e) => e.type ==
+                                                              Type.softSkill
+                                                          ? CustomTextWidget(
+                                                              text:
+                                                                  '• ${e.label}',
+                                                              marginBottom: 5.0,
+                                                            )
+                                                          : Container(),
+                                                    )
+                                                    .toList(),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            24.0,
+                                            0.0,
+                                            8.0,
+                                            8.0,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const CustomTextWidget(
+                                                text: 'Hard Skill',
+                                                marginBottom: 5.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: controller
+                                                    .studentInfoRepsonse
+                                                    .value
+                                                    .skills!
+                                                    .map(
+                                                      (e) => e.type ==
+                                                              Type.hardSkill
+                                                          ? CustomTextWidget(
+                                                              text:
+                                                                  '• ${e.label} - ${e.category}',
+                                                              marginBottom: 5.0,
+                                                            )
+                                                          : Container(),
+                                                    )
+                                                    .toList(),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  //===== Skills Component =====//
+
+                                  ///===== Languages Component =====//
+                                  CustomContainerWidget(
+                                    leftMargin: AppSize.s12,
+                                    rightMargin: AppSize.s12,
+                                    // topMargin: AppSize.s12,
+                                    bottomMargin: AppSize.s12,
+                                    leftTitle: 'Languages'.toUpperCase(),
+                                    titleFontSize: AppSize.s16,
+                                    // isRightWidget: true,
+                                    rightWidget: const Icon(
+                                      Icons.edit,
+                                      color: ColorsManager.grey800,
+                                      size: AppSize.s24,
+                                    ),
+                                    // child: CustomList(
+                                    //   subtitleList: controller.languageList,
+                                    // ),
+                                    child: Container(
+                                      padding: const EdgeInsets.fromLTRB(
+                                        24.0,
+                                        0.0,
+                                        8.0,
+                                        8.0,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: controller.studentInfoRepsonse
+                                            .value.spokenLanguages!
+                                            .map(
+                                              (e) => CustomTextWidget(
+                                                text:
+                                                    '• ${e.label} - Level ${e.level}',
+                                                marginBottom: 5.0,
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                                    ),
+                                  ),
+                                  //===== Languages Component =====//
+
+                                  ///===== Achievement Component =====//
+                                  CustomContainerWidget(
+                                    leftMargin: AppSize.s12,
+                                    rightMargin: AppSize.s12,
+                                    // topMargin: AppSize.s12,
+                                    bottomMargin: AppSize.s12,
+                                    leftTitle: 'Achievement'.toUpperCase(),
+                                    titleFontSize: AppSize.s16,
+                                    // isRightWidget: true,
+                                    rightWidget: const Icon(
+                                      Icons.add,
+                                      color: ColorsManager.grey800,
+                                      size: AppSize.s24,
+                                    ),
+                                    child: Column(
+                                      children: controller.studentInfoRepsonse
+                                          .value.achievements!
+                                          .map(
+                                            (e) => CustomListTileWidget(
+                                              text1: e.name,
+                                              text1Color: ColorsManager.grey850,
+                                              text1FontWeight:
+                                                  FontWeightManager.medium,
+                                              text1FontSize: AppSize.s16,
+                                              text2:
+                                                  'Issued: ${e.dateCompletionFormat}',
+                                              text2Color: ColorsManager.grey800,
+                                              text3: e.description,
+                                              // bottomPadding: 8.0,
+                                              leftWidget: const CustomBoxWidget(
+                                                insideObj: Icon(
+                                                  Icons.card_membership,
+                                                  color:
+                                                      ColorsManager.primary75,
+                                                  size: AppSize.s20,
+                                                ),
+                                              ),
+                                              rightWidget: const Icon(
+                                                Icons.edit,
+                                                color: ColorsManager.grey800,
+                                                size: AppSize.s20,
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                  //===== Achievement Component =====//
+
+                                  ///===== Certificates Component =====//
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: AppSize.s12,
+                                      right: AppSize.s12,
+                                      // top: AppSize.s4,
+                                      bottom: AppSize.s12,
+                                    ),
+                                    child: CustomContainerWidget(
+                                      leftTitle: 'Certificates'.toUpperCase(),
+                                      titleFontSize: AppSize.s16,
+                                      // isRightWidget: true,
+                                      rightWidget: const Icon(
+                                        Icons.add,
+                                        color: ColorsManager.grey800,
+                                        size: AppSize.s24,
+                                      ),
+                                      child: Column(
+                                        children: controller.studentInfoRepsonse
+                                            .value.certificates!
+                                            .map(
+                                              (e) => CustomListTileWidget(
+                                                text1: e.title,
+                                                text1Color:
+                                                    ColorsManager.grey850,
+                                                text1FontWeight:
+                                                    FontWeightManager.medium,
+                                                text1FontSize: AppSize.s16,
+                                                text2:
+                                                    'Issued: ${e.receivedDateFormat}',
+                                                text2Color:
+                                                    ColorsManager.grey800,
+                                                text3: e.expirationDate != null
+                                                    ? 'Expired: ${e.expirationDateFormat}'
+                                                    : 'No Expiration Date',
+                                                text3FontSize: AppSize.s14,
+                                                text4: e.description,
+                                                // bottomPadding: 8.0,
+                                                leftWidget:
+                                                    const CustomBoxWidget(
+                                                  insideObj: Icon(
+                                                    Icons.emoji_events,
+                                                    color:
+                                                        ColorsManager.primary75,
+                                                    size: AppSize.s20,
+                                                  ),
+                                                ),
+                                                rightWidget: const Icon(
+                                                  Icons.edit,
+                                                  color: ColorsManager.grey800,
+                                                  size: AppSize.s20,
+                                                ),
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                                    ),
+                                  )
+                                  //===== Certificates Component =====//
+                                ],
+                              )
+                            else
+                              const Center(child: Text('Loading...')),
+                          ],
+                        )
+                      : const Center(child: Text('Loading...')),
+            ),
           ),
         ),
       ),

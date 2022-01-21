@@ -7,12 +7,12 @@ import '../data.dart';
 
 class AuthProvider extends BaseProvider {
   Future<LoginModel> logInAPI({
-    required UserModel? loginData,
+    required ProfileModel? loginData,
   }) async {
     try {
       final Response dataResponse = await post(
-        APIEndPoints.signInEndPoint,
-        loginData!.userToJson(),
+        API.paths[Endpoint.signIn],
+        loginData!.toRawJson(),
       );
       if (dataResponse.hasError) {
         throw responseBodyHandler(resp: dataResponse);
@@ -28,7 +28,7 @@ class AuthProvider extends BaseProvider {
   Future<String> logOutAPI() async {
     try {
       final Response dataResponse = await post(
-        APIEndPoints.signOutEndPoint,
+        API.paths[Endpoint.signOut],
         {},
       );
       if (dataResponse.hasError) {
@@ -46,12 +46,12 @@ class AuthProvider extends BaseProvider {
   }
 
   Future<LoginModel> registerNewUserAPI({
-    required UserModel? registrationData,
+    required ProfileModel? registrationData,
   }) async {
     try {
       final Response dataResponse = await post(
-        APIEndPoints.registerNewUserEndPoint,
-        registrationData!.userToJson(),
+        API.paths[Endpoint.registerNewUser],
+        registrationData!.toRawJson(),
       );
       if (dataResponse.hasError) {
         throw responseBodyHandler(resp: dataResponse);

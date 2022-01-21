@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../../data/data.dart';
-import 'sign_in.dart';
+import '../../modules.dart';
 
 class SignInBinding implements Bindings {
   @override
@@ -12,6 +12,10 @@ class SignInBinding implements Bindings {
 
     Get.lazyPut<AuthProvider>(
       () => AuthProvider(),
+    );
+
+    Get.lazyPut<LanguageController>(
+      () => LanguageController(),
     );
   }
 }

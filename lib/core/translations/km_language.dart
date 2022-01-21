@@ -1,0 +1,20 @@
+const Map<String, String> kmKH = {
+  'auth.signInPasswordHint': '........',
+  'auth.username': 'ឈ្មោះអ្នកប្រើប្រាស់',
+  'auth.email': "អុីម៉ែល",
+  'auth.password': 'ពាក្យសម្ងាត់',
+  'validator.passwordRequired': 'តម្រូវដាក់លេខកូដសំងាត់​',
+  'auth.logIn': 'ចូល​',
+  'validator.usernameRequired': 'តម្រូវដាក់ឈ្មោះអ្នកប្រើប្រាស់',
+  'validator.usernamePasswordNotValid':
+      'បញ្ចូលឈ្មោះឬលេខកូដសំងាត់មិនត្រឹមត្រូវ​',
+  'auth.fullname': 'ឈ្មោះពេញ​',
+  'auth.customerId': 'លេខកូដអតិថិជន​',
+  'auth.phoneNumber': 'លេខទូរស័ព្ទ​',
+  'auth.deviceRegister': 'ចុះឈ្មោះក្នុងកម្មវិធី​',
+  'validator.fullnameRequired': 'តម្រូវអោយបំពេញឈ្មោះ​',
+  'validator.customerRequired': 'តម្រូវអោយបំពេញលេខកូដអតិថិជន​',
+  'validator.phoneNumberRequired': 'តម្រូវអោយបំពេញលេខទូរស័ព្ទ​',
+  'settings.changeLanguage': 'ផ្លាស់ប្តូរភាសា​​',
+  'settings.chooseLanguage': 'ជ្រើសរើសភាសារបស់អ្នក​​',
+};

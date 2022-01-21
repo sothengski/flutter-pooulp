@@ -15,6 +15,10 @@ class CustomContainerWidget extends StatelessWidget {
   final double? elevation;
   final bool? titleInSide;
   final double? childPadding;
+  final double? leftMargin;
+  final double? topMargin;
+  final double? rightMargin;
+  final double? bottomMargin;
 
   const CustomContainerWidget({
     Key? key,
@@ -30,6 +34,10 @@ class CustomContainerWidget extends StatelessWidget {
     this.elevation = 5.0,
     this.titleInSide = true,
     this.childPadding = 0.0,
+    this.leftMargin = 0.0,
+    this.topMargin = 0.0,
+    this.rightMargin = 0.0,
+    this.bottomMargin = 0.0,
   }) : super(key: key);
 
   @override
@@ -37,6 +45,12 @@ class CustomContainerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin: EdgeInsets.fromLTRB(
+          leftMargin!,
+          topMargin!,
+          rightMargin!,
+          bottomMargin!,
+        ),
         decoration: BoxDecoration(
           color: titleInSide == true ? ColorsManager.white : Colors.transparent,
           borderRadius: BorderRadius.circular(borderRadius!),

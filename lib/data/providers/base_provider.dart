@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+import '../../routes/routes.dart';
 
-import '../../core/core.dart';
 import '../data.dart';
 
 class BaseProvider extends GetConnect {
@@ -10,13 +10,17 @@ class BaseProvider extends GetConnect {
     final String userToken = AuthServices().getStringToken().toString();
 
     //1.base_url
-    httpClient.baseUrl = APIEndPoints.baseUrlPooulp;
+    httpClient.baseUrl = API.host;
     //2.
     httpClient.defaultContentType = "application/json";
     httpClient.timeout = const Duration(seconds: 45);
 
     httpClient.addResponseModifier((request, response) async {
-      // print(response.body.toString());
+      if (response.statusCode == 401) {
+        await AuthServices().removeToken().then(
+              (value) => Get.offAllNamed(Routes.splashRoute),
+            );
+      }
       return response;
     });
 

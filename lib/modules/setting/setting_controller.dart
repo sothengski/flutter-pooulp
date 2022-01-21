@@ -1,3 +1,7 @@
 import 'package:get/get.dart';
 
-class SettingController extends GetxController {}
+import '../modules.dart';
+
+class SettingController extends GetxController {
+  final homeController = Get.put(HomeController());
+}

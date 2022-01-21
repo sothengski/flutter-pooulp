@@ -15,6 +15,14 @@ class SignInPage extends GetView<SignInController> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.flag),
+            color: ColorsManager.grey300,
+            tooltip: 'Language',
+            onPressed: () => changeLanguageDialog(context),
+          ),
+        ],
       ),
       body: GestureDetector(
         onTap: () => unFocusKeyBoard(context),
@@ -30,16 +38,14 @@ class SignInPage extends GetView<SignInController> {
                   padding: EdgeInsets.only(
                     left: AppSize.s72,
                     right: AppSize.s72,
+                    bottom: AppSize.s24,
                   ),
                   child: Image(
-                    image: AssetImage(ImageAssets.appLogoWhite),
+                    image: AssetImage(AssetsManager.appLogoWhite),
                   ),
                 ),
-                // SizedBox(
-                //   height: getHeight * 0.05,
-                // ),
                 const Padding(
-                  padding: EdgeInsets.all(AppSize.s8),
+                  padding: EdgeInsets.all(AppSize.s16),
                   child: SignInForm(),
                 ),
                 const CustomTextWidget(

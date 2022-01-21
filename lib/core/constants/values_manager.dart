@@ -30,11 +30,12 @@ class AppSize {
 ///==================== Durations ====================
 
 class DurationConstant {
-  static const Duration d300 = Duration(milliseconds: 300);
-  static const Duration d400 = Duration(milliseconds: 400);
-  static const Duration d600 = Duration(milliseconds: 600);
+  static const Duration d250 = Duration(milliseconds: 250);
+  static const Duration d500 = Duration(milliseconds: 500);
+  static const Duration d750 = Duration(milliseconds: 750);
+  static const Duration d1000 = Duration(milliseconds: 1000);
   static const Duration d1500 = Duration(milliseconds: 1500);
-  static const Duration d2000ms = Duration(seconds: 2);
-  static const Duration d4000ms = Duration(seconds: 4);
-  static const Duration d7000ms = Duration(seconds: 7);
+  static const Duration d2000 = Duration(seconds: 2);
+  static const Duration d4000 = Duration(seconds: 4);
+  static const Duration d7000 = Duration(seconds: 7);
 }

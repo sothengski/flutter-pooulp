@@ -19,6 +19,13 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
 
   late LoginModel loginRepsonseData;
 
+  // @override
+  // void onInit() {
+  //   final String lang = StorageServices().readData('language') as String;
+  //   print('lang: $lang');
+  //   super.onInit();
+  // }
+
   @override
   void dispose() {
     super.dispose();
@@ -43,7 +50,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
   dynamic loginButtonOnClick() async {
     if (signInFormKey.currentState!.validate()) {
       swithcingBoolValueLoginBtn(boolValue: true);
-      final loginData = UserModel(
+      final loginData = ProfileModel(
         email: emailCtrl.text.trim(),
         password: passwordCtrl.text.trim(),
       );

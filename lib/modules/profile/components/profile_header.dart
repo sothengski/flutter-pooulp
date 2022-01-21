@@ -11,12 +11,12 @@ class ProfileHeader extends StatelessWidget {
   final double? headerHigh;
 
   const ProfileHeader({
-    this.profileImg = ImageAssets.appLogoSymbol,
-    this.coverImg = ImageAssets.coverImg,
-    this.userName = 'John Appleseed',
-    this.userRole = 'Student',
-    this.numberStarRate = 4.75,
-    this.headerHigh = 150,
+    this.profileImg = AssetsManager.appLogoSymbol,
+    this.coverImg = AssetsManager.coverImg,
+    this.userName = '...',
+    this.userRole = '',
+    this.numberStarRate = 0.0,
+    this.headerHigh = 100,
     Key? key,
   }) : super(key: key);
 
@@ -24,8 +24,8 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          padding: const EdgeInsets.only(bottom: AppSize.s24),
+        SizedBox(
+          // padding: const EdgeInsets.only(bottom: AppSize.s4),
           width: double.infinity,
           height: headerHigh,
           // decoration: BoxDecoration(
@@ -47,11 +47,11 @@ class ProfileHeader extends StatelessWidget {
         Row(
           children: [
             Container(
-              width: 100,
-              height: 100,
+              width: 75,
+              height: 75,
               margin: const EdgeInsets.only(
                 left: AppSize.s16,
-                top: AppSize.s72,
+                top: AppSize.s60,
               ),
               decoration: BoxDecoration(
                 color: ColorsManager.white,
@@ -69,7 +69,7 @@ class ProfileHeader extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50.0),
                 elevation: 5,
                 child: CircleAvatar(
-                  radius: 30.0,
+                  radius: 50.0,
                   backgroundColor: ColorsManager.white,
                   // foregroundColor: ColorsManager.white,
                   child: Image(
@@ -81,46 +81,52 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: 250,
-              height: 75,
-              margin: const EdgeInsets.only(
-                left: AppSize.s8,
-                top: AppSize.s72,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomTextWidget(
-                    text: userName,
-                    color: ColorsManager.white,
-                    fontSize: AppSize.s24,
-                    fontWeight: FontWeight.bold,
-                    marginTop: AppSize.s4,
-                    marginBottom: AppSize.s10,
-                  ),
-                  Row(
-                    children: [
-                      CustomTextWidget(
-                        text: userRole,
-                        fontSize: AppSize.s24,
-                        fontWeight: FontWeight.bold,
-                        marginRight: AppSize.s20,
-                      ),
-                      const Icon(
-                        Icons.star,
-                        color: ColorsManager.grey600,
-                      ),
-                      CustomTextWidget(
-                        text: '$numberStarRate/5',
-                        fontSize: AppSize.s18,
-                        fontWeight: FontWeight.normal,
-                        marginLeft: AppSize.s4,
-                      ),
-                    ],
-                  )
-                ],
+            Expanded(
+              child: Container(
+                width: 250,
+                height: 75,
+                margin: const EdgeInsets.only(
+                  left: AppSize.s8,
+                  top: AppSize.s48,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomTextWidget(
+                      text: userName,
+                      color: ColorsManager.white,
+                      fontSize: AppSize.s24,
+                      fontWeight: FontWeight.bold,
+                      marginTop: AppSize.s4,
+                      marginBottom: AppSize.s8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: CustomTextWidget(
+                            text: userRole,
+                            fontSize: AppSize.s18,
+                            fontWeight: FontWeight.bold,
+                            marginRight: AppSize.s20,
+                          ),
+                        ),
+                        // const Icon(
+                        //   Icons.star,
+                        //   color: ColorsManager.deepOrangeAccent,
+                        // ),
+                        // CustomTextWidget(
+                        //   text: '$numberStarRate/5',
+                        //   fontSize: AppSize.s18,
+                        //   fontWeight: FontWeight.w600,
+                        //   marginLeft: AppSize.s4,
+                        //   marginRight: AppSize.s16,
+                        // ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],

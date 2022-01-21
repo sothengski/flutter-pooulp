@@ -1,0 +1,17 @@
+
+# Used to get an access token given an autorization key
+
+POST {{baseUrl}}/login
+# Authorization: Basic {{authorization}}
+content-type: application/json
+
+{
+    "email": "",
+    "password": ""
+}
+
+###
+
+GET {{baseUrl}}/users/me
+Accept: application/json
+Authorization: Bearer {{token}}

@@ -1,7 +1,7 @@
 const Map<String, String> kmKH = {
   'auth.signInPasswordHint': '........',
   'auth.username': 'ឈ្មោះអ្នកប្រើប្រាស់',
-  'auth.email': "អុីម៉ែល",
+  'auth.email': 'អុីម៉ែល',
   'auth.password': 'ពាក្យសម្ងាត់',
   'validator.passwordRequired': 'តម្រូវដាក់លេខកូដសំងាត់​',
   'auth.logIn': 'ចូល​',

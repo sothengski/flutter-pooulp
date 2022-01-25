@@ -46,6 +46,41 @@ class ProfileHeader extends StatelessWidget {
         ),
         Row(
           children: [
+            // Container(
+            //   width: 75,
+            //   height: 75,
+            //   margin: const EdgeInsets.only(
+            //     left: AppSize.s16,
+            //     top: AppSize.s60,
+            //   ),
+            //   decoration: BoxDecoration(
+            //     color: ColorsManager.white,
+            //     shape: BoxShape.circle,
+            //     border: Border.all(
+            //       color: ColorsManager.white,
+            //       width: 3,
+            //     ),
+            //     // image: const DecorationImage(
+            //     //   fit: BoxFit.cover,
+            //     //   image: AssetImage(ImageAssets.appLogoSymbol),
+            //     // ),
+            //   ),
+            //   child: Material(
+            //     borderRadius: BorderRadius.circular(50.0),
+            //     elevation: 5,
+            //     child: CircleAvatar(
+            //       radius: 50.0,
+            //       backgroundColor: ColorsManager.white,
+            //       // foregroundColor: ColorsManager.white,
+            //       child: Image(
+            //         image: AssetImage(
+            //           profileImg!,
+            //         ),
+            //         fit: BoxFit.cover,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Container(
               width: 75,
               height: 75,
@@ -60,25 +95,23 @@ class ProfileHeader extends StatelessWidget {
                   color: ColorsManager.white,
                   width: 3,
                 ),
+                boxShadow: const [
+                  BoxShadow(
+                    color: ColorsManager.grey300,
+                    blurRadius: 1.0,
+                    offset: Offset(1.0, 1.0),
+                    spreadRadius: 1.0,
+                  )
+                ],
                 // image: const DecorationImage(
                 //   fit: BoxFit.cover,
                 //   image: AssetImage(ImageAssets.appLogoSymbol),
                 // ),
               ),
-              child: Material(
-                borderRadius: BorderRadius.circular(50.0),
-                elevation: 5,
-                child: CircleAvatar(
-                  radius: 50.0,
-                  backgroundColor: ColorsManager.white,
-                  // foregroundColor: ColorsManager.white,
-                  child: Image(
-                    image: AssetImage(
-                      profileImg!,
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              child: const CustomBoxWidget(
+                size: 75,
+                backgroundColor: ColorsManager.white,
+                isCircle: true,
               ),
             ),
             Expanded(

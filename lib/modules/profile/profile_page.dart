@@ -24,30 +24,30 @@ class ProfilePage extends GetView<ProfileController> {
             if (controller.homeController.userToken!.accountType == 'student')
               Container()
             else if (controller.enterpriseSwitching.value == true)
-              IconButton(
-                icon: const Icon(Icons.person),
-                color: ColorsManager.grey300,
+              CustomIconButtonWidget(
+                iconData: Icons.person,
+                iconColor: ColorsManager.grey300,
                 tooltip: 'User Profile',
-                onPressed: () => controller.enterpriseSwitching.value =
+                onClick: () => controller.enterpriseSwitching.value =
                     controller.updateSwitchingToggle(
                   switchingNewValue: controller.enterpriseSwitching.value,
                 ),
               )
             else
-              IconButton(
-                icon: const Icon(Icons.location_city),
-                color: ColorsManager.grey300,
+              CustomIconButtonWidget(
+                iconData: Icons.location_city,
+                iconColor: ColorsManager.grey300,
                 tooltip: 'Enterprise Profile',
-                onPressed: () => controller.enterpriseSwitching.value =
+                onClick: () => controller.enterpriseSwitching.value =
                     controller.updateSwitchingToggle(
                   switchingNewValue: controller.enterpriseSwitching.value,
                 ),
               ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              color: ColorsManager.grey300,
+            CustomIconButtonWidget(
+              iconData: Icons.settings,
+              iconColor: ColorsManager.grey300,
               tooltip: 'Settings',
-              onPressed: () => {Get.toNamed(Routes.settingsRoute)},
+              onClick: () => {Get.toNamed(Routes.settingsRoute)},
             ),
           ],
         ),
@@ -75,13 +75,79 @@ class ProfilePage extends GetView<ProfileController> {
                             //===== Profile Header Component =====//
 
                             ///===== Personal Information Component =====//
-                            ContactInformationComponent(
-                              headerTitle: 'Personal Information',
-                              email: controller.userInfoRepsonse.value.email,
-                              phone: controller.userInfoRepsonse.value.profile!
-                                  .fullPhone1Format,
-                              videoPreentationLink: controller
-                                  .userInfoRepsonse.value.profile!.description,
+                            // ContactInformationComponent(
+                            //   headerTitle: 'Personal Information',
+                            //   email: controller.userInfoRepsonse.value.email,
+                            //   phone: controller.userInfoRepsonse.value.profile!
+                            //       .fullPhone1Format,
+                            //   videoPreentationLink: controller
+                            //       .userInfoRepsonse.value.profile!.description,
+                            // ),
+                            CustomContainerWidget(
+                              leftMargin: AppSize.s12,
+                              rightMargin: AppSize.s12,
+                              topMargin: AppSize.s12,
+                              bottomMargin: AppSize.s12,
+                              leftTitle: 'Personal Information'.toUpperCase(),
+                              titleFontSize: AppSize.s16,
+                              rightWidget: CustomIconButtonWidget(
+                                iconData: Icons.edit,
+                                padding: 0.0,
+                                isConstraints: true,
+                                onClick: () =>
+                                    {Get.toNamed(Routes.editUserInfoRoute)},
+                              ),
+                              child: Column(
+                                children: [
+                                  CustomListTileWidget(
+                                    text1: 'Email',
+                                    text2:
+                                        controller.userInfoRepsonse.value.email,
+                                    isLauching: true,
+                                    text2Color: ColorsManager.blue,
+                                    leftWidget: const CustomBoxWidget(
+                                      insideObj: Icon(
+                                        Icons.email,
+                                        color: ColorsManager.grey,
+                                        size: AppSize.s24,
+                                      ),
+                                      backgroundColor: ColorsManager.white,
+                                    ),
+                                  ),
+                                  CustomListTileWidget(
+                                    text1: 'Phone',
+                                    text2: controller.userInfoRepsonse.value
+                                        .profile!.fullPhone1Format,
+                                    isLauching: true,
+                                    text2Color: ColorsManager.blue,
+                                    leftWidget: const CustomBoxWidget(
+                                      insideObj: Icon(
+                                        Icons.phone,
+                                        color: ColorsManager.grey,
+                                        size: AppSize.s24,
+                                      ),
+                                      backgroundColor: ColorsManager.white,
+                                    ),
+                                  ),
+                                  CustomListTileWidget(
+                                    text1: 'Video presentation link',
+                                    text2: controller.userInfoRepsonse.value
+                                        .profile!.description,
+                                    isLauching: true,
+                                    text2Color: ColorsManager.blue,
+                                    bottomPadding: 8.0,
+                                    isDivider: false,
+                                    leftWidget: const CustomBoxWidget(
+                                      insideObj: Icon(
+                                        Icons.video_library,
+                                        color: ColorsManager.grey,
+                                        size: AppSize.s24,
+                                      ),
+                                      backgroundColor: ColorsManager.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             //===== Personal Information Component =====//
 
@@ -376,28 +442,34 @@ class ProfilePage extends GetView<ProfileController> {
                                     // child: CustomList(
                                     //   subtitleList: controller.languageList,
                                     // ),
-                                    child: Container(
-                                      padding: const EdgeInsets.fromLTRB(
-                                        24.0,
-                                        0.0,
-                                        8.0,
-                                        8.0,
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: controller.studentInfoRepsonse
-                                            .value.spokenLanguages!
-                                            .map(
-                                              (e) => CustomTextWidget(
-                                                text:
-                                                    '• ${e.label} - Level ${e.level}',
-                                                marginBottom: 5.0,
-                                              ),
-                                            )
-                                            .toList(),
-                                      ),
-                                    ),
+                                    child: controller.studentInfoRepsonse.value
+                                                .spokenLanguages ==
+                                            []
+                                        ? Container()
+                                        : Container(
+                                            padding: const EdgeInsets.fromLTRB(
+                                              24.0,
+                                              0.0,
+                                              8.0,
+                                              8.0,
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: controller
+                                                  .studentInfoRepsonse
+                                                  .value
+                                                  .spokenLanguages!
+                                                  .map(
+                                                    (e) => CustomTextWidget(
+                                                      text:
+                                                          '• ${e.label} - Level ${e.level}',
+                                                      marginBottom: 5.0,
+                                                    ),
+                                                  )
+                                                  .toList(),
+                                            ),
+                                          ),
                                   ),
                                   //===== Languages Component =====//
 

@@ -59,6 +59,7 @@ class SignUpForm extends GetView<SignUpController> {
                   child: CustomContainerWidget(
                     elevation: 0.0,
                     childPadding: 16.0,
+                    titleInSide: false,
                     child: Obx(
                       () => Form(
                         key: controller.registrationFormKey,

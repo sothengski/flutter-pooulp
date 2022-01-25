@@ -6,6 +6,7 @@ export 'custom_box_widget.dart';
 export 'custom_container_widget.dart';
 export 'custom_dialog.dart';
 export 'custom_general_dialog.dart';
+export 'custom_icon_button_widget.dart';
 export 'custom_list.dart';
 export 'custom_list_tile_widget.dart';
 export 'custom_material_button.dart';

@@ -50,7 +50,7 @@ class CustomMaterialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: EdgeInsets.fromLTRB(
         leftPadding!,
         topPadding!,
@@ -58,6 +58,7 @@ class CustomMaterialButton extends StatelessWidget {
         bottomPadding!,
       ),
       child: MaterialButton(
+        // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         color: buttonColor,
         minWidth: buttonWidth,
         height: buttonHeight,

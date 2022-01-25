@@ -6,7 +6,10 @@ class CustomContainerWidget extends StatelessWidget {
   final String? leftTitle;
   final Widget? rightWidget;
   final double? titleFontSize;
-  final double? titleLeftRightPadding;
+  final double? titleLeftPadding;
+  final double? titleRightPadding;
+  final double? titleTopPadding;
+  final double? titleBottomPadding;
   final Color? titleColor;
   final FontWeight? titleFontWeight;
   final Widget? child;
@@ -25,7 +28,10 @@ class CustomContainerWidget extends StatelessWidget {
     this.leftTitle = '',
     this.rightWidget,
     this.titleFontSize = 14.0,
-    this.titleLeftRightPadding = 10,
+    this.titleLeftPadding = 10,
+    this.titleRightPadding = 10,
+    this.titleTopPadding = 10,
+    this.titleBottomPadding = 10,
     this.titleColor = ColorsManager.black,
     this.titleFontWeight = FontWeight.w600,
     this.child,
@@ -57,7 +63,7 @@ class CustomContainerWidget extends StatelessWidget {
           boxShadow: titleInSide == true
               ? [
                   const BoxShadow(
-                    color: ColorsManager.grey400,
+                    color: ColorsManager.grey300,
                     spreadRadius: 2,
                     blurRadius: 3,
                     offset: Offset(0, 1), // changes position of shadow
@@ -75,10 +81,10 @@ class CustomContainerWidget extends StatelessWidget {
                 // height: 50,
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(
-                  titleLeftRightPadding!,
-                  10,
-                  titleLeftRightPadding!,
-                  10,
+                  titleLeftPadding!,
+                  titleTopPadding!,
+                  titleRightPadding!,
+                  titleBottomPadding!,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,7 +96,7 @@ class CustomContainerWidget extends StatelessWidget {
                       fontWeight: titleFontWeight,
                     ),
                     // if (rightWidget != null)
-                    rightWidget!
+                    rightWidget ?? Container()
                     // else
                     //   CustomTextWidget(
                     //     text: rightTitle ?? '',

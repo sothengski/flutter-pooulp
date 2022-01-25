@@ -48,7 +48,12 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: child!,
+          child: GestureDetector(
+            onTap: () {
+              unFocusKeyBoard(context);
+            },
+            child: child,
+          ),
         );
       },
       debugShowCheckedModeBanner: false,

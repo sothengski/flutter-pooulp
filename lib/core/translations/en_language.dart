@@ -1,7 +1,7 @@
 const Map<String, String> enUS = {
   'auth.signInPasswordHint': '........',
-  'auth.username': "Username",
-  'auth.email': "Email",
+  'auth.username': 'Username',
+  'auth.email': 'Email',
   'auth.password': 'Password​',
   'validator.passwordRequired': 'Password is required​',
   'auth.logIn': 'Log In​',
@@ -11,9 +11,9 @@ const Map<String, String> enUS = {
   'auth.customerId': 'Customer Id​',
   'auth.phoneNumber': 'Phone Number​',
   'auth.deviceRegister': 'Device Register​',
-  'validator.fullnameRequired': "Fullname is required.",
-  'validator.customerRequired': "Customer Id is required.",
-  'validator.phoneNumberRequired': "Phone Number is required.",
+  'validator.fullnameRequired': 'Fullname is required.',
+  'validator.customerRequired': 'Customer Id is required.',
+  'validator.phoneNumberRequired': 'Phone Number is required.',
   'settings.changeLanguage': 'Change Language​',
   'settings.chooseLanguage': 'Choose Your Language​',
 };

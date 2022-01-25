@@ -11,10 +11,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final Color? backgroundColor;
   final List<Widget>? actions;
   final double? elevation;
+  final double? fontSize;
+  final FontWeight fontWeight;
 
   CustomAppBar({
     this.title = '',
     this.titleColor = Colors.white,
+    this.fontSize = AppSize.s20,
+    this.fontWeight = FontWeightManager.medium,
     this.centerTitle = true,
     this.backgroundColor,
     this.actions,
@@ -29,6 +33,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       centerTitle: centerTitle,
       title: CustomTextWidget(
         text: title,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
         color: titleColor,
       ),
       backgroundColor: backgroundColor,

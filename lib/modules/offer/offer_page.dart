@@ -13,7 +13,12 @@ class OfferPage extends GetView<OfferController> {
       appBar: CustomAppBar(
         title: 'Offer Page',
       ),
-      body: const Center(child: Text('Offer Page')),
+      body: const Center(
+        child: CustomTextWidget(
+          textAlign: TextAlign.center,
+          text: 'Offer Page\n\nThis Page is under construction!',
+        ),
+      ),
     );
   }
 }

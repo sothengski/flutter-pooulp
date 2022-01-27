@@ -12,8 +12,8 @@ class NetworkController extends GetxController {
 
   @override
   void onInit() {
-    initConnectivity();
     super.onInit();
+    initConnectivity();
   }
 
   // bool verify() {

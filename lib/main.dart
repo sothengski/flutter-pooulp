@@ -18,8 +18,13 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light,
     // const SystemUiOverlayStyle(
-    //   systemNavigationBarColor: Colors.blue, // navigation bar color
-    //   statusBarColor: Colors.pink, // status bar color
+    //   statusBarColor: Colors.transparent,
+    //   systemNavigationBarColor: Colors.amber, // navigation bar color
+    //   // systemNavigationBarColor: Colors.transparent,
+    //   // statusBarColor: Colors.white, // status bar color
+    //   statusBarIconBrightness: Brightness.dark, // status bar icon color
+    //   systemNavigationBarIconBrightness:
+    //       Brightness.dark, // color of navigation controls
     // ),
   );
   await initialConfig();

@@ -33,11 +33,11 @@ class ProfileController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    super.onInit();
     getUserInfoResponseProvider()
         .then((value) => isProcessingUserInfoRepsonse.value = true);
     await getStudentInfoResponseProvider()
         .then((value) => isProcessingStudentInfoRepsonse.value = true);
-    super.onInit();
   }
 
   Future<void> onRefresh() async {
@@ -60,7 +60,11 @@ class ProfileController extends GetxController {
   Future<Rx<StudentProfileModel>> getStudentInfoResponseProvider({
     bool? refresh = false,
   }) async {
-    studentInfoRepsonse.value = await userInfoProvider.getStudentProfileInfo();
+    if (homeController.userToken!.accountType == 'student') {
+      studentInfoRepsonse.value =
+          await userInfoProvider.getStudentProfileInfo();
+      return studentInfoRepsonse;
+    }
     return studentInfoRepsonse;
   }
 

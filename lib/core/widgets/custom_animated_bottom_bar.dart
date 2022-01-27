@@ -99,22 +99,26 @@ class ItemWidget extends StatelessWidget {
       container: true,
       selected: isSelected,
       child: AnimatedContainer(
-        width: isSelected ? 130 : 50,
+        width: 130,
+        // width: isSelected ? 130 : 50,
         height: double.maxFinite,
         duration: animationDuration,
         curve: curve,
         decoration: BoxDecoration(
-          color: //isSelected ? Colors.white : backgroundColor,
-              isSelected ? item.activeColor.withOpacity(0.2) : backgroundColor,
+          color: backgroundColor,
+          //isSelected ? Colors.white : backgroundColor,
+          // isSelected ? item.activeColor.withOpacity(0.2) : backgroundColor,
           borderRadius: BorderRadius.circular(itemCornerRadius),
         ),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           physics: const NeverScrollableScrollPhysics(),
           child: Container(
-            width: isSelected ? 130 : 50,
+            width: 130,
+            // width: isSelected ? 130 : 50,
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconTheme(
                   data: IconThemeData(
@@ -126,18 +130,16 @@ class ItemWidget extends StatelessWidget {
                   child: isSelected ? item.activeIcon : item.inActiveIcon,
                 ),
                 if (isSelected)
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: DefaultTextStyle.merge(
-                        style: TextStyle(
-                          color: item.activeColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 1,
-                        textAlign: item.textAlign,
-                        child: item.title,
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: DefaultTextStyle.merge(
+                      style: TextStyle(
+                        color: item.activeColor,
+                        fontWeight: FontWeight.bold,
                       ),
+                      maxLines: 1,
+                      textAlign: item.textAlign,
+                      child: item.title,
                     ),
                   ),
               ],
@@ -145,6 +147,43 @@ class ItemWidget extends StatelessWidget {
           ),
         ),
       ),
+      //   child: SingleChildScrollView(
+      //     scrollDirection: Axis.horizontal,
+      //     physics: const NeverScrollableScrollPhysics(),
+      //     child: Container(
+      //       width: isSelected ? 130 : 50,
+      //       padding: const EdgeInsets.symmetric(horizontal: 8),
+      //       child: Row(
+      //         children: <Widget>[
+      //           IconTheme(
+      //             data: IconThemeData(
+      //               size: iconSize,
+      //               color: isSelected
+      //                   ? item.activeColor.withOpacity(1)
+      //                   : item.inActiveColor ?? item.activeColor,
+      //             ),
+      //             child: isSelected ? item.activeIcon : item.inActiveIcon,
+      //           ),
+      //           if (isSelected)
+      //             Expanded(
+      //               child: Container(
+      //                 padding: const EdgeInsets.symmetric(horizontal: 4),
+      //                 child: DefaultTextStyle.merge(
+      //                   style: TextStyle(
+      //                     color: item.activeColor,
+      //                     fontWeight: FontWeight.bold,
+      //                   ),
+      //                   maxLines: 1,
+      //                   textAlign: item.textAlign,
+      //                   child: item.title,
+      //                 ),
+      //               ),
+      //             ),
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

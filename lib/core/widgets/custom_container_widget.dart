@@ -32,7 +32,7 @@ class CustomContainerWidget extends StatelessWidget {
     this.titleRightPadding = 10,
     this.titleTopPadding = 10,
     this.titleBottomPadding = 10,
-    this.titleColor = ColorsManager.black,
+    this.titleColor = ColorsManager.primaryBlue,
     this.titleFontWeight = FontWeight.w600,
     this.child,
     this.onTap,

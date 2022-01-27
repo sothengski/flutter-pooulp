@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
-import '../../routes/routes.dart';
 
+import '../../routes/routes.dart';
 import '../data.dart';
 
 class BaseProvider extends GetConnect {
   @override
   void onInit() {
+    super.onInit();
+
     // add your local storage here to load for every request
     final String userToken = AuthServices().getStringToken().toString();
 
@@ -33,6 +35,5 @@ class BaseProvider extends GetConnect {
     //Autenticator will be called 3 times if HttpStatus is
     //HttpStatus.unauthorized
     httpClient.maxAuthRetries = 3;
-    super.onInit();
   }
 }

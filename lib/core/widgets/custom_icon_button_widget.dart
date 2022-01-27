@@ -17,7 +17,7 @@ class CustomIconButtonWidget extends StatelessWidget {
     this.iconWidget,
     this.iconSize = 24.0,
     this.iconData,
-    this.iconColor = ColorsManager.grey800,
+    this.iconColor = ColorsManager.grey600,
     this.onClick,
     this.padding = 8.0,
     this.isConstraints = false,

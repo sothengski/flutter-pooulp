@@ -20,6 +20,7 @@ class EnterpriseProfileComponent extends StatelessWidget {
           userName: controller.userInfoRepsonse.value.enterprise!.name,
           // userRole: controller.userInfoRepsonse.value.enterprise!.enterpriseID,
           // numberStarRate: 0.0,
+          controller: controller,
         ),
         //===== Profile Header Widget =====//
 

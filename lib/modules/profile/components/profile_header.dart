@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../core/core.dart';
+import '../../../routes/routes.dart';
+import '../profile.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String? profileImg;
@@ -9,6 +12,7 @@ class ProfileHeader extends StatelessWidget {
   final String? userRole;
   final double? numberStarRate;
   final double? headerHigh;
+  final ProfileController? controller;
 
   const ProfileHeader({
     this.profileImg = AssetsManager.appLogoSymbol,
@@ -17,6 +21,7 @@ class ProfileHeader extends StatelessWidget {
     this.userRole = '',
     this.numberStarRate = 0.0,
     this.headerHigh = 100,
+    this.controller,
     Key? key,
   }) : super(key: key);
 
@@ -42,6 +47,43 @@ class ProfileHeader extends StatelessWidget {
               coverImg!,
             ),
             fit: BoxFit.cover,
+          ),
+        ),
+        Positioned(
+          top: 5.0,
+          right: 50.0,
+          child: controller!.homeController.userToken!.accountType == 'student'
+              ? Container()
+              : controller!.enterpriseSwitching.value == true
+                  ? CustomIconButtonWidget(
+                      iconData: Icons.person,
+                      iconColor: ColorsManager.grey300,
+                      tooltip: 'User Profile',
+                      onClick: () => controller!.enterpriseSwitching.value =
+                          controller!.updateSwitchingToggle(
+                        switchingNewValue:
+                            controller!.enterpriseSwitching.value,
+                      ),
+                    )
+                  : CustomIconButtonWidget(
+                      iconData: Icons.location_city,
+                      iconColor: ColorsManager.grey300,
+                      tooltip: 'Enterprise Profile',
+                      onClick: () => controller!.enterpriseSwitching.value =
+                          controller!.updateSwitchingToggle(
+                        switchingNewValue:
+                            controller!.enterpriseSwitching.value,
+                      ),
+                    ),
+        ),
+        Positioned(
+          top: 5.0,
+          right: 0.0,
+          child: CustomIconButtonWidget(
+            iconData: Icons.settings_outlined,
+            iconColor: ColorsManager.grey300,
+            tooltip: 'Settings',
+            onClick: () => {Get.toNamed(Routes.settingsRoute)},
           ),
         ),
         Row(

@@ -40,7 +40,17 @@ class AuthServices extends GetxService {
     String? urlKey = LocalStorage.authTokenData,
     Duration duration = const Duration(days: 1000),
   }) async {
-    final String jsonData = jsonEncode(bodyData!.toJson());
+    final tokenExpireDate =
+        DateTime.now().add(Duration(seconds: bodyData!.expireIn!));
+    final LoginModel userData = LoginModel(
+      token: bodyData.token,
+      tokenType: bodyData.token,
+      expireIn: bodyData.expireIn,
+      accountType: bodyData.accountType,
+      tokenExpirationDate: tokenExpireDate,
+    );
+    final String jsonData = jsonEncode(userData.toJson());
+
     if (jsonData.isNotEmpty) {
       await boxStorage.write(urlKey.toString(), jsonData);
       await boxStorage.write(LocalStorage.isLogged, true);

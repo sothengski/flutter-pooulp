@@ -23,7 +23,7 @@ class API {
 
   static final Map<Endpoint, String> paths = {
     Endpoint.signIn: '/login',
-    Endpoint.signOut: '/login',
+    Endpoint.signOut: '/logout',
     Endpoint.registerNewUser: '/register',
     Endpoint.userInfo: '/users/me',
     Endpoint.studentInfo: '/users/me/student_profile',

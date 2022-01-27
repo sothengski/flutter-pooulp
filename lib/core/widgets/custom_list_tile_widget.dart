@@ -44,7 +44,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.text3Color = ColorsManager.grey800,
     this.text3FontWeight = FontWeight.w400,
     this.text4 = '',
-    this.text4FontSize = 10.0,
+    this.text4FontSize = 12.0,
     this.text4Color = ColorsManager.grey800,
     this.text4FontWeight = FontWeight.w400,
     this.leftWidget,

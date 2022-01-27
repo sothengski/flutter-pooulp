@@ -24,10 +24,10 @@ class HomePage extends GetView<HomeController> {
         ),
         bottomNavigationBar: Obx(
           () => CustomAnimatedBottomBar(
-            containerHeight: 70,
+            containerHeight: 60,
             backgroundColor: ColorsManager.grey100,
             selectedIndex: controller.currentIndex.value,
-            itemCornerRadius: 32,
+            itemCornerRadius: 10,
             curve: Curves.easeIn,
             items: <BottomNavBarItem>[
               BottomNavBarItem(

@@ -6,35 +6,56 @@ import '../../../data/data.dart';
 
 class EditUserInformationController extends GetxController {
   // EditingUserInformationController(this.repository);
+
+  TextEditingController phoneNumberCtrl = TextEditingController();
+
+  Rx<CountryModel> selectedCountryPhoneNumber = const CountryModel().obs;
+  Rx<String> selectedGender = ''.obs;
+  Rx<String> selectedBirthday = ''.obs;
+  Rx<CountryModel> selectedCountryAddress = const CountryModel().obs;
+
   final List<String> genderList = [
-    // 'unselect',
+    // '', //'unselect',
     'male',
     'female',
     'others',
   ];
 
-  TextEditingController phoneNumberCtrl = TextEditingController();
+  // @override
+  // void onInit() {
+  //     super.onInit();
+  // }
 
-  Rx<CountryModel> selectedCountry = const CountryModel().obs;
+  CountryModel selectedCountryPhoneNumberOnClick(CountryModel selectedItem) {
+    return selectedCountryPhoneNumber.value = selectedItem;
+  }
 
-  CountryModel selectedCountryOnClick(CountryModel selectedItem) {
-    return selectedCountry.value = selectedItem;
+  CountryModel selectedCountryAddressOnClick(CountryModel selectedItem) {
+    return selectedCountryAddress.value = selectedItem;
+  }
+
+  String selectedGenderOnClick({String? selectedItem}) {
+    return selectedGender.value = selectedItem!;
+  }
+
+  String selectedBirthdayOnClick({String? selectedItem}) {
+    return selectedBirthday.value = selectedItem!;
   }
 
   String? isPhoneNumberValidate({bool? isPhoneNumberField = false}) {
-    if (selectedCountry.value.phoneCode == null ||
+    if (selectedCountryPhoneNumber.value.phoneCode == null ||
         phoneNumberCtrl.text.isEmpty ||
         Validator().isPhoneNumberValidate(
               phoneNumberCtrl.text,
             ) ==
             false) {
-      if (selectedCountry.value.phoneCode == null &&
+      if (selectedCountryPhoneNumber.value.phoneCode == null &&
           phoneNumberCtrl.text.isEmpty) {
         return isPhoneNumberField == false
             ? 'This field is required.'
             : 'This field is required.';
       }
-      if (selectedCountry.value.phoneCode == null &&
+      if (selectedCountryPhoneNumber.value.phoneCode == null &&
           Validator().isPhoneNumberValidate(
                 phoneNumberCtrl.text,
               ) ==
@@ -43,7 +64,7 @@ class EditUserInformationController extends GetxController {
             ? 'This field is required.'
             : '${Validator().phoneNumberValidator(phoneNumberCtrl.text)}';
       }
-      if (selectedCountry.value.phoneCode == null) {
+      if (selectedCountryPhoneNumber.value.phoneCode == null) {
         return isPhoneNumberField == false ? 'This field is required.' : '';
       }
       if (phoneNumberCtrl.text.isEmpty) {

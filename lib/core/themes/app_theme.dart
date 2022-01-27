@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../core.dart';
 
@@ -61,6 +62,7 @@ mixin ThemeManager {
             color: theme.colors.iconColor,
           ),
           backgroundColor: theme.colors.appBarColor,
+          systemOverlayStyle: SystemUiOverlayStyle.light, //statusBar Color
         ),
         scaffoldBackgroundColor: theme.colors.scaffoldBackgroundColor,
         colorScheme: theme.colors.colorScheme,

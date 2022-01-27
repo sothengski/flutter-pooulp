@@ -21,8 +21,8 @@ class CustomTextWidget extends StatelessWidget {
 
   const CustomTextWidget({
     Key? key,
-    this.text,
-    this.color,
+    this.text = '',
+    this.color = ColorsManager.primaryBlue,
     this.fontFamily,
     this.fontWeight,
     this.fontSize = 14.0,

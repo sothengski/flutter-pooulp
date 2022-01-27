@@ -128,8 +128,8 @@ class ProfileModel {
         // addressLongitude: json['address_longitude'] as String?,
         id: json['id'] as int?,
         name: json['name'] as String?,
-        subsidiaryOf: json['subsidiary_of'] as String?,
-        schoolID: json['school_id'] as String?,
+        // subsidiaryOf: json['subsidiary_of'] as String?,
+        // schoolID: json['school_id'] as String?,
         logoUrn: json['logo_urn'] as String?,
         createdAt: json['created_at'] != null
             ? DateTime.parse(json['created_at'].toString())

@@ -13,7 +13,12 @@ class FeedPage extends GetView<FeedController> {
       appBar: CustomAppBar(
         title: 'Feed Page',
       ),
-      body: const Center(child: Text('Feed Page')),
+      body: const Center(
+        child: CustomTextWidget(
+          textAlign: TextAlign.center,
+          text: 'Feed Page\n\nThis Page is under construction!',
+        ),
+      ),
     );
   }
 }

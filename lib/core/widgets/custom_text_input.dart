@@ -48,6 +48,8 @@ class CustomTextInput extends StatelessWidget {
   final double? bottomContentPadding;
   final int? minLines;
   final int? maxLines;
+  final double? fontSize;
+  final Color? fontColor;
 
   const CustomTextInput({
     this.controller,
@@ -87,12 +89,14 @@ class CustomTextInput extends StatelessWidget {
     this.fillColor = ColorsManager.grey100,
     this.isFilled = false,
     this.borderRadius = 8.0,
-    this.leftContentPadding = 12.0,
-    this.topContentPadding = 20.0,
-    this.rightContentPadding = 12.0,
-    this.bottomContentPadding = 20.0,
+    this.leftContentPadding = 8.0,
+    this.topContentPadding = 0.0, // = 20.0,
+    this.rightContentPadding = 8.0,
+    this.bottomContentPadding = 0.0, // = 20.0,
     this.minLines = 1,
     this.maxLines = 1,
+    this.fontSize = 16.0,
+    this.fontColor = Colors.black,
   });
 
   @override
@@ -108,8 +112,8 @@ class CustomTextInput extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (inputTitle != null)
-            Text(
-              inputTitle!,
+            CustomTextWidget(
+              text: inputTitle,
             )
           else
             const SizedBox.shrink(),
@@ -140,6 +144,11 @@ class CustomTextInput extends StatelessWidget {
                   focusNode: focusNodeName,
                   autocorrect: autocorrect!,
                   enableSuggestions: enableSuggestions!,
+                  style: TextStyle(
+                    fontSize: fontSize,
+                    color: fontColor,
+                    // fontWeight: FontWeight.w400,
+                  ),
 
                   decoration: InputDecoration(
                     // counterStyle: const TextStyle(
@@ -166,6 +175,7 @@ class CustomTextInput extends StatelessWidget {
                                 icon: const Icon(
                                   Icons.visibility_outlined,
                                   color: ColorsManager.grey400,
+                                  size: 20.0,
                                 ),
                                 onPressed: changeShowPassword,
                               )
@@ -173,6 +183,7 @@ class CustomTextInput extends StatelessWidget {
                                 icon: const Icon(
                                   Icons.visibility_off_outlined,
                                   color: ColorsManager.grey400,
+                                  size: 20.0,
                                 ),
                                 onPressed: changeShowPassword,
                               )

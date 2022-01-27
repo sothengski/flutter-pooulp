@@ -58,7 +58,7 @@ class SignUpForm extends GetView<SignUpController> {
                   padding: const EdgeInsets.all(AppSize.s16),
                   child: CustomContainerWidget(
                     elevation: 0.0,
-                    childPadding: 16.0,
+                    childPadding: 20.0,
                     titleInSide: false,
                     child: Obx(
                       () => Form(
@@ -72,6 +72,7 @@ class SignUpForm extends GetView<SignUpController> {
                               fontSize: 24.0,
                               fontWeight: FontWeight.w700,
                               color: ColorsManager.primary,
+                              marginBottom: AppSize.s24,
                             ),
                             CustomTextInput(
                               controller: controller.tokenCtrl,
@@ -167,6 +168,13 @@ class SignUpForm extends GetView<SignUpController> {
                                               return InputDecorator(
                                                 // alignedDropdown: true,
                                                 decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets.fromLTRB(
+                                                    4,
+                                                    0,
+                                                    4,
+                                                    0,
+                                                  ),
                                                   fillColor:
                                                       ColorsManager.grey100,
                                                   filled: true,
@@ -188,7 +196,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                     borderSide:
                                                         const BorderSide(
                                                       color:
-                                                          ColorsManager.grey300,
+                                                          ColorsManager.grey100,
                                                     ),
                                                   ),
                                                   errorBorder:
@@ -212,7 +220,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                     borderSide:
                                                         const BorderSide(
                                                       color:
-                                                          ColorsManager.grey800,
+                                                          ColorsManager.grey300,
                                                     ),
                                                   ),
                                                 ),
@@ -223,11 +231,14 @@ class SignUpForm extends GetView<SignUpController> {
                                                               .phoneCode ==
                                                           null
                                                       ? const CustomTextWidget(
-                                                          text: "Country Code",
+                                                          marginLeft:
+                                                              AppSize.s8,
+                                                          text: 'Country Code',
                                                           color: ColorsManager
                                                               .grey400,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.w400,
+                                                          fontSize: 16.0,
                                                         )
                                                       : Row(
                                                           children: [
@@ -242,7 +253,8 @@ class SignUpForm extends GetView<SignUpController> {
                                                               ),
                                                             ),
                                                             CustomTextWidget(
-                                                              marginLeft: 4.0,
+                                                              marginLeft:
+                                                                  AppSize.s8,
                                                               text: controller
                                                                   .selectedCountry
                                                                   .value
@@ -250,6 +262,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                               color:
                                                                   ColorsManager
                                                                       .black,
+                                                              fontSize: 16.0,
                                                             ),
                                                             // const Icon(
                                                             //   Icons
@@ -419,37 +432,45 @@ class SignUpForm extends GetView<SignUpController> {
                                 left: AppSize.s48,
                                 right: AppSize.s48,
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  CircleAvatar(
-                                    radius: 30.0,
-                                    backgroundColor: ColorsManager.white,
-                                    child: Image(
-                                      image:
-                                          AssetImage(AssetsManager.googleLogo),
-                                    ),
-                                  ),
-                                  CircleAvatar(
-                                    radius: 30.0,
-                                    backgroundColor: ColorsManager.white,
-                                    child: Image(
-                                      image: AssetImage(
-                                        AssetsManager.linkedInLogo,
+                              child: GestureDetector(
+                                onTap: () => customSnackbar(
+                                  msgTitle: 'This Page is under construction!',
+                                  msgContent:
+                                      'This Page is only view.\n Data will not save.',
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    CircleAvatar(
+                                      radius: 20.0,
+                                      backgroundColor: ColorsManager.white,
+                                      child: Image(
+                                        image: AssetImage(
+                                          AssetsManager.googleLogo,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  CircleAvatar(
-                                    radius: 30.0,
-                                    backgroundColor: ColorsManager.white,
-                                    child: Image(
-                                      image: AssetImage(
-                                        AssetsManager.facebookLogo,
+                                    CircleAvatar(
+                                      radius: 20.0,
+                                      backgroundColor: ColorsManager.white,
+                                      child: Image(
+                                        image: AssetImage(
+                                          AssetsManager.linkedInLogo,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    CircleAvatar(
+                                      radius: 20.0,
+                                      backgroundColor: ColorsManager.white,
+                                      child: Image(
+                                        image: AssetImage(
+                                          AssetsManager.facebookLogo,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

@@ -38,13 +38,15 @@ class AuthServices extends GetxService {
   Future<bool> saveUserToken({
     LoginModel? bodyData,
     String? urlKey = LocalStorage.authTokenData,
-    Duration duration = const Duration(days: 1000),
+    // Duration duration = const Duration(days: 1000),
   }) async {
+    // final tokenExpireDate = DateTime.now().add(const Duration(seconds: 7));
+
     final tokenExpireDate =
         DateTime.now().add(Duration(seconds: bodyData!.expireIn!));
     final LoginModel userData = LoginModel(
       token: bodyData.token,
-      tokenType: bodyData.token,
+      tokenType: bodyData.tokenType,
       expireIn: bodyData.expireIn,
       accountType: bodyData.accountType,
       tokenExpirationDate: tokenExpireDate,
@@ -65,8 +67,22 @@ class AuthServices extends GetxService {
     final bool isLoggedIn = boxStorage.read(LocalStorage.isLogged) as bool;
     auth = boxStorage.read(LocalStorage.authTokenData);
 
+    // final now = DateTime.now();
+
     if (isLoggedIn == true && auth != null) {
+      // auth = json.decode(auth.toString());
+      // final LoginModel loginCredential =
+      //     LoginModel.fromJson(auth as Map<String, dynamic>);
+      // if (loginCredential.tokenExpirationDate!.compareTo(now) >= 0) {
       return true;
+      // } else {
+      //   customSnackbar(
+      //     msgTitle: 'Session Expired',
+      //     msgContent: 'Please log In again.',
+      //     duration: DurationConstant.d7000,
+      //   );
+      //   return false;
+      // }
     } else {
       return false;
     }

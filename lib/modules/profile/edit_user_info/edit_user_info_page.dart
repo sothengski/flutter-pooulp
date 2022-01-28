@@ -880,6 +880,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                         ),
                                       ),
                                       child: CountryListSelector(
+                                        showPhoneCode: false,
                                         countrylist: countryList,
                                         onTap: (country) {
                                           controller
@@ -1039,34 +1040,36 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                   height: 3.0,
                                 ),
                                 GestureDetector(
-                                  onTap: () => Get.bottomSheet(
-                                    Container(
-                                      height: getHeight * 0.5,
-                                      decoration: const ShapeDecoration(
-                                        color: ColorsManager.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(
-                                              16,
-                                            ),
-                                            topRight: Radius.circular(
-                                              16,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      child: CountryListSelector(
-                                        countrylist: countryList,
-                                        onTap: (country) {
-                                          controller
-                                              .selectedCountryAddressOnClick(
-                                            country,
-                                          );
-                                          Get.back();
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                                  onTap: () => {
+                                    // Get.bottomSheet(
+                                    //   Container(
+                                    //     height: getHeight * 0.5,
+                                    //     decoration: const ShapeDecoration(
+                                    //       color: ColorsManager.white,
+                                    //       shape: RoundedRectangleBorder(
+                                    //         borderRadius: BorderRadius.only(
+                                    //           topLeft: Radius.circular(
+                                    //             16,
+                                    //           ),
+                                    //           topRight: Radius.circular(
+                                    //             16,
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //     child: CountryListSelector(
+                                    //       countrylist: countryList,
+                                    //       onTap: (country) {
+                                    //         controller
+                                    //             .selectedCountryAddressOnClick(
+                                    //           country,
+                                    //         );
+                                    //         Get.back();
+                                    //       },
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  },
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     padding: EdgeInsets.zero,
@@ -1125,66 +1128,65 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                               ),
                                             ),
                                           ),
-                                          child: Obx(
-                                            () => controller
-                                                        .selectedCountryAddress
-                                                        .value
-                                                        .phoneCode ==
-                                                    null
-                                                ? Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: const [
-                                                      CustomTextWidget(
-                                                        marginLeft: AppSize.s8,
-                                                        text: 'City/State',
-                                                        color: ColorsManager
-                                                            .grey400,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 16.0,
-                                                      ),
-                                                      Icon(
-                                                        Icons.arrow_drop_down,
-                                                        color: ColorsManager
-                                                            .grey600,
-                                                      ),
-                                                    ],
-                                                  )
-                                                : Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 15.0,
-                                                        child: CircleFlag(
-                                                          controller
-                                                              .selectedCountryAddress
-                                                              .value
-                                                              .isoCode
-                                                              .toString(),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: CustomTextWidget(
-                                                          marginLeft:
-                                                              AppSize.s8,
-                                                          text: controller
-                                                              .selectedCountryAddress
-                                                              .value
-                                                              .phoneCode,
-                                                          color: ColorsManager
-                                                              .black,
-                                                          fontSize: 16.0,
-                                                        ),
-                                                      ),
-                                                      const Icon(
-                                                        Icons.arrow_drop_down,
-                                                        color: ColorsManager
-                                                            .grey600,
-                                                      ),
-                                                    ],
-                                                  ),
+                                          child:
+                                              // Obx(
+                                              //   () =>
+                                              // controller
+                                              //             .selectedCountryAddress
+                                              //             .value
+                                              //             .phoneCode ==
+                                              //         null
+                                              //     ?
+                                              Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: const [
+                                              CustomTextWidget(
+                                                marginLeft: AppSize.s8,
+                                                text: 'City/State',
+                                                color: ColorsManager.grey400,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16.0,
+                                              ),
+                                              Icon(
+                                                Icons.arrow_drop_down,
+                                                color: ColorsManager.grey300,
+                                              ),
+                                            ],
                                           ),
+                                          // : Row(
+                                          //     children: [
+                                          //       SizedBox(
+                                          //         height: 15.0,
+                                          //         child: CircleFlag(
+                                          //           controller
+                                          //               .selectedCountryAddress
+                                          //               .value
+                                          //               .isoCode
+                                          //               .toString(),
+                                          //         ),
+                                          //       ),
+                                          //       Expanded(
+                                          //         child: CustomTextWidget(
+                                          //           marginLeft:
+                                          //               AppSize.s8,
+                                          //           text: controller
+                                          //               .selectedCountryAddress
+                                          //               .value
+                                          //               .phoneCode,
+                                          //           color: ColorsManager
+                                          //               .black,
+                                          //           fontSize: 16.0,
+                                          //         ),
+                                          //       ),
+                                          //       const Icon(
+                                          //         Icons.arrow_drop_down,
+                                          //         color: ColorsManager
+                                          //             .grey600,
+                                          //       ),
+                                          //     ],
+                                          //   ),
+                                          // ),
                                         );
                                       },
                                     ),
@@ -1258,7 +1260,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
         onPressed: () {
           unFocusKeyBoard(context);
           customSnackbar(
-            msgTitle: 'This Page is under construction!',
+            msgTitle: 'This Button is under construction!',
             msgContent: 'This Page is only view.\n Data will not save.',
           );
           // controller.registerButtonOnClick(

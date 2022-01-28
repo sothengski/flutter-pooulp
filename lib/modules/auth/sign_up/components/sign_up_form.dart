@@ -321,7 +321,6 @@ class SignUpForm extends GetView<SignUpController> {
                               bottomPadding:
                                   isStudent == true ? AppSize.s32 : 0.0,
                               validator: Validator().passwordValidator,
-                              maxLength: 15,
                               inputFormatterList: [
                                 FilteringTextInputFormatter.deny(
                                   RegExp(Validator.avoidSpaceRegExpPattern),
@@ -345,7 +344,6 @@ class SignUpForm extends GetView<SignUpController> {
                             //       isStudent == true ? AppSize.s32 : 0.0,
                             //   validator: (_) =>
                             //       controller.matchingPasswords(),
-                            //   maxLength: 15,
                             //   inputFormatterList: [
                             //     FilteringTextInputFormatter.deny(
                             //       RegExp(Validator.avoidSpaceRegExpPattern),

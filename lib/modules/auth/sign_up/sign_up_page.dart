@@ -26,6 +26,7 @@ class SignUpPage extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: AppSize.s72,
                   right: AppSize.s72,
+                  top: AppSize.s72,
                 ),
                 child: Image(
                   image: AssetImage(AssetsManager.appLogoWhite),

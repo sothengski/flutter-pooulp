@@ -83,7 +83,7 @@ class ProfilePage extends GetView<ProfileController> {
                               // bottomMargin: AppSize.s12,
                               leftTitle: 'Profile Progress',
                               rightWidget: const CustomTextWidget(
-                                text: '10%',
+                                text: '0%',
                                 fontWeight: FontWeightManager.medium,
                               ),
                               titleFontSize: AppSize.s16,

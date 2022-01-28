@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import '../../routes/routes.dart';
 import '../data.dart';
 
 class BaseProvider extends GetConnect {
@@ -18,11 +17,11 @@ class BaseProvider extends GetConnect {
     httpClient.timeout = const Duration(seconds: 45);
 
     httpClient.addResponseModifier((request, response) async {
-      if (response.statusCode == 401) {
-        await AuthServices().removeToken().then(
-              (value) => Get.offAllNamed(Routes.splashRoute),
-            );
-      }
+      // if (response.statusCode == 401) {
+      //   await AuthServices().removeToken().then(
+      //         (value) => Get.offAllNamed(Routes.splashRoute),
+      //       );
+      // }
       return response;
     });
 

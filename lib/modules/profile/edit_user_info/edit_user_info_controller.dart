@@ -16,8 +16,8 @@ class EditUserInformationController extends GetxController {
 
   final List<String> genderList = [
     // '', //'unselect',
-    'male',
-    'female',
+    'Mr.',
+    'Mrs.',
     'others',
   ];
 

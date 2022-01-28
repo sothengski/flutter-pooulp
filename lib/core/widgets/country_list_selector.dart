@@ -9,6 +9,8 @@ class CountryListSelector extends StatelessWidget {
   final ScrollController? scrollController;
   final int? separatorIndex;
   final Function(CountryModel)? onTap;
+  final bool? showPhoneCode;
+  final bool? showCountry;
 
   const CountryListSelector({
     this.countrylist,
@@ -16,6 +18,8 @@ class CountryListSelector extends StatelessWidget {
     this.separatorIndex = 1,
     this.onTap,
     Key? key,
+    this.showPhoneCode = true,
+    this.showCountry = true,
   }) : super(key: key);
 
   @override
@@ -50,24 +54,50 @@ class CountryListSelector extends StatelessWidget {
                     final CountryModel country = countryList[index];
                     return ListTile(
                       key: Key(country.isoCode.toString()),
+                      dense: true,
+                      contentPadding:
+                          const EdgeInsets.only(left: 20.0, right: 20.0),
                       leading: CircleFlag(
                         country.isoCode.toString(),
                       ),
                       title: Align(
                         alignment: AlignmentDirectional.centerStart,
-                        child: Text(
-                          "${country.name}",
-                          textAlign: TextAlign.start,
-                        ),
+                        child: showCountry == true
+                            ? CustomTextWidget(
+                                text: "${country.name}",
+                                fontSize: 16.0,
+                                fontWeight: FontWeightManager.medium,
+                              )
+                            : Container(),
                       ),
-                      subtitle: Align(
-                        alignment: AlignmentDirectional.centerStart,
-                        child: Text(
-                          country.phoneCode!,
-                          textDirection: TextDirection.ltr,
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
+                      trailing: showPhoneCode == true
+                          ? CustomTextWidget(
+                              text: country.phoneCode,
+                              color: ColorsManager.grey600,
+                              fontSize: 16.0,
+                              fontWeight: FontWeightManager.medium,
+                            )
+                          : const CustomTextWidget(
+                              color: ColorsManager.primary,
+                            ),
+                      // trailing:  Align(
+                      //   alignment: AlignmentDirectional.centerStart,
+                      //   child: showPhoneCode == true
+                      //       ? CustomTextWidget(
+                      //           text: country.phoneCode,
+                      //           color: ColorsManager.primary,
+                      //         )
+                      //       : Container(),
+                      // ),
+                      // subtitle: Align(
+                      //   alignment: AlignmentDirectional.centerStart,
+                      //   child: showPhoneCode == true
+                      //       ? CustomTextWidget(
+                      //           text: country.phoneCode,
+                      //           color: ColorsManager.primary,
+                      //         )
+                      //       : Container(),
+                      // ),
                       onTap: () => onTap!(country),
                     );
                   },

@@ -45,7 +45,6 @@ class SignInForm extends GetView<SignInController> {
                 isFilled: true,
                 topPadding: AppSize.s12,
                 validator: Validator().passwordValidator,
-                maxLength: 15,
                 inputFormatterList: [
                   FilteringTextInputFormatter.deny(
                     RegExp(Validator.avoidSpaceRegExpPattern),
@@ -71,35 +70,37 @@ class SignInForm extends GetView<SignInController> {
                   ),
                 ),
               ),
-              Obx(
-                () => Visibility(
-                  visible: controller.isSubmitBtnProcessing.value,
-                  child: CustomMaterialButton(
-                    childWidget: const LoadingWidget(
-                      isTreeBounceLoading: true,
-                      color: ColorsManager.white,
-                    ),
-                    buttonWidth: getWidth,
-                    onPressed: () {
-                      unFocusKeyBoard(context);
-                    },
+              // Obx(
+              //   () =>
+              Visibility(
+                visible: controller.isSubmitBtnProcessing.value,
+                child: CustomMaterialButton(
+                  childWidget: const LoadingWidget(
+                    isTreeBounceLoading: true,
+                    color: ColorsManager.white,
                   ),
+                  buttonWidth: getWidth,
+                  onPressed: () {
+                    unFocusKeyBoard(context);
+                  },
                 ),
               ),
-              Obx(
-                () => Visibility(
-                  visible: !controller.isSubmitBtnProcessing.value,
-                  child: CustomMaterialButton(
-                    text: "Login",
-                    fontSize: 20.0,
-                    buttonWidth: getWidth,
-                    onPressed: () {
-                      unFocusKeyBoard(context);
-                      controller.loginButtonOnClick();
-                    },
-                  ),
+              // ),
+              // Obx(
+              //   () =>
+              Visibility(
+                visible: !controller.isSubmitBtnProcessing.value,
+                child: CustomMaterialButton(
+                  text: "Login",
+                  fontSize: 20.0,
+                  buttonWidth: getWidth,
+                  onPressed: () {
+                    unFocusKeyBoard(context);
+                    controller.loginButtonOnClick();
+                  },
                 ),
               ),
+              // ),
               Row(
                 children: const [
                   Expanded(

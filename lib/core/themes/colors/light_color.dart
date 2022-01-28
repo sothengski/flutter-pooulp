@@ -83,7 +83,7 @@ class LightColors implements IColors {
     brightness = Brightness.light;
     buttonTextColor = ColorsManager.white;
     iconColor = ColorsManager.white; //iconColor on drawer and action icons
-    enabledColor = ColorsManager.grey100;
+    enabledColor = ColorsManager.grey400;
     errorColor = ColorsManager.red;
     fillColor = ColorsManager.primary25;
     focusColor = ColorsManager.primary50;

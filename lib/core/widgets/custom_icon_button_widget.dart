@@ -11,6 +11,7 @@ class CustomIconButtonWidget extends StatelessWidget {
   final Function()? onClick;
   final double? padding;
   final bool? isConstraints;
+  final double? splashRadius;
 
   const CustomIconButtonWidget({
     this.tooltip = "",
@@ -21,6 +22,7 @@ class CustomIconButtonWidget extends StatelessWidget {
     this.onClick,
     this.padding = 8.0,
     this.isConstraints = false,
+    this.splashRadius = 1.0,
     Key? key,
   }) : super(key: key);
 
@@ -30,6 +32,7 @@ class CustomIconButtonWidget extends StatelessWidget {
       constraints: isConstraints == false ? null : const BoxConstraints(),
       padding: EdgeInsets.all(padding!),
       iconSize: iconSize!,
+      splashRadius: splashRadius,
       icon: iconWidget ??
           Icon(
             iconData,

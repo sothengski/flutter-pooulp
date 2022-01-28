@@ -319,7 +319,7 @@ class SignUpForm extends GetView<SignUpController> {
                               isFilled: true,
                               topPadding: AppSize.s12,
                               bottomPadding:
-                                  isStudent == true ? AppSize.s32 : 0.0,
+                                  isStudent == true ? AppSize.s16 : 0.0,
                               validator: Validator().passwordValidator,
                               inputFormatterList: [
                                 FilteringTextInputFormatter.deny(
@@ -375,9 +375,71 @@ class SignUpForm extends GetView<SignUpController> {
                                 hintText: "Enter your enterprise ID",
                                 isFilled: true,
                                 topPadding: AppSize.s12,
-                                bottomPadding: AppSize.s32,
+                                bottomPadding: AppSize.s16,
                                 // validator: Validator().password,
                               ),
+                            Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomIconButtonWidget(
+                                  isConstraints: true,
+                                  iconWidget: controller
+                                              .isCheckTermCondition.value ==
+                                          true
+                                      ? const Icon(
+                                          Icons.check_box,
+                                          color: ColorsManager.primary,
+                                        )
+                                      : const Icon(
+                                          Icons.check_box_outline_blank_sharp,
+                                          color: ColorsManager.grey,
+                                        ),
+                                  onClick: () =>
+                                      controller.checkingBoolSwitching(
+                                    boolValue:
+                                        controller.isCheckTermCondition.value,
+                                  ),
+                                ),
+                                const CustomTextWidget(
+                                  text: "I agree to Pooulp's Terms of Use",
+                                )
+                              ],
+                            ),
+                            Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomIconButtonWidget(
+                                  isConstraints: true,
+                                  iconWidget:
+                                      controller.isCheckMarketing.value == true
+                                          ? const Icon(
+                                              Icons.check_box,
+                                              color: ColorsManager.primary,
+                                            )
+                                          : const Icon(
+                                              Icons
+                                                  .check_box_outline_blank_sharp,
+                                              color: ColorsManager.grey,
+                                            ),
+                                  onClick: () =>
+                                      controller.checkingBoolMarketing(
+                                    boolValue:
+                                        controller.isCheckMarketing.value,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: getWidth * 0.7,
+                                  child: const CustomTextWidget(
+                                    text:
+                                        "Join our Pooulp emailing list to be updated with our latest news!",
+                                    maxLine: 3,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 16.0,
+                            ),
                             Obx(
                               () => Visibility(
                                 visible: controller.isSubmitBtnProcessing.value,
@@ -388,17 +450,27 @@ class SignUpForm extends GetView<SignUpController> {
                               () => Visibility(
                                 visible:
                                     !controller.isSubmitBtnProcessing.value,
-                                child: CustomMaterialButton(
-                                  text: "Register",
-                                  fontSize: 20.0,
-                                  buttonWidth: getWidth,
-                                  onPressed: () {
-                                    unFocusKeyBoard(context);
-                                    controller.registerButtonOnClick(
-                                      userType: userType,
-                                    );
-                                  },
-                                ),
+                                child: controller.isCheckTermCondition.value ==
+                                        true
+                                    ? CustomMaterialButton(
+                                        text: "Register",
+                                        fontSize: 20.0,
+                                        buttonWidth: getWidth,
+                                        onPressed: () {
+                                          unFocusKeyBoard(context);
+                                          controller.registerButtonOnClick(
+                                            userType: userType,
+                                          );
+                                        },
+                                      )
+                                    : CustomMaterialButton(
+                                        text: "Register",
+                                        textColor: ColorsManager.primaryBlue,
+                                        fontSize: 20.0,
+                                        buttonWidth: getWidth,
+                                        buttonColor: ColorsManager.grey300,
+                                        onPressed: () {},
+                                      ),
                               ),
                             ),
                             Row(

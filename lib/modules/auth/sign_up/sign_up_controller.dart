@@ -25,7 +25,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
 
   TextEditingController tokenCtrl = TextEditingController();
 
-  Rx<CountryModel> selectedCountry = const CountryModel().obs;
+  late Rx<CountryModel> selectedCountry = const CountryModel().obs;
 
   RxBool showPassword = false.obs;
   // RxBool showPasswordConfirmation = false.obs;
@@ -38,6 +38,12 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
   late List<String> countries;
 
   late LoginModel loginRepsonseData;
+
+  @override
+  void onInit() {
+    super.onInit();
+    selectedCountry.value = countryList[20]; //belgium
+  }
 
   @override
   void dispose() {
@@ -74,7 +80,9 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
     lastNameCtrl.clear();
     emailCtrl.clear();
     phoneNumberCtrl.clear();
-    selectedCountry.value = const CountryModel();
+    // selectedCountry.value = const CountryModel();
+    selectedCountry.value = countryList[20];
+
     passwordCtrl.clear();
     // passwordConfirmationCtrl.clear();
     enterpriseNameCtrl.clear();

@@ -130,7 +130,7 @@ class SignUpForm extends GetView<SignUpController> {
                                       GestureDetector(
                                         onTap: () => Get.bottomSheet(
                                           Container(
-                                            height: getHeight * 0.5,
+                                            height: getHeight * 0.8,
                                             decoration: const ShapeDecoration(
                                               color: ColorsManager.white,
                                               shape: RoundedRectangleBorder(
@@ -146,6 +146,8 @@ class SignUpForm extends GetView<SignUpController> {
                                             ),
                                             child: CountryListSelector(
                                               countrylist: countryList,
+                                              selectedCountry: controller
+                                                  .selectedCountry.value,
                                               onTap: (country) {
                                                 controller
                                                     .selectedCountryOnClick(

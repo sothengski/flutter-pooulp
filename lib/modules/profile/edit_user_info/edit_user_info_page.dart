@@ -406,7 +406,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                 GestureDetector(
                                   onTap: () => Get.bottomSheet(
                                     Container(
-                                      height: getHeight * 0.5,
+                                      height: getHeight,
                                       decoration: const ShapeDecoration(
                                         color: ColorsManager.white,
                                         shape: RoundedRectangleBorder(
@@ -422,6 +422,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                       ),
                                       child: CountryListSelector(
                                         countrylist: countryList,
+                                        selectedCountry: controller
+                                            .selectedCountryPhoneNumber.value,
                                         onTap: (country) {
                                           controller
                                               .selectedCountryPhoneNumberOnClick(
@@ -865,7 +867,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                 GestureDetector(
                                   onTap: () => Get.bottomSheet(
                                     Container(
-                                      height: getHeight * 0.5,
+                                      height: getHeight,
                                       decoration: const ShapeDecoration(
                                         color: ColorsManager.white,
                                         shape: RoundedRectangleBorder(
@@ -882,6 +884,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                       child: CountryListSelector(
                                         showPhoneCode: false,
                                         countrylist: countryList,
+                                        selectedCountry: controller
+                                            .selectedCountryAddress.value,
                                         onTap: (country) {
                                           controller
                                               .selectedCountryAddressOnClick(
@@ -1020,183 +1024,194 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                           ),
                           //===== Country Component =====//
 
-                          const SizedBox(
-                            width: AppSize.s8,
-                          ),
+                          // const SizedBox(
+                          //   width: AppSize.s8,
+                          // ),
 
                           ///===== City/State Component =====//
-                          Expanded(
-                            flex: 50,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const CustomTextWidget(
-                                  text: 'City/State',
-                                  marginTop: AppSize.s12,
-                                  textAlign: TextAlign.left,
-                                  // marginBottom: AppSize.s4,
-                                ),
-                                const SizedBox(
-                                  height: 3.0,
-                                ),
-                                GestureDetector(
-                                  onTap: () => {
-                                    // Get.bottomSheet(
-                                    //   Container(
-                                    //     height: getHeight * 0.5,
-                                    //     decoration: const ShapeDecoration(
-                                    //       color: ColorsManager.white,
-                                    //       shape: RoundedRectangleBorder(
-                                    //         borderRadius: BorderRadius.only(
-                                    //           topLeft: Radius.circular(
-                                    //             16,
-                                    //           ),
-                                    //           topRight: Radius.circular(
-                                    //             16,
-                                    //           ),
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //     child: CountryListSelector(
-                                    //       countrylist: countryList,
-                                    //       onTap: (country) {
-                                    //         controller
-                                    //             .selectedCountryAddressOnClick(
-                                    //           country,
-                                    //         );
-                                    //         Get.back();
-                                    //       },
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding: EdgeInsets.zero,
-                                    child: FormField(
-                                      validator: (_) =>
-                                          controller.isPhoneNumberValidate(),
-                                      builder: (
-                                        FormFieldState<String> state,
-                                      ) {
-                                        return InputDecorator(
-                                          // alignedDropdown: true,
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                const EdgeInsets.fromLTRB(
-                                              4,
-                                              0,
-                                              4,
-                                              0,
-                                            ),
-                                            fillColor: ColorsManager.grey100,
-                                            filled: true,
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                            ),
-                                            errorText: state.hasError
-                                                ? state.errorText
-                                                : null,
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                              borderSide: const BorderSide(
-                                                color: ColorsManager.grey100,
-                                              ),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                              borderSide: const BorderSide(
-                                                color: ColorsManager.red900,
-                                              ),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                              borderSide: const BorderSide(
-                                                color: ColorsManager.grey300,
-                                              ),
-                                            ),
-                                          ),
-                                          child:
-                                              // Obx(
-                                              //   () =>
-                                              // controller
-                                              //             .selectedCountryAddress
-                                              //             .value
-                                              //             .phoneCode ==
-                                              //         null
-                                              //     ?
-                                              Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: const [
-                                              CustomTextWidget(
-                                                marginLeft: AppSize.s8,
-                                                text: 'City/State',
-                                                color: ColorsManager.grey400,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 16.0,
-                                              ),
-                                              Icon(
-                                                Icons.arrow_drop_down,
-                                                color: ColorsManager.grey300,
-                                              ),
-                                            ],
-                                          ),
-                                          // : Row(
-                                          //     children: [
-                                          //       SizedBox(
-                                          //         height: 15.0,
-                                          //         child: CircleFlag(
-                                          //           controller
-                                          //               .selectedCountryAddress
-                                          //               .value
-                                          //               .isoCode
-                                          //               .toString(),
-                                          //         ),
-                                          //       ),
-                                          //       Expanded(
-                                          //         child: CustomTextWidget(
-                                          //           marginLeft:
-                                          //               AppSize.s8,
-                                          //           text: controller
-                                          //               .selectedCountryAddress
-                                          //               .value
-                                          //               .phoneCode,
-                                          //           color: ColorsManager
-                                          //               .black,
-                                          //           fontSize: 16.0,
-                                          //         ),
-                                          //       ),
-                                          //       const Icon(
-                                          //         Icons.arrow_drop_down,
-                                          //         color: ColorsManager
-                                          //             .grey600,
-                                          //       ),
-                                          //     ],
-                                          //   ),
-                                          // ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+
+                          // Expanded(
+                          //   flex: 50,
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     children: [
+                          //       const CustomTextWidget(
+                          //         text: 'City/State',
+                          //         marginTop: AppSize.s12,
+                          //         textAlign: TextAlign.left,
+                          //         // marginBottom: AppSize.s4,
+                          //       ),
+                          //       const SizedBox(
+                          //         height: 3.0,
+                          //       ),
+                          //       GestureDetector(
+                          //         onTap: () => {
+                          //           // Get.bottomSheet(
+                          //           //   Container(
+                          //           //     height: getHeight * 0.5,
+                          //           //     decoration: const ShapeDecoration(
+                          //           //       color: ColorsManager.white,
+                          //           //       shape: RoundedRectangleBorder(
+                          //           //         borderRadius: BorderRadius.only(
+                          //           //           topLeft: Radius.circular(
+                          //           //             16,
+                          //           //           ),
+                          //           //           topRight: Radius.circular(
+                          //           //             16,
+                          //           //           ),
+                          //           //         ),
+                          //           //       ),
+                          //           //     ),
+                          //           //     child: CountryListSelector(
+                          //           //       countrylist: countryList,
+                          //           //       onTap: (country) {
+                          //           //         controller
+                          //           //             .selectedCountryAddressOnClick(
+                          //           //           country,
+                          //           //         );
+                          //           //         Get.back();
+                          //           //       },
+                          //           //     ),
+                          //           //   ),
+                          //           // ),
+                          //         },
+                          //         child: Container(
+                          //           alignment: Alignment.centerLeft,
+                          //           padding: EdgeInsets.zero,
+                          //           child: FormField(
+                          //             validator: (_) =>
+                          //                 controller.isPhoneNumberValidate(),
+                          //             builder: (
+                          //               FormFieldState<String> state,
+                          //             ) {
+                          //               return InputDecorator(
+                          //                 // alignedDropdown: true,
+                          //                 decoration: InputDecoration(
+                          //                   contentPadding:
+                          //                       const EdgeInsets.fromLTRB(
+                          //                     4,
+                          //                     0,
+                          //                     4,
+                          //                     0,
+                          //                   ),
+                          //                   fillColor: ColorsManager.grey100,
+                          //                   filled: true,
+                          //                   border: OutlineInputBorder(
+                          //                     borderRadius:
+                          //                         BorderRadius.circular(
+                          //                       AppSize.s8,
+                          //                     ),
+                          //                   ),
+                          //                   errorText: state.hasError
+                          //                       ? state.errorText
+                          //                       : null,
+                          //                   enabledBorder: OutlineInputBorder(
+                          //                     borderRadius:
+                          //                         BorderRadius.circular(
+                          //                       AppSize.s8,
+                          //                     ),
+                          //                     borderSide: const BorderSide(
+                          //                       color: ColorsManager.grey100,
+                          //                     ),
+                          //                   ),
+                          //                   errorBorder: OutlineInputBorder(
+                          //                     borderRadius:
+                          //                         BorderRadius.circular(
+                          //                       AppSize.s8,
+                          //                     ),
+                          //                     borderSide: const BorderSide(
+                          //                       color: ColorsManager.red900,
+                          //                     ),
+                          //                   ),
+                          //                   focusedBorder: OutlineInputBorder(
+                          //                     borderRadius:
+                          //                         BorderRadius.circular(
+                          //                       AppSize.s8,
+                          //                     ),
+                          //                     borderSide: const BorderSide(
+                          //                       color: ColorsManager.grey300,
+                          //                     ),
+                          //                   ),
+                          //                 ),
+                          //                 child:
+                          //                     // Obx(
+                          //                     //   () =>
+                          //                     // controller
+                          //                     //             .selectedCountryAddress
+                          //                     //             .value
+                          //                     //             .phoneCode ==
+                          //                     //         null
+                          //                     //     ?
+                          //                     Row(
+                          //                   mainAxisAlignment:
+                          //                       MainAxisAlignment.spaceBetween,
+                          //                   children: const [
+                          //                     CustomTextWidget(
+                          //                       marginLeft: AppSize.s8,
+                          //                       text: 'City/State',
+                          //                       color: ColorsManager.grey400,
+                          //                       fontWeight: FontWeight.w400,
+                          //                       fontSize: 16.0,
+                          //                     ),
+                          //                     Icon(
+                          //                       Icons.arrow_drop_down,
+                          //                       color: ColorsManager.grey300,
+                          //                     ),
+                          //                   ],
+                          //                 ),
+                          //                 // : Row(
+                          //                 //     children: [
+                          //                 //       SizedBox(
+                          //                 //         height: 15.0,
+                          //                 //         child: CircleFlag(
+                          //                 //           controller
+                          //                 //               .selectedCountryAddress
+                          //                 //               .value
+                          //                 //               .isoCode
+                          //                 //               .toString(),
+                          //                 //         ),
+                          //                 //       ),
+                          //                 //       Expanded(
+                          //                 //         child: CustomTextWidget(
+                          //                 //           marginLeft:
+                          //                 //               AppSize.s8,
+                          //                 //           text: controller
+                          //                 //               .selectedCountryAddress
+                          //                 //               .value
+                          //                 //               .phoneCode,
+                          //                 //           color: ColorsManager
+                          //                 //               .black,
+                          //                 //           fontSize: 16.0,
+                          //                 //         ),
+                          //                 //       ),
+                          //                 //       const Icon(
+                          //                 //         Icons.arrow_drop_down,
+                          //                 //         color: ColorsManager
+                          //                 //             .grey600,
+                          //                 //       ),
+                          //                 //     ],
+                          //                 //   ),
+                          //                 // ),
+                          //               );
+                          //             },
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                           //===== City/State Component =====//
                         ],
+                      ),
+                      const CustomTextInput(
+                        // controller: controller.emailCtrl,
+                        inputTitle: 'City/State',
+                        hintText: 'City/State',
+                        isFilled: true,
+                        maxLength: 10,
+                        topPadding: AppSize.s12,
+                        // validator: Validator().emailValidator,
+                        keyboardType: TextInputType.emailAddress,
                       ),
                       //===== Country & City/State Component =====//
 

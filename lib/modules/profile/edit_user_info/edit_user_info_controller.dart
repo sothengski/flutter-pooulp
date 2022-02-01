@@ -21,10 +21,13 @@ class EditUserInformationController extends GetxController {
     'others',
   ];
 
-  // @override
-  // void onInit() {
-  //     super.onInit();
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+    //TODO:: replace by data from API
+    selectedCountryPhoneNumber.value = countryList[20];
+    selectedCountryAddress.value = countryList[20];
+  }
 
   CountryModel selectedCountryPhoneNumberOnClick(CountryModel selectedItem) {
     return selectedCountryPhoneNumber.value = selectedItem;

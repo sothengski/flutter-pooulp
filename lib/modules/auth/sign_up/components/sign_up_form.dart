@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/core.dart';
@@ -43,16 +44,32 @@ class SignUpForm extends GetView<SignUpController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(
+                // const Padding(
+                //   padding: EdgeInsets.only(
+                //     top: kBottomNavigationBarHeight + 48,
+                //     left: AppSize.s72,
+                //     right: AppSize.s72,
+                //     bottom: AppSize.s24,
+                //   ),
+                //   child: Image(
+                //     image: AssetImage(AssetsManager.appLogoWhite),
+                //   ),
+                // ),
+                Padding(
+                  padding: const EdgeInsets.only(
                     top: kBottomNavigationBarHeight + 48,
                     left: AppSize.s72,
                     right: AppSize.s72,
-                    bottom: AppSize.s24,
+                    bottom: AppSize.s12,
                   ),
-                  child: Image(
-                    image: AssetImage(AssetsManager.appLogoWhite),
+                  child: SvgPicture.asset(
+                    AssetsManager.appLogoWhiteSvg,
+                    height: 80,
+                    matchTextDirection: true,
                   ),
+                  // child: Image(
+                  //   image: AssetImage(AssetsManager.appLogoWhite),
+                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(AppSize.s16),

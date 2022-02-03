@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../core/core.dart';
 import '../../modules.dart';
@@ -22,15 +23,20 @@ class SignUpPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(
+              Padding(
+                padding: const EdgeInsets.only(
                   left: AppSize.s72,
                   right: AppSize.s72,
                   top: AppSize.s72,
                 ),
-                child: Image(
-                  image: AssetImage(AssetsManager.appLogoWhite),
+                child: SvgPicture.asset(
+                  AssetsManager.appLogoWhiteSvg,
+                  height: 80,
+                  matchTextDirection: true,
                 ),
+                // child: Image(
+                //   image: AssetImage(AssetsManager.appLogoWhite),
+                // ),
               ),
               Column(
                 children: [

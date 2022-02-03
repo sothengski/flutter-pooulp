@@ -16,6 +16,7 @@ dependencies:
   intl: ^0.17.0
   connectivity_plus: ^2.2.0
   flutter_datetime_picker: ^1.5.1
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +31,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/icons/flags/
+    - assets/svgs/
 
   fonts:
     - family: TypoRound

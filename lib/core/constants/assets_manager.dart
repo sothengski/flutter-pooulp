@@ -1,5 +1,6 @@
 const String imagePath = "assets/images";
 const String iconPath = "assets/icons";
+const String svgPath = "assets/svgs";
 
 class AssetsManager {
   ///==================== Icons ====================
@@ -21,4 +22,12 @@ class AssetsManager {
 
   static const String socialMediaBrowsing =
       '$imagePath/social-media-browsing.png';
+
+  ///==================== Icons ====================
+
+  static const String appLogoSvg = '$svgPath/pooulp-logo-primary-landscape.svg';
+  static const String appLogoWhiteSvg =
+      '$svgPath/pooulp-logo-white-landscape.svg';
+  static const String appLogoSymbolSvg = '$svgPath/pooulp-logo-primary.svg';
+  // static const String appLogoTextSvg = '$svgPath/app-logo-text.png';
 }

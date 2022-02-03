@@ -169,12 +169,13 @@ class ProfileHeader extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomTextWidget(
-                      text: userName,
+                      text: '$userName',
+                      maxLine: 2,
                       color: ColorsManager.white,
-                      fontSize: AppSize.s24,
+                      fontSize: AppSize.s20,
                       fontWeight: FontWeight.bold,
-                      marginTop: AppSize.s4,
-                      marginBottom: AppSize.s8,
+                      marginTop: AppSize.s2,
+                      marginBottom: AppSize.s4,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

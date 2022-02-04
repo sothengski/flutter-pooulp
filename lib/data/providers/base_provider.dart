@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../routes/routes.dart';
 import '../data.dart';
 
 class BaseProvider extends GetConnect {
@@ -17,11 +19,47 @@ class BaseProvider extends GetConnect {
     httpClient.timeout = const Duration(seconds: 45);
 
     httpClient.addResponseModifier((request, response) async {
-      // if (response.statusCode == 401) {
-      //   await AuthServices().removeToken().then(
-      //         (value) => Get.offAllNamed(Routes.splashRoute),
-      //       );
-      // }
+      if ('${request.url}' !=
+              '${httpClient.baseUrl}${API.paths[Endpoint.signIn]}' ||
+          '${request.url}' !=
+              '${httpClient.baseUrl}${API.paths[Endpoint.registerNewUser]}') {
+        if (response.statusCode == 401) {
+          Get.defaultDialog(
+            barrierDismissible: false,
+            radius: 10.0,
+            contentPadding: const EdgeInsets.all(20.0),
+            title: 'Session Expired',
+            middleText: 'Please log in again.',
+            textConfirm: 'OK',
+            confirm: OutlinedButton.icon(
+              onPressed: () async => {
+                await AuthServices().removeToken().then(
+                      (value) => Get.offAllNamed(Routes.splashRoute),
+                    )
+              },
+              icon: const Icon(
+                Icons.check,
+                color: Colors.blue,
+              ),
+              label: const Text(
+                'Okay',
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
+            // cancel: OutlinedButton.icon(
+            //   onPressed: () {},
+            //   icon: const Icon(
+            //     Icons.check,
+            //     color: Colors.blue,
+            //   ),
+            //   label: const Text("cancel"),
+            // ),
+          );
+          // await AuthServices().removeToken().then(
+          //       (value) => Get.offAllNamed(Routes.splashRoute),
+          //     );
+        }
+      }
       return response;
     });
 

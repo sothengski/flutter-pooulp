@@ -161,33 +161,41 @@ class FeedItemCard extends StatelessWidget {
                   flex: 20,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                      top: AppSize.s16,
-                      bottom: AppSize.s10,
+                      top: AppSize.s10,
+                      bottom: AppSize.s5,
                       right: AppSize.s4,
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         for (var i = 0;
                             i < feedItem!.jobOffer!.types!.length;
                             i++)
-                          ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(AppSize.s8),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              // horizontal: AppSize.s2,
+                              vertical: AppSize.s2,
                             ),
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                color: ColorsManager.grey200,
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(AppSize.s5),
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppSize.s8,
-                                vertical: AppSize.s4,
-                              ),
-                              child: CustomTextWidget(
-                                textAlign: TextAlign.center,
-                                text: '${feedItem!.jobOffer!.types![i].label}',
-                                fontWeight: FontWeightManager.regular,
-                                fontSize: AppSize.s10,
-                                // marginBottom: 50.0,
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: ColorsManager.grey200,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSize.s8,
+                                  vertical: AppSize.s4,
+                                ),
+                                child: CustomTextWidget(
+                                  textAlign: TextAlign.center,
+                                  text:
+                                      '${feedItem!.jobOffer!.types![i].label}',
+                                  fontWeight: FontWeightManager.regular,
+                                  fontSize: AppSize.s10,
+                                  // marginBottom: AppSize.s10,
+                                ),
                               ),
                             ),
                           ),

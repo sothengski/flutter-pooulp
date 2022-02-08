@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../modules.dart';
 
 class FeedListComponent extends StatelessWidget {
@@ -14,12 +15,12 @@ class FeedListComponent extends StatelessWidget {
         padding: const EdgeInsets.only(
           bottom: kFloatingActionButtonMargin + 10,
         ),
-        itemCount: controller.feedListRepsonse.length,
+        itemCount: controller.feedFilterList.length,
         // physics: const BouncingScrollPhysics(),
         // scrollDirection: Axis.vertical,
         itemBuilder: (_, index) {
           return FeedItemCard(
-            feedItem: controller.feedListRepsonse[index],
+            feedItem: controller.feedFilterList[index],
           );
         },
       ),

@@ -16,17 +16,13 @@ class FeedPage extends GetView<FeedController> {
       body: Center(
         child: controller.obx(
           (state) => Obx(
-            () => controller.feedListRepsonse.isNotEmpty
+            () => controller.feedFilterList.isNotEmpty
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Expanded(
+                      Expanded(
                         flex: 7,
-                        child: Center(
-                          child: CustomTextWidget(
-                            text: 'List of Category',
-                          ),
-                        ),
+                        child: OfferTypesListComponent(),
                       ),
                       Expanded(
                         flex: 90,

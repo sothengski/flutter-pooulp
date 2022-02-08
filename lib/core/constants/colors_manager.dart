@@ -14,6 +14,7 @@ class ColorsManager {
   static const black = Color(0xFF000000);
 
   static const grey100 = Color(0xFFF5F5F5);
+  static const grey200 = Color(0xFFEEEEEE);
   static const grey300 = Color(0xFFE0E0E0);
   static const grey400 = Color(0xFFBDBDBD);
   static const grey = Colors.grey; //9E9E9E

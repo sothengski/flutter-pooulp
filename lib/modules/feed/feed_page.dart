@@ -13,10 +13,50 @@ class FeedPage extends GetView<FeedController> {
       appBar: CustomAppBar(
         title: 'Feed Page',
       ),
-      body: const Center(
-        child: CustomTextWidget(
-          textAlign: TextAlign.center,
-          text: 'Feed Page\n\nThis Page is under construction!',
+      body: Center(
+        child: controller.obx(
+          (state) => Obx(
+            () => controller.feedListRepsonse.isNotEmpty
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Expanded(
+                        flex: 7,
+                        child: Center(
+                          child: CustomTextWidget(
+                            text: 'List of Category',
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 90,
+                        child: FeedListComponent(),
+                      ),
+                    ],
+                  )
+                : const Center(
+                    child: CustomTextWidget(
+                      text: 'No feed results found.',
+                    ),
+                    //  StateHandlerWidget(
+                    //   imgPath: emptyDataIcon,
+                    //   headerText: "No customer results found.",
+                    //   bodyText: "You don't have customers yet!",
+                    //   buttonText: "Try again",
+                    //   onPressedFunctionCall: controller.onRefresh,
+                    // ),
+                  ),
+          ),
+          onLoading: const Center(
+            child: CustomTextWidget(
+              text: 'Loading...',
+            ),
+          ),
+          onError: (error) => Center(
+            child: Text(
+              error.toString(),
+            ),
+          ),
         ),
       ),
     );

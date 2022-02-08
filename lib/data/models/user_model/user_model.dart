@@ -10,6 +10,9 @@ class UserModel {
   final ProfileModel? profile;
   final ProfileModel? enterprise;
 
+  final String? role; //offer in feed endpoint
+  final UserModel? user; //offer in feed endpoint
+
   UserModel({
     this.id,
     this.uuid,
@@ -17,6 +20,8 @@ class UserModel {
     this.isActivated,
     this.profile,
     this.enterprise,
+    this.role,
+    this.user,
   });
 
   factory UserModel.fromRawJson(String str) => UserModel.fromJson(
@@ -40,6 +45,12 @@ class UserModel {
             : ProfileModel.fromJson(
                 json['enterprise'] as Map<String, dynamic>,
               ),
+        role: json['role'] as String?,
+        user: json['user'] == null
+            ? null
+            : UserModel.fromJson(
+                json['user'] as Map<String, dynamic>,
+              ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +60,8 @@ class UserModel {
         'is_activated': isActivated,
         'profile': profile?.toJson(),
         'enterprise': enterprise?.toJson(),
+        'role': role,
+        'user': user?.toJson(),
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -61,6 +74,8 @@ class UserModel {
       isActivated: $isActivated,
       profile: $profile,
       enterprise: $enterprise,
+      role: $role,
+      user: $user,
     )''';
   }
 }

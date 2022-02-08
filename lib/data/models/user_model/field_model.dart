@@ -7,6 +7,7 @@ class FieldModel {
   final int? level;
   final int? categoryId;
   final String? category;
+  final String? videoUrl;
 
   FieldModel({
     this.id,
@@ -15,6 +16,7 @@ class FieldModel {
     this.level,
     this.categoryId,
     this.category,
+    this.videoUrl,
   });
 
   factory FieldModel.fromRawJson(String str) => FieldModel.fromJson(
@@ -30,6 +32,7 @@ class FieldModel {
         level: json['level'] as int?,
         categoryId: json['category_id'] as int?,
         category: json['category'] as String?,
+        videoUrl: json['video_url'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,6 +42,7 @@ class FieldModel {
         'level': level,
         'category_id': categoryId,
         'category': category,
+        'video_url': videoUrl,
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -50,6 +54,7 @@ class FieldModel {
       'level': $level,
       categoryId: $categoryId,
       category: $category,
+      video_url: $videoUrl,
     )''';
   }
 }

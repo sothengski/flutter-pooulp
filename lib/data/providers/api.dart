@@ -7,6 +7,7 @@ enum Endpoint {
   registerNewUser,
   userInfo,
   studentInfo,
+  feed,
 }
 
 class API {
@@ -18,7 +19,7 @@ class API {
   static const String host =
       //'localhost:80'; //Local BASEURL
       'http://api.dev-lamp-01.srv.pooulp.eu'; //Development BASEURL
-  // 'http://uat-api.pooulp.eu'; //QAS BASEURL
+  // 'http://uat-api.pooulp.eu'; //UAT BASEURL
   // 'pooulp.eu'; //Production BASEURL
 
   static final Map<Endpoint, String> paths = {
@@ -27,5 +28,6 @@ class API {
     Endpoint.registerNewUser: '/register',
     Endpoint.userInfo: '/users/me',
     Endpoint.studentInfo: '/users/me/student_profile',
+    Endpoint.feed: '/offers',
   };
 }

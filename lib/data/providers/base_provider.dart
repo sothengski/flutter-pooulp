@@ -19,10 +19,11 @@ class BaseProvider extends GetConnect {
     httpClient.timeout = const Duration(seconds: 45);
 
     httpClient.addResponseModifier((request, response) async {
-      if ('${request.url}' !=
+      if ('${request.url}' ==
               '${httpClient.baseUrl}${API.paths[Endpoint.signIn]}' ||
-          '${request.url}' !=
+          '${request.url}' ==
               '${httpClient.baseUrl}${API.paths[Endpoint.registerNewUser]}') {
+      } else {
         if (response.statusCode == 401) {
           Get.defaultDialog(
             barrierDismissible: false,

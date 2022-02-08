@@ -18,6 +18,10 @@ class HomeBinding implements Bindings {
       () => UserInfoProvider(),
     );
 
+    Get.lazyPut<FeedProvider>(
+      () => FeedProvider(),
+    );
+
     Get.lazyPut<FeedController>(
       () => FeedController(),
     );

@@ -24,6 +24,10 @@ String dateFormatSlashYYYYMMDD({DateTime? date}) {
   return date == null ? "" : DateFormat('yyyy/MM/dd').format(date);
 }
 
+String dateFormatSlashDDMMYYYY({DateTime? date}) {
+  return date == null ? "" : DateFormat('dd/MM/yyyy').format(date);
+}
+
 String dateFormatToDayAsia(DateTime date) {
   return DateFormat('EEEE dd-MMMM-yyyy ').format(date);
 }

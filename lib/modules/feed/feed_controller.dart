@@ -8,7 +8,8 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
   RxList<FeedModel> feedListRepsonse = <FeedModel>[].obs;
   RxList<FeedModel> feedFilterList = <FeedModel>[].obs;
 
-  late FieldModel? typeSelected;
+  final FieldModel allType = FieldModel(label: 'All');
+  FieldModel? typeSelected;
   List<FieldModel> listFilterTypes = [];
   Set<String?> setOfListTypes = {};
 
@@ -18,7 +19,7 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
     await getFeedsDataState(refresh: true)
         // .then((value) => isProcessingStudentInfoRepsonse.value = true)
         ;
-    typeSelected = FieldModel(label: '');
+    // typeSelected = allType;
   }
 
   Future<void> getFeedsDataState({bool? refresh}) async {
@@ -52,7 +53,7 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
     List<FeedModel> tempListFeed;
     feedFilterList.clear();
 
-    if (type! == FieldModel(label: '')) {
+    if (type! == allType) {
       tempListFeed = feedList!;
     } else {
       tempListFeed = feedList!
@@ -63,31 +64,32 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
           )
           .toList();
     }
+
     feedFilterList.addAll(tempListFeed);
 
     return feedFilterList;
   }
 
   void selectType({FieldModel? type}) {
-    typeSelected = type;
+    FieldModel tempType = allType;
+    if (typeSelected != type) {
+      tempType = type!;
+    }
+    typeSelected = tempType;
     filterFeedlist(
       feedList: feedListRepsonse,
-      type: type,
+      type: tempType,
     );
   }
 
   void addTypesIntoSet({List<FeedModel>? jobOfferTrxData}) {
     listFilterTypes.clear();
     setOfListTypes.clear();
-    // listFilterTypes.add(
-    //   FieldModel(
-    //     id: 0,
-    //     // totalCategory: FeedList.length,
-    //     label: 'All',
-    //     type: 'All',
-    //   ),
-    // );
-    //typeSelected = listFilterTypes[0];
+    listFilterTypes.add(
+      allType,
+    );
+    selectType(type: listFilterTypes[0]);
+    // typeSelected = listFilterTypes[0];
 
     for (var i = 0; i < jobOfferTrxData!.length; i++) {
       for (var j = 0; j < jobOfferTrxData[i].jobOffer!.types!.length; j++) {
@@ -105,7 +107,7 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
     }
     filterFeedlist(
       feedList: jobOfferTrxData,
-      type: FieldModel(label: ''),
+      type: allType,
     );
   }
 }

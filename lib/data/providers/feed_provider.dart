@@ -3,30 +3,28 @@ import 'dart:convert';
 import '../data.dart';
 
 abstract class IFeedProvider {
-  Future<List<FeedModel>> getFeedOffers();
+  Future<List<JobOfferModel>> getFeedOffers();
 }
 
 class FeedProvider extends BaseProvider implements IFeedProvider {
   @override
-  Future<List<FeedModel>> getFeedOffers() async {
+  Future<List<JobOfferModel>> getFeedOffers() async {
     try {
       final dataResponse = await get(
         API.paths[Endpoint.feed].toString(),
       );
-      final List<FeedModel> feedOfferList = <FeedModel>[];
+      final List<JobOfferModel> feedOfferList = <JobOfferModel>[];
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
       } else {
         final apiResponse = json.decode(dataResponse.bodyString.toString());
         apiResponse.forEach(
           (e) {
-            feedOfferList.add(FeedModel.fromJson(e as Map<String, dynamic>));
+            feedOfferList
+                .add(JobOfferModel.fromJson(e as Map<String, dynamic>));
           },
         );
-        //sort
-        // dateTimeSortingOrderTrx(list: orderTrxList);
         return feedOfferList;
-        // return orderTrxListFromJson(response.body['data'].toString());
       }
     } catch (e) {
       return Future.error(e.toString());

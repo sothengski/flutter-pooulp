@@ -58,7 +58,10 @@ class JobOfferModel {
       : '$numberOfWorkingHourPerWeek hrs/week';
 
   String? get companyNameAndLocation =>
-      '${enterprise!.name} (${enterprise!.addressCity}, ${enterprise!.addressCountry})';
+      '${enterprise!.name} ($companyLocation)';
+
+  String? get companyLocation =>
+      '${enterprise!.addressCity}, ${enterprise!.addressCountry}';
 
   String? get workPlaceType => telecommuting == 1 ? 'Remote' : 'On-Site';
 
@@ -79,22 +82,25 @@ class JobOfferModel {
         studySubject: json['study_subject'] as String?,
         description: json['description'] as String?,
         isDraft: json['is_draft'] as bool?,
-        dateOfferStart: json['date_offer_start'] != null
-            ? DateTime.parse(
-                json['date_offer_start'].toString(),
-              )
-            : null,
-        dateOfferEnd: json['date_offer_end'] != null
-            ? DateTime.parse(
-                json['date_offer_end'].toString(),
-              )
-            : null,
-        dateJobStart: json['date_job_start'] != null
-            ? DateTime.parse(
-                json['date_job_start'].toString(),
-              )
-            : null,
-        dateJobEnd: json['date_job_end'] != null
+        dateOfferStart:
+            json['date_offer_start'] != null && json['date_offer_start'] != ''
+                ? DateTime.parse(
+                    json['date_offer_start'].toString(),
+                  )
+                : null,
+        dateOfferEnd:
+            json['date_offer_end'] != null && json['date_offer_end'] != ''
+                ? DateTime.parse(
+                    json['date_offer_end'].toString(),
+                  )
+                : null,
+        dateJobStart:
+            json['date_job_start'] != null && json['date_job_start'] != ''
+                ? DateTime.parse(
+                    json['date_job_start'].toString(),
+                  )
+                : null,
+        dateJobEnd: json['date_job_end'] != null && json['date_job_end'] != ''
             ? DateTime.parse(
                 json['date_job_end'].toString(),
               )

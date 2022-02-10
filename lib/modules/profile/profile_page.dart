@@ -52,6 +52,7 @@ class ProfilePage extends GetView<ProfileController> {
         //   ],
         // ),
         body: RefreshIndicator(
+          color: ColorsManager.primary,
           onRefresh: () => controller.onRefresh(),
           child: SingleChildScrollView(
             // physics: const ClampingScrollPhysics(),

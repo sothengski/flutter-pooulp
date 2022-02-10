@@ -13,8 +13,8 @@ class OfferTypesListComponent extends StatelessWidget {
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.only(
         top: AppSize.s5,
-        left: AppSize.s8,
-        right: AppSize.s8,
+        // left: AppSize.s8,
+        // right: AppSize.s8,
         // bottom: AppSize.s5,
       ),
       // padding: const EdgeInsets.symmetric(

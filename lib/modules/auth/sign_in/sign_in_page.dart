@@ -27,7 +27,8 @@ class SignInPage extends GetView<SignInController> {
       ),
       body: GestureDetector(
         onTap: () => unFocusKeyBoard(context),
-        child: SizedBox(
+        child: Container(
+          alignment: Alignment.topCenter,
           height: getHeight,
           width: getWidth,
           child: SingleChildScrollView(

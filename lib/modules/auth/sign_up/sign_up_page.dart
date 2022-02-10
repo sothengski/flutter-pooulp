@@ -17,7 +17,8 @@ class SignUpPage extends StatelessWidget {
       ),
       body: GestureDetector(
         onTap: () => unFocusKeyBoard(context),
-        child: SizedBox(
+        child: Container(
+          alignment: Alignment.topCenter,
           height: getHeight,
           width: getWidth,
           child: Column(

@@ -11,11 +11,16 @@ class OfferTypesListComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      margin: const EdgeInsets.only(top: AppSize.s5),
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSize.s8,
-        vertical: AppSize.s8,
+      padding: const EdgeInsets.only(
+        top: AppSize.s5,
+        left: AppSize.s8,
+        right: AppSize.s8,
+        // bottom: AppSize.s5,
       ),
+      // padding: const EdgeInsets.symmetric(
+      //   horizontal: AppSize.s8,
+      //   // vertical: AppSize.s8,
+      // ),
       child: ListView.builder(
         shrinkWrap: true,
         itemCount: controller.listFilterTypes.length,
@@ -25,7 +30,7 @@ class OfferTypesListComponent extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.symmetric(
               horizontal: AppSize.s4,
-              // vertical: AppSize.s8,
+              // vertical: AppSize.s4,
             ),
             child: FilterChip(
               // padding: EdgeInsets.zero,

@@ -6,7 +6,6 @@ class ColorsManager {
   static const primary75 = Color(0xFFFF9E8B); //primaryColor with 75% Opacity
   static const primary50 = Color(0xFFFFBFB3); //primaryColor with 50% Opacity
   static const primary25 = Color(0xFFFFDFD8); //primaryColor with 25% Opacity
-
   static const primaryBlue = Color(0xFF364454);
 
   static const white = Color(0xFFFFFFFF);
@@ -22,6 +21,7 @@ class ColorsManager {
   static const grey800 = Color(0xFF424242);
   static const grey850 = Color(0xFF303030);
   static const grey900 = Color(0xFF212121);
+  static const greyBlue = Color(0xFFEBEEF0);
 
   static const red200 = Color(0xFFEF9A9A);
   static const red = Colors.red;

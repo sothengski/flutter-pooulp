@@ -30,4 +30,5 @@ class AssetsManager {
       '$svgPath/pooulp-logo-white-landscape.svg';
   static const String appLogoSymbolSvg = '$svgPath/pooulp-logo-primary.svg';
   // static const String appLogoTextSvg = '$svgPath/app-logo-text.png';
+  static const String emptyDataIcon = '$iconPath/empty-data.png';
 }

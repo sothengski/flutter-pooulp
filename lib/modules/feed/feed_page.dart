@@ -13,7 +13,8 @@ class FeedPage extends GetView<FeedController> {
       appBar: CustomAppBar(
         title: 'Feed Page',
       ),
-      body: Center(
+      body: RefreshIndicator(
+        onRefresh: () => controller.onRefresh(),
         child: controller.obx(
           (state) => Obx(
             () => controller.feedFilterList.isNotEmpty
@@ -30,23 +31,19 @@ class FeedPage extends GetView<FeedController> {
                       ),
                     ],
                   )
-                : const Center(
-                    child: CustomTextWidget(
-                      text: 'No feed results found.',
+                : Center(
+                    child: StateHandlerWidget(
+                      imgPath: AssetsManager.emptyDataIcon,
+                      headerText: 'No feed results found.',
+                      bodyText:
+                          "Make sure you complete your profile information.",
+                      buttonText: 'Try again',
+                      onPressedFunctionCall: controller.onRefresh,
                     ),
-                    //  StateHandlerWidget(
-                    //   imgPath: emptyDataIcon,
-                    //   headerText: "No customer results found.",
-                    //   bodyText: "You don't have customers yet!",
-                    //   buttonText: "Try again",
-                    //   onPressedFunctionCall: controller.onRefresh,
-                    // ),
                   ),
           ),
           onLoading: const Center(
-            child: CustomTextWidget(
-              text: 'Loading...',
-            ),
+            child: ItemListShimmerLoadingWidget(),
           ),
           onError: (error) => Center(
             child: Text(

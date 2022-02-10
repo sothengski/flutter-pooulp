@@ -21,6 +21,8 @@ class FeedListComponent extends StatelessWidget {
         itemBuilder: (_, index) {
           return FeedItemCard(
             feedItem: controller.feedFilterList[index],
+            index: index,
+            // feedController: controller,
           );
         },
       ),

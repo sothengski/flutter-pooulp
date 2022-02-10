@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
+import '../../modules.dart';
 
 class FeedItemCard extends StatelessWidget {
+  final feedController = Get.find<FeedController>();
+
   final FeedModel? feedItem;
-  const FeedItemCard({
+  final int? index;
+  //final FeedController? feedController;
+  FeedItemCard({
     Key? key,
     this.feedItem,
+    this.index,
+    //this.feedController,
   }) : super(key: key);
 
   @override
@@ -15,7 +23,7 @@ class FeedItemCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSize.s12,
-        vertical: AppSize.s5,
+        vertical: AppSize.s6,
       ),
       child: MaterialButton(
         padding: EdgeInsets.zero,
@@ -82,7 +90,7 @@ class FeedItemCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(
                       left: AppSize.s4,
-                      bottom: AppSize.s10,
+                      bottom: AppSize.s12,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,69 +214,59 @@ class FeedItemCard extends StatelessWidget {
               ],
             ),
             const Divider(
-              height: AppSize.s10,
+              height: AppSize.s1,
               thickness: AppSize.s1,
             ),
-            Padding(
-              padding: const EdgeInsets.all(AppSize.s8),
-              child: Row(
+            Obx(
+              () => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Row(
-                    children: const [
-                      Icon(
-                        Icons.thumb_up_alt_outlined,
-                        color: ColorsManager.primaryBlue,
-                        size: AppSize.s20,
-                      ),
-                      // Icon(
-                      //   Icons.thumb_up_alt,
-                      //   color: ColorsManager.primaryBlue,
-                      //   size: AppSize.s20,
-                      // ),
-                      CustomTextWidget(
-                        text: 'Apply',
-                        marginLeft: AppSize.s4,
-                      ),
-                    ],
+                  Expanded(
+                    child: OutlineIconButtonWidget(
+                      buttonTitle: 'Apply',
+                      iconData: Icons.thumb_up_alt_outlined,
+                      iconDataOnClick: Icons.thumb_up,
+                      iconColorOnClick: ColorsManager.green,
+                      buttonState: feedController.applyButtonStateList[index!],
+                      onPressed: () {
+                        feedController.applyButtonStateList[index!] =
+                            feedController.jobOfferOnClickBoolSwitching(
+                          boolValue:
+                              feedController.applyButtonStateList[index!],
+                        );
+                      },
+                    ),
                   ),
-                  Row(
-                    children: const [
-                      Icon(
-                        Icons.turned_in_not_outlined,
-                        color: ColorsManager.primaryBlue,
-                        size: AppSize.s20,
-                      ),
-                      // Icon(
-                      //   Icons.thumb_up_alt,
-                      //   color: ColorsManager.primaryBlue,
-                      //   size: AppSize.s16,
-                      // ),
-                      CustomTextWidget(
-                        text: 'Save',
-                        marginLeft: AppSize.s4,
-                      ),
-                    ],
+                  Expanded(
+                    child: OutlineIconButtonWidget(
+                      buttonTitle: 'Save',
+                      iconData: Icons.turned_in_not_outlined,
+                      iconDataOnClick: Icons.turned_in,
+                      iconColorOnClick: ColorsManager.blue,
+                      buttonState: feedController.savedButtonStateList[index!],
+                      onPressed: () {
+                        feedController.savedButtonStateList[index!] =
+                            feedController.jobOfferOnClickBoolSwitching(
+                          boolValue:
+                              feedController.savedButtonStateList[index!],
+                        );
+                      },
+                    ),
                   ),
-                  Row(
-                    children: const [
-                      Icon(
-                        Icons.visibility_off_outlined,
-                        // color: ColorsManager.red,
-                        color: ColorsManager.primaryBlue,
-                        size: AppSize.s16,
-                      ),
-                      // Icon(
-                      //   Icons.visibility_off_outlined,
-                      //   color: ColorsManager.primaryBlue,
-                      //   size: AppSize.s16,
-                      // ),
-                      CustomTextWidget(
-                        text: 'Hide',
-                        marginLeft: AppSize.s4,
-                        // color: ColorsManager.red,
-                      ),
-                    ],
+                  Expanded(
+                    child: OutlineIconButtonWidget(
+                      buttonTitle: 'Hide',
+                      iconData: Icons.visibility_off_outlined,
+                      iconDataOnClick: Icons.visibility_outlined,
+                      iconColorOnClick: ColorsManager.red,
+                      buttonState: feedController.hideButtonStateList[index!],
+                      onPressed: () {
+                        feedController.hideButtonStateList[index!] =
+                            feedController.jobOfferOnClickBoolSwitching(
+                          boolValue: feedController.hideButtonStateList[index!],
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

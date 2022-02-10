@@ -13,6 +13,13 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
   List<FieldModel> listFilterTypes = [];
   Set<String?> setOfListTypes = {};
 
+  // RxBool applyButtonState = false.obs;
+  // RxBool savedButtonState = false.obs;
+  // RxBool hideButtonState = false.obs;
+  RxList<bool> applyButtonStateList = <bool>[].obs;
+  RxList<bool> savedButtonStateList = <bool>[].obs;
+  RxList<bool> hideButtonStateList = <bool>[].obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -20,6 +27,17 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
         // .then((value) => isProcessingStudentInfoRepsonse.value = true)
         ;
     // typeSelected = allType;
+  }
+
+  bool jobOfferOnClickBoolSwitching({bool? boolValue}) {
+    return !boolValue!;
+  }
+
+  Future<void> onRefresh() async {
+    // monitor network fetch
+    await getFeedsDataState(refresh: true);
+    await Future.delayed(const Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
   }
 
   Future<void> getFeedsDataState({bool? refresh}) async {
@@ -92,6 +110,9 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
     // typeSelected = listFilterTypes[0];
 
     for (var i = 0; i < jobOfferTrxData!.length; i++) {
+      applyButtonStateList.add(false);
+      savedButtonStateList.add(false);
+      hideButtonStateList.add(false);
       for (var j = 0; j < jobOfferTrxData[i].jobOffer!.types!.length; j++) {
         if (setOfListTypes.add(jobOfferTrxData[i].jobOffer!.types![j].label)) {
           listFilterTypes.add(

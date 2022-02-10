@@ -8,14 +8,12 @@ import '../../modules.dart';
 class FeedItemCard extends StatelessWidget {
   final feedController = Get.find<FeedController>();
 
-  final FeedModel? feedItem;
+  final JobOfferModel? feedItem;
   final int? index;
-  //final FeedController? feedController;
   FeedItemCard({
     Key? key,
     this.feedItem,
     this.index,
-    //this.feedController,
   }) : super(key: key);
 
   @override
@@ -27,17 +25,35 @@ class FeedItemCard extends StatelessWidget {
       ),
       child: MaterialButton(
         padding: EdgeInsets.zero,
-        elevation: AppSize.s4,
+        elevation: AppSize.s2,
         color: ColorsManager.white,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s10),
         ),
         onPressed: () {
-          // Get.toNamed(
-          //   Routes.routeOutletDetail,
-          //   arguments: outlet,
-          // );
+          showGeneralDialog(
+            barrierDismissible: false,
+            context: context,
+            barrierLabel:
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierColor: Colors.black45,
+            transitionDuration: const Duration(milliseconds: 200),
+            pageBuilder: (
+              BuildContext buildContext,
+              Animation animation,
+              Animation secondaryAnimation,
+            ) =>
+                WillPopScope(
+              onWillPop: () {
+                Get.back();
+                return Future.value(true);
+              },
+              child: FeedItemDetailPage(
+                feedItemDetail: feedItem,
+              ),
+            ),
+          );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -57,7 +73,7 @@ class FeedItemCard extends StatelessWidget {
                 ),
                 child: CustomTextWidget(
                   textAlign: TextAlign.center,
-                  text: '${feedItem!.jobOffer!.workPlaceType}',
+                  text: '${feedItem!.workPlaceType}',
                   color: ColorsManager.white,
                   fontWeight: FontWeightManager.regular,
                   fontSize: AppSize.s12,
@@ -69,18 +85,16 @@ class FeedItemCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Flexible(
+                Flexible(
                   flex: 15,
                   child: Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       // top: AppSize.s20,
                       left: AppSize.s5,
                     ),
                     child: CustomBoxWidget(
-                      insideObj: Icon(
-                        Icons.business,
-                        color: ColorsManager.primary75,
-                        size: AppSize.s28,
+                      insideObj: CachedNetworkImgWidget(
+                        imgUrl: '${feedItem!.enterprise!.logoUrl}',
                       ),
                     ),
                   ),
@@ -96,7 +110,7 @@ class FeedItemCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextWidget(
-                          text: '${feedItem!.jobOffer!.title}',
+                          text: '${feedItem!.title}',
                           fontWeight: FontWeightManager.semiBold,
                           maxLine: 3,
                           // marginTop: 20.0,
@@ -116,8 +130,7 @@ class FeedItemCard extends StatelessWidget {
                               ),
                               Expanded(
                                 child: CustomTextWidget(
-                                  text:
-                                      '${feedItem!.jobOffer!.companyNameAndLocation}',
+                                  text: '${feedItem!.companyNameAndLocation}',
                                   fontSize: AppSize.s12,
                                   fontWeight: FontWeightManager.medium,
                                   color: ColorsManager.primary,
@@ -152,7 +165,7 @@ class FeedItemCard extends StatelessWidget {
                                 CustomTextWidget(
                                   marginLeft: AppSize.s4,
                                   text:
-                                      'Starting Date: ${feedItem!.jobOffer!.dateJobStartFormat}',
+                                      'Starting Date: ${feedItem!.dateJobStartFormat}',
                                   fontSize: AppSize.s12,
                                   fontWeight: FontWeightManager.regular,
                                   maxLine: 3,
@@ -176,9 +189,7 @@ class FeedItemCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        for (var i = 0;
-                            i < feedItem!.jobOffer!.types!.length;
-                            i++)
+                        for (var i = 0; i < feedItem!.types!.length; i++)
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               // horizontal: AppSize.s2,
@@ -198,8 +209,7 @@ class FeedItemCard extends StatelessWidget {
                                 ),
                                 child: CustomTextWidget(
                                   textAlign: TextAlign.center,
-                                  text:
-                                      '${feedItem!.jobOffer!.types![i].label}',
+                                  text: '${feedItem!.types![i].label}',
                                   fontWeight: FontWeightManager.regular,
                                   fontSize: AppSize.s10,
                                   // marginBottom: AppSize.s10,

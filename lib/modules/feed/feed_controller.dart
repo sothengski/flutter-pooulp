@@ -2,11 +2,12 @@ import 'package:get/get.dart';
 
 import '../../data/data.dart';
 
-class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
+class FeedController extends GetxController
+    with StateMixin<RxList<JobOfferModel>> {
   final feedProvider = Get.find<FeedProvider>();
 
-  RxList<FeedModel> feedListRepsonse = <FeedModel>[].obs;
-  RxList<FeedModel> feedFilterList = <FeedModel>[].obs;
+  RxList<JobOfferModel> feedListRepsonse = <JobOfferModel>[].obs;
+  RxList<JobOfferModel> feedFilterList = <JobOfferModel>[].obs;
 
   final FieldModel allType = FieldModel(label: 'All');
   FieldModel? typeSelected;
@@ -55,7 +56,7 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
     );
   }
 
-  Future<RxList<FeedModel>> getfeedListResponseProvider({
+  Future<RxList<JobOfferModel>> getfeedListResponseProvider({
     bool? refresh = false,
   }) async {
     feedListRepsonse.clear();
@@ -64,11 +65,11 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
     return feedListRepsonse;
   }
 
-  List<FeedModel> filterFeedlist({
-    List<FeedModel>? feedList,
+  List<JobOfferModel> filterFeedlist({
+    List<JobOfferModel>? feedList,
     FieldModel? type,
   }) {
-    List<FeedModel> tempListFeed;
+    List<JobOfferModel> tempListFeed;
     feedFilterList.clear();
 
     if (type! == allType) {
@@ -76,13 +77,12 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
     } else {
       tempListFeed = feedList!
           .where(
-            (feed) => feed.jobOffer!.types!.any(
+            (feed) => feed.types!.any(
               (element) => element.label!.contains(type.label.toString()),
             ),
           )
           .toList();
     }
-
     feedFilterList.addAll(tempListFeed);
 
     return feedFilterList;
@@ -100,7 +100,7 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
     );
   }
 
-  void addTypesIntoSet({List<FeedModel>? jobOfferTrxData}) {
+  void addTypesIntoSet({List<JobOfferModel>? jobOfferTrxData}) {
     listFilterTypes.clear();
     setOfListTypes.clear();
     listFilterTypes.add(
@@ -113,14 +113,14 @@ class FeedController extends GetxController with StateMixin<RxList<FeedModel>> {
       applyButtonStateList.add(false);
       savedButtonStateList.add(false);
       hideButtonStateList.add(false);
-      for (var j = 0; j < jobOfferTrxData[i].jobOffer!.types!.length; j++) {
-        if (setOfListTypes.add(jobOfferTrxData[i].jobOffer!.types![j].label)) {
+      for (var j = 0; j < jobOfferTrxData[i].types!.length; j++) {
+        if (setOfListTypes.add(jobOfferTrxData[i].types![j].label)) {
           listFilterTypes.add(
             FieldModel(
-              id: jobOfferTrxData[i].jobOffer!.types![j].id,
+              id: jobOfferTrxData[i].types![j].id,
               // totalCategory: outletList.length,
-              label: jobOfferTrxData[i].jobOffer!.types![j].label,
-              type: jobOfferTrxData[i].jobOffer!.types![j].type,
+              label: jobOfferTrxData[i].types![j].label,
+              type: jobOfferTrxData[i].types![j].type,
             ),
           );
         }

@@ -81,6 +81,7 @@ class CustomListTileWidget extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(
               width: 8.0,

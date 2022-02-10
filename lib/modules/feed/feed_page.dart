@@ -10,10 +10,12 @@ class FeedPage extends GetView<FeedController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: ColorsManager.white,
       appBar: CustomAppBar(
         title: 'Feed Page',
       ),
       body: RefreshIndicator(
+        color: ColorsManager.primary,
         onRefresh: () => controller.onRefresh(),
         child: controller.obx(
           (state) => Obx(
@@ -46,8 +48,13 @@ class FeedPage extends GetView<FeedController> {
             child: ItemListShimmerLoadingWidget(),
           ),
           onError: (error) => Center(
-            child: Text(
-              error.toString(),
+            child: StateHandlerWidget(
+              imgPath: AssetsManager.emptyDataIcon,
+              headerText: 'Sorry! Something went wrong',
+              bodyText:
+                  "Make sure that Wi-Fi or mobile data is turned on and try again..",
+              buttonText: 'Try again',
+              onPressedFunctionCall: controller.onRefresh,
             ),
           ),
         ),

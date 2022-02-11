@@ -245,7 +245,9 @@ class ProfilePage extends GetView<ProfileController> {
                                                           '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
                                                       // bottomPadding: 8.0,
                                                       leftWidget:
-                                                          const CustomBoxWidget(),
+                                                          const CustomBoxWidget(
+                                                        size: 40,
+                                                      ),
                                                       // leftWidget: const CustomBoxWidget(
                                                       //   insideObj: Icon(
                                                       //     Icons.school,
@@ -327,6 +329,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                             // bottomPadding: 8.0,
                                                             leftWidget:
                                                                 const CustomBoxWidget(
+                                                              size: 40,
                                                               insideObj: Icon(
                                                                 Icons.work,
                                                                 color: ColorsManager
@@ -408,6 +411,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                             // bottomPadding: 8.0,
                                                             leftWidget:
                                                                 const CustomBoxWidget(
+                                                              size: 40,
                                                               insideObj: Icon(
                                                                 Icons.work,
                                                                 color: ColorsManager
@@ -547,7 +551,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                                       Type.hardSkill
                                                                   ? CustomTextWidget(
                                                                       text:
-                                                                          '• ${e.label} - ${e.category}',
+                                                                          '${e.displayLabelAndCategory}',
                                                                       marginBottom:
                                                                           5.0,
                                                                     )
@@ -614,7 +618,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                             (e) =>
                                                                 CustomTextWidget(
                                                               text:
-                                                                  '• ${e.label} - Level ${e.level}',
+                                                                  '${e.displayLabelAndLevel}',
                                                               marginBottom: 5.0,
                                                             ),
                                                           )
@@ -669,6 +673,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                       // bottomPadding: 8.0,
                                                       leftWidget:
                                                           const CustomBoxWidget(
+                                                        size: 40,
                                                         insideObj: Icon(
                                                           Icons.card_membership,
                                                           color: ColorsManager
@@ -750,6 +755,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                       // bottomPadding: 8.0,
                                                       leftWidget:
                                                           const CustomBoxWidget(
+                                                        size: 40,
                                                         insideObj: Icon(
                                                           Icons.emoji_events,
                                                           color: ColorsManager

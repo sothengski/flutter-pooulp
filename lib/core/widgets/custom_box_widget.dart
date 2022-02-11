@@ -15,7 +15,7 @@ class CustomBoxWidget extends StatelessWidget {
   const CustomBoxWidget({
     this.insideObj,
     this.backgroundColor = ColorsManager.grey100,
-    this.size = 40.0,
+    this.size,
     this.borderRadius = 8.0,
     this.objPadding = 6.0,
     this.isCircle = false,

@@ -93,6 +93,7 @@ class FeedItemCard extends StatelessWidget {
                       left: AppSize.s5,
                     ),
                     child: CustomBoxWidget(
+                      size: 40,
                       insideObj: CachedNetworkImgWidget(
                         imgUrl: '${feedItem!.enterprise!.logoUrl}',
                       ),

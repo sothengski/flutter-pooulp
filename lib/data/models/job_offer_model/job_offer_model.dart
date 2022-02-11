@@ -53,8 +53,9 @@ class JobOfferModel {
     this.skills,
     this.enterprise,
   });
+
   String? get numberOfWorkPerWeek => numberOfWorkingHourPerWeek == null
-      ? '- hrs/week'
+      ? 'N/A'
       : '$numberOfWorkingHourPerWeek hrs/week';
 
   String? get companyNameAndLocation =>
@@ -65,8 +66,10 @@ class JobOfferModel {
 
   String? get workPlaceType => telecommuting == 1 ? 'Remote' : 'On-Site';
 
-  String? get dateActiveJobStartFormat =>
+  String? get dateOfferStartFormat =>
       dateFormatSlashDDMMYYYY(date: dateOfferStart);
+
+  String? get dateOfferEndFormat => dateFormatSlashDDMMYYYY(date: dateOfferEnd);
 
   String? get dateJobStartFormat => dateFormatSlashDDMMYYYY(date: dateJobStart);
   String? get dateJobEndFormat => dateFormatSlashDDMMYYYY(date: dateJobEnd);

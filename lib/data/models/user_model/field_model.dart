@@ -19,6 +19,11 @@ class FieldModel {
     this.videoUrl,
   });
 
+  String? get displayLevel => level == null ? '' : 'Level $level';
+
+  String? get displayLabelAndLevel =>
+      level == null ? '• $label' : '• $label - Level $level';
+
   factory FieldModel.fromRawJson(String str) => FieldModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
       );

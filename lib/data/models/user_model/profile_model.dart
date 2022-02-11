@@ -44,6 +44,7 @@ class ProfileModel {
 
   // final Shool school; //offer in feed endpoint
   final List<FieldModel>? spokenLanguages; //offer in feed endpoint
+  final List<FieldModel>? fields;
   final String? logoUrl; //offer in feed endpoint
   final List<UserModel>? managers; //offer in feed endpoint
   // final List<int>? spokenLanguagesList;
@@ -88,6 +89,7 @@ class ProfileModel {
     this.uuid,
     // this.school,
     this.spokenLanguages,
+    this.fields,
     this.logoUrl,
     this.managers,
   });
@@ -163,6 +165,15 @@ class ProfileModel {
                       ),
                     )
                     .toList(),
+        fields: json['fields'] == null || json['fields'] == []
+            ? []
+            : (json['fields'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
         logoUrl: json['logo_url'] as String?,
         managers: json['managers'] == [] || json['managers'] == null
             ? []
@@ -216,6 +227,9 @@ class ProfileModel {
         'spoken_languages': spokenLanguages == null || spokenLanguages == []
             ? null
             : List<dynamic>.from(spokenLanguages!.map((x) => x.toJson())),
+        'fields': fields != null || fields != []
+            ? List<dynamic>.from(fields!.map((x) => x.toJson()))
+            : null,
         'logoUrl': logoUrl,
         'managers': managers == null || managers == []
             ? null
@@ -263,6 +277,7 @@ class ProfileModel {
       statusCode: $statusCode, 
       uuid: $uuid,
       spokenLanguages: $spokenLanguages,
+       fields: $fields,
       logoUrl: $logoUrl,
       managers: $managers,
     )''';

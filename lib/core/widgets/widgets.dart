@@ -18,6 +18,7 @@ export 'dropdown_picker.dart';
 export 'handler_widget.dart';
 export 'item_list_shimmer_loading_widget.dart';
 export 'loading_widget.dart';
+export 'outline_container_widget.dart';
 export 'outline_icon_button_widget.dart';
 export 'search_box.dart';
 export 'shimmer_widget.dart';

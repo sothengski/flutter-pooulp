@@ -94,7 +94,7 @@ class CustomListTileWidget extends StatelessWidget {
             else
               Container(),
             const SizedBox(
-              width: 8.0,
+              width: 10.0,
             ),
             Flexible(
               flex: 90,

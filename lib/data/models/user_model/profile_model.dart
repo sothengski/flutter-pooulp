@@ -227,9 +227,9 @@ class ProfileModel {
         'spoken_languages': spokenLanguages == null || spokenLanguages == []
             ? null
             : List<dynamic>.from(spokenLanguages!.map((x) => x.toJson())),
-        'fields': fields != null || fields != []
-            ? List<dynamic>.from(fields!.map((x) => x.toJson()))
-            : null,
+        'fields': fields == null || fields == []
+            ? null
+            : List<dynamic>.from(fields!.map((x) => x.toJson())),
         'logoUrl': logoUrl,
         'managers': managers == null || managers == []
             ? null

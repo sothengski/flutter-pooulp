@@ -155,11 +155,11 @@ class JobOfferModel {
                   ),
                 )
                 .toList(),
-        enterprise: json['enterprise'] != null
-            ? ProfileModel.fromJson(
+        enterprise: json['enterprise'] == null
+            ? null
+            : ProfileModel.fromJson(
                 json['enterprise'] as Map<String, dynamic>,
-              )
-            : null,
+              ),
       );
 
   Map<String, dynamic> toJson() => {

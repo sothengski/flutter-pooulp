@@ -65,7 +65,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
               padding: const EdgeInsets.only(
                 // left: AppSize.s16,
                 // right: AppSize.s16,
-                bottom: AppSize.s16,
+                bottom: AppSize.s4,
               ),
               decoration: const BoxDecoration(
                 color: ColorsManager.white,
@@ -97,13 +97,15 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                       ),
                       CustomListTileWidget(
                         isDivider: false,
+                        leftFlex: 15,
                         leftRightPadding: AppSize.s12,
                         text1: '${widget.feedItemDetail!.enterprise!.name}',
                         text1Color: ColorsManager.primary,
+                        text1FontSize: AppSize.s16,
                         text2:
                             '${widget.feedItemDetail!.companyLocation} (${widget.feedItemDetail!.workPlaceType})',
                         leftWidget: CustomBoxWidget(
-                          size: 40,
+                          size: 50,
                           insideObj: CachedNetworkImgWidget(
                             imgUrl:
                                 '${widget.feedItemDetail!.enterprise!.logoUrl}',
@@ -111,6 +113,17 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         ),
                       ),
                     ],
+                  ),
+                  CustomTextWidget(
+                    text:
+                        'Posted: ${widget.feedItemDetail!.dateOfferStartFormat}',
+                    // textAlign: TextAlign.center,
+                    fontSize: AppSize.s12,
+                    fontWeight: FontWeight.w500,
+                    color: ColorsManager.red,
+                    marginLeft: AppSize.s20,
+                    marginTop: AppSize.s10,
+                    marginBottom: AppSize.s10,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -160,24 +173,29 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //TODO::: will update the posted to time ago
-                        Center(
-                          child: CustomTextWidget(
-                            text:
-                                'Posted: ${widget.feedItemDetail!.dateOfferStartFormat}',
-                            textAlign: TextAlign.center,
-                            fontWeight: FontWeight.w500,
-                            color: ColorsManager.red,
-                            marginTop: AppSize.s10,
-                            marginBottom: AppSize.s10,
-                          ),
+                        // Center(
+                        //   child: CustomTextWidget(
+                        //     text:
+                        //         'Posted: ${widget.feedItemDetail!.dateOfferStartFormat}',
+                        //     textAlign: TextAlign.center,
+                        //     fontWeight: FontWeight.w500,
+                        //     color: ColorsManager.red,
+                        //     marginTop: AppSize.s10,
+                        //     marginBottom: AppSize.s10,
+                        //   ),
+                        // ),
+                        const SizedBox(
+                          height: AppSize.s10,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ///===== Working Period Component =====//
                             Expanded(
+                              flex: 55,
                               child: OutlineContainerWidget(
                                 title: 'Working Period',
+                                titleColor: ColorsManager.primaryBlue,
                                 isDivider: false,
                                 childWidget: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,8 +243,10 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
 
                             ///===== Working Duration Component =====//
                             Expanded(
+                              flex: 45,
                               child: OutlineContainerWidget(
                                 title: 'Working Duration',
+                                titleColor: ColorsManager.primaryBlue,
                                 isDivider: false,
                                 childWidget: CustomBoxWidget(
                                   insideObj: CustomTextWidget(
@@ -258,6 +278,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         if (widget.feedItemDetail!.types!.isNotEmpty)
                           OutlineContainerWidget(
                             title: 'Types',
+                            titleColor: ColorsManager.primaryBlue,
                             childWidget: widget.feedItemDetail!.types != []
                                 ? Wrap(
                                     children: [
@@ -268,7 +289,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                           i++)
                                         Padding(
                                           padding: const EdgeInsets.only(
-                                            right: AppSize.s4,
+                                            right: AppSize.s8,
                                             bottom: AppSize.s4,
                                           ),
                                           child: CustomBoxWidget(
@@ -294,6 +315,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         if (widget.feedItemDetail!.fields!.isNotEmpty)
                           OutlineContainerWidget(
                             title: 'Fields',
+                            titleColor: ColorsManager.primaryBlue,
                             childWidget: widget.feedItemDetail!.fields != []
                                 ? Wrap(
                                     children: [
@@ -304,7 +326,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                           i++)
                                         Padding(
                                           padding: const EdgeInsets.only(
-                                            right: AppSize.s4,
+                                            right: AppSize.s8,
                                             bottom: AppSize.s4,
                                           ),
                                           child: CustomBoxWidget(
@@ -329,10 +351,11 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         ///===== Office Address Component =====//
                         OutlineContainerWidget(
                           title: 'Office Address',
+                          titleColor: ColorsManager.primaryBlue,
                           childWidget: CustomTextWidget(
-                            textAlign: TextAlign.center,
                             text: '${widget.feedItemDetail!.addressStreet}',
                             fontWeight: FontWeightManager.regular,
+                            maxLine: 3,
                           ),
                         ),
                         //===== Office Address Component =====//
@@ -340,10 +363,11 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         ///===== Job Description Component =====//
                         OutlineContainerWidget(
                           title: 'Job Description',
+                          titleColor: ColorsManager.primaryBlue,
                           childWidget: CustomTextWidget(
                             text: '${widget.feedItemDetail!.description}',
                             fontWeight: FontWeightManager.regular,
-                            maxLine: 20,
+                            maxLine: 200,
                           ),
                         ),
                         //===== Job Description Component =====//
@@ -352,6 +376,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         if (widget.feedItemDetail!.spokenLanguages!.isNotEmpty)
                           OutlineContainerWidget(
                             title: 'Languages',
+                            titleColor: ColorsManager.primaryBlue,
                             childWidget:
                                 widget.feedItemDetail!.spokenLanguages != []
                                     ? Wrap(
@@ -373,7 +398,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                                     '${widget.feedItemDetail!.spokenLanguages![i].displayLabelAndLevel}',
                                                 fontWeight:
                                                     FontWeightManager.regular,
-                                                fontSize: AppSize.s12,
+                                                // fontSize: AppSize.s12,
                                               ),
                                             ),
                                         ],
@@ -388,6 +413,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         if (widget.feedItemDetail!.skills!.isNotEmpty)
                           OutlineContainerWidget(
                             title: 'Skills',
+                            titleColor: ColorsManager.primaryBlue,
                             childWidget: widget.feedItemDetail!.skills != []
                                 ? Wrap(
                                     direction: Axis.vertical,
@@ -408,7 +434,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                                 '${widget.feedItemDetail!.skills![i].displayLabelAndLevel}',
                                             fontWeight:
                                                 FontWeightManager.regular,
-                                            fontSize: AppSize.s12,
+                                            // fontSize: AppSize.s12,
                                           ),
                                         ),
                                     ],
@@ -427,9 +453,14 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(
+                          height: AppSize.s10,
+                        ),
+
                         ///===== Enterprise ID Component =====//
                         OutlineContainerWidget(
                           title: 'Enterprise ID',
+                          titleColor: ColorsManager.primaryBlue,
                           childWidget: CustomBoxWidget(
                             insideObj: CustomTextWidget(
                               textAlign: TextAlign.center,
@@ -446,8 +477,8 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         ///===== Office Address Component =====//
                         OutlineContainerWidget(
                           title: 'Office Address',
+                          titleColor: ColorsManager.primaryBlue,
                           childWidget: CustomTextWidget(
-                            textAlign: TextAlign.center,
                             text:
                                 '${widget.feedItemDetail!.enterprise!.addressStreet}',
                             fontWeight: FontWeightManager.regular,
@@ -460,7 +491,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                             .feedItemDetail!.enterprise!.fields!.isNotEmpty)
                           OutlineContainerWidget(
                             title: 'Fields',
-                            isDivider: false,
+                            titleColor: ColorsManager.primaryBlue,
                             childWidget:
                                 widget.feedItemDetail!.enterprise!.fields != []
                                     ? Wrap(
@@ -500,12 +531,13 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         ///===== Description Component =====//
                         OutlineContainerWidget(
                           title: 'Description',
+                          titleColor: ColorsManager.primaryBlue,
                           isDivider: false,
                           childWidget: CustomTextWidget(
                             text:
                                 '${widget.feedItemDetail!.enterprise!.description}',
                             fontWeight: FontWeightManager.regular,
-                            maxLine: 20,
+                            maxLine: 200,
                           ),
                         ),
                         //===== Description Component =====//
@@ -520,6 +552,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
           Expanded(
             flex: 10,
             child: Container(
+              alignment: Alignment.topCenter,
               margin: const EdgeInsets.only(
                 left: AppSize.s16,
                 right: AppSize.s16,
@@ -546,6 +579,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                       iconData: Icons.thumb_up_alt_outlined,
                       iconDataOnClick: Icons.thumb_up,
                       iconColorOnClick: ColorsManager.green,
+                      iconSize: AppSize.s24,
                       // buttonState: false,
                       onPressed: () {
                         customSnackbar(
@@ -567,6 +601,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                       iconData: Icons.turned_in_not_outlined,
                       iconDataOnClick: Icons.turned_in,
                       iconColorOnClick: ColorsManager.blue,
+                      iconSize: AppSize.s24,
                       // buttonState: feedController.savedButtonStateList[index!],
                       onPressed: () {
                         customSnackbar(
@@ -588,6 +623,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                       iconData: Icons.visibility_off_outlined,
                       iconDataOnClick: Icons.visibility_outlined,
                       iconColorOnClick: ColorsManager.red,
+                      iconSize: AppSize.s24,
                       // buttonState: feedController.hideButtonStateList[index!],
                       onPressed: () {
                         customSnackbar(

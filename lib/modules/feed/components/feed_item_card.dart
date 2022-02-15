@@ -38,7 +38,7 @@ class FeedItemCard extends StatelessWidget {
             barrierLabel:
                 MaterialLocalizations.of(context).modalBarrierDismissLabel,
             barrierColor: Colors.black45,
-            transitionDuration: const Duration(milliseconds: 200),
+            transitionDuration: const Duration(milliseconds: 350),
             pageBuilder: (
               BuildContext buildContext,
               Animation animation,

@@ -6,17 +6,25 @@ class OutlineContainerWidget extends StatelessWidget {
   final double? horizontalPadding;
   final double? verticalPadding;
   final String? title;
+  final double? fontSizeTitle;
   final Color? titleColor;
+  final FontWeight? fontWeightTitle;
   final Widget? childWidget;
   final bool? isDivider;
+  final double? heightDivider;
+  final double? thicknessDivider;
 
   const OutlineContainerWidget({
     this.horizontalPadding = AppSize.s16,
     this.verticalPadding = AppSize.s4,
     this.title,
+    this.fontSizeTitle = 14,
     this.titleColor = ColorsManager.grey,
+    this.fontWeightTitle = FontWeightManager.regular,
     this.childWidget,
     this.isDivider = true,
+    this.heightDivider = AppSize.s8,
+    this.thicknessDivider = AppSize.s0_5,
     Key? key,
   }) : super(key: key);
 
@@ -35,6 +43,8 @@ class OutlineContainerWidget extends StatelessWidget {
           else
             CustomTextWidget(
               text: title,
+              fontSize: fontSizeTitle,
+              fontWeight: fontWeightTitle,
               color: titleColor,
               marginBottom: AppSize.s8,
             ),
@@ -45,9 +55,9 @@ class OutlineContainerWidget extends StatelessWidget {
             child: childWidget,
           ),
           if (isDivider == true)
-            const Divider(
-              height: AppSize.s8,
-              thickness: AppSize.s0_5,
+            Divider(
+              height: heightDivider,
+              thickness: thicknessDivider,
             )
           else
             Container(),

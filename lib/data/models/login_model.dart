@@ -24,7 +24,7 @@ class LoginModel {
     return LoginModel(
       token: json['token'] as String?,
       tokenType: json['token_type'] as String?,
-      expireIn: json['expires_in']?.toInt() as int?,
+      expireIn: json['expires_in'] as int?,
       accountType: json['account_type'] as String?,
       tokenExpirationDate: json['token_expiration_date'] != null
           ? DateTime.parse(json['token_expiration_date'].toString())

@@ -17,13 +17,11 @@ class FeedProvider extends BaseProvider implements IFeedProvider {
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
       } else {
-        final apiResponse = json.decode(dataResponse.bodyString.toString());
-        apiResponse.forEach(
-          (e) {
-            feedOfferList
-                .add(JobOfferModel.fromJson(e as Map<String, dynamic>));
-          },
-        );
+        final apiResponse =
+            json.decode(dataResponse.bodyString.toString()) as List;
+        for (final e in apiResponse) {
+          feedOfferList.add(JobOfferModel.fromJson(e as Map<String, dynamic>));
+        }
         return feedOfferList;
       }
     } catch (e) {

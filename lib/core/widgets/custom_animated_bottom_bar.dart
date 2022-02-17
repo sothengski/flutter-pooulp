@@ -6,7 +6,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
     this.selectedIndex = 0,
     this.showElevation = true,
     this.iconSize = 24,
-    this.backgroundColor = Colors.red,
+    this.backgroundColor = Colors.white,
     this.itemCornerRadius = 50,
     this.containerHeight = 56,
     this.animationDuration = const Duration(milliseconds: 200),

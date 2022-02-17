@@ -5,15 +5,16 @@ import '../../../core/core.dart';
 import '../../../data/data.dart';
 import '../../modules.dart';
 
-class FeedItemCard extends StatelessWidget {
-  final feedController = Get.find<FeedController>();
+class JobOfferCard extends StatelessWidget {
+  final JobOfferModel? jobOfferItem;
+  // final Widget? bottomActionWidget;
+  final List<Widget>? bottomActionWidgetList;
 
-  final JobOfferModel? feedItem;
-  final int? index;
-  FeedItemCard({
+  const JobOfferCard({
     Key? key,
-    this.feedItem,
-    this.index,
+    this.jobOfferItem,
+    // this.bottomActionWidget,
+    this.bottomActionWidgetList = const [],
   }) : super(key: key);
 
   @override
@@ -50,7 +51,7 @@ class FeedItemCard extends StatelessWidget {
                 return Future.value(true);
               },
               child: FeedItemDetailPage(
-                feedItemDetail: feedItem,
+                feedItemDetail: jobOfferItem,
               ),
             ),
           );
@@ -73,7 +74,7 @@ class FeedItemCard extends StatelessWidget {
                 ),
                 child: CustomTextWidget(
                   textAlign: TextAlign.center,
-                  text: '${feedItem!.workPlaceType}',
+                  text: '${jobOfferItem!.workPlaceType}',
                   color: ColorsManager.white,
                   fontWeight: FontWeightManager.regular,
                   fontSize: AppSize.s12,
@@ -95,7 +96,7 @@ class FeedItemCard extends StatelessWidget {
                     child: CustomBoxWidget(
                       size: 40,
                       insideObj: CachedNetworkImgWidget(
-                        imgUrl: '${feedItem!.enterprise!.logoUrl}',
+                        imgUrl: '${jobOfferItem!.enterprise!.logoUrl}',
                       ),
                     ),
                   ),
@@ -111,7 +112,7 @@ class FeedItemCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextWidget(
-                          text: '${feedItem!.title}',
+                          text: '${jobOfferItem!.title}',
                           fontWeight: FontWeightManager.semiBold,
                           maxLine: 3,
                           // marginTop: 20.0,
@@ -131,7 +132,8 @@ class FeedItemCard extends StatelessWidget {
                               ),
                               Expanded(
                                 child: CustomTextWidget(
-                                  text: '${feedItem!.companyNameAndLocation}',
+                                  text:
+                                      '${jobOfferItem!.companyNameAndLocation}',
                                   fontSize: AppSize.s12,
                                   fontWeight: FontWeightManager.medium,
                                   color: ColorsManager.primary,
@@ -166,7 +168,7 @@ class FeedItemCard extends StatelessWidget {
                                 CustomTextWidget(
                                   marginLeft: AppSize.s4,
                                   text:
-                                      'Starting Date: ${feedItem!.dateJobStartFormat}',
+                                      'Starting Date: ${jobOfferItem!.dateJobStartFormat}',
                                   fontSize: AppSize.s12,
                                   fontWeight: FontWeightManager.regular,
                                   maxLine: 3,
@@ -190,7 +192,7 @@ class FeedItemCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        for (var i = 0; i < feedItem!.types!.length; i++)
+                        for (var i = 0; i < jobOfferItem!.types!.length; i++)
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               // horizontal: AppSize.s2,
@@ -210,7 +212,7 @@ class FeedItemCard extends StatelessWidget {
                                 ),
                                 child: CustomTextWidget(
                                   textAlign: TextAlign.center,
-                                  text: '${feedItem!.types![i].label}',
+                                  text: '${jobOfferItem!.types![i].label}',
                                   fontWeight: FontWeightManager.regular,
                                   fontSize: AppSize.s10,
                                   // marginBottom: AppSize.s10,
@@ -228,60 +230,54 @@ class FeedItemCard extends StatelessWidget {
               height: AppSize.s1,
               thickness: AppSize.s1,
             ),
-            Obx(
-              () => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: OutlineIconButtonWidget(
-                      buttonTitle: 'Apply',
-                      iconData: Icons.thumb_up_alt_outlined,
-                      iconDataOnClick: Icons.thumb_up,
-                      iconColorOnClick: ColorsManager.green,
-                      buttonState: feedController.applyButtonStateList[index!],
-                      onPressed: () {
-                        feedController.applyButtonStateList[index!] =
-                            feedController.jobOfferOnClickBoolSwitching(
-                          boolValue:
-                              feedController.applyButtonStateList[index!],
-                        );
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: OutlineIconButtonWidget(
-                      buttonTitle: 'Save',
-                      iconData: Icons.turned_in_not_outlined,
-                      iconDataOnClick: Icons.turned_in,
-                      iconColorOnClick: ColorsManager.blue,
-                      buttonState: feedController.savedButtonStateList[index!],
-                      onPressed: () {
-                        feedController.savedButtonStateList[index!] =
-                            feedController.jobOfferOnClickBoolSwitching(
-                          boolValue:
-                              feedController.savedButtonStateList[index!],
-                        );
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: OutlineIconButtonWidget(
-                      buttonTitle: 'Hide',
-                      iconData: Icons.visibility_off_outlined,
-                      iconDataOnClick: Icons.visibility_outlined,
-                      iconColorOnClick: ColorsManager.red,
-                      buttonState: feedController.hideButtonStateList[index!],
-                      onPressed: () {
-                        feedController.hideButtonStateList[index!] =
-                            feedController.jobOfferOnClickBoolSwitching(
-                          boolValue: feedController.hideButtonStateList[index!],
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // bottomActionWidget ?? Container(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: bottomActionWidgetList!,
+            )
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     Expanded(
+            //       child: OutlineIconButtonWidget(
+            //         buttonTitle: 'Apply',
+            //         iconData: Icons.thumb_up_alt_outlined,
+            //         iconDataOnClick: Icons.thumb_up,
+            //         iconColorOnClick: ColorsManager.green,
+            //         buttonState: leftButtonState,
+            //         onPressed: () => leftButtonFunctionCall!(),
+            //       ),
+            //     ),
+            //     Expanded(
+            //       child: OutlineIconButtonWidget(
+            //         buttonTitle: 'Save',
+            //         iconData: Icons.turned_in_not_outlined,
+            //         iconDataOnClick: Icons.turned_in,
+            //         iconColorOnClick: ColorsManager.blue,
+            //         buttonState: middleButtonState,
+            //         // buttonState: feedController.savedButtonStateList[index!],
+            //         onPressed: () => middleButtonFunctionCall!(),
+            //         // onPressed: () {
+            //         //   feedController.savedButtonStateList[index!] =
+            //         //       feedController.jobOfferOnClickBoolSwitching(
+            //         //     boolValue:
+            //         //         feedController.savedButtonStateList[index!],
+            //         //   );
+            //         // },
+            //       ),
+            //     ),
+            //     Expanded(
+            //       child: OutlineIconButtonWidget(
+            //         buttonTitle: 'Hide',
+            //         iconData: Icons.visibility_off_outlined,
+            //         iconDataOnClick: Icons.visibility_outlined,
+            //         iconColorOnClick: ColorsManager.red,
+            //         buttonState: rightButtonState,
+            //         onPressed: () => rightButtonFunctionCall!(),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

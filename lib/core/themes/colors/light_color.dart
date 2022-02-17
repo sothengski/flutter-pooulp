@@ -70,7 +70,8 @@ class LightColors implements IColors {
     primaryColor = ColorsManager.primary; //appBar text Color
     appBarColor = ColorsManager.primary; //appBar BgColor
     accentColor = ColorsManager.grey800;
-    scaffoldBackgroundColor = ColorsManager.grey100; //bgBody
+    scaffoldBackgroundColor =
+        ColorsManager.white; //ColorsManager.grey100; //bgBody
     tabBarColor = ColorsManager.yellowAccent;
     tabbarNormalColor = ColorsManager.green900;
     tabbarSelectedColor = ColorsManager.red200;

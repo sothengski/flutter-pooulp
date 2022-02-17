@@ -11,7 +11,7 @@ class FeedProvider extends BaseProvider implements IFeedProvider {
   Future<List<JobOfferModel>> getFeedOffers() async {
     try {
       final dataResponse = await get(
-        API.paths[Endpoint.feed].toString(),
+        API.paths[Endpoint.feedFresh].toString(),
       );
       final List<JobOfferModel> feedOfferList = <JobOfferModel>[];
       if (dataResponse.hasError) {

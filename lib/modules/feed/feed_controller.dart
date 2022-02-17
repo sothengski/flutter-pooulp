@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 
 import '../../data/data.dart';
+import '../modules.dart';
 
 class FeedController extends GetxController
     with StateMixin<RxList<JobOfferModel>> {
   final feedProvider = Get.find<FeedProvider>();
+  final profileController = Get.put(ProfileController());
 
   RxList<JobOfferModel> feedListRepsonse = <JobOfferModel>[].obs;
   RxList<JobOfferModel> feedFilterList = <JobOfferModel>[].obs;

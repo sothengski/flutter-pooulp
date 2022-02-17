@@ -13,6 +13,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final double? elevation;
   final double? fontSize;
   final FontWeight fontWeight;
+  final PreferredSizeWidget? bottomPreferredSizeWidget;
 
   CustomAppBar({
     this.title = '',
@@ -23,8 +24,11 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     this.backgroundColor,
     this.actions,
     this.elevation,
+    this.bottomPreferredSizeWidget,
     Key? key,
-  })  : preferredSize = const Size.fromHeight(60.0),
+  })  : preferredSize = bottomPreferredSizeWidget != null
+            ? const Size.fromHeight(100.0)
+            : const Size.fromHeight(60.0),
         super(key: key);
 
   @override
@@ -40,6 +44,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: backgroundColor,
       elevation: elevation,
       actions: actions,
+      bottom: bottomPreferredSizeWidget,
     );
   }
 }

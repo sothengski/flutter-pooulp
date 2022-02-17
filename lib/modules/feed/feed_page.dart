@@ -40,13 +40,33 @@ class FeedPage extends GetView<FeedController> {
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CustomTextWidget(
-                      text: 'Hello John',
-                      fontSize: 24,
-                      fontWeight: FontWeightManager.semiBold,
-                      color: ColorsManager.primary,
-                      marginLeft: AppSize.s8,
-                      marginBottom: AppSize.s8,
+                    Obx(
+                      () => controller.profileController.userInfoRepsonse.value
+                                  .profile ==
+                              null
+                          ? Container(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: AppSize.s8,
+                                vertical: AppSize.s10,
+                              ),
+                              child: ShimmerWidget.rectangular(
+                                width: 120,
+                                height: 1,
+                                shapeBorder: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s8),
+                                ),
+                              ),
+                            )
+                          : CustomTextWidget(
+                              text:
+                                  'Hello ${controller.profileController.userInfoRepsonse.value.profile!.firstName}',
+                              fontSize: 24,
+                              fontWeight: FontWeightManager.semiBold,
+                              color: ColorsManager.primary,
+                              marginLeft: AppSize.s8,
+                              marginBottom: AppSize.s8,
+                            ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

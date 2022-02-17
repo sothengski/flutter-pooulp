@@ -18,7 +18,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.grey100,
+      // backgroundColor: ColorsManager.grey100,
       appBar: CustomAppBar(
         title: 'Edit Information',
       ),

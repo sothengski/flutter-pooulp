@@ -13,7 +13,7 @@ class ProfilePage extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: ColorsManager.grey100,
+        // backgroundColor: ColorsManager.grey100,
         extendBodyBehindAppBar: true,
         extendBody: true,
         // appBar: CustomAppBar(
@@ -248,11 +248,12 @@ class ProfilePage extends GetView<ProfileController> {
                                                           const CustomBoxWidget(
                                                         size: 40,
                                                       ),
-                                                      // leftWidget: const CustomBoxWidget(
+                                                      // leftWidget:
+                                                      //     const CustomBoxWidget(
                                                       //   insideObj: Icon(
                                                       //     Icons.school,
-                                                      //     color:
-                                                      //         ColorsManager.primary75,
+                                                      //     color: ColorsManager
+                                                      //         .primary75,
                                                       //     size: AppSize.s20,
                                                       //   ),
                                                       // ),

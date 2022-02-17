@@ -7,7 +7,15 @@ class CustomBoxWidget extends StatelessWidget {
   final Color? backgroundColor;
   final double? size;
   final double? borderRadius;
-  final double? objPadding;
+  final double? topPadding;
+  final double? bottomPadding;
+  final double? leftPadding;
+  final double? rightPadding;
+  final double? topMargin;
+  final double? bottomMargin;
+  final double? leftMargin;
+  final double? rightMargin;
+
   final bool? isCircle;
   final double? borderWidth;
   final List<BoxShadow>? boxShadow;
@@ -17,7 +25,14 @@ class CustomBoxWidget extends StatelessWidget {
     this.backgroundColor = ColorsManager.grey100,
     this.size,
     this.borderRadius = 8.0,
-    this.objPadding = 6.0,
+    this.topPadding = 6.0,
+    this.bottomPadding = 6.0,
+    this.leftPadding = 6.0,
+    this.rightPadding = 6.0,
+    this.topMargin = 0.0,
+    this.bottomMargin = 0.0,
+    this.leftMargin = 0.0,
+    this.rightMargin = 0.0,
     this.isCircle = false,
     this.borderWidth = 0.0,
     this.boxShadow,
@@ -41,8 +56,20 @@ class CustomBoxWidget extends StatelessWidget {
           color: backgroundColor,
           shape: isCircle! ? BoxShape.circle : BoxShape.rectangle,
           boxShadow: boxShadow,
+          borderRadius: isCircle! ? null : BorderRadius.circular(borderRadius!),
         ),
-        padding: EdgeInsets.all(objPadding!),
+        padding: EdgeInsets.only(
+          top: topPadding!,
+          bottom: bottomPadding!,
+          left: leftPadding!,
+          right: rightPadding!,
+        ),
+        margin: EdgeInsets.only(
+          top: topMargin!,
+          bottom: bottomMargin!,
+          left: leftMargin!,
+          right: rightMargin!,
+        ),
         child: insideObj ??
             Container(
               decoration: BoxDecoration(

@@ -8,6 +8,7 @@ class FieldModel {
   final int? categoryId;
   final String? category;
   final String? videoUrl;
+  final int? total;
 
   FieldModel({
     this.id,
@@ -17,6 +18,7 @@ class FieldModel {
     this.categoryId,
     this.category,
     this.videoUrl,
+    this.total,
   });
 
   String? get displayLevel => level == null ? '' : 'Level $level';

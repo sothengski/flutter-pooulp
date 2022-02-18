@@ -16,9 +16,6 @@ class FeedController extends GetxController
   List<FieldModel> listFilterTypes = [];
   Set<String?> setOfListTypes = {};
 
-  // RxBool applyButtonState = false.obs;
-  // RxBool savedButtonState = false.obs;
-  // RxBool hideButtonState = false.obs;
   RxList<bool> applyButtonStateList = <bool>[].obs;
   RxList<bool> savedButtonStateList = <bool>[].obs;
   RxList<bool> hideButtonStateList = <bool>[].obs;

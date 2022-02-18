@@ -32,23 +32,27 @@ class OfferPage extends GetView<OfferController> {
                   ? JobOfferListComponent(
                       controller: controller,
                       offerList: controller.pendingOfferListRepsonse,
+                      jobOfferType: 'Pending',
                       noDataHeader: 'No Pending results found.',
                     )
                   : controller.isJobOfferStateList(inputValue: 'Matched')
                       ? JobOfferListComponent(
                           controller: controller,
                           offerList: controller.matchedOfferListRepsonse,
+                          jobOfferType: 'Matched',
                           noDataHeader: 'No Matched results found.',
                         )
                       : controller.isJobOfferStateList(inputValue: 'Saved')
                           ? JobOfferListComponent(
                               controller: controller,
                               offerList: controller.savedOfferListFilter,
+                              jobOfferType: 'Saved',
                               noDataHeader: 'No Saved results found.',
                             )
                           : JobOfferListComponent(
                               controller: controller,
                               offerList: controller.rejectedOfferListRepsonse,
+                              jobOfferType: 'Rejected',
                               noDataHeader: 'No Rejected results found.',
                             ),
             ),
@@ -62,6 +66,7 @@ class OfferPage extends GetView<OfferController> {
 class JobOfferListComponent extends StatelessWidget {
   final OfferController controller;
   final List<JobOfferModel>? offerList;
+  final String? jobOfferType;
   final String? noDataHeader;
   final String? noDataBody;
   final String? errorHeader;
@@ -71,6 +76,7 @@ class JobOfferListComponent extends StatelessWidget {
     Key? key,
     required this.controller,
     this.offerList,
+    this.jobOfferType,
     this.noDataHeader = 'No feed results found.',
     this.noDataBody = 'Make sure you complete your profile information.',
     this.errorHeader = 'Sorry! Something went wrong',
@@ -88,6 +94,8 @@ class JobOfferListComponent extends StatelessWidget {
           () => offerList!.isNotEmpty
               ? OfferListComponent(
                   offerList: offerList,
+                  offerController: controller,
+                  jobOfferType: jobOfferType,
                 )
               : Center(
                   child: StateHandlerWidget(

@@ -35,6 +35,11 @@ class OfferController extends GetxController
         ;
   }
 
+  bool jobOfferOnClickBoolSwitching({bool? boolValue}) {
+    update();
+    return !boolValue!;
+  }
+
   Future<void> onRefresh() async {
     // monitor network fetch
     await getOffersDataState(refresh: true);
@@ -64,12 +69,12 @@ class OfferController extends GetxController
     matchedOfferListRepsonse.clear();
     savedOfferListRepsonse.clear();
     savedOfferListFilter.clear();
-    // rejectedOfferListRepsonse.clear();
+    rejectedOfferListRepsonse.clear();
     pendingOfferListRepsonse.value = await offerProvider.getPendingOffers();
     int pendingItemCount = 0;
     int matchedItemCount = 0;
     int savedItemCount = 0;
-    // const int rejectedItemCount = 0;
+    int rejectedItemCount = 0;
 
     if (pendingOfferListRepsonse.isNotEmpty) {
       for (int i = 0; i < pendingOfferListRepsonse.length; i++) {
@@ -99,13 +104,21 @@ class OfferController extends GetxController
         }
       }
     }
+    rejectedOfferListRepsonse.value = await offerProvider.getRejectedOffers();
+    if (rejectedOfferListRepsonse.isNotEmpty) {
+      for (int i = 0; i < rejectedOfferListRepsonse.length; i++) {
+        if (rejectedOfferListRepsonse[i].jobOfferStateModel!.isRejectedState ==
+            1) {
+          rejectedItemCount += 1;
+        }
+      }
+    }
     countEachOfferItem(
       pendingTotalItems: pendingItemCount,
       matchedTotalItems: matchedItemCount,
       savedTotalItems: savedItemCount,
-      rejectedTotalItems: 0,
+      rejectedTotalItems: rejectedItemCount,
     );
-    // rejectedOfferListRepsonse.value = await offerProvider.getRejectedOffers();
 
     return pendingOfferListRepsonse;
   }

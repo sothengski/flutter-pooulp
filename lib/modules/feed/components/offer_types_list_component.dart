@@ -54,12 +54,13 @@ class OfferTypesListComponent extends StatelessWidget {
                 color: containerColorState(
                   object1: '${controller.listFilterTypes[index].label}',
                   object2: controller.typeSelected!.label,
+                  unEqualStateColor: ColorsManager.primaryBlue,
                 ),
               ),
               backgroundColor: containerColorState(
                 object1: '${controller.listFilterTypes[index].label}',
                 object2: controller.typeSelected!.label,
-                isText: false,
+                isTextColor: false,
               ),
               onSelected: (_) {
                 controller.selectType(

@@ -26,7 +26,6 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
           pendingOfferList
               .add(JobOfferModel.fromJson(e as Map<String, dynamic>));
         }
-        print('getPendingOffers object');
         return pendingOfferList;
       }
     } catch (e) {
@@ -50,7 +49,6 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
           matchedOfferList
               .add(JobOfferModel.fromJson(e as Map<String, dynamic>));
         }
-        print('getMatchingOffers object');
         return matchedOfferList;
       }
     } catch (e) {
@@ -73,7 +71,6 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
         for (final e in apiResponse) {
           savedOfferList.add(JobOfferModel.fromJson(e as Map<String, dynamic>));
         }
-        print('getSavedOffers object');
         return savedOfferList;
       }
     } catch (e) {
@@ -98,7 +95,6 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
           rejectedOfferList
               .add(JobOfferModel.fromJson(e as Map<String, dynamic>));
         }
-        print('getRejectedOffers object');
         return rejectedOfferList;
       }
     } catch (e) {

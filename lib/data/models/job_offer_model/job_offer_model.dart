@@ -27,6 +27,7 @@ class JobOfferModel {
   final List<FieldModel>? spokenLanguages;
   final List<SkillModel>? skills;
   final ProfileModel? enterprise;
+  final JobOfferStateModel? jobOfferStateModel;
 
   JobOfferModel({
     this.id,
@@ -52,6 +53,7 @@ class JobOfferModel {
     this.spokenLanguages,
     this.skills,
     this.enterprise,
+    this.jobOfferStateModel,
   });
 
   String? get numberOfWorkPerWeek => numberOfWorkingHourPerWeek == null
@@ -160,6 +162,11 @@ class JobOfferModel {
             : ProfileModel.fromJson(
                 json['enterprise'] as Map<String, dynamic>,
               ),
+        jobOfferStateModel: json['job_offer_state'] == null
+            ? null
+            : JobOfferStateModel.fromJson(
+                json['job_offer_state'] as Map<String, dynamic>,
+              ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -194,6 +201,7 @@ class JobOfferModel {
             ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
             : null,
         'enterprise': enterprise?.toJson(),
+        'job_offer_state': jobOfferStateModel?.toJson(),
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -222,6 +230,7 @@ class JobOfferModel {
       spokenLanguages: $spokenLanguages,
       skills: $skills,
       enterprise: $enterprise,
+      jobOfferStateModel: $jobOfferStateModel,
     )''';
   }
 }

@@ -8,7 +8,7 @@ class FieldModel {
   final int? categoryId;
   final String? category;
   final String? videoUrl;
-  final int? total;
+  int? total;
 
   FieldModel({
     this.id,

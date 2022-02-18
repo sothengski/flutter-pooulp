@@ -28,6 +28,10 @@ class JobOfferModel {
   final List<SkillModel>? skills;
   final ProfileModel? enterprise;
   final JobOfferStateModel? jobOfferStateModel;
+  bool? applyState;
+  bool? savedState;
+  bool? rejectedState;
+  bool? informationState;
 
   JobOfferModel({
     this.id,
@@ -54,6 +58,10 @@ class JobOfferModel {
     this.skills,
     this.enterprise,
     this.jobOfferStateModel,
+    this.applyState = false,
+    this.savedState = false,
+    this.rejectedState = false,
+    this.informationState = false,
   });
 
   String? get numberOfWorkPerWeek => numberOfWorkingHourPerWeek == null

@@ -41,7 +41,7 @@ class API {
     Endpoint.pendingOffer: '/offers/pending',
     Endpoint.matchedOffer: '/offers/matched',
     Endpoint.savedOffer: '/offers/saved',
-    Endpoint.rejectedOffer: '',
+    Endpoint.rejectedOffer: '/offers/hidden',
   };
 
   static String savedAnOfferPostMethod(int offerId) => '/offers/$offerId/save';

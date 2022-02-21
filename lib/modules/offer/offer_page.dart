@@ -19,7 +19,7 @@ class OfferPage extends GetView<OfferController> {
           Expanded(
             flex: 9,
             child: Obx(
-              () => JobOfferStateListComponent(
+              () => OfferStateListComponent(
                 jobOfferStateList: controller.jobOfferStateFilterList,
                 offerController: controller,
               ),
@@ -29,27 +29,27 @@ class OfferPage extends GetView<OfferController> {
             flex: 91,
             child: Obx(
               () => controller.isJobOfferStateList(inputValue: 'Pending')
-                  ? JobOfferListComponent(
+                  ? OfferListStateComponent(
                       controller: controller,
                       offerList: controller.pendingOfferListRepsonse,
                       jobOfferType: 'Pending',
                       noDataHeader: 'No Pending results found.',
                     )
                   : controller.isJobOfferStateList(inputValue: 'Matched')
-                      ? JobOfferListComponent(
+                      ? OfferListStateComponent(
                           controller: controller,
                           offerList: controller.matchedOfferListRepsonse,
                           jobOfferType: 'Matched',
                           noDataHeader: 'No Matched results found.',
                         )
                       : controller.isJobOfferStateList(inputValue: 'Saved')
-                          ? JobOfferListComponent(
+                          ? OfferListStateComponent(
                               controller: controller,
                               offerList: controller.savedOfferListFilter,
                               jobOfferType: 'Saved',
                               noDataHeader: 'No Saved results found.',
                             )
-                          : JobOfferListComponent(
+                          : OfferListStateComponent(
                               controller: controller,
                               offerList: controller.rejectedOfferListRepsonse,
                               jobOfferType: 'Rejected',
@@ -63,7 +63,7 @@ class OfferPage extends GetView<OfferController> {
   }
 }
 
-class JobOfferListComponent extends StatelessWidget {
+class OfferListStateComponent extends StatelessWidget {
   final OfferController controller;
   final List<JobOfferModel>? offerList;
   final String? jobOfferType;
@@ -72,7 +72,7 @@ class JobOfferListComponent extends StatelessWidget {
   final String? errorHeader;
   final String? errorBody;
 
-  const JobOfferListComponent({
+  const OfferListStateComponent({
     Key? key,
     required this.controller,
     this.offerList,

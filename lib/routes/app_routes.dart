@@ -7,7 +7,8 @@ class Routes {
   static const profileRoute = '/profile';
   static const editUserInfoRoute = '/edituserinfo';
   static const feedRoute = '/feed';
-  static const myOffersRoute = '/myOffer';
+  static const myOffersRoute = '/offer';
+  static const offerdetailRoute = '/offer_detail';
   static const settingsRoute = '/settings';
   static const unknownRoute = '/unknown';
 }

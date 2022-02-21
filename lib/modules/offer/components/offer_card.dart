@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
-import '../../modules.dart';
+import '../../../routes/routes.dart';
 
-class JobOfferCard extends StatelessWidget {
+class OfferCard extends StatelessWidget {
   final JobOfferModel? jobOfferItem;
   // final Widget? bottomActionWidget;
   final List<Widget>? bottomActionWidgetList;
 
-  const JobOfferCard({
+  const OfferCard({
     Key? key,
     this.jobOfferItem,
     // this.bottomActionWidget,
@@ -33,28 +33,32 @@ class JobOfferCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppSize.s10),
         ),
         onPressed: () {
-          showGeneralDialog(
-            barrierDismissible: false,
-            context: context,
-            barrierLabel:
-                MaterialLocalizations.of(context).modalBarrierDismissLabel,
-            barrierColor: Colors.black45,
-            transitionDuration: const Duration(milliseconds: 350),
-            pageBuilder: (
-              BuildContext buildContext,
-              Animation animation,
-              Animation secondaryAnimation,
-            ) =>
-                WillPopScope(
-              onWillPop: () {
-                Get.back();
-                return Future.value(true);
-              },
-              child: FeedItemDetailPage(
-                feedItemDetail: jobOfferItem,
-              ),
-            ),
+          Get.toNamed(
+            Routes.offerdetailRoute,
+            arguments: jobOfferItem,
           );
+          // showGeneralDialog(
+          //   barrierDismissible: false,
+          //   context: context,
+          //   barrierLabel:
+          //       MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          //   barrierColor: Colors.black45,
+          //   transitionDuration: const Duration(milliseconds: 350),
+          //   pageBuilder: (
+          //     BuildContext buildContext,
+          //     Animation animation,
+          //     Animation secondaryAnimation,
+          //   ) =>
+          //       WillPopScope(
+          //     onWillPop: () {
+          //       Get.back();
+          //       return Future.value(true);
+          //     },
+          //     child: FeedItemDetailPage(
+          //       feedItemDetail: jobOfferItem,
+          //     ),
+          //   ),
+          // );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,

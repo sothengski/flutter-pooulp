@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/core.dart';
 
+import '../../../core/core.dart';
 import '../../modules.dart';
 
 class FeedListComponent extends StatelessWidget {
@@ -21,7 +21,7 @@ class FeedListComponent extends StatelessWidget {
         // scrollDirection: Axis.vertical,
         itemBuilder: (_, index) {
           return Obx(
-            () => JobOfferCard(
+            () => OfferCard(
               jobOfferItem: controller.feedFilterList[index],
               // index: index,
               // leftButtonState: controller.applyButtonStateList[index],

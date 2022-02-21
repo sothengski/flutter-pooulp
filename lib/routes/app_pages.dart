@@ -48,5 +48,10 @@ class AppPages {
       page: () => const SettingPage(),
       binding: SettingBinding(),
     ),
+    GetPage(
+      name: Routes.offerdetailRoute,
+      page: () => OfferDetailPage(),
+      binding: OfferDetailBinding(),
+    ),
   ];
 }

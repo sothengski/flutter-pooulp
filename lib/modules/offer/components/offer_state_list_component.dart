@@ -5,12 +5,12 @@ import '../../../core/core.dart';
 import '../../../data/data.dart';
 import '../../modules.dart';
 
-class JobOfferStateListComponent extends StatelessWidget {
+class OfferStateListComponent extends StatelessWidget {
   // final controller = Get.find<OfferController>();
   final List<FieldModel>? jobOfferStateList;
   final OfferController? offerController;
 
-  const JobOfferStateListComponent({
+  const OfferStateListComponent({
     Key? key,
     this.jobOfferStateList,
     this.offerController,

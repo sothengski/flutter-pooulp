@@ -31,7 +31,7 @@ class OfferListComponent extends StatelessWidget {
         // scrollDirection: Axis.vertical,
         itemBuilder: (_, index) {
           return Obx(
-            () => JobOfferCard(
+            () => OfferCard(
               jobOfferItem: offerList![index],
               bottomActionWidgetList: (jobOfferType == 'Pending')
                   ? [

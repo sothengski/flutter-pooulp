@@ -32,6 +32,7 @@ class JobOfferModel {
   bool? savedState;
   bool? rejectedState;
   bool? informationState;
+  // String? jobOfferType;
 
   JobOfferModel({
     this.id,
@@ -62,6 +63,7 @@ class JobOfferModel {
     this.savedState = false,
     this.rejectedState = false,
     this.informationState = false,
+    // this.jobOfferType = '',
   });
 
   String? get numberOfWorkPerWeek => numberOfWorkingHourPerWeek == null

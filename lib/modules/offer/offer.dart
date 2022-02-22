@@ -7,3 +7,4 @@ export 'offer_detail/offer_detail_binding.dart';
 export 'offer_detail/offer_detail_controller.dart';
 export 'offer_detail/offer_detail_page.dart';
 export 'offer_page.dart';
+export 'offer_search/offer_search_page.dart';

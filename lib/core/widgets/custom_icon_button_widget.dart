@@ -31,7 +31,7 @@ class CustomIconButtonWidget extends StatelessWidget {
     return IconButton(
       constraints: isConstraints == false ? null : const BoxConstraints(),
       padding: EdgeInsets.all(padding!),
-      iconSize: iconSize!,
+      iconSize: iconSize,
       splashRadius: splashRadius,
       icon: iconWidget ??
           Icon(

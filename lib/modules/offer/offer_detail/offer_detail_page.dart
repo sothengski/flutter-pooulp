@@ -6,14 +6,17 @@ import '../../../data/data.dart';
 import '../offer.dart';
 
 class OfferDetailPage extends GetView<OfferDetailController> {
-  final jobOfferDetail = Get.arguments as JobOfferModel;
+  // ignore: avoid_dynamic_calls
+  final JobOfferModel jobOfferDetail = Get.arguments[0] as JobOfferModel;
+  // ignore: avoid_dynamic_calls
+  final List<Widget>? actionButtons = Get.arguments[1] as List<Widget>;
 
   // const OfferDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.primary,
+      // backgroundColor: ColorsManager.primary,
       appBar: CustomAppBar(
         title: 'Offer Details',
         elevation: 0.0,
@@ -24,8 +27,8 @@ class OfferDetailPage extends GetView<OfferDetailController> {
             flex: 90,
             child: Container(
               margin: const EdgeInsets.only(
-                left: AppSize.s16,
-                right: AppSize.s16,
+                left: AppSize.s4,
+                right: AppSize.s4,
                 // bottom: AppSize.s40,
               ),
               padding: const EdgeInsets.only(
@@ -61,19 +64,25 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                         height: AppSize.s5,
                         thickness: 1,
                       ),
-                      CustomListTileWidget(
-                        isDivider: false,
-                        leftFlex: 15,
-                        leftRightPadding: AppSize.s12,
-                        text1: '${jobOfferDetail.enterprise!.name}',
-                        text1Color: ColorsManager.primary,
-                        text1FontSize: AppSize.s16,
-                        text2:
-                            '${jobOfferDetail.companyLocation} (${jobOfferDetail.workPlaceType})',
-                        leftWidget: CustomBoxWidget(
-                          size: 50,
-                          insideObj: CachedNetworkImgWidget(
-                            imgUrl: '${jobOfferDetail.enterprise!.logoUrl}',
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: AppSize.s12,
+                          right: AppSize.s12,
+                        ),
+                        child: CustomListTileWidget(
+                          isDivider: false,
+                          leftFlex: 15,
+                          // leftRightPadding: AppSize.s12,
+                          text1: '${jobOfferDetail.enterprise!.name}',
+                          text1Color: ColorsManager.primary,
+                          text1FontSize: AppSize.s16,
+                          text2:
+                              '${jobOfferDetail.companyLocation} (${jobOfferDetail.workPlaceType})',
+                          leftWidget: CustomBoxWidget(
+                            size: 50,
+                            insideObj: CachedNetworkImgWidget(
+                              imgUrl: '${jobOfferDetail.enterprise!.logoUrl}',
+                            ),
                           ),
                         ),
                       ),
@@ -109,8 +118,8 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                         ),
                         unselectedLabelColor: ColorsManager.grey,
                         tabs: [
-                          'Job Information',
-                          'Company Information',
+                          'Job Summary',
+                          'Company',
                         ]
                             .map(
                               (e) => Tab(
@@ -123,139 +132,79 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                               ),
                             )
                             .toList(),
-                        // const [
-                        //   // first tab [you can add an icon using the icon property]
-                        //   Tab(
-                        //     child: CustomTextWidget(
-                        //       text: 'Job Information',
-                        //       textAlign: TextAlign.center,
-                        //       fontWeight: FontWeight.w500,
-                        //       color: null,
-                        //     ),
-                        //   ),
-                        //   // second tab [you can add an icon using the icon property]
-                        //   Tab(
-                        //     child: CustomTextWidget(
-                        //       text: 'Company Information',
-                        //       textAlign: TextAlign.center,
-                        //       fontWeight: FontWeight.w500,
-                        //       color: null,
-                        //     ),
-                        //   ),
-                        // ],
                       ),
                     ),
                   ),
-                  // TabBarView(
-                  //   controller: controller.tabController,
-                  //   children:
                   Obx(
                     () => [
-                      //     ///===== First Tab Component =====//
+                      ///===== First Tab Component =====//
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          //TODO::: will update the posted to time ago
-                          // Center(
-                          //   child: CustomTextWidget(
-                          //     text:
-                          //         'Posted: ${jobOfferDetail.dateOfferStartFormat}',
-                          //     textAlign: TextAlign.center,
-                          //     fontWeight: FontWeight.w500,
-                          //     color: ColorsManager.red,
-                          //     marginTop: AppSize.s10,
-                          //     marginBottom: AppSize.s10,
-                          //   ),
-                          // ),
                           const SizedBox(
                             height: AppSize.s10,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ///===== Working Period Component =====//
-                              Expanded(
-                                flex: 55,
-                                child: OutlineContainerWidget(
-                                  title: 'Working Period',
-                                  titleColor: ColorsManager.primaryBlue,
-                                  isDivider: false,
-                                  childWidget: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomBoxWidget(
-                                        insideObj: CustomTextWidget(
-                                          textAlign: TextAlign.center,
-                                          text: jobOfferDetail
-                                                      .dateJobStartFormat !=
-                                                  ''
-                                              ? 'Starting Date: ${jobOfferDetail.dateJobStartFormat}'
-                                              : 'N/A',
-                                          fontWeight: FontWeightManager.regular,
-                                          fontSize: AppSize.s12,
-                                          // marginBottom: AppSize.s10,
-                                        ),
-                                      ),
-                                      if (jobOfferDetail.dateJobEndFormat ==
-                                          null)
-                                        Container(
-                                          margin:
-                                              const EdgeInsetsDirectional.only(
-                                            top: AppSize.s4,
-                                          ),
-                                          child: CustomBoxWidget(
-                                            insideObj: CustomTextWidget(
-                                              textAlign: TextAlign.center,
-                                              text:
-                                                  'End Date: ${jobOfferDetail.dateJobEndFormat}',
-                                              fontWeight:
-                                                  FontWeightManager.regular,
-                                              fontSize: AppSize.s12,
-                                              // marginBottom: AppSize.s10,
-                                            ),
-                                          ),
-                                        )
-                                      else
-                                        Container(),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              //===== Working Period Component =====//
 
-                              ///===== Working Duration Component =====//
-                              Expanded(
-                                flex: 45,
-                                child: OutlineContainerWidget(
-                                  title: 'Working Duration',
-                                  titleColor: ColorsManager.primaryBlue,
-                                  isDivider: false,
-                                  childWidget: CustomBoxWidget(
-                                    insideObj: CustomTextWidget(
-                                      textAlign: TextAlign.center,
-                                      text:
-                                          '${jobOfferDetail.numberOfWorkPerWeek}',
-                                      fontWeight: FontWeightManager.regular,
-                                      fontSize: AppSize.s12,
-                                      // marginBottom: AppSize.s10,
-                                    ),
+                          ///===== Working Period Component =====//
+                          OutlineContainerWidget(
+                            title: 'Working Period',
+                            titleColor: ColorsManager.primaryBlue,
+                            childWidget: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomBoxWidget(
+                                  insideObj: CustomTextWidget(
+                                    textAlign: TextAlign.center,
+                                    text: jobOfferDetail.dateJobStartFormat !=
+                                            ''
+                                        ? 'Starting Date: ${jobOfferDetail.dateJobStartFormat}'
+                                        : 'N/A',
+                                    fontWeight: FontWeightManager.regular,
+                                    fontSize: AppSize.s12,
+                                    // marginBottom: AppSize.s10,
                                   ),
                                 ),
+                                if (jobOfferDetail.dateJobEndFormat == null)
+                                  Container(
+                                    margin: const EdgeInsetsDirectional.only(
+                                      top: AppSize.s4,
+                                    ),
+                                    child: CustomBoxWidget(
+                                      insideObj: CustomTextWidget(
+                                        textAlign: TextAlign.center,
+                                        text:
+                                            'End Date: ${jobOfferDetail.dateJobEndFormat}',
+                                        fontWeight: FontWeightManager.regular,
+                                        fontSize: AppSize.s12,
+                                        // marginBottom: AppSize.s10,
+                                      ),
+                                    ),
+                                  )
+                                else
+                                  Container(),
+                              ],
+                            ),
+                          ),
+                          //===== Working Period Component =====//
+
+                          ///===== Working Duration Component =====//
+                          if (jobOfferDetail.types!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'Working Duration',
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: CustomBoxWidget(
+                                insideObj: CustomTextWidget(
+                                  textAlign: TextAlign.center,
+                                  text: '${jobOfferDetail.numberOfWorkPerWeek}',
+                                  fontWeight: FontWeightManager.regular,
+                                  fontSize: AppSize.s12,
+                                  // marginBottom: AppSize.s10,
+                                ),
                               ),
-                              //===== Working Duration Component =====//
-                            ],
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: AppSize.s16,
-                              // vertical: AppSize.s4,
-                            ),
-                            child: Divider(
-                              height: AppSize.s8,
-                              thickness: AppSize.s0_5,
-                            ),
-                          ),
+                            )
+                          else
+                            Container(),
+                          //===== Working Duration Component =====//
 
                           ///===== Types Component =====//
                           if (jobOfferDetail.types!.isNotEmpty)
@@ -524,13 +473,13 @@ class OfferDetailPage extends GetView<OfferDetailController> {
             ),
           ),
           Expanded(
-            flex: 10,
+            flex: 8,
             child: Container(
               alignment: Alignment.topCenter,
               margin: const EdgeInsets.only(
-                left: AppSize.s16,
-                right: AppSize.s16,
-                bottom: AppSize.s40,
+                left: AppSize.s4,
+                right: AppSize.s4,
+                // bottom: AppSize.s20,
               ),
               // padding: const EdgeInsets.only(
               // left: AppSize.s16,
@@ -544,75 +493,84 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                   bottomRight: Radius.circular(15.0),
                 ),
               ),
+              // child: Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: [
+              //     Expanded(
+              //       child: OutlineIconButtonWidget(
+              //         buttonTitle: 'Apply',
+              //         iconData: Icons.thumb_up_alt_outlined,
+              //         iconDataOnClick: Icons.thumb_up,
+              //         iconColorOnClick: ColorsManager.green,
+              //         iconSize: AppSize.s24,
+              //         // buttonState: false,
+              //         onPressed: () {
+              //           customSnackbar(
+              //             msgTitle: 'This Button is under construction!',
+              //             msgContent:
+              //                 'This Page is only view.\n Data will not save.',
+              //           );
+              //           // feedController.applyButtonStateList[index!] =
+              //           //     feedController.jobOfferOnClickBoolSwitching(
+              //           //   boolValue:
+              //           //       feedController.applyButtonStateList[index!],
+              //           // );
+              //         },
+              //       ),
+              //     ),
+              //     Expanded(
+              //       child: OutlineIconButtonWidget(
+              //         buttonTitle: 'Save',
+              //         iconData: Icons.turned_in_not_outlined,
+              //         iconDataOnClick: Icons.turned_in,
+              //         iconColorOnClick: ColorsManager.blue,
+              //         iconSize: AppSize.s24,
+              //         // buttonState: feedController.savedButtonStateList[index!],
+              //         onPressed: () {
+              //           customSnackbar(
+              //             msgTitle: 'This Button is under construction!',
+              //             msgContent:
+              //                 'This Page is only view.\n Data will not save.',
+              //           );
+              //           // feedController.savedButtonStateList[index!] =
+              //           //     feedController.jobOfferOnClickBoolSwitching(
+              //           //   boolValue:
+              //           //       feedController.savedButtonStateList[index!],
+              //           // );
+              //         },
+              //       ),
+              //     ),
+              //     Expanded(
+              //       child: OutlineIconButtonWidget(
+              //         buttonTitle: 'Hide',
+              //         iconData: Icons.visibility_off_outlined,
+              //         iconDataOnClick: Icons.visibility_outlined,
+              //         iconColorOnClick: ColorsManager.red,
+              //         iconSize: AppSize.s24,
+              //         // buttonState: feedController.hideButtonStateList[index!],
+              //         onPressed: () {
+              //           customSnackbar(
+              //             msgTitle: 'This Button is under construction!',
+              //             msgContent:
+              //                 'This Page is only view.\n Data will not save.',
+              //           );
+              //           // feedController.hideButtonStateList[index!] =
+              //           //     feedController.jobOfferOnClickBoolSwitching(
+              //           //   boolValue: feedController.hideButtonStateList[index!],
+              //           // );
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: OutlineIconButtonWidget(
-                      buttonTitle: 'Apply',
-                      iconData: Icons.thumb_up_alt_outlined,
-                      iconDataOnClick: Icons.thumb_up,
-                      iconColorOnClick: ColorsManager.green,
-                      iconSize: AppSize.s24,
-                      // buttonState: false,
-                      onPressed: () {
-                        customSnackbar(
-                          msgTitle: 'This Button is under construction!',
-                          msgContent:
-                              'This Page is only view.\n Data will not save.',
-                        );
-                        // feedController.applyButtonStateList[index!] =
-                        //     feedController.jobOfferOnClickBoolSwitching(
-                        //   boolValue:
-                        //       feedController.applyButtonStateList[index!],
-                        // );
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: OutlineIconButtonWidget(
-                      buttonTitle: 'Save',
-                      iconData: Icons.turned_in_not_outlined,
-                      iconDataOnClick: Icons.turned_in,
-                      iconColorOnClick: ColorsManager.blue,
-                      iconSize: AppSize.s24,
-                      // buttonState: feedController.savedButtonStateList[index!],
-                      onPressed: () {
-                        customSnackbar(
-                          msgTitle: 'This Button is under construction!',
-                          msgContent:
-                              'This Page is only view.\n Data will not save.',
-                        );
-                        // feedController.savedButtonStateList[index!] =
-                        //     feedController.jobOfferOnClickBoolSwitching(
-                        //   boolValue:
-                        //       feedController.savedButtonStateList[index!],
-                        // );
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: OutlineIconButtonWidget(
-                      buttonTitle: 'Hide',
-                      iconData: Icons.visibility_off_outlined,
-                      iconDataOnClick: Icons.visibility_outlined,
-                      iconColorOnClick: ColorsManager.red,
-                      iconSize: AppSize.s24,
-                      // buttonState: feedController.hideButtonStateList[index!],
-                      onPressed: () {
-                        customSnackbar(
-                          msgTitle: 'This Button is under construction!',
-                          msgContent:
-                              'This Page is only view.\n Data will not save.',
-                        );
-                        // feedController.hideButtonStateList[index!] =
-                        //     feedController.jobOfferOnClickBoolSwitching(
-                        //   boolValue: feedController.hideButtonStateList[index!],
-                        // );
-                      },
-                    ),
-                  ),
-                ],
+                children: actionButtons!
+                    .where(
+                      (element) =>
+                          element.key! != const ValueKey('information'),
+                    )
+                    .toList(),
               ),
             ),
           )

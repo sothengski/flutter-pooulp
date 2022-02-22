@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
+import '../offer/offer.dart';
 import 'feed.dart';
 
 class FeedPage extends GetView<FeedController> {
@@ -65,7 +66,7 @@ class FeedPage extends GetView<FeedController> {
                               fontWeight: FontWeightManager.semiBold,
                               color: ColorsManager.primary,
                               marginLeft: AppSize.s8,
-                              marginBottom: AppSize.s8,
+                              marginBottom: AppSize.s16,
                             ),
                     ),
                     Row(
@@ -73,20 +74,34 @@ class FeedPage extends GetView<FeedController> {
                       children: [
                         SizedBox(
                           width: getWidth * 0.80,
-                          child: const CustomTextInput(
-                            // controller: controller.emailCtrl,
-                            // inputTitle: 'Search',
-                            hintText: 'Search the job title',
-                            isFilled: true,
-                            // suffixIcon: true,
-                            // topPadding: AppSize.s12,
-                            // validator: Validator().emailValidator,
-                            // keyboardType: TextInputType.emailAddress,
+                          child: CustomContainerWidget(
+                            containerBackground: ColorsManager.grey100,
+                            childPadding: AppSize.s12,
+                            child: const CustomTextWidget(
+                              text: 'Search the job title',
+                            ),
+                            onTap: () {
+                              showSearch(
+                                context: context,
+                                delegate: OfferSearchPage(),
+                              );
+                            },
                           ),
                         ),
-                        const Icon(
-                          Icons.filter_list,
+                        IconButton(
+                          icon: const Icon(Icons.filter_list),
                           color: ColorsManager.primary,
+                          onPressed: () {
+                            customSnackbar(
+                              msgTitle: 'This Page is under construction!',
+                              msgContent:
+                                  'This Page is only view.\n Data will not save.',
+                            );
+                            // showSearch(
+                            //   context: context,
+                            //   delegate: OfferSearchPage(),
+                            // );
+                          },
                         ),
                       ],
                     ),

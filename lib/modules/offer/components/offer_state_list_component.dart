@@ -33,71 +33,79 @@ class OfferStateListComponent extends StatelessWidget {
                   () => Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppSize.s4,
-                      vertical: AppSize.s14,
+                      // vertical: AppSize.s4,
                     ),
-                    child: GestureDetector(
-                      onTap: () {
-                        offerController!.selectjobOfferState(
-                          state: item,
-                        );
-                      },
-                      child: CustomBoxWidget(
-                        backgroundColor: containerColorState(
-                          object1: '${item.label}',
-                          object2: offerController!
-                              .jobOfferStateSelected.value.label,
-                          isTextColor: false,
+                    child: FilterChip(
+                      // padding: EdgeInsets.zero,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(AppSize.s16),
                         ),
-                        borderWidth: 0.5,
-                        borderRadius: AppSize.s20,
-                        leftPadding: AppSize.s16,
-                        rightPadding: AppSize.s16,
-                        insideObj: Row(
-                          children: [
-                            CustomTextWidget(
-                              text: '${item.label}',
-                              // fontSize: AppSize.s14,
-                              fontWeight: FontWeightManager.medium,
+                        side: BorderSide(
+                          width: 0.3,
+                          color: ColorsManager.primary50,
+                        ),
+                      ),
+                      labelPadding: const EdgeInsets.symmetric(
+                        horizontal: AppSize.s8,
+                        // vertical: AppSize.s0,
+                      ),
+                      label: Row(
+                        children: [
+                          CustomTextWidget(
+                            text: '${item.label}',
+                            // fontSize: AppSize.s14,
+                            fontWeight: FontWeightManager.medium,
+                            color: containerColorState(
+                              object1: '${item.label}',
+                              object2: offerController!
+                                  .jobOfferStateSelected.value.label,
+                              unEqualStateColor: ColorsManager.primaryBlue,
+                            ),
+                            marginRight: AppSize.s4,
+                          ),
+                          CustomBoxWidget(
+                            borderRadius: AppSize.s16,
+                            topPadding: AppSize.s2,
+                            bottomPadding: AppSize.s2,
+                            leftPadding: AppSize.s0,
+                            rightPadding: AppSize.s0,
+                            backgroundColor: containerColorState(
+                              object1: '${item.label}',
+                              object2: offerController!
+                                  .jobOfferStateSelected.value.label,
+                              equalStateColor: ColorsManager.primary,
+                              unEqualStateColor: ColorsManager.white,
+                              isTextColor: false,
+                            ),
+                            insideObj: CustomTextWidget(
+                              text: '${item.total}',
+                              fontSize: AppSize.s12,
                               color: containerColorState(
                                 object1: '${item.label}',
                                 object2: offerController!
                                     .jobOfferStateSelected.value.label,
-                                unEqualStateColor: ColorsManager.primaryBlue,
-                              ),
-                              marginRight: AppSize.s4,
-                            ),
-                            CustomBoxWidget(
-                              borderRadius: AppSize.s16,
-                              topPadding: AppSize.s2,
-                              bottomPadding: AppSize.s2,
-                              leftPadding: AppSize.s0,
-                              rightPadding: AppSize.s0,
-                              backgroundColor: containerColorState(
-                                object1: '${item.label}',
-                                object2: offerController!
-                                    .jobOfferStateSelected.value.label,
-                                equalStateColor: ColorsManager.primary,
+                                equalStateColor: ColorsManager.primaryBlue,
                                 unEqualStateColor: ColorsManager.white,
-                                isTextColor: false,
                               ),
-                              insideObj: CustomTextWidget(
-                                text: '${item.total}',
-                                fontSize: AppSize.s12,
-                                color: containerColorState(
-                                  object1: '${item.label}',
-                                  object2: offerController!
-                                      .jobOfferStateSelected.value.label,
-                                  equalStateColor: ColorsManager.primaryBlue,
-                                  unEqualStateColor: ColorsManager.white,
-                                ),
-                                textAlign: TextAlign.center,
-                                marginLeft: AppSize.s6,
-                                marginRight: AppSize.s6,
-                              ),
+                              textAlign: TextAlign.center,
+                              marginLeft: AppSize.s6,
+                              marginRight: AppSize.s6,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
+                      backgroundColor: containerColorState(
+                        object1: '${item.label}',
+                        object2:
+                            offerController!.jobOfferStateSelected.value.label,
+                        isTextColor: false,
+                      ),
+                      onSelected: (_) {
+                        offerController!.selectjobOfferState(
+                          state: item,
+                        );
+                      },
                     ),
                   ),
                 );

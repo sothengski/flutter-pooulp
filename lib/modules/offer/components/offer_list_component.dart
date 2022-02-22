@@ -36,6 +36,7 @@ class OfferListComponent extends StatelessWidget {
               bottomActionWidgetList: (jobOfferType == 'Pending')
                   ? [
                       Expanded(
+                        key: const ValueKey('information'),
                         child: OutlineIconButtonWidget(
                           buttonTitle: 'Information',
                           iconColor: ColorsManager.grey600,
@@ -53,6 +54,7 @@ class OfferListComponent extends StatelessWidget {
                   : (jobOfferType == 'Matched')
                       ? [
                           Expanded(
+                            key: const ValueKey('call'),
                             child: OutlineIconButtonWidget(
                               buttonTitle: 'Call',
                               iconData: Icons.phone_outlined,
@@ -68,6 +70,7 @@ class OfferListComponent extends StatelessWidget {
                             ),
                           ),
                           Expanded(
+                            key: const ValueKey('information'),
                             child: OutlineIconButtonWidget(
                               buttonTitle: 'Information',
                               iconColor: ColorsManager.grey600,
@@ -83,6 +86,7 @@ class OfferListComponent extends StatelessWidget {
                             ),
                           ),
                           Expanded(
+                            key: const ValueKey('email'),
                             child: OutlineIconButtonWidget(
                               buttonTitle: 'Email',
                               iconData: Icons.email_outlined,
@@ -102,6 +106,7 @@ class OfferListComponent extends StatelessWidget {
                       : (jobOfferType == 'Saved')
                           ? [
                               Expanded(
+                                key: const ValueKey('saved'),
                                 child: OutlineIconButtonWidget(
                                   buttonTitle: 'Apply',
                                   iconData: Icons.thumb_up_outlined,
@@ -119,6 +124,7 @@ class OfferListComponent extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
+                                key: const ValueKey('information'),
                                 child: OutlineIconButtonWidget(
                                   buttonTitle: 'Information',
                                   iconColor: ColorsManager.grey600,
@@ -136,6 +142,7 @@ class OfferListComponent extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
+                                key: const ValueKey('unSaved'),
                                 child: OutlineIconButtonWidget(
                                   buttonTitle: 'Unsaved',
                                   iconData: Icons.bookmark_remove_outlined,
@@ -156,6 +163,7 @@ class OfferListComponent extends StatelessWidget {
                             ]
                           : [
                               Expanded(
+                                key: const ValueKey('information'),
                                 child: OutlineIconButtonWidget(
                                   buttonTitle: 'Information',
                                   iconColor: ColorsManager.grey600,

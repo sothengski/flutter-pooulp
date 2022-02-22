@@ -35,30 +35,11 @@ class OfferCard extends StatelessWidget {
         onPressed: () {
           Get.toNamed(
             Routes.offerdetailRoute,
-            arguments: jobOfferItem,
+            arguments: [
+              jobOfferItem,
+              bottomActionWidgetList,
+            ],
           );
-          // showGeneralDialog(
-          //   barrierDismissible: false,
-          //   context: context,
-          //   barrierLabel:
-          //       MaterialLocalizations.of(context).modalBarrierDismissLabel,
-          //   barrierColor: Colors.black45,
-          //   transitionDuration: const Duration(milliseconds: 350),
-          //   pageBuilder: (
-          //     BuildContext buildContext,
-          //     Animation animation,
-          //     Animation secondaryAnimation,
-          //   ) =>
-          //       WillPopScope(
-          //     onWillPop: () {
-          //       Get.back();
-          //       return Future.value(true);
-          //     },
-          //     child: FeedItemDetailPage(
-          //       feedItemDetail: jobOfferItem,
-          //     ),
-          //   ),
-          // );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,

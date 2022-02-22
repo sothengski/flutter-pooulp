@@ -12,11 +12,13 @@ class CustomContainerWidget extends StatelessWidget {
   final double? titleBottomPadding;
   final Color? titleColor;
   final FontWeight? titleFontWeight;
+  final Color? containerBackground;
   final Widget? child;
   final Function()? onTap;
   final double? borderRadius;
   final double? elevation;
   final bool? titleInSide;
+  final bool? isBoxShadow;
   final double? childPadding;
   final double? leftMargin;
   final double? topMargin;
@@ -35,10 +37,12 @@ class CustomContainerWidget extends StatelessWidget {
     this.titleColor = ColorsManager.primaryBlue,
     this.titleFontWeight = FontWeight.w600,
     this.child,
+    this.containerBackground = ColorsManager.white,
     this.onTap,
     this.borderRadius = 10.0,
     this.elevation = 5.0,
     this.titleInSide = true,
+    this.isBoxShadow = false,
     this.childPadding = 0.0,
     this.leftMargin = 0.0,
     this.topMargin = 0.0,
@@ -60,7 +64,7 @@ class CustomContainerWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: titleInSide == true ? ColorsManager.white : Colors.transparent,
           borderRadius: BorderRadius.circular(borderRadius!),
-          boxShadow: titleInSide == true
+          boxShadow: titleInSide == true || isBoxShadow == true
               ? [
                   const BoxShadow(
                     color: ColorsManager.grey300,
@@ -110,7 +114,7 @@ class CustomContainerWidget extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: Card(
-                color: ColorsManager.white,
+                color: containerBackground,
                 elevation: titleInSide == true ? 0.0 : elevation,
                 // margin: const EdgeInsets.all(5),
                 margin: EdgeInsets.zero,

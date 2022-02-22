@@ -29,13 +29,16 @@ class FeedPage extends GetView<FeedController> {
               child: Container(
                 decoration: const BoxDecoration(
                   // color: ColorsManager.primary,
-                  color: ColorsManager.white,
+                  color: ColorsManager.primary,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15.0),
                     bottomRight: Radius.circular(15.0),
                   ),
                 ),
-                padding: const EdgeInsets.all(AppSize.s16),
+                // padding: const EdgeInsets.symmetric(
+                //   vertical: AppSize.s8,
+                //   horizontal: AppSize.s8,
+                // ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,19 +67,23 @@ class FeedPage extends GetView<FeedController> {
                                   'Hello ${controller.profileController.userInfoRepsonse.value.profile!.firstName}',
                               fontSize: 24,
                               fontWeight: FontWeightManager.semiBold,
-                              color: ColorsManager.primary,
-                              marginLeft: AppSize.s8,
+                              color: ColorsManager.white,
+                              marginTop: AppSize.s16,
+                              marginLeft: AppSize.s16,
                               marginBottom: AppSize.s16,
                             ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SizedBox(
-                          width: getWidth * 0.80,
+                        Expanded(
+                          flex: 85,
+                          // width: getWidth * 0.80,
                           child: CustomContainerWidget(
+                            leftMargin: AppSize.s16,
                             containerBackground: ColorsManager.grey100,
                             childPadding: AppSize.s12,
+                            titleInSide: false,
                             child: const CustomTextWidget(
                               text: 'Search the job title',
                             ),
@@ -88,20 +95,23 @@ class FeedPage extends GetView<FeedController> {
                             },
                           ),
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.filter_list),
-                          color: ColorsManager.primary,
-                          onPressed: () {
-                            customSnackbar(
-                              msgTitle: 'This Page is under construction!',
-                              msgContent:
-                                  'This Page is only view.\n Data will not save.',
-                            );
-                            // showSearch(
-                            //   context: context,
-                            //   delegate: OfferSearchPage(),
-                            // );
-                          },
+                        Expanded(
+                          flex: 15,
+                          child: IconButton(
+                            icon: const Icon(Icons.filter_list),
+                            color: ColorsManager.white,
+                            onPressed: () {
+                              customSnackbar(
+                                msgTitle: 'This Page is under construction!',
+                                msgContent:
+                                    'This Page is only view.\n Data will not save.',
+                              );
+                              // showSearch(
+                              //   context: context,
+                              //   delegate: OfferSearchPage(),
+                              // );
+                            },
+                          ),
                         ),
                       ],
                     ),

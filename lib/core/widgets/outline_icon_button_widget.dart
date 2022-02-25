@@ -12,6 +12,8 @@ class OutlineIconButtonWidget extends StatelessWidget {
   final Color? iconColorOnClick;
   final double? iconSize;
   final bool? buttonState;
+  final bool? oneTimePress;
+
   final VoidCallback? onPressed;
 
   const OutlineIconButtonWidget({
@@ -23,6 +25,7 @@ class OutlineIconButtonWidget extends StatelessWidget {
     this.iconColorOnClick = ColorsManager.primary,
     this.iconSize = AppSize.s16,
     this.buttonState = false,
+    this.oneTimePress = false,
     this.onPressed,
     Key? key,
   }) : super(key: key);
@@ -30,7 +33,7 @@ class OutlineIconButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed,
+      onTap: oneTimePress == true ? null : onPressed,
       child: Padding(
         padding: const EdgeInsets.all(AppSize.s8),
         child: Row(

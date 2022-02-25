@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/widgets/custom_text_widget.dart';
 
 class OfferSearchPage extends SearchDelegate {

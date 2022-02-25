@@ -568,7 +568,10 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                 children: actionButtons!
                     .where(
                       (element) =>
-                          element.key! != const ValueKey('information'),
+                          element.key! !=
+                          const ValueKey(
+                            OfferStrings.informationAction,
+                          ),
                     )
                     .toList(),
               ),

@@ -1,11 +1,17 @@
 import 'package:get/get.dart';
 
+import '../../core/core.dart';
 import '../../data/data.dart';
+import '../modules.dart';
 
 class OfferController extends GetxController
     with StateMixin<RxList<JobOfferModel>> {
   // final profileController = Get.put(ProfileController());
   final offerProvider = Get.find<OfferProvider>();
+
+  final offerHelper = OfferHelper();
+
+  final feedController = Get.put(FeedController());
 
   Rx<FieldModel> jobOfferStateSelected = FieldModel().obs;
 
@@ -23,10 +29,10 @@ class OfferController extends GetxController
   Future<void> onInit() async {
     super.onInit();
     jobOfferStateFilterList.value = [
-      FieldModel(id: 0, label: 'Pending', total: 0),
-      FieldModel(id: 1, label: 'Matched', total: 0),
-      FieldModel(id: 2, label: 'Saved', total: 0),
-      FieldModel(id: 3, label: 'Rejected', total: 0),
+      FieldModel(id: 0, label: OfferStrings.pendingState, total: 0),
+      FieldModel(id: 1, label: OfferStrings.matchedState, total: 0),
+      FieldModel(id: 2, label: OfferStrings.savedState, total: 0),
+      FieldModel(id: 3, label: OfferStrings.rejectedState, total: 0),
     ];
     jobOfferStateSelected.value = jobOfferStateFilterList[0];
 
@@ -47,6 +53,140 @@ class OfferController extends GetxController
     // if failed,use refreshFailed()
   }
 
+  Future<void> stateOnRefresh({
+    required String? actionStateName,
+    // int? jobOfferId,
+    RxList<JobOfferModel>? jobOfferList,
+    int? jobOfferState,
+    RxList<JobOfferModel>? jobOfferListFilter,
+    Future<List<JobOfferModel>>? getListFomProvider,
+    bool? isStateFilter = true,
+  }) async {
+    jobOfferList!.clear();
+    jobOfferListFilter?.clear();
+    jobOfferList.value = await getListFomProvider!;
+    int itemCount = 0;
+    if (jobOfferList.isNotEmpty) {
+      for (int i = 0; i < jobOfferList.length; i++) {
+        if (actionStateName == OfferStrings.savedState) {
+          if (jobOfferList[i].jobOfferStateModel!.isSavedState == 1) {
+            jobOfferListFilter!.add(jobOfferList[i]);
+            itemCount += 1;
+          }
+        } else {
+          itemCount += 1;
+        }
+      }
+    }
+    if (isStateFilter!) {
+      offerHelper.updateOfferStateItem(
+        actionStateName: actionStateName,
+        totalItem: itemCount,
+        jobOfferStateList: jobOfferStateFilterList,
+      );
+    }
+  }
+
+  // void updateOfferStateItem({
+  //   required String? actionStateName,
+  //   int? totalItem = 0,
+  //   List<FieldModel>? jobOfferStateList,
+  // }) {
+  //   final FieldModel itemToBeUpdated =
+  //       jobOfferStateList!.firstWhere((e) => e.label == actionStateName);
+  //   itemToBeUpdated.total = totalItem;
+  // }
+
+  // void removeAndUpdateItemJobOfferList({
+  //   required String? actionStateName,
+  //   RxList<JobOfferModel>? jobOfferList,
+  //   int? jobOfferId,
+  //   int? totalItem = 0,
+  // }) {
+  //   jobOfferList!.removeWhere((item) => item.id == jobOfferId);
+  //   updateOfferStateItem(
+  //     actionStateName: actionStateName,
+  //     totalItem: jobOfferList.length,
+  //     jobOfferStateList: jobOfferStateFilterList,
+  //   );
+  // }
+
+  Future<void> onClickActionButtonJobOffer({
+    required String? actionType,
+    required int? jobOfferId,
+  }) async {
+    if (actionType == OfferStrings.applyAction) {
+      await offerProvider.postApplyOffer(
+        jobOfferId: jobOfferId,
+      );
+      offerHelper.removeItemFromJobOfferList(
+        jobOfferList: savedOfferListFilter,
+        jobOfferId: jobOfferId,
+      );
+      offerHelper.updateOfferStateItem(
+        actionStateName: OfferStrings.savedState,
+        totalItem: savedOfferListFilter.length,
+        jobOfferStateList: jobOfferStateFilterList,
+      );
+      await stateOnRefresh(
+        actionStateName: OfferStrings.pendingState,
+        jobOfferList: pendingOfferListRepsonse,
+        getListFomProvider: offerProvider.getPendingOffers(),
+      );
+    } else if (actionType == OfferStrings.cancelAction) {
+      await offerProvider.postUnApplyOffer(
+        jobOfferId: jobOfferId,
+      );
+      offerHelper.removeItemFromJobOfferList(
+        jobOfferList: pendingOfferListRepsonse,
+        jobOfferId: jobOfferId,
+      );
+      offerHelper.updateOfferStateItem(
+        actionStateName: OfferStrings.pendingState,
+        totalItem: pendingOfferListRepsonse.length,
+        jobOfferStateList: jobOfferStateFilterList,
+      );
+      await stateOnRefresh(
+        actionStateName: OfferStrings.savedState,
+        jobOfferList: savedOfferListRepsonse,
+        jobOfferListFilter: savedOfferListFilter,
+        getListFomProvider: offerProvider.getSavedOffers(),
+      );
+      feedController.onRefresh();
+    } else if (actionType == OfferStrings.saveAction) {
+      await offerProvider.postSaveOffer(
+        jobOfferId: jobOfferId,
+      );
+    } else if (actionType == OfferStrings.unSaveAction) {
+      await offerProvider
+          .postUnSaveOffer(
+            jobOfferId: jobOfferId,
+          )
+          .then(
+            (value) => offerHelper.removeItemFromJobOfferList(
+              jobOfferList: savedOfferListFilter,
+              jobOfferId: jobOfferId,
+            ),
+          )
+          .then(
+            (value) => offerHelper.updateOfferStateItem(
+              actionStateName: OfferStrings.savedState,
+              totalItem: savedOfferListFilter.length,
+              jobOfferStateList: jobOfferStateFilterList,
+            ),
+          );
+      await feedController.onRefresh();
+    } else if (actionType == OfferStrings.hideAction) {
+      await offerProvider.postHideOffer(
+        jobOfferId: jobOfferId,
+      );
+    } else if (actionType == OfferStrings.unHideAction) {
+      await offerProvider.postUnHideOffer(
+        jobOfferId: jobOfferId,
+      );
+    } else {}
+  }
+
   Future<void> getOffersDataState({bool? refresh}) async {
     change(null, status: RxStatus.loading());
     getOfferListResponseProvider(refresh: refresh).then(
@@ -65,59 +205,26 @@ class OfferController extends GetxController
   Future<RxList<JobOfferModel>> getOfferListResponseProvider({
     bool? refresh = false,
   }) async {
-    pendingOfferListRepsonse.clear();
-    matchedOfferListRepsonse.clear();
-    savedOfferListRepsonse.clear();
-    savedOfferListFilter.clear();
-    rejectedOfferListRepsonse.clear();
-    pendingOfferListRepsonse.value = await offerProvider.getPendingOffers();
-    int pendingItemCount = 0;
-    int matchedItemCount = 0;
-    int savedItemCount = 0;
-    int rejectedItemCount = 0;
-
-    if (pendingOfferListRepsonse.isNotEmpty) {
-      for (int i = 0; i < pendingOfferListRepsonse.length; i++) {
-        if (pendingOfferListRepsonse[i].jobOfferStateModel!.isPendingState ==
-            1) {
-          pendingItemCount += 1;
-        }
-      }
-    }
-    matchedOfferListRepsonse.value = await offerProvider.getMatchedOffers();
-    if (matchedOfferListRepsonse.isNotEmpty) {
-      for (int i = 0; i < matchedOfferListRepsonse.length; i++) {
-        if (matchedOfferListRepsonse[i]
-                .jobOfferStateModel!
-                .isEnterpriseMatchedState ==
-            1) {
-          matchedItemCount += 1;
-        }
-      }
-    }
-    savedOfferListRepsonse.value = await offerProvider.getSavedOffers();
-    if (savedOfferListRepsonse.isNotEmpty) {
-      for (int i = 0; i < savedOfferListRepsonse.length; i++) {
-        if (savedOfferListRepsonse[i].jobOfferStateModel!.isSavedState == 1) {
-          savedOfferListFilter.add(savedOfferListRepsonse[i]);
-          savedItemCount += 1;
-        }
-      }
-    }
-    rejectedOfferListRepsonse.value = await offerProvider.getRejectedOffers();
-    if (rejectedOfferListRepsonse.isNotEmpty) {
-      for (int i = 0; i < rejectedOfferListRepsonse.length; i++) {
-        if (rejectedOfferListRepsonse[i].jobOfferStateModel!.isRejectedState ==
-            1) {
-          rejectedItemCount += 1;
-        }
-      }
-    }
-    countEachOfferItem(
-      pendingTotalItems: pendingItemCount,
-      matchedTotalItems: matchedItemCount,
-      savedTotalItems: savedItemCount,
-      rejectedTotalItems: rejectedItemCount,
+    stateOnRefresh(
+      actionStateName: OfferStrings.pendingState,
+      jobOfferList: pendingOfferListRepsonse,
+      getListFomProvider: offerProvider.getPendingOffers(),
+    );
+    stateOnRefresh(
+      actionStateName: OfferStrings.matchedState,
+      jobOfferList: matchedOfferListRepsonse,
+      getListFomProvider: offerProvider.getMatchedOffers(),
+    );
+    stateOnRefresh(
+      actionStateName: OfferStrings.savedState,
+      jobOfferList: savedOfferListRepsonse,
+      jobOfferListFilter: savedOfferListFilter,
+      getListFomProvider: offerProvider.getSavedOffers(),
+    );
+    stateOnRefresh(
+      actionStateName: OfferStrings.rejectedState,
+      jobOfferList: rejectedOfferListRepsonse,
+      getListFomProvider: offerProvider.getRejectedOffers(),
     );
 
     return pendingOfferListRepsonse;
@@ -133,31 +240,5 @@ class OfferController extends GetxController
 
   void selectjobOfferState({FieldModel? state}) {
     jobOfferStateSelected.value = state!;
-  }
-
-  void countEachOfferItem({
-    int? pendingTotalItems,
-    int? savedTotalItems,
-    int? matchedTotalItems,
-    int? rejectedTotalItems,
-  }) {
-    jobOfferStateFilterList.value = [
-      FieldModel(
-        label: 'Pending',
-        total: pendingTotalItems,
-      ),
-      FieldModel(
-        label: 'Matched',
-        total: matchedTotalItems,
-      ),
-      FieldModel(
-        label: 'Saved',
-        total: savedTotalItems,
-      ),
-      FieldModel(
-        label: 'Rejected',
-        total: rejectedTotalItems,
-      ),
-    ];
   }
 }

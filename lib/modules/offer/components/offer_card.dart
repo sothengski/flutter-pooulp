@@ -192,7 +192,7 @@ class OfferCard extends StatelessWidget {
                                   color: ColorsManager.grey200,
                                 ),
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: AppSize.s8,
+                                  horizontal: AppSize.s2,
                                   vertical: AppSize.s4,
                                 ),
                                 child: CustomTextWidget(

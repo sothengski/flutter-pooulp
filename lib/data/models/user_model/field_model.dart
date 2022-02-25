@@ -62,6 +62,7 @@ class FieldModel {
       categoryId: $categoryId,
       category: $category,
       video_url: $videoUrl,
+      total: $total,
     )''';
   }
 }

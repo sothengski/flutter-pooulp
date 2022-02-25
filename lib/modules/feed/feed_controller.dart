@@ -1,12 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/core.dart';
 import '../../data/data.dart';
 import '../modules.dart';
 
 class FeedController extends GetxController
     with StateMixin<RxList<JobOfferModel>> {
-  final feedProvider = Get.find<FeedProvider>();
+  // final feedProvider = Get.find<FeedProvider>();
+  final offerProvider = Get.find<OfferProvider>();
+
+  final offerHelper = OfferHelper();
+
   final profileController = Get.put(ProfileController());
+  final ScrollController scrollController = ScrollController();
 
   RxList<JobOfferModel> feedListRepsonse = <JobOfferModel>[].obs;
   RxList<JobOfferModel> feedFilterList = <JobOfferModel>[].obs;
@@ -16,9 +23,9 @@ class FeedController extends GetxController
   List<FieldModel> listFilterTypes = [];
   Set<String?> setOfListTypes = {};
 
-  RxList<bool> applyButtonStateList = <bool>[].obs;
-  RxList<bool> savedButtonStateList = <bool>[].obs;
-  RxList<bool> hideButtonStateList = <bool>[].obs;
+  // RxList<bool> applyButtonStateList = <bool>[].obs;
+  // RxList<bool> savedButtonStateList = <bool>[].obs;
+  // RxList<bool> hideButtonStateList = <bool>[].obs;
 
   @override
   Future<void> onInit() async {
@@ -30,6 +37,7 @@ class FeedController extends GetxController
   }
 
   bool jobOfferOnClickBoolSwitching({bool? boolValue}) {
+    update();
     return !boolValue!;
   }
 
@@ -59,7 +67,10 @@ class FeedController extends GetxController
     bool? refresh = false,
   }) async {
     feedListRepsonse.clear();
-    feedListRepsonse.value = await feedProvider.getFeedOffers();
+    // applyButtonStateList.clear();
+    // savedButtonStateList.clear();
+    // hideButtonStateList.clear();
+    feedListRepsonse.value = await offerProvider.getFeedOffers();
     addTypesIntoSet(jobOfferTrxData: feedListRepsonse);
     return feedListRepsonse;
   }
@@ -87,6 +98,64 @@ class FeedController extends GetxController
     return feedFilterList;
   }
 
+  Future<void> onClickActionButtonJobOfferFeed({
+    required String? actionType,
+    required int? jobOfferId,
+  }) async {
+    final offerController = Get.put(OfferController());
+
+    if (actionType == OfferStrings.applyAction) {
+      await offerProvider
+          .postApplyOffer(
+            jobOfferId: jobOfferId,
+          )
+          .then(
+            (value) => offerHelper.removeItemFromJobOfferList(
+              jobOfferList: feedListRepsonse,
+              jobOfferId: jobOfferId,
+            ),
+          )
+          .then(
+            (value) => offerHelper.removeItemFromJobOfferList(
+              jobOfferList: feedFilterList,
+              jobOfferId: jobOfferId,
+            ),
+          );
+      await offerController.onRefresh();
+    } else if (actionType == OfferStrings.saveAction) {
+      await offerProvider.postSaveOffer(
+        jobOfferId: jobOfferId,
+      );
+      offerHelper.removeItemFromJobOfferList(
+        jobOfferList: feedListRepsonse,
+        jobOfferId: jobOfferId,
+      );
+      offerHelper.removeItemFromJobOfferList(
+        jobOfferList: feedFilterList,
+        jobOfferId: jobOfferId,
+      );
+      await offerController.onRefresh();
+    } else if (actionType == OfferStrings.hideAction) {
+      await offerProvider
+          .postHideOffer(
+            jobOfferId: jobOfferId,
+          )
+          .then(
+            (value) => offerHelper.removeItemFromJobOfferList(
+              jobOfferList: feedListRepsonse,
+              jobOfferId: jobOfferId,
+            ),
+          )
+          .then(
+            (value) => offerHelper.removeItemFromJobOfferList(
+              jobOfferList: feedFilterList,
+              jobOfferId: jobOfferId,
+            ),
+          );
+      await offerController.onRefresh();
+    } else {}
+  }
+
   void selectType({FieldModel? type}) {
     FieldModel tempType = allType;
     if (typeSelected != type) {
@@ -109,9 +178,9 @@ class FeedController extends GetxController
     // typeSelected = listFilterTypes[0];
 
     for (var i = 0; i < jobOfferTrxData!.length; i++) {
-      applyButtonStateList.add(false);
-      savedButtonStateList.add(false);
-      hideButtonStateList.add(false);
+      // applyButtonStateList.add(false);
+      // savedButtonStateList.add(false);
+      // hideButtonStateList.add(false);
       for (var j = 0; j < jobOfferTrxData[i].types!.length; j++) {
         if (setOfListTypes.add(jobOfferTrxData[i].types![j].label)) {
           listFilterTypes.add(

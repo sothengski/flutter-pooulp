@@ -27,7 +27,7 @@ class OfferStateListComponent extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
           final FieldModel item = jobOfferStateList![index];
-          return item.label == 'Rejected' && item.total == 0
+          return item.label == OfferStrings.rejectedState && item.total == 0
               ? Container()
               : Obx(
                   () => Container(

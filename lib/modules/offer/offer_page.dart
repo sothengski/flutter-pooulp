@@ -28,31 +28,37 @@ class OfferPage extends GetView<OfferController> {
           Expanded(
             flex: 91,
             child: Obx(
-              () => controller.isJobOfferStateList(inputValue: 'Pending')
+              () => controller.isJobOfferStateList(
+                inputValue: OfferStrings.pendingState,
+              )
                   ? OfferListStateComponent(
                       controller: controller,
                       offerList: controller.pendingOfferListRepsonse,
-                      jobOfferType: 'Pending',
+                      jobOfferType: OfferStrings.pendingState,
                       noDataHeader: 'No Pending results found.',
                     )
-                  : controller.isJobOfferStateList(inputValue: 'Matched')
+                  : controller.isJobOfferStateList(
+                      inputValue: OfferStrings.matchedState,
+                    )
                       ? OfferListStateComponent(
                           controller: controller,
                           offerList: controller.matchedOfferListRepsonse,
-                          jobOfferType: 'Matched',
+                          jobOfferType: OfferStrings.matchedState,
                           noDataHeader: 'No Matched results found.',
                         )
-                      : controller.isJobOfferStateList(inputValue: 'Saved')
+                      : controller.isJobOfferStateList(
+                          inputValue: OfferStrings.savedState,
+                        )
                           ? OfferListStateComponent(
                               controller: controller,
                               offerList: controller.savedOfferListFilter,
-                              jobOfferType: 'Saved',
+                              jobOfferType: OfferStrings.savedState,
                               noDataHeader: 'No Saved results found.',
                             )
                           : OfferListStateComponent(
                               controller: controller,
                               offerList: controller.rejectedOfferListRepsonse,
-                              jobOfferType: 'Rejected',
+                              jobOfferType: OfferStrings.rejectedState,
                               noDataHeader: 'No Rejected results found.',
                             ),
             ),

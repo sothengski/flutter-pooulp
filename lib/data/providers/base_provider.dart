@@ -10,7 +10,7 @@ class BaseProvider extends GetConnect {
     super.onInit();
 
     // add your local storage here to load for every request
-    final String userToken = AuthServices().getStringToken().toString();
+    final String userToken = getUserToken();
 
     //1.base_url
     httpClient.baseUrl = API.host;
@@ -62,6 +62,7 @@ class BaseProvider extends GetConnect {
         }
       }
       return response;
+      // return getServerResponse(response);
     });
 
     httpClient.addRequestModifier<void>((request) async {
@@ -73,5 +74,48 @@ class BaseProvider extends GetConnect {
     //Autenticator will be called 3 times if HttpStatus is
     //HttpStatus.unauthorized
     httpClient.maxAuthRetries = 3;
+  }
+
+  String getUserToken() {
+    return AuthServices().getStringToken().toString();
+  }
+
+  Map<String, String> getRequestHeaders({
+    bool addHeaderAuthorization = false,
+    bool addHeaderContentJson = false,
+    String? addHeaderCustomContent,
+  }) {
+    final reqHeaders = <String, String>{};
+    reqHeaders.putIfAbsent('Accept', () => 'application/json');
+    reqHeaders.putIfAbsent('Accept-Encoding', () => 'gzip');
+    if (addHeaderAuthorization) {
+      reqHeaders.putIfAbsent(
+        'Authorization',
+        () => 'Bearer ${getUserToken()}',
+      );
+    }
+    if (addHeaderContentJson) {
+      reqHeaders.putIfAbsent('Content-Type', () => 'application/json');
+    } else if (addHeaderCustomContent != null &&
+        addHeaderCustomContent.isNotEmpty) {
+      reqHeaders.putIfAbsent('Content-Type', () => addHeaderCustomContent);
+    }
+    return reqHeaders;
+  }
+
+  Response getServerResponse(Response response) {
+    if (response.statusCode == 200) {
+      return response;
+    } else if (response.statusCode == 403) {
+      throw Exception(
+        'Non si dispone delle autorizzazioni necessarie per accedere alla risorsa',
+      );
+    } else if (response.statusCode == 404) {
+      throw Exception('Risorsa non trovata');
+    } else if (response.statusCode == 415) {
+      throw Exception('Unsupported media type');
+    } else {
+      throw Exception('Errore nel recupero dei dati');
+    }
   }
 }

@@ -7,13 +7,18 @@ enum Endpoint {
   registerNewUser,
   userInfo,
   studentInfo,
-  feed,
-  feedFresh,
-  pendingOffer,
-  matchedOffer,
-  savedOffer,
-  rejectedOffer,
-  savedAnOfferPOST,
+  getFeed,
+  getFeedFresh,
+  getPendingOffer,
+  getMatchedOffer,
+  getSavedOffer,
+  getRejectedOffer,
+  // postApplyOffer,
+  // postUnApplyOffer,
+  // postSavedOffer,
+  // postUnSaveOffer,
+  // postHideOffer,
+  // postUnHideOffer,
 }
 
 class API {
@@ -36,13 +41,23 @@ class API {
     Endpoint.registerNewUser: '/register',
     Endpoint.userInfo: '/users/me',
     Endpoint.studentInfo: '/users/me/student_profile',
-    Endpoint.feed: '/offers',
-    Endpoint.feedFresh: '/offers/fresh',
-    Endpoint.pendingOffer: '/offers/pending',
-    Endpoint.matchedOffer: '/offers/matched',
-    Endpoint.savedOffer: '/offers/saved',
-    Endpoint.rejectedOffer: '/offers/hidden',
+    Endpoint.getFeed: '/offers',
+    Endpoint.getFeedFresh: '/offers/fresh',
+    Endpoint.getPendingOffer: '/offers/pending',
+    Endpoint.getMatchedOffer: '/offers/matched',
+    Endpoint.getSavedOffer: '/offers/saved',
+    Endpoint.getRejectedOffer: '/offers/hidden',
   };
-
-  static String savedAnOfferPostMethod(int offerId) => '/offers/$offerId/save';
+  static String postApplyOffer({required int? offerId}) =>
+      '/offers/$offerId/like';
+  static String postUnApplyOffer({required int? offerId}) =>
+      '/offers/$offerId/unlike';
+  static String postSavedOffer({required int? offerId}) =>
+      '/offers/$offerId/save';
+  static String postUnSaveOffer({required int? offerId}) =>
+      '/offers/$offerId/unsave';
+  static String postHideOffer({required int? offerId}) =>
+      '/offers/$offerId/dislike';
+  static String postUnHideOffer({required int? offerId}) =>
+      '/offers/$offerId/undislike';
 }

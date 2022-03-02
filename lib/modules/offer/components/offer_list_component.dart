@@ -68,13 +68,20 @@ class OfferListComponent extends StatelessWidget {
                             // iconColor: ColorsManager.grey600,
                             buttonState: offerList![index].applyState,
                             onPressed: () {
-                              offerController!.onClickActionButtonJobOffer(
-                                actionType: OfferStrings.callAction,
-                                jobOfferId: offerList![index].id,
-                              );
+                              // offerController!.onClickActionButtonJobOffer(
+                              //   actionType: OfferStrings.callAction,
+                              //   jobOfferId: offerList![index].id,
+                              // );
                               offerList![index].applyState =
                                   offerController!.jobOfferOnClickBoolSwitching(
                                 boolValue: offerList![index].applyState,
+                              );
+                              urlLauncherUtils(
+                                thingToLaunch: offerList![index]
+                                    .enterprise!
+                                    .managers![0]
+                                    .managerPhoneContact,
+                                laucherType: LauncherType.phone,
                               );
                             },
                           ),
@@ -113,6 +120,13 @@ class OfferListComponent extends StatelessWidget {
                               //   actionType: OfferStrings.email,
                               //   jobOfferId: offerList![index].id,
                               // );
+                              urlLauncherUtils(
+                                thingToLaunch: offerList![index]
+                                    .enterprise!
+                                    .managers![0]
+                                    .managerEmailContact,
+                                laucherType: LauncherType.email,
+                              );
                               offerList![index].savedState =
                                   offerController!.jobOfferOnClickBoolSwitching(
                                 boolValue: offerList![index].savedState,

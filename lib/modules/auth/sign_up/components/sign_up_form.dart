@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -419,11 +420,75 @@ class SignUpForm extends GetView<SignUpController> {
                                         controller.isCheckTermCondition.value,
                                   ),
                                 ),
-                                const CustomTextWidget(
-                                  text: "I agree to Pooulp's Terms of Use",
-                                )
+                                SizedBox(
+                                  width: getWidth * 0.7,
+                                  child: RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        const TextSpan(
+                                          text: 'I agree to Pooulp ',
+                                          style: TextStyle(
+                                            color: ColorsManager.primaryBlue,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: 'Privacy Policy',
+                                          style: const TextStyle(
+                                            color: Colors.blue,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () async {
+                                              urlLauncherUtils(
+                                                thingToLaunch: UrlWebsiteStrings
+                                                    .privacyPolicy,
+                                                inApp: true,
+                                              );
+                                            },
+                                        ),
+                                        const TextSpan(
+                                          text: ' & ',
+                                          style: TextStyle(
+                                            color: ColorsManager.primaryBlue,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: 'Terms',
+                                          style: const TextStyle(
+                                            color: Colors.blue,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () async {
+                                              urlLauncherUtils(
+                                                thingToLaunch: UrlWebsiteStrings
+                                                    .termsOfUse,
+                                                inApp: true,
+                                              );
+                                            },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                // SizedBox(
+                                //   width: getWidth * 0.7,
+                                //   child: GestureDetector(
+                                //     onTap: () async {
+                                //       urlLaucherUtils(
+                                //         url:
+                                //             'http://pooulp.com/privacy-policy/',
+                                //         inApp: true,
+                                //       );
+                                //     },
+                                //     child: const CustomTextWidget(
+                                //       text:
+                                //           "I agree to Pooulp Privacy Policy & Terms",
+                                //       maxLine: 2,
+                                //     ),
+                                //   ),
+                                // )
                               ],
                             ),
+                            const SizedBox(height: AppSize.s5),
                             Row(
                               // crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

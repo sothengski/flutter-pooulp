@@ -23,6 +23,10 @@ class UserModel {
     this.role,
     this.user,
   });
+  String get managerPhoneContact =>
+      '${user!.profile!.phone1CountryCode} ${user!.profile!.phone1}';
+
+  String get managerEmailContact => '${user!.email}';
 
   factory UserModel.fromRawJson(String str) => UserModel.fromJson(
         json.decode(str) as Map<String, dynamic>,

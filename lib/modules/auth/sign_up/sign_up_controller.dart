@@ -29,7 +29,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
 
   RxBool showPassword = false.obs;
   // RxBool showPasswordConfirmation = false.obs;
-  RxBool isCheckTermCondition = true.obs;
+  RxBool isCheckTermCondition = false.obs;
 
   RxBool isCheckMarketing = true.obs;
 

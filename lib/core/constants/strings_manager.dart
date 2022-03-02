@@ -25,3 +25,8 @@ class OfferStrings {
   static const String emailAction = 'email';
   static const String callAction = 'call';
 }
+
+class UrlWebsiteStrings {
+  static const String privacyPolicy = 'http://pooulp.com/privacy-policy/';
+  static const String termsOfUse = 'http://pooulp.com/terms-of-use/';
+}

@@ -399,6 +399,58 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ),
                           //===== Enterprise ID Component =====//
 
+                          ///===== Contact Phone Component =====//
+                          // GestureDetector(
+                          //   onTap: () async {
+                          //     urlLauncherUtils(
+                          //       thingToLaunch: jobOfferDetail.enterprise!
+                          //           .managers![0].managerPhoneContact,
+                          //       laucherType: LauncherType.phone,
+                          //     );
+                          //   },
+                          //   child: OutlineContainerWidget(
+                          //     title: 'Contact Phone',
+                          //     titleColor: ColorsManager.primaryBlue,
+                          //     childWidget: CustomBoxWidget(
+                          //       insideObj: CustomTextWidget(
+                          //         textAlign: TextAlign.center,
+                          //         text: jobOfferDetail.enterprise!.managers![0]
+                          //             .managerPhoneContact,
+                          //         fontWeight: FontWeightManager.regular,
+                          //         fontSize: AppSize.s12,
+                          //         // marginBottom: AppSize.s10,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          //===== Contact Phone Component =====//
+
+                          ///===== Contact Email Component =====//
+                          // GestureDetector(
+                          //   onTap: () async {
+                          //     urlLauncherUtils(
+                          //       thingToLaunch: jobOfferDetail.enterprise!
+                          //           .managers![0].managerEmailContact,
+                          //       laucherType: LauncherType.email,
+                          //     );
+                          //   },
+                          //   child: OutlineContainerWidget(
+                          //     title: 'Contact Email',
+                          //     titleColor: ColorsManager.primaryBlue,
+                          //     childWidget: CustomBoxWidget(
+                          //       insideObj: CustomTextWidget(
+                          //         textAlign: TextAlign.center,
+                          //         text: jobOfferDetail.enterprise!.managers![0]
+                          //             .managerEmailContact,
+                          //         fontWeight: FontWeightManager.regular,
+                          //         fontSize: AppSize.s12,
+                          //         // marginBottom: AppSize.s10,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          //===== Contact Email Component =====//
+
                           ///===== Office Address Component =====//
                           OutlineContainerWidget(
                             title: 'Office Address',

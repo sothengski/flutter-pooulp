@@ -19,6 +19,7 @@ enum Endpoint {
   // postUnSaveOffer,
   // postHideOffer,
   // postUnHideOffer,
+  getJobOfferTypes,
 }
 
 class API {
@@ -47,7 +48,10 @@ class API {
     Endpoint.getMatchedOffer: '/offers/matched',
     Endpoint.getSavedOffer: '/offers/saved',
     Endpoint.getRejectedOffer: '/offers/hidden',
+    Endpoint.getJobOfferTypes: '/tags/offers',
   };
+  static String postSearchOffer({int? pageNumber = 1}) =>
+      '/search/offers?page=/$pageNumber';
   static String postApplyOffer({required int? offerId}) =>
       '/offers/$offerId/like';
   static String postUnApplyOffer({required int? offerId}) =>

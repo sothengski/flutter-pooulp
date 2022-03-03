@@ -33,6 +33,9 @@ class JobOfferModel {
   bool? rejectedState;
   bool? informationState;
   // String? jobOfferType;
+  final String? location;
+  final bool? isRangeSearch;
+  final int? range;
 
   JobOfferModel({
     this.id,
@@ -44,7 +47,7 @@ class JobOfferModel {
     this.dateOfferEnd,
     this.dateJobStart,
     this.dateJobEnd,
-    this.telecommuting,
+    this.telecommuting = 2,
     this.shifting,
     this.numberOfWorkingHourPerWeek,
     this.addressStreet,
@@ -64,6 +67,9 @@ class JobOfferModel {
     this.rejectedState = false,
     this.informationState = false,
     // this.jobOfferType = '',
+    this.location = "",
+    this.isRangeSearch = false,
+    this.range = -1,
   });
 
   String? get numberOfWorkPerWeek => numberOfWorkingHourPerWeek == null
@@ -214,6 +220,26 @@ class JobOfferModel {
         'job_offer_state': jobOfferStateModel?.toJson(),
       }..removeWhere((_, v) => v == null);
 
+  Map<String, dynamic> toSearchJson() => {
+        'keywords': title, //'title': title,
+        'telecommuting': telecommuting,
+        'address_street': addressStreet,
+        'address_city': addressCity,
+        'address_zip': addressZip,
+        'address_country': addressCountry,
+        'address_latitude': addressLatitude,
+        'address_longitude': addressLongitude,
+        'types': types == null || types == []
+            ? []
+            : List<dynamic>.from(types!.map((x) => x.id)), //use only type ID
+        'fields': fields == null || fields == []
+            ? []
+            : List<dynamic>.from(fields!.map((x) => x.toJson())),
+        'location': location,
+        'is_range_search': isRangeSearch,
+        'range': range,
+      }..removeWhere((_, v) => v == null);
+
   @override
   String toString() {
     return '''
@@ -241,6 +267,9 @@ class JobOfferModel {
       skills: $skills,
       enterprise: $enterprise,
       jobOfferStateModel: $jobOfferStateModel,
+      'location': $location,
+      'isRangeSearch': $isRangeSearch,
+      'range': $range,
     )''';
   }
 }

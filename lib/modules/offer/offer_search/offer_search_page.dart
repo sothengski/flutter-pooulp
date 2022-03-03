@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../core/widgets/custom_text_widget.dart';
+import '../../../core/core.dart';
+import '../../modules.dart';
 
 class OfferSearchPage extends SearchDelegate {
-  // const OfferSearchPage({Key? key}) : super(key: key);
+  // OfferSearchPage();
+
+  final feedController = Get.find<OfferFeedController>();
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -12,7 +14,7 @@ class OfferSearchPage extends SearchDelegate {
       IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
-          query = "";
+          query = feedController.keywordForSearch.value;
         },
       ),
     ];
@@ -33,7 +35,12 @@ class OfferSearchPage extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Container();
+    return Container(
+      padding: const EdgeInsets.only(
+        top: AppSize.s10,
+      ),
+      child: FeedListComponent(),
+    );
   }
 
   @override

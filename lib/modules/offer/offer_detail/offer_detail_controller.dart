@@ -11,8 +11,6 @@ class OfferDetailController extends GetxController
 
   late JobOfferModel? feedItemDetail;
 
-  // final FeedController feedController = Get.find<FeedController>();
-
   @override
   void onInit() {
     tabController = TabController(

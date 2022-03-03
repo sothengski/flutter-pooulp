@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class JobOfferStateModel {
   final int? id;
+  final int? stateID;
   final DateTime? datetimeSaved; // Job Offer Saved
   final DateTime? datetimeRefused; // Job Offer Hided
   final DateTime? datetimeMatched; // Job Offer Pending
@@ -12,6 +13,7 @@ class JobOfferStateModel {
 
   JobOfferStateModel({
     this.id,
+    this.stateID = 0,
     this.datetimeSaved,
     this.datetimeRefused,
     this.datetimeMatched,
@@ -78,6 +80,7 @@ class JobOfferStateModel {
   factory JobOfferStateModel.fromJson(Map<String, dynamic> json) =>
       JobOfferStateModel(
         id: json["id"] as int?,
+        stateID: json[' state_id'] as int?,
         datetimeSaved:
             json['datetime_saved'] == null || json['datetime_saved'] == ''
                 ? null
@@ -114,6 +117,7 @@ class JobOfferStateModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "state_id": stateID,
         "datetime_saved": datetimeSaved,
         "datetime_refused": datetimeRefused,
         "datetime_matched": datetimeMatched?.toIso8601String(),
@@ -125,6 +129,7 @@ class JobOfferStateModel {
   String toString() {
     return '''
     JobOfferStateModel(id: $id,
+      stateID: $stateID,
       datetimeSaved: $datetimeSaved,
       datetimeRefused: $datetimeRefused,
       datetimeMatched: $datetimeMatched,

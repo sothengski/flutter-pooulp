@@ -26,9 +26,17 @@ class HomeBinding implements Bindings {
       () => OfferProvider(),
     );
 
-    Get.lazyPut<FeedController>(
-      () => FeedController(),
+    Get.lazyPut<TagProvider>(
+      () => TagProvider(),
     );
+
+    Get.lazyPut<OfferFeedController>(
+      () => OfferFeedController(),
+    );
+
+    // Get.lazyPut<FeedController>(
+    //   () => FeedController(),
+    // );
 
     Get.lazyPut<OfferController>(
       () => OfferController(),

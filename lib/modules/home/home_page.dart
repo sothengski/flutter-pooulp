@@ -16,7 +16,8 @@ class HomePage extends GetView<HomeController> {
           child: IndexedStack(
             index: controller.currentIndex.value,
             children: const [
-              FeedPage(),
+              OfferFeedPage(),
+              // FeedPage(),
               OfferPage(),
               ProfilePage(),
             ],
@@ -36,6 +37,12 @@ class HomePage extends GetView<HomeController> {
                 title: const Text('Feed'),
                 activeColor: ColorsManager.primary,
               ),
+              // BottomNavBarItem(
+              //   activeIcon: const Icon(Icons.explore),
+              //   inActiveIcon: const Icon(Icons.explore_outlined),
+              //   title: const Text('Feed'),
+              //   activeColor: ColorsManager.primary,
+              // ),
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.description),
                 inActiveIcon: const Icon(Icons.description_outlined),

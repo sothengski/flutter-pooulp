@@ -11,7 +11,7 @@ class OfferController extends GetxController
 
   final offerHelper = OfferHelper();
 
-  final feedController = Get.put(FeedController());
+  final feedController = Get.put(OfferFeedController());
 
   Rx<FieldModel> jobOfferStateSelected = FieldModel().obs;
 

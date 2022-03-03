@@ -9,7 +9,7 @@ class HomeController extends GetxController {
 
   late LoginModel? userToken;
 
-  RxInt currentIndex = 1.obs;
+  RxInt currentIndex = 0.obs;
 
   @override
   Future<void> onInit() async {
@@ -18,7 +18,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> signOut() async {
-    AuthServices().removeToken();
+    await AuthServices().removeToken();
     await authProvider.logOutAPI();
     Get.offAllNamed(Routes.signInRoute);
   }

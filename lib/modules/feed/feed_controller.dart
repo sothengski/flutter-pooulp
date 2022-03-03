@@ -23,18 +23,20 @@ class FeedController extends GetxController
   List<FieldModel> listFilterTypes = [];
   Set<String?> setOfListTypes = {};
 
+  final String keywordForSearch = '';
+
   // RxList<bool> applyButtonStateList = <bool>[].obs;
   // RxList<bool> savedButtonStateList = <bool>[].obs;
   // RxList<bool> hideButtonStateList = <bool>[].obs;
 
-  @override
-  Future<void> onInit() async {
-    super.onInit();
-    await getFeedsDataState(refresh: true)
-        // .then((value) => isProcessingStudentInfoRepsonse.value = true)
-        ;
-    // typeSelected = allType;
-  }
+  // @override
+  // Future<void> onInit() async {
+  //   super.onInit();
+  //   await getFeedsDataState(refresh: true)
+  //       // .then((value) => isProcessingStudentInfoRepsonse.value = true)
+  //       ;
+  //   // typeSelected = allType;
+  // }
 
   bool jobOfferOnClickBoolSwitching({bool? boolValue}) {
     update();

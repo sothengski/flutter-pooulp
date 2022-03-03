@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../core/core.dart';
+import '../offer.dart';
 
-import '../../core/core.dart';
-import '../offer/offer.dart';
-import 'feed.dart';
-
-class FeedPage extends GetView<FeedController> {
-  const FeedPage({Key? key}) : super(key: key);
+class OfferFeedPage extends GetView<OfferFeedController> {
+  const OfferFeedPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,18 +48,11 @@ class FeedPage extends GetView<FeedController> {
                         () => controller.profileController.userInfoRepsonse
                                     .value.profile ==
                                 null
-                            ? Container(
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: AppSize.s8,
-                                  vertical: AppSize.s10,
-                                ),
-                                child: ShimmerWidget.rectangular(
-                                  width: 120,
-                                  height: 1,
-                                  shapeBorder: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(AppSize.s8),
-                                  ),
+                            ? const SizedBox(
+                                width: 100,
+                                child: LoadingWidget(
+                                  isTreeBounceLoading: true,
+                                  color: ColorsManager.white,
                                 ),
                               )
                             : CustomTextWidget(
@@ -90,8 +81,12 @@ class FeedPage extends GetView<FeedController> {
                               containerBackground: ColorsManager.grey100,
                               childPadding: AppSize.s12,
                               titleInSide: false,
-                              child: const CustomTextWidget(
-                                text: 'Search the job title',
+                              child: Obx(
+                                () => CustomTextWidget(
+                                  text: controller.keywordForSearch.value != ''
+                                      ? controller.keywordForSearch.value
+                                      : 'Search the job title', //'Search the job title',
+                                ),
                               ),
                               onTap: () {
                                 showSearch(
@@ -107,6 +102,7 @@ class FeedPage extends GetView<FeedController> {
                               icon: const Icon(Icons.filter_list),
                               color: ColorsManager.white,
                               onPressed: () {
+                                controller.updateKeyword();
                                 customSnackbar(
                                   msgTitle: 'This Page is under construction!',
                                   msgContent:
@@ -132,46 +128,54 @@ class FeedPage extends GetView<FeedController> {
             child: RefreshIndicator(
               color: ColorsManager.primary,
               onRefresh: () => controller.onRefresh(),
-              child: controller.obx(
-                (state) => Obx(
-                  () => controller.feedFilterList.isNotEmpty
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              flex: 9,
-                              child: OfferTypesListComponent(),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 9,
+                    child: Obx(
+                      () => controller.listJobOfferTypes.isNotEmpty
+                          ? OfferFeedTypesListComponent()
+                          : const ItemListShimmerLoadingWidget(
+                              isBodyList: false,
                             ),
-                            Expanded(
-                              flex: 90,
-                              child: FeedListComponent(),
-                            ),
-                          ],
-                        )
-                      : Center(
-                          child: StateHandlerWidget(
-                            imgPath: AssetsManager.emptyDataIcon,
-                            headerText: 'No feed results found.',
-                            bodyText:
-                                "Make sure you complete your profile information.",
-                            buttonText: 'Try again',
-                            onPressedFunctionCall: controller.onRefresh,
-                          ),
-                        ),
-                ),
-                onLoading: const Center(
-                  child: ItemListShimmerLoadingWidget(),
-                ),
-                onError: (error) => Center(
-                  child: StateHandlerWidget(
-                    imgPath: AssetsManager.emptyDataIcon,
-                    headerText: 'Sorry! Something went wrong',
-                    bodyText:
-                        "Make sure that Wi-Fi or mobile data is turned on and try again..",
-                    buttonText: 'Try again',
-                    onPressedFunctionCall: controller.onRefresh,
+                    ),
                   ),
-                ),
+                  Expanded(
+                    flex: 90,
+                    child: controller.obx(
+                      (state) => Obx(
+                        () => controller.feedListRepsonse.isNotEmpty
+                            ? OfferFeedListComponent()
+                            : Center(
+                                child: StateHandlerWidget(
+                                  imgPath: AssetsManager.emptyDataIcon,
+                                  headerText: 'No feed results found.',
+                                  bodyText:
+                                      "Make sure you complete your profile information.",
+                                  buttonText: 'Try again',
+                                  onPressedFunctionCall: controller.onRefresh,
+                                ),
+                              ),
+                      ),
+                      onLoading: const Center(
+                        child: ItemListShimmerLoadingWidget(
+                          isTopRowList: false,
+                        ),
+                      ),
+                      onError: (error) => Center(
+                        child: StateHandlerWidget(
+                          imgPath: AssetsManager.emptyDataIcon,
+                          headerText: 'Sorry! Something went wrong',
+                          bodyText:
+                              "Make sure that Wi-Fi or mobile data is turned on and try again..",
+                          buttonText: 'Try again',
+                          onPressedFunctionCall: controller.onRefresh,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

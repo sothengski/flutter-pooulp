@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 import '../data.dart';
 
 abstract class IOfferProvider {
@@ -8,6 +10,10 @@ abstract class IOfferProvider {
   Future<List<JobOfferModel>> getMatchedOffers();
   Future<List<JobOfferModel>> getSavedOffers();
   Future<List<JobOfferModel>> getRejectedOffers();
+  // Future<List<JobOfferModel>> postSearchOffer({
+  //   int? pageNumber = 1,
+  //   JobOfferModel jobOfferForSearch,
+  // });
   Future<JobOfferModel> postApplyOffer({required int? jobOfferId});
   Future<JobOfferModel> postUnApplyOffer({required int? jobOfferId});
   Future<JobOfferModel> postSaveOffer({required int? jobOfferId});
@@ -125,6 +131,43 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
               .add(JobOfferModel.fromJson(e as Map<String, dynamic>));
         }
         return rejectedOfferList;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  // @override
+  Future<List<JobOfferModel>> postSearchOffer({
+    int? pageNumber,
+    JobOfferModel? jobOfferForSearch,
+  }) async {
+    try {
+      // final JobOfferModel jobOfferToBeSearch = JobOfferModel(title: 'council');
+      debugPrint(jobOfferForSearch!.toSearchJson().toString());
+
+      final dataResponse = await post(
+        //'/search/offers?page=/1',
+        API.postSearchOffer(pageNumber: pageNumber),
+        // {
+        //   JobOfferModel(title: 'council').toSearchJson(),
+        // },
+        jobOfferForSearch.toSearchJson(),
+      );
+      final List<JobOfferModel> feedOfferList = <JobOfferModel>[];
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse = json.decode(dataResponse.bodyString.toString());
+        final Pagination offerPagination =
+            Pagination.fromJson(apiResponse as Map<String, dynamic>);
+        int count = 0;
+        for (final e in offerPagination.data!) {
+          count += 1;
+          debugPrint(count.toString());
+          feedOfferList.add(e);
+        }
+        return feedOfferList;
       }
     } catch (e) {
       return Future.error(e.toString());

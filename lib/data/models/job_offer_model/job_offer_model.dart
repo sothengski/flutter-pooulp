@@ -231,10 +231,38 @@ class JobOfferModel {
         'address_longitude': addressLongitude,
         'types': types == null || types == []
             ? []
-            : List<dynamic>.from(types!.map((x) => x.id)), //use only type ID
+            : List<dynamic>.from(
+                // types!.map((x) => x.id),
+                types!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ), //use only type ID
         'fields': fields == null || fields == []
             ? []
-            : List<dynamic>.from(fields!.map((x) => x.toJson())),
+            : List<dynamic>.from(
+                fields!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'languages': spokenLanguages == null || spokenLanguages == []
+            ? null
+            : List<dynamic>.from(
+                spokenLanguages!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
         'location': location,
         'is_range_search': isRangeSearch,
         'range': range,

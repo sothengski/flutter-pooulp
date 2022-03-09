@@ -10,10 +10,14 @@ abstract class IOfferProvider {
   Future<List<JobOfferModel>> getMatchedOffers();
   Future<List<JobOfferModel>> getSavedOffers();
   Future<List<JobOfferModel>> getRejectedOffers();
-  // Future<List<JobOfferModel>> postSearchOffer({
-  //   int? pageNumber = 1,
-  //   JobOfferModel jobOfferForSearch,
-  // });
+  Future<List<JobOfferModel>> postSearchOffer({
+    int? pageNumber = 1,
+    JobOfferModel jobOfferForSearch,
+  });
+  Future<PaginationModel> postSearchOfferWithPagination({
+    int? pageNumber = 1,
+    JobOfferModel jobOfferForSearch,
+  });
   Future<JobOfferModel> postApplyOffer({required int? jobOfferId});
   Future<JobOfferModel> postUnApplyOffer({required int? jobOfferId});
   Future<JobOfferModel> postSaveOffer({required int? jobOfferId});
@@ -137,37 +141,68 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
     }
   }
 
-  // @override
+  @override
   Future<List<JobOfferModel>> postSearchOffer({
     int? pageNumber,
     JobOfferModel? jobOfferForSearch,
   }) async {
     try {
-      // final JobOfferModel jobOfferToBeSearch = JobOfferModel(title: 'council');
-      debugPrint(jobOfferForSearch!.toSearchJson().toString());
+      debugPrint(
+        'Page: $pageNumber, Param:${jobOfferForSearch!.toSearchJson()}',
+      );
 
       final dataResponse = await post(
-        //'/search/offers?page=/1',
         API.postSearchOffer(pageNumber: pageNumber),
-        // {
-        //   JobOfferModel(title: 'council').toSearchJson(),
-        // },
         jobOfferForSearch.toSearchJson(),
+      );
+      debugPrint(
+        'API: ${API.postSearchOffer(pageNumber: pageNumber)}',
       );
       final List<JobOfferModel> feedOfferList = <JobOfferModel>[];
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
       } else {
         final apiResponse = json.decode(dataResponse.bodyString.toString());
-        final Pagination offerPagination =
-            Pagination.fromJson(apiResponse as Map<String, dynamic>);
+        final PaginationModel offerPagination =
+            PaginationModel.fromJson(apiResponse as Map<String, dynamic>);
         int count = 0;
         for (final e in offerPagination.data!) {
           count += 1;
-          debugPrint(count.toString());
+          debugPrint('$count:: ${e.title}');
           feedOfferList.add(e);
         }
         return feedOfferList;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<PaginationModel> postSearchOfferWithPagination({
+    int? pageNumber,
+    JobOfferModel? jobOfferForSearch,
+  }) async {
+    try {
+      debugPrint(
+        'Page: $pageNumber, Param:${jobOfferForSearch!.toSearchJson()}',
+      );
+
+      final dataResponse = await post(
+        API.postSearchOffer(pageNumber: pageNumber),
+        jobOfferForSearch.toSearchJson(),
+      );
+      debugPrint(
+        'API: ${API.postSearchOffer(pageNumber: pageNumber)}',
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse = json.decode(dataResponse.bodyString.toString());
+        final PaginationModel offerPagination =
+            PaginationModel.fromJson(apiResponse as Map<String, dynamic>);
+
+        return offerPagination;
       }
     } catch (e) {
       return Future.error(e.toString());

@@ -4,24 +4,25 @@ import 'dart:convert';
 
 import '../data.dart';
 
-class Pagination {
+class PaginationModel {
   final List<JobOfferModel>? data;
-  final Links? links;
-  final Meta? meta;
+  final LinksModel? links;
+  final MetaModel? meta;
 
-  Pagination({
+  PaginationModel({
     this.data,
     this.links,
     this.meta,
   });
 
-  factory Pagination.fromRawJson(String str) => Pagination.fromJson(
+  factory PaginationModel.fromRawJson(String str) => PaginationModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
       );
 
   String toRawJson() => json.encode(toJson());
 
-  factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
+  factory PaginationModel.fromJson(Map<String, dynamic> json) =>
+      PaginationModel(
         data: json['data'] != null || json['data'] != []
             ? (json['data'] as List)
                 .map(
@@ -32,12 +33,12 @@ class Pagination {
                 .toList()
             : [],
         links: json['links'] != null
-            ? Links.fromJson(
+            ? LinksModel.fromJson(
                 json['links'] as Map<String, dynamic>,
               )
             : null,
         meta: json['meta'] != null
-            ? Meta.fromJson(
+            ? MetaModel.fromJson(
                 json['meta'] as Map<String, dynamic>,
               )
             : null,
@@ -58,20 +59,20 @@ class Pagination {
   )''';
 }
 
-class Meta {
+class MetaModel {
   final int? currentPage;
   final int? from;
   final int? lastPage;
-  final List<Links>? links;
+  final List<LinksModel>? links;
   final String? path;
   final int? perPage;
   final int? to;
   final int? total;
 
-  Meta({
-    this.currentPage,
+  MetaModel({
+    this.currentPage = 0,
     this.from,
-    this.lastPage,
+    this.lastPage = 1,
     this.links,
     this.path,
     this.perPage,
@@ -79,13 +80,13 @@ class Meta {
     this.total,
   });
 
-  factory Meta.fromRawJson(String str) => Meta.fromJson(
+  factory MetaModel.fromRawJson(String str) => MetaModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
       );
 
   String toRawJson() => json.encode(toJson());
 
-  factory Meta.fromJson(Map<String, dynamic> json) => Meta(
+  factory MetaModel.fromJson(Map<String, dynamic> json) => MetaModel(
         currentPage: json['current_page'] as int?,
         from: json['from'] as int?,
         lastPage: json['last_page'] as int?,
@@ -93,7 +94,7 @@ class Meta {
             ? []
             : (json['links'] as List)
                 .map(
-                  (i) => Links.fromJson(
+                  (i) => LinksModel.fromJson(
                     i as Map<String, dynamic>,
                   ),
                 )
@@ -132,23 +133,23 @@ class Meta {
     ) ''';
 }
 
-String linksListToJson(List<Links> data) =>
+String linksListToJson(List<LinksModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-List<Links> linksListFromJson(String str) => List<Links>.from(
+List<LinksModel> linksListFromJson(String str) => List<LinksModel>.from(
       json.decode(str).map(
-            (x) => Links.fromJson(
+            (x) => LinksModel.fromJson(
               x as Map<String, dynamic>,
             ),
           ) as List,
     );
 
-Links linksFromJson(String str) =>
-    Links.fromJson(json.decode(str) as Map<String, dynamic>);
+LinksModel linksFromJson(String str) =>
+    LinksModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
-String linksToJson(Links data) => json.encode(data.toJson());
+String linksToJson(LinksModel data) => json.encode(data.toJson());
 
-class Links {
+class LinksModel {
   final String? first;
   final String? last;
   final String? prev;
@@ -157,7 +158,7 @@ class Links {
   final String? label;
   final bool? active;
 
-  Links({
+  LinksModel({
     this.first,
     this.last,
     this.prev,
@@ -167,19 +168,19 @@ class Links {
     this.active,
   });
 
-  factory Links.fromRawJson(String str) => Links.fromJson(
+  factory LinksModel.fromRawJson(String str) => LinksModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
       );
 
   String toRawJson() => json.encode(toJson());
 
-  factory Links.fromRawEachJson(String str) => Links.fromEachJson(
+  factory LinksModel.fromRawEachJson(String str) => LinksModel.fromEachJson(
         json.decode(str) as Map<String, dynamic>,
       );
 
   String toRawEachJson() => json.encode(toEachJson());
 
-  factory Links.fromJson(Map<String, dynamic> json) => Links(
+  factory LinksModel.fromJson(Map<String, dynamic> json) => LinksModel(
         first: json['first'] as String?,
         last: json['last'] as String?,
         prev: json['prev'] as String?,
@@ -199,7 +200,7 @@ class Links {
         'active': active,
       }..removeWhere((_, dynamic v) => v == null);
 
-  factory Links.fromEachJson(Map<String, dynamic> json) => Links(
+  factory LinksModel.fromEachJson(Map<String, dynamic> json) => LinksModel(
         url: json['url'] as String?,
         label: json['label'] as String?,
         active: json['active'] as bool?,

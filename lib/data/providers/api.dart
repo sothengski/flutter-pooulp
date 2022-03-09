@@ -51,7 +51,7 @@ class API {
     Endpoint.getJobOfferTypes: '/tags/offers',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
-      '/search/offers?page=/$pageNumber';
+      '/search/offers?page=$pageNumber';
   static String postApplyOffer({required int? offerId}) =>
       '/offers/$offerId/like';
   static String postUnApplyOffer({required int? offerId}) =>

@@ -10,7 +10,12 @@ class OfferFeedListComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return
+        // GetBuilder(
+        //   init: feedController,
+        //   builder: (value) =>
+        ListView.builder(
+      controller: feedController.scrollController,
       // shrinkWrap: true,
       padding: const EdgeInsets.only(
         bottom: kFloatingActionButtonMargin + 10,
@@ -100,6 +105,7 @@ class OfferFeedListComponent extends StatelessWidget {
           ),
         );
       },
+      // ),
     );
   }
 }

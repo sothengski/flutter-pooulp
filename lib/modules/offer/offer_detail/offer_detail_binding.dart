@@ -8,5 +8,9 @@ class OfferDetailBinding implements Bindings {
     Get.lazyPut<OfferDetailController>(
       () => OfferDetailController(),
     );
+
+    Get.lazyPut<OfferFeedController>(
+      () => OfferFeedController(),
+    );
   }
 }

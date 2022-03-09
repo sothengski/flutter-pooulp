@@ -144,19 +144,35 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                   Expanded(
                     flex: 90,
                     child: controller.obx(
-                      (state) => Obx(
-                        () => controller.feedListRepsonse.isNotEmpty
-                            ? OfferFeedListComponent()
-                            : Center(
-                                child: StateHandlerWidget(
-                                  imgPath: AssetsManager.emptyDataIcon,
-                                  headerText: 'No feed results found.',
-                                  bodyText:
-                                      "Make sure you complete your profile information.",
-                                  buttonText: 'Try again',
-                                  onPressedFunctionCall: controller.onRefresh,
-                                ),
-                              ),
+                      (state) => Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Obx(
+                            () => controller.feedListRepsonse.isNotEmpty
+                                ? OfferFeedListComponent()
+                                : Center(
+                                    child: StateHandlerWidget(
+                                      imgPath: AssetsManager.emptyDataIcon,
+                                      headerText: 'No feed results found.',
+                                      bodyText:
+                                          "Make sure you complete your profile information.",
+                                      buttonText: 'Try again',
+                                      onPressedFunctionCall:
+                                          controller.onRefresh,
+                                    ),
+                                  ),
+                          ),
+                          Obx(
+                            () => SizedBox(
+                              height: 30,
+                              child: controller.isLoadingIndicator.value == true
+                                  ? const LoadingWidget(
+                                      isTreeBounceLoading: true,
+                                    )
+                                  : Container(),
+                            ),
+                          ),
+                        ],
                       ),
                       onLoading: const Center(
                         child: ItemListShimmerLoadingWidget(

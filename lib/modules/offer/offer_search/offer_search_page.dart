@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/core.dart';
 import '../../modules.dart';
 
@@ -39,7 +40,7 @@ class OfferSearchPage extends SearchDelegate {
       padding: const EdgeInsets.only(
         top: AppSize.s10,
       ),
-      child: FeedListComponent(),
+      child: OfferFeedListComponent(),
     );
   }
 

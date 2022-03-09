@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
@@ -15,9 +16,16 @@ class OfferFeedController extends GetxController
 
   final profileController = Get.put(ProfileController());
   final ScrollController scrollController = ScrollController();
+  final RefreshController refreshController =
+      RefreshController(initialRefresh: true);
 
   RxList<JobOfferModel> feedListRepsonse = <JobOfferModel>[].obs;
   RxList<JobOfferModel> feedFilterList = <JobOfferModel>[].obs;
+
+  Rx<PaginationModel> feedListPagination =
+      PaginationModel(meta: MetaModel()).obs;
+
+  int pageNum = 1;
 
   final FieldModel allType = FieldModel(label: 'All');
 
@@ -31,6 +39,10 @@ class OfferFeedController extends GetxController
 
   RxString keywordForSearch = ''.obs;
   RxList<FieldModel> typesListForSearch = <FieldModel>[].obs;
+  RxList<FieldModel> fieldListForSearch = <FieldModel>[].obs;
+  RxList<FieldModel> languageListForSearch = <FieldModel>[].obs;
+
+  RxBool isLoadingIndicator = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -40,6 +52,7 @@ class OfferFeedController extends GetxController
     await getFeedsDataState(refresh: true)
         // .then((value) => isProcessingStudentInfoRepsonse.value = true)
         ;
+    await addItemsIntoList();
   }
 
   String updateKeyword({String? newKeyword = ''}) =>
@@ -85,23 +98,108 @@ class OfferFeedController extends GetxController
   Future<RxList<JobOfferModel>> getfeedListResponseProvider({
     bool? refresh = false,
   }) async {
-    // feedListRepsonse.clear();
+    final List<JobOfferModel> feedTempListResponse =
+        []; // feedListRepsonse.clear();
+    PaginationModel feedListPaginationRepsonse = PaginationModel();
     final JobOfferModel jobOfferToBeSearch = JobOfferModel(
       // title: 'commercial',
       title: keywordForSearch.value,
       types: [
         typeSelected.value,
       ],
+      // fields: [FieldModel(id: 238)],
+      // spokenLanguages: [FieldModel(id: 66)],
+    );
+    debugPrint(
+      'feedListPagination current page:: ${feedListPagination.value.meta!.currentPage!}',
+    );
+    debugPrint(
+      'feedListPagination last page:: ${feedListPagination.value.meta!.lastPage!}',
     );
 
-    feedListRepsonse.value = await offerProvider.postSearchOffer(
-      pageNumber: 1,
-      jobOfferForSearch: jobOfferToBeSearch,
-    );
+    if (refresh == false) {
+      if (feedListPagination.value.meta!.currentPage! <
+          feedListPagination.value.meta!.lastPage!) {
+        pageNum = feedListPagination.value.meta!.currentPage! + 1;
+        // debugPrint('pageNum if:: $pageNum');
+        feedListPaginationRepsonse =
+            await offerProvider.postSearchOfferWithPagination(
+          pageNumber: pageNum,
+          jobOfferForSearch: jobOfferToBeSearch,
+        );
+        feedListPagination.value = feedListPaginationRepsonse;
+        feedTempListResponse.addAll(feedListPagination.value.data!);
+        feedListRepsonse.addAll(feedTempListResponse);
+      } else {
+        feedListRepsonse.addAll(feedTempListResponse);
+        // customSnackbar(
+        //   msgTitle: 'Not more data!',
+        //   msgContent: '',
+        // );
+        // debugPrint('pageNum else:: $pageNum');
+      }
+    } else {
+      feedListPaginationRepsonse =
+          await offerProvider.postSearchOfferWithPagination(
+        pageNumber: 1,
+        jobOfferForSearch: jobOfferToBeSearch,
+      );
+      feedListPagination.value = feedListPaginationRepsonse;
+      feedTempListResponse.addAll(feedListPagination.value.data!);
+      // feedTempListResponse = await offerProvider.postSearchOffer(
+      //   pageNumber: 1,
+      //   jobOfferForSearch: jobOfferToBeSearch,
+      // );
+      feedListRepsonse.value = feedTempListResponse;
+    }
+    // if (feedListPagination.value.meta!.currentPage! <
+    //         feedListPagination.value.meta!.lastPage! &&
+    //     refresh == false) {
+    //   pageNum = feedListPagination.value.meta!.currentPage! + 1;
+    //   debugPrint('pageNum if:: $pageNum');
+    // } else {
+    //   pageNum = 1;
+    //   debugPrint('pageNum else:: $pageNum');
+    // }
+    // feedListPaginationRepsonse =
+    //     await offerProvider.postSearchOfferWithPagination(
+    //   pageNumber: pageNum,
+    //   jobOfferForSearch: jobOfferToBeSearch,
+    // );
+    // feedListPagination.value = feedListPaginationRepsonse;
+    // feedTempListResponse.addAll(feedListPagination.value.data!);
+    // // feedTempListResponse = await offerProvider.postSearchOffer(
+    // //   pageNumber: 1,
+    // //   jobOfferForSearch: jobOfferToBeSearch,
+    // // );
 
+    // if (refresh == false) {
+    //   feedListRepsonse.addAll(feedTempListResponse);
+    // } else {
+    //   feedListRepsonse.value = feedTempListResponse;
+    // }
+    // debugPrint('feedListRepsonse length:: ${feedListRepsonse.length}');
+    isLoadingIndicator.value = false;
+    debugPrint(
+      'isLoadingIndicator After:: ${isLoadingIndicator.value}',
+    );
     // addTypesIntoSet(jobOfferTrxData: feedListRepsonse);
 
     return feedListRepsonse;
+  }
+
+  Future<void> addItemsIntoList() async {
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+              scrollController.position.pixels &&
+          isLoadingIndicator.value == false) {
+        debugPrint('add Item');
+        isLoadingIndicator.value = true;
+        debugPrint('isLoadingIndicator b4:: ${isLoadingIndicator.value}');
+        getfeedListResponseProvider();
+        // isLoadingIndicator.value = false;
+      }
+    });
   }
 
   Future<void> onClickActionButtonJobOfferFeed({

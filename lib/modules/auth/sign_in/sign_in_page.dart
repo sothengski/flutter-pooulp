@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/core.dart';
@@ -26,7 +27,8 @@ class SignInPage extends GetView<SignInController> {
       ),
       body: GestureDetector(
         onTap: () => unFocusKeyBoard(context),
-        child: SizedBox(
+        child: Container(
+          alignment: Alignment.topCenter,
           height: getHeight,
           width: getWidth,
           child: SingleChildScrollView(
@@ -34,15 +36,20 @@ class SignInPage extends GetView<SignInController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.only(
+                Padding(
+                  padding: const EdgeInsets.only(
                     left: AppSize.s72,
                     right: AppSize.s72,
-                    bottom: AppSize.s24,
+                    bottom: AppSize.s12,
                   ),
-                  child: Image(
-                    image: AssetImage(AssetsManager.appLogoWhite),
+                  child: SvgPicture.asset(
+                    AssetsManager.appLogoWhiteSvg,
+                    height: 80,
+                    matchTextDirection: true,
                   ),
+                  // child: Image(
+                  //   image: AssetImage(AssetsManager.appLogoWhite),
+                  // ),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(AppSize.s16),

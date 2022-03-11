@@ -6,14 +6,19 @@ class CustomContainerWidget extends StatelessWidget {
   final String? leftTitle;
   final Widget? rightWidget;
   final double? titleFontSize;
-  final double? titleLeftRightPadding;
+  final double? titleLeftPadding;
+  final double? titleRightPadding;
+  final double? titleTopPadding;
+  final double? titleBottomPadding;
   final Color? titleColor;
   final FontWeight? titleFontWeight;
+  final Color? containerBackground;
   final Widget? child;
   final Function()? onTap;
   final double? borderRadius;
   final double? elevation;
   final bool? titleInSide;
+  final bool? isBoxShadow;
   final double? childPadding;
   final double? leftMargin;
   final double? topMargin;
@@ -25,14 +30,19 @@ class CustomContainerWidget extends StatelessWidget {
     this.leftTitle = '',
     this.rightWidget,
     this.titleFontSize = 14.0,
-    this.titleLeftRightPadding = 10,
-    this.titleColor = ColorsManager.black,
+    this.titleLeftPadding = 10,
+    this.titleRightPadding = 10,
+    this.titleTopPadding = 10,
+    this.titleBottomPadding = 10,
+    this.titleColor = ColorsManager.primaryBlue,
     this.titleFontWeight = FontWeight.w600,
     this.child,
+    this.containerBackground = ColorsManager.white,
     this.onTap,
     this.borderRadius = 10.0,
     this.elevation = 5.0,
     this.titleInSide = true,
+    this.isBoxShadow = true,
     this.childPadding = 0.0,
     this.leftMargin = 0.0,
     this.topMargin = 0.0,
@@ -54,10 +64,10 @@ class CustomContainerWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: titleInSide == true ? ColorsManager.white : Colors.transparent,
           borderRadius: BorderRadius.circular(borderRadius!),
-          boxShadow: titleInSide == true
+          boxShadow: isBoxShadow == true
               ? [
                   const BoxShadow(
-                    color: ColorsManager.grey400,
+                    color: ColorsManager.grey300,
                     spreadRadius: 2,
                     blurRadius: 3,
                     offset: Offset(0, 1), // changes position of shadow
@@ -75,10 +85,10 @@ class CustomContainerWidget extends StatelessWidget {
                 // height: 50,
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(
-                  titleLeftRightPadding!,
-                  10,
-                  titleLeftRightPadding!,
-                  10,
+                  titleLeftPadding!,
+                  titleTopPadding!,
+                  titleRightPadding!,
+                  titleBottomPadding!,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,7 +100,7 @@ class CustomContainerWidget extends StatelessWidget {
                       fontWeight: titleFontWeight,
                     ),
                     // if (rightWidget != null)
-                    rightWidget!
+                    rightWidget ?? Container()
                     // else
                     //   CustomTextWidget(
                     //     text: rightTitle ?? '',
@@ -104,7 +114,7 @@ class CustomContainerWidget extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: Card(
-                color: ColorsManager.white,
+                color: containerBackground,
                 elevation: titleInSide == true ? 0.0 : elevation,
                 // margin: const EdgeInsets.all(5),
                 margin: EdgeInsets.zero,

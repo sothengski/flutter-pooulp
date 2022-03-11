@@ -11,8 +11,10 @@ class SignInForm extends GetView<SignInController> {
   @override
   Widget build(BuildContext context) {
     return CustomContainerWidget(
+      isBoxShadow: false,
       elevation: 0.0,
-      childPadding: 16.0,
+      childPadding: 20.0,
+      titleInSide: false,
       child: Obx(
         () => Form(
           key: controller.signInFormKey,
@@ -24,6 +26,7 @@ class SignInForm extends GetView<SignInController> {
                 fontSize: 24.0,
                 fontWeight: FontWeight.w700,
                 color: ColorsManager.primary,
+                marginBottom: AppSize.s24,
               ),
               CustomTextInput(
                 controller: controller.emailCtrl,
@@ -43,7 +46,6 @@ class SignInForm extends GetView<SignInController> {
                 isFilled: true,
                 topPadding: AppSize.s12,
                 validator: Validator().passwordValidator,
-                maxLength: 15,
                 inputFormatterList: [
                   FilteringTextInputFormatter.deny(
                     RegExp(Validator.avoidSpaceRegExpPattern),
@@ -53,36 +55,53 @@ class SignInForm extends GetView<SignInController> {
                   boolValue: controller.showPassword.value,
                 ),
               ),
-              const Align(
+              Align(
                 alignment: Alignment.centerRight,
-                child: CustomTextWidget(
-                  text: 'Forget password?',
-                  color: ColorsManager.primary,
-                  textDecoration: TextDecoration.underline,
-                  marginTop: AppSize.s16,
-                  marginBottom: AppSize.s16,
-                ),
-              ),
-              Obx(
-                () => Visibility(
-                  visible: controller.isSubmitBtnProcessing.value,
-                  child: const LoadingWidget(),
-                ),
-              ),
-              Obx(
-                () => Visibility(
-                  visible: !controller.isSubmitBtnProcessing.value,
-                  child: CustomMaterialButton(
-                    text: "Login",
-                    fontSize: 20.0,
-                    buttonWidth: getWidth,
-                    onPressed: () {
-                      unFocusKeyBoard(context);
-                      controller.loginButtonOnClick();
-                    },
+                child: GestureDetector(
+                  onTap: () => customSnackbar(
+                    msgTitle: 'This Page is under construction!',
+                    msgContent: 'This Page is only view.\n Data will not save.',
+                  ),
+                  child: const CustomTextWidget(
+                    text: 'Forgot password?',
+                    color: ColorsManager.primary,
+                    textDecoration: TextDecoration.underline,
+                    marginTop: AppSize.s16,
+                    marginBottom: AppSize.s16,
                   ),
                 ),
               ),
+              // Obx(
+              //   () =>
+              Visibility(
+                visible: controller.isSubmitBtnProcessing.value,
+                child: CustomMaterialButton(
+                  childWidget: const LoadingWidget(
+                    isTreeBounceLoading: true,
+                    color: ColorsManager.white,
+                  ),
+                  buttonWidth: getWidth,
+                  onPressed: () {
+                    unFocusKeyBoard(context);
+                  },
+                ),
+              ),
+              // ),
+              // Obx(
+              //   () =>
+              Visibility(
+                visible: !controller.isSubmitBtnProcessing.value,
+                child: CustomMaterialButton(
+                  text: "Login",
+                  fontSize: 20.0,
+                  buttonWidth: getWidth,
+                  onPressed: () {
+                    unFocusKeyBoard(context);
+                    controller.loginButtonOnClick();
+                  },
+                ),
+              ),
+              // ),
               Row(
                 children: const [
                   Expanded(
@@ -112,31 +131,37 @@ class SignInForm extends GetView<SignInController> {
                   left: AppSize.s48,
                   right: AppSize.s48,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    CircleAvatar(
-                      radius: 30.0,
-                      backgroundColor: ColorsManager.white,
-                      child: Image(
-                        image: AssetImage(AssetsManager.googleLogo),
+                child: GestureDetector(
+                  onTap: () => customSnackbar(
+                    msgTitle: 'This Page is under construction!',
+                    msgContent: 'This Page is only view.\n Data will not save.',
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      CircleAvatar(
+                        radius: 20.0,
+                        backgroundColor: ColorsManager.white,
+                        child: Image(
+                          image: AssetImage(AssetsManager.googleLogo),
+                        ),
                       ),
-                    ),
-                    CircleAvatar(
-                      radius: 30.0,
-                      backgroundColor: ColorsManager.white,
-                      child: Image(
-                        image: AssetImage(AssetsManager.linkedInLogo),
+                      CircleAvatar(
+                        radius: 20.0,
+                        backgroundColor: ColorsManager.white,
+                        child: Image(
+                          image: AssetImage(AssetsManager.linkedInLogo),
+                        ),
                       ),
-                    ),
-                    CircleAvatar(
-                      radius: 30.0,
-                      backgroundColor: ColorsManager.white,
-                      child: Image(
-                        image: AssetImage(AssetsManager.facebookLogo),
+                      CircleAvatar(
+                        radius: 20.0,
+                        backgroundColor: ColorsManager.white,
+                        child: Image(
+                          image: AssetImage(AssetsManager.facebookLogo),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )
             ],

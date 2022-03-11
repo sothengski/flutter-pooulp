@@ -25,9 +25,9 @@ class LanguageController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    super.onInit();
     currentLanguageStore;
     // setInitialLocalLanguage();
-    super.onInit();
   }
 
   // Gets current language stored

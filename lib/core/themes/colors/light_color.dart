@@ -70,7 +70,8 @@ class LightColors implements IColors {
     primaryColor = ColorsManager.primary; //appBar text Color
     appBarColor = ColorsManager.primary; //appBar BgColor
     accentColor = ColorsManager.grey800;
-    scaffoldBackgroundColor = ColorsManager.grey100; //bgBody
+    scaffoldBackgroundColor =
+        ColorsManager.white; //ColorsManager.grey100; //bgBody
     tabBarColor = ColorsManager.yellowAccent;
     tabbarNormalColor = ColorsManager.green900;
     tabbarSelectedColor = ColorsManager.red200;
@@ -83,7 +84,7 @@ class LightColors implements IColors {
     brightness = Brightness.light;
     buttonTextColor = ColorsManager.white;
     iconColor = ColorsManager.white; //iconColor on drawer and action icons
-    enabledColor = ColorsManager.grey100;
+    enabledColor = ColorsManager.grey400;
     errorColor = ColorsManager.red;
     fillColor = ColorsManager.primary25;
     focusColor = ColorsManager.primary50;

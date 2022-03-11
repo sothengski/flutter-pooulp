@@ -39,9 +39,19 @@ class AppPages {
       binding: SignInBinding(),
     ),
     GetPage(
+      name: Routes.editUserInfoRoute,
+      page: () => const EditUserInformationPage(),
+      binding: EditUserInformationBinding(),
+    ),
+    GetPage(
       name: Routes.settingsRoute,
       page: () => const SettingPage(),
       binding: SettingBinding(),
+    ),
+    GetPage(
+      name: Routes.offerdetailRoute,
+      page: () => OfferDetailPage(),
+      binding: OfferDetailBinding(),
     ),
   ];
 }

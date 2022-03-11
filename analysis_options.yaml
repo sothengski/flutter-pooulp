@@ -10,3 +10,4 @@ linter:
   rules:
     sort_pub_dependencies: false
     no_logic_in_create_state: false
+    always_use_package_imports: false

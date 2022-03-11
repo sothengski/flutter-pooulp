@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../data.dart';
+
 class ProfileModel {
   final String? firstName;
   final String? lastName;
@@ -40,6 +42,11 @@ class ProfileModel {
   final int? statusCode; //enterprise
   final String? uuid; //enterprise
 
+  // final Shool school; //offer in feed endpoint
+  final List<FieldModel>? spokenLanguages; //offer in feed endpoint
+  final List<FieldModel>? fields;
+  final String? logoUrl; //offer in feed endpoint
+  final List<UserModel>? managers; //offer in feed endpoint
   // final List<int>? spokenLanguagesList;
   // final List<String>? fields;
 
@@ -80,6 +87,11 @@ class ProfileModel {
     this.whatsAppLink,
     this.statusCode,
     this.uuid,
+    // this.school,
+    this.spokenLanguages,
+    this.fields,
+    this.logoUrl,
+    this.managers,
   });
 
   String get fullName => '$firstName $lastName';
@@ -128,8 +140,8 @@ class ProfileModel {
         // addressLongitude: json['address_longitude'] as String?,
         id: json['id'] as int?,
         name: json['name'] as String?,
-        subsidiaryOf: json['subsidiary_of'] as String?,
-        schoolID: json['school_id'] as String?,
+        // subsidiaryOf: json['subsidiary_of'] as String?,
+        // schoolID: json['school_id'] as String?,
         logoUrn: json['logo_urn'] as String?,
         createdAt: json['created_at'] != null
             ? DateTime.parse(json['created_at'].toString())
@@ -142,6 +154,36 @@ class ProfileModel {
         whatsAppLink: json['whatsapp_link'] as String?,
         statusCode: json['statecode'] as int?,
         uuid: json['uuid'] as String?,
+        // school: School.fromJson(json['school']),
+        spokenLanguages:
+            json['spoken_languages'] == null || json['spoken_languages'] == []
+                ? []
+                : (json['spoken_languages'] as List)
+                    .map(
+                      (i) => FieldModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList(),
+        fields: json['fields'] == null || json['fields'] == []
+            ? []
+            : (json['fields'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
+        logoUrl: json['logo_url'] as String?,
+        managers: json['managers'] == [] || json['managers'] == null
+            ? []
+            : (json['managers'] as List)
+                .map(
+                  (i) => UserModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -181,6 +223,17 @@ class ProfileModel {
         'whatsapp_link': whatsAppLink,
         'statecode': statusCode,
         'uuid': uuid,
+        // 'school': school.toJson(),
+        'spoken_languages': spokenLanguages == null || spokenLanguages == []
+            ? null
+            : List<dynamic>.from(spokenLanguages!.map((x) => x.toJson())),
+        'fields': fields == null || fields == []
+            ? null
+            : List<dynamic>.from(fields!.map((x) => x.toJson())),
+        'logoUrl': logoUrl,
+        'managers': managers == null || managers == []
+            ? null
+            : List<dynamic>.from(managers!.map((x) => x.toJson())),
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -223,6 +276,10 @@ class ProfileModel {
       whatsAppLink: $whatsAppLink, 
       statusCode: $statusCode, 
       uuid: $uuid,
+      spokenLanguages: $spokenLanguages,
+       fields: $fields,
+      logoUrl: $logoUrl,
+      managers: $managers,
     )''';
   }
 }

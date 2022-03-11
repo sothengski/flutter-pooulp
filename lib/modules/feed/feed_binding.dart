@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../data/data.dart';
+import '../offer/offer_controller.dart';
 import 'feed.dart';
 
 class FeedBinding implements Bindings {
@@ -7,6 +9,14 @@ class FeedBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<FeedController>(
       () => FeedController(),
+    );
+
+    Get.lazyPut<OfferController>(
+      () => OfferController(),
+    );
+
+    Get.lazyPut<OfferProvider>(
+      () => OfferProvider(),
     );
   }
 }

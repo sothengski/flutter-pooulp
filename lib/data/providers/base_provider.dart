@@ -1,13 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../routes/routes.dart';
 
+import '../../routes/routes.dart';
 import '../data.dart';
 
 class BaseProvider extends GetConnect {
   @override
   void onInit() {
+    super.onInit();
+
     // add your local storage here to load for every request
-    final String userToken = AuthServices().getStringToken().toString();
+    final String userToken = getUserToken();
 
     //1.base_url
     httpClient.baseUrl = API.host;
@@ -16,12 +19,50 @@ class BaseProvider extends GetConnect {
     httpClient.timeout = const Duration(seconds: 45);
 
     httpClient.addResponseModifier((request, response) async {
-      if (response.statusCode == 401) {
-        await AuthServices().removeToken().then(
-              (value) => Get.offAllNamed(Routes.splashRoute),
-            );
+      if ('${request.url}' ==
+              '${httpClient.baseUrl}${API.paths[Endpoint.signIn]}' ||
+          '${request.url}' ==
+              '${httpClient.baseUrl}${API.paths[Endpoint.registerNewUser]}') {
+      } else {
+        if (response.statusCode == 401) {
+          Get.defaultDialog(
+            barrierDismissible: false,
+            radius: 10.0,
+            contentPadding: const EdgeInsets.all(20.0),
+            title: 'Session Expired',
+            middleText: 'Please log in again.',
+            textConfirm: 'OK',
+            confirm: OutlinedButton.icon(
+              onPressed: () async => {
+                await AuthServices().removeToken().then(
+                      (value) => Get.offAllNamed(Routes.splashRoute),
+                    )
+              },
+              icon: const Icon(
+                Icons.check,
+                color: Colors.blue,
+              ),
+              label: const Text(
+                'Okay',
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
+            // cancel: OutlinedButton.icon(
+            //   onPressed: () {},
+            //   icon: const Icon(
+            //     Icons.check,
+            //     color: Colors.blue,
+            //   ),
+            //   label: const Text("cancel"),
+            // ),
+          );
+          // await AuthServices().removeToken().then(
+          //       (value) => Get.offAllNamed(Routes.splashRoute),
+          //     );
+        }
       }
       return response;
+      // return getServerResponse(response);
     });
 
     httpClient.addRequestModifier<void>((request) async {
@@ -33,6 +74,48 @@ class BaseProvider extends GetConnect {
     //Autenticator will be called 3 times if HttpStatus is
     //HttpStatus.unauthorized
     httpClient.maxAuthRetries = 3;
-    super.onInit();
+  }
+
+  String getUserToken() {
+    return AuthServices().getStringToken().toString();
+  }
+
+  Map<String, String> getRequestHeaders({
+    bool addHeaderAuthorization = false,
+    bool addHeaderContentJson = false,
+    String? addHeaderCustomContent,
+  }) {
+    final reqHeaders = <String, String>{};
+    reqHeaders.putIfAbsent('Accept', () => 'application/json');
+    reqHeaders.putIfAbsent('Accept-Encoding', () => 'gzip');
+    if (addHeaderAuthorization) {
+      reqHeaders.putIfAbsent(
+        'Authorization',
+        () => 'Bearer ${getUserToken()}',
+      );
+    }
+    if (addHeaderContentJson) {
+      reqHeaders.putIfAbsent('Content-Type', () => 'application/json');
+    } else if (addHeaderCustomContent != null &&
+        addHeaderCustomContent.isNotEmpty) {
+      reqHeaders.putIfAbsent('Content-Type', () => addHeaderCustomContent);
+    }
+    return reqHeaders;
+  }
+
+  Response getServerResponse(Response response) {
+    if (response.statusCode == 200) {
+      return response;
+    } else if (response.statusCode == 403) {
+      throw Exception(
+        'Non si dispone delle autorizzazioni necessarie per accedere alla risorsa',
+      );
+    } else if (response.statusCode == 404) {
+      throw Exception('Risorsa non trovata');
+    } else if (response.statusCode == 415) {
+      throw Exception('Unsupported media type');
+    } else {
+      throw Exception('Errore nel recupero dei dati');
+    }
   }
 }

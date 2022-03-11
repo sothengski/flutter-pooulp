@@ -28,6 +28,7 @@ class CustomListTileWidget extends StatelessWidget {
   final double? topPadding;
   final double? bottomPadding;
   final Color? backgroundColor;
+  final int? leftFlex;
 
   const CustomListTileWidget({
     this.text1 = '',
@@ -44,7 +45,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.text3Color = ColorsManager.grey800,
     this.text3FontWeight = FontWeight.w400,
     this.text4 = '',
-    this.text4FontSize = 10.0,
+    this.text4FontSize = 12.0,
     this.text4Color = ColorsManager.grey800,
     this.text4FontWeight = FontWeight.w400,
     this.leftWidget,
@@ -55,6 +56,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.topPadding = 10.0,
     this.bottomPadding = 0.0,
     this.backgroundColor = ColorsManager.white,
+    this.leftFlex = 10,
     Key? key,
   }) : super(key: key);
 
@@ -81,22 +83,23 @@ class CustomListTileWidget extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(
               width: 8.0,
             ),
             if (leftWidget != null)
               Expanded(
-                flex: 10,
+                flex: leftFlex!,
                 child: leftWidget!,
               )
             else
               Container(),
             const SizedBox(
-              width: 8.0,
+              width: 10.0,
             ),
             Flexible(
-              flex: 90,
+              flex: 100 - leftFlex!,
               child: Container(
                 padding: const EdgeInsets.only(
                   bottom: 5.0,

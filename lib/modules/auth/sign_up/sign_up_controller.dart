@@ -25,15 +25,25 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
 
   TextEditingController tokenCtrl = TextEditingController();
 
-  Rx<CountryModel> selectedCountry = const CountryModel().obs;
+  late Rx<CountryModel> selectedCountry = const CountryModel().obs;
 
   RxBool showPassword = false.obs;
   // RxBool showPasswordConfirmation = false.obs;
+  RxBool isCheckTermCondition = false.obs;
+
+  RxBool isCheckMarketing = true.obs;
+
   RxBool isSubmitBtnProcessing = false.obs;
 
   late List<String> countries;
 
   late LoginModel loginRepsonseData;
+
+  @override
+  void onInit() {
+    super.onInit();
+    selectedCountry.value = countryList[20]; //belgium
+  }
 
   @override
   void dispose() {
@@ -56,6 +66,11 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
   // bool showPasswordConfirmationBoolSwitching({bool? boolValue}) =>
   //     showPasswordConfirmation.value = !boolValue!;
 
+  bool checkingBoolSwitching({bool? boolValue}) =>
+      isCheckTermCondition.value = !boolValue!;
+  bool checkingBoolMarketing({bool? boolValue}) =>
+      isCheckMarketing.value = !boolValue!;
+
   CountryModel selectedCountryOnClick(CountryModel selectedItem) {
     return selectedCountry.value = selectedItem;
   }
@@ -65,7 +80,9 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
     lastNameCtrl.clear();
     emailCtrl.clear();
     phoneNumberCtrl.clear();
-    selectedCountry.value = const CountryModel();
+    // selectedCountry.value = const CountryModel();
+    selectedCountry.value = countryList[20];
+
     passwordCtrl.clear();
     // passwordConfirmationCtrl.clear();
     enterpriseNameCtrl.clear();

@@ -5,12 +5,14 @@ class LoginModel {
   final String? tokenType;
   final int? expireIn;
   final String? accountType;
+  final DateTime? tokenExpirationDate;
 
   const LoginModel({
     this.token,
     this.tokenType,
     this.expireIn,
     this.accountType,
+    this.tokenExpirationDate,
   });
 
   factory LoginModel.fromRawJson(String str) =>
@@ -22,8 +24,11 @@ class LoginModel {
     return LoginModel(
       token: json['token'] as String?,
       tokenType: json['token_type'] as String?,
-      expireIn: json['expires_in']?.toInt() as int?,
+      expireIn: json['expires_in'] as int?,
       accountType: json['account_type'] as String?,
+      tokenExpirationDate: json['token_expiration_date'] != null
+          ? DateTime.parse(json['token_expiration_date'].toString())
+          : null,
     );
   }
 
@@ -32,6 +37,7 @@ class LoginModel {
         'token_type': tokenType,
         'expires_in': expireIn,
         'account_type': accountType,
+        'token_expiration_date': tokenExpirationDate?.toString(),
       }..removeWhere((_, dynamic v) => v == null);
 
   @override
@@ -41,7 +47,9 @@ class LoginModel {
       token: $token,
       tokenType: $tokenType,
       expireIn: $expireIn,
-      accountType: $accountType)''';
+      accountType: $accountType,
+      token_expiration_date: $tokenExpirationDate,
+    )''';
   }
 }
 

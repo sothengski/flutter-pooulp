@@ -6,11 +6,13 @@ import '../core.dart';
 class LoadingWidget extends StatelessWidget {
   final Color? color;
   final double? size;
+  final bool? isTreeBounceLoading;
 
   const LoadingWidget({
     Key? key,
     this.color = ColorsManager.primary,
     this.size = 50.0,
+    this.isTreeBounceLoading = false,
   }) : super(key: key);
 
   @override
@@ -18,10 +20,15 @@ class LoadingWidget extends StatelessWidget {
     return SizedBox(
       // color: background,
       child: Center(
-        child: SpinKitFadingCircle(
-          color: color,
-          size: size!,
-        ),
+        child: isTreeBounceLoading == true
+            ? SpinKitThreeBounce(
+                color: color,
+                size: size! * 0.4,
+              )
+            : SpinKitFadingCircle(
+                color: color,
+                size: size!,
+              ),
       ),
     );
   }

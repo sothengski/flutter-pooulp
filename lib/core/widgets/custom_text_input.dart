@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -42,6 +44,14 @@ class CustomTextInput extends StatelessWidget {
   final Color? fillColor;
   final bool? isFilled;
   final double? borderRadius;
+  final double? leftContentPadding;
+  final double? topContentPadding;
+  final double? rightContentPadding;
+  final double? bottomContentPadding;
+  final int? minLines;
+  final int? maxLines;
+  final double? fontSize;
+  final Color? fontColor;
 
   const CustomTextInput({
     this.controller,
@@ -81,6 +91,14 @@ class CustomTextInput extends StatelessWidget {
     this.fillColor = ColorsManager.grey100,
     this.isFilled = false,
     this.borderRadius = 8.0,
+    this.leftContentPadding = 8.0,
+    this.topContentPadding = 0.0, // = 20.0,
+    this.rightContentPadding = 8.0,
+    this.bottomContentPadding = 0.0, // = 20.0,
+    this.minLines = 1,
+    this.maxLines = 1,
+    this.fontSize = 16.0,
+    this.fontColor = Colors.black,
   });
 
   @override
@@ -96,8 +114,8 @@ class CustomTextInput extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (inputTitle != null)
-            Text(
-              inputTitle!,
+            CustomTextWidget(
+              text: inputTitle,
             )
           else
             const SizedBox.shrink(),
@@ -123,15 +141,22 @@ class CustomTextInput extends StatelessWidget {
                   // obscureText: !showPassword,
                   cursorColor: ColorsManager.black,
                   maxLength: maxLength,
+                  minLines: minLines,
+                  maxLines: maxLines,
                   focusNode: focusNodeName,
                   autocorrect: autocorrect!,
                   enableSuggestions: enableSuggestions!,
+                  style: TextStyle(
+                    fontSize: fontSize,
+                    color: fontColor,
+                    // fontWeight: FontWeight.w400,
+                  ),
 
                   decoration: InputDecoration(
-                    counterStyle: const TextStyle(
-                      height: double.minPositive,
-                    ),
-                    counterText: "",
+                    // counterStyle: const TextStyle(
+                    //   height: double.minPositive,
+                    // ),
+                    counterText: counter == true ? null : "",
                     // counter: counter == true
                     //     ? null
                     //     : Container(), // Validate Message
@@ -152,6 +177,7 @@ class CustomTextInput extends StatelessWidget {
                                 icon: const Icon(
                                   Icons.visibility_outlined,
                                   color: ColorsManager.grey400,
+                                  size: 20.0,
                                 ),
                                 onPressed: changeShowPassword,
                               )
@@ -159,6 +185,7 @@ class CustomTextInput extends StatelessWidget {
                                 icon: const Icon(
                                   Icons.visibility_off_outlined,
                                   color: ColorsManager.grey400,
+                                  size: 20.0,
                                 ),
                                 onPressed: changeShowPassword,
                               )
@@ -169,7 +196,14 @@ class CustomTextInput extends StatelessWidget {
                     hintStyle: const TextStyle(
                       color: ColorsManager.grey400,
                     ),
-
+                    // isDense: true,
+                    // contentPadding: EdgeInsets.zero,
+                    contentPadding: EdgeInsets.fromLTRB(
+                      leftContentPadding!,
+                      topContentPadding!,
+                      rightContentPadding!,
+                      bottomContentPadding!,
+                    ), //const EdgeInsets.fromLTRB(12, 20, 12, 20), //default value:
                     border: OutlineInputBorder(
                       // borderSide: BorderSide.none,
                       borderRadius: BorderRadius.all(
@@ -182,13 +216,13 @@ class CustomTextInput extends StatelessWidget {
                       borderRadius: BorderRadius.circular(borderRadius!),
                       borderSide: const BorderSide(
                         width: 1.5,
-                        color: ColorsManager.grey800,
+                        color: ColorsManager.grey600,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(borderRadius!),
                       borderSide: const BorderSide(
-                        color: ColorsManager.grey300,
+                        color: ColorsManager.grey100,
                       ),
                     ),
                     errorBorder: OutlineInputBorder(

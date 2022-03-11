@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../core.dart';
 
@@ -42,8 +44,11 @@ mixin ThemeManager {
         textTheme: theme.textTheme.data,
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: theme.colors.highlightColor,
-          selectionColor: theme.colors.focusColor,
-          selectionHandleColor: theme.colors.enabledColor,
+          selectionColor: theme.colors.enabledColor,
+          selectionHandleColor: theme.colors.primaryColor,
+        ),
+        cupertinoOverrideTheme: CupertinoThemeData(
+          primaryColor: theme.colors.primaryColor,
         ),
         cardColor: theme.colors.colorScheme?.surface,
         bottomAppBarColor: theme.colors.iconColor,
@@ -61,6 +66,7 @@ mixin ThemeManager {
             color: theme.colors.iconColor,
           ),
           backgroundColor: theme.colors.appBarColor,
+          systemOverlayStyle: SystemUiOverlayStyle.light, //statusBar Color
         ),
         scaffoldBackgroundColor: theme.colors.scaffoldBackgroundColor,
         colorScheme: theme.colors.colorScheme,

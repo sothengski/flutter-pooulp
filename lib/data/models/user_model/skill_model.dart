@@ -40,6 +40,14 @@ class SkillModel {
     this.level,
   });
 
+  String? get displayLevel => level == null ? '' : 'Level $level';
+
+  String? get displayLabelAndLevel =>
+      level == null ? '• $label' : '• $label - Level $level';
+
+  String? get displayLabelAndCategory =>
+      category == null ? '• $label' : '• $label - $category';
+
   factory SkillModel.fromRawJson(String str) => SkillModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
       );

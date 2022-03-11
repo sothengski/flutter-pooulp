@@ -1,8 +1,9 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:convert';
 
 import 'package:get/get.dart';
 
-import '../../core/core.dart';
 import '../data.dart';
 
 class AuthProvider extends BaseProvider {
@@ -34,10 +35,10 @@ class AuthProvider extends BaseProvider {
       if (dataResponse.hasError) {
         throw responseBodyHandler(resp: dataResponse);
       } else {
-        customSnackbar(
-          msgTitle: 'Log Out Successfully!',
-          msgContent: '${dataResponse.bodyString}',
-        );
+        // customSnackbar(
+        //   msgTitle: 'Log Out Successfully!',
+        //   msgContent: '${dataResponse.bodyString}',
+        // );
         return dataResponse.bodyString.toString();
       }
     } catch (e) {

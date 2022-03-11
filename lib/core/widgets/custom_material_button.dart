@@ -23,6 +23,7 @@ class CustomMaterialButton extends StatelessWidget {
   final double? topPadding;
   final double? rightPadding;
   final double? bottomPadding;
+  final Widget? childWidget;
 
   const CustomMaterialButton({
     Key? key,
@@ -40,17 +41,18 @@ class CustomMaterialButton extends StatelessWidget {
     this.fontStyle,
     this.borderRedius = 5.0,
     required this.onPressed,
-    this.buttonHeight = 50,
+    this.buttonHeight = 40,
     this.buttonWidth = 100,
     this.leftPadding = 0.0,
     this.topPadding = 0.0,
     this.rightPadding = 0.0,
     this.bottomPadding = 0.0,
+    this.childWidget,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: EdgeInsets.fromLTRB(
         leftPadding!,
         topPadding!,
@@ -58,18 +60,21 @@ class CustomMaterialButton extends StatelessWidget {
         bottomPadding!,
       ),
       child: MaterialButton(
+        // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        padding: EdgeInsets.zero,
         color: buttonColor,
         minWidth: buttonWidth,
         height: buttonHeight,
         elevation: elevation,
         focusColor: onPrimaryColor,
         onPressed: onPressed,
-        child: CustomTextWidget(
-          text: text,
-          color: textColor,
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-        ),
+        child: childWidget ??
+            CustomTextWidget(
+              text: text,
+              color: textColor,
+              fontSize: fontSize,
+              fontWeight: fontWeight,
+            ),
       ),
     );
   }

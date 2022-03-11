@@ -281,7 +281,8 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             title: 'Office Address',
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomTextWidget(
-                              text: '${jobOfferDetail.addressStreet}',
+                              text:
+                                  '${jobOfferDetail.jobOfferFullOfficeAddress}',
                               fontWeight: FontWeightManager.regular,
                               maxLine: 3,
                             ),
@@ -457,7 +458,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomTextWidget(
                               text:
-                                  '${jobOfferDetail.enterprise!.addressStreet}',
+                                  '${jobOfferDetail.enterprise!.addressStreet}, ${jobOfferDetail.companyLocation}',
                               fontWeight: FontWeightManager.regular,
                             ),
                           ),

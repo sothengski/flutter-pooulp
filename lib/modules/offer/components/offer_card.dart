@@ -118,7 +118,7 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: CustomTextWidget(
                                   text:
-                                      '${jobOfferItem!.companyNameAndLocation}',
+                                      '${jobOfferItem!.companyNameAndJobOfferOffice}',
                                   fontSize: AppSize.s12,
                                   fontWeight: FontWeightManager.medium,
                                   color: ColorsManager.primary,

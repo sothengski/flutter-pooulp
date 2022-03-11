@@ -61,6 +61,7 @@ class CustomMaterialButton extends StatelessWidget {
       ),
       child: MaterialButton(
         // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        padding: EdgeInsets.zero,
         color: buttonColor,
         minWidth: buttonWidth,
         height: buttonHeight,

@@ -18,7 +18,7 @@ class SettingPage extends GetView<SettingController> {
         child: CustomTextWidget(
           textAlign: TextAlign.center,
           text:
-              'App Version: 1.0.7(7)\nSetting Page\n\nThis Page is under construction!',
+              'App Version: 1.0.8(8)\nSetting Page\n\nThis Page is under construction!',
         ),
       ),
       bottomNavigationBar: // Obx(

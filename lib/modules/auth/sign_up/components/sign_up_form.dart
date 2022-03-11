@@ -75,6 +75,7 @@ class SignUpForm extends GetView<SignUpController> {
                 Padding(
                   padding: const EdgeInsets.all(AppSize.s16),
                   child: CustomContainerWidget(
+                    isBoxShadow: false,
                     elevation: 0.0,
                     childPadding: 20.0,
                     titleInSide: false,

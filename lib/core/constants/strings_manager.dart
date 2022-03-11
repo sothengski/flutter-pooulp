@@ -24,6 +24,8 @@ class OfferStrings {
   static const String informationAction = 'information';
   static const String emailAction = 'email';
   static const String callAction = 'call';
+
+  static const String searchByTitle = 'Search by title';
 }
 
 class UrlWebsiteStrings {

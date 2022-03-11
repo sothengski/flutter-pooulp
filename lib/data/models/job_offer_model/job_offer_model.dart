@@ -82,6 +82,14 @@ class JobOfferModel {
   String? get companyLocation =>
       '${enterprise!.addressCity}, ${enterprise!.addressCountry}';
 
+  String? get companyNameAndJobOfferOffice =>
+      '${enterprise!.name} ($jobOfferOffice)';
+
+  String? get jobOfferOffice => '$addressCity, $addressCountry';
+
+  String? get jobOfferFullOfficeAddress =>
+      '$addressStreet, $addressCity, $addressCountry';
+
   String? get workPlaceType => telecommuting == 1 ? 'Remote' : 'On-Site';
 
   String? get dateOfferStartFormat =>

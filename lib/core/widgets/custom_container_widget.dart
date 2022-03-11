@@ -42,7 +42,7 @@ class CustomContainerWidget extends StatelessWidget {
     this.borderRadius = 10.0,
     this.elevation = 5.0,
     this.titleInSide = true,
-    this.isBoxShadow = false,
+    this.isBoxShadow = true,
     this.childPadding = 0.0,
     this.leftMargin = 0.0,
     this.topMargin = 0.0,
@@ -64,7 +64,7 @@ class CustomContainerWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: titleInSide == true ? ColorsManager.white : Colors.transparent,
           borderRadius: BorderRadius.circular(borderRadius!),
-          boxShadow: titleInSide == true || isBoxShadow == true
+          boxShadow: isBoxShadow == true
               ? [
                   const BoxShadow(
                     color: ColorsManager.grey300,

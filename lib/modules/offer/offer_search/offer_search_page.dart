@@ -9,6 +9,9 @@ class OfferSearchPage extends SearchDelegate {
   final feedController = Get.find<OfferFeedController>();
 
   @override
+  String get searchFieldLabel => OfferStrings.searchByTitle;
+
+  @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
@@ -55,19 +58,34 @@ class OfferSearchPage extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // assignKeywordtoVariable(isAssignToQuery: true);
     // debugPrint(
     //   'buildSuggestions keywordForSearch:: ${feedController.keywordForSearch.value}',
     // );
-    return const Center(
-      child: CustomTextWidget(text: 'search under construction!!'),
+    // return const Center(
+    //   child: CustomTextWidget(text: 'search under construction!!'),
+    // );
+    return ListView.builder(
+      itemCount: feedController.suggestionWordList.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(
+            feedController.suggestionWordList[index],
+          ),
+          leading:
+              query.isEmpty ? const Icon(Icons.access_time) : const SizedBox(),
+          onTap: () {
+            query = feedController.suggestionWordList[index];
+            showResults(context);
+          },
+        );
+      },
     );
   }
 
   void assignKeywordtoVariable({bool? isAssignToQuery = false}) {
     isAssignToQuery == true
-        ? query = feedController.keywordForSearch.value.trim()
-        : feedController.keywordForSearch.value = query.trim();
+        ? query = feedController.keywordToBeSearch.value.trim()
+        : feedController.keywordToBeSearch.value = query.trim();
     // debugPrint(
     //   'assignKeywordtoVariable keywordForSearch:: ${feedController.keywordForSearch.value}',
     // );

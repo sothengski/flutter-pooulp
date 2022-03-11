@@ -15,3 +15,25 @@ Color containerColorState({
     return isTextColor! ? unEqualStateColor! : equalStateColor!;
   }
 }
+
+bool stringsComparation({
+  String? object1,
+  String? object2,
+}) {
+  if (object1 == object2) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool intComparation({
+  int? object1,
+  int? object2,
+}) {
+  if (object1 == object2) {
+    return true;
+  } else {
+    return false;
+  }
+}

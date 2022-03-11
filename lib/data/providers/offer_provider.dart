@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import '../data.dart';
 
 abstract class IOfferProvider {
@@ -147,17 +145,17 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
     JobOfferModel? jobOfferForSearch,
   }) async {
     try {
-      debugPrint(
-        'Page: $pageNumber, Param:${jobOfferForSearch!.toSearchJson()}',
-      );
+      // debugPrint(
+      //   'Page: $pageNumber, Param:${jobOfferForSearch!.toSearchJson()}',
+      // );
 
       final dataResponse = await post(
         API.postSearchOffer(pageNumber: pageNumber),
-        jobOfferForSearch.toSearchJson(),
+        jobOfferForSearch!.toSearchJson(),
       );
-      debugPrint(
-        'API: ${API.postSearchOffer(pageNumber: pageNumber)}',
-      );
+      // debugPrint(
+      //   'API: ${API.postSearchOffer(pageNumber: pageNumber)}',
+      // );
       final List<JobOfferModel> feedOfferList = <JobOfferModel>[];
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
@@ -165,10 +163,10 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
         final apiResponse = json.decode(dataResponse.bodyString.toString());
         final PaginationModel offerPagination =
             PaginationModel.fromJson(apiResponse as Map<String, dynamic>);
-        int count = 0;
+        // int count = 0;
         for (final e in offerPagination.data!) {
-          count += 1;
-          debugPrint('$count:: ${e.title}');
+          // count += 1;
+          // debugPrint('$count:: ${e.title}');
           feedOfferList.add(e);
         }
         return feedOfferList;
@@ -184,17 +182,17 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
     JobOfferModel? jobOfferForSearch,
   }) async {
     try {
-      debugPrint(
-        'Page: $pageNumber, Param:${jobOfferForSearch!.toSearchJson()}',
-      );
+      // debugPrint(
+      //   'Page: $pageNumber, Param:${jobOfferForSearch!.toSearchJson()}',
+      // );
 
       final dataResponse = await post(
         API.postSearchOffer(pageNumber: pageNumber),
-        jobOfferForSearch.toSearchJson(),
+        jobOfferForSearch!.toSearchJson(),
       );
-      debugPrint(
-        'API: ${API.postSearchOffer(pageNumber: pageNumber)}',
-      );
+      // debugPrint(
+      //   'API: ${API.postSearchOffer(pageNumber: pageNumber)}',
+      // );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
       } else {

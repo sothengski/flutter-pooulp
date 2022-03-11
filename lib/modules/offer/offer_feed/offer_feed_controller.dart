@@ -37,18 +37,53 @@ class OfferFeedController extends GetxController
 
   Set<String?> setOfListTypes = {};
 
-  RxString keywordForSearch = ''.obs;
+  RxInt workPlaceTypesForSearch = 2.obs;
   RxList<FieldModel> typesListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> fieldListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> languageListForSearch = <FieldModel>[].obs;
 
+  RxInt workPlaceTypesInFilter = 2.obs;
+  Rx<CountryModel> selectedCountryInFilter = const CountryModel().obs;
+  RxList<FieldModel> typesListInFilter = <FieldModel>[].obs;
+  RxList<FieldModel> fieldListInFilter = <FieldModel>[].obs;
+  RxList<FieldModel> languageListInFilter = <FieldModel>[].obs;
+
+  RxString keywordToBeSearch = ''.obs;
+  RxInt workPlaceTypesToBeSearch = 2.obs;
+  Rx<CountryModel> countryToBeSearch = const CountryModel().obs;
+  RxList<FieldModel> typesListToBeSearch = <FieldModel>[].obs;
+  RxList<FieldModel> fieldListToBeSearch = <FieldModel>[].obs;
+  // RxList<int> fieldListToBeSearch = <int>[].obs;
+  RxList<FieldModel> languageListToBeSearch = <FieldModel>[].obs;
+
   RxBool isLoadingIndicator = false.obs;
+
+  List<String> suggestionWordList = [
+    'Operator',
+    'Design',
+    'Marketing',
+    'Specialist',
+    'Information technology',
+    'Accounting',
+    'Engineering',
+    'Finance',
+    'Human resources',
+    'Recruitment',
+    'Procurement',
+    'Architecture',
+    'Software development',
+    'Microsoft Office',
+    'Business administration',
+    'Information systems',
+    'Nursing'
+  ];
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await getjobOfferTypesListResponseProvider();
-
+    await getFieldsListResponseProvider();
+    await getLanguagesListResponseProvider();
     await getFeedsDataState(refresh: true)
         // .then((value) => isProcessingStudentInfoRepsonse.value = true)
         ;
@@ -56,7 +91,99 @@ class OfferFeedController extends GetxController
   }
 
   String updateKeyword({String? newKeyword = ''}) =>
-      keywordForSearch.value = newKeyword.toString();
+      keywordToBeSearch.value = newKeyword.toString();
+
+  CountryModel selectedCountryOnClick(CountryModel selectedItem) {
+    return selectedCountryInFilter.value = selectedItem;
+  }
+
+  // void addingOrRemovingFieldInFieldListToBeSearch({int? intIdValue}) {
+  //   // update();
+  //   if (fieldListToBeSearch.contains(intIdValue)) {
+  //     fieldListToBeSearch.remove(intIdValue);
+  //   } else {
+  //     fieldListToBeSearch.add(intIdValue!);
+  //   }
+  // }
+
+  // void addingOrRemovingFieldInFieldListToBeSearch({FieldModel? fieldValue}) {
+  //   // update();
+  //   if (fieldListToBeSearch.contains(fieldValue)) {
+  //     fieldListToBeSearch.remove(fieldValue);
+  //   } else {
+  //     fieldListToBeSearch.add(fieldValue!);
+  //   }
+  // }
+
+  void addingOrRemovingFieldInFieldListToBeSearch({
+    RxList<FieldModel>? list,
+    FieldModel? fieldValue,
+  }) {
+    if (list!.contains(fieldValue)) {
+      list.removeWhere((element) => element.id == fieldValue!.id);
+    } else {
+      list.add(fieldValue!);
+    }
+  }
+
+  void clearAllFilterToBeSearch() {
+    keywordToBeSearch.value = '';
+    selectedCountryInFilter.value = const CountryModel();
+
+    workPlaceTypesInFilter.value = 2; // 2 == Hybrid(Default)
+    languageListInFilter.value = [];
+    fieldListInFilter.value = [];
+
+    countryToBeSearch.value = const CountryModel();
+    workPlaceTypesToBeSearch.value = 2; // 2 == Hybrid(Default)
+    languageListToBeSearch.value = [];
+    fieldListToBeSearch.value = [];
+
+    // debugPrint(
+    //   'clearAllFilterToBeSearch',
+    // );
+    // debugPrint(
+    //   'languageListToBeSearch:: ${languageListToBeSearch.map((element) => '${element.label}\n')}',
+    // );
+    // debugPrint(
+    //   'fieldListToBeSearch:: ${fieldListToBeSearch.map((element) => '${element.label}\n')}',
+    // );
+  }
+
+  void dismissFilter() {
+    workPlaceTypesInFilter.value = workPlaceTypesToBeSearch.value;
+    selectedCountryInFilter.value = countryToBeSearch.value;
+    languageListInFilter.value = [];
+    languageListInFilter.addAll(languageListToBeSearch);
+    fieldListInFilter.value = [];
+    fieldListInFilter.addAll(fieldListToBeSearch);
+
+    // debugPrint('dismissFilter');
+    // debugPrint(
+    //   'languageListToBeSearch:: ${languageListToBeSearch.map((element) => '${element.label}\n')}',
+    // );
+    // debugPrint(
+    //   'languageListInFilter:: ${languageListInFilter.map((element) => '${element.label}\n')}',
+    // );
+  }
+
+  void applyFilterToBeSearch() {
+    // keywordForSearch.value = '';
+    workPlaceTypesToBeSearch.value = workPlaceTypesInFilter.value;
+    countryToBeSearch.value = selectedCountryInFilter.value;
+    languageListToBeSearch.addAll(languageListInFilter);
+    fieldListToBeSearch.addAll(fieldListInFilter);
+
+    // debugPrint(
+    //   'applyFilterToBeSearch',
+    // );
+    // debugPrint(
+    //   'languageListToBeSearch:: ${languageListToBeSearch.map((element) => '${element.label}\n')}',
+    // );
+    // debugPrint(
+    //   'fieldListForSearch:: ${fieldListForSearch.map((element) => '${element.label}\n')}',
+    // );
+  }
 
   bool jobOfferOnClickBoolSwitching({bool? boolValue}) {
     update();
@@ -95,6 +222,26 @@ class OfferFeedController extends GetxController
     return listJobOfferTypes;
   }
 
+  Future<List<FieldModel>> getFieldsListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    fieldListForSearch.addAll(await tagProvider.getAllFields());
+    // debugPrint(
+    //   'fieldListForSearch:: ${fieldListForSearch.map((element) => '${element.label}\n')}',
+    // );
+    return fieldListForSearch;
+  }
+
+  Future<List<FieldModel>> getLanguagesListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    languageListForSearch.addAll(await tagProvider.getLanguages());
+    // debugPrint(
+    //   'languageListForSearch:: ${languageListForSearch.map((element) => '${element.label}\n')}',
+    // );
+    return languageListForSearch;
+  }
+
   Future<RxList<JobOfferModel>> getfeedListResponseProvider({
     bool? refresh = false,
   }) async {
@@ -103,19 +250,21 @@ class OfferFeedController extends GetxController
     PaginationModel feedListPaginationRepsonse = PaginationModel();
     final JobOfferModel jobOfferToBeSearch = JobOfferModel(
       // title: 'commercial',
-      title: keywordForSearch.value,
+      title: keywordToBeSearch.value,
+      location: countryToBeSearch.value.name,
+      telecommuting: workPlaceTypesToBeSearch.value,
       types: [
         typeSelected.value,
       ],
-      // fields: [FieldModel(id: 238)],
-      // spokenLanguages: [FieldModel(id: 66)],
+      spokenLanguages: languageListToBeSearch,
+      fields: fieldListToBeSearch,
     );
-    debugPrint(
-      'feedListPagination current page:: ${feedListPagination.value.meta!.currentPage!}',
-    );
-    debugPrint(
-      'feedListPagination last page:: ${feedListPagination.value.meta!.lastPage!}',
-    );
+    // debugPrint(
+    //   'feedListPagination current page:: ${feedListPagination.value.meta!.currentPage!}',
+    // );
+    // debugPrint(
+    //   'feedListPagination last page:: ${feedListPagination.value.meta!.lastPage!}',
+    // );
 
     if (refresh == false) {
       if (feedListPagination.value.meta!.currentPage! <
@@ -132,11 +281,6 @@ class OfferFeedController extends GetxController
         feedListRepsonse.addAll(feedTempListResponse);
       } else {
         feedListRepsonse.addAll(feedTempListResponse);
-        // customSnackbar(
-        //   msgTitle: 'Not more data!',
-        //   msgContent: '',
-        // );
-        // debugPrint('pageNum else:: $pageNum');
       }
     } else {
       feedListPaginationRepsonse =
@@ -146,44 +290,12 @@ class OfferFeedController extends GetxController
       );
       feedListPagination.value = feedListPaginationRepsonse;
       feedTempListResponse.addAll(feedListPagination.value.data!);
-      // feedTempListResponse = await offerProvider.postSearchOffer(
-      //   pageNumber: 1,
-      //   jobOfferForSearch: jobOfferToBeSearch,
-      // );
       feedListRepsonse.value = feedTempListResponse;
     }
-    // if (feedListPagination.value.meta!.currentPage! <
-    //         feedListPagination.value.meta!.lastPage! &&
-    //     refresh == false) {
-    //   pageNum = feedListPagination.value.meta!.currentPage! + 1;
-    //   debugPrint('pageNum if:: $pageNum');
-    // } else {
-    //   pageNum = 1;
-    //   debugPrint('pageNum else:: $pageNum');
-    // }
-    // feedListPaginationRepsonse =
-    //     await offerProvider.postSearchOfferWithPagination(
-    //   pageNumber: pageNum,
-    //   jobOfferForSearch: jobOfferToBeSearch,
-    // );
-    // feedListPagination.value = feedListPaginationRepsonse;
-    // feedTempListResponse.addAll(feedListPagination.value.data!);
-    // // feedTempListResponse = await offerProvider.postSearchOffer(
-    // //   pageNumber: 1,
-    // //   jobOfferForSearch: jobOfferToBeSearch,
-    // // );
-
-    // if (refresh == false) {
-    //   feedListRepsonse.addAll(feedTempListResponse);
-    // } else {
-    //   feedListRepsonse.value = feedTempListResponse;
-    // }
-    // debugPrint('feedListRepsonse length:: ${feedListRepsonse.length}');
     isLoadingIndicator.value = false;
-    debugPrint(
-      'isLoadingIndicator After:: ${isLoadingIndicator.value}',
-    );
-    // addTypesIntoSet(jobOfferTrxData: feedListRepsonse);
+    // debugPrint(
+    //   'isLoadingIndicator After:: ${isLoadingIndicator.value}',
+    // );
 
     return feedListRepsonse;
   }
@@ -193,9 +305,9 @@ class OfferFeedController extends GetxController
       if (scrollController.position.maxScrollExtent ==
               scrollController.position.pixels &&
           isLoadingIndicator.value == false) {
-        debugPrint('add Item');
+        // debugPrint('add Item');
         isLoadingIndicator.value = true;
-        debugPrint('isLoadingIndicator b4:: ${isLoadingIndicator.value}');
+        // debugPrint('isLoadingIndicator b4:: ${isLoadingIndicator.value}');
         getfeedListResponseProvider();
         // isLoadingIndicator.value = false;
       }
@@ -267,61 +379,5 @@ class OfferFeedController extends GetxController
     }
     typeSelected.value = tempType;
     onRefresh();
-    // filterFeedlist(
-    //   feedList: feedListRepsonse,
-    //   type: tempType,
-    // );
   }
-
-  // List<JobOfferModel> filterFeedlist({
-  //   List<JobOfferModel>? feedList,
-  //   FieldModel? type,
-  // }) {
-  //   List<JobOfferModel> tempListFeed;
-  //   feedFilterList.clear();
-
-  //   if (type! == allType) {
-  //     tempListFeed = feedList!;
-  //   } else {
-  //     tempListFeed = feedList!
-  //         .where(
-  //           (feed) => feed.types!.any(
-  //             (element) => element.label!.contains(type.label.toString()),
-  //           ),
-  //         )
-  //         .toList();
-  //   }
-  //   feedFilterList.addAll(tempListFeed);
-
-  //   return feedFilterList;
-  // }
-
-  // void addTypesIntoSet({List<JobOfferModel>? jobOfferTrxData}) {
-  //   listFilterTypes.clear();
-  //   setOfListTypes.clear();
-  //   listFilterTypes.add(
-  //     allType,
-  //   );
-  //   selectType(type: listFilterTypes[0]);
-
-  //   for (var i = 0; i < jobOfferTrxData!.length; i++) {
-  //     for (var j = 0; j < jobOfferTrxData[i].types!.length; j++) {
-  //       if (setOfListTypes.add(jobOfferTrxData[i].types![j].label)) {
-  //         listFilterTypes.add(
-  //           FieldModel(
-  //             id: jobOfferTrxData[i].types![j].id,
-  //             // totalCategory: outletList.length,
-  //             label: jobOfferTrxData[i].types![j].label,
-  //             type: jobOfferTrxData[i].types![j].type,
-  //           ),
-  //         );
-  //       }
-  //     }
-  //   }
-
-  //   filterFeedlist(
-  //     feedList: jobOfferTrxData,
-  //     type: allType,
-  //   );
-  // }
 }

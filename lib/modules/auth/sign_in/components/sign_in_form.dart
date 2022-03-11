@@ -11,6 +11,7 @@ class SignInForm extends GetView<SignInController> {
   @override
   Widget build(BuildContext context) {
     return CustomContainerWidget(
+      isBoxShadow: false,
       elevation: 0.0,
       childPadding: 20.0,
       titleInSide: false,

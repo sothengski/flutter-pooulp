@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/core.dart';
 import '../offer.dart';
 
@@ -77,15 +78,18 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                             flex: 85,
                             // width: getWidth * 0.80,
                             child: CustomContainerWidget(
+                              isBoxShadow: false,
+                              topMargin: AppSize.s6,
                               leftMargin: AppSize.s16,
                               containerBackground: ColorsManager.grey100,
                               childPadding: AppSize.s12,
                               titleInSide: false,
                               child: Obx(
                                 () => CustomTextWidget(
-                                  text: controller.keywordForSearch.value != ''
-                                      ? controller.keywordForSearch.value
-                                      : 'Search the job title', //'Search the job title',
+                                  text: controller.keywordToBeSearch.value != ''
+                                      ? controller.keywordToBeSearch.value
+                                      : OfferStrings
+                                          .searchByTitle, //'Search the title',
                                 ),
                               ),
                               onTap: () {
@@ -103,14 +107,36 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                               color: ColorsManager.white,
                               onPressed: () {
                                 controller.updateKeyword();
-                                customSnackbar(
-                                  msgTitle: 'This Page is under construction!',
-                                  msgContent:
-                                      'This Page is only view.\n Data will not save.',
+                                Get.dialog(
+                                  const OfferFeedFilterSearch(
+                                    title: 'Advanced Search',
+                                    // contentWidget: Container(
+                                    //   alignment: Alignment.topLeft,
+                                    //   padding: const EdgeInsets.all(AppSize.s8),
+                                    //   child: Column(
+                                    //     children: [
+                                    //       CustomContainerWidget(
+                                    //         isBoxShadow: false,
+                                    //         // topMargin: AppSize.s12,
+                                    //         // bottomMargin: AppSize.s12,
+                                    //         leftTitle: 'Profile Progress',
+                                    //         titleTopPadding: AppSize.s5,
+
+                                    //         titleFontSize: AppSize.s16,
+                                    //         child: Container(),
+                                    //       ),
+                                    //       const Text('body asd'),
+                                    //       const Text('body asd'),
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                  ),
+                                  // barrierDismissible: false,
                                 );
-                                // showSearch(
-                                //   context: context,
-                                //   delegate: OfferSearchPage(),
+                                // customSnackbar(
+                                //   msgTitle: 'This Page is under construction!',
+                                //   msgContent:
+                                //       'This Page is only view.\n Data will not save.',
                                 // );
                               },
                             ),

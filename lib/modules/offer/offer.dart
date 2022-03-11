@@ -1,5 +1,6 @@
 export 'components/offer_card.dart';
 export 'components/offer_feed_list_component.dart';
+export 'components/offer_filter_search.dart';
 export 'components/offer_list_component.dart';
 export 'components/offer_state_list_component.dart';
 export 'components/offer_types_list_component.dart';

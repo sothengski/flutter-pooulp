@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 
 import '../../../core/core.dart';
@@ -27,40 +26,42 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Container(
-            //   width: 120,
-            //   height: 120,
-            //   margin: const EdgeInsets.only(
-            //     top: AppSize.s16,
-            //   ),
-            //   decoration: BoxDecoration(
-            //     color: ColorsManager.white,
-            //     shape: BoxShape.circle,
-            //     border: Border.all(
-            //       color: ColorsManager.white,
-            //       width: 3,
-            //     ),
-            //     boxShadow: const [
-            //       BoxShadow(
-            //         color: ColorsManager.grey300,
-            //         blurRadius: 3.0,
-            //         offset: Offset(1.0, 1.0),
-            //         spreadRadius: 3.0,
-            //       )
-            //     ],
-            //     // image: const DecorationImage(
-            //     //   fit: BoxFit.cover,
-            //     //   image: AssetImage(ImageAssets.appLogoSymbol),
-            //     // ),
-            //   ),
-            //   child: const CustomBoxWidget(
-            //     size: 120,
-            //     backgroundColor: ColorsManager.white,
-            //     isCircle: true,
-            //   ),
-            // ),
+            ///===== Top of Profile Image Component =====//
+            CustomBoxWidget(
+              size: 150,
+              topMargin: AppSize.s16,
+              backgroundColor: ColorsManager.grey200,
+              isCircle: true,
+              insideObj: Stack(
+                children: [
+                  CachedNetworkImgWidget(
+                    imgUrl: controller.profileController.userInfoRepsonse.value
+                        .profile!.pictureUrl,
+                    borderRadius: 75,
+                  ),
+                  Align(
+                    alignment: const Alignment(1.25, 1.25),
+                    child: MaterialButton(
+                      minWidth: 0,
+                      onPressed: () {
+                        // controller.getImage();
+                      },
+                      textColor: Colors.white,
+                      color: ColorsManager.primary,
+                      elevation: 0,
+                      shape: const CircleBorder(),
+                      child: const Icon(
+                        Icons.add_a_photo_rounded,
+                        size: 18,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            //===== Bottom of Profile Image Component =====//
 
-            ///===== Personal Information Component =====//
+            ///===== Top of Personal Information Component =====//
             Padding(
               padding: const EdgeInsets.all(AppSize.s16),
               child: CustomContainerWidget(
@@ -78,9 +79,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ///===== First name Component =====//
+                      ///===== Top of First name Component =====//
                       CustomTextInput(
-                        // controller: controller.firstNameCtrl,
+                        controller: controller.firstNameCtrl,
                         inputTitle: 'First name',
                         hintText: 'Enter your first name',
                         isFilled: true,
@@ -89,458 +90,200 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         // onSaved: (value) => controller
                         //     .firstNameCtrl.text = value.toString(),
                       ),
-                      //===== First name Component =====//
+                      //===== Bottom of First name Component =====//
 
-                      ///===== Last name Component =====//
+                      ///===== Top of Last name Component =====//
                       CustomTextInput(
-                        // controller: controller.lastNameCtrl,
+                        controller: controller.lastNameCtrl,
                         inputTitle: 'Last name',
                         hintText: 'Enter your last name',
                         isFilled: true,
                         topPadding: AppSize.s12,
                         validator: Validator().notEmptyValidator,
                       ),
-                      //===== Last name Component =====//
+                      //===== Bottom of Last name Component =====//
 
-                      ///===== Title Component =====//
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const CustomTextWidget(
-                            text: 'Title',
-                            marginTop: AppSize.s12,
-                            textAlign: TextAlign.left,
-                            // marginBottom: AppSize.s4,
-                          ),
-                          const SizedBox(
-                            height: 3.0,
-                          ),
-                          GestureDetector(
-                            onTap: () => {
-                              unFocusKeyBoard(context),
-                              genderSelectedDialog(context),
-                            },
-                            child: Container(
-                              // height: 50.0,
-                              alignment: Alignment.centerLeft,
-                              padding: EdgeInsets.zero,
-                              margin: EdgeInsets.zero,
-                              child: FormField(
-                                // validator: (_) => controller
-                                //     .isPhoneNumberValidate(),
-                                builder: (
-                                  FormFieldState<String> state,
-                                ) {
-                                  return InputDecorator(
-                                    // alignedDropdown: true,
-                                    decoration: InputDecoration(
-                                      // contentPadding: EdgeInsets.zero,
-                                      contentPadding: const EdgeInsets.fromLTRB(
-                                        12,
-                                        0,
-                                        12,
-                                        0,
-                                      ), //const EdgeInsets.fromLTRB(12, 20, 12, 20), //default value:
-                                      fillColor: ColorsManager.grey100,
-                                      filled: true,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          AppSize.s8,
-                                        ),
-                                      ),
-                                      errorText: state.hasError
-                                          ? state.errorText
-                                          : null,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          AppSize.s8,
-                                        ),
-                                        borderSide: const BorderSide(
-                                          color: ColorsManager.grey100,
-                                        ),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          AppSize.s8,
-                                        ),
-                                        borderSide: const BorderSide(
-                                          color: ColorsManager.red900,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          AppSize.s8,
-                                        ),
-                                        borderSide: const BorderSide(
-                                          color: ColorsManager.grey300,
-                                        ),
-                                      ),
-                                    ),
-                                    child: Obx(
-                                      () => controller.selectedGender.value ==
-                                              ''
-                                          ? Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: const [
-                                                CustomTextWidget(
-                                                  text: 'Select a title',
-                                                  // marginLeft: AppSize.s8,
-                                                  color: ColorsManager.grey400,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16.0,
-                                                ),
-                                                Icon(
-                                                  Icons.arrow_drop_down,
-                                                  color: ColorsManager.grey600,
-                                                )
-                                              ],
-                                            )
-                                          : Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                CustomTextWidget(
-                                                  //marginLeft: 4.0,
-                                                  text: controller
-                                                      .selectedGender.value,
-                                                  color: ColorsManager.black,
-                                                  fontSize: 16.0,
-                                                ),
-                                                const Icon(
-                                                  Icons.arrow_drop_down,
-                                                  color: ColorsManager.grey600,
-                                                )
-                                              ],
-                                            ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      //===== Title Component =====//
-
-                      ///===== Birthday Component =====//
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const CustomTextWidget(
-                            text: 'Birthday',
-                            marginTop: AppSize.s12,
-                            textAlign: TextAlign.left,
-                            // marginBottom: AppSize.s4,
-                          ),
-                          const SizedBox(
-                            height: 3.0,
-                          ),
-                          // TextButton(
-                          //   style: TextButton.styleFrom(
-                          //     minimumSize: Size.zero,
-                          //     padding: EdgeInsets.zero,
-                          //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          //   ),
-                          //   onPressed:
-                          GestureDetector(
-                            onTap: () => {
-                              unFocusKeyBoard(context),
-                              DatePicker.showDatePicker(
-                                context,
-                                minTime: DateTime(1970),
-                                maxTime: DateTime(2009, 12, 31),
-                                currentTime: DateTime(2000),
-                                // locale: LocaleType.kh,
-                                theme: const DatePickerTheme(
-                                  headerColor: ColorsManager.grey100,
-                                  backgroundColor: ColorsManager.grey100,
-                                  itemStyle: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                      ///===== Top of Title Component =====//
+                      ContainerDialogWidget(
+                        inputTitle: 'Title',
+                        dialogWidget: MaterialDialogWidget(
+                          title: 'Select Title',
+                          contentWidget: ListView.separated(
+                            shrinkWrap: true,
+                            itemCount: controller.genderList.length,
+                            itemBuilder: (context, index) {
+                              return Obx(
+                                () => RowDataSelectionWidget.radioButton(
+                                  isLeftSideText: false,
+                                  isClickingValue: stringsComparation(
+                                    object1: controller.genderList[index],
+                                    object2: controller.selectedGender.value,
                                   ),
-                                  doneStyle: TextStyle(
-                                    color: ColorsManager.primaryBlue,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                  text: controller.genderList[index],
+                                  onPressed: () {
+                                    controller.selectedGenderOnClick(
+                                      selectedItem:
+                                          controller.genderList[index],
+                                    );
+                                    Navigator.pop(
+                                      context,
+                                      true,
+                                    ); // Issue:: It's not working properly on first click with Get.back();
+                                  },
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Divider(
+                                height: 1.0,
+                                color: ColorsManager.grey300,
+                              );
+                            },
+                          ),
+                        ),
+                        containerWidget: Obx(
+                          () => controller.selectedGender.value == ''
+                              ? const RowContentInputWidget(
+                                  centerWidget: CustomTextWidget(
+                                    text: 'Select a title',
+                                    // marginLeft: AppSize.s8,
+                                    color: ColorsManager.grey400,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16.0,
+                                  ),
+                                  suffixWidget: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: ColorsManager.grey600,
+                                  ),
+                                )
+                              : RowContentInputWidget(
+                                  centerWidget: CustomTextWidget(
+                                    //marginLeft: 4.0,
+                                    text: controller.selectedGender.value,
+                                    color: ColorsManager.black,
+                                    fontSize: 16.0,
+                                  ),
+                                  suffixWidget: const Icon(
+                                    Icons.arrow_drop_down,
+                                    color: ColorsManager.grey600,
                                   ),
                                 ),
-                                onChanged: (date) {
-                                  // print(
-                                  //   'change $date in time zone ${date.timeZoneOffset.inHours}',
-                                  // );
-                                },
-                                onConfirm: (date) {
-                                  // print('confirm $date');
-                                  controller.selectedBirthdayOnClick(
-                                    selectedItem:
-                                        '${date.year}-${date.month}-${date.day}',
-                                  );
-                                },
-                              )
-                            },
-                            child: Container(
-                              // height: 50.0,
-                              alignment: Alignment.centerLeft,
-                              padding: EdgeInsets.zero,
-                              margin: EdgeInsets.zero,
-                              child: FormField(
-                                // validator: (_) => controller
-                                //     .isPhoneNumberValidate(),
-                                builder: (
-                                  FormFieldState<String> state,
-                                ) {
-                                  return InputDecorator(
-                                    // alignedDropdown: true,
-                                    decoration: InputDecoration(
-                                      // contentPadding: EdgeInsets.zero,
-                                      contentPadding: const EdgeInsets.fromLTRB(
-                                        12,
-                                        0,
-                                        12,
-                                        0,
-                                      ), //const EdgeInsets.fromLTRB(12, 20, 12, 20), //default value:
-                                      fillColor: ColorsManager.grey100,
-                                      filled: true,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          AppSize.s8,
-                                        ),
-                                      ),
-                                      errorText: state.hasError
-                                          ? state.errorText
-                                          : null,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          AppSize.s8,
-                                        ),
-                                        borderSide: const BorderSide(
-                                          color: ColorsManager.grey100,
-                                        ),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          AppSize.s8,
-                                        ),
-                                        borderSide: const BorderSide(
-                                          color: ColorsManager.red900,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          AppSize.s8,
-                                        ),
-                                        borderSide: const BorderSide(
-                                          color: ColorsManager.grey300,
-                                        ),
-                                      ),
-                                    ),
-                                    child: Obx(
-                                      () => controller.selectedBirthday.value ==
-                                              ''
-                                          ? Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: const [
-                                                CustomTextWidget(
-                                                  text: 'Select your Birthday',
-                                                  color: ColorsManager.grey400,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16.0,
-                                                ),
-                                                Icon(
-                                                  Icons.date_range_outlined,
-                                                  color: ColorsManager.grey600,
-                                                )
-                                              ],
-                                            )
-                                          : Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                CustomTextWidget(
-                                                  //marginLeft: 4.0,
-                                                  text: controller
-                                                      .selectedBirthday.value,
-                                                  color: ColorsManager.black,
-                                                  fontSize: 16.0,
-                                                ),
-                                                const Icon(
-                                                  Icons.date_range_outlined,
-                                                  color: ColorsManager.grey600,
-                                                )
-                                              ],
-                                            ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                      //===== Birthday Component =====//
+                      //===== Bottom of Title Component =====//
 
-                      ///===== Phone Number Component =====//
+                      ///===== Top of Birthday Component =====//
+                      ContainerDialogWidget(
+                        inputTitle: 'Birthday',
+                        dialogType: DialogType.dateTimePickerDialog,
+                        controller: controller,
+                        containerWidget: Obx(
+                          () => controller.selectedBirthday.value == ''
+                              ? const RowContentInputWidget(
+                                  centerWidget: CustomTextWidget(
+                                    text: 'Select your Birthday',
+                                    color: ColorsManager.grey400,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16.0,
+                                  ),
+                                  suffixWidget: Icon(
+                                    Icons.date_range_outlined,
+                                    color: ColorsManager.grey600,
+                                  ),
+                                )
+                              : RowContentInputWidget(
+                                  centerWidget: CustomTextWidget(
+                                    //marginLeft: 4.0,
+                                    text: dateFormatDashYYYYMMDD(
+                                      date: DateTime.tryParse(
+                                        controller.selectedBirthday.value,
+                                      ),
+                                    ),
+                                    color: ColorsManager.black,
+                                    fontSize: 16.0,
+                                  ),
+                                  suffixWidget: const Icon(
+                                    Icons.date_range_outlined,
+                                    color: ColorsManager.grey600,
+                                  ),
+                                ),
+                        ),
+                      ),
+                      //===== Bottom of Birthday Component =====//
+
+                      ///===== Top of Phone Number Component =====//
                       Row(
                         children: [
                           Expanded(
                             flex: 40,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const CustomTextWidget(
-                                  text: 'Phone Number',
-                                  marginTop: AppSize.s12,
-                                  textAlign: TextAlign.left,
-                                  // marginBottom: AppSize.s4,
+                            child: ContainerDialogWidget(
+                              inputTitle: 'Phone Number',
+                              dialogType: DialogType.bottomSheetDialog,
+                              dialogWidget: Container(
+                                height: getHeight,
+                                decoration: const ShapeDecoration(
+                                  color: ColorsManager.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(
+                                        16,
+                                      ),
+                                      topRight: Radius.circular(
+                                        16,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                const SizedBox(
-                                  height: 3.0,
+                                child: Obx(
+                                  () => CountryListSelector(
+                                    countrylist: countryList,
+                                    selectedCountry: controller
+                                        .selectedCountryPhoneNumber.value,
+                                    onTap: (country) {
+                                      controller
+                                          .selectedCountryPhoneNumberOnClick(
+                                        country,
+                                      );
+                                      Navigator.pop(
+                                        context,
+                                        true,
+                                      ); // Issue:: It's not working properly on first click with Get.back();
+                                    },
+                                  ),
                                 ),
-                                GestureDetector(
-                                  onTap: () => Get.bottomSheet(
-                                    Container(
-                                      height: getHeight,
-                                      decoration: const ShapeDecoration(
-                                        color: ColorsManager.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(
-                                              16,
-                                            ),
-                                            topRight: Radius.circular(
-                                              16,
-                                            ),
-                                          ),
+                              ),
+                              containerWidget: Obx(
+                                () => controller.selectedCountryPhoneNumber
+                                            .value.phoneCode ==
+                                        null
+                                    ? const RowContentInputWidget(
+                                        centerWidget: CustomTextWidget(
+                                          text: 'Country Code',
+                                          color: ColorsManager.grey400,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 16.0,
+                                        ),
+                                      )
+                                    : RowContentInputWidget(
+                                        prefixWidgetFlex: 25,
+                                        prefixWidget: CircleFlag(
+                                          controller.selectedCountryPhoneNumber
+                                              .value.isoCode
+                                              .toString(),
+                                        ),
+                                        prefixWidgetRightPadding: AppSize.s12,
+                                        centerWidgetFlex: 75,
+                                        centerWidget: CustomTextWidget(
+                                          //marginLeft: 4.0,
+                                          text: controller
+                                              .selectedCountryPhoneNumber
+                                              .value
+                                              .phoneCode,
+                                          color: ColorsManager.black,
+                                          fontSize: 16.0,
                                         ),
                                       ),
-                                      child: CountryListSelector(
-                                        countrylist: countryList,
-                                        selectedCountry: controller
-                                            .selectedCountryPhoneNumber.value,
-                                        onTap: (country) {
-                                          controller
-                                              .selectedCountryPhoneNumberOnClick(
-                                            country,
-                                          );
-                                          Get.back();
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  child: Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding: EdgeInsets.zero,
-                                    child: FormField(
-                                      validator: (_) =>
-                                          controller.isPhoneNumberValidate(),
-                                      builder: (
-                                        FormFieldState<String> state,
-                                      ) {
-                                        return InputDecorator(
-                                          // alignedDropdown: true,
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                const EdgeInsets.fromLTRB(
-                                              4,
-                                              0,
-                                              4,
-                                              0,
-                                            ),
-                                            fillColor: ColorsManager.grey100,
-                                            filled: true,
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                            ),
-                                            errorText: state.hasError
-                                                ? state.errorText
-                                                : null,
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                              borderSide: const BorderSide(
-                                                color: ColorsManager.grey100,
-                                              ),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                              borderSide: const BorderSide(
-                                                color: ColorsManager.red900,
-                                              ),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                              borderSide: const BorderSide(
-                                                color: ColorsManager.grey300,
-                                              ),
-                                            ),
-                                          ),
-                                          child: Obx(
-                                            () => controller
-                                                        .selectedCountryPhoneNumber
-                                                        .value
-                                                        .phoneCode ==
-                                                    null
-                                                ? const CustomTextWidget(
-                                                    marginLeft: AppSize.s8,
-                                                    text: 'Country Code',
-                                                    color:
-                                                        ColorsManager.grey400,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 16.0,
-                                                  )
-                                                : Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 15.0,
-                                                        child: CircleFlag(
-                                                          controller
-                                                              .selectedCountryPhoneNumber
-                                                              .value
-                                                              .isoCode
-                                                              .toString(),
-                                                        ),
-                                                      ),
-                                                      CustomTextWidget(
-                                                        marginLeft: AppSize.s4,
-                                                        text: controller
-                                                            .selectedCountryPhoneNumber
-                                                            .value
-                                                            .phoneCode,
-                                                        color:
-                                                            ColorsManager.black,
-                                                        fontSize: 16.0,
-                                                      ),
-                                                      // const Icon(
-                                                      //   Icons
-                                                      //       .arrow_drop_down,
-                                                      // ),
-                                                    ],
-                                                  ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -577,9 +320,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                           ),
                         ],
                       ),
-                      //===== Phone Number Component =====//
+                      //===== Bottom of Phone Number Component =====//
 
-                      ///===== Phone Number 2 Component =====//
+                      ///===== Top of Phone Number 2 Component =====//
                       // Row(
                       //   children: [
                       //     Expanded(
@@ -765,9 +508,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       //     ),
                       //   ],
                       // ),
-                      //===== Phone Number 2 Component =====//
+                      //===== Bottom of Phone Number 2 Component =====//
 
-                      ///===== Facebook profile Component =====//
+                      ///===== Top of Facebook profile Component =====//
                       // CustomTextInput(
                       //   // controller: controller.emailCtrl,
                       //   inputTitle: 'Facebook profile',
@@ -777,21 +520,21 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       //   validator: Validator().emailValidator,
                       //   keyboardType: TextInputType.emailAddress,
                       // ),
-                      //===== Facebook profile Component =====//
+                      //===== Bottom of Facebook profile Component =====//
 
-                      ///===== Linkedin profile Component =====//
+                      ///===== Top of Linkedin profile Component =====//
                       CustomTextInput(
-                        // controller: controller.emailCtrl,
+                        controller: controller.linkedInProfileCtrl,
                         inputTitle: 'Linkedin profile',
                         hintText: 'Enter your Linkedin profile',
                         isFilled: true,
                         topPadding: AppSize.s12,
-                        validator: Validator().emailValidator,
+                        // validator: Validator().emailValidator,
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      //===== Linkedin profile Component =====//
+                      //===== Bottom of Linkedin profile Component =====//
 
-                      ///===== Whatapp contact Component =====//
+                      ///===== Top of Whatapp contact Component =====//
                       // CustomTextInput(
                       //   // controller: controller.emailCtrl,
                       //   inputTitle: 'Whatapp contact',
@@ -801,23 +544,21 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       //   validator: Validator().emailValidator,
                       //   keyboardType: TextInputType.emailAddress,
                       // ),
-                      //===== Whatapp contact Component =====//
+                      //===== Bottom of Whatapp contact Component =====//
 
-                      ///===== Video presentation link Component =====//
+                      ///===== Top of Video presentation link Component =====//
                       CustomTextInput(
-                        // controller: controller.emailCtrl,
+                        controller: controller.videoLinkCtrl,
                         inputTitle: 'Video presentation link',
                         hintText: 'Enter your Video presentation link',
                         isFilled: true,
                         topPadding: AppSize.s12,
-                        validator: Validator().emailValidator,
-                        keyboardType: TextInputType.emailAddress,
                       ),
-                      //===== Video presentation link Component =====//
+                      //===== Bottom of Video presentation link Component =====//
 
-                      ///===== Description Component =====//
+                      ///===== Top of Description Component =====//
                       CustomTextInput(
-                        // controller: controller.emailCtrl,
+                        controller: controller.descriptionCtrl,
                         inputTitle: 'Description',
                         hintText: 'Description...',
                         isFilled: true,
@@ -828,12 +569,12 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         maxLines: 10,
                         minLines: 3,
                         maxLength: 1000,
-                        validator: Validator().emailValidator,
+                        // validator: Validator().emailValidator,
                         keyboardType: TextInputType.multiline,
                       ),
-                      //===== Description Component =====//
+                      //===== Bottom of Description Component =====//
 
-                      ///===== Address Information Component =====//
+                      ///===== Top of Address Information Component =====//
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: CustomTextWidget(
@@ -844,393 +585,307 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                           marginTop: AppSize.s12,
                         ),
                       ),
-                      //===== Address Information Component =====//
+                      //===== Bottom of Address Information Component =====//
 
-                      ///===== Country & City/State Component =====//
-                      Row(
-                        children: [
-                          //===== Country Component =====//
-                          Expanded(
-                            flex: 50,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const CustomTextWidget(
-                                  text: 'Country',
-                                  marginTop: AppSize.s12,
-                                  textAlign: TextAlign.left,
-                                  // marginBottom: AppSize.s4,
-                                ),
-                                const SizedBox(
-                                  height: 3.0,
-                                ),
-                                GestureDetector(
-                                  onTap: () => Get.bottomSheet(
-                                    Container(
-                                      height: getHeight,
-                                      decoration: const ShapeDecoration(
-                                        color: ColorsManager.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(
-                                              16,
-                                            ),
-                                            topRight: Radius.circular(
-                                              16,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      child: CountryListSelector(
-                                        showPhoneCode: false,
-                                        countrylist: countryList,
-                                        selectedCountry: controller
-                                            .selectedCountryAddress.value,
-                                        onTap: (country) {
-                                          controller
-                                              .selectedCountryAddressOnClick(
-                                            country,
-                                          );
-                                          Get.back();
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  child: Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding: EdgeInsets.zero,
-                                    child: FormField(
-                                      validator: (_) =>
-                                          controller.isPhoneNumberValidate(),
-                                      builder: (
-                                        FormFieldState<String> state,
-                                      ) {
-                                        return InputDecorator(
-                                          // alignedDropdown: true,
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                const EdgeInsets.fromLTRB(
-                                              4,
-                                              0,
-                                              4,
-                                              0,
-                                            ),
-                                            fillColor: ColorsManager.grey100,
-                                            filled: true,
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                            ),
-                                            errorText: state.hasError
-                                                ? state.errorText
-                                                : null,
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                              borderSide: const BorderSide(
-                                                color: ColorsManager.grey100,
-                                              ),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                              borderSide: const BorderSide(
-                                                color: ColorsManager.red900,
-                                              ),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                AppSize.s8,
-                                              ),
-                                              borderSide: const BorderSide(
-                                                color: ColorsManager.grey300,
-                                              ),
-                                            ),
-                                          ),
-                                          child: Obx(
-                                            () => controller
-                                                        .selectedCountryAddress
-                                                        .value
-                                                        .name ==
-                                                    null
-                                                ? Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: const [
-                                                      CustomTextWidget(
-                                                        marginLeft: AppSize.s8,
-                                                        text: 'Country',
-                                                        color: ColorsManager
-                                                            .grey400,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 16.0,
-                                                      ),
-                                                      Icon(
-                                                        Icons.arrow_drop_down,
-                                                        color: ColorsManager
-                                                            .grey600,
-                                                      ),
-                                                    ],
-                                                  )
-                                                : Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 15.0,
-                                                        child: CircleFlag(
-                                                          controller
-                                                              .selectedCountryAddress
-                                                              .value
-                                                              .isoCode
-                                                              .toString(),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: CustomTextWidget(
-                                                          marginLeft:
-                                                              AppSize.s8,
-                                                          text: controller
-                                                              .selectedCountryAddress
-                                                              .value
-                                                              .name,
-                                                          color: ColorsManager
-                                                              .black,
-                                                          fontSize: 16.0,
-                                                        ),
-                                                      ),
-                                                      const Icon(
-                                                        Icons.arrow_drop_down,
-                                                        color: ColorsManager
-                                                            .grey600,
-                                                      ),
-                                                    ],
-                                                  ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          //===== Country Component =====//
-
-                          // const SizedBox(
-                          //   width: AppSize.s8,
-                          // ),
-
-                          ///===== City/State Component =====//
-
-                          // Expanded(
-                          //   flex: 50,
-                          //   child: Column(
-                          //     crossAxisAlignment: CrossAxisAlignment.start,
-                          //     children: [
-                          //       const CustomTextWidget(
-                          //         text: 'City/State',
-                          //         marginTop: AppSize.s12,
-                          //         textAlign: TextAlign.left,
-                          //         // marginBottom: AppSize.s4,
-                          //       ),
-                          //       const SizedBox(
-                          //         height: 3.0,
-                          //       ),
-                          //       GestureDetector(
-                          //         onTap: () => {
-                          //           // Get.bottomSheet(
-                          //           //   Container(
-                          //           //     height: getHeight * 0.5,
-                          //           //     decoration: const ShapeDecoration(
-                          //           //       color: ColorsManager.white,
-                          //           //       shape: RoundedRectangleBorder(
-                          //           //         borderRadius: BorderRadius.only(
-                          //           //           topLeft: Radius.circular(
-                          //           //             16,
-                          //           //           ),
-                          //           //           topRight: Radius.circular(
-                          //           //             16,
-                          //           //           ),
-                          //           //         ),
-                          //           //       ),
-                          //           //     ),
-                          //           //     child: CountryListSelector(
-                          //           //       countrylist: countryList,
-                          //           //       onTap: (country) {
-                          //           //         controller
-                          //           //             .selectedCountryAddressOnClick(
-                          //           //           country,
-                          //           //         );
-                          //           //         Get.back();
-                          //           //       },
-                          //           //     ),
-                          //           //   ),
-                          //           // ),
-                          //         },
-                          //         child: Container(
-                          //           alignment: Alignment.centerLeft,
-                          //           padding: EdgeInsets.zero,
-                          //           child: FormField(
-                          //             validator: (_) =>
-                          //                 controller.isPhoneNumberValidate(),
-                          //             builder: (
-                          //               FormFieldState<String> state,
-                          //             ) {
-                          //               return InputDecorator(
-                          //                 // alignedDropdown: true,
-                          //                 decoration: InputDecoration(
-                          //                   contentPadding:
-                          //                       const EdgeInsets.fromLTRB(
-                          //                     4,
-                          //                     0,
-                          //                     4,
-                          //                     0,
-                          //                   ),
-                          //                   fillColor: ColorsManager.grey100,
-                          //                   filled: true,
-                          //                   border: OutlineInputBorder(
-                          //                     borderRadius:
-                          //                         BorderRadius.circular(
-                          //                       AppSize.s8,
-                          //                     ),
-                          //                   ),
-                          //                   errorText: state.hasError
-                          //                       ? state.errorText
-                          //                       : null,
-                          //                   enabledBorder: OutlineInputBorder(
-                          //                     borderRadius:
-                          //                         BorderRadius.circular(
-                          //                       AppSize.s8,
-                          //                     ),
-                          //                     borderSide: const BorderSide(
-                          //                       color: ColorsManager.grey100,
-                          //                     ),
-                          //                   ),
-                          //                   errorBorder: OutlineInputBorder(
-                          //                     borderRadius:
-                          //                         BorderRadius.circular(
-                          //                       AppSize.s8,
-                          //                     ),
-                          //                     borderSide: const BorderSide(
-                          //                       color: ColorsManager.red900,
-                          //                     ),
-                          //                   ),
-                          //                   focusedBorder: OutlineInputBorder(
-                          //                     borderRadius:
-                          //                         BorderRadius.circular(
-                          //                       AppSize.s8,
-                          //                     ),
-                          //                     borderSide: const BorderSide(
-                          //                       color: ColorsManager.grey300,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 child:
-                          //                     // Obx(
-                          //                     //   () =>
-                          //                     // controller
-                          //                     //             .selectedCountryAddress
-                          //                     //             .value
-                          //                     //             .phoneCode ==
-                          //                     //         null
-                          //                     //     ?
-                          //                     Row(
-                          //                   mainAxisAlignment:
-                          //                       MainAxisAlignment.spaceBetween,
-                          //                   children: const [
-                          //                     CustomTextWidget(
-                          //                       marginLeft: AppSize.s8,
-                          //                       text: 'City/State',
-                          //                       color: ColorsManager.grey400,
-                          //                       fontWeight: FontWeight.w400,
-                          //                       fontSize: 16.0,
-                          //                     ),
-                          //                     Icon(
-                          //                       Icons.arrow_drop_down,
-                          //                       color: ColorsManager.grey300,
-                          //                     ),
-                          //                   ],
-                          //                 ),
-                          //                 // : Row(
-                          //                 //     children: [
-                          //                 //       SizedBox(
-                          //                 //         height: 15.0,
-                          //                 //         child: CircleFlag(
-                          //                 //           controller
-                          //                 //               .selectedCountryAddress
-                          //                 //               .value
-                          //                 //               .isoCode
-                          //                 //               .toString(),
-                          //                 //         ),
-                          //                 //       ),
-                          //                 //       Expanded(
-                          //                 //         child: CustomTextWidget(
-                          //                 //           marginLeft:
-                          //                 //               AppSize.s8,
-                          //                 //           text: controller
-                          //                 //               .selectedCountryAddress
-                          //                 //               .value
-                          //                 //               .phoneCode,
-                          //                 //           color: ColorsManager
-                          //                 //               .black,
-                          //                 //           fontSize: 16.0,
-                          //                 //         ),
-                          //                 //       ),
-                          //                 //       const Icon(
-                          //                 //         Icons.arrow_drop_down,
-                          //                 //         color: ColorsManager
-                          //                 //             .grey600,
-                          //                 //       ),
-                          //                 //     ],
-                          //                 //   ),
-                          //                 // ),
-                          //               );
-                          //             },
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
-                          //===== City/State Component =====//
-                        ],
+                      ///===== Top of Country & City/State Component =====//
+                      CustomTextInput(
+                        controller: controller.countryCtrl,
+                        inputTitle: 'Country',
+                        hintText: 'Country',
+                        isFilled: true,
+                        maxLength: 10,
+                        topPadding: AppSize.s12,
                       ),
-                      const CustomTextInput(
-                        // controller: controller.emailCtrl,
+                      // Row(
+                      //   children: [
+                      //===== Top of Country Component =====//
+
+                      // Expanded(
+                      //   flex: 50,
+                      //   child: ContainerDialogWidget(
+                      //     inputTitle: 'Country',
+                      //     dialogType: DialogType.bottomSheetDialog,
+                      //     dialogWidget: Container(
+                      //       height: getHeight,
+                      //       decoration: const ShapeDecoration(
+                      //         color: ColorsManager.white,
+                      //         shape: RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.only(
+                      //             topLeft: Radius.circular(
+                      //               16,
+                      //             ),
+                      //             topRight: Radius.circular(
+                      //               16,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //       child: Obx(
+                      //         () => CountryListSelector(
+                      //           showPhoneCode: false,
+                      //           countrylist: countryList,
+                      //           selectedCountry:
+                      //               controller.selectedCountryAddress.value,
+                      //           onTap: (country) {
+                      //             controller.selectedCountryAddressOnClick(
+                      //               country,
+                      //             );
+                      //             Navigator.pop(
+                      //               context,
+                      //               true,
+                      //             ); // Issue:: It's not working properly on first click with Get.back();
+                      //           },
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     containerWidget: Obx(
+                      //       () => controller.selectedCountryAddress.value
+                      //                   .name ==
+                      //               null
+                      //           ? const RowContentInputWidget(
+                      //               centerWidget: CustomTextWidget(
+                      //                 text: 'Country',
+                      //                 color: ColorsManager.grey400,
+                      //                 fontWeight: FontWeight.w400,
+                      //                 fontSize: 16.0,
+                      //               ),
+                      //               suffixWidget: Icon(
+                      //                 Icons.arrow_drop_down,
+                      //                 color: ColorsManager.grey600,
+                      //               ),
+                      //             )
+                      //           : RowContentInputWidget(
+                      //               prefixWidget: CircleFlag(
+                      //                 controller.selectedCountryAddress
+                      //                     .value.isoCode
+                      //                     .toString(),
+                      //               ),
+                      //               prefixWidgetRightPadding: AppSize.s12,
+                      //               // centerWidgetFlex: 75,
+                      //               centerWidget: CustomTextWidget(
+                      //                 //marginLeft: 4.0,
+                      //                 text: controller
+                      //                     .selectedCountryAddress
+                      //                     .value
+                      //                     .name,
+                      //                 color: ColorsManager.black,
+                      //                 fontSize: 16.0,
+                      //               ),
+                      //               suffixWidget: const Icon(
+                      //                 Icons.arrow_drop_down,
+                      //                 color: ColorsManager.grey600,
+                      //               ),
+                      //             ),
+                      //     ),
+                      //   ),
+                      // ),
+                      //===== Bottom of Country Component =====//
+
+                      // const SizedBox(
+                      //   width: AppSize.s8,
+                      // ),
+
+                      ///===== Top of City/State Component =====//
+
+                      // Expanded(
+                      //   flex: 50,
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       const CustomTextWidget(
+                      //         text: 'City/State',
+                      //         marginTop: AppSize.s12,
+                      //         textAlign: TextAlign.left,
+                      //         // marginBottom: AppSize.s4,
+                      //       ),
+                      //       const SizedBox(
+                      //         height: 3.0,
+                      //       ),
+                      //       GestureDetector(
+                      //         onTap: () => {
+                      //           // Get.bottomSheet(
+                      //           //   Container(
+                      //           //     height: getHeight * 0.5,
+                      //           //     decoration: const ShapeDecoration(
+                      //           //       color: ColorsManager.white,
+                      //           //       shape: RoundedRectangleBorder(
+                      //           //         borderRadius: BorderRadius.only(
+                      //           //           topLeft: Radius.circular(
+                      //           //             16,
+                      //           //           ),
+                      //           //           topRight: Radius.circular(
+                      //           //             16,
+                      //           //           ),
+                      //           //         ),
+                      //           //       ),
+                      //           //     ),
+                      //           //     child: CountryListSelector(
+                      //           //       countrylist: countryList,
+                      //           //       onTap: (country) {
+                      //           //         controller
+                      //           //             .selectedCountryAddressOnClick(
+                      //           //           country,
+                      //           //         );
+                      //           //         Get.back();
+                      //           //       },
+                      //           //     ),
+                      //           //   ),
+                      //           // ),
+                      //         },
+                      //         child: Container(
+                      //           alignment: Alignment.centerLeft,
+                      //           padding: EdgeInsets.zero,
+                      //           child: FormField(
+                      //             validator: (_) =>
+                      //                 controller.isPhoneNumberValidate(),
+                      //             builder: (
+                      //               FormFieldState<String> state,
+                      //             ) {
+                      //               return InputDecorator(
+                      //                 // alignedDropdown: true,
+                      //                 decoration: InputDecoration(
+                      //                   contentPadding:
+                      //                       const EdgeInsets.fromLTRB(
+                      //                     4,
+                      //                     0,
+                      //                     4,
+                      //                     0,
+                      //                   ),
+                      //                   fillColor: ColorsManager.grey100,
+                      //                   filled: true,
+                      //                   border: OutlineInputBorder(
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(
+                      //                       AppSize.s8,
+                      //                     ),
+                      //                   ),
+                      //                   errorText: state.hasError
+                      //                       ? state.errorText
+                      //                       : null,
+                      //                   enabledBorder: OutlineInputBorder(
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(
+                      //                       AppSize.s8,
+                      //                     ),
+                      //                     borderSide: const BorderSide(
+                      //                       color: ColorsManager.grey100,
+                      //                     ),
+                      //                   ),
+                      //                   errorBorder: OutlineInputBorder(
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(
+                      //                       AppSize.s8,
+                      //                     ),
+                      //                     borderSide: const BorderSide(
+                      //                       color: ColorsManager.red900,
+                      //                     ),
+                      //                   ),
+                      //                   focusedBorder: OutlineInputBorder(
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(
+                      //                       AppSize.s8,
+                      //                     ),
+                      //                     borderSide: const BorderSide(
+                      //                       color: ColorsManager.grey300,
+                      //                     ),
+                      //                   ),
+                      //                 ),
+                      //                 child:
+                      //                     // Obx(
+                      //                     //   () =>
+                      //                     // controller
+                      //                     //             .selectedCountryAddress
+                      //                     //             .value
+                      //                     //             .phoneCode ==
+                      //                     //         null
+                      //                     //     ?
+                      //                     Row(
+                      //                   mainAxisAlignment:
+                      //                       MainAxisAlignment.spaceBetween,
+                      //                   children: const [
+                      //                     CustomTextWidget(
+                      //                       marginLeft: AppSize.s8,
+                      //                       text: 'City/State',
+                      //                       color: ColorsManager.grey400,
+                      //                       fontWeight: FontWeight.w400,
+                      //                       fontSize: 16.0,
+                      //                     ),
+                      //                     Icon(
+                      //                       Icons.arrow_drop_down,
+                      //                       color: ColorsManager.grey300,
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //                 // : Row(
+                      //                 //     children: [
+                      //                 //       SizedBox(
+                      //                 //         height: 15.0,
+                      //                 //         child: CircleFlag(
+                      //                 //           controller
+                      //                 //               .selectedCountryAddress
+                      //                 //               .value
+                      //                 //               .isoCode
+                      //                 //               .toString(),
+                      //                 //         ),
+                      //                 //       ),
+                      //                 //       Expanded(
+                      //                 //         child: CustomTextWidget(
+                      //                 //           marginLeft:
+                      //                 //               AppSize.s8,
+                      //                 //           text: controller
+                      //                 //               .selectedCountryAddress
+                      //                 //               .value
+                      //                 //               .phoneCode,
+                      //                 //           color: ColorsManager
+                      //                 //               .black,
+                      //                 //           fontSize: 16.0,
+                      //                 //         ),
+                      //                 //       ),
+                      //                 //       const Icon(
+                      //                 //         Icons.arrow_drop_down,
+                      //                 //         color: ColorsManager
+                      //                 //             .grey600,
+                      //                 //       ),
+                      //                 //     ],
+                      //                 //   ),
+                      //                 // ),
+                      //               );
+                      //             },
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      //===== Bottom of City/State Component =====//
+                      //   ],
+                      // ),
+                      CustomTextInput(
+                        controller: controller.cityStateCtrl,
                         inputTitle: 'City/State',
                         hintText: 'City/State',
                         isFilled: true,
                         maxLength: 10,
                         topPadding: AppSize.s12,
-                        // validator: Validator().emailValidator,
-                        keyboardType: TextInputType.emailAddress,
                       ),
-                      //===== Country & City/State Component =====//
+                      //=====  Bottom of Country & City/State Component =====//
 
-                      ///===== Zip Code Component =====//
-                      const CustomTextInput(
-                        // controller: controller.emailCtrl,
+                      ///===== Top of Zip Code Component =====//
+                      CustomTextInput(
+                        controller: controller.zipCodeCtrl,
                         inputTitle: 'Zip Code',
-                        hintText: 'Enter your Zip Code',
+                        hintText: 'Zip Code',
                         isFilled: true,
                         maxLength: 10,
                         topPadding: AppSize.s12,
-                        // validator: Validator().emailValidator,
-                        keyboardType: TextInputType.emailAddress,
                       ),
-                      //===== Zip Code Component =====//
+                      //===== Bottom of Zip Code Component =====//
 
-                      ///===== Address Component =====//
+                      ///===== Top of Address Component =====//
+                      // GestureDetector(
+                      // child:
                       CustomTextInput(
-                        // controller: controller.emailCtrl,
+                        controller: controller.addressCtrl,
                         inputTitle: 'Address',
                         hintText: 'Address...',
                         isFilled: true,
@@ -1241,10 +896,30 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         maxLines: 3,
                         minLines: 2,
                         maxLength: 150,
-                        validator: Validator().emailValidator,
                         keyboardType: TextInputType.multiline,
                       ),
-                      //===== Address Component =====//
+                      // onTap: () async {
+                      // print('onTap: address');
+                      // generate a new token here
+                      // const sessionToken = 'Uuid().v4()';
+                      // final Suggestion? result = await showSearch(
+                      //   context: context,
+                      //   delegate: AddressSearch(sessionToken),
+                      // );
+                      // This will change the text displayed in the TextField
+                      // final placeDetails =
+                      //     await PlaceApiProvider(sessionToken)
+                      //         .getPlaceDetailFromId(result.placeId);
+                      // setState(() {
+                      //   _controller.text = result.description;
+                      //   _streetNumber = placeDetails.streetNumber;
+                      //   _street = placeDetails.street;
+                      //   _city = placeDetails.city;
+                      //   _zipCode = placeDetails.zipCode;
+                      // });
+                      //   },
+                      // ),
+                      //===== Bottom of Address Component =====//
                     ],
                   ),
                 ),
@@ -1274,13 +949,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
         buttonWidth: getWidth,
         onPressed: () {
           unFocusKeyBoard(context);
-          customSnackbar(
-            msgTitle: 'This Button is under construction!',
-            msgContent: 'This Page is only view.\n Data will not save.',
-          );
-          // controller.registerButtonOnClick(
-          //   userType: userType,
-          // );
+          controller.saveButtonOnClick();
         },
       ),
       //   ),
@@ -1289,137 +958,77 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
   }
 
   void genderSelectedDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (builder) {
-        return AlertDialog(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          ),
-          title: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10.0),
-                topRight: Radius.circular(10.0),
-              ),
-              color: ColorsManager.primary,
-            ),
-            child: const CustomTextWidget(
-              text: 'Title',
-              fontSize: AppSize.s18,
-              color: ColorsManager.white,
-              textAlign: TextAlign.center,
-              marginTop: AppSize.s14,
-              marginBottom: AppSize.s14,
-            ),
-          ),
-          titlePadding: EdgeInsets.zero,
-          contentPadding: EdgeInsets.zero,
-          // actions: <Widget>[
-          //   // TextButton(
-          //   //   // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          //   //   // textColor: Theme.of(context).colorScheme.secondary,
-          //   //   onPressed: () {
-          //   //     //widget.onOk();
-          //   //   },
-          //   //   child: const Text('OK'),
-          //   // ),
-          //   CustomMaterialButton(
-          //     elevation: 0,
-          //     text: 'CANCEL',
-          //     textColor: ColorsManager.red,
-          //     buttonColor: ColorsManager.white,
-          //     onPressed: () {
-          //       //widget.onCancel();
-          //     },
-          //   ),
-          //   TextButton(
-          //     // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          //     // textColor: Theme.of(context).colorScheme.secondary,
-          //     onPressed: () {
-          //       //widget.onOk();
-          //     },
-          //     child: const Text('OK'),
-          //   ),
-          // ],
-          content: SizedBox(
-            width: double.maxFinite,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // const Divider(
-                //   color: ColorsManager.grey600,
-                // ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxHeight: getHeight * 0.5,
-                  ),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: controller.genderList.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          controller.selectedGenderOnClick(
-                            selectedItem: controller.genderList[index],
-                          );
-                          Get.back();
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 24.0,
-                            top: 16.0,
-                            bottom: 16.0,
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              // if (LanguageController().languageOptions[index].key ==
-                              //     LanguageController().currentLanguageStore.toString())
-                              //   const Icon(
-                              //     Icons.radio_button_checked,
-                              //     color: ColorsManager.primary,
-                              //   )
-                              // else
-                              const Icon(
-                                Icons.radio_button_unchecked,
-                                color: ColorsManager.grey600,
-                              ),
-                              const SizedBox(
-                                width: 15.0,
-                              ),
-                              CustomTextWidget(
-                                text: controller.genderList[index],
-                                fontSize: AppSize.s16,
-                                color:
-                                    // LanguageController().languageOptions[index].key ==
-                                    //         LanguageController()
-                                    //             .currentLanguageStore
-                                    //             .toString()
-                                    //     ? ColorsManager.primary
-                                    //     :
-                                    ColorsManager.grey600,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const Divider(
-                        height: 1.0,
-                        color: ColorsManager.grey300,
-                      );
-                    },
-                  ),
-                ),
-                // const Divider(
-                //   color: ColorsManager.grey600,
-                // ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (builder) {
+    //     return AlertDialog(
+    //       shape: const RoundedRectangleBorder(
+    //         borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    //       ),
+    //       title: Container(
+    //         decoration: const BoxDecoration(
+    //           borderRadius: BorderRadius.only(
+    //             topLeft: Radius.circular(10.0),
+    //             topRight: Radius.circular(10.0),
+    //           ),
+    //           color: ColorsManager.primary,
+    //         ),
+    //         child: const CustomTextWidget(
+    //           text: 'Title',
+    //           fontSize: AppSize.s18,
+    //           color: ColorsManager.white,
+    //           textAlign: TextAlign.center,
+    //           marginTop: AppSize.s14,
+    //           marginBottom: AppSize.s14,
+    //         ),
+    //       ),
+    //       titlePadding: EdgeInsets.zero,
+    //       contentPadding: EdgeInsets.zero,
+    //       content: SizedBox(
+    //         width: double.maxFinite,
+    //         child: Column(
+    //           mainAxisSize: MainAxisSize.min,
+    //           children: [
+    //             ConstrainedBox(
+    //               constraints: BoxConstraints(
+    //                 maxHeight: getHeight * 0.5,
+    //               ),
+    //               child: ListView.separated(
+    //                 shrinkWrap: true,
+    //                 itemCount: controller.genderList.length,
+    //                 itemBuilder: (context, index) {
+    //                   return Obx(
+    //                     () => RowDataSelectionWidget.radioButton(
+    //                       isLeftSideText: false,
+    //                       isClickingValue: stringsComparation(
+    //                         object1: controller.genderList[index],
+    //                         object2: controller.selectedGender.value,
+    //                       ),
+    //                       text: controller.genderList[index],
+    //                       onPressed: () {
+    //                         controller.selectedGender.value =
+    //                             controller.genderList[index];
+    //                         // controller.selectedGenderOnClick(
+    //                         //   selectedItem: controller.genderList[index],
+    //                         // );
+    //                         Get.back();
+    //                       },
+    //                     ),
+    //                   );
+    //                 },
+    //                 separatorBuilder: (context, index) {
+    //                   return const Divider(
+    //                     height: 1.0,
+    //                     color: ColorsManager.grey300,
+    //                   );
+    //                 },
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     );
+    //   },
+    // );
   }
 }

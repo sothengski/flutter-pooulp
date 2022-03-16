@@ -130,14 +130,14 @@ class ProfileHeader extends StatelessWidget {
                 left: AppSize.s16,
                 top: AppSize.s60,
               ),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: ColorsManager.white,
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: ColorsManager.white,
-                  width: 3,
-                ),
-                boxShadow: const [
+                // border: Border.all(
+                //   color: ColorsManager.red,
+                //   width: 2,
+                // ),
+                boxShadow: [
                   BoxShadow(
                     color: ColorsManager.grey300,
                     blurRadius: 1.0,
@@ -150,10 +150,9 @@ class ProfileHeader extends StatelessWidget {
                 //   image: AssetImage(ImageAssets.appLogoSymbol),
                 // ),
               ),
-              child: const CustomBoxWidget(
-                size: 75,
-                backgroundColor: ColorsManager.white,
-                isCircle: true,
+              child: CachedNetworkImgWidget(
+                imgUrl: profileImg,
+                borderRadius: 75,
               ),
             ),
             Expanded(

@@ -8,5 +8,8 @@ class EditUserInformationBinding implements Bindings {
     Get.lazyPut<EditUserInformationController>(
       () => EditUserInformationController(),
     );
+    Get.lazyPut<ProfileController>(
+      () => ProfileController(),
+    );
   }
 }

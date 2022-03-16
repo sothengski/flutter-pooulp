@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
@@ -16,8 +15,8 @@ class OfferFeedController extends GetxController
 
   final profileController = Get.put(ProfileController());
   final ScrollController scrollController = ScrollController();
-  final RefreshController refreshController =
-      RefreshController(initialRefresh: true);
+  // final RefreshController refreshController =
+  //     RefreshController(initialRefresh: true);
 
   RxList<JobOfferModel> feedListRepsonse = <JobOfferModel>[].obs;
   RxList<JobOfferModel> feedFilterList = <JobOfferModel>[].obs;

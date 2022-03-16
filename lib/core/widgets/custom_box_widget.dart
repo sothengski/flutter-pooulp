@@ -74,6 +74,12 @@ class CustomBoxWidget extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 shape: isCircle! ? BoxShape.circle : BoxShape.rectangle,
+                // border: Border.all(
+                //   color: borderWidth == 0.0
+                //       ? ColorsManager.white
+                //       : ColorsManager.grey400,
+                //   width: 0,
+                // ),
                 image: const DecorationImage(
                   image: AssetImage(AssetsManager.appLogoSymbol),
                   opacity: 0.75,

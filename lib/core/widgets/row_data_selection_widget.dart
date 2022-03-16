@@ -74,7 +74,7 @@ class RowDataSelectionWidget extends StatelessWidget {
             if (isLeftSideText == false)
               Wrap(
                 children: [
-                  const SizedBox(width: 6.0),
+                  const SizedBox(width: 8.0),
                   if (isClickingValue == true)
                     iconDataClick == null
                         ? Container()
@@ -89,7 +89,7 @@ class RowDataSelectionWidget extends StatelessWidget {
                             iconDataUnClick,
                             color: iconColorUnClick,
                           ),
-                  const SizedBox(width: 6.0),
+                  const SizedBox(width: 8.0),
                 ],
               )
             else
@@ -98,8 +98,8 @@ class RowDataSelectionWidget extends StatelessWidget {
               flex: 75,
               child: textWidget ??
                   CustomTextWidget(
-                    marginLeft: 6.0,
-                    marginRight: 6.0,
+                    marginLeft: 8.0,
+                    marginRight: 8.0,
                     text: text,
                     fontWeight: isClickingValue == true
                         ? FontWeight.w600
@@ -110,7 +110,7 @@ class RowDataSelectionWidget extends StatelessWidget {
               Wrap(
                 alignment: WrapAlignment.end,
                 children: [
-                  const SizedBox(width: 6.0),
+                  const SizedBox(width: 8.0),
                   if (isClickingValue == true)
                     iconDataClick == null
                         ? Container()
@@ -125,7 +125,7 @@ class RowDataSelectionWidget extends StatelessWidget {
                             iconDataUnClick,
                             color: iconColorUnClick,
                           ),
-                  const SizedBox(width: 6.0),
+                  const SizedBox(width: 8.0),
                 ],
               )
             else

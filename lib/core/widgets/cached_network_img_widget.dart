@@ -29,6 +29,11 @@ class CachedNetworkImgWidget extends StatelessWidget {
             ) =>
                 Container(
               decoration: BoxDecoration(
+                // shape: BoxShape.circle,
+                border: Border.all(
+                  color: ColorsManager.white,
+                  width: 0,
+                ),
                 borderRadius: BorderRadius.circular(
                   borderRadius!,
                 ),

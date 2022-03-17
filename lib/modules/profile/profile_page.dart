@@ -69,12 +69,12 @@ class ProfilePage extends GetView<ProfileController> {
 
                             ///===== Profile Header Component =====//
                             ProfileHeader(
-                              userName: controller
-                                  .userInfoRepsonse.value.profile!.fullName,
+                              userName:
+                                  controller.userProfileInfo.value.fullName,
                               // userRole: controller.userInfoRepsonse.value.profile!.accountType,
                               controller: controller,
-                              profileImg: controller
-                                  .userInfoRepsonse.value.profile!.pictureUrl,
+                              profileImg:
+                                  controller.userProfileInfo.value.pictureUrl,
                             ),
                             //===== Profile Header Component =====//
 
@@ -127,7 +127,7 @@ class ProfilePage extends GetView<ProfileController> {
                                   else
                                     CustomTextWidget(
                                       text:
-                                          '${controller.userInfoRepsonse.value.profile!.description}',
+                                          '${controller.userProfileInfo.value.description}',
                                       maxLine: 3,
                                       marginTop: AppSize.s4,
                                       marginLeft: AppSize.s16,
@@ -151,8 +151,8 @@ class ProfilePage extends GetView<ProfileController> {
                                   ),
                                   CustomListTileWidget(
                                     text1: 'Phone',
-                                    text2: controller.userInfoRepsonse.value
-                                        .profile!.fullPhone1Format,
+                                    text2: controller
+                                        .userProfileInfo.value.fullPhone1Format,
                                     // isLauching: true,
                                     text2Color: ColorsManager.blue,
                                     leftWidget: const CustomBoxWidget(

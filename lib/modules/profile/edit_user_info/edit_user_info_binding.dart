@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../../data/data.dart';
 import '../../modules.dart';
 
 class EditUserInformationBinding implements Bindings {
@@ -10,6 +11,9 @@ class EditUserInformationBinding implements Bindings {
     );
     Get.lazyPut<ProfileController>(
       () => ProfileController(),
+    );
+    Get.lazyPut<UserInfoProvider>(
+      () => UserInfoProvider(),
     );
   }
 }

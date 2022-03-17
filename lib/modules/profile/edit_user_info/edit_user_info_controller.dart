@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/core.dart';
@@ -9,8 +10,8 @@ import '../../../data/data.dart';
 import '../../modules.dart';
 
 class EditUserInformationController extends GetxController {
-  // EditingUserInformationController(this.repository);
   final profileController = Get.put(ProfileController());
+  final userInfoProvider = Get.find<UserInfoProvider>();
 
   final List<String> genderList = [
     // '', //'unselect',
@@ -20,9 +21,20 @@ class EditUserInformationController extends GetxController {
   ];
 
 //save the result of gallery file
-  late File galleryFile;
-  String imagePath = '';
-  final imagePicker = ImagePicker();
+  Rx<String> selectedImagePath = ''.obs;
+  Rx<String> selectedImageSize = ''.obs;
+
+  Rx<String> cropImagePath = ''.obs;
+  Rx<String> cropImageSize = ''.obs;
+
+  Rx<String> compressImagePath = ''.obs;
+  Rx<String> compressImageSize = ''.obs;
+
+  Rx<bool> isUploadingImage = false.obs;
+
+  // late File galleryFile;
+  // String imagePath = '';
+  // final imagePicker = ImagePicker();
 //save the result of camera file
   // late File cameraFile;
 
@@ -118,17 +130,96 @@ class EditUserInformationController extends GetxController {
     return selectedBirthday.value = selectedItem!;
   }
 
-  Future<void> getImage() async {
-    final pickedFile = await imagePicker.pickImage(source: ImageSource.camera);
+  bool uploadImgBoolSwitching() =>
+      isUploadingImage.value = !isUploadingImage.value;
+
+  Future<void> getImage({
+    bool? isCamera = false,
+  }) async {
+    final pickedFile = await ImagePicker().pickImage(
+      source: isCamera == true ? ImageSource.camera : ImageSource.gallery,
+    );
 
     if (pickedFile != null) {
-      galleryFile = File(pickedFile.path);
-      imagePath = pickedFile.path;
-      // print(imagePath);
-      update();
+      selectedImagePath.value = pickedFile.path;
+      selectedImageSize.value =
+          "${(File(selectedImagePath.value).lengthSync() / 1024 / 1024).toStringAsFixed(4)}Mb";
+      debugPrint('selectedImagePath:: ${selectedImagePath.value}');
+      debugPrint('selectedImageSize:: ${selectedImageSize.value}');
+
+      ///Crop Image
+      final cropImageFile = await ImageCropper().cropImage(
+        sourcePath: selectedImagePath.value,
+        compressQuality: 50,
+        maxWidth: 512,
+        maxHeight: 512,
+        // compressFormat: ImageCompressFormat.jpg,
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+        cropStyle: CropStyle.circle,
+        androidUiSettings: const AndroidUiSettings(
+          toolbarWidgetColor: ColorsManager.white,
+          toolbarColor: ColorsManager.primary,
+          toolbarTitle: "Crop Image",
+          statusBarColor: ColorsManager.grey400,
+          backgroundColor: ColorsManager.white,
+        ),
+      );
+      debugPrint('B4 cropImageFile != null');
+      if (cropImageFile != null) {
+        cropImagePath.value = cropImageFile.path;
+        cropImageSize.value =
+            "${(File(cropImagePath.value).lengthSync() / 1024 / 1024).toStringAsFixed(4)}Mb";
+        debugPrint('cropImagePath:: ${cropImagePath.value}');
+        debugPrint('cropImageSize:: ${cropImageSize.value}');
+
+        ///Upload Image
+        uploadImage(
+          cropImageFile,
+          "${firstNameCtrl.text}_${lastNameCtrl.text}",
+        );
+      }
+
+      // final dir = Directory.systemTemp;
+      // final targetPath = "${dir.absolute.path}/temp.jpg";
+      // debugPrint('targetPath:: $targetPath');
+
+      ///Compress Image
+
+      // final compressedFile = await FlutterImageCompress.compressAndGetFile(
+      //   cropImagePath.value,
+      //   targetPath,
+      //   quality: 90,
+      // );
+      // compressImagePath.value = compressedFile.path;
+      // compressImageSize.value =
+      //     "${(File(compressImagePath.value).lengthSync() / 1024 / 1024).toStringAsFixed(2)}Mb";
+
     } else {
       // print('No image selected.');
+      customSnackbar(msgTitle: 'No Image Selected', msgContent: '');
     }
+  }
+
+  Future<void> uploadImage(File? file, String? fileName) async {
+    uploadImgBoolSwitching();
+    await userInfoProvider.uploadImage(filepath: file!.path, fileName: fileName)
+        // .uploadImage(file: file, fileName: fileName)
+        .then((resp) {
+      // Get.back();
+      if (resp.pictureUrl!.isNotEmpty) {
+        profileController.userProfileInfo.value = resp;
+        customSnackbar(
+          msgTitle: 'Success',
+          msgContent: 'File Uploaded',
+        );
+      } else {
+        customSnackbar(
+          msgTitle: 'Failed',
+          msgContent: "Can't Uploaded your Image.",
+        );
+      }
+    });
+    uploadImgBoolSwitching();
   }
 
   String? isPhoneNumberValidate({bool? isPhoneNumberField = false}) {

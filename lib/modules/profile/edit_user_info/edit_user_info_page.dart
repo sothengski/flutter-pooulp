@@ -34,17 +34,58 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
               isCircle: true,
               insideObj: Stack(
                 children: [
-                  CachedNetworkImgWidget(
-                    imgUrl: controller.profileController.userInfoRepsonse.value
-                        .profile!.pictureUrl,
-                    borderRadius: 75,
+                  Obx(
+                    () => CachedNetworkImgWidget(
+                      imgUrl: controller
+                          .profileController.userProfileInfo.value.pictureUrl,
+                      borderRadius: 75,
+                    ),
                   ),
                   Align(
                     alignment: const Alignment(1.25, 1.25),
                     child: MaterialButton(
                       minWidth: 0,
                       onPressed: () {
+                        // controller.uploadImgBoolSwitching();
                         // controller.getImage();
+                        Get.dialog(
+                          MaterialDialogWidget(
+                            // title: '',
+                            contentWidget: Column(
+                              children: [
+                                RowDataSelectionWidget(
+                                  iconDataUnClick: Icons.camera_alt_outlined,
+                                  iconColorUnClick: ColorsManager.grey600,
+                                  isLeftSideText: false,
+                                  text: 'Take a Picture',
+                                  onPressed: () {
+                                    controller.getImage(isCamera: true);
+                                    Navigator.pop(
+                                      context,
+                                      true,
+                                    );
+                                  },
+                                ),
+                                const Divider(
+                                  height: 5,
+                                ),
+                                RowDataSelectionWidget(
+                                  iconDataUnClick: Icons.image_outlined,
+                                  iconColorUnClick: ColorsManager.grey600,
+                                  isLeftSideText: false,
+                                  text: 'Phone Gallery',
+                                  onPressed: () {
+                                    controller.getImage();
+                                    Navigator.pop(
+                                      context,
+                                      true,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                       textColor: Colors.white,
                       color: ColorsManager.primary,
@@ -55,7 +96,15 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         size: 18,
                       ),
                     ),
-                  )
+                  ),
+                  Obx(
+                    () => Visibility(
+                      visible: controller.isUploadingImage.value,
+                      child: const LoadingWidget(
+                        color: ColorsManager.red,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

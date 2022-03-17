@@ -10,6 +10,8 @@ class ProfileController extends GetxController {
   RxBool enterpriseSwitching = false.obs;
 
   Rx<UserModel> userInfoRepsonse = UserModel().obs;
+  Rx<ProfileModel> userProfileInfo = const ProfileModel().obs;
+
   Rx<StudentProfileModel> studentInfoRepsonse = StudentProfileModel().obs;
 
   RxBool isProcessingUserInfoRepsonse = false.obs;
@@ -53,6 +55,7 @@ class ProfileController extends GetxController {
     bool? refresh = false,
   }) async {
     userInfoRepsonse.value = await userInfoProvider.getUserInfo();
+    userProfileInfo.value = userInfoRepsonse.value.profile!;
     // debugPrint('userInfoRepsonse: $userInfoRepsonse');
     return userInfoRepsonse;
   }

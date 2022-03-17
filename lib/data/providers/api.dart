@@ -22,6 +22,7 @@ enum Endpoint {
   getJobOfferTypes,
   getFields,
   getLanguages,
+  //postProfilePicture
 }
 
 class API {
@@ -68,4 +69,6 @@ class API {
       '/offers/$offerId/dislike';
   static String postUnHideOffer({required int? offerId}) =>
       '/offers/$offerId/undislike';
+
+  static String postProfilePicture() => '/users/me/profile/picture';
 }

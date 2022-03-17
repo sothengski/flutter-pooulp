@@ -150,9 +150,18 @@ class ProfileHeader extends StatelessWidget {
                 //   image: AssetImage(ImageAssets.appLogoSymbol),
                 // ),
               ),
-              child: CachedNetworkImgWidget(
-                imgUrl: profileImg,
-                borderRadius: 75,
+              child: CustomBoxWidget(
+                size: 150,
+                // backgroundColor: ColorsManager.grey100,
+                isCircle: true,
+                topPadding: 2.0,
+                bottomPadding: 2.0,
+                leftPadding: 2.0,
+                rightPadding: 2.0,
+                insideObj: CachedNetworkImgWidget(
+                  imgUrl: profileImg,
+                  borderRadius: 75,
+                ),
               ),
             ),
             Expanded(

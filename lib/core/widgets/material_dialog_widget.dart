@@ -30,13 +30,16 @@ class MaterialDialogWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              CustomTextWidget(
-                marginTop: 16.0,
-                marginBottom: 16.0,
-                text: title,
-                fontSize: 20.0,
-                fontWeight: FontWeightManager.medium,
-              ),
+              if (title == '')
+                Container()
+              else
+                CustomTextWidget(
+                  marginTop: 16.0,
+                  marginBottom: 16.0,
+                  text: title,
+                  fontSize: 20.0,
+                  fontWeight: FontWeightManager.medium,
+                ),
               const Divider(
                 height: 1.0,
                 color: ColorsManager.grey,
@@ -49,10 +52,7 @@ class MaterialDialogWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(
                   AppSize.s8,
                 ),
-
-                ///===== Top of Gender List Component =====//
                 child: contentWidget,
-                //===== Bottom of Gender List Component =====//
               ),
               //===== Bottom Body/Content Component =====//
             ],

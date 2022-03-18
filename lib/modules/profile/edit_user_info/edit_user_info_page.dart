@@ -46,8 +46,6 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                     child: MaterialButton(
                       minWidth: 0,
                       onPressed: () {
-                        // controller.uploadImgBoolSwitching();
-                        // controller.getImage();
                         Get.dialog(
                           MaterialDialogWidget(
                             // title: '',
@@ -371,206 +369,6 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ),
                       //===== Bottom of Phone Number Component =====//
 
-                      ///===== Top of Phone Number 2 Component =====//
-                      // Row(
-                      //   children: [
-                      //     Expanded(
-                      //       flex: 40,
-                      //       child: Column(
-                      //         crossAxisAlignment: CrossAxisAlignment.start,
-                      //         children: [
-                      //           const CustomTextWidget(
-                      //             text: 'Phone Line 2',
-                      //             marginTop: AppSize.s12,
-                      //             textAlign: TextAlign.left,
-                      //             // marginBottom: AppSize.s4,
-                      //           ),
-                      //           const SizedBox(
-                      //             height: 3.0,
-                      //           ),
-                      //           GestureDetector(
-                      //             onTap: () => Get.bottomSheet(
-                      //               Container(
-                      //                 height: getHeight * 0.5,
-                      //                 decoration: const ShapeDecoration(
-                      //                   color: ColorsManager.white,
-                      //                   shape: RoundedRectangleBorder(
-                      //                     borderRadius: BorderRadius.only(
-                      //                       topLeft: Radius.circular(
-                      //                         16,
-                      //                       ),
-                      //                       topRight: Radius.circular(
-                      //                         16,
-                      //                       ),
-                      //                     ),
-                      //                   ),
-                      //                 ),
-                      //                 child: CountryListSelector(
-                      //                   countrylist: countryList,
-                      //                   onTap: (country) {
-                      //                     controller.selectedCountryOnClick(
-                      //                       country,
-                      //                     );
-                      //                     Get.back();
-                      //                   },
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //             child: Container(
-                      //               alignment: Alignment.centerLeft,
-                      //               padding: EdgeInsets.zero,
-                      //               child: FormField(
-                      //                 validator: (_) =>
-                      //                     controller.isPhoneNumberValidate(),
-                      //                 builder: (
-                      //                   FormFieldState<String> state,
-                      //                 ) {
-                      //                   return InputDecorator(
-                      //                     // alignedDropdown: true,
-                      //                     decoration: InputDecoration(
-                      //                       contentPadding:
-                      //                           const EdgeInsets.fromLTRB(
-                      //                         4,
-                      //                         0,
-                      //                         4,
-                      //                         0,
-                      //                       ),
-                      //                       fillColor: ColorsManager.grey100,
-                      //                       filled: true,
-                      //                       border: OutlineInputBorder(
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(
-                      //                           AppSize.s8,
-                      //                         ),
-                      //                       ),
-                      //                       errorText: state.hasError
-                      //                           ? state.errorText
-                      //                           : null,
-                      //                       enabledBorder: OutlineInputBorder(
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(
-                      //                           AppSize.s8,
-                      //                         ),
-                      //                         borderSide: const BorderSide(
-                      //                           color: ColorsManager.grey100,
-                      //                         ),
-                      //                       ),
-                      //                       errorBorder: OutlineInputBorder(
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(
-                      //                           AppSize.s8,
-                      //                         ),
-                      //                         borderSide: const BorderSide(
-                      //                           color: ColorsManager.red900,
-                      //                         ),
-                      //                       ),
-                      //                       focusedBorder: OutlineInputBorder(
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(
-                      //                           AppSize.s8,
-                      //                         ),
-                      //                         borderSide: const BorderSide(
-                      //                           color: ColorsManager.grey300,
-                      //                         ),
-                      //                       ),
-                      //                     ),
-                      //                     child: Obx(
-                      //                       () => controller.selectedCountry
-                      //                                   .value.phoneCode ==
-                      //                               null
-                      //                           ? const CustomTextWidget(
-                      //                               marginLeft: AppSize.s8,
-                      //                               text: 'Country Code',
-                      //                               color:
-                      //                                   ColorsManager.grey400,
-                      //                               fontWeight: FontWeight.w400,
-                      //                               fontSize: 16.0,
-                      //                             )
-                      //                           : Row(
-                      //                               children: [
-                      //                                 SizedBox(
-                      //                                   height: 15.0,
-                      //                                   child: CircleFlag(
-                      //                                     controller
-                      //                                         .selectedCountry
-                      //                                         .value
-                      //                                         .isoCode
-                      //                                         .toString(),
-                      //                                   ),
-                      //                                 ),
-                      //                                 CustomTextWidget(
-                      //                                   marginLeft: AppSize.s8,
-                      //                                   text: controller
-                      //                                       .selectedCountry
-                      //                                       .value
-                      //                                       .phoneCode,
-                      //                                   color:
-                      //                                       ColorsManager.black,
-                      //                                   fontSize: 16.0,
-                      //                                 ),
-                      //                                 // const Icon(
-                      //                                 //   Icons
-                      //                                 //       .arrow_drop_down,
-                      //                                 // ),
-                      //                               ],
-                      //                             ),
-                      //                     ),
-                      //                   );
-                      //                 },
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //     const SizedBox(
-                      //       width: AppSize.s8,
-                      //     ),
-                      //     Expanded(
-                      //       flex: 60,
-                      //       child: CustomTextInput(
-                      //         controller: controller.phoneNumberCtrl,
-                      //         inputTitle: "",
-                      //         hintText: 'Enter Phone Number',
-                      //         keyboardType: TextInputType.phone,
-                      //         isFilled: true,
-                      //         topPadding: AppSize.s12,
-                      //         leftPadding: AppSize.s4,
-                      //         validator: (_) =>
-                      //             controller.isPhoneNumberValidate(
-                      //           isPhoneNumberField: true,
-                      //         ),
-                      //         maxLength: 13,
-                      //         inputFormatterList: [
-                      //           FilteringTextInputFormatter.deny(
-                      //             RegExp(
-                      //               Validator.avoidSpaceRegExpPattern,
-                      //             ),
-                      //           ),
-                      //           FilteringTextInputFormatter.allow(
-                      //             RegExp(
-                      //               Validator.numberRegExpPattern,
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      //===== Bottom of Phone Number 2 Component =====//
-
-                      ///===== Top of Facebook profile Component =====//
-                      // CustomTextInput(
-                      //   // controller: controller.emailCtrl,
-                      //   inputTitle: 'Facebook profile',
-                      //   hintText: 'Enter your Facebook profile',
-                      //   isFilled: true,
-                      //   topPadding: AppSize.s12,
-                      //   validator: Validator().emailValidator,
-                      //   keyboardType: TextInputType.emailAddress,
-                      // ),
-                      //===== Bottom of Facebook profile Component =====//
-
                       ///===== Top of Linkedin profile Component =====//
                       CustomTextInput(
                         controller: controller.linkedInProfileCtrl,
@@ -582,18 +380,6 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         keyboardType: TextInputType.emailAddress,
                       ),
                       //===== Bottom of Linkedin profile Component =====//
-
-                      ///===== Top of Whatapp contact Component =====//
-                      // CustomTextInput(
-                      //   // controller: controller.emailCtrl,
-                      //   inputTitle: 'Whatapp contact',
-                      //   hintText: 'Enter your Whatapp contact',
-                      //   isFilled: true,
-                      //   topPadding: AppSize.s12,
-                      //   validator: Validator().emailValidator,
-                      //   keyboardType: TextInputType.emailAddress,
-                      // ),
-                      //===== Bottom of Whatapp contact Component =====//
 
                       ///===== Top of Video presentation link Component =====//
                       CustomTextInput(
@@ -636,6 +422,48 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ),
                       //===== Bottom of Address Information Component =====//
 
+                      ///===== Top of Address Component =====//
+                      GestureDetector(
+                        onTap: () async {
+                          await showSearch(
+                            context: context,
+                            delegate: AddressSearchBarWidget(),
+                          );
+                          // final result = await showSearch(
+                          //   context: context,
+                          //   delegate: AddressSearch(),
+                          // );
+                          // if (result != null) {
+                          //   final googlePlaceDetail = await controller
+                          //       .placeProvider
+                          //       .getPlace(placeId: result.placeId)
+                          //       .then(
+                          //         (value) => print(
+                          //           'googlePlaceDetail:: ${value.result!.formattedAddress}',
+                          //         ),
+                          //       );
+                          // }
+                        },
+                        child: AbsorbPointer(
+                          child: CustomTextInput(
+                            controller: controller.addressCtrl,
+                            inputTitle: 'Address',
+                            hintText: 'Address...',
+                            isFilled: true,
+                            isReadOnly: true,
+                            topContentPadding: 12.0,
+                            bottomContentPadding: 12.0,
+                            topPadding: AppSize.s12,
+                            // counter: true,
+                            maxLines: 5,
+                            minLines: 2,
+                            maxLength: 150,
+                            keyboardType: TextInputType.multiline,
+                          ),
+                        ),
+                      ),
+                      //===== Bottom of Address Component =====//
+
                       ///===== Top of Country & City/State Component =====//
                       CustomTextInput(
                         controller: controller.countryCtrl,
@@ -645,270 +473,6 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         maxLength: 10,
                         topPadding: AppSize.s12,
                       ),
-                      // Row(
-                      //   children: [
-                      //===== Top of Country Component =====//
-
-                      // Expanded(
-                      //   flex: 50,
-                      //   child: ContainerDialogWidget(
-                      //     inputTitle: 'Country',
-                      //     dialogType: DialogType.bottomSheetDialog,
-                      //     dialogWidget: Container(
-                      //       height: getHeight,
-                      //       decoration: const ShapeDecoration(
-                      //         color: ColorsManager.white,
-                      //         shape: RoundedRectangleBorder(
-                      //           borderRadius: BorderRadius.only(
-                      //             topLeft: Radius.circular(
-                      //               16,
-                      //             ),
-                      //             topRight: Radius.circular(
-                      //               16,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       child: Obx(
-                      //         () => CountryListSelector(
-                      //           showPhoneCode: false,
-                      //           countrylist: countryList,
-                      //           selectedCountry:
-                      //               controller.selectedCountryAddress.value,
-                      //           onTap: (country) {
-                      //             controller.selectedCountryAddressOnClick(
-                      //               country,
-                      //             );
-                      //             Navigator.pop(
-                      //               context,
-                      //               true,
-                      //             ); // Issue:: It's not working properly on first click with Get.back();
-                      //           },
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     containerWidget: Obx(
-                      //       () => controller.selectedCountryAddress.value
-                      //                   .name ==
-                      //               null
-                      //           ? const RowContentInputWidget(
-                      //               centerWidget: CustomTextWidget(
-                      //                 text: 'Country',
-                      //                 color: ColorsManager.grey400,
-                      //                 fontWeight: FontWeight.w400,
-                      //                 fontSize: 16.0,
-                      //               ),
-                      //               suffixWidget: Icon(
-                      //                 Icons.arrow_drop_down,
-                      //                 color: ColorsManager.grey600,
-                      //               ),
-                      //             )
-                      //           : RowContentInputWidget(
-                      //               prefixWidget: CircleFlag(
-                      //                 controller.selectedCountryAddress
-                      //                     .value.isoCode
-                      //                     .toString(),
-                      //               ),
-                      //               prefixWidgetRightPadding: AppSize.s12,
-                      //               // centerWidgetFlex: 75,
-                      //               centerWidget: CustomTextWidget(
-                      //                 //marginLeft: 4.0,
-                      //                 text: controller
-                      //                     .selectedCountryAddress
-                      //                     .value
-                      //                     .name,
-                      //                 color: ColorsManager.black,
-                      //                 fontSize: 16.0,
-                      //               ),
-                      //               suffixWidget: const Icon(
-                      //                 Icons.arrow_drop_down,
-                      //                 color: ColorsManager.grey600,
-                      //               ),
-                      //             ),
-                      //     ),
-                      //   ),
-                      // ),
-                      //===== Bottom of Country Component =====//
-
-                      // const SizedBox(
-                      //   width: AppSize.s8,
-                      // ),
-
-                      ///===== Top of City/State Component =====//
-
-                      // Expanded(
-                      //   flex: 50,
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     children: [
-                      //       const CustomTextWidget(
-                      //         text: 'City/State',
-                      //         marginTop: AppSize.s12,
-                      //         textAlign: TextAlign.left,
-                      //         // marginBottom: AppSize.s4,
-                      //       ),
-                      //       const SizedBox(
-                      //         height: 3.0,
-                      //       ),
-                      //       GestureDetector(
-                      //         onTap: () => {
-                      //           // Get.bottomSheet(
-                      //           //   Container(
-                      //           //     height: getHeight * 0.5,
-                      //           //     decoration: const ShapeDecoration(
-                      //           //       color: ColorsManager.white,
-                      //           //       shape: RoundedRectangleBorder(
-                      //           //         borderRadius: BorderRadius.only(
-                      //           //           topLeft: Radius.circular(
-                      //           //             16,
-                      //           //           ),
-                      //           //           topRight: Radius.circular(
-                      //           //             16,
-                      //           //           ),
-                      //           //         ),
-                      //           //       ),
-                      //           //     ),
-                      //           //     child: CountryListSelector(
-                      //           //       countrylist: countryList,
-                      //           //       onTap: (country) {
-                      //           //         controller
-                      //           //             .selectedCountryAddressOnClick(
-                      //           //           country,
-                      //           //         );
-                      //           //         Get.back();
-                      //           //       },
-                      //           //     ),
-                      //           //   ),
-                      //           // ),
-                      //         },
-                      //         child: Container(
-                      //           alignment: Alignment.centerLeft,
-                      //           padding: EdgeInsets.zero,
-                      //           child: FormField(
-                      //             validator: (_) =>
-                      //                 controller.isPhoneNumberValidate(),
-                      //             builder: (
-                      //               FormFieldState<String> state,
-                      //             ) {
-                      //               return InputDecorator(
-                      //                 // alignedDropdown: true,
-                      //                 decoration: InputDecoration(
-                      //                   contentPadding:
-                      //                       const EdgeInsets.fromLTRB(
-                      //                     4,
-                      //                     0,
-                      //                     4,
-                      //                     0,
-                      //                   ),
-                      //                   fillColor: ColorsManager.grey100,
-                      //                   filled: true,
-                      //                   border: OutlineInputBorder(
-                      //                     borderRadius:
-                      //                         BorderRadius.circular(
-                      //                       AppSize.s8,
-                      //                     ),
-                      //                   ),
-                      //                   errorText: state.hasError
-                      //                       ? state.errorText
-                      //                       : null,
-                      //                   enabledBorder: OutlineInputBorder(
-                      //                     borderRadius:
-                      //                         BorderRadius.circular(
-                      //                       AppSize.s8,
-                      //                     ),
-                      //                     borderSide: const BorderSide(
-                      //                       color: ColorsManager.grey100,
-                      //                     ),
-                      //                   ),
-                      //                   errorBorder: OutlineInputBorder(
-                      //                     borderRadius:
-                      //                         BorderRadius.circular(
-                      //                       AppSize.s8,
-                      //                     ),
-                      //                     borderSide: const BorderSide(
-                      //                       color: ColorsManager.red900,
-                      //                     ),
-                      //                   ),
-                      //                   focusedBorder: OutlineInputBorder(
-                      //                     borderRadius:
-                      //                         BorderRadius.circular(
-                      //                       AppSize.s8,
-                      //                     ),
-                      //                     borderSide: const BorderSide(
-                      //                       color: ColorsManager.grey300,
-                      //                     ),
-                      //                   ),
-                      //                 ),
-                      //                 child:
-                      //                     // Obx(
-                      //                     //   () =>
-                      //                     // controller
-                      //                     //             .selectedCountryAddress
-                      //                     //             .value
-                      //                     //             .phoneCode ==
-                      //                     //         null
-                      //                     //     ?
-                      //                     Row(
-                      //                   mainAxisAlignment:
-                      //                       MainAxisAlignment.spaceBetween,
-                      //                   children: const [
-                      //                     CustomTextWidget(
-                      //                       marginLeft: AppSize.s8,
-                      //                       text: 'City/State',
-                      //                       color: ColorsManager.grey400,
-                      //                       fontWeight: FontWeight.w400,
-                      //                       fontSize: 16.0,
-                      //                     ),
-                      //                     Icon(
-                      //                       Icons.arrow_drop_down,
-                      //                       color: ColorsManager.grey300,
-                      //                     ),
-                      //                   ],
-                      //                 ),
-                      //                 // : Row(
-                      //                 //     children: [
-                      //                 //       SizedBox(
-                      //                 //         height: 15.0,
-                      //                 //         child: CircleFlag(
-                      //                 //           controller
-                      //                 //               .selectedCountryAddress
-                      //                 //               .value
-                      //                 //               .isoCode
-                      //                 //               .toString(),
-                      //                 //         ),
-                      //                 //       ),
-                      //                 //       Expanded(
-                      //                 //         child: CustomTextWidget(
-                      //                 //           marginLeft:
-                      //                 //               AppSize.s8,
-                      //                 //           text: controller
-                      //                 //               .selectedCountryAddress
-                      //                 //               .value
-                      //                 //               .phoneCode,
-                      //                 //           color: ColorsManager
-                      //                 //               .black,
-                      //                 //           fontSize: 16.0,
-                      //                 //         ),
-                      //                 //       ),
-                      //                 //       const Icon(
-                      //                 //         Icons.arrow_drop_down,
-                      //                 //         color: ColorsManager
-                      //                 //             .grey600,
-                      //                 //       ),
-                      //                 //     ],
-                      //                 //   ),
-                      //                 // ),
-                      //               );
-                      //             },
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      //===== Bottom of City/State Component =====//
-                      //   ],
-                      // ),
                       CustomTextInput(
                         controller: controller.cityStateCtrl,
                         inputTitle: 'City/State',
@@ -929,46 +493,6 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         topPadding: AppSize.s12,
                       ),
                       //===== Bottom of Zip Code Component =====//
-
-                      ///===== Top of Address Component =====//
-                      // GestureDetector(
-                      // child:
-                      CustomTextInput(
-                        controller: controller.addressCtrl,
-                        inputTitle: 'Address',
-                        hintText: 'Address...',
-                        isFilled: true,
-                        topContentPadding: 12.0,
-                        bottomContentPadding: 12.0,
-                        topPadding: AppSize.s12,
-                        // counter: true,
-                        maxLines: 3,
-                        minLines: 2,
-                        maxLength: 150,
-                        keyboardType: TextInputType.multiline,
-                      ),
-                      // onTap: () async {
-                      // print('onTap: address');
-                      // generate a new token here
-                      // const sessionToken = 'Uuid().v4()';
-                      // final Suggestion? result = await showSearch(
-                      //   context: context,
-                      //   delegate: AddressSearch(sessionToken),
-                      // );
-                      // This will change the text displayed in the TextField
-                      // final placeDetails =
-                      //     await PlaceApiProvider(sessionToken)
-                      //         .getPlaceDetailFromId(result.placeId);
-                      // setState(() {
-                      //   _controller.text = result.description;
-                      //   _streetNumber = placeDetails.streetNumber;
-                      //   _street = placeDetails.street;
-                      //   _city = placeDetails.city;
-                      //   _zipCode = placeDetails.zipCode;
-                      // });
-                      //   },
-                      // ),
-                      //===== Bottom of Address Component =====//
                     ],
                   ),
                 ),
@@ -977,107 +501,44 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
           ],
         ),
       ),
-      bottomNavigationBar: // Obx(
-          //   () => Visibility(
-          //     visible: controller.isSubmitBtnProcessing.value,
-          //     child: const LoadingWidget(),
-          //   ),
-          // ),
-          // Obx(
-          //   () => Visibility(
-          //     visible:
-          //         !controller.isSubmitBtnProcessing.value,
-          // child:
-          CustomMaterialButton(
-        leftPadding: AppSize.s12,
-        rightPadding: AppSize.s12,
-        bottomPadding: AppSize.s20,
-        text: 'Save',
-        fontSize: AppSize.s20,
-        // buttonHeight: 45,
-        buttonWidth: getWidth,
-        onPressed: () {
-          unFocusKeyBoard(context);
-          controller.saveButtonOnClick();
-        },
+      bottomNavigationBar: Obx(
+        () => Wrap(
+          children: [
+            Visibility(
+              visible: controller.isSubmitBtnProcessing.value,
+              child: CustomMaterialButton(
+                leftPadding: AppSize.s12,
+                rightPadding: AppSize.s12,
+                bottomPadding: AppSize.s20,
+                childWidget: const LoadingWidget(
+                  isTreeBounceLoading: true,
+                  color: ColorsManager.white,
+                ),
+                buttonWidth: getWidth,
+                onPressed: () {
+                  unFocusKeyBoard(context);
+                },
+              ),
+            ),
+            Visibility(
+              visible: !controller.isSubmitBtnProcessing.value,
+              child: CustomMaterialButton(
+                leftPadding: AppSize.s12,
+                rightPadding: AppSize.s12,
+                bottomPadding: AppSize.s20,
+                text: 'Save',
+                fontSize: AppSize.s20,
+                // buttonHeight: 45,
+                buttonWidth: getWidth,
+                onPressed: () {
+                  unFocusKeyBoard(context);
+                  controller.saveButtonOnClick();
+                },
+              ),
+            ),
+          ],
+        ),
       ),
-      //   ),
-      // ),
     );
-  }
-
-  void genderSelectedDialog(BuildContext context) {
-    // showDialog(
-    //   context: context,
-    //   builder: (builder) {
-    //     return AlertDialog(
-    //       shape: const RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-    //       ),
-    //       title: Container(
-    //         decoration: const BoxDecoration(
-    //           borderRadius: BorderRadius.only(
-    //             topLeft: Radius.circular(10.0),
-    //             topRight: Radius.circular(10.0),
-    //           ),
-    //           color: ColorsManager.primary,
-    //         ),
-    //         child: const CustomTextWidget(
-    //           text: 'Title',
-    //           fontSize: AppSize.s18,
-    //           color: ColorsManager.white,
-    //           textAlign: TextAlign.center,
-    //           marginTop: AppSize.s14,
-    //           marginBottom: AppSize.s14,
-    //         ),
-    //       ),
-    //       titlePadding: EdgeInsets.zero,
-    //       contentPadding: EdgeInsets.zero,
-    //       content: SizedBox(
-    //         width: double.maxFinite,
-    //         child: Column(
-    //           mainAxisSize: MainAxisSize.min,
-    //           children: [
-    //             ConstrainedBox(
-    //               constraints: BoxConstraints(
-    //                 maxHeight: getHeight * 0.5,
-    //               ),
-    //               child: ListView.separated(
-    //                 shrinkWrap: true,
-    //                 itemCount: controller.genderList.length,
-    //                 itemBuilder: (context, index) {
-    //                   return Obx(
-    //                     () => RowDataSelectionWidget.radioButton(
-    //                       isLeftSideText: false,
-    //                       isClickingValue: stringsComparation(
-    //                         object1: controller.genderList[index],
-    //                         object2: controller.selectedGender.value,
-    //                       ),
-    //                       text: controller.genderList[index],
-    //                       onPressed: () {
-    //                         controller.selectedGender.value =
-    //                             controller.genderList[index];
-    //                         // controller.selectedGenderOnClick(
-    //                         //   selectedItem: controller.genderList[index],
-    //                         // );
-    //                         Get.back();
-    //                       },
-    //                     ),
-    //                   );
-    //                 },
-    //                 separatorBuilder: (context, index) {
-    //                   return const Divider(
-    //                     height: 1.0,
-    //                     color: ColorsManager.grey300,
-    //                   );
-    //                 },
-    //               ),
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     );
-    //   },
-    // );
   }
 }

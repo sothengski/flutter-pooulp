@@ -1,107 +1,105 @@
-// import 'dart:convert';
-// import 'dart:io';
+// ignore_for_file: avoid_dynamic_calls
 
-// import 'package:get/get.dart';
+import 'dart:io';
 
-// class Place {
-//   String? streetNumber;
-//   String? street;
-//   String? city;
-//   String? zipCode;
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pooulp_flutter/data/data.dart';
 
-//   Place({
-//     this.streetNumber,
-//     this.street,
-//     this.city,
-//     this.zipCode,
-//   });
+class PlaceApiProvider extends GetConnect {
+  final key = Platform.isAndroid ? APIKeys.androidKey : APIKeys.iosKey;
 
-//   @override
-//   String toString() {
-//     return 'Place(streetNumber: $streetNumber, street: $street, city: $city, zipCode: $zipCode)';
-//   }
-// }
+  Future<List<GooglePlaceSearchModel>> getGooglePlacesAutocomplete({
+    String? search,
+    String? lang = 'en',
+  }) async {
+    final url =
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$search&language=$lang&types=address&key=$key';
+    //         'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&types=address&language=$lang&components=country:ch&key=$apiKey&sessiontoken=$sessionToken';
+    final response = await get(url);
+    final apiResponse = response
+        .body; //same as // final apiResponse = json.decode(response.bodyString.toString());
 
-// class Suggestion {
-//   final String? placeId;
-//   final String? description;
+    final jsonResults = apiResponse['predictions'] as List;
+// debugPrint('<=====jsonResults:: $jsonResults=====>');
+    return jsonResults
+        .map(
+          (place) =>
+              GooglePlaceSearchModel.fromJson(place as Map<String, dynamic>),
+        )
+        .toList();
+  }
 
-//   Suggestion(this.placeId, this.description);
+  Future<GooglePlaceDetailModel> getGooglePlaceDetail({String? placeId}) async {
+    debugPrint('<=====getGooglePlaceDetail=====>');
 
-//   @override
-//   String toString() {
-//     return 'Suggestion(description: $description, placeId: $placeId)';
-//   }
-// }
+    final url =
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$key';
+    final response = await httpClient.get(url);
 
-// class PlaceApiProvider extends GetConnect {
-//   // final client = Client();
+    final apiResponse = response.body;
 
-//   PlaceApiProvider(this.sessionToken);
+    // final jsonResult = apiResponse['result'] as Map<String, dynamic>;
 
-//   final sessionToken;
+    final jsonResp =
+        GooglePlaceDetailModel.fromJson(apiResponse as Map<String, dynamic>);
 
-//   static const String androidKey = 'AIzaSyBjShmOqzN5KkJoBp3No7gKwYH3GjepW54';
-//   static const String iosKey = 'AIzaSyBjShmOqzN5KkJoBp3No7gKwYH3GjepW54';
-//   final apiKey = Platform.isAndroid ? androidKey : iosKey;
+    // debugPrint("jsonResp:: $jsonResp");
+    // debugPrint(
+    //   "jsonResp formattedAddress:: ${jsonResp.result!.formattedAddress}",
+    // );
+    // debugPrint(
+    //   "jsonResp lat/long:: ${jsonResp.result!.geometry!.location!.lat}/${jsonResp.result!.geometry!.location!.lng}",
+    // );
 
-//   Future<List<Suggestion>> fetchSuggestions({
-//     String? input,
-//     String? lang = 'en',
-//   }) async {
-//     final request =
-//         'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&types=address&language=$lang&components=country:ch&key=$apiKey&sessiontoken=$sessionToken';
-//     final response = await get(request);
+    // final data = jsonResp.result!.addressComponents;
+    // for (final c in data!) {
+    //   if (c.types!.contains('country')) {
+    //     debugPrint("country:: ${c.longName}");
+    //   }
+    //   if (c.types!.contains('administrative_area_level_2')) {
+    //     debugPrint("administrative_area_level_2:: ${c.longName}");
+    //   }
+    //   if (c.types!.contains('administrative_area_level_1')) {
+    //     debugPrint("administrative_area_level_1:: ${c.longName}");
+    //   }
+    //   if (c.types!.contains('postal_code')) {
+    //     debugPrint("postal_code:: ${c.longName}");
+    //   }
+    // }
+    // debugPrint('<=====End of getPlace=====>');
 
-//     if (response.statusCode == 200) {
-//       final result = json.decode(response.body);
-//       if (result['status'] == 'OK') {
-//         // compose suggestions in a list
-//         // return result['predictions']
-//         //     .map<Suggestion>((p) => Suggestion(p['place_id'], p['description']))
-//         //     .toList();
-//       }
-//       if (result['status'] == 'ZERO_RESULTS') {
-//         return [];
-//       }
-//       throw Exception(result['error_message']);
-//     } else {
-//       throw Exception('Failed to fetch suggestion');
-//     }
-//   }
+    return jsonResp;
+  }
 
-//   // Future<Place> getPlaceDetailFromId(String placeId) async {
-//   //   final request =
-//   //       'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&fields=address_component&key=$apiKey&sessiontoken=$sessionToken';
-//   //   final response = await get(request);
+  // Future<List<Place>> getPlaces(
+  //   double lat,
+  //   double lng,
+  //   String placeType,
+  // ) async {
+  //   debugPrint('<=====getPlaces=====>');
+  //   final url =
+  //       'https://maps.googleapis.com/maps/api/place/textsearch/json?location=$lat,$lng&type=$placeType&rankby=distance&key=$key';
+  //   final response = await httpClient.get(url);
+  //   final json = convert.jsonDecode(response.body.toString());
+  //   final jsonResults = json['results'] as List;
+  //   return jsonResults
+  //       .map((place) => Place.fromJson(place as Map<String, dynamic>))
+  //       .toList();
+  // }
 
-//   //   if (response.statusCode == 200) {
-//   //     final result = json.decode(response.body);
-//   //     if (result['status'] == 'OK') {
-//   //       final components =
-//   //           result['result']['address_components'] as List<dynamic>;
-//   //       // build result
-//   //       final place = Place();
-//   //       for (final c in components) {
-//   //         final List type = c['types'];
-//   //         if (type.contains('street_number')) {
-//   //           place.streetNumber = c['long_name'];
-//   //         }
-//   //         if (type.contains('route')) {
-//   //           place.street = c['long_name'];
-//   //         }
-//   //         if (type.contains('locality')) {
-//   //           place.city = c['long_name'];
-//   //         }
-//   //         if (type.contains('postal_code')) {
-//   //           place.zipCode = c['long_name'];
-//   //         }
-//   //       }
-//   //       return place;
-//   //     }
-//   //     throw Exception(result['error_message']);
-//   //   } else {
-//   //     throw Exception('Failed to fetch suggestion');
-//   //   }
-//   // }
-// }
+  // Future<void> getPlaceDetail({String? id}) async {
+  //   final GoogleMapsPlaces placesProvider = GoogleMapsPlaces(apiKey: key);
+  //   final PlacesDetailsResponse detail =
+  //       await placesProvider.getDetailsByPlaceId(id!);
+
+  //   // final placeId = p.placeId;
+  //   final double lat = detail.result.geometry!.location.lat;
+  //   final double lng = detail.result.geometry!.location.lng;
+
+  //   // final address = await Geocoder.local.findAddressesFromQuery(p.description);
+
+  //   print("lat: $lat");
+  //   print("lng: $lng");
+  // }
+}

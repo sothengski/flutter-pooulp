@@ -2,6 +2,7 @@ export 'components/contact_information_component.dart';
 export 'components/enterprise_profile_component.dart';
 export 'components/profile_header.dart';
 export 'components/user_profile_component.dart';
+export 'edit_user_info/address_search.dart';
 export 'edit_user_info/edit_user_info_binding.dart';
 export 'edit_user_info/edit_user_info_controller.dart';
 export 'edit_user_info/edit_user_info_page.dart';

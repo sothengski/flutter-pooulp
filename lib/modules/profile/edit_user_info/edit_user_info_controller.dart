@@ -12,6 +12,7 @@ import '../../modules.dart';
 class EditUserInformationController extends GetxController {
   final profileController = Get.put(ProfileController());
   final userInfoProvider = Get.find<UserInfoProvider>();
+  final placeProvider = PlaceApiProvider();
 
   final List<String> genderList = [
     // '', //'unselect',
@@ -50,12 +51,18 @@ class EditUserInformationController extends GetxController {
   TextEditingController cityStateCtrl = TextEditingController();
   TextEditingController zipCodeCtrl = TextEditingController();
   TextEditingController addressCtrl = TextEditingController();
+  String addressLat = '';
+  String addressLng = '';
+
+  Rx<GooglePlaceDetailModel> googlePlaceDetail = GooglePlaceDetailModel().obs;
 
   Rx<CountryModel> selectedCountryPhoneNumber = const CountryModel().obs;
   Rx<String> selectedGender = ''.obs;
   Rx<String> selectedBirthday = ''.obs;
 
   Rx<CountryModel> selectedCountryAddress = const CountryModel().obs;
+
+  Rx<bool> isSubmitBtnProcessing = false.obs;
 
   @override
   void onInit() {
@@ -133,6 +140,9 @@ class EditUserInformationController extends GetxController {
   bool uploadImgBoolSwitching() =>
       isUploadingImage.value = !isUploadingImage.value;
 
+  bool saveBtnBoolSwitching({bool? value}) =>
+      isSubmitBtnProcessing.value = value!;
+
   Future<void> getImage({
     bool? isCamera = false,
   }) async {
@@ -144,8 +154,8 @@ class EditUserInformationController extends GetxController {
       selectedImagePath.value = pickedFile.path;
       selectedImageSize.value =
           "${(File(selectedImagePath.value).lengthSync() / 1024 / 1024).toStringAsFixed(4)}Mb";
-      debugPrint('selectedImagePath:: ${selectedImagePath.value}');
-      debugPrint('selectedImageSize:: ${selectedImageSize.value}');
+      // debugPrint('selectedImagePath:: ${selectedImagePath.value}');
+      // debugPrint('selectedImageSize:: ${selectedImageSize.value}');
 
       ///Crop Image
       final cropImageFile = await ImageCropper().cropImage(
@@ -164,13 +174,12 @@ class EditUserInformationController extends GetxController {
           backgroundColor: ColorsManager.white,
         ),
       );
-      debugPrint('B4 cropImageFile != null');
       if (cropImageFile != null) {
         cropImagePath.value = cropImageFile.path;
         cropImageSize.value =
             "${(File(cropImagePath.value).lengthSync() / 1024 / 1024).toStringAsFixed(4)}Mb";
-        debugPrint('cropImagePath:: ${cropImagePath.value}');
-        debugPrint('cropImageSize:: ${cropImageSize.value}');
+        // debugPrint('cropImagePath:: ${cropImagePath.value}');
+        // debugPrint('cropImageSize:: ${cropImageSize.value}');
 
         ///Upload Image
         uploadImage(
@@ -195,17 +204,15 @@ class EditUserInformationController extends GetxController {
       //     "${(File(compressImagePath.value).lengthSync() / 1024 / 1024).toStringAsFixed(2)}Mb";
 
     } else {
-      // print('No image selected.');
       customSnackbar(msgTitle: 'No Image Selected', msgContent: '');
     }
   }
 
   Future<void> uploadImage(File? file, String? fileName) async {
     uploadImgBoolSwitching();
-    await userInfoProvider.uploadImage(filepath: file!.path, fileName: fileName)
-        // .uploadImage(file: file, fileName: fileName)
+    await userInfoProvider
+        .uploadImage(filepath: file!.path, fileName: fileName)
         .then((resp) {
-      // Get.back();
       if (resp.pictureUrl!.isNotEmpty) {
         profileController.userProfileInfo.value = resp;
         customSnackbar(
@@ -258,7 +265,35 @@ class EditUserInformationController extends GetxController {
     return null;
   }
 
+  Future<Rx<GooglePlaceDetailModel>> getPlaceDetail({String? placeId}) async {
+    googlePlaceDetail.value =
+        await placeProvider.getGooglePlaceDetail(placeId: placeId);
+    final data = googlePlaceDetail.value.result!.addressComponents;
+    for (final c in data!) {
+      if (c.types!.contains('country')) {
+        countryCtrl.text = c.longName!;
+      }
+      if (c.types!.contains('administrative_area_level_2')) {
+        // cityStateCtrl.text = c.longName!;
+      }
+      if (c.types!.contains('administrative_area_level_1')) {
+        cityStateCtrl.text = c.longName!;
+      }
+      if (c.types!.contains('postal_code')) {
+        zipCodeCtrl.text = c.longName!;
+      }
+    }
+    addressLat =
+        googlePlaceDetail.value.result!.geometry!.location!.lat!.toString();
+    addressLng =
+        googlePlaceDetail.value.result!.geometry!.location!.lng!.toString();
+    // countryCtrl.text = googlePlaceDetail.value.result!.googlePlaceCountry;
+    addressCtrl.text = googlePlaceDetail.value.result!.formattedAddress!;
+    return googlePlaceDetail;
+  }
+
   void saveButtonOnClick() {
+    saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
     final String firstName = firstNameCtrl.text;
     final String lastName = lastNameCtrl.text;
     final String selectGender = selectedGender.value;
@@ -270,10 +305,11 @@ class EditUserInformationController extends GetxController {
     final String videoLink = videoLinkCtrl.text;
     final String description = descriptionCtrl.text;
 
-    final String countrySelected = selectedCountryAddress.value.name.toString();
+    // final String countrySelected = selectedCountryAddress.value.name.toString();
+    final String address = addressCtrl.text;
+    final String countrySelected = countryCtrl.text;
     final String cityState = cityStateCtrl.text;
     final String zipCode = zipCodeCtrl.text;
-    final String address = addressCtrl.text;
 
     debugPrint('firstName:: $firstName');
     debugPrint('lastName:: $lastName');
@@ -287,5 +323,7 @@ class EditUserInformationController extends GetxController {
     debugPrint('cityState:: $cityState');
     debugPrint('zipCode:: $zipCode');
     debugPrint('address:: $address');
+    debugPrint('addressLat:: $addressLat');
+    debugPrint('addressLng:: $addressLng');
   }
 }

@@ -22,7 +22,7 @@ class CustomTextInput extends StatelessWidget {
   final bool? obscureText;
   final bool? suffixIcon;
   final Widget? inputIcon;
-  final IconData? prefixIcon;
+  final Widget? prefixIcon;
   final TextCapitalization? textCapitalization;
   final TextAlign? textAlign;
   final int? maxLength;
@@ -52,6 +52,7 @@ class CustomTextInput extends StatelessWidget {
   final int? maxLines;
   final double? fontSize;
   final Color? fontColor;
+  final bool? isReadOnly;
 
   const CustomTextInput({
     this.controller,
@@ -99,6 +100,7 @@ class CustomTextInput extends StatelessWidget {
     this.maxLines = 1,
     this.fontSize = 16.0,
     this.fontColor = Colors.black,
+    this.isReadOnly = false,
   });
 
   @override
@@ -146,6 +148,7 @@ class CustomTextInput extends StatelessWidget {
                   focusNode: focusNodeName,
                   autocorrect: autocorrect!,
                   enableSuggestions: enableSuggestions!,
+                  readOnly: isReadOnly!,
                   style: TextStyle(
                     fontSize: fontSize,
                     color: fontColor,
@@ -170,6 +173,9 @@ class CustomTextInput extends StatelessWidget {
                     //   prefixIcon,
                     //   // color: primary,
                     // ),
+                    // focusColor: Colors.white,
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    prefixIcon: prefixIcon,
                     prefixText: " ",
                     suffixIcon: suffixIcon!
                         ? obscureText == true

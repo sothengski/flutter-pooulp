@@ -20,7 +20,7 @@ class CustomTextInput extends StatelessWidget {
   final String? errorText;
   final bool? enabled;
   final bool? obscureText;
-  final bool? suffixIcon;
+  final Widget? suffixIcon;
   final Widget? inputIcon;
   final Widget? prefixIcon;
   final TextCapitalization? textCapitalization;
@@ -69,7 +69,7 @@ class CustomTextInput extends StatelessWidget {
     this.onValidator,
     this.onChanged,
     this.obscureText = false,
-    this.suffixIcon = false,
+    this.suffixIcon,
     this.inputIcon,
     this.prefixIcon,
     this.textCapitalization,
@@ -177,25 +177,7 @@ class CustomTextInput extends StatelessWidget {
                     // floatingLabelBehavior: FloatingLabelBehavior.never,
                     prefixIcon: prefixIcon,
                     prefixText: " ",
-                    suffixIcon: suffixIcon!
-                        ? obscureText == true
-                            ? IconButton(
-                                icon: const Icon(
-                                  Icons.visibility_outlined,
-                                  color: ColorsManager.grey400,
-                                  size: 20.0,
-                                ),
-                                onPressed: changeShowPassword,
-                              )
-                            : IconButton(
-                                icon: const Icon(
-                                  Icons.visibility_off_outlined,
-                                  color: ColorsManager.grey400,
-                                  size: 20.0,
-                                ),
-                                onPressed: changeShowPassword,
-                              )
-                        : null,
+                    suffixIcon: suffixIcon,
                     filled: isFilled,
                     fillColor: fillColor,
                     hintText: hintText,
@@ -225,12 +207,16 @@ class CustomTextInput extends StatelessWidget {
                         color: ColorsManager.grey600,
                       ),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(borderRadius!),
-                      borderSide: const BorderSide(
-                        color: ColorsManager.grey100,
-                      ),
+                    enabledBorder: outlineInputBorder(
+                      borderColor: ColorsManager.grey100,
+                      borderRadius: borderRadius,
                     ),
+                    // OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(borderRadius!),
+                    //   borderSide: const BorderSide(
+                    //     color: ColorsManager.grey100,
+                    //   ),
+                    // ),
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(borderRadius!),
                       borderSide: const BorderSide(

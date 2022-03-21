@@ -335,7 +335,23 @@ class SignUpForm extends GetView<SignUpController> {
                               controller: controller.passwordCtrl,
                               inputTitle: "Password",
                               hintText: "Enter your password",
-                              suffixIcon: true,
+                              suffixIcon: IconButton(
+                                icon: !controller.showPassword.value
+                                    ? const Icon(
+                                        Icons.visibility_outlined,
+                                        color: ColorsManager.grey400,
+                                        size: 20.0,
+                                      )
+                                    : const Icon(
+                                        Icons.visibility_off_outlined,
+                                        color: ColorsManager.grey400,
+                                        size: 20.0,
+                                      ),
+                                onPressed: () =>
+                                    controller.showPasswordBoolSwitching(
+                                  boolValue: controller.showPassword.value,
+                                ),
+                              ),
                               obscureText: !controller.showPassword.value,
                               isFilled: true,
                               topPadding: AppSize.s12,
@@ -347,10 +363,6 @@ class SignUpForm extends GetView<SignUpController> {
                                   RegExp(Validator.avoidSpaceRegExpPattern),
                                 ),
                               ],
-                              changeShowPassword: () =>
-                                  controller.showPasswordBoolSwitching(
-                                boolValue: controller.showPassword.value,
-                              ),
                             ),
                             // CustomTextInput(
                             //   controller: controller.passwordConfirmationCtrl,
@@ -358,7 +370,7 @@ class SignUpForm extends GetView<SignUpController> {
                             //   hintText: "Enter your password confirmation",
                             //   suffixIcon: true,
                             //   obscureText:
-                            //       !controller.showPasswordConfirmation.value,
+                            // /      !controller.showPasswordConfirmation.value,
                             //   isFilled: true,
                             //   topPadding: AppSize.s12,
                             //   bottomPadding:

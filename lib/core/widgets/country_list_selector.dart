@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../data/data.dart';
 import '../core.dart';
 
-class CountryListSelector extends StatelessWidget {
+bool isNumeric(String s) => s.isNotEmpty && double.tryParse(s) != null;
+
+class CountryListSelector extends StatefulWidget {
   final List<CountryModel>? countrylist;
   final CountryModel? selectedCountry;
   // late CountryFinder _countryFinder;
@@ -25,38 +27,49 @@ class CountryListSelector extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CountryListSelector> createState() => _CountryListSelectorState();
+}
+
+class _CountryListSelectorState extends State<CountryListSelector> {
+  late List<CountryModel>? filteredCountryList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredCountryList!.addAll(widget.countrylist!.toList());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 70,
-          width: double.infinity,
-          child: CustomTextWidget(
-            text: "search",
-            textAlign: TextAlign.center,
-            marginTop: AppSize.s10,
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: CustomTextInput(
+            hintText: 'Search Country Name',
+            suffixIcon: const Icon(
+              Icons.search,
+              // color: ColorsManager.grey400,
+            ),
+            onChanged: filterSearchResults,
           ),
-          // SearchBox(
-          //   autofocus: widget.searchAutofocus,
-          //   onChanged: _onSearch,
-          // ),
         ),
         Flexible(
-          child: countrylist!.isNotEmpty
+          child: filteredCountryList!.isNotEmpty
               ? ListView.separated(
-                  controller: scrollController,
+                  controller: widget.scrollController,
                   shrinkWrap: true,
-                  itemCount: countrylist!.length,
+                  itemCount: filteredCountryList!.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const Divider(
                     height: 0.0,
                     thickness: 0.0,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    final CountryModel country = countryList[index];
+                    final CountryModel country = filteredCountryList![index];
                     return Card(
                       elevation: 0.0,
-                      color: selectedCountry!.iso3Code ==
+                      color: widget.selectedCountry!.iso3Code ==
                               country.iso3Code.toString()
                           ? ColorsManager.grey300
                           : ColorsManager.white,
@@ -70,22 +83,22 @@ class CountryListSelector extends StatelessWidget {
                         ),
                         title: Align(
                           alignment: AlignmentDirectional.centerStart,
-                          child: showCountry == true
+                          child: widget.showCountry == true
                               ? CustomTextWidget(
                                   text: "${country.name}",
                                   fontSize: 16.0,
                                   fontWeight: FontWeightManager.medium,
-                                  color: selectedCountry!.iso3Code ==
+                                  color: widget.selectedCountry!.iso3Code ==
                                           country.iso3Code.toString()
                                       ? ColorsManager.primary
                                       : ColorsManager.primaryBlue,
                                 )
                               : Container(),
                         ),
-                        trailing: showPhoneCode == true
+                        trailing: widget.showPhoneCode == true
                             ? CustomTextWidget(
                                 text: country.phoneCode,
-                                color: selectedCountry!.iso3Code ==
+                                color: widget.selectedCountry!.iso3Code ==
                                         country.iso3Code.toString()
                                     ? ColorsManager.primary
                                     : ColorsManager.grey600,
@@ -113,7 +126,7 @@ class CountryListSelector extends StatelessWidget {
                         //         )
                         //       : Container(),
                         // ),
-                        onTap: () => onTap!(country),
+                        onTap: () => widget.onTap!(country),
                       ),
                     );
                   },
@@ -128,5 +141,21 @@ class CountryListSelector extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void filterSearchResults(String query) {
+    List<CountryModel> searchResult = <CountryModel>[];
+    if (query.isEmpty) {
+      searchResult.addAll(countryList);
+    } else {
+      searchResult = countryList
+          .where(
+            (c) => c.name!.toLowerCase().startsWith(
+                  query.toLowerCase(),
+                ),
+          )
+          .toList();
+    }
+    setState(() => filteredCountryList = searchResult);
   }
 }

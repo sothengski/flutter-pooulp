@@ -41,7 +41,22 @@ class SignInForm extends GetView<SignInController> {
                 controller: controller.passwordCtrl,
                 inputTitle: 'auth.password'.tr,
                 hintText: "Enter your password",
-                suffixIcon: true,
+                suffixIcon: IconButton(
+                  icon: !controller.showPassword.value
+                      ? const Icon(
+                          Icons.visibility_outlined,
+                          color: ColorsManager.grey400,
+                          size: 20.0,
+                        )
+                      : const Icon(
+                          Icons.visibility_off_outlined,
+                          color: ColorsManager.grey400,
+                          size: 20.0,
+                        ),
+                  onPressed: () => controller.showPasswordBoolSwitching(
+                    boolValue: controller.showPassword.value,
+                  ),
+                ),
                 obscureText: !controller.showPassword.value,
                 isFilled: true,
                 topPadding: AppSize.s12,
@@ -51,9 +66,9 @@ class SignInForm extends GetView<SignInController> {
                     RegExp(Validator.avoidSpaceRegExpPattern),
                   ),
                 ],
-                changeShowPassword: () => controller.showPasswordBoolSwitching(
-                  boolValue: controller.showPassword.value,
-                ),
+                // changeShowPassword: () => controller.showPasswordBoolSwitching(
+                //   boolValue: controller.showPassword.value,
+                // ),
               ),
               Align(
                 alignment: Alignment.centerRight,

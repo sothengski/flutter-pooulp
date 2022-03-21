@@ -122,7 +122,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                 titleLeftPadding: AppSize.s16,
                 // titleInSide: false,
                 child: Form(
-                  // key: controller.registrationFormKey,
+                  key: controller.editProfileFormKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -346,10 +346,11 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                               isFilled: true,
                               topPadding: AppSize.s12,
                               leftPadding: AppSize.s4,
-                              validator: (_) =>
-                                  controller.isPhoneNumberValidate(
-                                isPhoneNumberField: true,
-                              ),
+                              validator: Validator().notEmptyValidator,
+                              // validator: (_) =>
+                              //     controller.isPhoneNumberValidate(
+                              //   isPhoneNumberField: true,
+                              // ),
                               maxLength: 13,
                               inputFormatterList: [
                                 FilteringTextInputFormatter.deny(
@@ -425,24 +426,11 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Address Component =====//
                       GestureDetector(
                         onTap: () async {
+                          controller.uuidTokenGenerator();
                           await showSearch(
                             context: context,
                             delegate: AddressSearchBarWidget(),
                           );
-                          // final result = await showSearch(
-                          //   context: context,
-                          //   delegate: AddressSearch(),
-                          // );
-                          // if (result != null) {
-                          //   final googlePlaceDetail = await controller
-                          //       .placeProvider
-                          //       .getPlace(placeId: result.placeId)
-                          //       .then(
-                          //         (value) => print(
-                          //           'googlePlaceDetail:: ${value.result!.formattedAddress}',
-                          //         ),
-                          //       );
-                          // }
                         },
                         child: AbsorbPointer(
                           child: CustomTextInput(

@@ -136,8 +136,8 @@ class ProfileModel {
         addressCity: json['address_city'] as String?,
         addressZip: json['address_zip'] as String?,
         addressCountry: json['address_country'] as String?,
-        // addressLatitude: json['address_latitude'] as String?,
-        // addressLongitude: json['address_longitude'] as String?,
+        addressLatitude: json['address_latitude'] as String?,
+        addressLongitude: json['address_longitude'] as String?,
         id: json['id'] as int?,
         name: json['name'] as String?,
         // subsidiaryOf: json['subsidiary_of'] as String?,
@@ -202,7 +202,10 @@ class ProfileModel {
         'description': description,
         'phone2_country_code': phone2CountryCode,
         'phone2': phone2,
-        'birthdate': birthDate?.toString(),
+        // 'birthdate': birthDate?.toString(),
+        'birthdate': birthDate != null
+            ? "${birthDate!.year.toString().padLeft(4, '0')}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}"
+            : null,
         'picture_url': pictureUrl,
         'settings_notifications_email': emailNotification,
         'address_street': addressStreet,

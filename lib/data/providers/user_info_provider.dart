@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,6 +11,10 @@ abstract class IUserInfoProvider {
   Future<StudentProfileModel> getStudentProfileInfo();
   // Future<UserModel> uploadImage({File? file});
   Future<ProfileModel> uploadImage({String? filepath});
+  Future<ProfileModel> putUpdateUserProfileInfo({ProfileModel? data});
+  Future<StudentProfileModel> putUpdateStudentProfileInfo({
+    StudentProfileModel? data,
+  });
 }
 
 class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
@@ -73,8 +76,8 @@ class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
     if (response.statusCode == 200 || response.statusCode == 201) {
       final respStr = await response.stream.bytesToString();
       final resp = json.decode(respStr);
-      debugPrint("respStr::$respStr ");
-      debugPrint("resp::$resp ");
+      // debugPrint("respStr::$respStr ");
+      // debugPrint("resp::$resp ");
       return ProfileModel.fromJson(
         resp as Map<String, dynamic>,
       );
@@ -82,6 +85,46 @@ class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
     } else {
       return Future.error(response.toString());
       // return false;
+    }
+  }
+
+  @override
+  Future<ProfileModel> putUpdateUserProfileInfo({ProfileModel? data}) async {
+    try {
+      final Response dataResponse = await put(
+        API.paths[Endpoint.putUpdateProfileInfo].toString(),
+        data!.toRawJson(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        return ProfileModel.fromJson(
+          dataResponse.body as Map<String, dynamic>,
+        );
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<StudentProfileModel> putUpdateStudentProfileInfo({
+    StudentProfileModel? data,
+  }) async {
+    try {
+      final Response dataResponse = await put(
+        API.paths[Endpoint.putUpdateStudentProfileInfo].toString(),
+        data!.toRawJson(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        return StudentProfileModel.fromJson(
+          dataResponse.body as Map<String, dynamic>,
+        );
+      }
+    } catch (e) {
+      return Future.error(e.toString());
     }
   }
 

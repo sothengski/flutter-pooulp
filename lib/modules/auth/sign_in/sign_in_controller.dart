@@ -9,7 +9,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
   final authProvider = Get.find<AuthProvider>();
 
   final signInFormKey = GlobalKey<FormState>();
-  final formFieldKey = GlobalKey<FormFieldState>();
+  // final formFieldKey = GlobalKey<FormFieldState>();
 
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();

@@ -18,7 +18,7 @@ class UserProfileComponent extends StatelessWidget {
       children: <Widget>[
         ///===== Profile Header Component =====//
         ProfileHeader(
-          userName: controller.userInfoRepsonse.value.profile!.fullName,
+          userName: controller.userProfileInfo.value.fullName,
           // userRole: controller.userInfoRepsonse.value.profile!.accountType,
         ),
         //===== Profile Header Component =====//
@@ -27,9 +27,8 @@ class UserProfileComponent extends StatelessWidget {
         ContactInformationComponent(
           headerTitle: 'Personal Information',
           email: controller.userInfoRepsonse.value.email,
-          phone: controller.userInfoRepsonse.value.profile!.fullPhone1Format,
-          videoPreentationLink:
-              controller.userInfoRepsonse.value.profile!.description,
+          phone: controller.userProfileInfo.value.fullPhone1Format,
+          videoPreentationLink: controller.userProfileInfo.value.description,
         ),
         //===== Personal Information Component =====//
 

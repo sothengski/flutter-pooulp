@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pooulp_flutter/data/data.dart';
 
@@ -12,9 +11,10 @@ class PlaceApiProvider extends GetConnect {
   Future<List<GooglePlaceSearchModel>> getGooglePlacesAutocomplete({
     String? search,
     String? lang = 'en',
+    String? sessionToken = '',
   }) async {
     final url =
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$search&language=$lang&types=address&key=$key';
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$search&language=$lang&types=address&key=$key&sessiontoken=$sessionToken';
     //         'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&types=address&language=$lang&components=country:ch&key=$apiKey&sessiontoken=$sessionToken';
     final response = await get(url);
     final apiResponse = response
@@ -30,11 +30,14 @@ class PlaceApiProvider extends GetConnect {
         .toList();
   }
 
-  Future<GooglePlaceDetailModel> getGooglePlaceDetail({String? placeId}) async {
-    debugPrint('<=====getGooglePlaceDetail=====>');
+  Future<GooglePlaceDetailModel> getGooglePlaceDetail({
+    String? placeId,
+    String? sessionToken = '',
+  }) async {
+    // debugPrint('<=====getGooglePlaceDetail=====>');
 
     final url =
-        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$key';
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$key&sessiontoken=$sessionToken';
     final response = await httpClient.get(url);
 
     final apiResponse = response.body;

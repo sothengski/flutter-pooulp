@@ -137,27 +137,27 @@ class StudentProfileModel {
         'whatsapp_link': whatsappLink,
         'youtube_link': youtubeLink,
         'gender': gender,
-        'skills': skills != null || skills != []
-            ? List<dynamic>.from(skills!.map((x) => x.toJson()))
-            : null,
-        'spoken_languages': spokenLanguages != null || spokenLanguages != []
-            ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
-            : null,
-        'educations': educations != null || educations != []
-            ? List<dynamic>.from(educations!.map((x) => x.toJson()))
-            : null,
-        'experiences': experiences != null || experiences != []
-            ? List<dynamic>.from(experiences!.map((x) => x.toJson()))
-            : null,
-        'achievements': achievements != null || achievements != []
-            ? List<dynamic>.from(achievements!.map((x) => x.toJson()))
-            : null,
-        'certificates': certificates != null || certificates != []
-            ? List<dynamic>.from(certificates!.map((x) => x.toJson()))
-            : null,
-        'periods': periods != null || periods != []
-            ? List<dynamic>.from(periods!.map((x) => x.toJson()))
-            : null,
+        'skills': skills == null || skills == []
+            ? null
+            : List<dynamic>.from(skills!.map((x) => x.toJson())),
+        'spoken_languages': spokenLanguages == null || spokenLanguages == []
+            ? null
+            : List<dynamic>.from(spokenLanguages!.map((x) => x.toJson())),
+        'educations': educations == null || educations == []
+            ? null
+            : List<dynamic>.from(educations!.map((x) => x.toJson())),
+        'experiences': experiences == null || experiences == []
+            ? null
+            : List<dynamic>.from(experiences!.map((x) => x.toJson())),
+        'achievements': achievements == null || achievements == []
+            ? null
+            : List<dynamic>.from(achievements!.map((x) => x.toJson())),
+        'certificates': certificates == null || certificates == []
+            ? null
+            : List<dynamic>.from(certificates!.map((x) => x.toJson())),
+        'periods': periods == null || periods == []
+            ? null
+            : List<dynamic>.from(periods!.map((x) => x.toJson())),
       }..removeWhere((_, v) => v == null);
 
   @override

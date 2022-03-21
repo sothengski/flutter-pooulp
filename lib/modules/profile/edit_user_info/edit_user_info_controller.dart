@@ -14,12 +14,16 @@ class EditUserInformationController extends GetxController {
   final userInfoProvider = Get.find<UserInfoProvider>();
   final placeProvider = PlaceApiProvider();
 
+  final editProfileFormKey = GlobalKey<FormState>();
+
   final List<String> genderList = [
     // '', //'unselect',
     'Mr.',
     'Mrs.',
     'Others',
   ];
+
+  String? sessionToken = '';
 
 //save the result of gallery file
   Rx<String> selectedImagePath = ''.obs;
@@ -67,19 +71,17 @@ class EditUserInformationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    firstNameCtrl.text =
-        profileController.userInfoRepsonse.value.profile!.firstName!;
-    lastNameCtrl.text =
-        profileController.userInfoRepsonse.value.profile!.lastName!;
+    firstNameCtrl.text = profileController.userProfileInfo.value.firstName!;
+    lastNameCtrl.text = profileController.userProfileInfo.value.lastName!;
 
+    //TODO: profileController.studentInfoRepsonse.value.gender.toString();
     selectedBirthday.value =
-        profileController.userInfoRepsonse.value.profile!.birthDate!.toString();
-    phoneNumberCtrl.text =
-        profileController.userInfoRepsonse.value.profile!.phone1!;
+        profileController.userProfileInfo.value.birthDate!.toString();
+    phoneNumberCtrl.text = profileController.userProfileInfo.value.phone1!;
     // selectedCountryPhoneNumber.value =  profileController.userInfoRepsonse.value.profile!.phone1CountryCode!;
     initPhoneNumberCountryCode(
       phoneNumberCode:
-          profileController.userInfoRepsonse.value.profile!.phone1CountryCode,
+          profileController.userProfileInfo.value.phone1CountryCode,
     );
     // selectedCountryPhoneNumber.value = countryList[20];
 
@@ -87,17 +89,14 @@ class EditUserInformationController extends GetxController {
         profileController.studentInfoRepsonse.value.linkedinLink!;
     videoLinkCtrl.text =
         profileController.studentInfoRepsonse.value.youtubeLink!;
-    descriptionCtrl.text =
-        profileController.userInfoRepsonse.value.profile!.description!;
+    descriptionCtrl.text = profileController.userProfileInfo.value.description!;
 
-    countryCtrl.text =
-        profileController.userInfoRepsonse.value.profile!.addressCountry!;
-    cityStateCtrl.text =
-        profileController.userInfoRepsonse.value.profile!.addressCity!;
-    zipCodeCtrl.text =
-        profileController.userInfoRepsonse.value.profile!.addressZip!;
-    addressCtrl.text =
-        profileController.userInfoRepsonse.value.profile!.addressStreet!;
+    countryCtrl.text = profileController.userProfileInfo.value.addressCountry!;
+    cityStateCtrl.text = profileController.userProfileInfo.value.addressCity!;
+    zipCodeCtrl.text = profileController.userProfileInfo.value.addressZip!;
+    addressCtrl.text = profileController.userProfileInfo.value.addressStreet!;
+    addressLat = profileController.userProfileInfo.value.addressLatitude!;
+    addressLng = profileController.userProfileInfo.value.addressLongitude!;
 
     selectedCountryAddress.value = countryList[20];
   }
@@ -115,6 +114,8 @@ class EditUserInformationController extends GetxController {
   //   addressCtrl.dispose();
   //   super.dispose();
   // }
+
+  void uuidTokenGenerator() => sessionToken = UuidGenerator().uuidV4();
 
   void initPhoneNumberCountryCode({String? phoneNumberCode}) {
     selectedCountryPhoneNumber.value = countryList
@@ -265,9 +266,14 @@ class EditUserInformationController extends GetxController {
     return null;
   }
 
-  Future<Rx<GooglePlaceDetailModel>> getPlaceDetail({String? placeId}) async {
-    googlePlaceDetail.value =
-        await placeProvider.getGooglePlaceDetail(placeId: placeId);
+  Future<Rx<GooglePlaceDetailModel>> getPlaceDetail({
+    String? placeId,
+    String? sessionToken,
+  }) async {
+    googlePlaceDetail.value = await placeProvider.getGooglePlaceDetail(
+      placeId: placeId,
+      sessionToken: sessionToken,
+    );
     final data = googlePlaceDetail.value.result!.addressComponents;
     for (final c in data!) {
       if (c.types!.contains('country')) {
@@ -293,37 +299,102 @@ class EditUserInformationController extends GetxController {
   }
 
   void saveButtonOnClick() {
-    saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
-    final String firstName = firstNameCtrl.text;
-    final String lastName = lastNameCtrl.text;
-    final String selectGender = selectedGender.value;
-    final String selectBD = selectedBirthday.value;
-    final String phoneNumberCode =
-        selectedCountryPhoneNumber.value.phoneCode.toString();
-    final String phoneNum = phoneNumberCtrl.text;
-    final String linkedInProfile = linkedInProfileCtrl.text;
-    final String videoLink = videoLinkCtrl.text;
-    final String description = descriptionCtrl.text;
+    if (editProfileFormKey.currentState!.validate()) {
+      saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
+      final String firstName = firstNameCtrl.text;
+      final String lastName = lastNameCtrl.text;
+      // final String selectGender = selectedGender.value;
+      final String selectBD = selectedBirthday.value;
+      final String phoneNumberCode =
+          selectedCountryPhoneNumber.value.phoneCode.toString();
+      final String phoneNum = phoneNumberCtrl.text;
+      final String linkedInProfile = linkedInProfileCtrl.text;
+      final String videoLink = videoLinkCtrl.text;
+      final String description = descriptionCtrl.text;
 
-    // final String countrySelected = selectedCountryAddress.value.name.toString();
-    final String address = addressCtrl.text;
-    final String countrySelected = countryCtrl.text;
-    final String cityState = cityStateCtrl.text;
-    final String zipCode = zipCodeCtrl.text;
+      // final String countrySelected = selectedCountryAddress.value.name.toString();
+      final String address = addressCtrl.text;
+      final String countrySelected = countryCtrl.text;
+      final String cityState = cityStateCtrl.text;
+      final String zipCode = zipCodeCtrl.text;
 
-    debugPrint('firstName:: $firstName');
-    debugPrint('lastName:: $lastName');
-    debugPrint('selectGender:: $selectGender');
-    debugPrint('selectBD:: $selectBD');
-    debugPrint('phoneNumberCode + phoneNum:: $phoneNumberCode - $phoneNum');
-    debugPrint('linkedInProfile:: $linkedInProfile');
-    debugPrint('videoLink:: $videoLink');
-    debugPrint('description:: $description');
-    debugPrint('countrySelected:: $countrySelected');
-    debugPrint('cityState:: $cityState');
-    debugPrint('zipCode:: $zipCode');
-    debugPrint('address:: $address');
-    debugPrint('addressLat:: $addressLat');
-    debugPrint('addressLng:: $addressLng');
+      final ProfileModel profileInfoToBeUpdate = ProfileModel(
+        firstName: firstName,
+        lastName: lastName,
+        birthDate: DateTime.tryParse(selectBD),
+        phone1CountryCode: phoneNumberCode,
+        phone1: phoneNum,
+        linkedinLink: linkedInProfile,
+        description: description,
+        addressStreet: address,
+        addressCountry: countrySelected,
+        addressCity: cityState,
+        addressZip: zipCode,
+        addressLatitude: addressLat,
+        addressLongitude: addressLng,
+        emailNotification:
+            profileController.userInfoRepsonse.value.profile!.emailNotification,
+        uiLanguage:
+            profileController.userInfoRepsonse.value.profile!.uiLanguage,
+      );
+
+      final StudentProfileModel studentProfileInfoToBeUpdate =
+          StudentProfileModel(
+        drivingLicense:
+            profileController.studentInfoRepsonse.value.drivingLicense,
+        shifting: profileController.studentInfoRepsonse.value.shifting,
+        radius: profileController.studentInfoRepsonse.value.radius,
+        telecommuting:
+            profileController.studentInfoRepsonse.value.telecommuting,
+        hasAutomobile:
+            profileController.studentInfoRepsonse.value.hasAutomobile,
+        facebookLink: profileController.studentInfoRepsonse.value.facebookLink,
+        linkedinLink: linkedInProfile,
+        whatsappLink: profileController.studentInfoRepsonse.value.whatsappLink,
+        youtubeLink: videoLink,
+        gender: profileController.studentInfoRepsonse.value.gender,
+      );
+
+      userInfoProvider
+          .putUpdateStudentProfileInfo(
+        data: studentProfileInfoToBeUpdate,
+      )
+          .then((StudentProfileModel value) {
+        profileController.studentInfoRepsonse.value = value;
+        // customSnackbar(
+        //   msgTitle: 'Success',
+        //   msgContent: 'Student Profile Information Updated',
+        //   bgColor: ColorsManager.green,
+        // );
+        // saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
+      });
+      // } else {
+      // customSnackbar(
+      //   msgTitle: 'Required Fields',
+      //   msgContent: 'Please Input the required fields.',
+      //   bgColor: ColorsManager.orange,
+      // );
+      // }
+
+      userInfoProvider
+          .putUpdateUserProfileInfo(
+        data: profileInfoToBeUpdate,
+      )
+          .then((ProfileModel value) {
+        profileController.userProfileInfo.value = value;
+        customSnackbar(
+          msgTitle: 'Success',
+          msgContent: 'Profile Information Updated',
+          bgColor: ColorsManager.green,
+        );
+        saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
+      });
+    } else {
+      customSnackbar(
+        msgTitle: 'Required Fields',
+        msgContent: 'Please Input the required fields.',
+        bgColor: ColorsManager.orange,
+      );
+    }
   }
 }

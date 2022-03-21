@@ -53,6 +53,7 @@ class AddressSearchBarWidget extends SearchDelegate<GooglePlaceSearchModel> {
           ? null
           : editInformationController.placeProvider.getGooglePlacesAutocomplete(
               search: query,
+              sessionToken: editInformationController.sessionToken,
               // Localizations.localeOf(context).languageCode,
             ),
       builder: (context, snapshot) {
@@ -72,6 +73,7 @@ class AddressSearchBarWidget extends SearchDelegate<GooglePlaceSearchModel> {
                   onTap: () async {
                     editInformationController.getPlaceDetail(
                       placeId: place.placeId,
+                      sessionToken: editInformationController.sessionToken,
                     );
                     Get.back();
                     // close(context, listOfPlace[index]);

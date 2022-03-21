@@ -23,6 +23,8 @@ enum Endpoint {
   getFields,
   getLanguages,
   //postProfilePicture
+  putUpdateProfileInfo,
+  putUpdateStudentProfileInfo,
 }
 
 class API {
@@ -54,6 +56,8 @@ class API {
     Endpoint.getJobOfferTypes: '/tags/offers',
     Endpoint.getFields: '/tags/fields',
     Endpoint.getLanguages: '/tags/languages',
+    Endpoint.putUpdateProfileInfo: '/users/me/profile',
+    Endpoint.putUpdateStudentProfileInfo: '/users/me/student_profile',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

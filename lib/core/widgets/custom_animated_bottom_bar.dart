@@ -53,16 +53,18 @@ class CustomAnimatedBottomBar extends StatelessWidget {
             mainAxisAlignment: mainAxisAlignment,
             children: items.map((item) {
               final index = items.indexOf(item);
-              return GestureDetector(
-                onTap: () => onItemSelected(index),
-                child: ItemWidget(
-                  item: item,
-                  iconSize: iconSize,
-                  isSelected: index == selectedIndex,
-                  backgroundColor: bgColor,
-                  itemCornerRadius: itemCornerRadius,
-                  animationDuration: animationDuration,
-                  curve: curve,
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () => onItemSelected(index),
+                  child: ItemWidget(
+                    item: item,
+                    iconSize: iconSize,
+                    isSelected: index == selectedIndex,
+                    backgroundColor: bgColor,
+                    itemCornerRadius: itemCornerRadius,
+                    animationDuration: animationDuration,
+                    curve: curve,
+                  ),
                 ),
               );
             }).toList(),

@@ -127,9 +127,9 @@ class ProfileModel {
         description: json['description'] as String? ?? '',
         phone2CountryCode: json['phone2_country_code'] as String?,
         phone2: json['phone2'] as String?,
-        birthDate: json['birthdate'] != null
-            ? DateTime.parse(json['birthdate'].toString())
-            : null,
+        birthDate: json['birthdate'] == null
+            ? null
+            : DateTime.parse(json['birthdate'].toString()),
         pictureUrl: json['picture_url'] as String?,
         emailNotification: json['settings_notifications_email'] as bool?,
         addressStreet: json['address_street'] as String?,
@@ -203,9 +203,9 @@ class ProfileModel {
         'phone2_country_code': phone2CountryCode,
         'phone2': phone2,
         // 'birthdate': birthDate?.toString(),
-        'birthdate': birthDate != null
-            ? "${birthDate!.year.toString().padLeft(4, '0')}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}"
-            : null,
+        'birthdate': birthDate == null
+            ? null
+            : "${birthDate!.year.toString().padLeft(4, '0')}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}",
         'picture_url': pictureUrl,
         'settings_notifications_email': emailNotification,
         'address_street': addressStreet,

@@ -486,7 +486,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                             .start,
                                                     children: [
                                                       const CustomTextWidget(
-                                                        text: 'Soft Skill',
+                                                        text: 'Soft Skills',
                                                         marginBottom: 5.0,
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -530,7 +530,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                             .start,
                                                     children: [
                                                       const CustomTextWidget(
-                                                        text: 'Hard Skill',
+                                                        text: 'Hard Skills',
                                                         marginBottom: 5.0,
                                                         fontWeight:
                                                             FontWeight.w600,

@@ -14,7 +14,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
       body: Column(
         children: [
           Expanded(
-            flex: 17,
+            flex: 18,
             child: Card(
               elevation: 5.0,
               margin: EdgeInsets.zero,
@@ -26,6 +26,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
               ),
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: Container(
+                alignment: Alignment.centerLeft,
                 decoration: const BoxDecoration(
                   // color: ColorsManager.primary,
                   color: ColorsManager.primary,
@@ -34,17 +35,12 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                     bottomRight: Radius.circular(15.0),
                   ),
                 ),
-                // padding: const EdgeInsets.symmetric(
-                //   vertical: AppSize.s8,
-                //   horizontal: AppSize.s8,
-                // ),
                 child: Column(
-                  // mainAxisSize: MainAxisSize.min,
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      flex: 50,
+                      flex: 45,
                       child: Obx(
                         () => controller.profileController.userInfoRepsonse
                                     .value.profile ==
@@ -62,14 +58,15 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                 fontSize: 24,
                                 fontWeight: FontWeightManager.semiBold,
                                 color: ColorsManager.white,
-                                marginTop: AppSize.s16,
+                                marginTop: AppSize.s12,
                                 marginLeft: AppSize.s16,
-                                marginBottom: AppSize.s16,
+                                // marginBottom: AppSize.s16,
                               ),
                       ),
                     ),
+                    // const SizedBox(height: 4.0),
                     Expanded(
-                      flex: 50,
+                      flex: 45,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +76,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                             // width: getWidth * 0.80,
                             child: CustomContainerWidget(
                               isBoxShadow: false,
-                              topMargin: AppSize.s6,
+                              // topMargin: AppSize.s6,
                               leftMargin: AppSize.s16,
                               containerBackground: ColorsManager.grey100,
                               childPadding: AppSize.s12,
@@ -150,7 +147,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
             ),
           ),
           Expanded(
-            flex: 83,
+            flex: 82,
             child: RefreshIndicator(
               color: ColorsManager.primary,
               onRefresh: () => controller.onRefresh(),

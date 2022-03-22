@@ -152,9 +152,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
 
                       ///===== Top of Title Component =====//
                       ContainerDialogWidget(
-                        inputTitle: 'Title',
+                        inputTitle: 'Gender',
                         dialogWidget: MaterialDialogWidget(
-                          title: 'Select Title',
+                          title: 'Select your Gender',
                           contentWidget: ListView.separated(
                             shrinkWrap: true,
                             itemCount: controller.genderList.length,
@@ -163,10 +163,12 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                 () => RowDataSelectionWidget.radioButton(
                                   isLeftSideText: false,
                                   isClickingValue: stringsComparation(
-                                    object1: controller.genderList[index],
+                                    object1: controller.genderList[index]
+                                        .toLowerCase(),
                                     object2: controller.selectedGender.value,
                                   ),
-                                  text: controller.genderList[index],
+                                  text: controller.genderList[index]
+                                      .toLowerCase(),
                                   onPressed: () {
                                     controller.selectedGenderOnClick(
                                       selectedItem:
@@ -192,7 +194,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                           () => controller.selectedGender.value == ''
                               ? const RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'Select a title',
+                                    text: 'Select your gender',
                                     // marginLeft: AppSize.s8,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
@@ -225,7 +227,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         dialogType: DialogType.dateTimePickerDialog,
                         controller: controller,
                         containerWidget: Obx(
-                          () => controller.selectedBirthday.value == ''
+                          () => controller.selectedBirthday.value.year ==
+                                  controller.now.year
                               ? const RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
                                     text: 'Select your Birthday',
@@ -241,11 +244,14 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
                                     //marginLeft: 4.0,
-                                    text: dateFormatDashYYYYMMDD(
-                                      date: DateTime.tryParse(
-                                        controller.selectedBirthday.value,
-                                      ),
-                                    ),
+                                    text:
+                                        '${controller.selectedBirthday.value.year}-${controller.selectedBirthday.value.month}-${controller.selectedBirthday.value.day}',
+                                    // controller.selectedBirthday.value.toIso8601String(),
+                                    //     dateFormatDashYYYYMMDD(
+                                    //   date: DateTime.tryParse(
+                                    //     controller.selectedBirthday.value,
+                                    //   ),
+                                    // ),
                                     color: ColorsManager.black,
                                     fontSize: 16.0,
                                   ),

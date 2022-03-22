@@ -44,11 +44,7 @@ class ContainerDialogWidget extends StatelessWidget {
                 context,
                 minTime: DateTime(1970),
                 // maxTime: DateTime(2009, 12, 31),
-                currentTime: controller!.selectedBirthday.value != ''
-                    ? DateTime.tryParse(
-                        controller!.selectedBirthday.value,
-                      )
-                    : DateTime(2000),
+                currentTime: controller!.selectedBirthday.value,
                 // locale: LocaleType.kh,
                 theme: const DatePickerTheme(
                   headerColor: ColorsManager.grey100,
@@ -72,8 +68,11 @@ class ContainerDialogWidget extends StatelessWidget {
                 onConfirm: (date) {
                   // print('confirm $date');
                   controller!.selectedBirthdayOnClick(
-                    selectedItem: '${date.year}-${date.month}-${date.day}',
+                    selectedItem: date,
                   );
+                  // controller!.selectedBirthdayOnClick(
+                  //   selectedItem: '${date.year}-${date.month}-${date.day}',
+                  // );
                 },
               )
             else

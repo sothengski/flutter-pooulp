@@ -18,9 +18,12 @@ class EditUserInformationController extends GetxController {
 
   final List<String> genderList = [
     // '', //'unselect',
-    'Mr.',
-    'Mrs.',
-    'Others',
+    'male',
+    'female',
+    'others',
+    // 'Mr.',
+    // 'Mrs.',
+    // 'Others',
   ];
 
   String? sessionToken = '';
@@ -62,7 +65,9 @@ class EditUserInformationController extends GetxController {
 
   Rx<CountryModel> selectedCountryPhoneNumber = const CountryModel().obs;
   Rx<String> selectedGender = ''.obs;
-  Rx<String> selectedBirthday = ''.obs;
+
+  Rx<DateTime> selectedBirthday = DateTime.now().obs;
+  DateTime now = DateTime.now();
 
   Rx<CountryModel> selectedCountryAddress = const CountryModel().obs;
 
@@ -74,9 +79,12 @@ class EditUserInformationController extends GetxController {
     firstNameCtrl.text = profileController.userProfileInfo.value.firstName!;
     lastNameCtrl.text = profileController.userProfileInfo.value.lastName!;
 
-    //TODO: profileController.studentInfoRepsonse.value.gender.toString();
-    selectedBirthday.value =
-        profileController.userProfileInfo.value.birthDate!.toString();
+    selectedGender.value =
+        profileController.studentInfoRepsonse.value.gender.toString();
+    if (profileController.userProfileInfo.value.birthDate != null) {
+      selectedBirthday.value =
+          profileController.userProfileInfo.value.birthDate!;
+    }
     phoneNumberCtrl.text = profileController.userProfileInfo.value.phone1!;
     // selectedCountryPhoneNumber.value =  profileController.userInfoRepsonse.value.profile!.phone1CountryCode!;
     initPhoneNumberCountryCode(
@@ -131,10 +139,10 @@ class EditUserInformationController extends GetxController {
   }
 
   String selectedGenderOnClick({String? selectedItem}) {
-    return selectedGender.value = selectedItem!;
+    return selectedGender.value = selectedItem!.toLowerCase();
   }
 
-  String selectedBirthdayOnClick({String? selectedItem}) {
+  DateTime selectedBirthdayOnClick({DateTime? selectedItem}) {
     return selectedBirthday.value = selectedItem!;
   }
 
@@ -303,8 +311,8 @@ class EditUserInformationController extends GetxController {
       saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
       final String firstName = firstNameCtrl.text;
       final String lastName = lastNameCtrl.text;
-      // final String selectGender = selectedGender.value;
-      final String selectBD = selectedBirthday.value;
+      final String selectGender = selectedGender.value;
+      // final String selectBD = selectedBirthday.value;
       final String phoneNumberCode =
           selectedCountryPhoneNumber.value.phoneCode.toString();
       final String phoneNum = phoneNumberCtrl.text;
@@ -321,7 +329,9 @@ class EditUserInformationController extends GetxController {
       final ProfileModel profileInfoToBeUpdate = ProfileModel(
         firstName: firstName,
         lastName: lastName,
-        birthDate: DateTime.tryParse(selectBD),
+        birthDate: selectedBirthday.value.year != now.year
+            ? selectedBirthday.value
+            : null,
         phone1CountryCode: phoneNumberCode,
         phone1: phoneNum,
         linkedinLink: linkedInProfile,
@@ -352,7 +362,8 @@ class EditUserInformationController extends GetxController {
         linkedinLink: linkedInProfile,
         whatsappLink: profileController.studentInfoRepsonse.value.whatsappLink,
         youtubeLink: videoLink,
-        gender: profileController.studentInfoRepsonse.value.gender,
+        gender: selectGender,
+        // gender: profileController.studentInfoRepsonse.value.gender,
       );
 
       userInfoProvider

@@ -4,12 +4,20 @@ import '../core.dart';
 
 class MaterialDialogWidget extends StatelessWidget {
   final String? title;
+  final double? titleFontSize;
+  final double? titleHorizontalMargin;
+  final double? titleVerticalMargin;
   final Widget? contentWidget;
+  final Widget? actionWidget;
 
   const MaterialDialogWidget({
     Key? key,
     this.title = '',
+    this.titleFontSize = 20.0,
+    this.titleHorizontalMargin = 16.0,
+    this.titleVerticalMargin = 16.0,
     this.contentWidget,
+    this.actionWidget,
   }) : super(key: key);
 
   @override
@@ -34,10 +42,10 @@ class MaterialDialogWidget extends StatelessWidget {
                 Container()
               else
                 CustomTextWidget(
-                  marginTop: 16.0,
-                  marginBottom: 16.0,
+                  marginTop: titleHorizontalMargin,
+                  marginBottom: titleHorizontalMargin,
                   text: title,
-                  fontSize: 20.0,
+                  fontSize: titleFontSize,
                   fontWeight: FontWeightManager.medium,
                 ),
               const Divider(
@@ -55,6 +63,24 @@ class MaterialDialogWidget extends StatelessWidget {
                 child: contentWidget,
               ),
               //===== Bottom Body/Content Component =====//
+
+              ///===== Top of Actions Component =====//
+              if (actionWidget == null)
+                Container()
+              else
+                const Divider(
+                  height: 1.0,
+                  color: ColorsManager.grey,
+                ),
+              Container(
+                // height: getHeight * 0.25,
+                alignment: Alignment.topCenter,
+                // padding: const EdgeInsets.all(
+                //   AppSize.s8,
+                // ),
+                child: actionWidget,
+              ),
+              //===== Bottom Actions Component =====//
             ],
           ),
         ),

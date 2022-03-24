@@ -27,6 +27,7 @@ enum Endpoint {
   putUpdateStudentProfileInfo,
   getSchools,
   postEducation,
+  // putOrdeleteEducation,
 }
 
 class API {
@@ -79,4 +80,7 @@ class API {
       '/offers/$offerId/undislike';
 
   static String postProfilePicture() => '/users/me/profile/picture';
+
+  static String putOrdeleteEducation({required int? eduId}) =>
+      '/users/me/student_profile/educations/$eduId';
 }

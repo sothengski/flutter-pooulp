@@ -5,8 +5,6 @@ import '../../core/core.dart';
 import 'education_controller.dart';
 
 class AddOrEditEducationPage extends GetView<EducationController> {
-  // const AddOrEditEducationPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     controller.title = controller.title;
@@ -17,14 +15,63 @@ class AddOrEditEducationPage extends GetView<EducationController> {
           if (controller.title != Keys.editOperation)
             Container()
           else
-            const CustomIconButtonWidget(
+            CustomIconButtonWidget(
               iconData: Icons.delete_forever_outlined,
               iconColor: ColorsManager.white,
               tooltip: 'Remove',
-              // onClick: () => controller.enterpriseSwitching.value =
-              //     controller.updateSwitchingToggle(
-              //   switchingNewValue: controller.enterpriseSwitching.value,
-              // ),
+              onClick: () => Get.dialog(
+                MaterialDialogWidget(
+                  title: 'Confirmation',
+                  titleHorizontalMargin: AppSize.s12,
+                  contentWidget: const Center(
+                    child: CustomTextWidget(
+                      marginTop: AppSize.s12,
+                      marginBottom: AppSize.s12,
+                      text: 'Would you like to remove this information?',
+                    ),
+                  ),
+                  actionWidget: Row(
+                    children: [
+                      Expanded(
+                        flex: 40,
+                        child: OutlinedButton.icon(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ),
+                          label: const CustomTextWidget(
+                            text: 'No',
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 40,
+                        child: OutlinedButton.icon(
+                          onPressed: () async => {
+                            controller.makeRequestToAPI(
+                              eduId: controller.eduId,
+                              operation: Keys.deleteOperation,
+                            ),
+                            Get.back(),
+                          },
+                          icon: const Icon(
+                            Icons.check,
+                            color: Colors.white,
+                          ),
+                          label: const CustomTextWidget(
+                            text: 'Yes',
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             )
         ],
       ),
@@ -41,6 +88,9 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 ///===== Top of School Component =====//
                 ContainerDialogWidget(
                   inputTitle: 'School',
+                  validatorFunction: (_) => Validator().notEmptyValidator(
+                    controller.selectedSchool.value.name ?? '',
+                  ),
                   dialogType:
                       DialogType.bottomSheetDialog, // controller: controller,
                   dialogWidget: Container(
@@ -114,9 +164,6 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                   hintText: 'Enter your field of study',
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
-                  // onChanged: (value) => null,
-                  // onSaved: (value) => controller
-                  //     .firstNameCtrl.text = value.toString(),
                 ),
                 //===== Bottom of Field of Study Component =====//
 
@@ -128,14 +175,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                   hintText: 'Enter your Degree',
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
-                  // onChanged: (value) => null,
-                  // onSaved: (value) => controller
-                  //     .firstNameCtrl.text = value.toString(),
                 ),
                 //===== Bottom of Degree Component =====//
-                // const SizedBox(
-                //   height: AppSize.s8,
-                // ),
 
                 ///===== Top of Start Date & End Date Component =====//
                 Row(
@@ -146,6 +187,9 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                       child: ContainerDialogWidget(
                         inputTitle: 'Start Date',
                         inputTitleMarginTop: AppSize.s16,
+                        validatorFunction: (_) => Validator().notEmptyValidator(
+                          controller.selectedStartedDateString.value,
+                        ),
                         dialogType: DialogType.dateTimePickerDialog,
                         currentTime: DateTime.tryParse(
                               controller.selectedStartedDateString.value,

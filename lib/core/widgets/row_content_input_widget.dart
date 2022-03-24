@@ -9,6 +9,7 @@ class RowContentInputWidget extends StatelessWidget {
   final int? suffixWidgetFlex;
   final double? prefixWidgetRightPadding;
   final double? suffixWidgetLeftPadding;
+  final FormFieldValidator? validatorFunction;
 
   const RowContentInputWidget({
     Key? key,
@@ -20,6 +21,7 @@ class RowContentInputWidget extends StatelessWidget {
     this.suffixWidgetFlex = 10,
     this.prefixWidgetRightPadding = 0.0,
     this.suffixWidgetLeftPadding = 8.0,
+    this.validatorFunction,
   }) : super(key: key);
 
   @override

@@ -8,13 +8,17 @@ import '../../core/core.dart';
 import '../../data/data.dart';
 
 class EducationController extends GetxController {
-  final profileController = Get.put(ProfileController());
-  final studentProvider = Get.find<StudentProvider>();
+  // final profileController = Get.put(ProfileController());
+  final profileController = Get.find<ProfileController>();
+
+  final studentProvider = Get.put(StudentProvider());
   final tagProvider = Get.find<TagProvider>();
 
   String? title;
 
   final editProfileFormKey = GlobalKey<FormState>();
+
+  int eduId = 0;
 
   TextEditingController fieldOfStudyTextCtrl = TextEditingController();
   TextEditingController degreeTextCtrl = TextEditingController();
@@ -38,16 +42,22 @@ class EducationController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     title = Get.arguments[0].toString();
-
-    await getSchoolListResponseProvider();
-
     if (title == Keys.editOperation) {
       final EducationModel eduDataArg = Get.arguments[1] as EducationModel;
-      debugPrint('arg:: $eduDataArg');
-      // selectedSchool =
+      eduId = eduDataArg.id!;
+      selectedSchool.value = eduDataArg.school!;
+      fieldOfStudyTextCtrl.text = eduDataArg.name!;
+      degreeTextCtrl.text = eduDataArg.degree!;
+      selectedStartedDateString.value =
+          eduDataArg.dateStart == null ? '' : eduDataArg.dateStart.toString();
+      selectedEndDateString.value =
+          eduDataArg.dateEnd == null ? '' : eduDataArg.dateEnd.toString();
+      isCheckGraduated.value = eduDataArg.completed!;
+      descriptionTextCtrl.text = eduDataArg.description!;
+      // debugPrint('eduDataArg:: $eduDataArg');
     }
-    // selectedStartedDateString.value = '';
-    isCheckGraduated.value = false;
+
+    await getSchoolListResponseProvider();
   }
 
   Future<List<SchoolModel>> getSchoolListResponseProvider({
@@ -78,63 +88,65 @@ class EducationController extends GetxController {
   void saveButtonOnClick() {
     if (editProfileFormKey.currentState!.validate()) {
       saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
-      // debugPrint(
-      //   'selectedSchool:: ${selectedSchool.value.id}-${selectedSchool.value.name}',
-      // );
-
-      // debugPrint('fieldOfStudyTextCtrl:: ${fieldOfStudyTextCtrl.text}');
-      // debugPrint('degreeTextCtrl:: ${degreeTextCtrl.text}');
-
-      // // debugPrint('selectedStartedDate:: ${selectedStartedDate.value}');
-      // debugPrint(
-      //   'selectedStartedDateString:: ${dateFormatDashYYYYMMDD(
-      //     date: DateTime.tryParse(
-      //       selectedStartedDateString.value,
-      //     ),
-      //   )}',
-      // );
-
-      // // debugPrint('selectedEndDate:: ${selectedEndDate.value}');
-      // debugPrint(
-      //   'selectedEndDateString:: ${dateFormatDashYYYYMMDD(
-      //     date: DateTime.tryParse(
-      //       selectedEndDateString.value,
-      //     ),
-      //   )}',
-      // );
-
-      // debugPrint('isCheckGraduated:: ${isCheckGraduated.value}');
-      // debugPrint('descriptionTextCtrl:: ${descriptionTextCtrl.text}');
       final EducationModel educationToBeAddOrEdit = EducationModel(
         schoolId: selectedSchool.value.id,
         name: fieldOfStudyTextCtrl.text.trim(),
         degree: degreeTextCtrl.text.trim(),
-        dateStart: DateTime.tryParse(
-          selectedStartedDateString.value,
-        ),
-        dateEnd: DateTime.tryParse(
-          selectedEndDateString.value,
-        ),
+        dateStart: selectedStartedDateString.value == ''
+            ? null
+            : DateTime.tryParse(
+                selectedStartedDateString.value,
+              ),
+        dateEnd: selectedEndDateString.value == ''
+            ? null
+            : DateTime.tryParse(
+                selectedEndDateString.value,
+              ),
         completed: isCheckGraduated.value,
         description: descriptionTextCtrl.text.trim(),
         fields: [],
       );
-      if (title == Keys.addOperation) {
-        studentProvider
-            .postStudentEducation(educationData: educationToBeAddOrEdit)
-            .then(
-          (value) async {
-            profileController.studentInfoRepsonse.value.educations!.add(value);
-          },
-        ).whenComplete(() {
-          Get.back();
-        });
-        // .catchError(
-        //   (onError) {
-        //     print("catchError called when there is an error catches error");
-        //   },)
-      } else if (title == Keys.editOperation) {
-      } else {}
+      makeRequestToAPI(
+        eduId: eduId,
+        eduData: educationToBeAddOrEdit,
+        operation: title,
+      );
+    }
+  }
+
+  Future<void> makeRequestToAPI({
+    int? eduId,
+    EducationModel? eduData,
+    required String? operation,
+  }) async {
+    final JsonResponse responseData;
+    if (operation == Keys.addOperation) {
+      // debugPrint('=====addOperation=====');
+      responseData =
+          await studentProvider.postStudentEducation(educationData: eduData);
+    } else if (operation == Keys.editOperation) {
+      // debugPrint('=====editOperation=====');
+      responseData = await studentProvider.putStudentEducation(
+        eduId: eduId,
+        educationData: eduData,
+      );
+    } else {
+      // debugPrint('=====deleteOperation=====');
+      responseData = await studentProvider.deleteStudentEducation(
+        eduId: eduId,
+      );
+    }
+    if (responseData.success!) {
+      // debugPrint('=====success=====');
+      profileController.getStudentInfoResponseProvider();
+      saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
+      Get.back();
+      customSnackbar(
+        msgTitle: 'Success',
+        msgContent:
+            'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'}  Education Information',
+        bgColor: ColorsManager.green,
+      );
     }
   }
 }

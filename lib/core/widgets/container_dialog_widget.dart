@@ -15,6 +15,8 @@ class ContainerDialogWidget extends StatelessWidget {
   final DialogType? dialogType;
   final double? inputTitleMarginTop;
   final double? inputTitleMarginBottom;
+  final FormFieldValidator<String>? validatorFunction;
+  // final FormFieldValidator? validatorFunction;
 
   const ContainerDialogWidget({
     Key? key,
@@ -26,6 +28,7 @@ class ContainerDialogWidget extends StatelessWidget {
     this.dialogType = DialogType.alertDialog,
     this.inputTitleMarginTop = AppSize.s12,
     this.inputTitleMarginBottom = AppSize.s12,
+    this.validatorFunction,
   }) : super(key: key);
 
   @override
@@ -97,6 +100,7 @@ class ContainerDialogWidget extends StatelessWidget {
             padding: EdgeInsets.zero,
             margin: EdgeInsets.zero,
             child: FormField(
+              validator: validatorFunction,
               // validator: (_) => controller
               //     .isPhoneNumberValidate(),
               builder: (

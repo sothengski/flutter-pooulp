@@ -198,80 +198,89 @@ class ProfilePage extends GetView<ProfileController> {
                                     ? Wrap(
                                         children: [
                                           ///===== Education Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Education'.toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .educations!
-                                                  .map(
-                                                    (e) => CustomListTileWidget(
-                                                      text1: e.school!.name,
-                                                      text1Color:
-                                                          ColorsManager.grey850,
-                                                      text1FontWeight:
-                                                          FontWeightManager
-                                                              .medium,
-                                                      text1FontSize:
-                                                          AppSize.s16,
-                                                      text2: e.degree,
-                                                      text2Color:
-                                                          ColorsManager.grey800,
-                                                      text3:
-                                                          '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
-                                                      // bottomPadding: 8.0,
-                                                      leftWidget:
-                                                          const CustomBoxWidget(
-                                                        size: 40,
+                                          Obx(
+                                            () => CustomContainerWidget(
+                                              leftMargin: AppSize.s16,
+                                              rightMargin: AppSize.s16,
+                                              // topMargin: AppSize.s12,
+                                              bottomMargin: AppSize.s12,
+                                              leftTitle:
+                                                  'Education'.toUpperCase(),
+                                              titleFontSize: AppSize.s16,
+                                              rightWidget:
+                                                  CustomIconButtonWidget(
+                                                iconData: Icons.add,
+                                                padding: 0.0,
+                                                isConstraints: true,
+                                                onClick: () => {
+                                                  Get.toNamed(
+                                                    Routes
+                                                        .addoreditEducationRoute,
+                                                    arguments: [
+                                                      Keys.addOperation
+                                                    ],
+                                                  ),
+                                                },
+                                              ),
+                                              child: Column(
+                                                children: controller
+                                                    .studentInfoRepsonse
+                                                    .value
+                                                    .educations!
+                                                    .map(
+                                                      (e) =>
+                                                          CustomListTileWidget(
+                                                        text1: e.school!.name,
+                                                        text1Color:
+                                                            ColorsManager
+                                                                .grey850,
+                                                        text1FontWeight:
+                                                            FontWeightManager
+                                                                .medium,
+                                                        text1FontSize:
+                                                            AppSize.s16,
+                                                        text2: e.degree,
+                                                        text2Color:
+                                                            ColorsManager
+                                                                .grey800,
+                                                        text3:
+                                                            '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
+                                                        // bottomPadding: 8.0,
+                                                        leftWidget:
+                                                            const CustomBoxWidget(
+                                                          size: 40,
+                                                        ),
+                                                        // leftWidget:
+                                                        //     const CustomBoxWidget(
+                                                        //   insideObj: Icon(
+                                                        //     Icons.school,
+                                                        //     color: ColorsManager
+                                                        //         .primary75,
+                                                        //     size: AppSize.s20,
+                                                        //   ),
+                                                        // ),
+                                                        rightWidget:
+                                                            CustomIconButtonWidget(
+                                                          iconData: Icons
+                                                              .edit_outlined,
+                                                          padding: 0.0,
+                                                          iconSize: 20.0,
+                                                          isConstraints: true,
+                                                          onClick: () => {
+                                                            Get.toNamed(
+                                                              Routes
+                                                                  .addoreditEducationRoute,
+                                                              arguments: [
+                                                                Keys.editOperation,
+                                                                e
+                                                              ],
+                                                            ),
+                                                          },
+                                                        ),
                                                       ),
-                                                      // leftWidget:
-                                                      //     const CustomBoxWidget(
-                                                      //   insideObj: Icon(
-                                                      //     Icons.school,
-                                                      //     color: ColorsManager
-                                                      //         .primary75,
-                                                      //     size: AppSize.s20,
-                                                      //   ),
-                                                      // ),
-                                                      rightWidget:
-                                                          CustomIconButtonWidget(
-                                                        iconData:
-                                                            Icons.edit_outlined,
-                                                        padding: 0.0,
-                                                        iconSize: 20.0,
-                                                        isConstraints: true,
-                                                        onClick: () => {
-                                                          customSnackbar(
-                                                            msgTitle:
-                                                                'This Page is under construction!',
-                                                            msgContent:
-                                                                'This Page is only view.\n Data will not save.',
-                                                          ),
-                                                        },
-                                                      ),
-                                                    ),
-                                                  )
-                                                  .toList(),
+                                                    )
+                                                    .toList(),
+                                              ),
                                             ),
                                           ),
                                           //===== Education Component =====//

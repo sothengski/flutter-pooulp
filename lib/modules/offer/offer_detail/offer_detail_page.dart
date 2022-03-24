@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,9 +8,7 @@ import '../../../data/data.dart';
 import '../offer.dart';
 
 class OfferDetailPage extends GetView<OfferDetailController> {
-  // ignore: avoid_dynamic_calls
   final JobOfferModel jobOfferDetail = Get.arguments[0] as JobOfferModel;
-  // ignore: avoid_dynamic_calls
   final List<Widget>? actionButtons = Get.arguments[1] as List<Widget>;
 
   // const OfferDetailPage({Key? key}) : super(key: key);

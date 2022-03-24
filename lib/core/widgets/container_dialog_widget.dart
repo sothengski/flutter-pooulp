@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 
-import '../../modules/modules.dart';
 import '../core.dart';
 
 enum DialogType { bottomSheetDialog, alertDialog, dateTimePickerDialog }
@@ -10,16 +9,23 @@ enum DialogType { bottomSheetDialog, alertDialog, dateTimePickerDialog }
 class ContainerDialogWidget extends StatelessWidget {
   final String? inputTitle;
   final Widget? dialogWidget;
+  final DateTime? currentTime;
+  final Function(DateTime)? onConfirmDate;
   final Widget? containerWidget;
   final DialogType? dialogType;
-  final EditUserInformationController? controller;
+  final double? inputTitleMarginTop;
+  final double? inputTitleMarginBottom;
+
   const ContainerDialogWidget({
     Key? key,
     this.inputTitle = '',
     this.dialogWidget,
+    this.currentTime,
+    this.onConfirmDate,
     this.containerWidget,
     this.dialogType = DialogType.alertDialog,
-    this.controller,
+    this.inputTitleMarginTop = AppSize.s12,
+    this.inputTitleMarginBottom = AppSize.s12,
   }) : super(key: key);
 
   @override
@@ -29,9 +35,9 @@ class ContainerDialogWidget extends StatelessWidget {
       children: [
         CustomTextWidget(
           text: inputTitle,
-          marginTop: AppSize.s12,
+          marginTop: inputTitleMarginTop,
           textAlign: TextAlign.left,
-          // marginBottom: AppSize.s4,
+          // marginBottom: inputTitleMarginBottom,
         ),
         const SizedBox(
           height: 3.0,
@@ -44,7 +50,7 @@ class ContainerDialogWidget extends StatelessWidget {
                 context,
                 minTime: DateTime(1970),
                 // maxTime: DateTime(2009, 12, 31),
-                currentTime: controller!.selectedBirthday.value,
+                currentTime: currentTime,
                 // locale: LocaleType.kh,
                 theme: const DatePickerTheme(
                   headerColor: ColorsManager.grey100,
@@ -65,15 +71,16 @@ class ContainerDialogWidget extends StatelessWidget {
                   //   'change $date in time zone ${date.timeZoneOffset.inHours}',
                   // );
                 },
-                onConfirm: (date) {
-                  // print('confirm $date');
-                  controller!.selectedBirthdayOnClick(
-                    selectedItem: date,
-                  );
-                  // controller!.selectedBirthdayOnClick(
-                  //   selectedItem: '${date.year}-${date.month}-${date.day}',
-                  // );
-                },
+                onConfirm: onConfirmDate,
+                // (date) {
+                //   // print('confirm $date');
+                //   controller!.selectedBirthdayOnClick(
+                //     selectedItem: date,
+                //   );
+                //   // controller!.selectedBirthdayOnClick(
+                //   //   selectedItem: '${date.year}-${date.month}-${date.day}',
+                //   // );
+                // },
               )
             else
               dialogType == DialogType.bottomSheetDialog

@@ -25,6 +25,8 @@ enum Endpoint {
   //postProfilePicture
   putUpdateProfileInfo,
   putUpdateStudentProfileInfo,
+  getSchools,
+  postEducation,
 }
 
 class API {
@@ -36,8 +38,8 @@ class API {
   /// Based API End Point URLs
   static const String host =
       //'localhost:80'; //Local BASEURL
-      // 'http://api.dev-lamp-01.srv.pooulp.eu'; //Development BASEURL
-      'http://uat-api.pooulp.eu'; //UAT BASEURL
+      'http://api.dev-lamp-01.srv.pooulp.eu'; //Development BASEURL
+  // 'http://uat-api.pooulp.eu'; //UAT BASEURL
   // 'pooulp.eu'; //Production BASEURL
 
   /// API End Point Path URLs
@@ -58,6 +60,8 @@ class API {
     Endpoint.getLanguages: '/tags/languages',
     Endpoint.putUpdateProfileInfo: '/users/me/profile',
     Endpoint.putUpdateStudentProfileInfo: '/users/me/student_profile',
+    Endpoint.getSchools: '/schools',
+    Endpoint.postEducation: '/users/me/student_profile/educations',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

@@ -5,6 +5,7 @@ import '../../data.dart';
 
 class EducationModel {
   final int? id;
+  final int? schoolId;
   final String? name;
   final String? description;
   final String? degree;
@@ -17,6 +18,7 @@ class EducationModel {
 
   EducationModel({
     this.id,
+    this.schoolId,
     this.name,
     this.description,
     this.degree,
@@ -43,6 +45,7 @@ class EducationModel {
 
   factory EducationModel.fromJson(Map<String, dynamic> json) => EducationModel(
         id: json['id'] as int?,
+        schoolId: json['school_id'] as int?,
         name: json['name'] as String?,
         description: json['description'] as String?,
         degree: json['degree'] as String?,
@@ -72,6 +75,7 @@ class EducationModel {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'school_id': schoolId,
         'name': name,
         'description': description,
         'degree': degree,
@@ -82,9 +86,9 @@ class EducationModel {
             "${dateEnd!.year.toString().padLeft(4, '0')}-${dateEnd!.month.toString().padLeft(2, '0')}-${dateEnd!.day.toString().padLeft(2, '0')}",
         'completed': completed,
         'school': school?.toJson(),
-        'fields': fields != null || fields != []
-            ? List<dynamic>.from(fields!.map((x) => x.toJson()))
-            : null,
+        'fields': fields == null //|| fields == []
+            ? null
+            : List<dynamic>.from(fields!.map((x) => x.toJson())),
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -92,6 +96,7 @@ class EducationModel {
     return '''
     EducationModel(
       id: $id,
+      'schoolId': $schoolId,
       name: $name,
       description: $description,
       degree: $degree,

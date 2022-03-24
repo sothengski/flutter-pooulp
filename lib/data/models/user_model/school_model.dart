@@ -40,15 +40,15 @@ class SchoolModel {
         addressCity: json['address_city'] as String?,
         addressZip: json['address_zip'] as String?,
         addressCountry: json['address_country'] as String?,
-        fields: json['fields'] != null || json['fields'] != []
-            ? (json['fields'] as List)
+        fields: json['fields'] == null || json['fields'] != []
+            ? []
+            : (json['fields'] as List)
                 .map(
                   (i) => FieldModel.fromJson(
                     i as Map<String, dynamic>,
                   ),
                 )
-                .toList()
-            : [],
+                .toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -60,9 +60,9 @@ class SchoolModel {
         'address_city': addressCity,
         'address_zip': addressZip,
         'address_country': addressCountry,
-        'fields': fields != null || fields != []
-            ? List<dynamic>.from(fields!.map((x) => x.toJson()))
-            : [],
+        'fields': fields == null || fields == []
+            ? []
+            : List<dynamic>.from(fields!.map((x) => x.toJson())),
       }..removeWhere((_, v) => v == null);
 
   @override

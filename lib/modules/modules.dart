@@ -1,4 +1,5 @@
 export 'auth/auth.dart';
+export 'education/education.dart';
 export 'feed/feed.dart';
 export 'home/home.dart';
 export 'network/network.dart';

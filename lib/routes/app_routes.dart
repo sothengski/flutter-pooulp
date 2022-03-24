@@ -11,4 +11,5 @@ class Routes {
   static const offerdetailRoute = '/offer_detail';
   static const settingsRoute = '/settings';
   static const unknownRoute = '/unknown';
+  static const addoreditEducationRoute = '/add_or_edit_education';
 }

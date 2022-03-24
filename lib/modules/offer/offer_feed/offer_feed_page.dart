@@ -107,34 +107,9 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                 Get.dialog(
                                   const OfferFeedFilterSearch(
                                     title: 'Advanced Search',
-                                    // contentWidget: Container(
-                                    //   alignment: Alignment.topLeft,
-                                    //   padding: const EdgeInsets.all(AppSize.s8),
-                                    //   child: Column(
-                                    //     children: [
-                                    //       CustomContainerWidget(
-                                    //         isBoxShadow: false,
-                                    //         // topMargin: AppSize.s12,
-                                    //         // bottomMargin: AppSize.s12,
-                                    //         leftTitle: 'Profile Progress',
-                                    //         titleTopPadding: AppSize.s5,
-
-                                    //         titleFontSize: AppSize.s16,
-                                    //         child: Container(),
-                                    //       ),
-                                    //       const Text('body asd'),
-                                    //       const Text('body asd'),
-                                    //     ],
-                                    //   ),
-                                    // ),
                                   ),
                                   // barrierDismissible: false,
                                 );
-                                // customSnackbar(
-                                //   msgTitle: 'This Page is under construction!',
-                                //   msgContent:
-                                //       'This Page is only view.\n Data will not save.',
-                                // );
                               },
                             ),
                           ),

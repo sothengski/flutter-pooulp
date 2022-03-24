@@ -222,12 +222,18 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       //===== Bottom of Title Component =====//
 
                       ///===== Top of Birthday Component =====//
-                      ContainerDialogWidget(
-                        inputTitle: 'Birthday',
-                        dialogType: DialogType.dateTimePickerDialog,
-                        controller: controller,
-                        containerWidget: Obx(
-                          () => controller.selectedBirthday.value.year ==
+                      Obx(
+                        () => ContainerDialogWidget(
+                          inputTitle: 'Birthday',
+                          dialogType: DialogType.dateTimePickerDialog,
+                          currentTime: controller.selectedBirthday.value,
+                          onConfirmDate: (date) {
+                            controller.selectedBirthdayOnClick(
+                              selectedItem: date,
+                            );
+                          },
+                          containerWidget: controller
+                                      .selectedBirthday.value.year ==
                                   controller.now.year
                               ? const RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
@@ -244,14 +250,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
                                     //marginLeft: 4.0,
-                                    text:
-                                        '${controller.selectedBirthday.value.year}-${controller.selectedBirthday.value.month}-${controller.selectedBirthday.value.day}',
-                                    // controller.selectedBirthday.value.toIso8601String(),
-                                    //     dateFormatDashYYYYMMDD(
-                                    //   date: DateTime.tryParse(
-                                    //     controller.selectedBirthday.value,
-                                    //   ),
-                                    // ),
+                                    text: dateFormatDashYYYYMMDD(
+                                      date: controller.selectedBirthday.value,
+                                    ),
                                     color: ColorsManager.black,
                                     fontSize: 16.0,
                                   ),

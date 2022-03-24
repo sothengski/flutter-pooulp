@@ -62,19 +62,19 @@ class RowDataSelectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: verticalPadding,
-          horizontal: horizontalPadding,
-        ),
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: verticalPadding,
+        horizontal: horizontalPadding,
+      ),
+      child: InkWell(
+        onTap: onPressed,
         child: Row(
           children: [
             if (isLeftSideText == false)
               Wrap(
                 children: [
-                  const SizedBox(width: 8.0),
+                  // const SizedBox(width: 8.0),
                   if (isClickingValue == true)
                     iconDataClick == null
                         ? Container()
@@ -89,7 +89,7 @@ class RowDataSelectionWidget extends StatelessWidget {
                             iconDataUnClick,
                             color: iconColorUnClick,
                           ),
-                  const SizedBox(width: 8.0),
+                  // const SizedBox(width: 8.0),
                 ],
               )
             else

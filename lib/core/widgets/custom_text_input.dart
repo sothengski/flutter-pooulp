@@ -53,6 +53,7 @@ class CustomTextInput extends StatelessWidget {
   final double? fontSize;
   final Color? fontColor;
   final bool? isReadOnly;
+  final double? hintTexFontSize;
 
   const CustomTextInput({
     this.controller,
@@ -101,6 +102,7 @@ class CustomTextInput extends StatelessWidget {
     this.fontSize = 16.0,
     this.fontColor = Colors.black,
     this.isReadOnly = false,
+    this.hintTexFontSize = 16,
   });
 
   @override
@@ -181,8 +183,9 @@ class CustomTextInput extends StatelessWidget {
                     filled: isFilled,
                     fillColor: fillColor,
                     hintText: hintText,
-                    hintStyle: const TextStyle(
+                    hintStyle: TextStyle(
                       color: ColorsManager.grey400,
+                      fontSize: hintTexFontSize,
                     ),
                     // isDense: true,
                     // contentPadding: EdgeInsets.zero,

@@ -3,39 +3,37 @@ import 'package:flutter/material.dart';
 import '../../data/data.dart';
 import '../core.dart';
 
-// bool isNumeric(String s) => s.isNotEmpty && double.tryParse(s) != null;
-class CountryListSelector extends StatefulWidget {
-  final List<CountryModel>? countrylist;
-  final CountryModel? selectedCountry;
-  // late CountryFinder _countryFinder;
+class SchoolListSelector extends StatefulWidget {
+  final List<SchoolModel>? dataListforSelected;
+  final SchoolModel? selectedItem;
   final ScrollController? scrollController;
   final int? separatorIndex;
-  final Function(CountryModel)? onTap;
+  final Function(SchoolModel)? onTap;
   final bool? showPhoneCode;
   final bool? showCountry;
 
-  const CountryListSelector({
-    this.countrylist,
+  const SchoolListSelector({
+    this.dataListforSelected,
     this.scrollController,
     this.separatorIndex = 1,
     this.onTap,
     Key? key,
     this.showPhoneCode = true,
     this.showCountry = true,
-    @required this.selectedCountry,
+    @required this.selectedItem,
   }) : super(key: key);
 
   @override
-  State<CountryListSelector> createState() => _CountryListSelectorState();
+  State<SchoolListSelector> createState() => _SchoolListSelectorState();
 }
 
-class _CountryListSelectorState extends State<CountryListSelector> {
-  late List<CountryModel>? filteredCountryList = [];
+class _SchoolListSelectorState extends State<SchoolListSelector> {
+  late List<SchoolModel>? filteredDataList = [];
 
   @override
   void initState() {
     super.initState();
-    filteredCountryList!.addAll(widget.countrylist!.toList());
+    filteredDataList!.addAll(widget.dataListforSelected!.toList());
   }
 
   @override
@@ -45,7 +43,7 @@ class _CountryListSelectorState extends State<CountryListSelector> {
         Padding(
           padding: const EdgeInsets.all(8),
           child: CustomTextInput(
-            hintText: 'Search Country Name',
+            hintText: 'Search School Name',
             suffixIcon: const Icon(
               Icons.search,
               // color: ColorsManager.grey400,
@@ -54,59 +52,58 @@ class _CountryListSelectorState extends State<CountryListSelector> {
           ),
         ),
         Flexible(
-          child: filteredCountryList!.isNotEmpty
+          child: filteredDataList!.isNotEmpty
               ? ListView.separated(
                   controller: widget.scrollController,
                   shrinkWrap: true,
-                  itemCount: filteredCountryList!.length,
+                  itemCount: filteredDataList!.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const Divider(
                     height: 0.0,
                     thickness: 0.0,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    final CountryModel country = filteredCountryList![index];
+                    final SchoolModel schoolItem = filteredDataList![index];
                     return Card(
                       elevation: 0.0,
-                      color: widget.selectedCountry!.iso3Code ==
-                              country.iso3Code.toString()
+                      color: widget.selectedItem!.id == schoolItem.id
                           ? ColorsManager.grey300
                           : ColorsManager.white,
                       child: ListTile(
-                        key: Key(country.isoCode.toString()),
+                        key: Key(schoolItem.id.toString()),
                         dense: true,
                         contentPadding:
                             const EdgeInsets.only(left: 20.0, right: 20.0),
-                        leading: CircleFlag(
-                          country.isoCode.toString(),
-                        ),
+                        // leading: CircleFlag(
+                        //  schoolItem.id.toString(),
+                        // ),
                         title: Align(
                           alignment: AlignmentDirectional.centerStart,
                           child: widget.showCountry == true
                               ? CustomTextWidget(
-                                  text: "${country.name}",
+                                  text: "${schoolItem.name}",
                                   fontSize: 16.0,
+                                  maxLine: 3,
                                   fontWeight: FontWeightManager.medium,
-                                  color: widget.selectedCountry!.iso3Code ==
-                                          country.iso3Code.toString()
-                                      ? ColorsManager.primary
-                                      : ColorsManager.primaryBlue,
+                                  color:
+                                      widget.selectedItem!.id == schoolItem.id
+                                          ? ColorsManager.primary
+                                          : ColorsManager.primaryBlue,
                                 )
                               : Container(),
                         ),
-                        trailing: widget.showPhoneCode == true
-                            ? CustomTextWidget(
-                                text: country.phoneCode,
-                                color: widget.selectedCountry!.iso3Code ==
-                                        country.iso3Code.toString()
-                                    ? ColorsManager.primary
-                                    : ColorsManager.grey600,
-                                fontSize: 16.0,
-                                fontWeight: FontWeightManager.medium,
-                              )
-                            : const CustomTextWidget(
-                                color: ColorsManager.primary,
-                              ),
+                        // trailing: widget.showPhoneCode == true
+                        //     ? CustomTextWidget(
+                        //         text: schoolItem.id.toString(),
+                        //         color: widget.selectedItem!.id == schoolItem.id
+                        //             ? ColorsManager.primary
+                        //             : ColorsManager.grey600,
+                        //         fontSize: 16.0,
+                        //         fontWeight: FontWeightManager.medium,
+                        //       )
+                        //     : const CustomTextWidget(
+                        //         color: ColorsManager.primary,
+                        //       ),
                         // trailing:  Align(
                         //   alignment: AlignmentDirectional.centerStart,
                         //   child: showPhoneCode == true
@@ -125,7 +122,7 @@ class _CountryListSelectorState extends State<CountryListSelector> {
                         //         )
                         //       : Container(),
                         // ),
-                        onTap: () => widget.onTap!(country),
+                        onTap: () => widget.onTap!(schoolItem),
                       ),
                     );
                   },
@@ -143,11 +140,11 @@ class _CountryListSelectorState extends State<CountryListSelector> {
   }
 
   void filterSearchResults(String query) {
-    List<CountryModel> searchResult = <CountryModel>[];
+    List<SchoolModel> searchResult = <SchoolModel>[];
     if (query.isEmpty) {
-      searchResult.addAll(countryList);
+      searchResult.addAll(widget.dataListforSelected!);
     } else {
-      searchResult = countryList
+      searchResult = widget.dataListforSelected!
           .where(
             (c) => c.name!.toLowerCase().startsWith(
                   query.toLowerCase(),
@@ -155,6 +152,6 @@ class _CountryListSelectorState extends State<CountryListSelector> {
           )
           .toList();
     }
-    setState(() => filteredCountryList = searchResult);
+    setState(() => filteredDataList = searchResult);
   }
 }

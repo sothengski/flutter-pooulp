@@ -6,6 +6,10 @@ bool switchingBooleanValue({required bool? boolValue}) {
   return !boolValue!;
 }
 
+String dateTimeToString({DateTime? selectedItem}) {
+  return selectedItem!.toString();
+}
+
 bool stringsComparation({
   required String? object1,
   required String? object2,

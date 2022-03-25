@@ -1,3 +1,4 @@
+export 'achievement/achievement.dart';
 export 'auth/auth.dart';
 export 'education/education.dart';
 export 'experience/experience.dart';

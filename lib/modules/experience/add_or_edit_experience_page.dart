@@ -233,9 +233,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                             DateTime.now(),
                         onConfirmDate: (date) {
                           controller.selectedStartedDateString.value =
-                              controller.selectedDateOnClickString(
-                            selectedItem: date,
-                          );
+                              dateTimeToString(selectedItem: date);
                         },
                         containerWidget: Obx(
                           () => controller.selectedStartedDateString.value == ''
@@ -290,9 +288,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                             DateTime.now(),
                         onConfirmDate: (date) {
                           controller.selectedEndDateString.value =
-                              controller.selectedDateOnClickString(
-                            selectedItem: date,
-                          );
+                              dateTimeToString(selectedItem: date);
                         },
                         containerWidget: Obx(
                           () => controller.selectedEndDateString.value == ''

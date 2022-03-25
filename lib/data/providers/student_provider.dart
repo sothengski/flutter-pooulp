@@ -1,6 +1,7 @@
 import '../data.dart';
 
 abstract class IStudentProvider {
+  ///===== Top of Education Section =====//
   Future<JsonResponse> postStudentEducation({
     EducationModel? educationData,
   });
@@ -11,7 +12,9 @@ abstract class IStudentProvider {
   Future<JsonResponse> deleteStudentEducation({
     required int? eduId,
   });
+  //===== Bottom of Education Section =====//
 
+  ///===== Top of Experience Section =====//
   Future<JsonResponse> postStudentExperience({
     ExperienceModel? experienceData,
   });
@@ -22,9 +25,26 @@ abstract class IStudentProvider {
   Future<JsonResponse> deleteStudentExperience({
     required int? expId,
   });
+  //===== Bottom of Experience Section =====//
+
+  ///===== Top of Achievement Section =====//
+  Future<JsonResponse> postStudentAchievement({
+    AchievementModel? achievementData,
+  });
+  Future<JsonResponse> putStudentAchievement({
+    required int? achievementId,
+    AchievementModel? achievementData,
+  });
+  Future<JsonResponse> deleteStudentAchievement({
+    required int? achievementId,
+  });
+  //===== Bottom of Achievement Section =====//
 }
 
 class StudentProvider extends BaseProvider implements IStudentProvider {
+  ///===== Top of Education Section =====//
+  ///
+  ///POST Method for Add New Education Information
   @override
   Future<JsonResponse> postStudentEducation({
     EducationModel? educationData,
@@ -53,6 +73,7 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
     }
   }
 
+  ///PUT Method for Update by Replacing Education Information by ID
   @override
   Future<JsonResponse> putStudentEducation({
     required int? eduId,
@@ -63,7 +84,7 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
       //   'educationData: ${educationData!.toRawJson()}',
       // );
       final dataResponse = await put(
-        API.putOrdeleteEducation(eduId: eduId),
+        API.putOrDeleteEducation(eduId: eduId),
         educationData!.toRawJson(),
       );
       if (dataResponse.hasError) {
@@ -85,13 +106,14 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
     }
   }
 
+  ///DELETE Method for Removing Education Information by ID
   @override
   Future<JsonResponse> deleteStudentEducation({
     required int? eduId,
   }) async {
     try {
       final dataResponse = await delete(
-        API.putOrdeleteEducation(eduId: eduId),
+        API.putOrDeleteEducation(eduId: eduId),
       );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
@@ -108,7 +130,11 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
       return Future.error(e.toString());
     }
   }
+  //===== Bottom of Education Section =====//
 
+  ///===== Top of Experience Section =====//
+  ///
+  ///POST Method for Add New Experience Information
   @override
   Future<JsonResponse> postStudentExperience({
     ExperienceModel? experienceData,
@@ -134,6 +160,7 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
     }
   }
 
+  ///PUT Method for Update by Replacing Experience Information by ID
   @override
   Future<JsonResponse> putStudentExperience({
     required int? expId,
@@ -141,7 +168,7 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
   }) async {
     try {
       final dataResponse = await put(
-        API.putOrdeleteExperience(expId: expId),
+        API.putOrDeleteExperience(expId: expId),
         experienceData!.toRawJson(),
       );
       if (dataResponse.hasError) {
@@ -160,13 +187,14 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
     }
   }
 
+  ///DELETE Method for Removing Experience Information by ID
   @override
   Future<JsonResponse> deleteStudentExperience({
     required int? expId,
   }) async {
     try {
       final dataResponse = await delete(
-        API.putOrdeleteExperience(expId: expId),
+        API.putOrDeleteExperience(expId: expId),
       );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
@@ -183,4 +211,86 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
       return Future.error(e.toString());
     }
   }
+  //===== Bottom of Experience Section =====//
+
+  ///===== Top of Achievement Section =====//
+  ///
+  ///POST Method for Add New Achievement Information
+  @override
+  Future<JsonResponse> postStudentAchievement({
+    AchievementModel? achievementData,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postAchievement].toString(),
+        achievementData!.toRawJson(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///PUT Method for Update by Replacing Achievement Information by ID
+  @override
+  Future<JsonResponse> putStudentAchievement({
+    required int? achievementId,
+    AchievementModel? achievementData,
+  }) async {
+    try {
+      final dataResponse = await put(
+        API.putOrDeleteAchievement(achievementId: achievementId),
+        achievementData!.toRawJson(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///DELETE Method for Removing Achievement Information by ID
+  @override
+  Future<JsonResponse> deleteStudentAchievement({
+    required int? achievementId,
+  }) async {
+    try {
+      final dataResponse = await delete(
+        API.putOrDeleteAchievement(achievementId: achievementId),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+  //===== Bottom of Achievement Section =====//
 }

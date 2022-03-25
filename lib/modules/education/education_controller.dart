@@ -71,13 +71,13 @@ class EducationController extends GetxController {
     return selectedItem!;
   }
 
-  DateTime selectedDateOnClick({DateTime? selectedItem}) {
-    return selectedItem!;
-  }
+  // DateTime selectedDateOnClick({DateTime? selectedItem}) {
+  //   return selectedItem!;
+  // }
 
-  String selectedDateOnClickString({DateTime? selectedItem}) {
-    return selectedItem!.toString();
-  }
+  // String selectedDateOnClickString({DateTime? selectedItem}) {
+  //   return selectedItem!.toString();
+  // }
 
   void saveButtonOnClick() {
     if (editEducationFormKey.currentState!.validate()) {

@@ -144,15 +144,54 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
     required int? expId,
     ExperienceModel? experienceData,
   }) async {
-    // TODO: implement putStudentExperience
-    throw UnimplementedError();
+    try {
+      // debugPrint(
+      //   'educationData: ${educationData!.toRawJson()}',
+      // );
+      final dataResponse = await put(
+        API.putOrdeleteExperience(expId: expId),
+        experienceData!.toRawJson(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        // debugPrint(
+        //   'API: ${API.putOrdeleteEducation(eduId: eduId)}\nresponse::$response',
+        // );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
   }
 
   @override
   Future<JsonResponse> deleteStudentExperience({
     required int? expId,
   }) async {
-    // TODO: implement deleteStudentExperience
-    throw UnimplementedError();
+    try {
+      final dataResponse = await delete(
+        API.putOrdeleteExperience(expId: expId),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
   }
 }

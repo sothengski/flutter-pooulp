@@ -31,6 +31,8 @@ class ExperienceController extends GetxController {
 
   RxString selectedEndDateString = ''.obs;
 
+  List<dynamic>? tagList = [];
+
   Rx<bool> isSubmitBtnProcessing = false.obs;
 
   @override
@@ -39,10 +41,25 @@ class ExperienceController extends GetxController {
     title = Get.arguments[0].toString();
     expType.value = Get.arguments[1].toString();
     debugPrint('expType.value:: ${expType.value}');
-    // if (title == Keys.editOperation) {
-    //   final ExperienceModel expDataArg = Get.arguments[2] as ExperienceModel;
-    //   expId = expDataArg.id!;
-    // }
+    if (title == Keys.editOperation) {
+      final ExperienceModel expDataArg = Get.arguments[2] as ExperienceModel;
+      expId = expDataArg.id!;
+      companyNameTextCtrl.text = expDataArg.company!;
+      titleTextCtrl.text = expDataArg.name!;
+      if (expDataArg.completed == 1) {
+        isCheckStillWorking.value = true;
+      } else {
+        isCheckStillWorking.value = false;
+      }
+      selectedStartedDateString.value =
+          expDataArg.dateStart == null ? '' : expDataArg.dateStart.toString();
+      selectedEndDateString.value =
+          expDataArg.dateEnd == null ? '' : expDataArg.dateEnd.toString();
+      descriptionTextCtrl.text = expDataArg.description!;
+      cityTextCtrl.text = expDataArg.addressCity!;
+      countryTextCtrl.text = expDataArg.addressCountry!;
+      tagList!.add(expDataArg.tags);
+    }
   }
 
   String selectedDateOnClickString({DateTime? selectedItem}) {

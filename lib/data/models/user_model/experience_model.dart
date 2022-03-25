@@ -24,7 +24,7 @@ class ExperienceModel {
     this.company,
     this.dateStart,
     this.dateEnd,
-    this.completed,
+    this.completed = 0,
     this.addressCity,
     this.addressCountry,
     // this.job,

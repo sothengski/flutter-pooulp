@@ -55,10 +55,10 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                         flex: 40,
                         child: OutlinedButton.icon(
                           onPressed: () async => {
-                            // controller.makeRequestToAPI(
-                            //   eduId: controller.eduId,
-                            //   operation: Keys.deleteOperation,
-                            // ),
+                            controller.makeRequestToExperienceAPI(
+                              expId: controller.expId,
+                              operation: Keys.deleteOperation,
+                            ),
                             Get.back(),
                           },
                           icon: const Icon(
@@ -331,9 +331,9 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
           buttonWidth: getWidth,
           onPressed: () {
             unFocusKeyBoard(context);
-            // if (!controller.isSubmitBtnProcessing.value == true) {
-            controller.saveButtonOnClick();
-            // }
+            if (!controller.isSubmitBtnProcessing.value == true) {
+              controller.saveButtonOnClick();
+            }
           },
         ),
       ),

@@ -63,5 +63,10 @@ class AppPages {
       page: () => const AddOrEditExperiencePage(),
       binding: ExperienceBinding(),
     ),
+    GetPage(
+      name: Routes.addOrEditAchievementRoute,
+      page: () => const AddOrEditAchievementPage(),
+      binding: AchievementBinding(),
+    ),
   ];
 }

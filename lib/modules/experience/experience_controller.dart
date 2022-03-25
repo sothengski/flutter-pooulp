@@ -86,10 +86,6 @@ class ExperienceController extends GetxController {
     return selectedItem!;
   }
 
-  String selectedDateOnClickString({DateTime? selectedItem}) {
-    return selectedItem!.toString();
-  }
-
   void saveButtonOnClick() {
     if (editExperienceFormKey.currentState!.validate()) {
       isSubmitBtnProcessing.value = switchingBooleanValue(

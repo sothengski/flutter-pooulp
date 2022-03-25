@@ -31,6 +31,8 @@ enum Endpoint {
   getExperienceTypes,
   postExperience,
   // putOrDeleteExperience,
+  postAchievement,
+  // putOrDeleteAchievement,
 }
 
 class API {
@@ -68,6 +70,7 @@ class API {
     Endpoint.postEducation: '/users/me/student_profile/educations',
     Endpoint.postExperience: '/users/me/student_profile/experiences',
     Endpoint.getExperienceTypes: '/tags/experiences',
+    Endpoint.postAchievement: '/users/me/student_profile/achievements'
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';
@@ -86,9 +89,12 @@ class API {
 
   static String postProfilePicture() => '/users/me/profile/picture';
 
-  static String putOrdeleteEducation({required int? eduId}) =>
+  static String putOrDeleteEducation({required int? eduId}) =>
       '/users/me/student_profile/educations/$eduId';
 
-  static String putOrdeleteExperience({required int? expId}) =>
+  static String putOrDeleteExperience({required int? expId}) =>
       '/users/me/student_profile/experiences/$expId';
+
+  static String putOrDeleteAchievement({required int? achievementId}) =>
+      '/users/me/student_profile/achievements/$achievementId';
 }

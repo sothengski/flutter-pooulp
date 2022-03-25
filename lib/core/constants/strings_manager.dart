@@ -32,6 +32,9 @@ class AppStrings {
   static const String removeText = 'Remove';
   static const String confirmationText = 'Confirmation';
   static const String saveText = 'Save';
+
+  static const String personalKey = 'personal';
+  static const String professionalKey = 'professional';
 }
 
 class OfferStrings {

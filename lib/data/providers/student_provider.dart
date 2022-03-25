@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../data.dart';
 
 abstract class IStudentProvider {
@@ -129,9 +127,6 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
           message: dataResponse.statusText,
           data: dataResponse.body,
         );
-        debugPrint(
-          'API: ${API.paths[Endpoint.postExperience].toString()}\nresponse::$response',
-        );
         return response;
       }
     } catch (e) {
@@ -145,9 +140,6 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
     ExperienceModel? experienceData,
   }) async {
     try {
-      // debugPrint(
-      //   'educationData: ${educationData!.toRawJson()}',
-      // );
       final dataResponse = await put(
         API.putOrdeleteExperience(expId: expId),
         experienceData!.toRawJson(),
@@ -161,9 +153,6 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
           message: dataResponse.statusText,
           data: dataResponse.body,
         );
-        // debugPrint(
-        //   'API: ${API.putOrdeleteEducation(eduId: eduId)}\nresponse::$response',
-        // );
         return response;
       }
     } catch (e) {

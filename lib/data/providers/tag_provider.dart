@@ -7,6 +7,7 @@ abstract class ITagProvider {
   Future<List<FieldModel>> getAllFields();
   Future<List<FieldModel>> getLanguages();
   Future<List<SchoolModel>> getSchools();
+  Future<List<FieldModel>> getExperienceTypes();
 }
 
 class TagProvider extends BaseProvider implements ITagProvider {
@@ -92,6 +93,28 @@ class TagProvider extends BaseProvider implements ITagProvider {
           schoolList.add(SchoolModel.fromJson(e as Map<String, dynamic>));
         }
         return schoolList;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<List<FieldModel>> getExperienceTypes() async {
+    try {
+      final dataResponse = await get(
+        API.paths[Endpoint.getExperienceTypes].toString(),
+      );
+      final List<FieldModel> jobOfferTypeList = <FieldModel>[];
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse =
+            json.decode(dataResponse.bodyString.toString()) as List;
+        for (final e in apiResponse) {
+          jobOfferTypeList.add(FieldModel.fromJson(e as Map<String, dynamic>));
+        }
+        return jobOfferTypeList;
       }
     } catch (e) {
       return Future.error(e.toString());

@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pooulp_flutter/modules/modules.dart';
 
 import '../../core/core.dart';
 import '../../data/data.dart';
+import '../../modules/modules.dart';
 
 class EducationController extends GetxController {
   // final profileController = Get.put(ProfileController());
@@ -16,7 +16,7 @@ class EducationController extends GetxController {
 
   String? title;
 
-  final editProfileFormKey = GlobalKey<FormState>();
+  final editEducationFormKey = GlobalKey<FormState>();
 
   int eduId = 0;
 
@@ -79,15 +79,10 @@ class EducationController extends GetxController {
     return selectedItem!.toString();
   }
 
-  bool isCheckGraduatedSwitching({bool? value}) =>
-      isCheckGraduated.value = !value!;
-
-  bool saveBtnBoolSwitching({bool? value}) =>
-      isSubmitBtnProcessing.value = value!;
-
   void saveButtonOnClick() {
-    if (editProfileFormKey.currentState!.validate()) {
-      saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
+    if (editEducationFormKey.currentState!.validate()) {
+      isSubmitBtnProcessing.value =
+          switchingBooleanValue(boolValue: isSubmitBtnProcessing.value);
       final EducationModel educationToBeAddOrEdit = EducationModel(
         schoolId: selectedSchool.value.id,
         name: fieldOfStudyTextCtrl.text.trim(),
@@ -106,7 +101,7 @@ class EducationController extends GetxController {
         description: descriptionTextCtrl.text.trim(),
         fields: [],
       );
-      makeRequestToAPI(
+      makeRequestToEducationAPI(
         eduId: eduId,
         eduData: educationToBeAddOrEdit,
         operation: title,
@@ -114,7 +109,7 @@ class EducationController extends GetxController {
     }
   }
 
-  Future<void> makeRequestToAPI({
+  Future<void> makeRequestToEducationAPI({
     int? eduId,
     EducationModel? eduData,
     required String? operation,
@@ -139,12 +134,13 @@ class EducationController extends GetxController {
     if (responseData.success!) {
       // debugPrint('=====success=====');
       profileController.getStudentInfoResponseProvider();
-      saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
+      isSubmitBtnProcessing.value =
+          switchingBooleanValue(boolValue: isSubmitBtnProcessing.value);
       Get.back();
       customSnackbar(
         msgTitle: 'Success',
         msgContent:
-            'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'}  Education Information',
+            'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Education Information',
         bgColor: ColorsManager.green,
       );
     }

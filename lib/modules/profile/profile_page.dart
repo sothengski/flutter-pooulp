@@ -215,7 +215,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                 onClick: () => {
                                                   Get.toNamed(
                                                     Routes
-                                                        .addoreditEducationRoute,
+                                                        .addOrEditEducationRoute,
                                                     arguments: [
                                                       Keys.addOperation
                                                     ],
@@ -269,7 +269,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                           onClick: () => {
                                                             Get.toNamed(
                                                               Routes
-                                                                  .addoreditEducationRoute,
+                                                                  .addOrEditEducationRoute,
                                                               arguments: [
                                                                 Keys.editOperation,
                                                                 e
@@ -300,11 +300,13 @@ class ProfilePage extends GetView<ProfileController> {
                                               padding: 0.0,
                                               isConstraints: true,
                                               onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
+                                                Get.toNamed(
+                                                  Routes
+                                                      .addOrEditExperienceRoute,
+                                                  arguments: [
+                                                    Keys.addOperation,
+                                                    'professional',
+                                                  ],
                                                 ),
                                               },
                                             ),
@@ -353,11 +355,14 @@ class ProfilePage extends GetView<ProfileController> {
                                                               isConstraints:
                                                                   true,
                                                               onClick: () => {
-                                                                customSnackbar(
-                                                                  msgTitle:
-                                                                      'This Page is under construction!',
-                                                                  msgContent:
-                                                                      'This Page is only view.\n Data will not save.',
+                                                                Get.toNamed(
+                                                                  Routes
+                                                                      .addOrEditExperienceRoute,
+                                                                  arguments: [
+                                                                    Keys.editOperation,
+                                                                    'professional',
+                                                                    e,
+                                                                  ],
                                                                 ),
                                                               },
                                                             ),

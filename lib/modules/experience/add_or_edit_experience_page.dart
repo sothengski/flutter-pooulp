@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
-import 'education_controller.dart';
+import 'experience.dart';
 
-class AddOrEditEducationPage extends GetView<EducationController> {
+class AddOrEditExperiencePage extends GetView<ExperienceController> {
+  const AddOrEditExperiencePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    controller.title = controller.title;
+    // controller.title = controller.title;
     return Scaffold(
+      ///===== Top of appBar Component =====//
       appBar: CustomAppBar(
-        title: '${controller.title} Education',
+        title: '${controller.title} Experience',
         actions: [
           if (controller.title != Keys.editOperation)
             Container()
@@ -52,10 +55,10 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                         flex: 40,
                         child: OutlinedButton.icon(
                           onPressed: () async => {
-                            controller.makeRequestToEducationAPI(
-                              eduId: controller.eduId,
-                              operation: Keys.deleteOperation,
-                            ),
+                            // controller.makeRequestToAPI(
+                            //   eduId: controller.eduId,
+                            //   operation: Keys.deleteOperation,
+                            // ),
                             Get.back(),
                           },
                           icon: const Icon(
@@ -75,108 +78,57 @@ class AddOrEditEducationPage extends GetView<EducationController> {
             )
         ],
       ),
-      // backgroundColor: ColorsManager.white,
+      //===== Bottom of appBar Component =====//
+
+      ///===== Top of body Component =====//
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Form(
-          key: controller.editEducationFormKey,
+          key: controller.editExperienceFormKey,
           child: Padding(
             padding: const EdgeInsets.all(AppSize.s16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ///===== Top of School Component =====//
-                ContainerDialogWidget(
-                  inputTitle: 'School',
-                  validatorFunction: (_) => Validator().notEmptyValidator(
-                    controller.selectedSchool.value.name ?? '',
-                  ),
-                  dialogType:
-                      DialogType.bottomSheetDialog, // controller: controller,
-                  dialogWidget: Container(
-                    height: getHeight,
-                    decoration: const ShapeDecoration(
-                      color: ColorsManager.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                            AppSize.s16,
-                          ),
-                          topRight: Radius.circular(
-                            AppSize.s16,
-                          ),
-                        ),
-                      ),
-                    ),
-                    child: Obx(
-                      () => controller.schoolList.isNotEmpty
-                          ? SchoolListSelector(
-                              dataListforSelected: controller.schoolList,
-                              selectedItem: controller.selectedSchool.value,
-                              onTap: (school) {
-                                controller.selectedSchool.value =
-                                    controller.selectedSchoolOnClick(
-                                  selectedItem: school,
-                                );
-                                Navigator.pop(
-                                  context,
-                                  true,
-                                );
-                              },
-                            )
-                          : const LoadingWidget(),
-                    ),
-                  ),
-                  containerWidget: Obx(
-                    () => controller.selectedSchool.value.id == null
-                        ? const RowContentInputWidget(
-                            centerWidget: CustomTextWidget(
-                              text: 'Select your School',
-                              color: ColorsManager.grey400,
-                              fontWeight: FontWeight.w400,
-                              fontSize: AppSize.s16,
-                            ),
-                            suffixWidget: Icon(
-                              IconsManager.arrowDropDown,
-                              color: ColorsManager.grey600,
-                            ),
-                          )
-                        : RowContentInputWidget(
-                            centerWidget: CustomTextWidget(
-                              text: controller.selectedSchool.value.name,
-                              color: ColorsManager.black,
-                              fontSize: AppSize.s16,
-                            ),
-                            suffixWidget: const Icon(
-                              IconsManager.arrowDropDown,
-                              color: ColorsManager.grey600,
-                            ),
-                          ),
-                  ),
-                ),
-                //===== Bottom of School Component =====//
-
-                ///===== Top of Field of Study Component =====//
+                ///===== Top of Company Name Component =====//
                 CustomTextInput(
                   topPadding: AppSize.s16,
-                  controller: controller.fieldOfStudyTextCtrl,
-                  inputTitle: 'Field of Study',
-                  hintText: 'Enter your field of study',
+                  controller: controller.companyNameTextCtrl,
+                  inputTitle: 'Company Name',
+                  hintText: 'Enter the Company Name',
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
-                //===== Bottom of Field of Study Component =====//
+                //===== Bottom of Company Name Component =====//
 
-                ///===== Top of Degree Component =====//
+                ///===== Top of Title Component =====//
                 CustomTextInput(
                   topPadding: AppSize.s16,
-                  controller: controller.degreeTextCtrl,
-                  inputTitle: 'Degree',
-                  hintText: 'Enter your Degree',
+                  controller: controller.titleTextCtrl,
+                  inputTitle: 'Title',
+                  hintText: 'Enter the Title',
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
-                //===== Bottom of Degree Component =====//
+                //===== Bottom of Title Component =====//
+
+                ///===== Top of Current Working CheckBox Component =====//
+                Obx(
+                  () => RowDataSelectionWidget.checkBox(
+                    verticalPadding: AppSize.s16,
+                    horizontalPadding: AppSize.s0,
+                    isClickingValue: controller.isCheckStillWorking.value,
+                    text: 'I am currently working in this role.',
+                    isLeftSideText: false,
+                    onPressed: () {
+                      controller.isCheckStillWorking.value =
+                          switchingBooleanValue(
+                        boolValue: controller.isCheckStillWorking.value,
+                      );
+                    },
+                  ),
+                ),
+                //===== Bottom of Current Working CheckBox Component =====//
 
                 ///===== Top of Start Date & End Date Component =====//
                 Row(
@@ -186,7 +138,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                       flex: 40,
                       child: ContainerDialogWidget(
                         inputTitle: 'Start Date',
-                        inputTitleMarginTop: AppSize.s16,
+                        inputTitleMarginTop: AppSize.s0,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedStartedDateString.value,
                         ),
@@ -246,7 +198,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                       flex: 40,
                       child: ContainerDialogWidget(
                         inputTitle: 'End Date(Or Expected)',
-                        inputTitleMarginTop: AppSize.s16,
+                        inputTitleMarginTop: AppSize.s0,
                         dialogType: DialogType.dateTimePickerDialog,
                         currentTime: DateTime.tryParse(
                               controller.selectedEndDateString.value,
@@ -297,25 +249,46 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 ),
                 //===== Bottom of Start Date & End Date Component =====//
 
-                ///===== Top of Graduated Component =====//
-                Obx(
-                  () => RowDataSelectionWidget.checkBox(
-                    verticalPadding: AppSize.s16,
-                    horizontalPadding: AppSize.s0,
-                    isClickingValue: controller.isCheckGraduated.value,
-                    text: 'Graduated',
-                    isLeftSideText: false,
-                    onPressed: () {
-                      controller.isCheckGraduated.value = switchingBooleanValue(
-                        boolValue: controller.isCheckGraduated.value,
-                      );
-                    },
-                  ),
+                ///===== Top of Start Locations Component =====//
+                Row(
+                  children: [
+                    ///===== Top of City Component =====//
+                    Expanded(
+                      flex: 40,
+                      child: CustomTextInput(
+                        topPadding: AppSize.s16,
+                        controller: controller.cityTextCtrl,
+                        inputTitle: 'City',
+                        hintText: 'Enter the City',
+                        isFilled: true,
+                        // validator: Validator().notEmptyValidator,
+                      ),
+                    ),
+                    //===== Bottom of City Component =====//
+                    const SizedBox(
+                      width: AppSize.s12,
+                    ),
+
+                    ///===== Top of Country Component =====//
+                    Expanded(
+                      flex: 40,
+                      child: CustomTextInput(
+                        topPadding: AppSize.s16,
+                        controller: controller.countryTextCtrl,
+                        inputTitle: 'Country',
+                        hintText: 'Enter the Country',
+                        isFilled: true,
+                        // validator: Validator().notEmptyValidator,
+                      ),
+                    ),
+                    //===== Bottom of Country Component =====//
+                  ],
                 ),
-                //===== Bottom of Graduated Component =====//
+                //===== Bottom of Locations Component =====//
 
                 ///===== Top of Description Component =====//
                 CustomTextInput(
+                  topPadding: AppSize.s16,
                   controller: controller.descriptionTextCtrl,
                   inputTitle: 'Description',
                   hintText: 'Description...',
@@ -336,43 +309,35 @@ class AddOrEditEducationPage extends GetView<EducationController> {
           ),
         ),
       ),
+      //===== Bottom of body Component =====//
+
+      ///===== Top of bottomNavigationBar Component =====//
       bottomNavigationBar: Obx(
-        () => Wrap(
-          children: [
-            Visibility(
-              visible: controller.isSubmitBtnProcessing.value,
-              child: CustomMaterialButton(
-                leftPadding: AppSize.s12,
-                rightPadding: AppSize.s12,
-                bottomPadding: AppSize.s20,
-                childWidget: const LoadingWidget(
-                  isTreeBounceLoading: true,
-                  color: ColorsManager.white,
-                ),
-                buttonWidth: getWidth,
-                onPressed: () {
-                  unFocusKeyBoard(context);
-                },
-              ),
-            ),
-            Visibility(
-              visible: !controller.isSubmitBtnProcessing.value,
-              child: CustomMaterialButton(
-                leftPadding: AppSize.s12,
-                rightPadding: AppSize.s12,
-                bottomPadding: AppSize.s20,
-                text: AppStrings.saveText,
-                fontSize: AppSize.s20,
-                buttonWidth: getWidth,
-                onPressed: () {
-                  unFocusKeyBoard(context);
-                  controller.saveButtonOnClick();
-                },
-              ),
-            ),
-          ],
+        () => CustomMaterialButton(
+          leftPadding: AppSize.s12,
+          rightPadding: AppSize.s12,
+          bottomPadding: AppSize.s20,
+          text: AppStrings.saveText,
+          childWidget: controller.isSubmitBtnProcessing.value == true
+              ? const SizedBox(
+                  height: 40,
+                  child: LoadingWidget(
+                    isTreeBounceLoading: true,
+                    color: ColorsManager.white,
+                  ),
+                )
+              : null,
+          fontSize: AppSize.s20,
+          buttonWidth: getWidth,
+          onPressed: () {
+            unFocusKeyBoard(context);
+            // if (!controller.isSubmitBtnProcessing.value == true) {
+            controller.saveButtonOnClick();
+            // }
+          },
         ),
       ),
+      //===== Bottom of bottomNavigationBar Component =====//
     );
   }
 }

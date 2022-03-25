@@ -54,9 +54,14 @@ class AppPages {
       binding: OfferDetailBinding(),
     ),
     GetPage(
-      name: Routes.addoreditEducationRoute,
+      name: Routes.addOrEditEducationRoute,
       page: () => AddOrEditEducationPage(),
       binding: EducationBinding(),
+    ),
+    GetPage(
+      name: Routes.addOrEditExperienceRoute,
+      page: () => const AddOrEditExperiencePage(),
+      binding: ExperienceBinding(),
     ),
   ];
 }

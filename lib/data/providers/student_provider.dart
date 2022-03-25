@@ -39,6 +39,19 @@ abstract class IStudentProvider {
     required int? achievementId,
   });
   //===== Bottom of Achievement Section =====//
+
+  ///===== Top of Certificate Section =====//
+  Future<JsonResponse> postStudentCertificate({
+    CertificateModel? certificateData,
+  });
+  Future<JsonResponse> putStudentCertificate({
+    required int? certificateId,
+    CertificateModel? certificateData,
+  });
+  Future<JsonResponse> deleteStudentCertificate({
+    required int? certificateId,
+  });
+  //===== Bottom of Certificate Section =====//
 }
 
 class StudentProvider extends BaseProvider implements IStudentProvider {
@@ -292,5 +305,89 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
       return Future.error(e.toString());
     }
   }
+
   //===== Bottom of Achievement Section =====//
+
+  ///===== Top of Certificate Section =====//
+  ///
+  ///POST Method for Add New Certificate Information
+  @override
+  Future<JsonResponse> postStudentCertificate({
+    CertificateModel? certificateData,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postCertificate].toString(),
+        certificateData!.toRawJson(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///PUT Method for Update by Replacing Certificate Information by ID
+  @override
+  Future<JsonResponse> putStudentCertificate({
+    required int? certificateId,
+    CertificateModel? certificateData,
+  }) async {
+    try {
+      final dataResponse = await put(
+        API.putOrDeleteCertificate(certificateId: certificateId),
+        certificateData!.toRawJson(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///DELETE Method for Removing Certificate Information by ID
+  @override
+  Future<JsonResponse> deleteStudentCertificate({
+    required int? certificateId,
+    CertificateModel? certificateData,
+  }) async {
+    try {
+      final dataResponse = await delete(
+        API.putOrDeleteCertificate(certificateId: certificateId),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  //===== Bottom of Certificate Section =====//
 }

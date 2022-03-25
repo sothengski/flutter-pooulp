@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pooulp_flutter/core/core.dart';
 
+import '../../core/core.dart';
 import '../modules.dart';
 
 class AddOrEditAchievementPage extends GetView<AchievementController> {

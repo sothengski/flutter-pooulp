@@ -68,5 +68,10 @@ class AppPages {
       page: () => const AddOrEditAchievementPage(),
       binding: AchievementBinding(),
     ),
+    GetPage(
+      name: Routes.addOrEditCertificateRoute,
+      page: () => const AddOrEditCertificatePage(),
+      binding: CertificateBinding(),
+    ),
   ];
 }

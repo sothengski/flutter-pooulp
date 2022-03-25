@@ -9,7 +9,6 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
 
   @override
   Widget build(BuildContext context) {
-    // controller.title = controller.title;
     return Scaffold(
       ///===== Top of appBar Component =====//
       appBar: CustomAppBar(
@@ -90,16 +89,101 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ///===== Top of Company Name Component =====//
-                CustomTextInput(
-                  topPadding: AppSize.s16,
-                  controller: controller.companyNameTextCtrl,
-                  inputTitle: 'Company Name',
-                  hintText: 'Enter the Company Name',
-                  isFilled: true,
-                  validator: Validator().notEmptyValidator,
-                ),
+                if (controller.expType.value == AppStrings.professionalKey)
+
+                  ///===== Top of Company Name Component =====//
+                  CustomTextInput(
+                    topPadding: AppSize.s16,
+                    controller: controller.companyNameTextCtrl,
+                    inputTitle: 'Company Name',
+                    hintText: 'Enter the Company Name',
+                    isFilled: true,
+                    validator: Validator().notEmptyValidator,
+                  )
                 //===== Bottom of Company Name Component =====//
+                else
+
+                  ///===== Top of Type Component =====//
+                  ContainerDialogWidget(
+                    inputTitle: 'Type',
+                    validatorFunction: (_) => Validator().notEmptyValidator(
+                      controller.selectedExperienceType.value.label ?? '',
+                    ),
+                    dialogWidget: MaterialDialogWidget(
+                      title: 'Select Experience Type',
+                      contentWidget: Obx(
+                        () => controller.experienceTypeList.isNotEmpty
+                            ? ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: controller.experienceTypeList.length,
+                                itemBuilder: (context, index) {
+                                  return Obx(
+                                    () => RowDataSelectionWidget.radioButton(
+                                      isLeftSideText: false,
+                                      isClickingValue: stringsComparation(
+                                        object1: controller
+                                            .experienceTypeList[index].label,
+                                        object2: controller
+                                            .selectedExperienceType.value.label,
+                                      ),
+                                      text: controller
+                                          .experienceTypeList[index].label,
+                                      onPressed: () {
+                                        controller
+                                                .selectedExperienceType.value =
+                                            controller
+                                                .selectedExperienceTypeOnClick(
+                                          selectedItem: controller
+                                              .experienceTypeList[index],
+                                        );
+                                        Navigator.pop(
+                                          context,
+                                          true,
+                                        ); // Issue:: It's not working properly on first click with Get.back();
+                                      },
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const Divider(
+                                    height: 1.0,
+                                    color: ColorsManager.grey300,
+                                  );
+                                },
+                              )
+                            : const LoadingWidget(),
+                      ),
+                    ),
+                    containerWidget: Obx(
+                      () => controller.selectedExperienceType.value.id == null
+                          ? const RowContentInputWidget(
+                              centerWidget: CustomTextWidget(
+                                text: 'Select your School',
+                                color: ColorsManager.grey400,
+                                fontWeight: FontWeight.w400,
+                                fontSize: AppSize.s16,
+                              ),
+                              suffixWidget: Icon(
+                                IconsManager.arrowDropDown,
+                                color: ColorsManager.grey600,
+                              ),
+                            )
+                          : RowContentInputWidget(
+                              centerWidget: CustomTextWidget(
+                                text: controller
+                                    .selectedExperienceType.value.label,
+                                color: ColorsManager.black,
+                                fontSize: AppSize.s16,
+                              ),
+                              suffixWidget: const Icon(
+                                IconsManager.arrowDropDown,
+                                color: ColorsManager.grey600,
+                              ),
+                            ),
+                    ),
+                  ),
+
+                //===== Bottom of Type Component =====//
 
                 ///===== Top of Title Component =====//
                 CustomTextInput(

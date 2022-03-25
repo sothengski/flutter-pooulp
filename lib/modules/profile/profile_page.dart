@@ -305,7 +305,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                       .addOrEditExperienceRoute,
                                                   arguments: [
                                                     Keys.addOperation,
-                                                    'professional',
+                                                    AppStrings.professionalKey,
                                                   ],
                                                 ),
                                               },
@@ -317,7 +317,8 @@ class ProfilePage extends GetView<ProfileController> {
                                                   .experiences!
                                                   .map(
                                                     (e) => e.type ==
-                                                            'professional'
+                                                            AppStrings
+                                                                .professionalKey
                                                         ? CustomListTileWidget(
                                                             text1: e.name,
                                                             text1Color:
@@ -360,7 +361,8 @@ class ProfilePage extends GetView<ProfileController> {
                                                                       .addOrEditExperienceRoute,
                                                                   arguments: [
                                                                     Keys.editOperation,
-                                                                    'professional',
+                                                                    AppStrings
+                                                                        .professionalKey,
                                                                     e,
                                                                   ],
                                                                 ),
@@ -388,11 +390,13 @@ class ProfilePage extends GetView<ProfileController> {
                                               padding: 0.0,
                                               isConstraints: true,
                                               onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
+                                                Get.toNamed(
+                                                  Routes
+                                                      .addOrEditExperienceRoute,
+                                                  arguments: [
+                                                    Keys.addOperation,
+                                                    AppStrings.personalKey,
+                                                  ],
                                                 ),
                                               },
                                             ),
@@ -402,7 +406,9 @@ class ProfilePage extends GetView<ProfileController> {
                                                   .value
                                                   .experiences!
                                                   .map(
-                                                    (e) => e.type == 'personal'
+                                                    (e) => e.type ==
+                                                            AppStrings
+                                                                .personalKey
                                                         ? CustomListTileWidget(
                                                             text1: e.name,
                                                             text1Color:
@@ -440,11 +446,15 @@ class ProfilePage extends GetView<ProfileController> {
                                                               isConstraints:
                                                                   true,
                                                               onClick: () => {
-                                                                customSnackbar(
-                                                                  msgTitle:
-                                                                      'This Page is under construction!',
-                                                                  msgContent:
-                                                                      'This Page is only view.\n Data will not save.',
+                                                                Get.toNamed(
+                                                                  Routes
+                                                                      .addOrEditExperienceRoute,
+                                                                  arguments: [
+                                                                    Keys.editOperation,
+                                                                    AppStrings
+                                                                        .personalKey,
+                                                                    e,
+                                                                  ],
                                                                 ),
                                                               },
                                                             ),

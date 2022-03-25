@@ -28,6 +28,7 @@ enum Endpoint {
   getSchools,
   postEducation,
   // putOrdeleteEducation,
+  getExperienceTypes,
   postExperience,
   // putOrDeleteExperience,
 }
@@ -66,6 +67,7 @@ class API {
     Endpoint.getSchools: '/schools',
     Endpoint.postEducation: '/users/me/student_profile/educations',
     Endpoint.postExperience: '/users/me/student_profile/experiences',
+    Endpoint.getExperienceTypes: '/tags/experiences',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

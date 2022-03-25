@@ -2,16 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pooulp_flutter/data/data.dart';
-import 'package:pooulp_flutter/modules/modules.dart';
 
 import '../../core/core.dart';
+import '../../data/data.dart';
+import '../../modules/modules.dart';
 
 class ExperienceController extends GetxController {
   final profileController = Get.find<ProfileController>();
 
   final studentProvider = Get.put(StudentProvider());
   final tagProvider = Get.find<TagProvider>();
+
   String? title;
   RxString expType = ''.obs;
   int expId = 0;
@@ -31,7 +32,12 @@ class ExperienceController extends GetxController {
 
   RxString selectedEndDateString = ''.obs;
 
-  List<dynamic>? tagList = [];
+  // List<dynamic>? tagList = [];
+  Rx<int> experienceTypeInt = 0.obs;
+
+  Rx<FieldModel> selectedExperienceType = FieldModel().obs;
+
+  RxList<FieldModel> experienceTypeList = <FieldModel>[].obs;
 
   Rx<bool> isSubmitBtnProcessing = false.obs;
 
@@ -40,7 +46,6 @@ class ExperienceController extends GetxController {
     super.onInit();
     title = Get.arguments[0].toString();
     expType.value = Get.arguments[1].toString();
-    debugPrint('expType.value:: ${expType.value}');
     if (title == Keys.editOperation) {
       final ExperienceModel expDataArg = Get.arguments[2] as ExperienceModel;
       expId = expDataArg.id!;
@@ -58,8 +63,27 @@ class ExperienceController extends GetxController {
       descriptionTextCtrl.text = expDataArg.description!;
       cityTextCtrl.text = expDataArg.addressCity!;
       countryTextCtrl.text = expDataArg.addressCountry!;
-      tagList!.add(expDataArg.tags);
+      experienceTypeInt.value = expDataArg.tags!.first! as int;
     }
+    if (expType.value == AppStrings.personalKey) {
+      await getExperienceTypeListResponseProvider();
+      if (title == Keys.editOperation) {
+        selectedExperienceType.value = experienceTypeList.firstWhere(
+          (element) => element.id == experienceTypeInt.value,
+        );
+      }
+    }
+  }
+
+  Future<List<FieldModel>> getExperienceTypeListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    experienceTypeList.addAll(await tagProvider.getExperienceTypes());
+    return experienceTypeList;
+  }
+
+  FieldModel selectedExperienceTypeOnClick({FieldModel? selectedItem}) {
+    return selectedItem!;
   }
 
   String selectedDateOnClickString({DateTime? selectedItem}) {
@@ -72,9 +96,7 @@ class ExperienceController extends GetxController {
         boolValue: isSubmitBtnProcessing.value,
       );
       final ExperienceModel expToBeAddOrEdit = ExperienceModel(
-        tags: [
-          // FieldModel(id: 247),
-        ],
+        tags: [selectedExperienceType.value],
         type: expType.value,
         company: companyNameTextCtrl.text.trim(),
         name: titleTextCtrl.text.trim(),
@@ -93,7 +115,6 @@ class ExperienceController extends GetxController {
         addressCountry: countryTextCtrl.text.trim(),
         description: descriptionTextCtrl.text.trim(),
       );
-      debugPrint('expToBeAddOrEdit:: ${expToBeAddOrEdit.toJson()}');
 
       makeRequestToExperienceAPI(
         expId: expId,
@@ -110,23 +131,24 @@ class ExperienceController extends GetxController {
   }) async {
     final JsonResponse responseData;
     if (operation == Keys.addOperation) {
-      debugPrint('=====addOperation=====');
-      responseData =
-          await studentProvider.postStudentExperience(experienceData: expData);
+      // debugPrint('=====addOperation=====');
+      responseData = await studentProvider.postStudentExperience(
+        experienceData: expData,
+      );
     } else if (operation == Keys.editOperation) {
-      debugPrint('=====editOperation=====');
+      // debugPrint('=====editOperation=====');
       responseData = await studentProvider.putStudentExperience(
         expId: expId,
         experienceData: expData,
       );
     } else {
-      debugPrint('=====deleteOperation=====');
+      // debugPrint('=====deleteOperation=====');
       responseData = await studentProvider.deleteStudentExperience(
         expId: expId,
       );
     }
     if (responseData.success!) {
-      debugPrint('=====success=====');
+      // debugPrint('=====success=====');
       profileController.getStudentInfoResponseProvider();
       isSubmitBtnProcessing.value = switchingBooleanValue(
         boolValue: isSubmitBtnProcessing.value,

@@ -43,10 +43,12 @@ class CertificateModel {
         'id': id,
         'title': title,
         'description': description,
-        'received_date':
-            "${receivedDate!.year.toString().padLeft(4, '0')}-${receivedDate!.month.toString().padLeft(2, '0')}-${receivedDate!.day.toString().padLeft(2, '0')}",
-        'expiration_date':
-            "${expirationDate!.year.toString().padLeft(4, '0')}-${expirationDate!.month.toString().padLeft(2, '0')}-${expirationDate!.day.toString().padLeft(2, '0')}",
+        'received_date': receivedDate == null
+            ? null
+            : "${receivedDate!.year.toString().padLeft(4, '0')}-${receivedDate!.month.toString().padLeft(2, '0')}-${receivedDate!.day.toString().padLeft(2, '0')}",
+        'expiration_date': expirationDate == null
+            ? null
+            : "${expirationDate!.year.toString().padLeft(4, '0')}-${expirationDate!.month.toString().padLeft(2, '0')}-${expirationDate!.day.toString().padLeft(2, '0')}",
       }..removeWhere((_, v) => v == null);
 
   @override

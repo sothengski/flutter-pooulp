@@ -49,8 +49,9 @@ class AchievementModel {
         'name': name,
         'description': description,
         // 'date_completion': dateCompletion?.toString(),
-        'date_completion':
-            "${dateCompletion!.year.toString().padLeft(4, '0')}-${dateCompletion!.month.toString().padLeft(2, '0')}-${dateCompletion!.day.toString().padLeft(2, '0')}",
+        'date_completion': dateCompletion == null
+            ? null
+            : "${dateCompletion!.year.toString().padLeft(4, '0')}-${dateCompletion!.month.toString().padLeft(2, '0')}-${dateCompletion!.day.toString().padLeft(2, '0')}",
         'fields': fields == null || fields == []
             ? []
             : List<dynamic>.from(fields!.map((x) => x.toJson())),

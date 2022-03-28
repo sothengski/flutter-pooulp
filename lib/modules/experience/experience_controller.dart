@@ -63,7 +63,9 @@ class ExperienceController extends GetxController {
       descriptionTextCtrl.text = expDataArg.description!;
       cityTextCtrl.text = expDataArg.addressCity!;
       countryTextCtrl.text = expDataArg.addressCountry!;
-      experienceTypeInt.value = expDataArg.tags!.first! as int;
+      if (expType.value == AppStrings.personalKey) {
+        experienceTypeInt.value = expDataArg.tags!.first! as int;
+      }
     }
     if (expType.value == AppStrings.personalKey) {
       await getExperienceTypeListResponseProvider();

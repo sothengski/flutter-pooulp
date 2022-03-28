@@ -32,10 +32,11 @@ class EducationModel {
 
   String? get attendedFrom => dateFormatDashYYYYMMDD(date: dateStart);
   String? get attendedTo => dateFormatDashYYYYMMDD(date: dateEnd);
-  String? get attendedFromTo => '$attendedFrom - $attendedTo';
+  String? get attendedFromTo =>
+      '$attendedFrom ${attendedTo == null || attendedTo == '' ? '' : '- $attendedTo'}';
 
   String? get schoolCityAndCountry =>
-      '${school!.addressCity} - ${school!.addressCountry}';
+      '${school!.addressCity} ${school!.addressCountry == null || school!.addressCountry == '' ? '' : '- ${school!.addressCountry}'}';
 
   factory EducationModel.fromRawJson(String str) => EducationModel.fromJson(
         json.decode(str) as Map<String, dynamic>,

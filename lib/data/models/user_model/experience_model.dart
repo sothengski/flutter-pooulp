@@ -33,9 +33,11 @@ class ExperienceModel {
 
   String? get attendedFrom => dateFormatDashYYYYMMDD(date: dateStart);
   String? get attendedTo => dateFormatDashYYYYMMDD(date: dateEnd);
-  String? get attendedFromTo => '$attendedFrom - $attendedTo';
+  String? get attendedFromTo =>
+      '$attendedFrom ${attendedTo == null || attendedTo == '' ? '' : '- $attendedTo'}';
 
-  String? get companyCityAndCountry => '$addressCity - $addressCountry';
+  String? get companyCityAndCountry =>
+      '$addressCity ${addressCountry == null || addressCountry == '' ? '' : '- $addressCountry'}';
 
   factory ExperienceModel.fromRawJson(String str) => ExperienceModel.fromJson(
         json.decode(str) as Map<String, dynamic>,

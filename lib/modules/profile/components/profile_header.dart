@@ -158,7 +158,7 @@ class ProfileHeader extends StatelessWidget {
                 bottomPadding: 2.0,
                 leftPadding: 2.0,
                 rightPadding: 2.0,
-                insideObj: CachedNetworkImgWidget(
+                child: CachedNetworkImgWidget(
                   imgUrl: profileImg,
                   borderRadius: 75,
                 ),

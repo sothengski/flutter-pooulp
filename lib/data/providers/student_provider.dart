@@ -52,6 +52,23 @@ abstract class IStudentProvider {
     required int? certificateId,
   });
   //===== Bottom of Certificate Section =====//
+
+  ///===== Top of Spoken Language Section =====//
+  Future<JsonResponse> postStudentSpokenLanguageList({
+    List<FieldModel>? languageListData,
+  });
+  Future<JsonResponse> postStudentSpokenLanguage({
+    required int? languageId,
+    FieldModel? languageData,
+  });
+  Future<JsonResponse> putStudentSpokenLanguage({
+    required int? spokenLanguageId,
+    FieldModel? spokenLanguageData,
+  });
+  Future<JsonResponse> deleteStudentSpokenLanguage({
+    required int? spokenLanguageId,
+  });
+  //===== Bottom of Spoken Language Section =====//
 }
 
 class StudentProvider extends BaseProvider implements IStudentProvider {
@@ -367,7 +384,6 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
   @override
   Future<JsonResponse> deleteStudentCertificate({
     required int? certificateId,
-    CertificateModel? certificateData,
   }) async {
     try {
       final dataResponse = await delete(
@@ -390,4 +406,133 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
   }
 
   //===== Bottom of Certificate Section =====//
+
+  ///===== Top of Spoken Language Section =====//
+  ///
+  ///POST Method for Add a New Spoken Language Information
+  @override
+  Future<JsonResponse> postStudentSpokenLanguage({
+    required int? languageId,
+    FieldModel? languageData,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.postSpokenLanguage(languageId: languageId),
+        languageData!.toRawJson(),
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.postSpokenLanguage(languageId: languageId)},
+      //   languageData: ${languageData.toRawJson()}
+      //   ''',
+      // );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///POST Method for Add a New Spoken Languages List Information
+  @override
+  Future<JsonResponse> postStudentSpokenLanguageList({
+    List<FieldModel>? languageListData,
+  }) async {
+    // final List<FieldModel?> body = [spokenlanguageData];
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postSpokenLanguageList].toString(),
+        // spokenlanguageData!.toRawJson(),
+        fieldListToJson(languageListData),
+      );
+      // debugPrint(
+      //   '''
+      //   API: ${API.paths[Endpoint.postSpokenLanguageList].toString()}\n
+      //   POST Data: ${fieldListToJson(languageListData)}\n
+      //   response::${dataResponse.bodyString}''',
+      // );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///PUT Method for Update by Replacing Spoken Language Information by ID
+  @override
+  Future<JsonResponse> putStudentSpokenLanguage({
+    required int? spokenLanguageId,
+    FieldModel? spokenLanguageData,
+  }) async {
+    try {
+      final dataResponse = await put(
+        API.putOrDeleteSpokenLanguage(spokenLanguageId: spokenLanguageId),
+        spokenLanguageData!.toRawJson(),
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.putOrDeleteSpokenLanguage(spokenLanguageId: spokenLanguageId)}\n
+      //   POST Data: ${spokenLanguageData.toRawJson()}\n
+      //   response::${dataResponse.bodyString}''',
+      // );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///DELETE Method for Removing Spoken Language Information by ID
+  @override
+  Future<JsonResponse> deleteStudentSpokenLanguage({
+    required int? spokenLanguageId,
+  }) async {
+    try {
+      final dataResponse = await delete(
+        API.putOrDeleteSpokenLanguage(spokenLanguageId: spokenLanguageId),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  //===== Bottom of Spoken Language Section =====//
 }

@@ -80,7 +80,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                               '${jobOfferDetail.companyLocation} (${jobOfferDetail.workPlaceType})',
                           leftWidget: CustomBoxWidget(
                             size: 50,
-                            insideObj: CachedNetworkImgWidget(
+                            child: CachedNetworkImgWidget(
                               imgUrl: '${jobOfferDetail.enterprise!.logoUrl}',
                             ),
                           ),
@@ -153,7 +153,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomBoxWidget(
-                                  insideObj: CustomTextWidget(
+                                  child: CustomTextWidget(
                                     textAlign: TextAlign.center,
                                     text: jobOfferDetail.dateJobStartFormat !=
                                             ''
@@ -170,7 +170,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                       top: AppSize.s4,
                                     ),
                                     child: CustomBoxWidget(
-                                      insideObj: CustomTextWidget(
+                                      child: CustomTextWidget(
                                         textAlign: TextAlign.center,
                                         text:
                                             'End Date: ${jobOfferDetail.dateJobEndFormat}',
@@ -193,7 +193,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                               title: 'Working Duration',
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: CustomBoxWidget(
-                                insideObj: CustomTextWidget(
+                                child: CustomTextWidget(
                                   textAlign: TextAlign.center,
                                   text: '${jobOfferDetail.numberOfWorkPerWeek}',
                                   fontWeight: FontWeightManager.regular,
@@ -223,7 +223,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                               bottom: AppSize.s4,
                                             ),
                                             child: CustomBoxWidget(
-                                              insideObj: CustomTextWidget(
+                                              child: CustomTextWidget(
                                                 textAlign: TextAlign.center,
                                                 text:
                                                     '${jobOfferDetail.types![i].label}',
@@ -258,7 +258,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                               bottom: AppSize.s4,
                                             ),
                                             child: CustomBoxWidget(
-                                              insideObj: CustomTextWidget(
+                                              child: CustomTextWidget(
                                                 textAlign: TextAlign.center,
                                                 text:
                                                     '${jobOfferDetail.fields![i].label}',
@@ -388,7 +388,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             title: 'Enterprise ID',
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomBoxWidget(
-                              insideObj: CustomTextWidget(
+                              child: CustomTextWidget(
                                 textAlign: TextAlign.center,
                                 text:
                                     '${jobOfferDetail.enterprise!.enterpriseID}',
@@ -484,7 +484,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                               bottom: AppSize.s4,
                                             ),
                                             child: CustomBoxWidget(
-                                              insideObj: CustomTextWidget(
+                                              child: CustomTextWidget(
                                                 textAlign: TextAlign.center,
                                                 text:
                                                     '${jobOfferDetail.enterprise!.fields![i].label}',

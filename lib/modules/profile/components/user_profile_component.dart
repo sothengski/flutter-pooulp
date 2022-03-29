@@ -69,7 +69,7 @@ class UserProfileComponent extends StatelessWidget {
                   bottomPadding: 8.0,
                   isDivider: false,
                   leftWidget: CustomBoxWidget(
-                    insideObj: Icon(
+                    child: Icon(
                       Icons.work,
                       color: ColorsManager.primary75,
                       size: AppSize.s20,
@@ -232,7 +232,7 @@ class UserProfileComponent extends StatelessWidget {
                   bottomPadding: 8.0,
                   isDivider: false,
                   leftWidget: CustomBoxWidget(
-                    insideObj: Icon(
+                    child: Icon(
                       Icons.assignment,
                       color: ColorsManager.primary75,
                       size: AppSize.s20,

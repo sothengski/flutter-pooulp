@@ -32,9 +32,18 @@ class AppStrings {
   static const String removeText = 'Remove';
   static const String confirmationText = 'Confirmation';
   static const String saveText = 'Save';
+  static const String addText = 'Add';
 
   static const String personalKey = 'personal';
   static const String professionalKey = 'professional';
+}
+
+class LanguageLevelStrings {
+  static const String undefined = 'Undefined';
+  static const String beginner = 'Beginner';
+  static const String intermediate = 'Intermediate';
+  static const String professional = 'Professional';
+  static const String motherTongue = 'Mother tongue';
 }
 
 class OfferStrings {

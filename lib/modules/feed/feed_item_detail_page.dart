@@ -106,7 +106,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                             '${widget.feedItemDetail!.companyLocation} (${widget.feedItemDetail!.workPlaceType})',
                         leftWidget: CustomBoxWidget(
                           size: 50,
-                          insideObj: CachedNetworkImgWidget(
+                          child: CachedNetworkImgWidget(
                             imgUrl:
                                 '${widget.feedItemDetail!.enterprise!.logoUrl}',
                           ),
@@ -201,7 +201,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomBoxWidget(
-                                      insideObj: CustomTextWidget(
+                                      child: CustomTextWidget(
                                         textAlign: TextAlign.center,
                                         text: widget.feedItemDetail!
                                                     .dateJobStartFormat !=
@@ -222,7 +222,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                           top: AppSize.s4,
                                         ),
                                         child: CustomBoxWidget(
-                                          insideObj: CustomTextWidget(
+                                          child: CustomTextWidget(
                                             textAlign: TextAlign.center,
                                             text:
                                                 'End Date: ${widget.feedItemDetail!.dateJobEndFormat}',
@@ -249,7 +249,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                 titleColor: ColorsManager.primaryBlue,
                                 isDivider: false,
                                 childWidget: CustomBoxWidget(
-                                  insideObj: CustomTextWidget(
+                                  child: CustomTextWidget(
                                     textAlign: TextAlign.center,
                                     text:
                                         '${widget.feedItemDetail!.numberOfWorkPerWeek}',
@@ -293,7 +293,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                             bottom: AppSize.s4,
                                           ),
                                           child: CustomBoxWidget(
-                                            insideObj: CustomTextWidget(
+                                            child: CustomTextWidget(
                                               textAlign: TextAlign.center,
                                               text:
                                                   '${widget.feedItemDetail!.types![i].label}',
@@ -330,7 +330,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                             bottom: AppSize.s4,
                                           ),
                                           child: CustomBoxWidget(
-                                            insideObj: CustomTextWidget(
+                                            child: CustomTextWidget(
                                               textAlign: TextAlign.center,
                                               text:
                                                   '${widget.feedItemDetail!.fields![i].label}',
@@ -462,7 +462,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                           title: 'Enterprise ID',
                           titleColor: ColorsManager.primaryBlue,
                           childWidget: CustomBoxWidget(
-                            insideObj: CustomTextWidget(
+                            child: CustomTextWidget(
                               textAlign: TextAlign.center,
                               text:
                                   '${widget.feedItemDetail!.enterprise!.enterpriseID}',
@@ -510,7 +510,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                                 bottom: AppSize.s4,
                                               ),
                                               child: CustomBoxWidget(
-                                                insideObj: CustomTextWidget(
+                                                child: CustomTextWidget(
                                                   textAlign: TextAlign.center,
                                                   text:
                                                       '${widget.feedItemDetail!.enterprise!.fields![i].label}',

@@ -15,4 +15,6 @@ class Routes {
   static const addOrEditExperienceRoute = '/add_or_edit_experience';
   static const addOrEditAchievementRoute = '/add_or_edit_achievement';
   static const addOrEditCertificateRoute = '/add_or_edit_certificate';
+  static const addOrEditLanguageUsageRoute = '/add_or_edit_language_usage';
+  // static const addOrEditSkillRoute = '/add_or_edit_skill';
 }

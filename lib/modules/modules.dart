@@ -5,6 +5,7 @@ export 'education/education.dart';
 export 'experience/experience.dart';
 export 'feed/feed.dart';
 export 'home/home.dart';
+export 'language_usage/language_usage.dart';
 export 'network/network.dart';
 export 'offer/offer.dart';
 export 'profile/profile.dart';

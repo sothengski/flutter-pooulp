@@ -78,7 +78,7 @@ class OfferStateListComponent extends StatelessWidget {
                               unEqualStateColor: ColorsManager.white,
                               isTextColor: false,
                             ),
-                            insideObj: CustomTextWidget(
+                            child: CustomTextWidget(
                               text: '${item.total}',
                               fontSize: AppSize.s12,
                               color: containerColorState(

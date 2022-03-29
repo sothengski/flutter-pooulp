@@ -38,12 +38,12 @@ class ContactInformationComponent extends StatelessWidget {
             isLauching: true,
             text2Color: ColorsManager.blue,
             leftWidget: const CustomBoxWidget(
-              insideObj: Icon(
+              backgroundColor: ColorsManager.white,
+              child: Icon(
                 Icons.email,
                 color: ColorsManager.grey,
                 size: AppSize.s24,
               ),
-              backgroundColor: ColorsManager.white,
             ),
           ),
           CustomListTileWidget(
@@ -52,12 +52,12 @@ class ContactInformationComponent extends StatelessWidget {
             isLauching: true,
             text2Color: ColorsManager.blue,
             leftWidget: const CustomBoxWidget(
-              insideObj: Icon(
+              backgroundColor: ColorsManager.white,
+              child: Icon(
                 Icons.phone,
                 color: ColorsManager.grey,
                 size: AppSize.s24,
               ),
-              backgroundColor: ColorsManager.white,
             ),
           ),
           CustomListTileWidget(
@@ -68,12 +68,12 @@ class ContactInformationComponent extends StatelessWidget {
             bottomPadding: 8.0,
             isDivider: false,
             leftWidget: const CustomBoxWidget(
-              insideObj: Icon(
+              backgroundColor: ColorsManager.white,
+              child: Icon(
                 Icons.video_library,
                 color: ColorsManager.grey,
                 size: AppSize.s24,
               ),
-              backgroundColor: ColorsManager.white,
             ),
           ),
         ],

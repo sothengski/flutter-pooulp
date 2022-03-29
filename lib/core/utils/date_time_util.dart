@@ -1,5 +1,12 @@
 import 'package:intl/intl.dart';
 
+extension DateExtensions on DateTime {
+  String formatToPattern(String pattern) {
+    final DateFormat formatter = DateFormat(pattern);
+    return formatter.format(this);
+  }
+}
+
 String fullDateFormat(DateTime date) {
   return '${DateFormat('EEE dd-MMM-yyyy ').format(date)} at ${DateFormat.jms().format(date)}';
 }

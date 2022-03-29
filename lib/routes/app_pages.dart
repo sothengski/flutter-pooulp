@@ -73,5 +73,10 @@ class AppPages {
       page: () => const AddOrEditCertificatePage(),
       binding: CertificateBinding(),
     ),
+    GetPage(
+      name: Routes.addOrEditLanguageUsageRoute,
+      page: () => const AddOrEditLanguageUsagePage(),
+      binding: LanguageUsageBinding(),
+    ),
   ];
 }

@@ -35,6 +35,9 @@ enum Endpoint {
   // putOrDeleteAchievement,
   postCertificate,
   // putOrDeleteCertificate,
+  postSpokenLanguageList,
+  postSpokenLanguage,
+  // putOrDeleteSpokenLanguage,
 }
 
 class API {
@@ -74,6 +77,7 @@ class API {
     Endpoint.getExperienceTypes: '/tags/experiences',
     Endpoint.postAchievement: '/users/me/student_profile/achievements',
     Endpoint.postCertificate: '/users/me/student_profile/certificates',
+    Endpoint.postSpokenLanguageList: '/users/me/student_profile/languages',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';
@@ -103,4 +107,10 @@ class API {
 
   static String putOrDeleteCertificate({required int? certificateId}) =>
       '/users/me/student_profile/certificates/$certificateId';
+
+  static String postSpokenLanguage({required int? languageId}) =>
+      '/users/me/student_profile/languages/$languageId';
+
+  static String putOrDeleteSpokenLanguage({required int? spokenLanguageId}) =>
+      '/users/me/student_profile/languages/$spokenLanguageId';
 }

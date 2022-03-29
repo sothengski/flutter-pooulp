@@ -141,12 +141,12 @@ class ProfilePage extends GetView<ProfileController> {
                                     // isLauching: true,
                                     text2Color: ColorsManager.blue,
                                     leftWidget: const CustomBoxWidget(
-                                      insideObj: Icon(
+                                      backgroundColor: ColorsManager.white,
+                                      child: Icon(
                                         Icons.email_outlined,
                                         color: ColorsManager.grey,
                                         size: AppSize.s24,
                                       ),
-                                      backgroundColor: ColorsManager.white,
                                     ),
                                   ),
                                   CustomListTileWidget(
@@ -156,12 +156,12 @@ class ProfilePage extends GetView<ProfileController> {
                                     // isLauching: true,
                                     text2Color: ColorsManager.blue,
                                     leftWidget: const CustomBoxWidget(
-                                      insideObj: Icon(
+                                      backgroundColor: ColorsManager.white,
+                                      child: Icon(
                                         Icons.phone_outlined,
                                         color: ColorsManager.grey,
                                         size: AppSize.s24,
                                       ),
-                                      backgroundColor: ColorsManager.white,
                                     ),
                                   ),
                                   CustomListTileWidget(
@@ -173,12 +173,12 @@ class ProfilePage extends GetView<ProfileController> {
                                     bottomPadding: 8.0,
                                     isDivider: false,
                                     leftWidget: const CustomBoxWidget(
-                                      insideObj: Icon(
+                                      backgroundColor: ColorsManager.white,
+                                      child: Icon(
                                         Icons.video_library_outlined,
                                         color: ColorsManager.grey,
                                         size: AppSize.s24,
                                       ),
-                                      backgroundColor: ColorsManager.white,
                                     ),
                                   ),
                                 ],
@@ -339,7 +339,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                             leftWidget:
                                                                 const CustomBoxWidget(
                                                               size: 40,
-                                                              insideObj: Icon(
+                                                              child: Icon(
                                                                 Icons.work,
                                                                 color: ColorsManager
                                                                     .primary75,
@@ -429,7 +429,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                             leftWidget:
                                                                 const CustomBoxWidget(
                                                               size: 40,
-                                                              insideObj: Icon(
+                                                              child: Icon(
                                                                 Icons.work,
                                                                 color: ColorsManager
                                                                     .primary75,
@@ -602,11 +602,12 @@ class ProfilePage extends GetView<ProfileController> {
                                               padding: 0.0,
                                               isConstraints: true,
                                               onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
+                                                Get.toNamed(
+                                                  Routes
+                                                      .addOrEditLanguageUsageRoute,
+                                                  arguments: [
+                                                    Keys.addOperation
+                                                  ],
                                                 ),
                                               },
                                             ),
@@ -696,7 +697,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                       leftWidget:
                                                           const CustomBoxWidget(
                                                         size: 40,
-                                                        insideObj: Icon(
+                                                        child: Icon(
                                                           Icons.card_membership,
                                                           color: ColorsManager
                                                               .primary75,
@@ -781,7 +782,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                       leftWidget:
                                                           const CustomBoxWidget(
                                                         size: 40,
-                                                        insideObj: Icon(
+                                                        child: Icon(
                                                           Icons.emoji_events,
                                                           color: ColorsManager
                                                               .primary75,

@@ -32,7 +32,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
               topMargin: AppSize.s16,
               backgroundColor: ColorsManager.grey200,
               isCircle: true,
-              insideObj: Stack(
+              child: Stack(
                 children: [
                   Obx(
                     () => CachedNetworkImgWidget(

@@ -1,4 +1,25 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:convert';
+
+import '/core/core.dart';
+
+List<FieldModel>? proficiencyList = <FieldModel>[
+  FieldModel(id: 0, label: LanguageLevelStrings.undefined, level: 0),
+  FieldModel(id: 1, label: LanguageLevelStrings.beginner, level: 1),
+  FieldModel(id: 2, label: LanguageLevelStrings.intermediate, level: 2),
+  FieldModel(id: 3, label: LanguageLevelStrings.professional, level: 3),
+  FieldModel(id: 4, label: LanguageLevelStrings.motherTongue, level: 4),
+];
+
+List<FieldModel> fieldListFromJson(String str) => List<FieldModel>.from(
+      json
+          .decode(str)
+          .map((x) => FieldModel.fromJson(x as Map<String, dynamic>)) as List,
+    );
+
+String fieldListToJson(List<FieldModel?>? data) =>
+    json.encode(List<dynamic>.from(data!.map((x) => x!.toJson())));
 
 class FieldModel {
   final int? id;
@@ -23,10 +44,16 @@ class FieldModel {
     this.total,
   });
 
+  // FieldModel? get getProficiencyLevel =>
+  //     proficiencyList.firstWhere((element) => element.level == level);
+
+  String? get getLabelProficiencyLevel =>
+      proficiencyList!.firstWhere((element) => element.level == level).label;
+
   String? get displayLevel => level == null ? '' : 'Level $level';
 
   String? get displayLabelAndLevel =>
-      level == null ? '• $label' : '• $label - Level $level';
+      level == null ? '• $label' : '• $label - ${getLabelProficiencyLevel!}';
 
   factory FieldModel.fromRawJson(String str) => FieldModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
@@ -59,7 +86,8 @@ class FieldModel {
   @override
   String toString() {
     return '''
-    FieldModel(id: $id,
+    FieldModel(
+      id: $id,
       tagId: $tagId,
       type: $type,
       label: $label,

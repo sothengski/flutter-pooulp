@@ -38,12 +38,17 @@ class AppStrings {
   static const String professionalKey = 'professional';
 }
 
-class LanguageLevelStrings {
+class LevelStrings {
   static const String undefined = 'Undefined';
   static const String beginner = 'Beginner';
   static const String intermediate = 'Intermediate';
   static const String professional = 'Professional';
   static const String motherTongue = 'Mother tongue';
+}
+
+class SkillCategoryStrings {
+  static const String softSkill = 'Soft Skill';
+  static const String hardSkill = 'Hard Skill';
 }
 
 class OfferStrings {

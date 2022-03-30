@@ -16,6 +16,7 @@ class ContainerDialogWidget extends StatelessWidget {
   final double? inputTitleMarginTop;
   final double? inputTitleMarginBottom;
   final FormFieldValidator<String>? validatorFunction;
+  final bool? isTap;
   // final FormFieldValidator? validatorFunction;
 
   const ContainerDialogWidget({
@@ -29,6 +30,7 @@ class ContainerDialogWidget extends StatelessWidget {
     this.inputTitleMarginTop = AppSize.s12,
     this.inputTitleMarginBottom = AppSize.s12,
     this.validatorFunction,
+    this.isTap = true,
   }) : super(key: key);
 
   @override
@@ -46,54 +48,56 @@ class ContainerDialogWidget extends StatelessWidget {
           height: 3.0,
         ),
         GestureDetector(
-          onTap: () => {
-            unFocusKeyBoard(context),
-            if (dialogType == DialogType.dateTimePickerDialog)
-              DatePicker.showDatePicker(
-                context,
-                minTime: DateTime(1970),
-                // maxTime: DateTime(2009, 12, 31),
-                currentTime: currentTime,
-                // locale: LocaleType.kh,
-                theme: const DatePickerTheme(
-                  headerColor: ColorsManager.grey100,
-                  backgroundColor: ColorsManager.grey100,
-                  itemStyle: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                  doneStyle: TextStyle(
-                    color: ColorsManager.primaryBlue,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onChanged: (date) {
-                  // print(
-                  //   'change $date in time zone ${date.timeZoneOffset.inHours}',
-                  // );
-                },
-                onConfirm: onConfirmDate,
-                // (date) {
-                //   // print('confirm $date');
-                //   controller!.selectedBirthdayOnClick(
-                //     selectedItem: date,
-                //   );
-                //   // controller!.selectedBirthdayOnClick(
-                //   //   selectedItem: '${date.year}-${date.month}-${date.day}',
-                //   // );
-                // },
-              )
-            else
-              dialogType == DialogType.bottomSheetDialog
-                  ? Get.bottomSheet(
-                      dialogWidget!,
-                    )
-                  : Get.dialog(
-                      dialogWidget!,
-                    )
-          },
+          onTap: isTap == false
+              ? () {}
+              : () => {
+                    unFocusKeyBoard(context),
+                    if (dialogType == DialogType.dateTimePickerDialog)
+                      DatePicker.showDatePicker(
+                        context,
+                        minTime: DateTime(1970),
+                        // maxTime: DateTime(2009, 12, 31),
+                        currentTime: currentTime,
+                        // locale: LocaleType.kh,
+                        theme: const DatePickerTheme(
+                          headerColor: ColorsManager.grey100,
+                          backgroundColor: ColorsManager.grey100,
+                          itemStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                          doneStyle: TextStyle(
+                            color: ColorsManager.primaryBlue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onChanged: (date) {
+                          // print(
+                          //   'change $date in time zone ${date.timeZoneOffset.inHours}',
+                          // );
+                        },
+                        onConfirm: onConfirmDate,
+                        // (date) {
+                        //   // print('confirm $date');
+                        //   controller!.selectedBirthdayOnClick(
+                        //     selectedItem: date,
+                        //   );
+                        //   // controller!.selectedBirthdayOnClick(
+                        //   //   selectedItem: '${date.year}-${date.month}-${date.day}',
+                        //   // );
+                        // },
+                      )
+                    else
+                      dialogType == DialogType.bottomSheetDialog
+                          ? Get.bottomSheet(
+                              dialogWidget!,
+                            )
+                          : Get.dialog(
+                              dialogWidget!,
+                            )
+                  },
           child: Container(
             // height: 50.0,
             alignment: Alignment.centerLeft,

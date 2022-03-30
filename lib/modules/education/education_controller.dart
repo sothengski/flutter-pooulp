@@ -142,6 +142,7 @@ class EducationController extends GetxController {
         msgContent:
             'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Education Information',
         bgColor: ColorsManager.green,
+        duration: DurationConstant.d1500,
       );
     }
   }

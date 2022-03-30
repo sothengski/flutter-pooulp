@@ -52,7 +52,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                     ),
                     child: Obx(
                       () => controller.languageListForSelection.isNotEmpty
-                          ? LanguageListSelector(
+                          ? FieldListSelector(
                               dataListforSelected:
                                   controller.languageListForSelection,
                               selectedItem: controller.selectedLanguage.value,
@@ -257,7 +257,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                             CustomTextWidget(
                                               text: '${e.label}',
                                               fontSize: AppSize.s16,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.w500,
                                               marginLeft: AppSize.s10,
                                               marginTop: AppSize.s8,
                                               marginBottom: AppSize.s24,

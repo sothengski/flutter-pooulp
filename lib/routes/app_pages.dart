@@ -78,5 +78,10 @@ class AppPages {
       page: () => const AddOrEditLanguageUsagePage(),
       binding: LanguageUsageBinding(),
     ),
+    GetPage(
+      name: Routes.addOrEditSkillRoute,
+      page: () => const AddOrEditSkillPage(),
+      binding: SkillBinding(),
+    ),
   ];
 }

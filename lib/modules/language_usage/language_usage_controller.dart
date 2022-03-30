@@ -29,10 +29,10 @@ class LanguageUsageController extends GetxController {
 
   RxList<FieldModel> proficiencyList = <FieldModel>[
     // FieldModel(id: 0, label: LanguageLevelStrings.levelUndefined, level: 0),
-    FieldModel(id: 1, label: LanguageLevelStrings.beginner, level: 1),
-    FieldModel(id: 2, label: LanguageLevelStrings.intermediate, level: 2),
-    FieldModel(id: 3, label: LanguageLevelStrings.professional, level: 3),
-    FieldModel(id: 4, label: LanguageLevelStrings.motherTongue, level: 4),
+    FieldModel(id: 1, label: LevelStrings.beginner, level: 1),
+    FieldModel(id: 2, label: LevelStrings.intermediate, level: 2),
+    FieldModel(id: 3, label: LevelStrings.professional, level: 3),
+    FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
   ].obs;
 
   @override
@@ -136,6 +136,7 @@ class LanguageUsageController extends GetxController {
         msgContent:
             'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Language Information',
         bgColor: ColorsManager.green,
+        duration: DurationConstant.d1500,
       );
     }
   }

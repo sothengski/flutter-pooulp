@@ -14,7 +14,7 @@ bool stringsComparation({
   required String? object1,
   required String? object2,
 }) {
-  if (object1 == object2) {
+  if (object1!.toLowerCase() == object2!.toLowerCase()) {
     return true;
   } else {
     return false;

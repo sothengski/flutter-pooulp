@@ -8,6 +8,9 @@ abstract class ITagProvider {
   Future<List<FieldModel>> getLanguages();
   Future<List<SchoolModel>> getSchools();
   Future<List<FieldModel>> getExperienceTypes();
+  Future<List<FieldModel>> getHardAndSoftSkills();
+  Future<List<FieldModel>> getOnlyHardSkills();
+  Future<List<FieldModel>> getOnlySoftSkills();
 }
 
 class TagProvider extends BaseProvider implements ITagProvider {
@@ -115,6 +118,73 @@ class TagProvider extends BaseProvider implements ITagProvider {
           jobOfferTypeList.add(FieldModel.fromJson(e as Map<String, dynamic>));
         }
         return jobOfferTypeList;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<List<FieldModel>> getHardAndSoftSkills() async {
+    try {
+      final dataResponse = await get(
+        API.paths[Endpoint.getHardAndSoftSkills].toString(),
+      );
+      final List<FieldModel> hardAndSoftSkillList = <FieldModel>[];
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse =
+            json.decode(dataResponse.bodyString.toString()) as List;
+        for (final e in apiResponse) {
+          hardAndSoftSkillList
+              .add(FieldModel.fromJson(e as Map<String, dynamic>));
+        }
+        return hardAndSoftSkillList;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<List<FieldModel>> getOnlyHardSkills() async {
+    try {
+      final dataResponse = await get(
+        API.paths[Endpoint.getOnlyHardSkills].toString(),
+      );
+      final List<FieldModel> hardSkillList = <FieldModel>[];
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse =
+            json.decode(dataResponse.bodyString.toString()) as List;
+        for (final e in apiResponse) {
+          hardSkillList.add(FieldModel.fromJson(e as Map<String, dynamic>));
+        }
+        return hardSkillList;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<List<FieldModel>> getOnlySoftSkills() async {
+    try {
+      final dataResponse = await get(
+        API.paths[Endpoint.getOnlySoftSkills].toString(),
+      );
+      final List<FieldModel> softSkillList = <FieldModel>[];
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse =
+            json.decode(dataResponse.bodyString.toString()) as List;
+        for (final e in apiResponse) {
+          softSkillList.add(FieldModel.fromJson(e as Map<String, dynamic>));
+        }
+        return softSkillList;
       }
     } catch (e) {
       return Future.error(e.toString());

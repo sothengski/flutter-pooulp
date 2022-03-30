@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../data/data.dart';
 import '../core.dart';
 
-class LanguageListSelector extends StatefulWidget {
+class FieldListSelector extends StatefulWidget {
   final List<FieldModel>? dataListforSelected;
   final FieldModel? selectedItem;
   final ScrollController? scrollController;
@@ -12,7 +12,7 @@ class LanguageListSelector extends StatefulWidget {
   final bool? showPhoneCode;
   final bool? showCountry;
 
-  const LanguageListSelector({
+  const FieldListSelector({
     this.dataListforSelected,
     this.scrollController,
     this.separatorIndex = 1,
@@ -24,10 +24,10 @@ class LanguageListSelector extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<LanguageListSelector> createState() => _LanguageListSelectorState();
+  State<FieldListSelector> createState() => _FieldListSelectorState();
 }
 
-class _LanguageListSelectorState extends State<LanguageListSelector> {
+class _FieldListSelectorState extends State<FieldListSelector> {
   late List<FieldModel>? filteredDataList = [];
 
   @override

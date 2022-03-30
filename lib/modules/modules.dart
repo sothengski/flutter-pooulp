@@ -10,5 +10,6 @@ export 'network/network.dart';
 export 'offer/offer.dart';
 export 'profile/profile.dart';
 export 'setting/setting.dart';
+export 'skill/skill.dart';
 export 'splash/splash.dart';
 export 'unknown/unknown_page.dart';

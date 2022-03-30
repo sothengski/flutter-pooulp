@@ -479,11 +479,11 @@ class ProfilePage extends GetView<ProfileController> {
                                               padding: 0.0,
                                               isConstraints: true,
                                               onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
+                                                Get.toNamed(
+                                                  Routes.addOrEditSkillRoute,
+                                                  arguments: [
+                                                    Keys.addOperation
+                                                  ],
                                                 ),
                                               },
                                             ),

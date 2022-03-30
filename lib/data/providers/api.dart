@@ -38,6 +38,9 @@ enum Endpoint {
   postSpokenLanguageList,
   postSpokenLanguage,
   // putOrDeleteSpokenLanguage,
+  getHardAndSoftSkills,
+  getOnlyHardSkills,
+  getOnlySoftSkills,
 }
 
 class API {
@@ -78,6 +81,9 @@ class API {
     Endpoint.postAchievement: '/users/me/student_profile/achievements',
     Endpoint.postCertificate: '/users/me/student_profile/certificates',
     Endpoint.postSpokenLanguageList: '/users/me/student_profile/languages',
+    Endpoint.getHardAndSoftSkills: '/tags/skills',
+    Endpoint.getOnlyHardSkills: '/tags/hardskills',
+    Endpoint.getOnlySoftSkills: '/tags/softskills',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';
@@ -113,4 +119,13 @@ class API {
 
   static String putOrDeleteSpokenLanguage({required int? spokenLanguageId}) =>
       '/users/me/student_profile/languages/$spokenLanguageId';
+
+  static String postSkillByCategory({required String? skillCategory}) =>
+      '/users/me/student_profile/$skillCategory';
+
+  static String putOrDeleteSkillByCategoryAndID({
+    required String? skillCategory,
+    required int? skillId,
+  }) =>
+      '/users/me/student_profile/$skillCategory/$skillId';
 }

@@ -97,6 +97,7 @@ class AchievementController extends GetxController {
         msgContent:
             'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Achievement Information',
         bgColor: ColorsManager.green,
+        duration: DurationConstant.d1500,
       );
     }
   }

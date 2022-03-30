@@ -69,6 +69,23 @@ abstract class IStudentProvider {
     required int? spokenLanguageId,
   });
   //===== Bottom of Spoken Language Section =====//
+
+  ///===== Top of Skill Section =====//
+  Future<JsonResponse> postStudentSkillList({
+    List<FieldModel>? skillData,
+  });
+  Future<JsonResponse> postStudentSkill({
+    required String? skillCategory,
+    FieldModel? skillData,
+  });
+  Future<JsonResponse> putStudentSkill({
+    required int? skillId,
+    FieldModel? skillData,
+  });
+  Future<JsonResponse> deleteStudentSkill({
+    required int? skillId,
+  });
+  //===== Bottom of Skill Section =====//
 }
 
 class StudentProvider extends BaseProvider implements IStudentProvider {
@@ -535,4 +552,137 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
   }
 
   //===== Bottom of Spoken Language Section =====//
+
+  ///===== Top of Skill Section =====//
+  ///
+  ///POST Method for Add a New Skill Information
+  @override
+  Future<JsonResponse> postStudentSkill({
+    required String? skillCategory,
+    FieldModel? skillData,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.postSkillByCategory(skillCategory: skillCategory),
+        skillData!.toRawJson(),
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.postSkillByCategory(skillCategory: skillCategory)},
+      //   skillData: ${skillData.toRawJson()}
+      //   ''',
+      // );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///POST Method for Add a New Skills List Information
+  @override
+  Future<JsonResponse> postStudentSkillList({
+    List<FieldModel>? skillData,
+  }) async {
+    // final List<FieldModel?> body = [spokenlanguageData];
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postSpokenLanguageList].toString(),
+        // spokenlanguageData!.toRawJson(),
+        fieldListToJson(skillData),
+      );
+      // debugPrint(
+      //   '''
+      //   API: ${API.paths[Endpoint.postSpokenLanguageList].toString()}\n
+      //   POST Data: ${fieldListToJson(languageListData)}\n
+      //   response::${dataResponse.bodyString}''',
+      // );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///PUT Method for Update by Replacing Skill Information by ID
+  @override
+  Future<JsonResponse> putStudentSkill({
+    required int? skillId,
+    FieldModel? skillData,
+  }) async {
+    try {
+      final dataResponse = await put(
+        API.putOrDeleteSkillByCategoryAndID(
+          skillCategory: 'hardskills',
+          skillId: skillId,
+        ),
+        skillData!.toRawJson(),
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.putOrDeleteSpokenLanguage(spokenLanguageId: spokenLanguageId)}\n
+      //   POST Data: ${spokenLanguageData.toRawJson()}\n
+      //   response::${dataResponse.bodyString}''',
+      // );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///DELETE Method for Removing Skill Information by ID
+  @override
+  Future<JsonResponse> deleteStudentSkill({required int? skillId}) async {
+    try {
+      final dataResponse = await delete(
+        API.putOrDeleteSkillByCategoryAndID(
+          skillCategory: 'skills',
+          skillId: skillId,
+        ),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  //===== Bottom of Skill Section =====//
 }

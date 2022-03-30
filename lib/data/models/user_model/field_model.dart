@@ -5,11 +5,16 @@ import 'dart:convert';
 import '/core/core.dart';
 
 List<FieldModel>? proficiencyList = <FieldModel>[
-  FieldModel(id: 0, label: LanguageLevelStrings.undefined, level: 0),
-  FieldModel(id: 1, label: LanguageLevelStrings.beginner, level: 1),
-  FieldModel(id: 2, label: LanguageLevelStrings.intermediate, level: 2),
-  FieldModel(id: 3, label: LanguageLevelStrings.professional, level: 3),
-  FieldModel(id: 4, label: LanguageLevelStrings.motherTongue, level: 4),
+  FieldModel(id: 0, label: LevelStrings.undefined, level: 0),
+  FieldModel(id: 1, label: LevelStrings.beginner, level: 1),
+  FieldModel(id: 2, label: LevelStrings.intermediate, level: 2),
+  FieldModel(id: 3, label: LevelStrings.professional, level: 3),
+  FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
+];
+
+List<FieldModel>? skillCategoryList = <FieldModel>[
+  FieldModel(id: 0, label: SkillCategoryStrings.hardSkill),
+  FieldModel(id: 1, label: SkillCategoryStrings.softSkill),
 ];
 
 List<FieldModel> fieldListFromJson(String str) => List<FieldModel>.from(

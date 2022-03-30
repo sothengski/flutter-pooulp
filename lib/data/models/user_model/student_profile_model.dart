@@ -41,6 +41,51 @@ class StudentProfileModel {
     this.periods,
   });
 
+  double? get calculatingProfileCompleteness {
+    const int fieldCounter = 8;
+    const int fullPercentage = 100;
+    double completePercent = 0;
+    if (linkedinLink != '') {
+      completePercent += fullPercentage / fieldCounter;
+    }
+    if (skills != null) {
+      if (skills!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (spokenLanguages != null) {
+      if (spokenLanguages!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (educations != null) {
+      if (educations!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (experiences != null) {
+      if (experiences!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (achievements != null) {
+      if (achievements!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (certificates != null) {
+      if (certificates!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (periods != null) {
+      if (periods!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    return double.tryParse(completePercent.toStringAsFixed(2));
+  }
+
   factory StudentProfileModel.fromRawJson(String str) =>
       StudentProfileModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
@@ -106,15 +151,15 @@ class StudentProfileModel {
                 )
                 .toList()
             : [],
-        certificates: json['certificates'] != null || json['certificates'] != []
-            ? (json['certificates'] as List)
+        certificates: json['certificates'] == null || json['certificates'] == []
+            ? []
+            : (json['certificates'] as List)
                 .map(
                   (i) => CertificateModel.fromJson(
                     i as Map<String, dynamic>,
                   ),
                 )
-                .toList()
-            : [],
+                .toList(),
         periods: json['periods'] != null || json['periods'] != []
             ? (json['periods'] as List)
                 .map(

@@ -84,13 +84,38 @@ class ProfilePage extends GetView<ProfileController> {
                               rightMargin: AppSize.s16,
                               topMargin: AppSize.s12,
                               // bottomMargin: AppSize.s12,
-                              leftTitle: 'Profile Progress',
-                              rightWidget: const CustomTextWidget(
-                                text: '0%',
+                              leftTitle: 'Profile Completeness',
+                              rightWidget: CustomTextWidget(
+                                text:
+                                    '${controller.studentInfoRepsonse.value.calculatingProfileCompleteness.toString()} %',
                                 fontWeight: FontWeightManager.medium,
                               ),
                               titleFontSize: AppSize.s16,
-                              child: Container(),
+                              child: CustomBoxWidget(
+                                leftMargin: AppSize.s8,
+                                rightMargin: AppSize.s8,
+                                bottomMargin: AppSize.s12,
+                                backgroundColor: ColorsManager.grey200,
+                                topPadding: AppSize.s0,
+                                leftPadding: AppSize.s0,
+                                rightPadding: controller
+                                            .studentInfoRepsonse
+                                            .value
+                                            .calculatingProfileCompleteness!
+                                            .toInt() ==
+                                        100
+                                    ? 0
+                                    : (getWidth - AppSize.s48) -
+                                        ((getWidth - AppSize.s48) *
+                                            controller.studentInfoRepsonse.value
+                                                .calculatingProfileCompleteness!
+                                                .toInt() /
+                                            100),
+                                bottomPadding: AppSize.s0,
+                                child: const CustomBoxWidget(
+                                  backgroundColor: ColorsManager.primary75,
+                                ),
+                              ),
                             ),
 
                             ///===== Personal Information Component =====//
@@ -487,102 +512,108 @@ class ProfilePage extends GetView<ProfileController> {
                                                 ),
                                               },
                                             ),
-                                            child: Column(
+                                            child: Row(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                // CustomList(
-                                                //   title: 'Soft Skill',
-                                                //   subtitleList:
-                                                //       controller.mockSkillList,
-                                                // ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                    24.0,
-                                                    0.0,
-                                                    8.0,
-                                                    8.0,
-                                                  ),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const CustomTextWidget(
-                                                        text: 'Soft Skills',
-                                                        marginBottom: 5.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: controller
-                                                            .studentInfoRepsonse
-                                                            .value
-                                                            .skills!
-                                                            .map(
-                                                              (e) => e.type ==
-                                                                      Type.softSkill
-                                                                  ? CustomTextWidget(
-                                                                      text:
-                                                                          '• ${e.label}',
-                                                                      marginBottom:
-                                                                          5.0,
-                                                                    )
-                                                                  : Container(),
-                                                            )
-                                                            .toList(),
-                                                      )
-                                                    ],
+                                                Expanded(
+                                                  flex: 50,
+                                                  child: Container(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(
+                                                      24.0,
+                                                      0.0,
+                                                      8.0,
+                                                      8.0,
+                                                    ),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const CustomTextWidget(
+                                                          text:
+                                                              '${SkillCategoryStrings.hardSkill}s',
+                                                          marginBottom: 5.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: controller
+                                                              .studentInfoRepsonse
+                                                              .value
+                                                              .skills!
+                                                              .map(
+                                                                (e) => e.type ==
+                                                                        Type.hardSkill
+                                                                    ? CustomTextWidget(
+                                                                        text:
+                                                                            '${e.displayLabelAndCategory} \n   ${e.displayLevel}',
+                                                                        marginBottom:
+                                                                            8.0,
+                                                                        maxLine:
+                                                                            3,
+                                                                      )
+                                                                    : Container(),
+                                                              )
+                                                              .toList(),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                    24.0,
-                                                    0.0,
-                                                    8.0,
-                                                    8.0,
+                                                Expanded(
+                                                  flex: 50,
+                                                  child: Container(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(
+                                                      24.0,
+                                                      0.0,
+                                                      8.0,
+                                                      8.0,
+                                                    ),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const CustomTextWidget(
+                                                          text:
+                                                              '${SkillCategoryStrings.softSkill}s',
+                                                          marginBottom: 5.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: controller
+                                                              .studentInfoRepsonse
+                                                              .value
+                                                              .skills!
+                                                              .map(
+                                                                (e) => e.type ==
+                                                                        Type.softSkill
+                                                                    ? CustomTextWidget(
+                                                                        text:
+                                                                            '• ${e.label}',
+                                                                        marginBottom:
+                                                                            8.0,
+                                                                        maxLine:
+                                                                            3,
+                                                                      )
+                                                                    : Container(),
+                                                              )
+                                                              .toList(),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const CustomTextWidget(
-                                                        text: 'Hard Skills',
-                                                        marginBottom: 5.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: controller
-                                                            .studentInfoRepsonse
-                                                            .value
-                                                            .skills!
-                                                            .map(
-                                                              (e) => e.type ==
-                                                                      Type.hardSkill
-                                                                  ? CustomTextWidget(
-                                                                      text:
-                                                                          '${e.displayLabelAndCategory}',
-                                                                      marginBottom:
-                                                                          5.0,
-                                                                    )
-                                                                  : Container(),
-                                                            )
-                                                            .toList(),
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
+                                                ),
                                               ],
                                             ),
                                           ),

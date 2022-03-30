@@ -93,8 +93,8 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.achievementNameTextCtrl,
-                  inputTitle: 'Achievement Name',
-                  hintText: 'Enter the Achievement Name',
+                  inputTitle: 'Achievement Title',
+                  hintText: 'Enter your Achievement Title',
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),

@@ -161,7 +161,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                   topPadding: AppSize.s16,
                   controller: controller.fieldOfStudyTextCtrl,
                   inputTitle: 'Field of Study',
-                  hintText: 'Enter your field of study',
+                  hintText: 'Enter your Field of Study',
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),

@@ -105,7 +105,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
 
                   ///===== Top of Type Component =====//
                   ContainerDialogWidget(
-                    inputTitle: 'Type',
+                    inputTitle: 'Experience Type',
                     validatorFunction: (_) => Validator().notEmptyValidator(
                       controller.selectedExperienceType.value.label ?? '',
                     ),
@@ -158,7 +158,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                       () => controller.selectedExperienceType.value.id == null
                           ? const RowContentInputWidget(
                               centerWidget: CustomTextWidget(
-                                text: 'Select your School',
+                                text: 'Select your Experience Type',
                                 color: ColorsManager.grey400,
                                 fontWeight: FontWeight.w400,
                                 fontSize: AppSize.s16,
@@ -190,7 +190,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                   topPadding: AppSize.s16,
                   controller: controller.titleTextCtrl,
                   inputTitle: 'Title',
-                  hintText: 'Enter the Title',
+                  hintText: 'Enter your Title',
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),

@@ -35,7 +35,7 @@ class ExperienceController extends GetxController {
   // List<dynamic>? tagList = [];
   Rx<int> experienceTypeInt = 0.obs;
 
-  Rx<FieldModel> selectedExperienceType = FieldModel().obs;
+  Rx<FieldModel> selectedExperienceType = FieldModel(label: '').obs;
 
   RxList<FieldModel> experienceTypeList = <FieldModel>[].obs;
 

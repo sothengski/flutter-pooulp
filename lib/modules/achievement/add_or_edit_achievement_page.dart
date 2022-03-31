@@ -22,56 +22,14 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
               iconColor: ColorsManager.white,
               tooltip: AppStrings.removeText,
               onClick: () => Get.dialog(
-                MaterialDialogWidget(
-                  title: AppStrings.confirmationText,
-                  titleHorizontalMargin: AppSize.s12,
-                  contentWidget: const Center(
-                    child: CustomTextWidget(
-                      marginTop: AppSize.s12,
-                      marginBottom: AppSize.s12,
-                      text: 'Would you like to remove this information?',
+                ConfirmationDialogWidget(
+                  onPressed: () => {
+                    controller.makeRequestToAchievementAPI(
+                      achievementId: controller.achievementId,
+                      operation: Keys.deleteOperation,
                     ),
-                  ),
-                  actionWidget: Row(
-                    children: [
-                      Expanded(
-                        flex: 40,
-                        child: OutlinedButton.icon(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: const Icon(
-                            IconsManager.close,
-                            color: Colors.white,
-                          ),
-                          label: const CustomTextWidget(
-                            text: AppStrings.noText,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 40,
-                        child: OutlinedButton.icon(
-                          onPressed: () async => {
-                            controller.makeRequestToAchievementAPI(
-                              achievementId: controller.achievementId,
-                              operation: Keys.deleteOperation,
-                            ),
-                            Get.back(),
-                          },
-                          icon: const Icon(
-                            IconsManager.check,
-                            color: Colors.white,
-                          ),
-                          label: const CustomTextWidget(
-                            text: AppStrings.yesText,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    Get.back(),
+                  },
                 ),
               ),
             )

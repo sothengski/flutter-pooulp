@@ -48,12 +48,12 @@ class CustomAnimatedBottomBar extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: containerHeight,
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2),
           child: Row(
             mainAxisAlignment: mainAxisAlignment,
             children: items.map((item) {
               final index = items.indexOf(item);
-              return Expanded(
+              return Flexible(
                 child: GestureDetector(
                   onTap: () => onItemSelected(index),
                   child: ItemWidget(
@@ -101,7 +101,7 @@ class ItemWidget extends StatelessWidget {
       container: true,
       selected: isSelected,
       child: AnimatedContainer(
-        width: 130,
+        width: double.infinity, //130
         // width: isSelected ? 130 : 50,
         height: double.maxFinite,
         duration: animationDuration,

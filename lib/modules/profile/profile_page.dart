@@ -524,7 +524,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                       24.0,
                                                       0.0,
                                                       8.0,
-                                                      8.0,
+                                                      0.0,
                                                     ),
                                                     child: Column(
                                                       crossAxisAlignment:
@@ -573,7 +573,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                       24.0,
                                                       0.0,
                                                       8.0,
-                                                      8.0,
+                                                      0.0,
                                                     ),
                                                     child: Column(
                                                       crossAxisAlignment:
@@ -672,7 +672,8 @@ class ProfilePage extends GetView<ProfileController> {
                                                                 CustomTextWidget(
                                                               text:
                                                                   '${e.displayLabelAndLevel}',
-                                                              marginBottom: 5.0,
+                                                              marginBottom:
+                                                                  AppSize.s8,
                                                             ),
                                                           )
                                                           .toList(),

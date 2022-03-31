@@ -77,7 +77,7 @@ class LightColors implements IColors {
     tabbarSelectedColor = ColorsManager.red200;
     colorScheme = const ColorScheme.light().copyWith(
       primary: ColorsManager.primaryBlue, //for icon in inputtext when on focus
-      onPrimary: ColorsManager.white,
+      onPrimary: ColorsManager.primaryBlue,
       onSecondary: ColorsManager
           .primary25, //Icon Color inside floatingButton and Bg on Card Widget
       onSurface: ColorsManager.grey300, //border around the OutlinedButton

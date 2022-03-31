@@ -1,5 +1,6 @@
 export 'cached_network_img_widget.dart';
 export 'circle_flag.dart';
+export 'confirmation_dialog_widget.dart';
 export 'container_dialog_widget.dart';
 export 'country_list_selector.dart';
 export 'custom_animated_bottom_bar.dart';

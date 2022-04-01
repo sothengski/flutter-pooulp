@@ -119,6 +119,31 @@ class AuthProvider extends BaseProvider {
       return Future.error(e.toString());
     }
   }
+
+  ///===== Top of Delete User Account Section =====//
+  ///
+  ///DELETE Method for Auth Delete User Account Information
+  Future<JsonResponse> deleteUserAccount() async {
+    try {
+      final dataResponse = await delete(
+        API.paths[Endpoint.userInfo].toString(),
+      );
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      // if (dataResponse.hasError) {
+      //   // throw "(resp: ${dataResponse.bodyString})";
+      //   return response;
+      // } else {
+      return response;
+      // }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }
 
 // RESPONSE CODES#

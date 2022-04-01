@@ -8,6 +8,7 @@ class SettingController extends GetxController {
   final homeController = Get.put(HomeController());
   final profileController = Get.put(ProfileController());
   final userInfoProvider = Get.find<UserInfoProvider>();
+  final authProvider = Get.find<AuthProvider>();
 
   RxBool telecommutingRxBool = false.obs;
   RxBool shiftingRxBool = false.obs;
@@ -110,6 +111,27 @@ class SettingController extends GetxController {
         msgContent: 'Profile Information Updated',
         bgColor: ColorsManager.green,
       );
+    });
+  }
+
+  Future<void> makeRequestToAuthDeleteAccountAPI({
+    ProfileModel? userProfileData,
+    StudentProfileModel? studentProfileData,
+  }) async {
+    authProvider.deleteUserAccount().then((value) {
+      if (value.status == 200) {
+        customSnackbar(
+          msgTitle: 'Success',
+          msgContent: 'Your User Account Successfully Deleted.',
+          bgColor: ColorsManager.green,
+        );
+      } else {
+        customSnackbar(
+          msgTitle: 'Failed',
+          msgContent: '',
+          bgColor: ColorsManager.red,
+        );
+      }
     });
   }
 }

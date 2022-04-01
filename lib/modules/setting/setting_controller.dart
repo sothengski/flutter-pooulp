@@ -5,10 +5,12 @@ import '../../data/data.dart';
 import '../modules.dart';
 
 class SettingController extends GetxController {
-  final homeController = Get.put(HomeController());
-  final profileController = Get.put(ProfileController());
   final userInfoProvider = Get.find<UserInfoProvider>();
   final authProvider = Get.find<AuthProvider>();
+
+  final languageController = Get.put(LanguageController());
+  final homeController = Get.put(HomeController());
+  final profileController = Get.put(ProfileController());
 
   RxBool telecommutingRxBool = false.obs;
   RxBool shiftingRxBool = false.obs;

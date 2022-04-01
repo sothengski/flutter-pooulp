@@ -15,9 +15,11 @@ class LanguageController extends GetxController {
   final String defaultLanguage = 'en';
 
   final List<MenuOptionsModel> languageOptions = [
-    MenuOptionsModel(key: "en", value: "English"), //English
-    MenuOptionsModel(key: "km", value: "ភាសាខ្មែរ"), //Khmer
-    MenuOptionsModel(key: "zh", value: "简体中文"), //Chinese
+    MenuOptionsModel(key: "en", value: "English", flagPath: 'GB'), //English
+    MenuOptionsModel(key: "fr", value: "Français", flagPath: 'FR'), //Khmer
+    MenuOptionsModel(key: "nl", value: "Nederlands", flagPath: 'NL'), //Chinese
+    // MenuOptionsModel(key: "km", value: "ភាសាខ្មែរ", flagPath: 'KH'), //Khmer
+    // MenuOptionsModel(key: "zh", value: "简体中文", flagPath: 'CN'), //Chinese
   ];
 
   // RxString selected = "English".obs;

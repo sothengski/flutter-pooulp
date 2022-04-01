@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 
 ///==================== Colors ====================
 class ColorsManager {
-  static const primary = Color(0xFFFF7E65);
-  static const primary75 = Color(0xFFFF9E8B); //primaryColor with 75% Opacity
-  static const primary50 = Color(0xFFFFBFB3); //primaryColor with 50% Opacity
-  static const primary25 = Color(0xFFFFDFD8); //primaryColor with 25% Opacity
-  static const primaryBlue = Color(0xFF364454);
+  static const primary = Color(0xFFFC247F); // before 0xFFFF7E65
+  static const primary75 =
+      Color(0xFFFD5B9F); //primaryColor with 75% Opacity // before 0xFFFF9E8B
+  static const primary50 =
+      Color(0xFFFE92BF); //primaryColor with 50% Opacity // before 0xFFFFBFB3
+  static const primary25 =
+      Color(0xFFFEC8DF); //primaryColor with 25% Opacity // before 0xFFFFDFD8
+  static const primaryBlue = Color(0xFF000E8A); // before 0xFF364454
+  static const primaryBlue75 = Color(0xFF000E8A);
+  static const primaryBlue50 = Color(0xFF000E8A);
+  static const primaryBlue25 = Color(0xFF000E8A);
 
   static const white = Color(0xFFFFFFFF);
 

@@ -24,6 +24,11 @@ class Validator {
 
   static const enterAValidField = "Please enter a valid";
 
+  TextInputFormatter avoidSpaceInputFormatter() =>
+      FilteringTextInputFormatter.deny(
+        RegExp(Validator.avoidSpaceRegExpPattern),
+      );
+
   String? emailValidator(String? value) {
     final RegExp regex = RegExp(emailRegExpPattern);
 
@@ -36,12 +41,12 @@ class Validator {
     }
   }
 
-  String? passwordValidator(String? value) {
+  String? passwordValidatorWithMin6Chars(String? value) {
     final RegExp regex = RegExp(lengthMin6RegExppattern);
     if (value!.isEmpty || regex.hasMatch(emptySpaceRegExpPattern)) {
       return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {
-      return 'Password should be 6~15 characters.';
+      return 'Password should be at least 6 characters.';
     } else {
       return null;
     }

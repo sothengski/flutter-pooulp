@@ -18,6 +18,8 @@ class SettingController extends GetxController {
   RxInt radiusRxInt = 0.obs;
   RxString languageRxString = 'en'.obs;
 
+  RxBool isUpdating = false.obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -34,6 +36,11 @@ class SettingController extends GetxController {
         profileController.userProfileInfo.value.uiLanguage!;
     emailNotificationRxBool.value =
         profileController.userProfileInfo.value.emailNotification!;
+  }
+
+  bool? updatingBoolValue({bool? newValue}) {
+    isUpdating.value = true;
+    return newValue;
   }
 
   void dataSummitionAndValidation() {

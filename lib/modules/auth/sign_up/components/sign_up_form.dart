@@ -357,7 +357,8 @@ class SignUpForm extends GetView<SignUpController> {
                               topPadding: AppSize.s12,
                               bottomPadding:
                                   isStudent == true ? AppSize.s16 : 0.0,
-                              validator: Validator().passwordValidator,
+                              validator:
+                                  Validator().passwordValidatorWithMin6Chars,
                               inputFormatterList: [
                                 FilteringTextInputFormatter.deny(
                                   RegExp(Validator.avoidSpaceRegExpPattern),

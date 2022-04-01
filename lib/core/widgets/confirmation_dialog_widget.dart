@@ -27,6 +27,7 @@ class ConfirmationDialogWidget extends StatelessWidget {
               marginTop: AppSize.s12,
               marginBottom: AppSize.s12,
               text: dialogBody,
+              maxLine: 5,
             ),
           ),
       actionWidget: Row(

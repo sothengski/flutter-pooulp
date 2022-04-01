@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
+import '../../data/data.dart';
 import '../../routes/routes.dart';
 import 'setting.dart';
 
@@ -297,21 +298,42 @@ class SettingPage extends GetView<SettingController> {
                       ),
 
                       ///===== Top of Delete Account Component =====//
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: AppSize.s12),
-                        child: RowContentInputWidget(
-                          centerWidget: CustomTextWidget(
-                            marginLeft: AppSize.s12,
-                            textAlign: TextAlign.center,
-                            text: 'Delete Account',
-                            color: ColorsManager.red,
-                            fontSize: AppSize.s16,
+                      InkWell(
+                        onTap: () => Get.dialog(
+                          ConfirmationDialogWidget(
+                            dialogBody:
+                                'Warning: Your activity cannot be recovered after deleting your account.\n\nAre you sure you want to delete this account?',
+                            onPressed: () async => {
+                              Get.dialog(
+                                const LoadingWidget(),
+                              ),
+                              await Future.delayed(DurationConstant.d750, () {
+                                controller.makeRequestToAuthDeleteAccountAPI();
+                              }),
+                              AuthServices().removeToken().then(
+                                    (value) =>
+                                        Get.offAllNamed(Routes.splashRoute),
+                                  ),
+                              // Get.back(),
+                            },
                           ),
-                          suffixWidget: Padding(
-                            padding: EdgeInsets.only(right: AppSize.s12),
-                            child: Icon(
-                              Icons.keyboard_arrow_right_outlined,
-                              color: ColorsManager.grey,
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: AppSize.s12),
+                          child: RowContentInputWidget(
+                            centerWidget: CustomTextWidget(
+                              marginLeft: AppSize.s12,
+                              textAlign: TextAlign.center,
+                              text: 'Delete Account',
+                              color: ColorsManager.red,
+                              fontSize: AppSize.s16,
+                            ),
+                            suffixWidget: Padding(
+                              padding: EdgeInsets.only(right: AppSize.s12),
+                              child: Icon(
+                                Icons.keyboard_arrow_right_outlined,
+                                color: ColorsManager.grey,
+                              ),
                             ),
                           ),
                         ),

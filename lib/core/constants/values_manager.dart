@@ -36,6 +36,7 @@ class AppSize {
 
 class DurationConstant {
   static const Duration d250 = Duration(milliseconds: 250);
+  static const Duration d350 = Duration(milliseconds: 350);
   static const Duration d500 = Duration(milliseconds: 500);
   static const Duration d750 = Duration(milliseconds: 750);
   static const Duration d1000 = Duration(milliseconds: 1000);

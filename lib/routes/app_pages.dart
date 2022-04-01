@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../core/core.dart';
 import '../modules/modules.dart';
 import 'routes.dart';
 
@@ -47,7 +48,17 @@ class AppPages {
       name: Routes.settingsRoute,
       page: () => const SettingPage(),
       binding: SettingBinding(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: DurationConstant.d350,
     ),
+    GetPage(
+      name: Routes.changePasswordRoute,
+      page: () => const ChangePasswordPage(),
+      binding: ChangePasswordBinding(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: DurationConstant.d350,
+    ),
+
     GetPage(
       name: Routes.offerdetailRoute,
       page: () => OfferDetailPage(),

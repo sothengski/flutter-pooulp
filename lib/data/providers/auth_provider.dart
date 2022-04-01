@@ -75,6 +75,50 @@ class AuthProvider extends BaseProvider {
         // "${reps.body['code'] != null ? "\n- ${reps.body!['code']}" : ""}"
         ;
   }
+
+  ///===== Top of Change Password Section =====//
+  ///
+  ///PUT Method for Add a New Skill Information
+  Future<JsonResponse> putChangePassword({
+    required String? currentPassword,
+    required String? newPassword,
+    required String? newPasswordConfirmation,
+  }) async {
+    try {
+      final dataResponse = await put(
+        API.paths[Endpoint.putChangePassword].toString(),
+        {
+          "password": currentPassword,
+          "newPassword": newPassword,
+          "newPassword_confirmation": newPasswordConfirmation,
+        },
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.paths[Endpoint.putChangePassword].toString()},
+      //   {
+      //     "password": $currentPassword,
+      //     "newPassword": $newPassword,
+      //     "newPassword_confirmation": $newPasswordConfirmation,
+      //   },
+      //   ''',
+      // );
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      // if (dataResponse.hasError) {
+      //   // throw "(resp: ${dataResponse.bodyString})";
+      //   return response;
+      // } else {
+      return response;
+      // }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }
 
 // RESPONSE CODES#

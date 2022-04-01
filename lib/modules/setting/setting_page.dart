@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
+import '../../routes/routes.dart';
 import 'setting.dart';
 
 class SettingPage extends GetView<SettingController> {
@@ -9,30 +10,34 @@ class SettingPage extends GetView<SettingController> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      ///===== Top of Will Pop Scope Component =====//
-      onWillPop: () async {
-        Get.dialog(
-          const LoadingWidget(),
-        );
-        await Future.delayed(DurationConstant.d750, () {
-          controller.dataSummitionAndValidation();
-        });
-        Get.back();
-        return Future.value(true);
-      },
-      //===== Bottom of Will Pop Scope Component =====//
-      child: Scaffold(
-        appBar: CustomAppBar(
-          title: 'Setting Page',
-        ),
+    return Obx(
+      () => WillPopScope(
+        ///===== Top of Will Pop Scope Component =====//
+        onWillPop: controller.isUpdating.value == false
+            ? () async {
+                return Future.value(true);
+              }
+            : () async {
+                Get.dialog(
+                  const LoadingWidget(),
+                );
+                await Future.delayed(DurationConstant.d750, () {
+                  controller.dataSummitionAndValidation();
+                });
+                Get.back();
+                return Future.value(true);
+              },
+        //===== Bottom of Will Pop Scope Component =====//
+        child: Scaffold(
+          appBar: CustomAppBar(
+            title: 'Settings',
+          ),
 
-        ///===== Top of body Component =====//
-        body: SingleChildScrollView(
-          // physics: const ClampingScrollPhysics(),
-          padding: const EdgeInsets.only(bottom: AppSize.s32),
-          child: Obx(
-            () => Column(
+          ///===== Top of body Component =====//
+          body: SingleChildScrollView(
+            // physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.only(bottom: AppSize.s32),
+            child: Column(
               children: [
                 ///===== Top of More Information Component =====//
                 CustomContainerWidget(
@@ -56,7 +61,8 @@ class SettingPage extends GetView<SettingController> {
                         suffixWidget: Switch(
                           value: controller.telecommutingRxBool.value,
                           onChanged: (value) {
-                            controller.telecommutingRxBool.value = value;
+                            controller.telecommutingRxBool.value =
+                                controller.updatingBoolValue(newValue: value)!;
                           },
                           activeTrackColor: ColorsManager.primary25,
                           activeColor: ColorsManager.primary,
@@ -80,7 +86,8 @@ class SettingPage extends GetView<SettingController> {
                         suffixWidget: Switch(
                           value: controller.shiftingRxBool.value,
                           onChanged: (value) {
-                            controller.shiftingRxBool.value = value;
+                            controller.shiftingRxBool.value =
+                                controller.updatingBoolValue(newValue: value)!;
                           },
                           activeTrackColor: ColorsManager.primary25,
                           activeColor: ColorsManager.primary,
@@ -104,7 +111,8 @@ class SettingPage extends GetView<SettingController> {
                         suffixWidget: Switch(
                           value: controller.drivingLicenseRxBool.value,
                           onChanged: (value) {
-                            controller.drivingLicenseRxBool.value = value;
+                            controller.drivingLicenseRxBool.value =
+                                controller.updatingBoolValue(newValue: value)!;
                           },
                           activeTrackColor: ColorsManager.primary25,
                           activeColor: ColorsManager.primary,
@@ -128,7 +136,8 @@ class SettingPage extends GetView<SettingController> {
                         suffixWidget: Switch(
                           value: controller.hasAutoMobileRxBool.value,
                           onChanged: (value) {
-                            controller.hasAutoMobileRxBool.value = value;
+                            controller.hasAutoMobileRxBool.value =
+                                controller.updatingBoolValue(newValue: value)!;
                           },
                           activeTrackColor: ColorsManager.primary25,
                           activeColor: ColorsManager.primary,
@@ -159,6 +168,7 @@ class SettingPage extends GetView<SettingController> {
                           thumbColor: ColorsManager.primary,
                           label: '${controller.radiusRxInt.value}',
                           onChanged: (double newValue) {
+                            controller.isUpdating.value = true;
                             controller.radiusRxInt.value = newValue.toInt();
                           },
                         ),
@@ -222,21 +232,32 @@ class SettingPage extends GetView<SettingController> {
                       ),
 
                       ///===== Top of Email Notification Component =====//
-                      RowContentInputWidget(
-                        centerWidget: const CustomTextWidget(
-                          marginLeft: AppSize.s12,
-                          textAlign: TextAlign.center,
-                          text: 'Email Notification',
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidgetFlex: 20,
-                        suffixWidget: Switch(
-                          value: controller.emailNotificationRxBool.value,
-                          onChanged: (value) {
-                            controller.emailNotificationRxBool.value = value;
-                          },
-                          activeTrackColor: ColorsManager.primary25,
-                          activeColor: ColorsManager.primary,
+                      InkWell(
+                        onTap: () {
+                          controller.emailNotificationRxBool.value =
+                              controller.updatingBoolValue(
+                            newValue: !controller.emailNotificationRxBool.value,
+                          )!;
+                        },
+                        child: RowContentInputWidget(
+                          centerWidget: const CustomTextWidget(
+                            marginLeft: AppSize.s12,
+                            textAlign: TextAlign.center,
+                            text: 'Email Notification',
+                            fontSize: AppSize.s16,
+                          ),
+                          suffixWidgetFlex: 20,
+                          suffixWidget: Switch(
+                            value: controller.emailNotificationRxBool.value,
+                            onChanged: (value) {
+                              controller.emailNotificationRxBool.value =
+                                  controller.updatingBoolValue(
+                                newValue: value,
+                              )!;
+                            },
+                            activeTrackColor: ColorsManager.primary25,
+                            activeColor: ColorsManager.primary,
+                          ),
                         ),
                       ),
                       //===== Bottom of Email Notification Component =====//
@@ -246,20 +267,25 @@ class SettingPage extends GetView<SettingController> {
                       ),
 
                       ///===== Top of Change Password Component =====//
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: AppSize.s12),
-                        child: RowContentInputWidget(
-                          centerWidget: CustomTextWidget(
-                            marginLeft: AppSize.s12,
-                            textAlign: TextAlign.center,
-                            text: 'Change Password',
-                            fontSize: AppSize.s16,
-                          ),
-                          suffixWidget: Padding(
-                            padding: EdgeInsets.only(right: AppSize.s12),
-                            child: Icon(
-                              Icons.keyboard_arrow_right_outlined,
-                              color: ColorsManager.grey,
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed(Routes.changePasswordRoute);
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: AppSize.s12),
+                          child: RowContentInputWidget(
+                            centerWidget: CustomTextWidget(
+                              marginLeft: AppSize.s12,
+                              textAlign: TextAlign.center,
+                              text: 'Change Password',
+                              fontSize: AppSize.s16,
+                            ),
+                            suffixWidget: Padding(
+                              padding: EdgeInsets.only(right: AppSize.s12),
+                              child: Icon(
+                                Icons.keyboard_arrow_right_outlined,
+                                color: ColorsManager.grey,
+                              ),
                             ),
                           ),
                         ),
@@ -308,30 +334,30 @@ class SettingPage extends GetView<SettingController> {
               ],
             ),
           ),
-        ),
-        //===== Bottom of body Component =====//
+          //===== Bottom of body Component =====//
 
-        ///===== Top of bottomNavigationBar Component =====//
-        bottomNavigationBar: CustomMaterialButton(
-          leftPadding: AppSize.s12,
-          rightPadding: AppSize.s12,
-          bottomPadding: AppSize.s20,
-          text: 'Sign Out',
-          fontSize: 20.0,
-          buttonWidth: getWidth,
-          onPressed: () {
-            unFocusKeyBoard(context);
-            Get.dialog(
-              ConfirmationDialogWidget(
-                dialogBody: 'Are you sure you want to logout?',
-                onPressed: () => {
-                  controller.homeController.signOut(),
-                },
-              ),
-            );
-          },
+          ///===== Top of bottomNavigationBar Component =====//
+          bottomNavigationBar: CustomMaterialButton(
+            leftPadding: AppSize.s12,
+            rightPadding: AppSize.s12,
+            bottomPadding: AppSize.s20,
+            text: 'Sign Out',
+            fontSize: 20.0,
+            buttonWidth: getWidth,
+            onPressed: () {
+              unFocusKeyBoard(context);
+              Get.dialog(
+                ConfirmationDialogWidget(
+                  dialogBody: 'Are you sure you want to logout?',
+                  onPressed: () => {
+                    controller.homeController.signOut(),
+                  },
+                ),
+              );
+            },
+          ),
+          //===== Bottom of bottomNavigationBar Component =====//
         ),
-        //===== Bottom of bottomNavigationBar Component =====//
       ),
     );
   }

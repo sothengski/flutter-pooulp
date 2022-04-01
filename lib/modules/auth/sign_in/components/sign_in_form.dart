@@ -60,7 +60,7 @@ class SignInForm extends GetView<SignInController> {
                 obscureText: !controller.showPassword.value,
                 isFilled: true,
                 topPadding: AppSize.s12,
-                validator: Validator().passwordValidator,
+                validator: Validator().passwordValidatorWithMin6Chars,
                 inputFormatterList: [
                   FilteringTextInputFormatter.deny(
                     RegExp(Validator.avoidSpaceRegExpPattern),

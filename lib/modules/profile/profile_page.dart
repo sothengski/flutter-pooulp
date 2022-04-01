@@ -84,7 +84,7 @@ class ProfilePage extends GetView<ProfileController> {
                               rightMargin: AppSize.s16,
                               topMargin: AppSize.s12,
                               // bottomMargin: AppSize.s12,
-                              leftTitle: 'Profile Completeness',
+                              leftTitle: 'Profile Completeness'.toUpperCase(),
                               rightWidget: CustomTextWidget(
                                 text:
                                     '${controller.studentInfoRepsonse.value.calculatingProfileCompleteness.toString()} %',
@@ -153,6 +153,7 @@ class ProfilePage extends GetView<ProfileController> {
                                     CustomTextWidget(
                                       text:
                                           '${controller.userProfileInfo.value.description}',
+                                      color: ColorsManager.grey850,
                                       maxLine: 3,
                                       marginTop: AppSize.s4,
                                       marginLeft: AppSize.s16,
@@ -271,19 +272,21 @@ class ProfilePage extends GetView<ProfileController> {
                                                         text3:
                                                             '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
                                                         // bottomPadding: 8.0,
+                                                        // leftWidget:
+                                                        //     const CustomBoxWidget(
+                                                        //   size: 40,
+                                                        // ),
                                                         leftWidget:
                                                             const CustomBoxWidget(
                                                           size: 40,
+                                                          child: Icon(
+                                                            Icons
+                                                                .school_rounded,
+                                                            color: ColorsManager
+                                                                .primary75,
+                                                            size: AppSize.s20,
+                                                          ),
                                                         ),
-                                                        // leftWidget:
-                                                        //     const CustomBoxWidget(
-                                                        //   insideObj: Icon(
-                                                        //     Icons.school,
-                                                        //     color: ColorsManager
-                                                        //         .primary75,
-                                                        //     size: AppSize.s20,
-                                                        //   ),
-                                                        // ),
                                                         rightWidget:
                                                             CustomIconButtonWidget(
                                                           iconData: Icons
@@ -537,6 +540,8 @@ class ProfilePage extends GetView<ProfileController> {
                                                           marginBottom: 5.0,
                                                           fontWeight:
                                                               FontWeight.w600,
+                                                          color: ColorsManager
+                                                              .grey850,
                                                         ),
                                                         Column(
                                                           crossAxisAlignment:
@@ -552,6 +557,8 @@ class ProfilePage extends GetView<ProfileController> {
                                                                     ? CustomTextWidget(
                                                                         text:
                                                                             '${e.displayLabelAndCategory} \n   ${e.displayLevel}',
+                                                                        color: ColorsManager
+                                                                            .grey800,
                                                                         marginBottom:
                                                                             8.0,
                                                                         maxLine:
@@ -583,6 +590,8 @@ class ProfilePage extends GetView<ProfileController> {
                                                         const CustomTextWidget(
                                                           text:
                                                               '${SkillCategoryStrings.softSkill}s',
+                                                          color: ColorsManager
+                                                              .grey850,
                                                           marginBottom: 5.0,
                                                           fontWeight:
                                                               FontWeight.w600,
@@ -601,6 +610,8 @@ class ProfilePage extends GetView<ProfileController> {
                                                                     ? CustomTextWidget(
                                                                         text:
                                                                             '• ${e.label}',
+                                                                        color: ColorsManager
+                                                                            .grey800,
                                                                         marginBottom:
                                                                             8.0,
                                                                         maxLine:
@@ -672,6 +683,9 @@ class ProfilePage extends GetView<ProfileController> {
                                                                 CustomTextWidget(
                                                               text:
                                                                   '${e.displayLabelAndLevel}',
+                                                              color:
+                                                                  ColorsManager
+                                                                      .grey800,
                                                               marginBottom:
                                                                   AppSize.s8,
                                                             ),

@@ -191,37 +191,81 @@ class SettingPage extends GetView<SettingController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ///===== Top of Change Language Component =====//
-                      Padding(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: AppSize.s12),
-                        child: RowContentInputWidget(
-                          centerWidgetFlex: 50,
-                          centerWidget: const CustomTextWidget(
-                            marginLeft: AppSize.s12,
-                            textAlign: TextAlign.center,
-                            text: 'Language',
-                            fontSize: AppSize.s16,
+                      InkWell(
+                        onTap: () => Get.dialog(
+                          MaterialDialogWidget(
+                            title: 'Select a Language',
+                            titleHorizontalMargin: AppSize.s12,
+                            contentWidget: Center(
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: controller
+                                    .languageController.languageOptions.length,
+                                separatorBuilder: (context, index) {
+                                  return const Divider(
+                                    color: ColorsManager.grey600,
+                                  );
+                                },
+                                itemBuilder: (context, index) {
+                                  return RowContentInputWidget(
+                                    centerWidget: CustomTextWidget(
+                                      marginTop: AppSize.s12,
+                                      marginBottom: AppSize.s12,
+                                      text: controller.languageController
+                                          .languageOptions[index].value,
+                                      fontWeight: FontWeightManager.medium,
+                                      fontSize: AppSize.s16,
+                                    ),
+                                    prefixWidgetFlex: 25,
+                                    prefixWidget: Padding(
+                                      padding: const EdgeInsets.only(
+                                        right: AppSize.s8,
+                                      ),
+                                      child: CircleFlag(
+                                        controller.languageController
+                                            .languageOptions[index].flagPath!,
+                                        size: AppSize.s28,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           ),
-                          suffixWidgetFlex: 50,
-                          suffixWidget: Padding(
-                            padding: const EdgeInsets.only(right: AppSize.s12),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                CustomTextWidget(
-                                  textAlign: TextAlign.center,
-                                  text: controller.languageRxString.value,
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: AppSize.s4,
+                        ),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: AppSize.s12),
+                          child: RowContentInputWidget(
+                            centerWidgetFlex: 50,
+                            centerWidget: const CustomTextWidget(
+                              marginLeft: AppSize.s12,
+                              textAlign: TextAlign.center,
+                              text: 'Language',
+                              fontSize: AppSize.s16,
+                            ),
+                            suffixWidgetFlex: 50,
+                            suffixWidget: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: AppSize.s12),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  CustomTextWidget(
+                                    textAlign: TextAlign.center,
+                                    text: controller.languageRxString.value,
                                   ),
-                                  child: Icon(
-                                    Icons.keyboard_arrow_right_outlined,
-                                    color: ColorsManager.grey,
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: AppSize.s4,
+                                    ),
+                                    child: Icon(
+                                      Icons.keyboard_arrow_right_outlined,
+                                      color: ColorsManager.grey,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),

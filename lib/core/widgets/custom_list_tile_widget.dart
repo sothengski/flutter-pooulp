@@ -29,6 +29,7 @@ class CustomListTileWidget extends StatelessWidget {
   final double? bottomPadding;
   final Color? backgroundColor;
   final int? leftFlex;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const CustomListTileWidget({
     this.text1 = '',
@@ -57,6 +58,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.bottomPadding = 0.0,
     this.backgroundColor = ColorsManager.white,
     this.leftFlex = 10,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
     Key? key,
   }) : super(key: key);
 
@@ -83,7 +85,7 @@ class CustomListTileWidget extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: crossAxisAlignment,
           children: <Widget>[
             const SizedBox(
               width: 8.0,

@@ -20,8 +20,10 @@ class SignInPage extends GetView<SignInController> {
           IconButton(
             icon: const Icon(Icons.flag),
             color: ColorsManager.grey300,
-            tooltip: 'Language',
-            onPressed: () => changeLanguageDialog(context),
+            tooltip: 'settings.language'.tr,
+            onPressed: () => changeLanguageDialog(
+              languageOptions: controller.languageController.languageOptions,
+            ),
           ),
         ],
       ),
@@ -55,8 +57,8 @@ class SignInPage extends GetView<SignInController> {
                   padding: EdgeInsets.all(AppSize.s16),
                   child: SignInForm(),
                 ),
-                const CustomTextWidget(
-                  text: "Don't have an account yet?",
+                CustomTextWidget(
+                  text: 'auth.dontHaveAccount'.tr,
                   color: ColorsManager.white,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
@@ -65,8 +67,8 @@ class SignInPage extends GetView<SignInController> {
                 ),
                 GestureDetector(
                   onTap: () => Get.toNamed(Routes.signUpRoute),
-                  child: const CustomTextWidget(
-                    text: 'Register Now!',
+                  child: CustomTextWidget(
+                    text: 'auth.registerNow'.tr,
                     color: ColorsManager.white,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,

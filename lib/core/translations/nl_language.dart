@@ -10,6 +10,18 @@ const Map<String, String> nlNL = {
   'validator.passwordMin6': "Wachtwoord moet minimaal 6 tekens zijn.",
   'validator.passwordsDontMatch': "Wachtwoorden komen niet overeen.",
 
+  ///===== Auth =====//
+  'auth.logIn': "Log in",
+  'auth.email': "E-mail",
+  'auth.emailHint': "Voer uw e-mailadres in",
+  'auth.password': "Wachtwoord",
+  'auth.passwordHint': "Voer uw wachtwoord in",
+  'auth.forgotPassword': "Wachtwoord vergeten?",
+  'auth.loginButton': "Log in",
+  'auth.Or': "Of",
+  'auth.dontHaveAccount': "Heb je nog geen account?",
+  'auth.registerNow': "Registreer nu!",
+
   ///===== Settings =====//
   'settings.settingsTitle': "Instellingen",
   'settings.moreInformation': "Meer informatie",

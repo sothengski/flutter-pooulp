@@ -70,11 +70,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeManager.createTheme(
         AppThemeLight(),
       ),
-      locale: storageServices!.languageCode == 'nl'
-          ? const Locale('nl', 'NL')
-          : storageServices!.languageCode == 'fr'
-              ? const Locale('fr', 'FR')
-              : const Locale('en', 'US'),
+      locale: LanguageController().getLocale,
+      // locale: storageServices!.languageCode == 'nl'
+      //     ? const Locale('nl', 'NL')
+      //     : storageServices!.languageCode == 'fr'
+      //         ? const Locale('fr', 'FR')
+      //         : const Locale('en', 'US'),
 
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),

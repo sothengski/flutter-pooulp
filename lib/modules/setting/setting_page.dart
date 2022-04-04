@@ -274,7 +274,14 @@ class SettingPage extends GetView<SettingController> {
                                 children: [
                                   CustomTextWidget(
                                     textAlign: TextAlign.center,
-                                    text: controller.languageRxString.value,
+                                    text: controller
+                                        .languageController.languageOptions
+                                        .firstWhere(
+                                          (e) =>
+                                              e.key ==
+                                              controller.languageRxString.value,
+                                        )
+                                        .value,
                                   ),
                                   const Padding(
                                     padding: EdgeInsets.symmetric(

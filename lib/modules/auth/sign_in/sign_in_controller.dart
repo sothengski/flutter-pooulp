@@ -4,15 +4,18 @@ import 'package:get/get.dart';
 import '../../../core/core.dart';
 import '../../../data/data.dart';
 import '../../../routes/routes.dart';
+import '../../modules.dart';
 
 class SignInController extends GetxController with StateMixin<LoginModel> {
   final authProvider = Get.find<AuthProvider>();
+  final languageController = Get.put(LanguageController());
 
   final signInFormKey = GlobalKey<FormState>();
   // final formFieldKey = GlobalKey<FormFieldState>();
 
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+
   RxBool showPassword = false.obs;
 
   RxBool isSubmitBtnProcessing = false.obs;

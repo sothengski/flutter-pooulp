@@ -34,14 +34,14 @@ class LocalizationService extends Translations {
   // Needs to be same order with langs
   static final locales = [
     const Locale('en', 'US'),
-    const Locale('km', 'KH'),
-    const Locale('zh', 'ZH'),
+    const Locale('nl', 'NL'),
+    const Locale('fr', 'FR'),
   ];
 
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': enUS, // en_language.dart
-        'km_KH': kmKH, // km_language.dart
-        'zh_ZH': zhZH, // km_language.dart
+        'nl_NL': nlNL, // nl_language.dart
+        'fr_FR': frFR, // fr_language.dart
       };
 }

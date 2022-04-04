@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 
 import '../../data/data.dart';
-import '../home/home.dart';
+import '../modules.dart';
 
 class ProfileController extends GetxController {
   final homeController = Get.put(HomeController());
+  final languageController = Get.put(LanguageController());
+
   final userInfoProvider = Get.find<UserInfoProvider>();
 
   RxBool enterpriseSwitching = false.obs;
@@ -57,6 +59,9 @@ class ProfileController extends GetxController {
     userInfoRepsonse.value = await userInfoProvider.getUserInfo();
     userProfileInfo.value = userInfoRepsonse.value.profile!;
     // debugPrint('userInfoRepsonse: $userInfoRepsonse');
+    changeLanguageBasedOnProfileLanguage(
+      languageKey: userProfileInfo.value.uiLanguage,
+    );
     return userInfoRepsonse;
   }
 
@@ -73,5 +78,13 @@ class ProfileController extends GetxController {
 
   bool updateSwitchingToggle({bool? switchingNewValue}) {
     return !switchingNewValue!;
+  }
+
+  void changeLanguageBasedOnProfileLanguage({required String? languageKey}) {
+    if (languageController.currentLanguage != languageKey) {
+      languageController.updateLanguage(
+        languageKey,
+      );
+    }
   }
 }

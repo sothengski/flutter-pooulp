@@ -31,7 +31,7 @@ class SettingPage extends GetView<SettingController> {
         //===== Bottom of Will Pop Scope Component =====//
         child: Scaffold(
           appBar: CustomAppBar(
-            title: 'Settings',
+            title: 'settings.settingsTitle'.tr,
           ),
 
           ///===== Top of body Component =====//
@@ -46,16 +46,16 @@ class SettingPage extends GetView<SettingController> {
                   rightMargin: AppSize.s12,
                   topMargin: AppSize.s12,
                   bottomMargin: AppSize.s12,
-                  leftTitle: 'More Information'.toUpperCase(),
+                  leftTitle: 'settings.moreInformation'.tr.toUpperCase(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ///===== Top of Telecommuting Component =====//
                       RowContentInputWidget(
-                        centerWidget: const CustomTextWidget(
+                        centerWidget: CustomTextWidget(
                           marginLeft: AppSize.s12,
                           textAlign: TextAlign.center,
-                          text: 'Telecommuting',
+                          text: 'settings.telecommunicating'.tr,
                           fontSize: AppSize.s16,
                         ),
                         suffixWidgetFlex: 20,
@@ -77,10 +77,10 @@ class SettingPage extends GetView<SettingController> {
 
                       ///===== Top of ShiftingComponent =====//
                       RowContentInputWidget(
-                        centerWidget: const CustomTextWidget(
+                        centerWidget: CustomTextWidget(
                           marginLeft: AppSize.s12,
                           textAlign: TextAlign.center,
-                          text: 'Shifting',
+                          text: 'settings.shifting'.tr,
                           fontSize: AppSize.s16,
                         ),
                         suffixWidgetFlex: 20,
@@ -102,10 +102,10 @@ class SettingPage extends GetView<SettingController> {
 
                       ///===== Top of Driving License Component =====//
                       RowContentInputWidget(
-                        centerWidget: const CustomTextWidget(
+                        centerWidget: CustomTextWidget(
                           marginLeft: AppSize.s12,
                           textAlign: TextAlign.center,
-                          text: 'Driving License',
+                          text: 'settings.drivingLicense'.tr,
                           fontSize: AppSize.s16,
                         ),
                         suffixWidgetFlex: 20,
@@ -127,10 +127,10 @@ class SettingPage extends GetView<SettingController> {
 
                       ///===== Top of Has AutomobileComponent =====//
                       RowContentInputWidget(
-                        centerWidget: const CustomTextWidget(
+                        centerWidget: CustomTextWidget(
                           marginLeft: AppSize.s12,
                           textAlign: TextAlign.center,
-                          text: 'Has Automobile',
+                          text: 'settings.hasAutomobile'.tr,
                           fontSize: AppSize.s16,
                         ),
                         suffixWidgetFlex: 20,
@@ -156,7 +156,8 @@ class SettingPage extends GetView<SettingController> {
                         centerWidget: CustomTextWidget(
                           marginLeft: AppSize.s12,
                           textAlign: TextAlign.center,
-                          text: 'Radius(Km): ${controller.radiusRxInt.value}',
+                          text:
+                              '${'settings.radius'.tr}(Km): ${controller.radiusRxInt.value}',
                           fontSize: AppSize.s16,
                         ),
                         suffixWidgetFlex: 50,
@@ -194,7 +195,7 @@ class SettingPage extends GetView<SettingController> {
                       InkWell(
                         onTap: () => Get.dialog(
                           MaterialDialogWidget(
-                            title: 'Select a Language',
+                            title: 'settings.selectALanguage'.tr,
                             titleHorizontalMargin: AppSize.s12,
                             contentWidget: Center(
                               child: ListView.separated(
@@ -207,24 +208,44 @@ class SettingPage extends GetView<SettingController> {
                                   );
                                 },
                                 itemBuilder: (context, index) {
-                                  return RowContentInputWidget(
-                                    centerWidget: CustomTextWidget(
-                                      marginTop: AppSize.s12,
-                                      marginBottom: AppSize.s12,
-                                      text: controller.languageController
-                                          .languageOptions[index].value,
-                                      fontWeight: FontWeightManager.medium,
-                                      fontSize: AppSize.s16,
-                                    ),
-                                    prefixWidgetFlex: 25,
-                                    prefixWidget: Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: AppSize.s8,
+                                  return InkWell(
+                                    onTap: () => {
+                                      // controller.languageRxString.value =
+                                      //     controller.languageController
+                                      //         .languageOptions[index].key,
+                                      // controller.isUpdating.value = true,
+                                      // controller.languageController
+                                      //     .updateLanguage(
+                                      //       controller.languageController
+                                      //           .languageOptions[index].key,
+                                      //     ).then((value) => Get.back())
+                                      controller.changeLanguage(
+                                        languageKey: controller
+                                            .languageController
+                                            .languageOptions[index]
+                                            .key,
                                       ),
-                                      child: CircleFlag(
-                                        controller.languageController
-                                            .languageOptions[index].flagPath!,
-                                        size: AppSize.s28,
+                                      Get.back(),
+                                    },
+                                    child: RowContentInputWidget(
+                                      centerWidget: CustomTextWidget(
+                                        // marginTop: AppSize.s4,
+                                        // marginBottom: AppSize.s4,
+                                        text: controller.languageController
+                                            .languageOptions[index].value,
+                                        fontWeight: FontWeightManager.medium,
+                                        fontSize: AppSize.s16,
+                                      ),
+                                      prefixWidgetFlex: 25,
+                                      prefixWidget: Padding(
+                                        padding: const EdgeInsets.only(
+                                          right: AppSize.s8,
+                                        ),
+                                        child: CircleFlag(
+                                          controller.languageController
+                                              .languageOptions[index].flagPath!,
+                                          padding: AppSize.s16,
+                                        ),
                                       ),
                                     ),
                                   );
@@ -238,10 +259,10 @@ class SettingPage extends GetView<SettingController> {
                               const EdgeInsets.symmetric(vertical: AppSize.s12),
                           child: RowContentInputWidget(
                             centerWidgetFlex: 50,
-                            centerWidget: const CustomTextWidget(
+                            centerWidget: CustomTextWidget(
                               marginLeft: AppSize.s12,
                               textAlign: TextAlign.center,
-                              text: 'Language',
+                              text: 'settings.language'.tr,
                               fontSize: AppSize.s16,
                             ),
                             suffixWidgetFlex: 50,
@@ -285,10 +306,10 @@ class SettingPage extends GetView<SettingController> {
                           )!;
                         },
                         child: RowContentInputWidget(
-                          centerWidget: const CustomTextWidget(
+                          centerWidget: CustomTextWidget(
                             marginLeft: AppSize.s12,
                             textAlign: TextAlign.center,
-                            text: 'Email Notification',
+                            text: 'settings.emailNotifications'.tr,
                             fontSize: AppSize.s16,
                           ),
                           suffixWidgetFlex: 20,
@@ -316,16 +337,17 @@ class SettingPage extends GetView<SettingController> {
                         onTap: () {
                           Get.toNamed(Routes.changePasswordRoute);
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: AppSize.s12),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: AppSize.s12),
                           child: RowContentInputWidget(
                             centerWidget: CustomTextWidget(
                               marginLeft: AppSize.s12,
                               textAlign: TextAlign.center,
-                              text: 'Change Password',
+                              text: 'settings.changePassword'.tr,
                               fontSize: AppSize.s16,
                             ),
-                            suffixWidget: Padding(
+                            suffixWidget: const Padding(
                               padding: EdgeInsets.only(right: AppSize.s12),
                               child: Icon(
                                 Icons.keyboard_arrow_right_outlined,
@@ -346,7 +368,7 @@ class SettingPage extends GetView<SettingController> {
                         onTap: () => Get.dialog(
                           ConfirmationDialogWidget(
                             dialogBody:
-                                'Warning: Your activity cannot be recovered after deleting your account.\n\nAre you sure you want to delete this account?',
+                                "${'settings.delectAccountWarming'.tr}\n\n${'settings.deleteAccountConfirm'.tr}",
                             onPressed: () async => {
                               Get.dialog(
                                 const LoadingWidget(),
@@ -362,17 +384,18 @@ class SettingPage extends GetView<SettingController> {
                             },
                           ),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: AppSize.s12),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: AppSize.s12),
                           child: RowContentInputWidget(
                             centerWidget: CustomTextWidget(
                               marginLeft: AppSize.s12,
                               textAlign: TextAlign.center,
-                              text: 'Delete Account',
+                              text: 'settings.deleteAccount'.tr,
                               color: ColorsManager.red,
                               fontSize: AppSize.s16,
                             ),
-                            suffixWidget: Padding(
+                            suffixWidget: const Padding(
                               padding: EdgeInsets.only(right: AppSize.s12),
                               child: Icon(
                                 Icons.keyboard_arrow_right_outlined,
@@ -392,9 +415,9 @@ class SettingPage extends GetView<SettingController> {
                 //===== Bottom of Settings Component =====//
 
                 ///===== Top of App Version Component =====//
-                const CustomTextWidget(
+                CustomTextWidget(
                   textAlign: TextAlign.center,
-                  text: textEnAppVersion,
+                  text: "${'settings.appVersion'.tr}: $textAppVersion",
                 ),
                 //===== Bottom of App Version Component =====//
               ],
@@ -407,14 +430,14 @@ class SettingPage extends GetView<SettingController> {
             leftPadding: AppSize.s12,
             rightPadding: AppSize.s12,
             bottomPadding: AppSize.s20,
-            text: 'Sign Out',
+            text: 'settings.signOutButton'.tr,
             fontSize: 20.0,
             buttonWidth: getWidth,
             onPressed: () {
               unFocusKeyBoard(context);
               Get.dialog(
                 ConfirmationDialogWidget(
-                  dialogBody: 'Are you sure you want to logout?',
+                  dialogBody: 'settings.logOutConfirm'.tr,
                   onPressed: () => {
                     controller.homeController.signOut(),
                   },

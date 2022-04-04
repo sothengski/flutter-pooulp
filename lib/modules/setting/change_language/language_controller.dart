@@ -8,10 +8,6 @@ class LanguageController extends GetxController {
   final language = "".obs;
   final storage = Get.find<StorageServices>();
 
-  // final List<String> languageOptions = [
-  //   'English',
-  //   'ភាសាខ្មែរ',
-  // ];
   final String defaultLanguage = 'en';
 
   final List<MenuOptionsModel> languageOptions = [

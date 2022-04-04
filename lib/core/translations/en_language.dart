@@ -10,6 +10,18 @@ const Map<String, String> enUS = {
   'validator.passwordMin6': "Password should be at least 6 characters.",
   'validator.passwordsDontMatch': "Passwords don't match.",
 
+  ///===== Auth =====//
+  'auth.logIn': "Login",
+  'auth.email': "Email",
+  'auth.emailHint': "Enter your email",
+  'auth.password': "Password",
+  'auth.passwordHint': "Enter your password",
+  'auth.forgotPassword': "Forgot Password?",
+  'auth.loginButton': "Login",
+  'auth.Or': "Or",
+  'auth.dontHaveAccount': "Don't have an account yet?",
+  'auth.registerNow': "Register Now!",
+
   ///===== Settings =====//
   'settings.settingsTitle': "Settings",
   'settings.moreInformation': "More Information",

@@ -10,6 +10,18 @@ const Map<String, String> frFR = {
   'validator.passwordMin6': "Le mot de passe doit avoir au moins 6 caractères.",
   'validator.passwordsDontMatch': "Les mots de passe ne correspondent pas.",
 
+  ///===== Auth =====//
+  'auth.logIn': "Connexion",
+  'auth.email': "E-mail",
+  'auth.emailHint': "Entrer votre Email",
+  'auth.password': "Mot de passe",
+  'auth.passwordHint': "Tapez votre mot de passe",
+  'auth.forgotPassword': "Mot de passe oublié?",
+  'auth.loginButton': "Connexion",
+  'auth.Or': "Ou",
+  'auth.dontHaveAccount': "Vous n'avez pas encore de compte?",
+  'auth.registerNow': "S'inscrire maintenant!",
+
   ///===== Settings =====//
   'settings.settingsTitle': "Réglages",
   'settings.moreInformation': "Plus d'information",

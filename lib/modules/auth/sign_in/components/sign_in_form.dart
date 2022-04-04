@@ -31,7 +31,7 @@ class SignInForm extends GetView<SignInController> {
               CustomTextInput(
                 controller: controller.emailCtrl,
                 inputTitle: 'auth.email'.tr,
-                hintText: "Enter your email",
+                hintText: 'auth.emailHint'.tr,
                 isFilled: true,
                 topPadding: AppSize.s12,
                 validator: Validator().emailValidator,
@@ -40,7 +40,7 @@ class SignInForm extends GetView<SignInController> {
               CustomTextInput(
                 controller: controller.passwordCtrl,
                 inputTitle: 'auth.password'.tr,
-                hintText: "Enter your password",
+                hintText: 'auth.passwordHint'.tr,
                 suffixIcon: IconButton(
                   icon: !controller.showPassword.value
                       ? const Icon(
@@ -77,8 +77,8 @@ class SignInForm extends GetView<SignInController> {
                     msgTitle: 'This Page is under construction!',
                     msgContent: 'This Page is only view.\n Data will not save.',
                   ),
-                  child: const CustomTextWidget(
-                    text: 'Forgot password?',
+                  child: CustomTextWidget(
+                    text: 'auth.forgotPassword'.tr,
                     color: ColorsManager.primary,
                     textDecoration: TextDecoration.underline,
                     marginTop: AppSize.s16,
@@ -107,7 +107,7 @@ class SignInForm extends GetView<SignInController> {
               Visibility(
                 visible: !controller.isSubmitBtnProcessing.value,
                 child: CustomMaterialButton(
-                  text: "Login",
+                  text: 'auth.loginButton'.tr,
                   fontSize: 20.0,
                   buttonWidth: getWidth,
                   onPressed: () {
@@ -118,22 +118,22 @@ class SignInForm extends GetView<SignInController> {
               ),
               // ),
               Row(
-                children: const [
-                  Expanded(
+                children: [
+                  const Expanded(
                     child: Divider(
                       thickness: 1,
                       color: ColorsManager.grey600,
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   CustomTextWidget(
-                    text: 'Or',
+                    text: 'auth.Or'.tr,
                     fontSize: 20.0,
                     marginTop: AppSize.s16,
                     marginBottom: AppSize.s16,
                   ),
-                  SizedBox(width: 10),
-                  Expanded(
+                  const SizedBox(width: 10),
+                  const Expanded(
                     child: Divider(
                       thickness: 1,
                       color: ColorsManager.grey600,

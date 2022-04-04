@@ -27,7 +27,7 @@ class ChangePasswordController extends GetxController {
       return Validator()
           .passwordValidatorWithMin6Chars(newPasswordConfirmationCtrl.text);
     } else {
-      return "Passwords don't match.";
+      return 'validator.passwordsDontMatch'.tr;
     }
   }
 

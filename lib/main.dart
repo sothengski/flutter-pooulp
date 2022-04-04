@@ -70,10 +70,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeManager.createTheme(
         AppThemeLight(),
       ),
-      locale: storageServices!.languageCode == 'km'
-          ? const Locale('km', 'KH')
-          : storageServices!.languageCode == 'zh'
-              ? const Locale('zh', 'ZH')
+      locale: storageServices!.languageCode == 'nl'
+          ? const Locale('nl', 'NL')
+          : storageServices!.languageCode == 'fr'
+              ? const Locale('fr', 'FR')
               : const Locale('en', 'US'),
 
       fallbackLocale: LocalizationService.fallbackLocale,

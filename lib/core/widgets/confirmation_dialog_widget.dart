@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../core.dart';
 
@@ -10,8 +11,8 @@ class ConfirmationDialogWidget extends StatelessWidget {
 
   const ConfirmationDialogWidget({
     Key? key,
-    this.dialogTitle = AppStrings.confirmationText,
-    this.dialogBody = "Would you like to remove this information?",
+    this.dialogTitle, // = AppStrings.confirmationText,
+    this.dialogBody, // = "Would you like to remove this information?",
     this.contentWidget,
     required this.onPressed,
   }) : super(key: key);
@@ -19,14 +20,14 @@ class ConfirmationDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialDialogWidget(
-      title: dialogTitle,
+      title: dialogTitle ?? 'core.confirmation'.tr,
       titleHorizontalMargin: AppSize.s12,
       contentWidget: contentWidget ??
           Center(
             child: CustomTextWidget(
               marginTop: AppSize.s12,
               marginBottom: AppSize.s12,
-              text: dialogBody,
+              text: dialogBody ?? 'core.removeConfirm'.tr,
               maxLine: 5,
             ),
           ),
@@ -45,9 +46,9 @@ class ConfirmationDialogWidget extends StatelessWidget {
                 IconsManager.close,
                 color: Colors.white,
               ),
-              label: const CustomTextWidget(
+              label: CustomTextWidget(
                 marginRight: AppSize.s24,
-                text: AppStrings.noText,
+                text: 'core.no'.tr,
                 color: Colors.blue,
               ),
             ),
@@ -68,9 +69,9 @@ class ConfirmationDialogWidget extends StatelessWidget {
                 IconsManager.check,
                 color: Colors.white,
               ),
-              label: const CustomTextWidget(
+              label: CustomTextWidget(
                 marginRight: AppSize.s24,
-                text: AppStrings.yesText,
+                text: 'core.yes'.tr,
                 color: Colors.red,
               ),
             ),

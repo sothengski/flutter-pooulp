@@ -9,7 +9,7 @@ class Keys {
   static const String deleteOperation = 'Delete';
 }
 
-const String textEnAppVersion = "App Version: 1.0.10(10)";
+const String textAppVersion = "1.0.11 (11)";
 
 class LocalStorage {
   static const credentialName = 'Pooulp';

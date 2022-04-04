@@ -9,6 +9,7 @@ class SettingController extends GetxController {
   final authProvider = Get.find<AuthProvider>();
 
   final languageController = Get.put(LanguageController());
+
   final homeController = Get.put(HomeController());
   final profileController = Get.put(ProfileController());
 
@@ -44,6 +45,14 @@ class SettingController extends GetxController {
   bool? updatingBoolValue({bool? newValue}) {
     isUpdating.value = true;
     return newValue;
+  }
+
+  void changeLanguage({required String? languageKey}) {
+    isUpdating.value = true;
+    languageRxString.value = languageKey!;
+    languageController.updateLanguage(
+      languageKey,
+    );
   }
 
   void dataSummitionAndValidation() {

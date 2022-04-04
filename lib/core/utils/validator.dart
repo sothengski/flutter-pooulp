@@ -17,7 +17,8 @@ class Validator {
   static const String numberRegExpPattern = r'^\d+$';
 
   static const requiredMsg = "This is required.";
-  static const requiredFieldMsg = "This field is required.";
+  String requiredFieldMsg = 'validator.requireField'.tr;
+  // static const requiredFieldMsg = "This field is required.";
 
   static const formatNotValid = "format is not valid.";
   static const inValidFieldMsg = "This is invalid.";
@@ -46,7 +47,8 @@ class Validator {
     if (value!.isEmpty || regex.hasMatch(emptySpaceRegExpPattern)) {
       return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {
-      return 'Password should be at least 6 characters.';
+      return 'validator.passwordMin6'.tr;
+      // return 'Password should be at least 6 characters.';
     } else {
       return null;
     }

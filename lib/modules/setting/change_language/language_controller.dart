@@ -40,8 +40,8 @@ class LanguageController extends GetxController {
 
   static final locales = [
     const Locale('en', 'US'),
-    const Locale('km', 'KH'),
-    const Locale('zh', 'ZH'),
+    const Locale('nl', 'NL'),
+    const Locale('fr', 'FR'),
   ];
 
   // gets the language locale app is set to
@@ -53,7 +53,7 @@ class LanguageController extends GetxController {
       //set the stored string country code to the locale
       return currentLanguageStore.value == 'en'
           ? locales[0]
-          : currentLanguageStore.value == 'km'
+          : currentLanguageStore.value == 'nl'
               ? locales[1]
               : locales[2];
     }

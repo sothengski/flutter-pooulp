@@ -24,11 +24,11 @@ class AppPages {
       page: () => const HomePage(),
       binding: HomeBinding(),
     ),
-    // GetPage(
-    //   name: Routes.onBoardingRoute,
-    //   page: () => const OnBoardingPage(),
-    //   binding: OnboardingBinding(),
-    // ),
+    GetPage(
+      name: Routes.onBoardingRoute,
+      page: () => const OnboardingPage(),
+      binding: OnboardingBinding(),
+    ),
     GetPage(
       name: Routes.signUpRoute,
       page: () => const SignUpPage(),
@@ -58,7 +58,6 @@ class AppPages {
       transition: Transition.rightToLeftWithFade,
       transitionDuration: DurationConstant.d350,
     ),
-
     GetPage(
       name: Routes.offerdetailRoute,
       page: () => OfferDetailPage(),

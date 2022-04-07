@@ -36,6 +36,7 @@ class FieldModel {
   final String? category;
   final String? videoUrl;
   int? total;
+  bool? selected;
 
   FieldModel({
     this.id,
@@ -47,6 +48,7 @@ class FieldModel {
     this.category,
     this.videoUrl,
     this.total,
+    this.selected = false,
   });
 
   // FieldModel? get getProficiencyLevel =>

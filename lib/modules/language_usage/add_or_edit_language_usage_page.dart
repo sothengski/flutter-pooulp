@@ -53,6 +53,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                     child: Obx(
                       () => controller.languageListForSelection.isNotEmpty
                           ? FieldListSelector(
+                              inputHintText: 'Search Language',
                               dataListforSelected:
                                   controller.languageListForSelection,
                               selectedItem: controller.selectedLanguage.value,

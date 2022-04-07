@@ -8,6 +8,7 @@ export 'home/home.dart';
 export 'language_usage/language_usage.dart';
 export 'network/network.dart';
 export 'offer/offer.dart';
+export 'onboarding/onboarding.dart';
 export 'profile/profile.dart';
 export 'setting/setting.dart';
 export 'skill/skill.dart';

@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import '../../data/data.dart';
 import '../core.dart';
 
+///[items] are the original item from [items] or/and [onFind]
+// typedef List<T> Items<T>(List<T> items);
+// typedef List<T> = List<T> Function(List<T> items);
+
+// typedef OnItemAdded<T> = void Function(List<T> selectedItems, T addedItem);
+// typedef OnItemRemoved<T> = void Function(List<T> selectedItems, T removedItem);
+
 class FieldListSelector extends StatefulWidget {
   final List<FieldModel>? dataListforSelected;
   final FieldModel? selectedItem;
@@ -11,6 +18,10 @@ class FieldListSelector extends StatefulWidget {
   final Function(FieldModel)? onTap;
   final bool? showPhoneCode;
   final bool? showCountry;
+  final String? inputHintText;
+
+  ///selected items
+  // final List<T>? selectedItems;
 
   const FieldListSelector({
     this.dataListforSelected,
@@ -21,6 +32,8 @@ class FieldListSelector extends StatefulWidget {
     this.showPhoneCode = true,
     this.showCountry = true,
     @required this.selectedItem,
+    this.inputHintText = 'Search School Name',
+    // this.selectedItems = const [],
   }) : super(key: key);
 
   @override
@@ -43,7 +56,7 @@ class _FieldListSelectorState extends State<FieldListSelector> {
         Padding(
           padding: const EdgeInsets.all(8),
           child: CustomTextInput(
-            hintText: 'Search School Name',
+            hintText: widget.inputHintText,
             suffixIcon: const Icon(
               Icons.search,
               // color: ColorsManager.grey400,

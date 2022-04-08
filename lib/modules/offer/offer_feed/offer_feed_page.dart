@@ -29,7 +29,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                 alignment: Alignment.centerLeft,
                 decoration: const BoxDecoration(
                   // color: ColorsManager.primary,
-                  color: ColorsManager.primary,
+                  color: ColorsManager.primaryBlue,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15.0),
                     bottomRight: Radius.circular(15.0),

@@ -37,6 +37,7 @@ class FieldModel {
   final String? videoUrl;
   int? total;
   bool? selected;
+  final List<FieldModel>? subFieldList;
 
   FieldModel({
     this.id,
@@ -49,6 +50,7 @@ class FieldModel {
     this.videoUrl,
     this.total,
     this.selected = false,
+    this.subFieldList,
   });
 
   // FieldModel? get getProficiencyLevel =>
@@ -77,6 +79,15 @@ class FieldModel {
         categoryId: json['category_id'] as int?,
         category: json['category'] as String?,
         videoUrl: json['video_url'] as String?,
+        subFieldList: json['skills'] == null || json['skills'] == []
+            ? []
+            : (json['skills'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -88,6 +99,14 @@ class FieldModel {
         'category_id': categoryId,
         'category': category,
         'video_url': videoUrl,
+        'skills': subFieldList == null || subFieldList == []
+            ? null
+            : List<dynamic>.from(subFieldList!.map((x) => x.toJson())),
+      }..removeWhere((_, v) => v == null);
+
+  Map<String, dynamic> toJsonForOnboarding({bool? usedTagId = false}) => {
+        'id': usedTagId == true ? null : id,
+        'tag_id': usedTagId == true ? id : null,
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -98,11 +117,12 @@ class FieldModel {
       tagId: $tagId,
       type: $type,
       label: $label,
-      'level': $level,
+      level: $level,
       categoryId: $categoryId,
       category: $category,
       video_url: $videoUrl,
       total: $total,
+      subFieldList: $subFieldList
     )''';
   }
 }

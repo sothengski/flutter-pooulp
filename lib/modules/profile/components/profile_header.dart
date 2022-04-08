@@ -179,7 +179,7 @@ class ProfileHeader extends StatelessWidget {
                     CustomTextWidget(
                       text: '$userName',
                       maxLine: 2,
-                      color: ColorsManager.white,
+                      // color: ColorsManager.primaryBlue,
                       fontSize: AppSize.s20,
                       fontWeight: FontWeight.bold,
                       marginTop: AppSize.s2,

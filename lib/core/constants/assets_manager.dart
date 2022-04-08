@@ -13,6 +13,7 @@ class AssetsManager {
 
   static const String appLogo = '$imagePath/app-logo.png';
   static const String appLogoWhite = '$imagePath/pooulp-logo-full-white.png';
+  static const String appLogoRose = '$imagePath/pooulp-logo-type-rose.png';
 
   static const String appLogoSymbol = '$imagePath/app-logo-symbol.png';
   static const String appLogoText = '$imagePath/app-logo-text.png';

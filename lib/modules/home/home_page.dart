@@ -11,7 +11,8 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: ColorsManager.primary,
+        //change bgColor here also change the status Bar Color
+        backgroundColor: ColorsManager.primaryBlue,
         body: SafeArea(
           child: IndexedStack(
             index: controller.currentIndex.value,

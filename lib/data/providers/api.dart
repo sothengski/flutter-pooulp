@@ -42,6 +42,7 @@ enum Endpoint {
   getHardAndSoftSkills,
   getOnlyHardSkills,
   getOnlySoftSkills,
+  postOrGetOnBoardingData,
 }
 
 class API {
@@ -86,6 +87,7 @@ class API {
     Endpoint.getHardAndSoftSkills: '/tags/skills',
     Endpoint.getOnlyHardSkills: '/tags/hardskills',
     Endpoint.getOnlySoftSkills: '/tags/softskills',
+    Endpoint.postOrGetOnBoardingData: '/onboarding',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

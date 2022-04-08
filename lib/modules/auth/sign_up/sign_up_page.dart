@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../core/core.dart';
 import '../../modules.dart';
@@ -10,7 +9,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.primary,
+      backgroundColor: ColorsManager.primaryBlue,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -24,20 +23,21 @@ class SignUpPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
+              const Padding(
+                padding: EdgeInsets.only(
                   left: AppSize.s72,
                   right: AppSize.s72,
                   top: AppSize.s72,
                 ),
-                child: SvgPicture.asset(
-                  AssetsManager.appLogoWhiteSvg,
-                  height: 80,
-                  matchTextDirection: true,
-                ),
-                // child: Image(
-                //   image: AssetImage(AssetsManager.appLogoWhite),
+                // child: SvgPicture.asset(
+                //   AssetsManager.appLogoWhiteSvg,
+                //   height: 80,
+                //   matchTextDirection: true,
                 // ),
+                child: Image(
+                  // height: 80,
+                  image: AssetImage(AssetsManager.appLogoRose),
+                ),
               ),
               Column(
                 children: [

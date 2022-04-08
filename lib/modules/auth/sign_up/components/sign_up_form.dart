@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/core.dart';
@@ -21,7 +20,7 @@ class SignUpForm extends GetView<SignUpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.primary,
+      backgroundColor: ColorsManager.primaryBlue,
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
@@ -56,21 +55,22 @@ class SignUpForm extends GetView<SignUpController> {
                 //     image: AssetImage(AssetsManager.appLogoWhite),
                 //   ),
                 // ),
-                Padding(
-                  padding: const EdgeInsets.only(
+                const Padding(
+                  padding: EdgeInsets.only(
                     top: kBottomNavigationBarHeight + 48,
                     left: AppSize.s72,
                     right: AppSize.s72,
                     bottom: AppSize.s12,
                   ),
-                  child: SvgPicture.asset(
-                    AssetsManager.appLogoWhiteSvg,
-                    height: 80,
-                    matchTextDirection: true,
-                  ),
-                  // child: Image(
-                  //   image: AssetImage(AssetsManager.appLogoWhite),
+                  // child: SvgPicture.asset(
+                  //   AssetsManager.appLogoWhiteSvg,
+                  //   height: 80,
+                  //   matchTextDirection: true,
                   // ),
+                  child: Image(
+                    // height: 80,
+                    image: AssetImage(AssetsManager.appLogoRose),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(AppSize.s16),
@@ -191,7 +191,7 @@ class SignUpForm extends GetView<SignUpController> {
                                                 decoration: InputDecoration(
                                                   contentPadding:
                                                       const EdgeInsets.fromLTRB(
-                                                    4,
+                                                    12,
                                                     0,
                                                     4,
                                                     0,
@@ -251,45 +251,42 @@ class SignUpForm extends GetView<SignUpController> {
                                                               .value
                                                               .phoneCode ==
                                                           null
-                                                      ? const CustomTextWidget(
-                                                          marginLeft:
-                                                              AppSize.s8,
-                                                          text: 'Country Code',
-                                                          color: ColorsManager
-                                                              .grey400,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 16.0,
+                                                      ? const RowContentInputWidget(
+                                                          centerWidget:
+                                                              CustomTextWidget(
+                                                            text:
+                                                                'Country Code',
+                                                            color: ColorsManager
+                                                                .grey400,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 16.0,
+                                                          ),
                                                         )
-                                                      : Row(
-                                                          children: [
-                                                            SizedBox(
-                                                              height: 15.0,
-                                                              child: CircleFlag(
-                                                                controller
-                                                                    .selectedCountry
-                                                                    .value
-                                                                    .isoCode
-                                                                    .toString(),
-                                                              ),
-                                                            ),
-                                                            CustomTextWidget(
-                                                              marginLeft:
-                                                                  AppSize.s8,
-                                                              text: controller
-                                                                  .selectedCountry
-                                                                  .value
-                                                                  .phoneCode,
-                                                              color:
-                                                                  ColorsManager
-                                                                      .black,
-                                                              fontSize: 16.0,
-                                                            ),
-                                                            // const Icon(
-                                                            //   Icons
-                                                            //       .arrow_drop_down,
-                                                            // ),
-                                                          ],
+                                                      : RowContentInputWidget(
+                                                          prefixWidgetFlex: 25,
+                                                          prefixWidget:
+                                                              CircleFlag(
+                                                            controller
+                                                                .selectedCountry
+                                                                .value
+                                                                .isoCode
+                                                                .toString(),
+                                                          ),
+                                                          prefixWidgetRightPadding:
+                                                              AppSize.s12,
+                                                          centerWidgetFlex: 75,
+                                                          centerWidget:
+                                                              CustomTextWidget(
+                                                            //marginLeft: 4.0,
+                                                            text: controller
+                                                                .selectedCountry
+                                                                .value
+                                                                .phoneCode,
+                                                            color: ColorsManager
+                                                                .black,
+                                                            fontSize: 16.0,
+                                                          ),
                                                         ),
                                                 ),
                                               );

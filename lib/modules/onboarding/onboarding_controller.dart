@@ -3,85 +3,114 @@ import 'package:get/get.dart';
 
 import '../../core/core.dart';
 import '../../data/data.dart';
-import '../modules.dart';
+import '../../routes/routes.dart';
 
-class OnboardingController extends GetxController {
+class OnboardingController extends GetxController
+    with StateMixin<Rx<OnboardingModel>> {
+  final onboardingProvider = Get.find<OnboardingProvider>();
+
   PageController pageController = PageController();
   RxInt selectedPageIndex = 0.obs;
-  RxList<OnboardingInfoModel> onboardingDataToBeAdded =
-      <OnboardingInfoModel>[].obs;
+  // RxList<OnboardingPageModel> onboardingDataToBeAdded =
+  //     <OnboardingPageModel>[].obs;
 
-  RxList<OnboardingInfoModel> onboardingPages = <OnboardingInfoModel>[].obs;
+  RxList<OnboardingPageModel> onboardingPages = <OnboardingPageModel>[].obs;
+  Rx<OnboardingModel> onboardingPagesAPIData =
+      OnboardingModel(totalPage: 0).obs;
+
+  Rx<OnboardingPageModel> lookingForSelectionListPage0 =
+      OnboardingPageModel(pageIndex: 0, selectionItems: []).obs;
+  Rx<OnboardingPageModel> interestedInSelectionListPage1 =
+      OnboardingPageModel(pageIndex: 1, selectionItems: []).obs;
+  Rx<OnboardingPageModel> goodAtListSelectionPage2 =
+      OnboardingPageModel(pageIndex: 2, selectionItems: []).obs;
+  Rx<OnboardingPageModel> goodAtListSelectionPage2BasedonPage1 =
+      OnboardingPageModel(pageIndex: 2, selectionItems: []).obs;
+  Rx<OnboardingPageModel> languageSelectionListPage3 =
+      OnboardingPageModel(pageIndex: 3, selectionItems: []).obs;
+
+  RxList<FieldModel>? goodAtfieldList = <FieldModel>[].obs;
+  // RxList<FieldModel>? goodAtfieldListBasedOnCategory = <FieldModel>[].obs;
+
   RxBool isUpdate = false.obs;
-
-  Offset distance = const Offset(28, 28);
-  double blur = 30.0;
 
   @override
   Future<void> onInit() async {
     super.onInit();
-    onboardingDataToBeAdded.addAll([
-      OnboardingInfoModel(id: 0, fieldList: []),
-      OnboardingInfoModel(id: 1, fieldList: []),
-      OnboardingInfoModel(id: 2, fieldList: []),
-      OnboardingInfoModel(id: 3, fieldList: []),
-    ]);
+    // onboardingDataToBeAdded.addAll([
+    //   OnboardingPageModel(pageIndex: 0, selectionItems: []),
+    //   OnboardingPageModel(pageIndex: 1, selectionItems: []),
+    //   OnboardingPageModel(pageIndex: 2, selectionItems: []),
+    //   OnboardingPageModel(pageIndex: 3, selectionItems: []),
+    // ]);
+    await getOffersDataState();
+  }
 
-    onboardingPages.value = [
-      OnboardingInfoModel(
-        id: 0,
-        textTitle: 'What are you looking for?',
-        fieldList: [
-          FieldModel(id: 0, label: 'Student Job'),
-          FieldModel(id: 1, label: 'Internship'),
-          FieldModel(id: 2, label: 'Study Subject'),
-          FieldModel(id: 3, label: 'Job'),
-        ],
-      ),
-      OnboardingInfoModel(
-        id: 1,
-        textTitle: 'What are you interested in?',
-        fieldList: [
-          FieldModel(id: 0, label: 'Information Technology'),
-          FieldModel(id: 1, label: 'Marketing & Communication'),
-          FieldModel(id: 2, label: 'Engeenering'),
-          FieldModel(id: 3, label: 'Finance'),
-          FieldModel(id: 4, label: 'Law'),
-          FieldModel(id: 5, label: 'Design/Graphism'),
-        ],
-      ),
-      OnboardingInfoModel(
-        id: 2,
-        textTitle: 'What are you looking for?',
-        fieldList: [
-          FieldModel(id: 0, label: 'Data analysis'),
-          FieldModel(id: 1, label: 'Market Research'),
-          FieldModel(id: 2, label: 'Story Telling'),
-          FieldModel(id: 3, label: 'Content Creation / Copy Writing'),
-          FieldModel(id: 4, label: 'SEO/SEA'),
-          FieldModel(id: 5, label: 'Branding'),
-          FieldModel(id: 6, label: 'Social Media Management'),
-          FieldModel(id: 7, label: 'Emailing'),
-          FieldModel(id: 8, label: 'Events'),
-          FieldModel(id: 9, label: 'Telephone Sales'),
-          FieldModel(id: 10, label: 'Press Officer'),
-          FieldModel(id: 11, label: 'Flexibility'),
-        ],
-      ),
-      OnboardingInfoModel(
-        id: 3,
-        textTitle: 'What are your languages?',
-        fieldList: [
-          FieldModel(id: 0, label: 'Dutch'),
-          FieldModel(id: 1, label: 'French'),
-          FieldModel(id: 2, label: 'English'),
-        ],
-      ),
-    ];
+  Future<void> getOffersDataState({bool? refresh}) async {
+    change(null, status: RxStatus.loading());
+    getOnboardingDataListResponseProvider(refresh: refresh).then(
+      (resp) {
+        change(resp, status: RxStatus.success());
+      },
+      onError: (err) {
+        change(
+          null,
+          status: RxStatus.error('Error'),
+        );
+      },
+    );
+  }
+
+  Future<Rx<OnboardingModel>> getOnboardingDataListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    onboardingPagesAPIData.value =
+        await onboardingProvider.getOnboardingDataList();
+    // debugPrint(
+    //   'onboardingPagesAPIData: $onboardingPagesAPIData',
+    // );
+    for (final item in onboardingPagesAPIData.value.pages!) {
+      /// need some modifies to start the pageIndex from 0 instead of 1
+      final OnboardingPageModel temp = OnboardingPageModel(
+        pageIndex: item.pageIndex! - 1,
+        title: item.title,
+        isSkippable: item.isSkippable,
+        selectionItems: item.selectionItems,
+        allSkills: item.allSkills,
+      );
+
+      onboardingPages.add(temp);
+      if (item.pageIndex == 3) {
+        final tempGoodAtfieldList = <FieldModel>{};
+        for (final subField in item.selectionItems!) {
+          tempGoodAtfieldList.addAll(subField.subFieldList!);
+        }
+
+        /// remove duplicate fieldItem based on ID
+        for (final item in tempGoodAtfieldList) {
+          final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
+          if (i <= -1) {
+            goodAtfieldList!.add(item);
+          }
+        }
+      }
+    }
+    // onboardingPages.add(
+    //   OnboardingPageModel(
+    //     pageIndex: 4,
+    //     title: 'Where do you want to work?',
+    //     isSkippable: false,
+    //     selectionItems: [],
+    //   ),
+    // );
+
+    return onboardingPagesAPIData;
   }
 
   bool get isFirstPage => selectedPageIndex.value == 0;
+
   bool get isLastPage => selectedPageIndex.value == onboardingPages.length - 1;
+
   void movingAction({bool? forward = true}) {
     forward == false
         ? pageController.previousPage(
@@ -100,40 +129,171 @@ class OnboardingController extends GetxController {
     required int? pageIndex,
     required FieldModel? itemToBeAdd,
   }) {
-    // onboardingDataToBeAdded
-    //     .firstWhere((element) => element.id == pageIndex)
-    //     .fieldList!
-    //     .addIf(
-    //       !onboardingDataToBeAdded
-    //           .firstWhere(
-    //             (element) => element.id == pageIndex,
-    //           )
-    //           .fieldList!
-    //           .contains(itemToBeAdd),
-    //       itemToBeAdd!,
-    //     );
-
-    for (final page in onboardingDataToBeAdded) {
-      if (page.id == pageIndex) {
-        if (!page.fieldList!.contains(itemToBeAdd)) {
-          page.fieldList!.add(itemToBeAdd!);
-          // print('add:');
-        } else if (page.fieldList!.contains(itemToBeAdd)) {
-          page.fieldList!
-              .removeWhere((element) => element.id == itemToBeAdd!.id);
-          // print('remove:');
-        }
-      } else {
-        // print('else:');
+    if (pageIndex == 0) {
+      if (!lookingForSelectionListPage0.value.selectionItems!
+          .contains(itemToBeAdd)) {
+        lookingForSelectionListPage0.value.selectionItems!.add(itemToBeAdd!);
+        // print('add:');
+        // print('lookingForSelectionListPage0:::: $lookingForSelectionListPage0');
+      } else if (lookingForSelectionListPage0.value.selectionItems!
+          .contains(itemToBeAdd)) {
+        lookingForSelectionListPage0.value.selectionItems!
+            .removeWhere((element) => element.id == itemToBeAdd!.id);
+        // print('remove:');
+        // print('lookingForSelectionListPage0:::: $lookingForSelectionListPage0');
       }
     }
+    if (pageIndex == 1) {
+      if (!interestedInSelectionListPage1.value.selectionItems!
+          .contains(itemToBeAdd)) {
+        interestedInSelectionListPage1.value.selectionItems!.add(itemToBeAdd!);
+        for (final fieldItem in onboardingPages) {
+          if (fieldItem.pageIndex == pageIndex! + 1) {
+            goodAtListSelectionPage2BasedonPage1.value.selectionItems!.add(
+              fieldItem.selectionItems!
+                  .firstWhere((element) => element.id == itemToBeAdd.id),
+            );
+            final tempGoodAtfieldList = <FieldModel>{};
+            for (final subField
+                in goodAtListSelectionPage2BasedonPage1.value.selectionItems!) {
+              tempGoodAtfieldList.addAll(subField.subFieldList!);
+            }
+            goodAtfieldList!.clear();
+
+            /// remove duplicate fieldItem based on ID
+            for (final item in tempGoodAtfieldList) {
+              final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
+              if (i <= -1) {
+                goodAtfieldList!.add(item);
+              }
+            }
+            // debugPrint(
+            //   'goodAtListSelectionPage2BasedonPage1:: $goodAtListSelectionPage2BasedonPage1',
+            // );
+            // print(
+            //   'add:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.length}',
+            // );
+            // print(
+            //   'add:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.map(
+            //     (e) => e.subFieldList!.length,
+            //   )}',
+            // );
+          }
+        }
+
+        // print('add:');
+      } else if (interestedInSelectionListPage1.value.selectionItems!
+          .contains(itemToBeAdd)) {
+        interestedInSelectionListPage1.value.selectionItems!
+            .removeWhere((element) => element.id == itemToBeAdd!.id);
+        // print('remove:');
+
+        for (final fieldItem in onboardingPages) {
+          if (fieldItem.pageIndex == pageIndex! + 1) {
+            goodAtListSelectionPage2BasedonPage1.value.selectionItems!
+                .removeWhere(
+              (element) => element.id == itemToBeAdd!.id,
+            );
+            final tempGoodAtfieldList = <FieldModel>{};
+            for (final subField
+                in goodAtListSelectionPage2BasedonPage1.value.selectionItems!) {
+              tempGoodAtfieldList.addAll(subField.subFieldList!);
+            }
+            goodAtListSelectionPage2.value.selectionItems!.clear();
+            goodAtfieldList!.clear();
+
+            /// remove duplicate fieldItem based on ID
+            for (final item in tempGoodAtfieldList) {
+              final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
+              if (i <= -1) {
+                goodAtfieldList!.add(item);
+              }
+            }
+            // debugPrint(
+            //   'goodAtListSelectionPage2BasedonPage1:: $goodAtListSelectionPage2BasedonPage1',
+            // );
+            // print(
+            //   'remove:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.length}',
+            // );
+          }
+        }
+      }
+    }
+    if (pageIndex == 2) {
+      if (!goodAtListSelectionPage2.value.selectionItems!
+          .contains(itemToBeAdd)) {
+        goodAtListSelectionPage2.value.selectionItems!.add(itemToBeAdd!);
+        // print('add:');
+      } else if (goodAtListSelectionPage2.value.selectionItems!
+          .contains(itemToBeAdd)) {
+        goodAtListSelectionPage2.value.selectionItems!
+            .removeWhere((element) => element.id == itemToBeAdd!.id);
+        // print('remove:');
+      }
+    }
+    if (pageIndex == 3) {
+      if (!languageSelectionListPage3.value.selectionItems!
+          .contains(itemToBeAdd)) {
+        languageSelectionListPage3.value.selectionItems!.add(itemToBeAdd!);
+        // print('add:');
+      } else if (languageSelectionListPage3.value.selectionItems!
+          .contains(itemToBeAdd)) {
+        languageSelectionListPage3.value.selectionItems!
+            .removeWhere((element) => element.id == itemToBeAdd!.id);
+        // print('remove:');
+      }
+    }
+    // for (final page in onboardingDataToBeAdded) {
+    //   if (page.pageIndex == pageIndex) {
+    //     if (!page.selectionItems!.contains(itemToBeAdd)) {
+    //       page.selectionItems!.add(itemToBeAdd!);
+    //       // print('add:');
+    //     } else if (page.selectionItems!.contains(itemToBeAdd)) {
+    //       page.selectionItems!
+    //           .removeWhere((element) => element.id == itemToBeAdd!.id);
+    //       // print('remove:');
+    //     }
+    //   } else {
+    //     // print('else:');
+    //   }
+    // }
     // print('onboardingDataToBeAdded: $onboardingDataToBeAdded');
+
     /// isUpdate is used for trigger the update into the UI
     isUpdate.value = switchingBooleanValue(boolValue: isUpdate.value);
   }
 
   void validateData() {
-    debugPrint('onboardingDataToBeAdded: $onboardingDataToBeAdded');
-// Get.offNamed(Routes.homeRoute);
+    // debugPrint('lookingForSelectionListPage0: $lookingForSelectionListPage0');
+    // debugPrint(
+    //   'interestedInSelectionListPage1: $interestedInSelectionListPage1',
+    // );
+    // debugPrint('goodAtListSelectionPage2: $goodAtListSelectionPage2');
+    // debugPrint('languageSelectionListPage3: $languageSelectionListPage3');
+
+    final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
+      offerTypePreferences: lookingForSelectionListPage0.value.selectionItems,
+      fieldPreferences: interestedInSelectionListPage1.value.selectionItems,
+      skills: goodAtListSelectionPage2.value.selectionItems,
+      languages: languageSelectionListPage3.value.selectionItems,
+    );
+    // debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
+    submitDataToAPI(onboardingData: onboardingDataToBeAdd);
+  }
+
+  Future<void> submitDataToAPI({OnboardingModel? onboardingData}) async {
+    final JsonResponse responseData =
+        await onboardingProvider.postOnboarding(onboardingData: onboardingData);
+
+    if (responseData.success!) {
+      // debugPrint('=====success=====');
+      customSnackbar(
+        msgTitle: 'Success',
+        msgContent: 'Successfully',
+        bgColor: ColorsManager.green,
+        duration: DurationConstant.d1500,
+      );
+      Get.offNamed(Routes.homeRoute);
+    }
   }
 }

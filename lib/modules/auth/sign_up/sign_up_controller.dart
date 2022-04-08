@@ -188,7 +188,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
                   bodyData: value,
                 );
                 if (loginStatus == true) {
-                  Get.offAllNamed(Routes.homeRoute);
+                  Get.offAllNamed(Routes.onBoardingRoute);
                 } else {
                   customSnackbar(
                     msgTitle: "Can't save user Data",

@@ -152,6 +152,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
 
                       ///===== Top of Title Component =====//
                       ContainerDialogWidget(
+                        validatorFunction: (_) => Validator().notEmptyValidator(
+                          controller.selectedGender.value,
+                        ),
                         inputTitle: 'Gender',
                         dialogWidget: MaterialDialogWidget(
                           title: 'Select your Gender',

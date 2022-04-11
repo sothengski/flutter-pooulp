@@ -314,10 +314,67 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                         ),
                                                     ],
                                                   )
-                                                : const CustomTextWidget(
-                                                    text: ' ',
-                                                    color: ColorsManager.amber,
-                                                  ),
+                                                : pageData.pageIndex == 4
+                                                    ? SingleChildScrollView(
+                                                        child: Wrap(
+                                                          children: controller
+                                                              .belgiumCitiesToField
+                                                              .map(
+                                                                (element) =>
+                                                                    Obx(
+                                                                  () => Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .only(
+                                                                      right:
+                                                                          AppSize
+                                                                              .s8,
+                                                                      bottom:
+                                                                          AppSize
+                                                                              .s12,
+                                                                    ),
+                                                                    child:
+                                                                        TextCardClickableWidget(
+                                                                      isCenterText:
+                                                                          false,
+                                                                      text: element
+                                                                          .label
+                                                                          .toString(),
+                                                                      maxLine: controller.isUpdate.value ==
+                                                                              true
+                                                                          ? 3
+                                                                          : 3,
+                                                                      fontSize:
+                                                                          AppSize
+                                                                              .s24,
+                                                                      itemList:
+                                                                          controller
+                                                                              .belgiumCitiesToFieldSelected,
+                                                                      item:
+                                                                          element,
+                                                                      onClick:
+                                                                          () {
+                                                                        controller
+                                                                            .addOrRemoveDataInList(
+                                                                          pageIndex:
+                                                                              pageIndex,
+                                                                          itemToBeAdd:
+                                                                              element,
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                              .toSet()
+                                                              .toList(),
+                                                        ),
+                                                      )
+                                                    : const CustomTextWidget(
+                                                        text: ' ',
+                                                        color:
+                                                            ColorsManager.amber,
+                                                      ),
                               ),
                             )
                           ],

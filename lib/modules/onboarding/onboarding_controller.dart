@@ -34,6 +34,12 @@ class OnboardingController extends GetxController
 
   RxBool isUpdate = false.obs;
 
+  RxList<CityModel> belgiumCitiesList = <CityModel>[].obs;
+  RxList<FieldModel> belgiumCitiesToField = <FieldModel>[].obs;
+  RxList<FieldModel> belgiumCitiesToFieldSelected = <FieldModel>[].obs;
+
+  // Rx<FieldModel> belgiumCitySelected = FieldModel(label: '').obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -44,6 +50,7 @@ class OnboardingController extends GetxController
     //   OnboardingPageModel(pageIndex: 3, selectionItems: []),
     // ]);
     await getOffersDataState();
+    getBelgiumCities();
   }
 
   Future<void> getOffersDataState({bool? refresh}) async {
@@ -95,16 +102,26 @@ class OnboardingController extends GetxController
         }
       }
     }
-    // onboardingPages.add(
-    //   OnboardingPageModel(
-    //     pageIndex: 4,
-    //     title: 'Where do you want to work?',
-    //     isSkippable: false,
-    //     selectionItems: [],
-    //   ),
-    // );
+    onboardingPages.add(
+      OnboardingPageModel(
+        pageIndex: 4,
+        title: 'Where do you want to work?',
+        isSkippable: false,
+        selectionItems: [],
+      ),
+    );
 
     return onboardingPagesAPIData;
+  }
+
+  void getBelgiumCities() {
+    belgiumCitiesList.value = belgiumCities;
+    for (final item in belgiumCitiesList) {
+      final temp = FieldModel(
+        label: item.city,
+      );
+      belgiumCitiesToField.add(temp);
+    }
   }
 
   bool get isFirstPage => selectedPageIndex.value == 0;
@@ -243,21 +260,16 @@ class OnboardingController extends GetxController
         // print('remove:');
       }
     }
-    // for (final page in onboardingDataToBeAdded) {
-    //   if (page.pageIndex == pageIndex) {
-    //     if (!page.selectionItems!.contains(itemToBeAdd)) {
-    //       page.selectionItems!.add(itemToBeAdd!);
-    //       // print('add:');
-    //     } else if (page.selectionItems!.contains(itemToBeAdd)) {
-    //       page.selectionItems!
-    //           .removeWhere((element) => element.id == itemToBeAdd!.id);
-    //       // print('remove:');
-    //     }
-    //   } else {
-    //     // print('else:');
-    //   }
-    // }
-    // print('onboardingDataToBeAdded: $onboardingDataToBeAdded');
+
+    if (pageIndex == 4) {
+      belgiumCitiesToFieldSelected.clear();
+      if (!belgiumCitiesToFieldSelected.contains(itemToBeAdd)) {
+        belgiumCitiesToFieldSelected.add(itemToBeAdd!);
+      } else if (belgiumCitiesToFieldSelected.contains(itemToBeAdd)) {
+        belgiumCitiesToFieldSelected
+            .removeWhere((element) => element.id == itemToBeAdd!.id);
+      }
+    }
 
     /// isUpdate is used for trigger the update into the UI
     isUpdate.value = switchingBooleanValue(boolValue: isUpdate.value);
@@ -270,6 +282,7 @@ class OnboardingController extends GetxController
     // );
     // debugPrint('goodAtListSelectionPage2: $goodAtListSelectionPage2');
     // debugPrint('languageSelectionListPage3: $languageSelectionListPage3');
+    // debugPrint('belgiumCitiesToFieldSelected: $belgiumCitiesToFieldSelected');
 
     final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
       offerTypePreferences: lookingForSelectionListPage0.value.selectionItems,

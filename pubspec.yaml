@@ -41,6 +41,7 @@ flutter:
     - assets/icons/
     - assets/icons/flags/
     - assets/svgs/
+    - assets/data/
 
   fonts:
     - family: TypoRound

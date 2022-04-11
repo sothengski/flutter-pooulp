@@ -20,7 +20,7 @@ class ProfileHeader extends StatelessWidget {
     this.userName = '...',
     this.userRole = '',
     this.numberStarRate = 0.0,
-    this.headerHigh = 100,
+    this.headerHigh = 110,
     this.controller,
     Key? key,
   }) : super(key: key);

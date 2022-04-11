@@ -1,6 +1,8 @@
 export 'availabilities_model/period_model.dart';
 export 'availabilities_model/slot_model.dart';
 export 'availabilities_model/weekly_model.dart';
+export 'belgium_cities.dart';
+export 'city_model.dart';
 export 'countries.dart';
 export 'country_model.dart';
 export 'feed_model/feed_model.dart';

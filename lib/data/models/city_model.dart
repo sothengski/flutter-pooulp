@@ -1,14 +1,20 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, avoid_dynamic_calls
 
 import 'dart:convert';
 
-// List<CityModel> CityModelFromJson(String str) =>
-//     List<CityModel>.from(
-//       json.decode(str).map((x) => CityModel.fromJson(x)),
-//     );
+import 'package:pooulp_flutter/data/data.dart';
 
-// String CityModelToJson(List<CityModel> data) =>
-//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+// OnboardingModel onboardingModelFromJson(String str) =>
+//     OnboardingModel.fromJson(json.decode(str) as Map<String, dynamic>);
+
+List<CityModel> cityModelFromJson(String str) => List<CityModel>.from(
+      json.decode(str).map(
+            (x) => CityModel.fromJson(x as Map<String, dynamic>),
+          ) as List<Map<String, dynamic>>,
+    );
+
+String cityModelToJson(List<CityModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CityModel {
   final String? city;
@@ -21,7 +27,7 @@ class CityModel {
   final String? population;
   final String? populationProper;
 
-  CityModel({
+  const CityModel({
     this.city,
     this.lat,
     this.lng,
@@ -42,10 +48,10 @@ class CityModel {
         city: json["city"] as String?,
         lat: json["lat"] as String?,
         lng: json["lng"] as String?,
-        country: countryValues.map[json["country"]],
-        iso2: iso2Values.map[json["iso2"]],
-        adminName: adminNameValues.map[json["admin_name"]],
-        capital: capitalValues.map[json["capital"]],
+        country: countryValues.map![json["country"]],
+        iso2: iso2Values.map![json["iso2"]],
+        adminName: adminNameValues.map![json["admin_name"]],
+        capital: capitalValues.map![json["capital"]],
         population: json["population"] as String?,
         populationProper: json["population_proper"] as String?,
       );
@@ -61,6 +67,20 @@ class CityModel {
         "population": population,
         "population_proper": populationProper,
       };
+
+  @override
+  String toString() => '''
+    CityModel(
+      city: $city,
+      lat: $lat,
+      lng: $lng,
+      country: $country,
+      iso2: $iso2,
+      adminName: $adminName,
+      capital: $capital,
+      population: $population,
+      populationProper: $populationProper)
+    ''';
 }
 
 enum AdminName { BRUSSELS_CAPITAL_REGION, FLANDERS, WALLONIA }
@@ -88,14 +108,14 @@ enum Iso2 { BE }
 
 final iso2Values = EnumValues({"BE": Iso2.BE});
 
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
+// class EnumValues<T> {
+//   Map<String, T> map;
+//   late Map<T, String> reverseMap;
 
-  EnumValues(this.map);
+//   EnumValues(this.map);
 
-  Map<T, String> get reverse {
-    // reverseMap ??= map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
-}
+//   Map<T, String> get reverse {
+//     // reverseMap ??= map.map((k, v) => MapEntry(v, k));
+//     return reverseMap;
+//   }
+// }

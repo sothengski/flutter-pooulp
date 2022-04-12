@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import '../../data.dart';
 
-// OnboardingModel onboardingModelFromJson(String str) =>
-//     OnboardingModel.fromJson(json.decode(str) as Map<String, dynamic>);
+OnboardingModel onboardingModelFromJson(String str) =>
+    OnboardingModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
-// String onboardingModelToJson(OnboardingModel data) =>
-//     json.encode(data.toJson());
+String onboardingModelToJson(OnboardingModel data) =>
+    json.encode(data.toJson());
 
 class OnboardingModel {
   final int? totalPage;
@@ -17,14 +17,22 @@ class OnboardingModel {
   final List<FieldModel>? fieldPreferences;
   final List<FieldModel>? skills;
   final List<FieldModel>? languages;
+  final String? location;
+  final String? locationLat;
+  final String? locationLng;
+  final int? locationRadius;
 
-  OnboardingModel({
+  const OnboardingModel({
     this.totalPage,
     this.pages,
     this.offerTypePreferences,
     this.fieldPreferences,
     this.skills,
     this.languages,
+    this.location,
+    this.locationLat,
+    this.locationLng,
+    this.locationRadius,
   });
 
   factory OnboardingModel.fromRawJson(String str) =>
@@ -60,6 +68,10 @@ class OnboardingModel {
         'languages': List<dynamic>.from(
           languages!.map((x) => x.toJsonForOnboarding(usedTagId: true)),
         ),
+        'location_preference': location,
+        'location_latitude': locationLat,
+        'location_longitude': locationLng,
+        'radius': locationRadius ?? 6000,
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -71,5 +83,9 @@ class OnboardingModel {
       fieldPreferences: $fieldPreferences,
       skills: $skills,
       languages: $languages,
+      location: $location,
+      locationLat: $locationLat,
+      locationLng: $locationLng,
+      locationRadius: $locationRadius,
     )''';
 }

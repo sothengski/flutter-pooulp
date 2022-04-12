@@ -16,7 +16,7 @@ class OnboardingPage extends GetView<OnboardingController> {
         child: controller.obx(
           (state) => Obx(
             () => controller.onboardingPagesAPIData.value ==
-                    OnboardingModel(totalPage: 0)
+                    const OnboardingModel(totalPage: 0)
                 ? Container()
                 : Container(
                     padding: const EdgeInsets.only(
@@ -400,7 +400,7 @@ class OnboardingPage extends GetView<OnboardingController> {
       bottomNavigationBar: controller.obx(
         (state) => Obx(
           () => controller.onboardingPagesAPIData.value ==
-                  OnboardingModel(totalPage: 0)
+                  const OnboardingModel(totalPage: 0)
               ? Container()
               : Obx(
                   () => Container(

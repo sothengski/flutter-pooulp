@@ -16,7 +16,7 @@ class OnboardingController extends GetxController
 
   RxList<OnboardingPageModel> onboardingPages = <OnboardingPageModel>[].obs;
   Rx<OnboardingModel> onboardingPagesAPIData =
-      OnboardingModel(totalPage: 0).obs;
+      const OnboardingModel(totalPage: 0).obs;
 
   Rx<OnboardingPageModel> lookingForSelectionListPage0 =
       OnboardingPageModel(pageIndex: 0, selectionItems: []).obs;
@@ -118,7 +118,9 @@ class OnboardingController extends GetxController
     belgiumCitiesList.value = belgiumCities;
     for (final item in belgiumCitiesList) {
       final temp = FieldModel(
-        label: item.city,
+        label: item.city, //convert city name to label in FieldModel
+        type: item.lat, //convert lat of the city to type in FieldModel
+        category: item.lng, //convert lng of the city  to category in FieldModel
       );
       belgiumCitiesToField.add(temp);
     }
@@ -283,15 +285,27 @@ class OnboardingController extends GetxController
     // debugPrint('goodAtListSelectionPage2: $goodAtListSelectionPage2');
     // debugPrint('languageSelectionListPage3: $languageSelectionListPage3');
     // debugPrint('belgiumCitiesToFieldSelected: $belgiumCitiesToFieldSelected');
-
-    final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
-      offerTypePreferences: lookingForSelectionListPage0.value.selectionItems,
-      fieldPreferences: interestedInSelectionListPage1.value.selectionItems,
-      skills: goodAtListSelectionPage2.value.selectionItems,
-      languages: languageSelectionListPage3.value.selectionItems,
-    );
-    // debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
-    submitDataToAPI(onboardingData: onboardingDataToBeAdd);
+    if (belgiumCitiesToFieldSelected == [] ||
+        belgiumCitiesToFieldSelected.isEmpty) {
+      customSnackbar(
+        msgTitle: 'validator.requireFieldsMsg'.tr,
+        msgContent: '',
+        bgColor: ColorsManager.red,
+        duration: DurationConstant.d1500,
+      );
+    } else {
+      final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
+        offerTypePreferences: lookingForSelectionListPage0.value.selectionItems,
+        fieldPreferences: interestedInSelectionListPage1.value.selectionItems,
+        skills: goodAtListSelectionPage2.value.selectionItems,
+        languages: languageSelectionListPage3.value.selectionItems,
+        location: belgiumCitiesToFieldSelected.first.label,
+        locationLat: belgiumCitiesToFieldSelected.first.type,
+        locationLng: belgiumCitiesToFieldSelected.first.category,
+      );
+      // debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
+      submitDataToAPI(onboardingData: onboardingDataToBeAdd);
+    }
   }
 
   Future<void> submitDataToAPI({OnboardingModel? onboardingData}) async {

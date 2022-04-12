@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +37,7 @@ class SkillController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    title = Get.arguments[0].toString();
+    title = (Get.arguments as List)[0].toString();
     await getHardSkillListFromProvider();
     await getSoftSkillListFromProvider();
     skillListFilter();
@@ -144,9 +142,13 @@ class SkillController extends GetxController {
       skillListFilter();
       // Get.back();
       customSnackbar(
-        msgTitle: 'Success',
-        msgContent:
-            'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Skill Information',
+        msgTitle: 'core.success'.tr,
+        msgContent: operation == Keys.addOperation
+            ? 'profile.skillAddSuccessMsg'.tr
+            : operation == Keys.editOperation
+                ? 'profile.skillEditSuccessMsg'.tr
+                : 'profile.skillDeleteSuccessMsg'.tr,
+        // 'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Skill Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,
       );

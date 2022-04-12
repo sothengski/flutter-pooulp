@@ -13,7 +13,7 @@ class AddOrEditSkillPage extends GetView<SkillController> {
     return Scaffold(
       ///===== Top of appBar Component =====//
       appBar: CustomAppBar(
-        title: 'Skills',
+        title: 'profile.skills'.tr,
       ),
       //===== Bottom of appBar Component =====//
 
@@ -29,13 +29,13 @@ class AddOrEditSkillPage extends GetView<SkillController> {
               children: [
                 ///===== Top of Category Selection Component =====//
                 ContainerDialogWidget(
-                  inputTitle: 'Category',
+                  inputTitle: 'profile.category'.tr,
                   inputTitleMarginTop: AppSize.s16,
                   validatorFunction: (_) => Validator().notEmptyValidator(
                     controller.selectedSkillCategory.value.label ?? '',
                   ),
                   dialogWidget: MaterialDialogWidget(
-                    title: 'Select a Category',
+                    title: 'profile.categoryHint'.tr,
                     contentWidget: ListView.separated(
                       shrinkWrap: true,
                       itemCount: skillCategoryList!.length,
@@ -51,7 +51,9 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                   .selectedSkillCategory.value.label!
                                   .toLowerCase(),
                             ),
-                            text: skillCategoryList![index].label,
+                            text: translateStateWords(
+                              stateWord: skillCategoryList![index].label,
+                            ),
                             onPressed: () {
                               controller.selectedSkillCategory.value =
                                   controller.selectedSkillOnClick(
@@ -76,15 +78,15 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                   ),
                   containerWidget: Obx(
                     () => controller.selectedSkillCategory.value.label == ''
-                        ? const RowContentInputWidget(
+                        ? RowContentInputWidget(
                             centerWidget: CustomTextWidget(
-                              text: 'Select a Category',
+                              text: 'profile.categoryHint'.tr,
                               // marginLeft: AppSize.s8,
                               color: ColorsManager.grey400,
                               fontWeight: FontWeight.w400,
                               fontSize: 16.0,
                             ),
-                            suffixWidget: Icon(
+                            suffixWidget: const Icon(
                               Icons.arrow_drop_down,
                               color: ColorsManager.grey600,
                             ),
@@ -92,8 +94,11 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                         : RowContentInputWidget(
                             centerWidget: CustomTextWidget(
                               //marginLeft: 4.0,
-                              text:
-                                  controller.selectedSkillCategory.value.label,
+                              text: translateStateWords(
+                                stateWord: controller
+                                    .selectedSkillCategory.value.label,
+                              ),
+                              // controller.selectedSkillCategory.value.label,
                               color: ColorsManager.black,
                               fontSize: 16.0,
                             ),
@@ -113,7 +118,7 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                       object1: controller.selectedSkillCategory.value.label,
                       object2: '',
                     ),
-                    inputTitle: 'Skill',
+                    inputTitle: 'profile.skill'.tr,
                     validatorFunction: (_) => Validator().notEmptyValidator(
                       controller.selectedSkill.value.label ?? '',
                     ),
@@ -156,6 +161,7 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                 : const LoadingWidget()
                             : controller.hardSkillListForSelection.isNotEmpty
                                 ? FieldListSelector(
+                                    inputHintText: 'profile.searchSkill'.tr,
                                     dataListforSelected:
                                         controller.hardSkillListForSelection,
                                     selectedItem:
@@ -176,8 +182,8 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                     ),
                     containerWidget: controller.selectedSkill.value.id == null
                         ? RowContentInputWidget(
-                            centerWidget: const CustomTextWidget(
-                              text: 'Select your Skill',
+                            centerWidget: CustomTextWidget(
+                              text: 'profile.skillHint'.tr,
                               color: ColorsManager.grey400,
                               fontWeight: FontWeight.w400,
                               fontSize: AppSize.s16,
@@ -217,13 +223,13 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                       object2: SkillCategoryStrings.hardSkill,
                     ),
                     child: ContainerDialogWidget(
-                      inputTitle: 'Proficiency',
+                      inputTitle: 'profile.proficiency'.tr,
                       inputTitleMarginTop: AppSize.s16,
                       validatorFunction: (_) => Validator().notEmptyValidator(
                         controller.selectedProficiency.value.label ?? '',
                       ),
                       dialogWidget: MaterialDialogWidget(
-                        title: 'Select your Proficiency',
+                        title: 'profile.proficiencyHint'.tr,
                         contentWidget: ListView.separated(
                           shrinkWrap: true,
                           itemCount: controller.proficiencyList.length,
@@ -263,15 +269,15 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                       ),
                       containerWidget: Obx(
                         () => controller.selectedProficiency.value.label == ''
-                            ? const RowContentInputWidget(
+                            ? RowContentInputWidget(
                                 centerWidget: CustomTextWidget(
-                                  text: 'Select your Proficiency',
+                                  text: 'profile.proficiencyHint'.tr,
                                   // marginLeft: AppSize.s8,
                                   color: ColorsManager.grey400,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16.0,
                                 ),
-                                suffixWidget: Icon(
+                                suffixWidget: const Icon(
                                   Icons.arrow_drop_down,
                                   color: ColorsManager.grey600,
                                 ),
@@ -300,7 +306,7 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                   () => CustomMaterialButton(
                     topPadding: AppSize.s20,
                     bottomPadding: AppSize.s20,
-                    text: AppStrings.addText,
+                    text: 'core.addBtn'.tr,
                     childWidget: controller.isSubmitBtnProcessing.value == true
                         ? const SizedBox(
                             height: 40,
@@ -338,15 +344,15 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                     ),
                     child: controller.profileController.studentInfoRepsonse
                             .value.skills!.isEmpty
-                        ? const CustomTextWidget(
-                            text: "You don't have any skills yet!",
+                        ? CustomTextWidget(
+                            text: 'profile.noSkillsFound'.tr,
                           )
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             // mainAxisAlignment:MainAxisAlignment.start,
                             children: [
-                              const CustomTextWidget(
-                                text: '${SkillCategoryStrings.hardSkill}s',
+                              CustomTextWidget(
+                                text: 'profile.hardSkills'.tr,
                                 marginBottom: AppSize.s12,
                                 fontSize: AppSize.s16,
                                 fontWeight: FontWeight.w400,
@@ -400,7 +406,8 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                                       Get.dialog(
                                                         MaterialDialogWidget(
                                                           title:
-                                                              'Select your Proficiency',
+                                                              'profile.proficiencyHint'
+                                                                  .tr,
                                                           contentWidget:
                                                               ListView
                                                                   .separated(
@@ -495,8 +502,8 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                     )
                                     .toList(),
                               ),
-                              const CustomTextWidget(
-                                text: '${SkillCategoryStrings.softSkill}s',
+                              CustomTextWidget(
+                                text: 'profile.softSkills'.tr,
                                 marginBottom: AppSize.s12,
                                 fontSize: AppSize.s16,
                                 fontWeight: FontWeight.w400,

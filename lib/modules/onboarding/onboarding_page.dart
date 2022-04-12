@@ -425,8 +425,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                       const EdgeInsets.only(left: AppSize.s24),
                                     ),
                                   ),
-                                  child: const CustomTextWidget(
-                                    text: 'Back',
+                                  child: CustomTextWidget(
+                                    text: 'core.back'.tr,
                                     color: ColorsManager.white,
                                     fontSize: AppSize.s16,
                                     fontWeight: FontWeight.bold,
@@ -459,7 +459,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                               // ),
                             ),
                             child: CustomTextWidget(
-                              text: controller.isLastPage ? 'Finish' : 'Next',
+                              text: controller.isLastPage
+                                  ? 'core.finish'.tr
+                                  : 'core.next'.tr,
                               color: ColorsManager.white,
                               fontSize: AppSize.s16,
                               fontWeight: FontWeight.bold,

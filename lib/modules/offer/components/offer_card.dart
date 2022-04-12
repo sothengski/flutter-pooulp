@@ -152,8 +152,11 @@ class OfferCard extends StatelessWidget {
                                 ),
                                 CustomTextWidget(
                                   marginLeft: AppSize.s4,
-                                  text:
-                                      'Starting Date: ${jobOfferItem!.dateJobStartFormat}',
+                                  text: 'offer.startDate'.trParams({
+                                    'date':
+                                        '${jobOfferItem!.dateJobStartFormat}'
+                                  }),
+                                  // 'Starting Date: ${jobOfferItem!.dateJobStartFormat}',
                                   fontSize: AppSize.s12,
                                   fontWeight: FontWeightManager.regular,
                                   maxLine: 3,

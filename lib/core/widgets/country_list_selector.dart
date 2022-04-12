@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../data/data.dart';
 import '../core.dart';
@@ -45,7 +46,7 @@ class _CountryListSelectorState extends State<CountryListSelector> {
         Padding(
           padding: const EdgeInsets.all(8),
           child: CustomTextInput(
-            hintText: 'Search Country Name',
+            hintText: 'profile.searchCountry'.tr,
             suffixIcon: const Icon(
               Icons.search,
               // color: ColorsManager.grey400,
@@ -130,11 +131,11 @@ class _CountryListSelectorState extends State<CountryListSelector> {
                     );
                   },
                 )
-              : const Padding(
-                  key: Key('no-result'),
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
+              : Padding(
+                  key: const Key('no-result'),
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Text(
-                    'No result found',
+                    'profile.noResult'.tr,
                   ),
                 ),
         ),

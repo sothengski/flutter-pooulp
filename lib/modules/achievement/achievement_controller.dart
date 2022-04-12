@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,10 +24,10 @@ class AchievementController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    title = Get.arguments[0].toString();
+    title = (Get.arguments as List)[0].toString();
     if (title == Keys.editOperation) {
       final AchievementModel achievementDataArg =
-          Get.arguments[1] as AchievementModel;
+          (Get.arguments as List)[1] as AchievementModel;
       achievementId = achievementDataArg.id!;
       achievementNameTextCtrl.text = achievementDataArg.name!;
       descriptionTextCtrl.text = achievementDataArg.description!;
@@ -93,9 +91,13 @@ class AchievementController extends GetxController {
       );
       Get.back();
       customSnackbar(
-        msgTitle: 'Success',
-        msgContent:
-            'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Achievement Information',
+        msgTitle: 'core.success'.tr,
+        msgContent: operation == Keys.addOperation
+            ? 'profile.achievementAddSuccessMsg'.tr
+            : operation == Keys.editOperation
+                ? 'profile.achievementEditSuccessMsg'.tr
+                : 'profile.achievementDeleteSuccessMsg'.tr,
+        //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Achievement Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,
       );

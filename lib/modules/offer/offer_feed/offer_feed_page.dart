@@ -53,8 +53,10 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                 ),
                               )
                             : CustomTextWidget(
-                                text:
-                                    'Hello ${controller.profileController.userInfoRepsonse.value.profile!.firstName}',
+                                text: 'offer.hello'.trParams({
+                                  'name':
+                                      '${controller.profileController.userInfoRepsonse.value.profile!.firstName}',
+                                }),
                                 fontSize: 24,
                                 fontWeight: FontWeightManager.semiBold,
                                 color: ColorsManager.white,
@@ -85,8 +87,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                 () => CustomTextWidget(
                                   text: controller.keywordToBeSearch.value != ''
                                       ? controller.keywordToBeSearch.value
-                                      : OfferStrings
-                                          .searchByTitle, //'Search the title',
+                                      : 'offer.searchByTitle'.tr,
                                 ),
                               ),
                               onTap: () {
@@ -105,8 +106,8 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                               onPressed: () {
                                 controller.updateKeyword();
                                 Get.dialog(
-                                  const OfferFeedFilterSearch(
-                                    title: 'Advanced Search',
+                                  OfferFeedFilterSearch(
+                                    title: 'offer.filterTitle'.tr,
                                   ),
                                   // barrierDismissible: false,
                                 );
@@ -151,10 +152,9 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                 : Center(
                                     child: StateHandlerWidget(
                                       imgPath: AssetsManager.emptyDataIcon,
-                                      headerText: 'No feed results found.',
-                                      bodyText:
-                                          "Make sure you complete your profile information.",
-                                      buttonText: 'Try again',
+                                      headerText: 'offer.noFeedMsg'.tr,
+                                      bodyText: 'offer.contentMsg'.tr,
+                                      buttonText: 'core.tryAgain'.tr,
                                       onPressedFunctionCall:
                                           controller.onRefresh,
                                     ),
@@ -180,10 +180,9 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                       onError: (error) => Center(
                         child: StateHandlerWidget(
                           imgPath: AssetsManager.emptyDataIcon,
-                          headerText: 'Sorry! Something went wrong',
-                          bodyText:
-                              "Make sure that Wi-Fi or mobile data is turned on and try again..",
-                          buttonText: 'Try again',
+                          headerText: 'core.sthWentWrong'.tr,
+                          bodyText: 'core.connectionFailedMsg'.tr,
+                          buttonText: 'core.tryAgain'.tr,
                           onPressedFunctionCall: controller.onRefresh,
                         ),
                       ),

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
-import '../../../core/core.dart';
 import '../../modules.dart';
 
 class OfferSearchPage extends SearchDelegate {
   final feedController = Get.find<OfferFeedController>();
 
   @override
-  String get searchFieldLabel => OfferStrings.searchByTitle;
+  // String get searchFieldLabel => OfferStrings.searchByTitle;
+  String get searchFieldLabel => 'offer.searchByTitle'.tr;
 
   @override
   List<Widget> buildActions(BuildContext context) {

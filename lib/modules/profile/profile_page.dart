@@ -84,7 +84,8 @@ class ProfilePage extends GetView<ProfileController> {
                               rightMargin: AppSize.s16,
                               topMargin: AppSize.s12,
                               // bottomMargin: AppSize.s12,
-                              leftTitle: 'Profile Completeness'.toUpperCase(),
+                              leftTitle:
+                                  'profile.completeness'.tr.toUpperCase(),
                               rightWidget: CustomTextWidget(
                                 text:
                                     '${controller.studentInfoRepsonse.value.calculatingProfileCompleteness.toString()} %',
@@ -133,7 +134,7 @@ class ProfilePage extends GetView<ProfileController> {
                               rightMargin: AppSize.s16,
                               topMargin: AppSize.s12,
                               bottomMargin: AppSize.s12,
-                              leftTitle: 'Personal Information'.toUpperCase(),
+                              leftTitle: 'profile.information'.tr.toUpperCase(),
                               titleFontSize: AppSize.s16,
                               rightWidget: CustomIconButtonWidget(
                                 iconData: Icons.edit_outlined,
@@ -161,7 +162,7 @@ class ProfilePage extends GetView<ProfileController> {
                                       marginBottom: AppSize.s4,
                                     ),
                                   CustomListTileWidget(
-                                    text1: 'Email',
+                                    text1: 'profile.email'.tr,
                                     text2:
                                         controller.userInfoRepsonse.value.email,
                                     // isLauching: true,
@@ -176,7 +177,7 @@ class ProfilePage extends GetView<ProfileController> {
                                     ),
                                   ),
                                   CustomListTileWidget(
-                                    text1: 'Phone',
+                                    text1: 'profile.phone'.tr,
                                     text2: controller
                                         .userProfileInfo.value.fullPhone1Format,
                                     // isLauching: true,
@@ -191,7 +192,7 @@ class ProfilePage extends GetView<ProfileController> {
                                     ),
                                   ),
                                   CustomListTileWidget(
-                                    text1: 'Video presentation link',
+                                    text1: 'profile.vdoLink'.tr,
                                     text2: controller
                                         .studentInfoRepsonse.value.youtubeLink,
                                     // isLauching: true,
@@ -230,8 +231,9 @@ class ProfilePage extends GetView<ProfileController> {
                                               rightMargin: AppSize.s16,
                                               // topMargin: AppSize.s12,
                                               bottomMargin: AppSize.s12,
-                                              leftTitle:
-                                                  'Education'.toUpperCase(),
+                                              leftTitle: 'profile.edu'
+                                                  .tr
+                                                  .toUpperCase(),
                                               titleFontSize: AppSize.s16,
                                               rightWidget:
                                                   CustomIconButtonWidget(
@@ -319,9 +321,9 @@ class ProfilePage extends GetView<ProfileController> {
                                             rightMargin: AppSize.s16,
                                             // topMargin: AppSize.s12,
                                             bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Professional Experiences'
-                                                    .toUpperCase(),
+                                            leftTitle: 'profile.professionalExp'
+                                                .tr
+                                                .toUpperCase(),
                                             titleFontSize: AppSize.s16,
                                             rightWidget: CustomIconButtonWidget(
                                               iconData: Icons.add,
@@ -410,7 +412,8 @@ class ProfilePage extends GetView<ProfileController> {
                                             rightMargin: AppSize.s16,
                                             // topMargin: AppSize.s12,
                                             bottomMargin: AppSize.s12,
-                                            leftTitle: 'Personal Experiences'
+                                            leftTitle: 'profile.personalExp'
+                                                .tr
                                                 .toUpperCase(),
                                             titleFontSize: AppSize.s16,
                                             rightWidget: CustomIconButtonWidget(
@@ -500,7 +503,9 @@ class ProfilePage extends GetView<ProfileController> {
                                             rightMargin: AppSize.s16,
                                             // topMargin: AppSize.s12,
                                             bottomMargin: AppSize.s12,
-                                            leftTitle: 'Skills'.toUpperCase(),
+                                            leftTitle: 'profile.skills'
+                                                .tr
+                                                .toUpperCase(),
                                             titleFontSize: AppSize.s16,
                                             rightWidget: CustomIconButtonWidget(
                                               iconData: Icons.edit_outlined,
@@ -534,9 +539,10 @@ class ProfilePage extends GetView<ProfileController> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        const CustomTextWidget(
+                                                        CustomTextWidget(
                                                           text:
-                                                              '${SkillCategoryStrings.hardSkill}s',
+                                                              'profile.hardSkills'
+                                                                  .tr,
                                                           marginBottom: 5.0,
                                                           fontWeight:
                                                               FontWeight.w600,
@@ -587,9 +593,10 @@ class ProfilePage extends GetView<ProfileController> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        const CustomTextWidget(
+                                                        CustomTextWidget(
                                                           text:
-                                                              '${SkillCategoryStrings.softSkill}s',
+                                                              'profile.softSkills'
+                                                                  .tr,
                                                           color: ColorsManager
                                                               .grey850,
                                                           marginBottom: 5.0,
@@ -636,8 +643,9 @@ class ProfilePage extends GetView<ProfileController> {
                                             rightMargin: AppSize.s16,
                                             // topMargin: AppSize.s12,
                                             bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Languages'.toUpperCase(),
+                                            leftTitle: 'profile.languages'
+                                                .tr
+                                                .toUpperCase(),
                                             titleFontSize: AppSize.s16,
                                             rightWidget: CustomIconButtonWidget(
                                               iconData: Icons.edit_outlined,
@@ -702,8 +710,9 @@ class ProfilePage extends GetView<ProfileController> {
                                             rightMargin: AppSize.s16,
                                             // topMargin: AppSize.s12,
                                             bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Achievement'.toUpperCase(),
+                                            leftTitle: 'profile.achievement'
+                                                .tr
+                                                .toUpperCase(),
                                             titleFontSize: AppSize.s16,
                                             rightWidget: CustomIconButtonWidget(
                                               iconData: Icons.add,
@@ -735,7 +744,11 @@ class ProfilePage extends GetView<ProfileController> {
                                                       text1FontSize:
                                                           AppSize.s16,
                                                       text2:
-                                                          'Issued: ${e.dateCompletionFormat}',
+                                                          'profile.issuedDate'
+                                                              .trParams({
+                                                        'date':
+                                                            '${e.dateCompletionFormat}'
+                                                      }),
                                                       text2Color:
                                                           ColorsManager.grey800,
                                                       text3: e.description,
@@ -781,8 +794,9 @@ class ProfilePage extends GetView<ProfileController> {
                                             rightMargin: AppSize.s16,
                                             // topMargin: AppSize.s12,
                                             bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Certificates'.toUpperCase(),
+                                            leftTitle: 'profile.certificates'
+                                                .tr
+                                                .toUpperCase(),
                                             titleFontSize: AppSize.s16,
                                             rightWidget: CustomIconButtonWidget(
                                               iconData: Icons.add,
@@ -814,13 +828,24 @@ class ProfilePage extends GetView<ProfileController> {
                                                       text1FontSize:
                                                           AppSize.s16,
                                                       text2:
-                                                          'Issued: ${e.receivedDateFormat}',
+                                                          'profile.issuedDate'
+                                                              .trParams({
+                                                        'date':
+                                                            '${e.receivedDateFormat}'
+                                                      }),
+                                                      // 'Issued: ${e.receivedDateFormat}',
                                                       text2Color:
                                                           ColorsManager.grey800,
                                                       text3: e.expirationDate !=
                                                               null
-                                                          ? 'Expired: ${e.expirationDateFormat}'
-                                                          : 'No Expiration Date',
+                                                          ? 'profile.expiredDate'
+                                                              .trParams({
+                                                              'date':
+                                                                  '${e.receivedDateFormat}'
+                                                            })
+                                                          // 'Expired: ${e.expirationDateFormat}'
+                                                          : 'profile.noExpiredDate'
+                                                              .tr,
                                                       text3FontSize:
                                                           AppSize.s14,
                                                       text4: e.description,

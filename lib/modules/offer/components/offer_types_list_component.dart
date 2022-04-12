@@ -49,7 +49,9 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                   // vertical: AppSize.s0,
                 ),
                 label: CustomTextWidget(
-                  text: '${controller.listJobOfferTypes[index].label}',
+                  text: controller.listJobOfferTypes[index].label == 'All'
+                      ? 'offer.all'.tr
+                      : '${controller.listJobOfferTypes[index].label}',
                   // fontSize: AppSize.s14,
                   fontWeight: FontWeightManager.light,
                   color: containerColorState(

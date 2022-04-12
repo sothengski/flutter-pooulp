@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../core/core.dart';
 import '../../modules.dart';
@@ -41,8 +42,8 @@ class SignUpPage extends StatelessWidget {
               ),
               Column(
                 children: [
-                  const CustomTextWidget(
-                    text: "Register an account as",
+                  CustomTextWidget(
+                    text: 'auth.registerAs'.tr,
                     color: ColorsManager.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 20,
@@ -50,7 +51,7 @@ class SignUpPage extends StatelessWidget {
                     marginBottom: AppSize.s32,
                   ),
                   CustomMaterialButton(
-                    text: "Student",
+                    text: 'auth.student'.tr,
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
                     textColor: ColorsManager.primary,
@@ -68,7 +69,7 @@ class SignUpPage extends StatelessWidget {
                     height: 40.0,
                   ),
                   CustomMaterialButton(
-                    text: "Enterprise",
+                    text: 'auth.enterprise'.tr,
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
                     textColor: ColorsManager.primary,

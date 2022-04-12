@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,8 +6,10 @@ import '../../../data/data.dart';
 import '../offer.dart';
 
 class OfferDetailPage extends GetView<OfferDetailController> {
-  final JobOfferModel jobOfferDetail = Get.arguments[0] as JobOfferModel;
-  final List<Widget>? actionButtons = Get.arguments[1] as List<Widget>;
+  final JobOfferModel jobOfferDetail =
+      (Get.arguments as List)[0] as JobOfferModel;
+  final List<Widget>? actionButtons =
+      (Get.arguments as List)[1] as List<Widget>;
 
   // const OfferDetailPage({Key? key}) : super(key: key);
 
@@ -18,7 +18,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
     return Scaffold(
       // backgroundColor: ColorsManager.primary,
       appBar: CustomAppBar(
-        title: 'Offer Details',
+        title: 'offer.details'.tr,
         elevation: 0.0,
       ),
       body: Column(
@@ -89,7 +89,10 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                     ],
                   ),
                   CustomTextWidget(
-                    text: 'Posted: ${jobOfferDetail.dateOfferStartFormat}',
+                    text: 'offer.posted'.trParams(
+                      {'date': '${jobOfferDetail.dateOfferStartFormat}'},
+                    ),
+                    // 'Posted: ${jobOfferDetail.dateOfferStartFormat}',
                     // textAlign: TextAlign.center,
                     fontSize: AppSize.s12,
                     fontWeight: FontWeight.w500,
@@ -118,8 +121,10 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                         ),
                         unselectedLabelColor: ColorsManager.grey,
                         tabs: [
-                          'Job Summary',
-                          'Company',
+                          // 'Job Summary',
+                          // 'Company',
+                          'offer.jobSummary'.tr,
+                          'offer.company'.tr
                         ]
                             .map(
                               (e) => Tab(
@@ -147,7 +152,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
                           ///===== Working Period Component =====//
                           OutlineContainerWidget(
-                            title: 'Working Period',
+                            title: 'offer.workingPeriod'.tr,
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,8 +162,14 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                     textAlign: TextAlign.center,
                                     text: jobOfferDetail.dateJobStartFormat !=
                                             ''
-                                        ? 'Starting Date: ${jobOfferDetail.dateJobStartFormat}'
-                                        : 'N/A',
+                                        ? 'offer.startDate'.trParams(
+                                            {
+                                              'date':
+                                                  '${jobOfferDetail.dateJobStartFormat}'
+                                            },
+                                          )
+                                        // 'Starting Date: ${jobOfferDetail.dateJobStartFormat}'
+                                        : 'offer.na'.tr,
                                     fontWeight: FontWeightManager.regular,
                                     fontSize: AppSize.s12,
                                     // marginBottom: AppSize.s10,
@@ -172,8 +183,13 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                     child: CustomBoxWidget(
                                       child: CustomTextWidget(
                                         textAlign: TextAlign.center,
-                                        text:
-                                            'End Date: ${jobOfferDetail.dateJobEndFormat}',
+                                        text: 'offer.endDate'.trParams(
+                                          {
+                                            'date':
+                                                '${jobOfferDetail.dateJobEndFormat}'
+                                          },
+                                        ),
+                                        // 'End Date: ${jobOfferDetail.dateJobEndFormat}',
                                         fontWeight: FontWeightManager.regular,
                                         fontSize: AppSize.s12,
                                         // marginBottom: AppSize.s10,
@@ -190,7 +206,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ///===== Working Duration Component =====//
                           if (jobOfferDetail.types!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Working Duration',
+                              title: 'offer.workingDuration'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: CustomBoxWidget(
                                 child: CustomTextWidget(
@@ -209,7 +225,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ///===== Types Component =====//
                           if (jobOfferDetail.types!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Types',
+                              title: 'offer.types'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.types != []
                                   ? Wrap(
@@ -244,7 +260,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ///===== Fields Component =====//
                           if (jobOfferDetail.fields!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Fields',
+                              title: 'offer.fields'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.fields != []
                                   ? Wrap(
@@ -278,7 +294,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
                           ///===== Office Address Component =====//
                           OutlineContainerWidget(
-                            title: 'Office Address',
+                            title: 'offer.officeAddress'.tr,
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomTextWidget(
                               text:
@@ -291,7 +307,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
                           ///===== Job Description Component =====//
                           OutlineContainerWidget(
-                            title: 'Job Description',
+                            title: 'offer.jobDescription'.tr,
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomTextWidget(
                               text: '${jobOfferDetail.description}',
@@ -304,7 +320,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ///===== Languages Component =====//
                           if (jobOfferDetail.spokenLanguages!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Languages',
+                              title: 'offer.languages'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.spokenLanguages != []
                                   ? Wrap(
@@ -340,7 +356,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ///===== Skills Component =====//
                           if (jobOfferDetail.skills!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Skills',
+                              title: 'offer.skills'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.skills != []
                                   ? Wrap(
@@ -385,7 +401,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
                           ///===== Enterprise ID Component =====//
                           OutlineContainerWidget(
-                            title: 'Enterprise ID',
+                            title: 'offer.enterpriseID'.tr,
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomBoxWidget(
                               child: CustomTextWidget(
@@ -454,12 +470,13 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
                           ///===== Office Address Component =====//
                           OutlineContainerWidget(
-                            title: 'Office Address',
+                            title: 'offer.officeAddress'.tr,
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomTextWidget(
                               text:
                                   '${jobOfferDetail.enterprise!.addressStreet}, ${jobOfferDetail.companyLocation}',
                               fontWeight: FontWeightManager.regular,
+                              maxLine: 3,
                             ),
                           ),
                           //===== Office Address Component =====//
@@ -467,7 +484,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ///===== Fields Component =====//
                           if (jobOfferDetail.enterprise!.fields!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Fields',
+                              title: 'offer.fields'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.enterprise!.fields !=
                                       []
@@ -504,7 +521,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
                           ///===== Description Component =====//
                           OutlineContainerWidget(
-                            title: 'Description',
+                            title: 'offer.description'.tr,
                             titleColor: ColorsManager.primaryBlue,
                             isDivider: false,
                             childWidget: CustomTextWidget(

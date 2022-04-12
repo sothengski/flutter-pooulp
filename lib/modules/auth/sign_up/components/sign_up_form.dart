@@ -86,8 +86,9 @@ class SignUpForm extends GetView<SignUpController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CustomTextWidget(
-                              text:
-                                  "Create ${isStudent == true ? 'Student' : 'Enterprise'} Account",
+                              text: isStudent == true
+                                  ? 'auth.createStudentAccount'.tr
+                                  : 'auth.createEnterpriseAccount'.tr,
                               fontSize: 24.0,
                               fontWeight: FontWeight.w700,
                               color: ColorsManager.primary,
@@ -95,16 +96,16 @@ class SignUpForm extends GetView<SignUpController> {
                             ),
                             CustomTextInput(
                               controller: controller.tokenCtrl,
-                              inputTitle: "Token",
-                              hintText: "Enter the Token",
+                              inputTitle: 'auth.token'.tr,
+                              hintText: 'auth.tokenHint'.tr,
                               isFilled: true,
                               topPadding: AppSize.s12,
                               validator: Validator().notEmptyValidator,
                             ),
                             CustomTextInput(
                               controller: controller.firstNameCtrl,
-                              inputTitle: "First name",
-                              hintText: "Enter your first name",
+                              inputTitle: 'auth.firstName'.tr,
+                              hintText: 'auth.firstNameHint'.tr,
                               isFilled: true,
                               topPadding: AppSize.s12,
                               validator: Validator().notEmptyValidator,
@@ -114,16 +115,16 @@ class SignUpForm extends GetView<SignUpController> {
                             ),
                             CustomTextInput(
                               controller: controller.lastNameCtrl,
-                              inputTitle: "Last name",
-                              hintText: "Enter your last name",
+                              inputTitle: 'auth.lastName'.tr,
+                              hintText: 'auth.lastNameHint'.tr,
                               isFilled: true,
                               topPadding: AppSize.s12,
                               validator: Validator().notEmptyValidator,
                             ),
                             CustomTextInput(
                               controller: controller.emailCtrl,
-                              inputTitle: "Email",
-                              hintText: "Enter your email",
+                              inputTitle: 'auth.email'.tr,
+                              hintText: 'auth.emailHint'.tr,
                               isFilled: true,
                               topPadding: AppSize.s12,
                               validator: Validator().emailValidator,
@@ -137,8 +138,8 @@ class SignUpForm extends GetView<SignUpController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const CustomTextWidget(
-                                        text: 'Phone Number',
+                                      CustomTextWidget(
+                                        text: 'auth.phoneNumber'.tr,
                                         marginTop: AppSize.s12,
                                         textAlign: TextAlign.left,
                                         // marginBottom: AppSize.s4,
@@ -251,11 +252,12 @@ class SignUpForm extends GetView<SignUpController> {
                                                               .value
                                                               .phoneCode ==
                                                           null
-                                                      ? const RowContentInputWidget(
+                                                      ? RowContentInputWidget(
                                                           centerWidget:
                                                               CustomTextWidget(
                                                             text:
-                                                                'Country Code',
+                                                                'auth.countryCode'
+                                                                    .tr,
                                                             color: ColorsManager
                                                                 .grey400,
                                                             fontWeight:
@@ -302,7 +304,7 @@ class SignUpForm extends GetView<SignUpController> {
                                   child: CustomTextInput(
                                     controller: controller.phoneNumberCtrl,
                                     inputTitle: "",
-                                    hintText: 'Enter Phone Number',
+                                    hintText: 'auth.phoneNumberHint'.tr,
                                     keyboardType: TextInputType.phone,
                                     isFilled: true,
                                     topPadding: AppSize.s12,
@@ -330,8 +332,8 @@ class SignUpForm extends GetView<SignUpController> {
                             ),
                             CustomTextInput(
                               controller: controller.passwordCtrl,
-                              inputTitle: "Password",
-                              hintText: "Enter your password",
+                              inputTitle: 'auth.password'.tr,
+                              hintText: 'auth.passwordHint'.tr,
                               suffixIcon: IconButton(
                                 icon: !controller.showPassword.value
                                     ? const Icon(
@@ -391,8 +393,8 @@ class SignUpForm extends GetView<SignUpController> {
                             else
                               CustomTextInput(
                                 controller: controller.enterpriseNameCtrl,
-                                inputTitle: "Enterprise Name",
-                                hintText: "Enter your enterprise name",
+                                inputTitle: 'auth.enterpriseName'.tr,
+                                hintText: 'auth.enterpriseNameHint'.tr,
                                 isFilled: true,
                                 topPadding: AppSize.s12,
                                 validator: Validator().notEmptyValidator,
@@ -402,8 +404,8 @@ class SignUpForm extends GetView<SignUpController> {
                             else
                               CustomTextInput(
                                 controller: controller.enterpriseIDCtrl,
-                                inputTitle: "Enterprise ID",
-                                hintText: "Enter your enterprise ID",
+                                inputTitle: 'auth.enterpriseID'.tr,
+                                hintText: 'auth.enterpriseIDHint'.tr,
                                 isFilled: true,
                                 topPadding: AppSize.s12,
                                 bottomPadding: AppSize.s16,
@@ -436,14 +438,14 @@ class SignUpForm extends GetView<SignUpController> {
                                   child: RichText(
                                     text: TextSpan(
                                       children: [
-                                        const TextSpan(
-                                          text: 'I agree to Pooulp ',
-                                          style: TextStyle(
+                                        TextSpan(
+                                          text: 'auth.agreeToPooulp'.tr,
+                                          style: const TextStyle(
                                             color: ColorsManager.primaryBlue,
                                           ),
                                         ),
                                         TextSpan(
-                                          text: 'Privacy Policy',
+                                          text: 'auth.privacy'.tr,
                                           style: const TextStyle(
                                             color: Colors.blue,
                                           ),
@@ -463,7 +465,7 @@ class SignUpForm extends GetView<SignUpController> {
                                           ),
                                         ),
                                         TextSpan(
-                                          text: 'Terms',
+                                          text: 'auth.term'.tr,
                                           style: const TextStyle(
                                             color: Colors.blue,
                                           ),
@@ -524,9 +526,8 @@ class SignUpForm extends GetView<SignUpController> {
                                 ),
                                 SizedBox(
                                   width: getWidth * 0.7,
-                                  child: const CustomTextWidget(
-                                    text:
-                                        "Join our Pooulp emailing list to be updated with our latest news!",
+                                  child: CustomTextWidget(
+                                    text: 'auth.joinEmailListText'.tr,
                                     maxLine: 3,
                                   ),
                                 ),
@@ -548,7 +549,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 child: controller.isCheckTermCondition.value ==
                                         true
                                     ? CustomMaterialButton(
-                                        text: "Register",
+                                        text: 'auth.register'.tr,
                                         fontSize: 20.0,
                                         buttonWidth: getWidth,
                                         onPressed: () {
@@ -559,7 +560,7 @@ class SignUpForm extends GetView<SignUpController> {
                                         },
                                       )
                                     : CustomMaterialButton(
-                                        text: "Register",
+                                        text: 'auth.register'.tr,
                                         textColor: ColorsManager.primaryBlue,
                                         fontSize: 20.0,
                                         buttonWidth: getWidth,
@@ -569,22 +570,22 @@ class SignUpForm extends GetView<SignUpController> {
                               ),
                             ),
                             Row(
-                              children: const [
-                                Expanded(
+                              children: [
+                                const Expanded(
                                   child: Divider(
                                     thickness: 1,
                                     color: ColorsManager.grey600,
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 CustomTextWidget(
-                                  text: 'Or',
+                                  text: 'auth.or'.tr,
                                   fontSize: 20.0,
                                   marginTop: AppSize.s16,
                                   marginBottom: AppSize.s16,
                                 ),
-                                SizedBox(width: 10),
-                                Expanded(
+                                const SizedBox(width: 10),
+                                const Expanded(
                                   child: Divider(
                                     thickness: 1,
                                     color: ColorsManager.grey600,
@@ -644,8 +645,8 @@ class SignUpForm extends GetView<SignUpController> {
                     ),
                   ),
                 ),
-                const CustomTextWidget(
-                  text: "You already have an account?",
+                CustomTextWidget(
+                  text: 'auth.acountExist'.tr,
                   color: ColorsManager.white,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
@@ -656,8 +657,8 @@ class SignUpForm extends GetView<SignUpController> {
                   onTap: () => Get.offAllNamed(
                     Routes.signInRoute,
                   ),
-                  child: const CustomTextWidget(
-                    text: "Login",
+                  child: CustomTextWidget(
+                    text: 'auth.logIn'.tr,
                     color: ColorsManager.white,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,

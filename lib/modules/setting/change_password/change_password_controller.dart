@@ -81,8 +81,8 @@ class ChangePasswordController extends GetxController {
             if (value.status == 200)
               {
                 customSnackbar(
-                  msgTitle: 'Success',
-                  msgContent: 'Your Password Successfully Updated.',
+                  msgTitle: 'core.success'.tr,
+                  msgContent: 'settings.passwordUpdated'.tr,
                   bgColor: ColorsManager.green,
                 ),
                 cleanUpFormData(),
@@ -90,8 +90,8 @@ class ChangePasswordController extends GetxController {
             else
               {
                 customSnackbar(
-                  msgTitle: 'Failed',
-                  msgContent: 'Please check your current password again.',
+                  msgTitle: 'core.failed'.tr,
+                  msgContent: 'settings.recheckPassword'.tr,
                   bgColor: ColorsManager.red,
                 ),
               }

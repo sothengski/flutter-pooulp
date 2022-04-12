@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 
 enum Type { softSkill, hardSkill }
 
@@ -40,8 +41,9 @@ class SkillModel {
     this.level,
   });
 
-  String? get displayLevel => level == null ? '' : 'Level $level';
-
+  // String? get displayLevel => level == null ? '' : 'Level $level';
+  String? get displayLevel =>
+      level == null ? '' : "${'profile.level'.tr} $level";
   String? get displayLabelAndLevel =>
       level == null ? '• $label' : '• $label - Level $level';
 

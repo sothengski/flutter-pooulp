@@ -12,7 +12,10 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
     return Scaffold(
       ///===== Top of appBar Component =====//
       appBar: CustomAppBar(
-        title: '${controller.title} Experience',
+        title: controller.title == AppStrings.addText
+            ? 'profile.addExp'.tr
+            : 'profile.editExp'.tr,
+        //'${controller.title} Experience',
         actions: [
           if (controller.title != Keys.editOperation)
             Container()
@@ -53,8 +56,8 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                   CustomTextInput(
                     topPadding: AppSize.s16,
                     controller: controller.companyNameTextCtrl,
-                    inputTitle: 'Company Name',
-                    hintText: 'Enter the Company Name',
+                    inputTitle: 'profile.companyName'.tr,
+                    hintText: 'profile.companyNameHint'.tr,
                     isFilled: true,
                     validator: Validator().notEmptyValidator,
                   )
@@ -63,12 +66,12 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
 
                   ///===== Top of Type Component =====//
                   ContainerDialogWidget(
-                    inputTitle: 'Experience Type',
+                    inputTitle: 'profile.expType'.tr,
                     validatorFunction: (_) => Validator().notEmptyValidator(
                       controller.selectedExperienceType.value.label ?? '',
                     ),
                     dialogWidget: MaterialDialogWidget(
-                      title: 'Select Experience Type',
+                      title: 'profile.expTypeHint'.tr,
                       contentWidget: Obx(
                         () => controller.experienceTypeList.isNotEmpty
                             ? ListView.separated(
@@ -114,14 +117,14 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                     ),
                     containerWidget: Obx(
                       () => controller.selectedExperienceType.value.id == null
-                          ? const RowContentInputWidget(
+                          ? RowContentInputWidget(
                               centerWidget: CustomTextWidget(
-                                text: 'Select your Experience Type',
+                                text: 'profile.expTypeHint'.tr,
                                 color: ColorsManager.grey400,
                                 fontWeight: FontWeight.w400,
                                 fontSize: AppSize.s16,
                               ),
-                              suffixWidget: Icon(
+                              suffixWidget: const Icon(
                                 IconsManager.arrowDropDown,
                                 color: ColorsManager.grey600,
                               ),
@@ -147,8 +150,8 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.titleTextCtrl,
-                  inputTitle: 'Title',
-                  hintText: 'Enter your Title',
+                  inputTitle: 'profile.title'.tr,
+                  hintText: 'profile.titleHint'.tr,
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
@@ -160,7 +163,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                     verticalPadding: AppSize.s16,
                     horizontalPadding: AppSize.s0,
                     isClickingValue: controller.isCheckStillWorking.value,
-                    text: 'I am currently working in this role.',
+                    text: 'profile.stillInThisRole'.tr,
                     isLeftSideText: false,
                     onPressed: () {
                       controller.isCheckStillWorking.value =
@@ -179,12 +182,14 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'Start Date',
+                        inputTitle: 'profile.startDate'.tr,
                         inputTitleMarginTop: AppSize.s0,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedStartedDateString.value,
                         ),
                         dialogType: DialogType.dateTimePickerDialog,
+                        dateLocale: controller
+                            .profileController.userProfileInfo.value.uiLanguage,
                         currentTime: DateTime.tryParse(
                               controller.selectedStartedDateString.value,
                             ) ??
@@ -195,15 +200,15 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                         },
                         containerWidget: Obx(
                           () => controller.selectedStartedDateString.value == ''
-                              ? const RowContentInputWidget(
+                              ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'Start Date',
+                                    text: 'profile.startDate'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
                                   ),
                                   suffixWidgetFlex: 20,
-                                  suffixWidget: Icon(
+                                  suffixWidget: const Icon(
                                     IconsManager.dateRangeOutlined,
                                     color: ColorsManager.grey600,
                                   ),
@@ -237,9 +242,12 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'End Date(Or Expected)',
+                        inputTitle:
+                            "${'profile.endDate'.tr}(${'profile.expectedDate'.tr})",
                         inputTitleMarginTop: AppSize.s0,
                         dialogType: DialogType.dateTimePickerDialog,
+                        dateLocale: controller
+                            .profileController.userProfileInfo.value.uiLanguage,
                         currentTime: DateTime.tryParse(
                               controller.selectedEndDateString.value,
                             ) ??
@@ -250,15 +258,15 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                         },
                         containerWidget: Obx(
                           () => controller.selectedEndDateString.value == ''
-                              ? const RowContentInputWidget(
+                              ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'End Date',
+                                    text: 'profile.endDate'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
                                   ),
                                   suffixWidgetFlex: 20,
-                                  suffixWidget: Icon(
+                                  suffixWidget: const Icon(
                                     Icons.date_range_outlined,
                                     color: ColorsManager.grey600,
                                   ),
@@ -296,8 +304,8 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                       child: CustomTextInput(
                         topPadding: AppSize.s16,
                         controller: controller.cityTextCtrl,
-                        inputTitle: 'City',
-                        hintText: 'Enter the City',
+                        inputTitle: 'profile.city'.tr,
+                        hintText: 'profile.cityHint'.tr,
                         isFilled: true,
                         // validator: Validator().notEmptyValidator,
                       ),
@@ -313,8 +321,8 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                       child: CustomTextInput(
                         topPadding: AppSize.s16,
                         controller: controller.countryTextCtrl,
-                        inputTitle: 'Country',
-                        hintText: 'Enter the Country',
+                        inputTitle: 'profile.country'.tr,
+                        hintText: 'profile.countryHint'.tr,
                         isFilled: true,
                         // validator: Validator().notEmptyValidator,
                       ),
@@ -328,8 +336,8 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.descriptionTextCtrl,
-                  inputTitle: 'Description',
-                  hintText: 'Description...',
+                  inputTitle: 'offer.description'.tr,
+                  hintText: "${'offer.description'.tr}...",
                   isFilled: true,
                   topContentPadding: AppSize.s12,
                   bottomContentPadding: AppSize.s12,
@@ -355,7 +363,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
           leftPadding: AppSize.s12,
           rightPadding: AppSize.s12,
           bottomPadding: AppSize.s20,
-          text: AppStrings.saveText,
+          text: 'core.saveBtn'.tr,
           childWidget: controller.isSubmitBtnProcessing.value == true
               ? const SizedBox(
                   height: 40,

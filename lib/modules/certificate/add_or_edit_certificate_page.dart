@@ -12,7 +12,10 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
     return Scaffold(
       ///===== Top of appBar Component =====//
       appBar: CustomAppBar(
-        title: '${controller.title} Certificate',
+        title: controller.title == AppStrings.addText
+            ? 'profile.addCertificate'.tr
+            : 'profile.editCertificate'.tr,
+        //'${controller.title} Certificate',
         actions: [
           if (controller.title != Keys.editOperation)
             Container()
@@ -52,8 +55,8 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                   topPadding: AppSize.s16,
                   bottomPadding: AppSize.s16,
                   controller: controller.certificateTitleTextCtrl,
-                  inputTitle: 'Certificate Title',
-                  hintText: 'Enter your Certificate Title',
+                  inputTitle: 'profile.certificateTitle'.tr,
+                  hintText: 'profile.certificateTitleHint'.tr,
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
@@ -65,12 +68,14 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'Received Date',
+                        inputTitle: 'profile.receivedDate'.tr,
                         inputTitleMarginTop: AppSize.s0,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedReceivedDateString.value,
                         ),
                         dialogType: DialogType.dateTimePickerDialog,
+                        dateLocale: controller
+                            .profileController.userProfileInfo.value.uiLanguage,
                         currentTime: DateTime.tryParse(
                               controller.selectedReceivedDateString.value,
                             ) ??
@@ -82,15 +87,15 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                         containerWidget: Obx(
                           () =>
                               controller.selectedReceivedDateString.value == ''
-                                  ? const RowContentInputWidget(
+                                  ? RowContentInputWidget(
                                       centerWidget: CustomTextWidget(
-                                        text: 'Received Date',
+                                        text: 'profile.receivedDate'.tr,
                                         color: ColorsManager.grey400,
                                         fontWeight: FontWeight.w400,
                                         fontSize: AppSize.s16,
                                       ),
                                       suffixWidgetFlex: 20,
-                                      suffixWidget: Icon(
+                                      suffixWidget: const Icon(
                                         IconsManager.dateRangeOutlined,
                                         color: ColorsManager.grey600,
                                       ),
@@ -125,9 +130,11 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'Expire Date',
+                        inputTitle: 'profile.expireDate'.tr,
                         inputTitleMarginTop: AppSize.s0,
                         dialogType: DialogType.dateTimePickerDialog,
+                        dateLocale: controller
+                            .profileController.userProfileInfo.value.uiLanguage,
                         currentTime: DateTime.tryParse(
                               controller.selectedExpireDateString.value,
                             ) ??
@@ -180,8 +187,8 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.descriptionTextCtrl,
-                  inputTitle: 'Description',
-                  hintText: 'Description...',
+                  inputTitle: 'offer.description'.tr,
+                  hintText: "${'offer.description'.tr}...",
                   isFilled: true,
                   topContentPadding: AppSize.s12,
                   bottomContentPadding: AppSize.s12,
@@ -207,7 +214,7 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
           leftPadding: AppSize.s12,
           rightPadding: AppSize.s12,
           bottomPadding: AppSize.s20,
-          text: AppStrings.saveText,
+          text: 'core.saveBtn'.tr,
           childWidget: controller.isSubmitBtnProcessing.value == true
               ? const SizedBox(
                   height: 40,

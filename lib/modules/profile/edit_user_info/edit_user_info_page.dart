@@ -19,7 +19,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
     return Scaffold(
       // backgroundColor: ColorsManager.grey100,
       appBar: CustomAppBar(
-        title: 'Edit Information',
+        title: 'profile.editInformation'.tr,
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -55,7 +55,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                   iconDataUnClick: Icons.camera_alt_outlined,
                                   iconColorUnClick: ColorsManager.grey600,
                                   isLeftSideText: false,
-                                  text: 'Take a Picture',
+                                  text: 'profile.takeAPic'.tr,
                                   onPressed: () {
                                     controller.getImage(isCamera: true);
                                     Navigator.pop(
@@ -71,7 +71,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                   iconDataUnClick: Icons.image_outlined,
                                   iconColorUnClick: ColorsManager.grey600,
                                   isLeftSideText: false,
-                                  text: 'Phone Gallery',
+                                  text: 'profile.phoneGallery'.tr,
                                   onPressed: () {
                                     controller.getImage();
                                     Navigator.pop(
@@ -112,7 +112,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
             Padding(
               padding: const EdgeInsets.all(AppSize.s16),
               child: CustomContainerWidget(
-                leftTitle: 'Personal Information',
+                leftTitle: 'profile.information'.tr,
                 titleColor: ColorsManager.primary,
                 titleFontWeight: FontWeightManager.regular,
                 titleFontSize: AppSize.s20,
@@ -129,8 +129,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of First name Component =====//
                       CustomTextInput(
                         controller: controller.firstNameCtrl,
-                        inputTitle: 'First name',
-                        hintText: 'Enter your first name',
+                        inputTitle: 'auth.firstName'.tr,
+                        hintText: 'auth.firstNameHint'.tr,
                         isFilled: true,
                         validator: Validator().notEmptyValidator,
                         // onChanged: (value) => null,
@@ -142,8 +142,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Last name Component =====//
                       CustomTextInput(
                         controller: controller.lastNameCtrl,
-                        inputTitle: 'Last name',
-                        hintText: 'Enter your last name',
+                        inputTitle: 'auth.lastName'.tr,
+                        hintText: 'auth.lastNameHint'.tr,
                         isFilled: true,
                         topPadding: AppSize.s12,
                         validator: Validator().notEmptyValidator,
@@ -155,9 +155,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedGender.value,
                         ),
-                        inputTitle: 'Gender',
+                        inputTitle: 'profile.gender'.tr,
                         dialogWidget: MaterialDialogWidget(
-                          title: 'Select your Gender',
+                          title: 'profile.genderHint'.tr,
                           contentWidget: ListView.separated(
                             shrinkWrap: true,
                             itemCount: controller.genderList.length,
@@ -195,15 +195,15 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         ),
                         containerWidget: Obx(
                           () => controller.selectedGender.value == ''
-                              ? const RowContentInputWidget(
+                              ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'Select your gender',
+                                    text: 'profile.genderHint'.tr,
                                     // marginLeft: AppSize.s8,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16.0,
                                   ),
-                                  suffixWidget: Icon(
+                                  suffixWidget: const Icon(
                                     Icons.arrow_drop_down,
                                     color: ColorsManager.grey600,
                                   ),
@@ -227,8 +227,10 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Birthday Component =====//
                       Obx(
                         () => ContainerDialogWidget(
-                          inputTitle: 'Birthday',
+                          inputTitle: 'profile.birthday'.tr,
                           dialogType: DialogType.dateTimePickerDialog,
+                          dateLocale: controller.profileController
+                              .userProfileInfo.value.uiLanguage,
                           currentTime: controller.selectedBirthday.value,
                           onConfirmDate: (date) {
                             controller.selectedBirthdayOnClick(
@@ -238,14 +240,14 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                           containerWidget: controller
                                       .selectedBirthday.value.year ==
                                   controller.now.year
-                              ? const RowContentInputWidget(
+                              ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'Select your Birthday',
+                                    text: 'profile.birthdayHint'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16.0,
                                   ),
-                                  suffixWidget: Icon(
+                                  suffixWidget: const Icon(
                                     Icons.date_range_outlined,
                                     color: ColorsManager.grey600,
                                   ),
@@ -274,7 +276,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                           Expanded(
                             flex: 40,
                             child: ContainerDialogWidget(
-                              inputTitle: 'Phone Number',
+                              inputTitle: 'auth.phoneNumber'.tr,
                               dialogType: DialogType.bottomSheetDialog,
                               dialogWidget: Container(
                                 height: getHeight,
@@ -313,9 +315,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                 () => controller.selectedCountryPhoneNumber
                                             .value.phoneCode ==
                                         null
-                                    ? const RowContentInputWidget(
+                                    ? RowContentInputWidget(
                                         centerWidget: CustomTextWidget(
-                                          text: 'Country Code',
+                                          text: 'auth.countryCode'.tr,
                                           color: ColorsManager.grey400,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16.0,
@@ -351,7 +353,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                             child: CustomTextInput(
                               controller: controller.phoneNumberCtrl,
                               inputTitle: "",
-                              hintText: 'Enter Phone Number',
+                              hintText: 'auth.phoneNumberHint'.tr,
                               keyboardType: TextInputType.phone,
                               isFilled: true,
                               topPadding: AppSize.s12,
@@ -383,8 +385,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Linkedin profile Component =====//
                       CustomTextInput(
                         controller: controller.linkedInProfileCtrl,
-                        inputTitle: 'Linkedin profile',
-                        hintText: 'Enter your Linkedin profile',
+                        inputTitle: 'profile.linkedInAcc'.tr,
+                        hintText: 'profile.linkedInAccHint'.tr,
                         isFilled: true,
                         topPadding: AppSize.s12,
                         // validator: Validator().emailValidator,
@@ -395,8 +397,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Video presentation link Component =====//
                       CustomTextInput(
                         controller: controller.videoLinkCtrl,
-                        inputTitle: 'Video presentation link',
-                        hintText: 'Enter your Video presentation link',
+                        inputTitle: 'profile.vdoLink'.tr,
+                        hintText: 'profile.vdoLinkHint'.tr,
                         isFilled: true,
                         topPadding: AppSize.s12,
                       ),
@@ -405,8 +407,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Description Component =====//
                       CustomTextInput(
                         controller: controller.descriptionCtrl,
-                        inputTitle: 'Description',
-                        hintText: 'Description...',
+                        inputTitle: 'profile.description'.tr,
+                        hintText: "${'profile.description'.tr}...",
                         isFilled: true,
                         topContentPadding: 12.0,
                         bottomContentPadding: 12.0,
@@ -421,10 +423,10 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       //===== Bottom of Description Component =====//
 
                       ///===== Top of Address Information Component =====//
-                      const Align(
+                      Align(
                         alignment: Alignment.centerLeft,
                         child: CustomTextWidget(
-                          text: 'Address Information',
+                          text: 'profile.addressInformation'.tr,
                           fontWeight: FontWeightManager.regular,
                           fontSize: AppSize.s20,
                           color: ColorsManager.primary,
@@ -445,8 +447,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         child: AbsorbPointer(
                           child: CustomTextInput(
                             controller: controller.addressCtrl,
-                            inputTitle: 'Address',
-                            hintText: 'Address...',
+                            inputTitle: 'profile.address'.tr,
+                            hintText: "${'profile.address'.tr}...",
                             isFilled: true,
                             isReadOnly: true,
                             topContentPadding: 12.0,
@@ -465,16 +467,16 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Country & City/State Component =====//
                       CustomTextInput(
                         controller: controller.countryCtrl,
-                        inputTitle: 'Country',
-                        hintText: 'Country',
+                        inputTitle: 'profile.country'.tr,
+                        hintText: 'profile.country'.tr,
                         isFilled: true,
                         maxLength: 10,
                         topPadding: AppSize.s12,
                       ),
                       CustomTextInput(
                         controller: controller.cityStateCtrl,
-                        inputTitle: 'City/State',
-                        hintText: 'City/State',
+                        inputTitle: 'profile.city'.tr,
+                        hintText: 'profile.city'.tr,
                         isFilled: true,
                         maxLength: 10,
                         topPadding: AppSize.s12,
@@ -484,8 +486,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Zip Code Component =====//
                       CustomTextInput(
                         controller: controller.zipCodeCtrl,
-                        inputTitle: 'Zip Code',
-                        hintText: 'Zip Code',
+                        inputTitle: 'profile.zipCode'.tr,
+                        hintText: 'profile.zipCode'.tr,
                         isFilled: true,
                         maxLength: 10,
                         topPadding: AppSize.s12,
@@ -524,7 +526,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                 leftPadding: AppSize.s12,
                 rightPadding: AppSize.s12,
                 bottomPadding: AppSize.s20,
-                text: 'Save',
+                text: 'core.saveBtn'.tr,
                 fontSize: AppSize.s20,
                 // buttonHeight: 45,
                 buttonWidth: getWidth,

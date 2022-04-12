@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names, avoid_dynamic_calls
+// ignore_for_file: constant_identifier_names
 
 import 'dart:convert';
 
@@ -8,9 +8,9 @@ import 'package:pooulp_flutter/data/data.dart';
 //     OnboardingModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
 List<CityModel> cityModelFromJson(String str) => List<CityModel>.from(
-      json.decode(str).map(
-            (x) => CityModel.fromJson(x as Map<String, dynamic>),
-          ) as List<Map<String, dynamic>>,
+      (json.decode(str) as List).map(
+        (x) => CityModel.fromJson(x as Map<String, dynamic>),
+      ) as List<Map<String, dynamic>>,
     );
 
 String cityModelToJson(List<CityModel> data) =>

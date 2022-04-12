@@ -12,7 +12,10 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
     return Scaffold(
       ///===== Top of appBar Component =====//
       appBar: CustomAppBar(
-        title: '${controller.title} Achievement',
+        title: controller.title == AppStrings.addText
+            ? 'profile.addAchievement'.tr
+            : 'profile.editAchievement'.tr,
+        // '${controller.title} Achievement',
         actions: [
           if (controller.title != Keys.editOperation)
             Container()
@@ -51,8 +54,8 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.achievementNameTextCtrl,
-                  inputTitle: 'Achievement Title',
-                  hintText: 'Enter your Achievement Title',
+                  inputTitle: 'profile.achievementTitle'.tr,
+                  hintText: 'profile.achievementTitleHint'.tr,
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
@@ -60,12 +63,14 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
 
                 ///===== Top of Completion Date Component =====//
                 ContainerDialogWidget(
-                  inputTitle: 'Completion Date',
+                  inputTitle: 'profile.completionDate'.tr,
                   inputTitleMarginTop: AppSize.s16,
                   validatorFunction: (_) => Validator().notEmptyValidator(
                     controller.selectedCompletionDateString.value,
                   ),
                   dialogType: DialogType.dateTimePickerDialog,
+                  dateLocale: controller
+                      .profileController.userProfileInfo.value.uiLanguage,
                   currentTime: DateTime.tryParse(
                         controller.selectedCompletionDateString.value,
                       ) ??
@@ -76,14 +81,14 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                   },
                   containerWidget: Obx(
                     () => controller.selectedCompletionDateString.value == ''
-                        ? const RowContentInputWidget(
+                        ? RowContentInputWidget(
                             centerWidget: CustomTextWidget(
-                              text: 'Completion Date',
+                              text: 'profile.completionDate'.tr,
                               color: ColorsManager.grey400,
                               fontWeight: FontWeight.w400,
                               fontSize: AppSize.s16,
                             ),
-                            suffixWidget: Icon(
+                            suffixWidget: const Icon(
                               IconsManager.dateRangeOutlined,
                               color: ColorsManager.grey600,
                             ),
@@ -111,8 +116,8 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.descriptionTextCtrl,
-                  inputTitle: 'Description',
-                  hintText: 'Description...',
+                  inputTitle: 'offer.description'.tr,
+                  hintText: "${'offer.description'.tr}...",
                   isFilled: true,
                   topContentPadding: AppSize.s12,
                   bottomContentPadding: AppSize.s12,
@@ -138,7 +143,7 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
           leftPadding: AppSize.s12,
           rightPadding: AppSize.s12,
           bottomPadding: AppSize.s20,
-          text: AppStrings.saveText,
+          text: 'core.saveBtn'.tr,
           childWidget: controller.isSubmitBtnProcessing.value == true
               ? const SizedBox(
                   height: 40,

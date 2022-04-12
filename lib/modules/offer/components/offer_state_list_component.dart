@@ -53,7 +53,8 @@ class OfferStateListComponent extends StatelessWidget {
                       label: Row(
                         children: [
                           CustomTextWidget(
-                            text: '${item.label}',
+                            text:
+                                translateStateWords(stateWord: '${item.label}'),
                             // fontSize: AppSize.s14,
                             fontWeight: FontWeightManager.medium,
                             color: containerColorState(

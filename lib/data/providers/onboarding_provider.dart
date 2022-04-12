@@ -35,7 +35,7 @@ class OnboardingProvider extends BaseProvider implements IOnboardingProvider {
           data: dataResponse.body,
         );
         // debugPrint(
-        //   'API: ${API.paths[Endpoint.getOnBoardingData]}\nresponse::$response',
+        //   'API: ${API.paths[Endpoint.postOrGetOnBoardingData]}\nresponse::$response',
         // );
         return response;
       }

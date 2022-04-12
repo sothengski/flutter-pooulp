@@ -120,8 +120,8 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
       if (selectedCountry.value.phoneCode == null &&
           phoneNumberCtrl.text.isEmpty) {
         return isPhoneNumberField == false
-            ? 'This field is required.'
-            : 'This field is required.';
+            ? 'validator.requireField'.tr
+            : 'validator.requireField'.tr;
       }
       if (selectedCountry.value.phoneCode == null &&
           Validator().isPhoneNumberValidate(
@@ -129,14 +129,14 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
               ) ==
               false) {
         return isPhoneNumberField == false
-            ? 'This field is required.'
+            ? 'validator.requireField'.tr
             : '${Validator().phoneNumberValidator(phoneNumberCtrl.text)}';
       }
       if (selectedCountry.value.phoneCode == null) {
-        return isPhoneNumberField == false ? 'This field is required.' : '';
+        return isPhoneNumberField == false ? 'validator.requireField'.tr : '';
       }
       if (phoneNumberCtrl.text.isEmpty) {
-        return isPhoneNumberField == false ? '' : 'This field is required.';
+        return isPhoneNumberField == false ? '' : 'validator.requireField'.tr;
       }
       //else condition
       return isPhoneNumberField == false
@@ -178,11 +178,11 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
         (LoginModel value) {
           Get.dialog(
             CustomAlertDialog(
-              title: 'SUCCESS!',
-              content: "You're now a member of Pooulp.",
+              title: 'core.success'.tr,
+              content: 'auth.memberPooulp'.tr,
               routePath: Routes.homeRoute,
               type: AlertDialogType.success,
-              buttonLabel: 'Continue',
+              buttonLabel: 'core.continue'.tr,
               onPressed: () async {
                 final bool loginStatus = await AuthServices().saveUserToken(
                   bodyData: value,
@@ -205,7 +205,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
         },
         onError: (error) {
           customSnackbar(
-            msgTitle: 'Something went wrong!',
+            msgTitle: 'core.sthWentWrong'.tr,
             msgContent: '$error',
             bgColor: ColorsManager.red,
           );
@@ -219,7 +219,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
       // }
     } else {
       customSnackbar(
-        msgTitle: 'Please Complete the required fields.',
+        msgTitle: 'validator.completeRequiredFields'.tr,
         msgContent: '',
         bgColor: ColorsManager.red,
       );

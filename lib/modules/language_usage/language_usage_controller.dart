@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +36,7 @@ class LanguageUsageController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    title = Get.arguments[0].toString();
+    title = (Get.arguments as List)[0].toString();
     await getLanguagesListResponseProvider();
     languageListFilter();
   }
@@ -132,9 +130,13 @@ class LanguageUsageController extends GetxController {
       languageListFilter();
       // Get.back();
       customSnackbar(
-        msgTitle: 'Success',
-        msgContent:
-            'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Language Information',
+        msgTitle: 'core.success'.tr,
+        msgContent: operation == Keys.addOperation
+            ? 'profile.langAddSuccessMsg'.tr
+            : operation == Keys.editOperation
+                ? 'profile.langEditSuccessMsg'.tr
+                : 'profile.langDeleteSuccessMsg'.tr,
+        //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Language Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,
       );

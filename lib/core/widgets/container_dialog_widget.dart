@@ -10,6 +10,7 @@ class ContainerDialogWidget extends StatelessWidget {
   final String? inputTitle;
   final Widget? dialogWidget;
   final DateTime? currentTime;
+  final String? dateLocale;
   final Function(DateTime)? onConfirmDate;
   final Widget? containerWidget;
   final DialogType? dialogType;
@@ -24,6 +25,7 @@ class ContainerDialogWidget extends StatelessWidget {
     this.inputTitle = '',
     this.dialogWidget,
     this.currentTime,
+    this.dateLocale = 'en',
     this.onConfirmDate,
     this.containerWidget,
     this.dialogType = DialogType.alertDialog,
@@ -55,6 +57,11 @@ class ContainerDialogWidget extends StatelessWidget {
                     if (dialogType == DialogType.dateTimePickerDialog)
                       DatePicker.showDatePicker(
                         context,
+                        locale: dateLocale == 'fr'
+                            ? LocaleType.fr
+                            : dateLocale == 'nl'
+                                ? LocaleType.nl
+                                : LocaleType.en,
                         minTime: DateTime(1970),
                         // maxTime: DateTime(2009, 12, 31),
                         currentTime: currentTime,

@@ -10,7 +10,10 @@ class AddOrEditEducationPage extends GetView<EducationController> {
     controller.title = controller.title;
     return Scaffold(
       appBar: CustomAppBar(
-        title: '${controller.title} Education',
+        title: controller.title == AppStrings.addText
+            ? 'profile.addEdu'.tr
+            : 'profile.editEdu'.tr,
+        // '${controller.title} Education',
         actions: [
           if (controller.title != Keys.editOperation)
             Container()
@@ -45,7 +48,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
               children: [
                 ///===== Top of School Component =====//
                 ContainerDialogWidget(
-                  inputTitle: 'School',
+                  inputTitle: 'profile.school'.tr,
                   validatorFunction: (_) => Validator().notEmptyValidator(
                     controller.selectedSchool.value.name ?? '',
                   ),
@@ -87,14 +90,14 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                   ),
                   containerWidget: Obx(
                     () => controller.selectedSchool.value.id == null
-                        ? const RowContentInputWidget(
+                        ? RowContentInputWidget(
                             centerWidget: CustomTextWidget(
-                              text: 'Select your School',
+                              text: 'profile.schoolHint'.tr,
                               color: ColorsManager.grey400,
                               fontWeight: FontWeight.w400,
                               fontSize: AppSize.s16,
                             ),
-                            suffixWidget: Icon(
+                            suffixWidget: const Icon(
                               IconsManager.arrowDropDown,
                               color: ColorsManager.grey600,
                             ),
@@ -118,8 +121,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.fieldOfStudyTextCtrl,
-                  inputTitle: 'Field of Study',
-                  hintText: 'Enter your Field of Study',
+                  inputTitle: 'profile.fieldStudy'.tr,
+                  hintText: 'profile.fieldStudyHint'.tr,
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
@@ -129,8 +132,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.degreeTextCtrl,
-                  inputTitle: 'Degree',
-                  hintText: 'Enter your Degree',
+                  inputTitle: 'profile.degree'.tr,
+                  hintText: 'profile.degreeHint'.tr,
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
@@ -143,12 +146,14 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'Start Date',
+                        inputTitle: 'profile.startDate'.tr,
                         inputTitleMarginTop: AppSize.s16,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedStartedDateString.value,
                         ),
                         dialogType: DialogType.dateTimePickerDialog,
+                        dateLocale: controller
+                            .profileController.userProfileInfo.value.uiLanguage,
                         currentTime: DateTime.tryParse(
                               controller.selectedStartedDateString.value,
                             ) ??
@@ -159,15 +164,15 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                         },
                         containerWidget: Obx(
                           () => controller.selectedStartedDateString.value == ''
-                              ? const RowContentInputWidget(
+                              ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'Start Date',
+                                    text: 'profile.startDate'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
                                   ),
                                   suffixWidgetFlex: 20,
-                                  suffixWidget: Icon(
+                                  suffixWidget: const Icon(
                                     IconsManager.dateRangeOutlined,
                                     color: ColorsManager.grey600,
                                   ),
@@ -201,9 +206,13 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'End Date(Or Expected)',
+                        inputTitle:
+                            "${'profile.endDate'.tr}(${'profile.expectedDate'.tr})",
+                        // 'End Date(Or Expected)',
                         inputTitleMarginTop: AppSize.s16,
                         dialogType: DialogType.dateTimePickerDialog,
+                        dateLocale: controller
+                            .profileController.userProfileInfo.value.uiLanguage,
                         currentTime: DateTime.tryParse(
                               controller.selectedEndDateString.value,
                             ) ??
@@ -214,15 +223,15 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                         },
                         containerWidget: Obx(
                           () => controller.selectedEndDateString.value == ''
-                              ? const RowContentInputWidget(
+                              ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'End Date',
+                                    text: 'profile.endDate'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
                                   ),
                                   suffixWidgetFlex: 20,
-                                  suffixWidget: Icon(
+                                  suffixWidget: const Icon(
                                     Icons.date_range_outlined,
                                     color: ColorsManager.grey600,
                                   ),
@@ -257,7 +266,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     verticalPadding: AppSize.s16,
                     horizontalPadding: AppSize.s0,
                     isClickingValue: controller.isCheckGraduated.value,
-                    text: 'Graduated',
+                    text: 'profile.graduated'.tr,
                     isLeftSideText: false,
                     onPressed: () {
                       controller.isCheckGraduated.value = switchingBooleanValue(
@@ -271,8 +280,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 ///===== Top of Description Component =====//
                 CustomTextInput(
                   controller: controller.descriptionTextCtrl,
-                  inputTitle: 'Description',
-                  hintText: 'Description...',
+                  inputTitle: 'offer.description'.tr,
+                  hintText: "${'offer.description'.tr}...",
                   isFilled: true,
                   topContentPadding: AppSize.s12,
                   bottomContentPadding: AppSize.s12,
@@ -315,7 +324,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 leftPadding: AppSize.s12,
                 rightPadding: AppSize.s12,
                 bottomPadding: AppSize.s20,
-                text: AppStrings.saveText,
+                text: 'core.saveBtn'.tr,
                 fontSize: AppSize.s20,
                 buttonWidth: getWidth,
                 onPressed: () {

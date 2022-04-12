@@ -1,6 +1,5 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'dart:convert';
+import 'package:get/get.dart';
 
 import '/core/core.dart';
 
@@ -18,8 +17,7 @@ List<FieldModel>? skillCategoryList = <FieldModel>[
 ];
 
 List<FieldModel> fieldListFromJson(String str) => List<FieldModel>.from(
-      json
-          .decode(str)
+      (json.decode(str) as List)
           .map((x) => FieldModel.fromJson(x as Map<String, dynamic>)) as List,
     );
 
@@ -59,10 +57,13 @@ class FieldModel {
   String? get getLabelProficiencyLevel =>
       proficiencyList!.firstWhere((element) => element.level == level).label;
 
-  String? get displayLevel => level == null ? '' : 'Level $level';
+  // String? get displayLevel => level == null ? '' : 'Level $level';
+  String? get displayLevel =>
+      level == null ? '' : "${'profile.level'.tr} $level";
 
-  String? get displayLabelAndLevel =>
-      level == null ? '• $label' : '• $label - ${getLabelProficiencyLevel!}';
+  String? get displayLabelAndLevel => level == null
+      ? '• $label'
+      : "• $label - ${translateStateWords(stateWord: getLabelProficiencyLevel)}";
 
   factory FieldModel.fromRawJson(String str) => FieldModel.fromJson(
         json.decode(str) as Map<String, dynamic>,

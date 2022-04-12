@@ -1,9 +1,7 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'dart:io';
 
 import 'package:get/get.dart';
-import 'package:pooulp_flutter/data/data.dart';
+import '../data.dart';
 
 class PlaceApiProvider extends GetConnect {
   final key = Platform.isAndroid ? APIKeys.androidKey : APIKeys.iosKey;
@@ -20,7 +18,7 @@ class PlaceApiProvider extends GetConnect {
     final apiResponse = response
         .body; //same as // final apiResponse = json.decode(response.bodyString.toString());
 
-    final jsonResults = apiResponse['predictions'] as List;
+    final jsonResults = (apiResponse as Map)['predictions'] as List;
 // debugPrint('<=====jsonResults:: $jsonResults=====>');
     return jsonResults
         .map(

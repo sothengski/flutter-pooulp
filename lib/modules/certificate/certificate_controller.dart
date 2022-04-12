@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,10 +25,10 @@ class CertificateController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    title = Get.arguments[0].toString();
+    title = (Get.arguments as List)[0].toString();
     if (title == Keys.editOperation) {
       final CertificateModel certificateDataArg =
-          Get.arguments[1] as CertificateModel;
+          (Get.arguments as List)[1] as CertificateModel;
       certificateId = certificateDataArg.id!;
       certificateTitleTextCtrl.text = certificateDataArg.title!;
       descriptionTextCtrl.text = certificateDataArg.description!;
@@ -101,9 +99,13 @@ class CertificateController extends GetxController {
       );
       Get.back();
       customSnackbar(
-        msgTitle: 'Success',
-        msgContent:
-            'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Certificate Information',
+        msgTitle: 'core.success'.tr,
+        msgContent: operation == Keys.addOperation
+            ? 'profile.certificateAddSuccessMsg'.tr
+            : operation == Keys.editOperation
+                ? 'profile.certificateEditSuccessMsg'.tr
+                : 'profile.certificateDeleteSuccessMsg'.tr,
+        //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Certificate Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,
       );

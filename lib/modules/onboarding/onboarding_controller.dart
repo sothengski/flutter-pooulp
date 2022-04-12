@@ -102,14 +102,14 @@ class OnboardingController extends GetxController
         }
       }
     }
-    onboardingPages.add(
-      OnboardingPageModel(
-        pageIndex: 4,
-        title: 'Where do you want to work?',
-        isSkippable: false,
-        selectionItems: [],
-      ),
-    );
+    // onboardingPages.add(
+    //   OnboardingPageModel(
+    //     pageIndex: 4,
+    //     title: 'Where do you want to work?',
+    //     isSkippable: false,
+    //     selectionItems: [],
+    //   ),
+    // );
 
     return onboardingPagesAPIData;
   }
@@ -301,8 +301,8 @@ class OnboardingController extends GetxController
     if (responseData.success!) {
       // debugPrint('=====success=====');
       customSnackbar(
-        msgTitle: 'Success',
-        msgContent: 'Successfully',
+        msgTitle: 'core.success'.tr,
+        msgContent: '',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,
       );

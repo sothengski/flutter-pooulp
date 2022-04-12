@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,9 +39,10 @@ class EducationController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    title = Get.arguments[0].toString();
+    title = (Get.arguments as List)[0].toString();
     if (title == Keys.editOperation) {
-      final EducationModel eduDataArg = Get.arguments[1] as EducationModel;
+      final EducationModel eduDataArg =
+          (Get.arguments as List)[1] as EducationModel;
       eduId = eduDataArg.id!;
       selectedSchool.value = eduDataArg.school!;
       fieldOfStudyTextCtrl.text = eduDataArg.name!;
@@ -138,9 +137,13 @@ class EducationController extends GetxController {
           switchingBooleanValue(boolValue: isSubmitBtnProcessing.value);
       Get.back();
       customSnackbar(
-        msgTitle: 'Success',
-        msgContent:
-            'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Education Information',
+        msgTitle: 'core.success'.tr,
+        msgContent: operation == Keys.addOperation
+            ? 'profile.eduAddSuccessMsg'.tr
+            : operation == Keys.editOperation
+                ? 'profile.eduEditSuccessMsg'.tr
+                : 'profile.eduDeleteSuccessMsg'.tr,
+        // 'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Education Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,
       );

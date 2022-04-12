@@ -22,9 +22,9 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
     this.title = '',
     this.contentWidget,
     this.icon,
-    this.buttonLabel1 = 'Clear All',
-    this.buttonLabel2 = 'Dismiss',
-    this.buttonLabel3 = 'Apply',
+    this.buttonLabel1,
+    this.buttonLabel2,
+    this.buttonLabel3,
     this.routePath = '',
     this.onPressed1,
     this.onPressed2,
@@ -74,7 +74,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         isBoxShadow: false,
                         // topMargin: AppSize.s12,
                         // bottomMargin: AppSize.s12,
-                        leftTitle: 'Location',
+                        leftTitle: 'offer.location'.tr,
                         titleTopPadding: AppSize.s5,
                         titleFontSize: AppSize.s16,
                         child: Container(
@@ -85,8 +85,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const CustomTextWidget(
-                                text: 'Country',
+                              CustomTextWidget(
+                                text: 'profile.country'.tr,
                                 // marginTop: AppSize.s12,
                                 textAlign: TextAlign.left,
                                 // marginBottom: AppSize.s4,
@@ -189,17 +189,18 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
                                                           .spaceBetween,
-                                                  children: const [
+                                                  children: [
                                                     CustomTextWidget(
                                                       marginLeft: AppSize.s8,
-                                                      text: 'Country',
+                                                      text:
+                                                          'profile.country'.tr,
                                                       color:
                                                           ColorsManager.grey400,
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       fontSize: 16.0,
                                                     ),
-                                                    Icon(
+                                                    const Icon(
                                                       Icons.arrow_drop_down,
                                                       color:
                                                           ColorsManager.grey600,
@@ -253,7 +254,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       ///===== Top of Workplace Type Component =====//
                       CustomContainerWidget(
                         isBoxShadow: false,
-                        leftTitle: 'Workplace Type',
+                        leftTitle: 'offer.workplaceType'.tr,
                         titleTopPadding: AppSize.s5,
                         titleFontSize: AppSize.s16,
                         child: Column(
@@ -265,7 +266,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                     controller.workPlaceTypesInFilter.value,
                                 object2: 0,
                               ),
-                              text: 'On-Site',
+                              text: 'offer.onSite'.tr,
                               onPressed: () {
                                 controller.workPlaceTypesInFilter.value = 0;
                                 // controller.workPlaceTypesForSearch.value = 0;
@@ -280,7 +281,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                     controller.workPlaceTypesInFilter.value,
                                 object2: 1,
                               ),
-                              text: 'Remote',
+                              text: 'offer.remote'.tr,
                               onPressed: () {
                                 controller.workPlaceTypesInFilter.value = 1;
                                 // controller.workPlaceTypesForSearch.value = 1;
@@ -295,7 +296,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                     controller.workPlaceTypesInFilter.value,
                                 object2: 2,
                               ),
-                              text: 'Hybrid',
+                              text: 'offer.hybrid'.tr,
                               onPressed: () {
                                 controller.workPlaceTypesInFilter.value = 2;
                                 // controller.workPlaceTypesForSearch.value = 2;
@@ -347,7 +348,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       ///===== Top of Languages Component =====//
                       CustomContainerWidget(
                         isBoxShadow: false,
-                        leftTitle: 'Languages',
+                        leftTitle: 'offer.languages'.tr,
                         titleTopPadding: AppSize.s5,
                         titleFontSize: AppSize.s16,
                         child: Column(
@@ -380,7 +381,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       ///===== Top of Fields Component =====//
                       CustomContainerWidget(
                         isBoxShadow: false,
-                        leftTitle: 'Fields',
+                        leftTitle: 'offer.fields'.tr,
                         titleTopPadding: AppSize.s5,
                         titleFontSize: AppSize.s16,
                         child: Column(
@@ -431,7 +432,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       child: CustomMaterialButton(
                         buttonColor: ColorsManager.white,
                         elevation: 0.0,
-                        text: buttonLabel1,
+                        text: buttonLabel1 ?? 'offer.clearAllBtn'.tr,
                         textColor: ColorsManager.primaryBlue,
                         fontSize: 14,
                         onPressed: () {
@@ -447,7 +448,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     child: CustomMaterialButton(
                       buttonColor: ColorsManager.white,
                       elevation: 0.0,
-                      text: buttonLabel2,
+                      text: buttonLabel2 ?? 'offer.dismissBtn'.tr,
                       textColor: ColorsManager.primaryBlue,
                       fontSize: 14,
                       onPressed: () {
@@ -463,7 +464,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     child: CustomMaterialButton(
                       childWidget: CustomTextWidget(
                         textAlign: TextAlign.left,
-                        text: buttonLabel3,
+                        text: buttonLabel3 ?? 'offer.applyBtn'.tr,
                       ),
                       buttonColor: ColorsManager.white,
                       elevation: 0.0,

@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,10 +42,11 @@ class ExperienceController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    title = Get.arguments[0].toString();
-    expType.value = Get.arguments[1].toString();
+    title = (Get.arguments as List)[0].toString();
+    expType.value = (Get.arguments as List)[1].toString();
     if (title == Keys.editOperation) {
-      final ExperienceModel expDataArg = Get.arguments[2] as ExperienceModel;
+      final ExperienceModel expDataArg =
+          (Get.arguments as List)[2] as ExperienceModel;
       expId = expDataArg.id!;
       companyNameTextCtrl.text = expDataArg.company!;
       titleTextCtrl.text = expDataArg.name!;
@@ -153,9 +152,13 @@ class ExperienceController extends GetxController {
       );
       Get.back();
       customSnackbar(
-        msgTitle: 'Success',
-        msgContent:
-            'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Experience Information',
+        msgTitle: 'core.success'.tr,
+        msgContent: operation == Keys.addOperation
+            ? 'profile.expAddSuccessMsg'.tr
+            : operation == Keys.editOperation
+                ? 'profile.expEditSuccessMsg'.tr
+                : 'profile.expDeleteSuccessMsg'.tr,
+        // 'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Experience Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,
       );

@@ -127,7 +127,7 @@ class SignInForm extends GetView<SignInController> {
                   ),
                   const SizedBox(width: 10),
                   CustomTextWidget(
-                    text: 'auth.Or'.tr,
+                    text: 'auth.or'.tr,
                     fontSize: 20.0,
                     marginTop: AppSize.s16,
                     marginBottom: AppSize.s16,

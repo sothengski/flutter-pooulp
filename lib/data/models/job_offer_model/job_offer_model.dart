@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 
 import '../../../core/core.dart';
 import '../../data.dart';
@@ -90,7 +91,8 @@ class JobOfferModel {
   String? get jobOfferFullOfficeAddress =>
       '$addressStreet, $addressCity, $addressCountry';
 
-  String? get workPlaceType => telecommuting == 1 ? 'Remote' : 'On-Site';
+  String? get workPlaceType =>
+      telecommuting == 1 ? 'offer.remote'.tr : 'offer.onSite'.tr;
 
   String? get dateOfferStartFormat =>
       dateFormatSlashDDMMYYYY(date: dateOfferStart);

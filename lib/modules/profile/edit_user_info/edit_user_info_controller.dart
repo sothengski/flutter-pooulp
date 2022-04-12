@@ -394,16 +394,16 @@ class EditUserInformationController extends GetxController {
           .then((ProfileModel value) {
         profileController.userProfileInfo.value = value;
         customSnackbar(
-          msgTitle: 'Success',
-          msgContent: 'Profile Information Updated',
+          msgTitle: 'core.success'.tr,
+          msgContent: 'profile.editSucessMsg'.tr,
           bgColor: ColorsManager.green,
         );
         saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
       });
     } else {
       customSnackbar(
-        msgTitle: 'Required Fields',
-        msgContent: 'Please Input the required fields.',
+        msgTitle: 'validator.requireFields'.tr,
+        msgContent: 'validator.requireFieldsMsg'.tr,
         bgColor: ColorsManager.orange,
       );
     }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:get/get.dart';
 
 enum Type { softSkill, hardSkill }

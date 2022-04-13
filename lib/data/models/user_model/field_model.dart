@@ -106,8 +106,9 @@ class FieldModel {
       }..removeWhere((_, v) => v == null);
 
   Map<String, dynamic> toJsonForOnboarding({bool? usedTagId = false}) => {
-        'id': usedTagId == true ? null : id,
-        'tag_id': usedTagId == true ? id : null,
+        usedTagId == true ? 'tag_id' : 'id': id,
+        // 'id': usedTagId == true ? null : id,
+        // 'tag_id': usedTagId == true ? id : null,
       }..removeWhere((_, v) => v == null);
 
   @override

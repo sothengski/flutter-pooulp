@@ -20,6 +20,7 @@ class HomePage extends GetView<HomeController> {
               OfferFeedPage(),
               // FeedPage(),
               OfferPage(),
+              MessagingPage(),
               ProfilePage(),
             ],
           ),
@@ -49,6 +50,12 @@ class HomePage extends GetView<HomeController> {
                 activeIcon: const Icon(Icons.description),
                 inActiveIcon: const Icon(Icons.description_outlined),
                 title: Text('home.myOffers'.tr),
+                activeColor: ColorsManager.primary,
+              ),
+              BottomNavBarItem(
+                activeIcon: const Icon(Icons.message_rounded),
+                inActiveIcon: const Icon(Icons.message_outlined),
+                title: Text('home.messaging'.tr),
                 activeColor: ColorsManager.primary,
               ),
               BottomNavBarItem(

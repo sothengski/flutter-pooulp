@@ -6,6 +6,7 @@ export 'experience/experience.dart';
 export 'feed/feed.dart';
 export 'home/home.dart';
 export 'language_usage/language_usage.dart';
+export 'messaging/messaging.dart';
 export 'network/network.dart';
 export 'offer/offer.dart';
 export 'onboarding/onboarding.dart';

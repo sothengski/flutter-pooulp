@@ -886,11 +886,19 @@ class ProfilePage extends GetView<ProfileController> {
                                           //===== Certificates Component =====//
                                         ],
                                       )
-                                    : const Center(child: Text('Loading...')),
+                                    : const Center(
+                                        child: LoadingWidget(
+                                          isTreeBounceLoading: true,
+                                        ),
+                                      ),
                               )
                           ],
                         )
-                      : const Center(child: Text('Loading...')),
+                      : const Center(
+                          child: LoadingWidget(
+                            isTreeBounceLoading: true,
+                          ),
+                        ),
             ),
           ),
         ),

@@ -43,6 +43,8 @@ enum Endpoint {
   getOnlyHardSkills,
   getOnlySoftSkills,
   postOrGetOnBoardingData,
+  // getMessagingRoomList,
+  // getMessagesByRoomID,
 }
 
 class API {
@@ -132,4 +134,15 @@ class API {
     required int? skillId,
   }) =>
       '/users/me/student_profile/$skillCategory/$skillId';
+
+  static String getMessagingRoomList({
+    int? pageNumber = 1,
+  }) =>
+      '/rooms?page=$pageNumber';
+
+  static String getMessagesByRoomID({
+    required String? roomId,
+    int? pageNumber = 1,
+  }) =>
+      '/rooms/$roomId/messages?page=$pageNumber';
 }

@@ -35,7 +35,8 @@ class SettingController extends GetxController {
         profileController.studentInfoRepsonse.value.shifting!;
     hasAutoMobileRxBool.value =
         profileController.studentInfoRepsonse.value.hasAutomobile!;
-    radiusRxInt.value = profileController.studentInfoRepsonse.value.radius!;
+    radiusRxInt.value =
+        profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
     languageRxString.value =
         profileController.userProfileInfo.value.uiLanguage!;
     emailNotificationRxBool.value =

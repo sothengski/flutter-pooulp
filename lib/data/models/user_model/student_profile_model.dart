@@ -86,6 +86,8 @@ class StudentProfileModel {
     return double.tryParse(completePercent.toStringAsFixed(2));
   }
 
+  int get radiusFromMeterToKM => radius! ~/ 1000;
+
   factory StudentProfileModel.fromRawJson(String str) =>
       StudentProfileModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
@@ -174,7 +176,7 @@ class StudentProfileModel {
   Map<String, dynamic> toJson() => {
         'telecommuting': telecommuting,
         'shifting': shifting,
-        'radius': radius,
+        'radius': radius! * 1000,
         'driving_license': drivingLicense,
         'has_automobile': hasAutomobile,
         'facebook_link': facebookLink,

@@ -9,18 +9,20 @@ class CachedNetworkImgWidget extends StatelessWidget {
   final double? borderRadius;
   final bool? isHost;
   final double iconSize;
+  final IconData iconData;
 
   const CachedNetworkImgWidget({
-    required this.imgUrl,
+    this.imgUrl = '',
     this.borderRadius = 0.0,
     this.isHost = true,
     this.iconSize = AppSize.s20,
+    this.iconData = Icons.image_outlined,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return imgUrl! != ''
+    return imgUrl != null && imgUrl != ''
         ? CachedNetworkImage(
             imageUrl: isHost == true ? '${API.host}$imgUrl' : imgUrl!,
             imageBuilder: (
@@ -58,7 +60,7 @@ class CachedNetworkImgWidget extends StatelessWidget {
             ),
           )
         : Icon(
-            Icons.image_outlined,
+            iconData,
             color: ColorsManager.grey,
             size: iconSize,
           );

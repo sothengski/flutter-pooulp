@@ -158,6 +158,7 @@ const Map<String, String> frFR = {
   ///===== Profile =====//
   'home.feed': "Nourrir",
   'home.myOffers': "Myoffers",
+  'home.messaging': "Messaging",
   'home.profile': "Profil",
   'profile.completeness': "Composition du profil",
   'profile.information': "Renseignements personnels",

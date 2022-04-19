@@ -168,7 +168,6 @@ class ProfilePage extends GetView<ProfileController> {
                                     // isLauching: true,
                                     text2Color: ColorsManager.blue,
                                     leftWidget: const CustomBoxWidget(
-                                      backgroundColor: ColorsManager.white,
                                       child: Icon(
                                         Icons.email_outlined,
                                         color: ColorsManager.grey,
@@ -183,7 +182,6 @@ class ProfilePage extends GetView<ProfileController> {
                                     // isLauching: true,
                                     text2Color: ColorsManager.blue,
                                     leftWidget: const CustomBoxWidget(
-                                      backgroundColor: ColorsManager.white,
                                       child: Icon(
                                         Icons.phone_outlined,
                                         color: ColorsManager.grey,
@@ -200,7 +198,6 @@ class ProfilePage extends GetView<ProfileController> {
                                     bottomPadding: 8.0,
                                     isDivider: false,
                                     leftWidget: const CustomBoxWidget(
-                                      backgroundColor: ColorsManager.white,
                                       child: Icon(
                                         Icons.video_library_outlined,
                                         color: ColorsManager.grey,

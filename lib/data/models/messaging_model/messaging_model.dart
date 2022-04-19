@@ -1,25 +1,10 @@
 import 'dart:convert';
 
+import '../../../core/core.dart';
+
 import '../../data.dart';
 
 class MessagingModel {
-  MessagingModel({
-    this.uuid,
-    this.userUuid,
-    this.message,
-    this.isSeen,
-    this.isOwner,
-    this.name,
-    this.firstName,
-    this.lastName,
-    this.pictureUrl,
-    this.latestMessage,
-    this.unseenMessages,
-    this.participants,
-    this.createdAt,
-    this.updatedAt,
-  });
-
   final String? uuid;
   final String? userUuid;
   final String? message;
@@ -36,6 +21,31 @@ class MessagingModel {
 
   final DateTime? createdAt;
   final DateTime? updatedAt;
+
+  MessagingModel({
+    this.uuid,
+    this.userUuid,
+    this.message,
+    this.isSeen,
+    this.isOwner,
+    this.name,
+    this.firstName,
+    this.lastName,
+    this.pictureUrl,
+    this.latestMessage,
+    this.unseenMessages = 0,
+    this.participants,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  String? get lastestMessageDate => latestMessage != null &&
+          latestMessage!.createdAt != null
+      ? DateOnlyCompare(latestMessage!.createdAt!)
+              .isSameDate(other: latestMessage!.createdAt)
+          ? dateFormatToHourMn(date: latestMessage!.createdAt!.toLocal())
+          : dateFormatSlashDDMMYYYY(date: latestMessage!.createdAt!.toLocal())
+      : dateFormatSlashDDMMYYYY(date: createdAt!.toLocal());
 
   factory MessagingModel.fromRawJson(String str) =>
       MessagingModel.fromJson(json.decode(str) as Map<String, dynamic>);

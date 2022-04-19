@@ -155,6 +155,7 @@ const Map<String, String> nlNL = {
   ///===== Profile =====//
   'home.feed': "Voer",
   'home.myOffers': "Myoffers",
+  'home.messaging': "Messaging",
   'home.profile': "Profiel",
   'profile.completeness': "Profiel compleetheid",
   'profile.information': "Persoonsgegevens",

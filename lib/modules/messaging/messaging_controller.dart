@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/data.dart';
@@ -43,9 +42,16 @@ class MessagingController extends GetxController
     //     MessagingPaginationModel();
     roomListRepsonse.value =
         await messagingProvider.getMessagingRoomList(pageNumber: 1);
-    debugPrint(
-      'roomListRepsonse:: ${roomListRepsonse.length}',
-    );
+    // debugPrint(
+    //   'roomListRepsonse:: ${roomListRepsonse.length}',
+    // );
     return roomListRepsonse;
+  }
+
+  Future<void> onRefresh() async {
+    // monitor network fetch
+    await getRoomListDataState(refresh: true);
+    await Future.delayed(const Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
   }
 }

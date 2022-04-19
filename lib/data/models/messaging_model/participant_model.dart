@@ -15,6 +15,8 @@ class ParticipantModel {
   final String? accountType;
   final String? pictureUrl;
 
+  String? get fullName => '$firstName $lastName';
+
   factory ParticipantModel.fromRawJson(String str) =>
       ParticipantModel.fromJson(json.decode(str) as Map<String, dynamic>);
 

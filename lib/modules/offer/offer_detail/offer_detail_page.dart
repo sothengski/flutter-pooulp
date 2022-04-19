@@ -80,6 +80,11 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                               '${jobOfferDetail.companyLocation} (${jobOfferDetail.workPlaceType})',
                           leftWidget: CustomBoxWidget(
                             size: 50,
+                            isCircle: true,
+                            topPadding: AppSize.s2,
+                            bottomPadding: AppSize.s2,
+                            leftPadding: AppSize.s2,
+                            rightPadding: AppSize.s2,
                             child: CachedNetworkImgWidget(
                               imgUrl: '${jobOfferDetail.enterprise!.logoUrl}',
                             ),

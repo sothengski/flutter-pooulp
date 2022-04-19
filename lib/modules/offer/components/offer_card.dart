@@ -80,6 +80,11 @@ class OfferCard extends StatelessWidget {
                     ),
                     child: CustomBoxWidget(
                       size: 40,
+                      isCircle: true,
+                      topPadding: 2.0,
+                      bottomPadding: 2.0,
+                      leftPadding: 2.0,
+                      rightPadding: 2.0,
                       child: CachedNetworkImgWidget(
                         imgUrl: '${jobOfferItem!.enterprise!.logoUrl}',
                       ),

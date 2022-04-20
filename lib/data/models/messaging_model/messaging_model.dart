@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import '../../../core/core.dart';
-
 import '../../data.dart';
 
 class MessagingModel {
@@ -39,6 +38,8 @@ class MessagingModel {
     this.updatedAt,
   });
 
+  String? get shortName => '${firstName![0]}${lastName![0]}'.toUpperCase();
+
   String? get lastestMessageDate => latestMessage != null &&
           latestMessage!.createdAt != null
       ? DateOnlyCompare(latestMessage!.createdAt!)
@@ -68,15 +69,15 @@ class MessagingModel {
               )
             : null,
         unseenMessages: json["unseen_messages"] as int?,
-        participants: json['participants'] != null || json['participants'] != []
-            ? (json['participants'] as List)
+        participants: json['participants'] == null || json['participants'] == []
+            ? []
+            : (json['participants'] as List)
                 .map(
                   (i) => ParticipantModel.fromJson(
                     i as Map<String, dynamic>,
                   ),
                 )
-                .toList()
-            : [],
+                .toList(),
         createdAt: json['created_at'] != null && json['created_at'] != ''
             ? DateTime.parse(
                 json['created_at'].toString(),

@@ -20,7 +20,7 @@ class HomePage extends GetView<HomeController> {
               OfferFeedPage(),
               // FeedPage(),
               OfferPage(),
-              MessagingPage(),
+              RoomListPage(),
               ProfilePage(),
             ],
           ),

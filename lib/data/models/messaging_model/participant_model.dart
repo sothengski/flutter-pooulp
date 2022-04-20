@@ -17,6 +17,8 @@ class ParticipantModel {
 
   String? get fullName => '$firstName $lastName';
 
+  String? get shortName => '${firstName![0]}${lastName![0]}'.toUpperCase();
+
   factory ParticipantModel.fromRawJson(String str) =>
       ParticipantModel.fromJson(json.decode(str) as Map<String, dynamic>);
 

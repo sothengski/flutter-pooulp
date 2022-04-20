@@ -10,6 +10,7 @@ class CachedNetworkImgWidget extends StatelessWidget {
   final bool? isHost;
   final double iconSize;
   final IconData iconData;
+  final String? logoAsText;
 
   const CachedNetworkImgWidget({
     this.imgUrl = '',
@@ -17,6 +18,7 @@ class CachedNetworkImgWidget extends StatelessWidget {
     this.isHost = true,
     this.iconSize = AppSize.s20,
     this.iconData = Icons.image_outlined,
+    this.logoAsText = '',
     Key? key,
   }) : super(key: key);
 
@@ -59,10 +61,19 @@ class CachedNetworkImgWidget extends StatelessWidget {
               size: iconSize,
             ),
           )
-        : Icon(
-            iconData,
-            color: ColorsManager.grey,
-            size: iconSize,
-          );
+        : logoAsText != ''
+            ? Center(
+                child: CustomTextWidget(
+                  text: logoAsText,
+                  fontSize: AppSize.s20,
+                  fontWeight: FontWeight.w800,
+                  textAlign: TextAlign.center,
+                ),
+              )
+            : Icon(
+                iconData,
+                color: ColorsManager.grey,
+                size: iconSize,
+              );
   }
 }

@@ -14,11 +14,15 @@ extension DateOnlyCompare on DateTime {
 }
 
 String fullDateFormat({DateTime? date}) {
-  return '${DateFormat('EEE dd-MMM-yyyy ').format(date!)} at ${DateFormat.jms().format(date)}';
+  return '${DateFormat('EEE dd-MMM-yyyy').format(date!)} • ${DateFormat.jms().format(date)}';
 }
 
 String shortDateFormat({DateTime? date}) {
-  return '${DateFormat('EEE dd-MMM-yyyy ').format(date!)} at ${DateFormat.jms().format(date)}';
+  return '${DateFormat('EEE dd-MMM-yyyy').format(date!)} • ${DateFormat.jms().format(date)}';
+}
+
+String slashDateTimeFormat({DateTime? date}) {
+  return '${DateFormat('dd/MM/yyyy').format(date!)} • ${DateFormat.jm().format(date)}';
 }
 
 String dateFormatToDayWithDate({DateTime? date}) {

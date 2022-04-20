@@ -7,6 +7,7 @@ class RoomCard extends StatelessWidget {
   final String? participantName;
   final String? lastestMessage;
   final int? unseenMessage;
+  final String? shortName;
 
   final String? date;
   const RoomCard({
@@ -16,6 +17,7 @@ class RoomCard extends StatelessWidget {
     this.lastestMessage,
     this.date,
     this.unseenMessage = 0,
+    this.shortName = '',
   }) : super(key: key);
 
   @override
@@ -46,7 +48,7 @@ class RoomCard extends StatelessWidget {
               child: CachedNetworkImgWidget(
                 imgUrl: imgUrl,
                 iconSize: 30,
-                iconData: Icons.person_outline,
+                logoAsText: shortName,
               ),
             ),
             //===== Image Component =====//
@@ -122,38 +124,5 @@ class RoomCard extends StatelessWidget {
         ],
       ),
     );
-    // CustomListTileWidget(
-    //   text1: participantName,
-    //   text1Color: ColorsManager.grey850,
-    //   text1FontWeight: FontWeightManager.medium,
-    //   text1FontSize: AppSize.s16,
-    //   text2: '${lastestMessage.toString()}...$date',
-    //   text2Color: ColorsManager.grey800,
-    //   // bottomPadding: 8.0,
-    //   leftWidget: const CustomBoxWidget(
-    //     size: 40,
-    //     child: Icon(
-    //       Icons.work,
-    //       color: ColorsManager.primary75,
-    //       size: AppSize.s20,
-    //     ),
-    //   ),
-    //   rightWidget: CustomIconButtonWidget(
-    //     iconData: Icons.edit_outlined,
-    //     padding: 0.0,
-    //     iconSize: 20.0,
-    //     isConstraints: true,
-    //     onClick: () => {
-    //       // Get.toNamed(
-    //       //   Routes.addOrEditExperienceRoute,
-    //       //   arguments: [
-    //       //     Keys.editOperation,
-    //       //     AppStrings.personalKey,
-    //       //     e,
-    //       //   ],
-    //       // ),
-    //     },
-    //   ),
-    // );
   }
 }

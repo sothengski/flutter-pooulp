@@ -95,13 +95,13 @@ class AppPages {
     ),
     GetPage(
       name: Routes.messagingRoomsRoute,
+      page: () => const RoomListPage(),
+      binding: MessagingBinding(),
+    ),
+    GetPage(
+      name: Routes.roomDetailsRoute,
       page: () => const MessagingPage(),
       binding: MessagingBinding(),
     ),
-    // GetPage(
-    //   name: Routes.roomDetailsRoute,
-    //   page: () => const MessagingPage(),
-    //   binding: MessagingBinding(),
-    // ),
   ];
 }

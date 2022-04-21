@@ -13,6 +13,7 @@ class MessagingModel {
   final String? firstName;
   final String? lastName;
   final String? pictureUrl;
+  bool? enableDateTime;
 
   final LatestMessageModel? latestMessage;
   final int? unseenMessages;
@@ -36,6 +37,7 @@ class MessagingModel {
     this.participants,
     this.createdAt,
     this.updatedAt,
+    this.enableDateTime = false,
   });
 
   String? get shortName => '${firstName![0]}${lastName![0]}'.toUpperCase();

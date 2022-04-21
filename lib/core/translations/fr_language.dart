@@ -158,7 +158,7 @@ const Map<String, String> frFR = {
   ///===== Profile =====//
   'home.feed': "Nourrir",
   'home.myOffers': "Myoffers",
-  'home.messaging': "Messaging",
+  'home.messaging': "Messagerie",
   'home.profile': "Profil",
   'profile.completeness': "Composition du profil",
   'profile.information': "Renseignements personnels",
@@ -277,4 +277,8 @@ const Map<String, String> frFR = {
   'profile.certificateAddSuccessMsg': "Certificat ajouté avec succès",
   'profile.certificateEditSuccessMsg': "Certificat édité avec succès",
   'profile.certificateDeleteSuccessMsg': "Certificat supprimé avec succès",
+  //messaging
+  'messaging.messagingHint': "Tapez votre message...",
+  'messaging.noMessages': "Pas de messages ici encore...",
+  'messaging.noChatRoom': "Vous n'avez pas encore de messages",
 };

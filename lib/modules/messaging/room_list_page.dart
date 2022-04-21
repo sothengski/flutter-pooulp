@@ -18,11 +18,11 @@ class RoomListPage extends GetView<MessagingController> {
       body: controller.obx(
         (state) => RefreshIndicator(
           color: ColorsManager.primary,
-          onRefresh: () => controller.onRefresh(),
+          onRefresh: () => controller.onRefreshForRoomChat(),
           child: controller.roomListRepsonse.isEmpty
-              ? const Center(
+              ? Center(
                   child: CustomTextWidget(
-                    text: 'You have no messages yet',
+                    text: 'messaging.noChatRoom'.tr,
                   ),
                 )
               : ListView.builder(
@@ -36,11 +36,9 @@ class RoomListPage extends GetView<MessagingController> {
                   itemBuilder: (_, index) {
                     return GestureDetector(
                       onTap: () => {
-                        // print('click'),
                         controller.roomOnClick(
                           roomValue: controller.roomListRepsonse[index],
                         ),
-
                         Get.toNamed(Routes.roomDetailsRoute),
                       },
                       child: RoomCard(
@@ -76,7 +74,7 @@ class RoomListPage extends GetView<MessagingController> {
             headerText: 'core.sthWentWrong'.tr,
             bodyText: 'core.connectionFailedMsg'.tr,
             buttonText: 'core.tryAgain'.tr,
-            onPressedFunctionCall: controller.onRefresh,
+            onPressedFunctionCall: controller.onRefreshForRoomChat,
           ),
         ),
       ),

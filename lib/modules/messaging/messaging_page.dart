@@ -29,11 +29,22 @@ class MessagingPage extends GetView<MessagingController> {
                       child: Column(
                         children: <Widget>[
                           // List of messages
+                          Obx(
+                            () => controller.isLoadingIndicator.value == true
+                                ? Container(
+                                    color: Colors.transparent,
+                                    height: 30,
+                                    child: const LoadingWidget(
+                                      isTreeBounceLoading: true,
+                                    ),
+                                  )
+                                : Container(),
+                          ),
                           Expanded(
                             child: (controller
                                     .roomMessagingDetailsRepsonse.isNotEmpty)
                                 ? ListView.builder(
-                                    controller: controller.listScrollController,
+                                    controller: controller.scrollController,
                                     reverse: true,
                                     itemCount: controller
                                         .roomMessagingDetailsRepsonse.length,
@@ -70,12 +81,6 @@ class MessagingPage extends GetView<MessagingController> {
                                                 color: ColorsManager.grey100,
                                                 borderRadius:
                                                     BorderRadius.circular(12),
-                                                // borderRadius: BorderRadius.only(
-                                                //   topLeft: Radius.circular(8),
-                                                //   topRight: Radius.circular(8),
-                                                //   // bottomLeft: Radius.circular(8),
-                                                //   bottomRight: Radius.circular(8),
-                                                // ),
                                               ),
                                               child: CustomTextWidget(
                                                 text: dateFormatSlashDDMMYYYY(
@@ -85,28 +90,31 @@ class MessagingPage extends GetView<MessagingController> {
                                               ),
                                             ),
                                           const SizedBox(height: AppSize.s4),
-                                          MessageCard(
-                                            message: chat,
-                                            // userId: chat.userUuid,
-                                            // isCurrentUser: chat.isOwner == 1,
-                                            // userProfilePic: chat.pictureUrl,
-                                            // shortName: chat.shortName,
-                                            // messageContent: chat.message,
-                                            // date: slashDateTimeFormat(
-                                            //   date: chat.createdAt!.toLocal(),
-                                            // ),
+                                          GetBuilder<MessagingController>(
+                                            initState: (_) {},
+                                            builder: (_) {
+                                              return MessageCard(
+                                                message: chat,
+                                                onTap: () =>
+                                                    chat.enableDateTime =
+                                                        controller
+                                                            .switchingBoolValue(
+                                                  boolValue:
+                                                      chat.enableDateTime,
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ],
                                       );
                                     },
                                   )
-                                : const Center(
-                                    child: Text("No messages here yet..."),
+                                : Center(
+                                    child: CustomTextWidget(
+                                      text: 'messaging.noMessages'.tr,
+                                    ),
                                   ),
                           ),
-                          // Sticker
-                          // isShowSticker ? buildSticker() : SizedBox.shrink(),
-
                           // Input content
                           Container(
                             margin: const EdgeInsets.only(
@@ -128,42 +136,18 @@ class MessagingPage extends GetView<MessagingController> {
                             ),
                             child: Row(
                               children: <Widget>[
-                                // Button send image
-                                // Material(
-                                //   color: Colors.white,
-                                //   child: Container(
-                                //     margin: const EdgeInsets.symmetric(horizontal: 1),
-                                //     child: const IconButton(
-                                //       icon: Icon(Icons.image),
-                                //       onPressed: null,
-                                //       color: ColorsManager.primary,
-                                //     ),
-                                //   ),
-                                // ),
-                                // Material(
-                                //   color: Colors.white,
-                                //   child: Container(
-                                //     margin: const EdgeInsets.symmetric(horizontal: 1),
-                                //     child: IconButton(
-                                //       icon: const Icon(Icons.face),
-                                //       onPressed: getSticker,
-                                //       color: ColorsManager.primaryColor,
-                                //     ),
-                                //   ),
-                                // ),
-
                                 // Edit text
                                 Flexible(
                                   child: TextField(
                                     controller: controller.sendingTextCtrl,
                                     // focusNode: ref.read(messageController).messageFieldNode,
                                     // onTap: ref.read(emojiVisiblityController.notifier).onFieldTap,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       contentPadding:
-                                          EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                          const EdgeInsets.fromLTRB(8, 8, 8, 8),
                                       isCollapsed: true,
                                       isDense: true,
-                                      hintText: 'Type your message...',
+                                      hintText: 'messaging.messagingHint'.tr,
                                       border: InputBorder.none,
                                     ),
                                     maxLines: null,
@@ -190,7 +174,12 @@ class MessagingPage extends GetView<MessagingController> {
                                               : IconButton(
                                                   icon: const Icon(Icons.send),
                                                   onPressed: () => {
-                                                    controller.onSendMessage(
+                                                    controller
+                                                        .makeRequestToPOSTMessagesAPI(
+                                                      roomId: controller
+                                                          .selectedRoom
+                                                          .value
+                                                          .uuid,
                                                       message: controller
                                                           .sendingTextCtrl.text,
                                                     ),

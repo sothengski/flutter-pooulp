@@ -155,7 +155,7 @@ const Map<String, String> nlNL = {
   ///===== Profile =====//
   'home.feed': "Voer",
   'home.myOffers': "Myoffers",
-  'home.messaging': "Messaging",
+  'home.messaging': "Berichten",
   'home.profile': "Profiel",
   'profile.completeness': "Profiel compleetheid",
   'profile.information': "Persoonsgegevens",
@@ -273,4 +273,8 @@ const Map<String, String> nlNL = {
   'profile.certificateAddSuccessMsg': "Certificaat met succes toegevoegd",
   'profile.certificateEditSuccessMsg': "Certificaat succesvol bewerkt",
   'profile.certificateDeleteSuccessMsg': "Certificaat is succesvol verwijderd",
+  //messaging
+  'messaging.messagingHint': "Schrijf je bericht...",
+  'messaging.noMessages': "Geen berichten hier nog...",
+  'messaging.noChatRoom': "Je hebt nog geen berichten",
 };

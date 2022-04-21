@@ -273,4 +273,8 @@ const Map<String, String> enUS = {
   'profile.certificateAddSuccessMsg': "Certificate Added Successfully",
   'profile.certificateEditSuccessMsg': "Certificate Edited Successfully",
   'profile.certificateDeleteSuccessMsg': "Certificate Deleted Successfully",
+  //messaging
+  'messaging.messagingHint': "Type your message...",
+  'messaging.noMessages': "No messages here yet...",
+  'messaging.noChatRoom': "You have no messages yet",
 };

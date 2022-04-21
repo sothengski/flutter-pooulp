@@ -39,6 +39,25 @@ class CustomBoxWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  const CustomBoxWidget.chatAvatarDefault({
+    this.child,
+    this.backgroundColor = ColorsManager.white,
+    this.size = 35,
+    this.borderRadius = 8.0,
+    this.topPadding = 2.0,
+    this.bottomPadding = 2.0,
+    this.leftPadding = 2.0,
+    this.rightPadding = 2.0,
+    this.topMargin = 0.0,
+    this.bottomMargin = 0.0,
+    this.leftMargin = 0.0,
+    this.rightMargin = 0.0,
+    this.isCircle = true,
+    this.borderWidth = 0.0,
+    this.boxShadow,
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(

@@ -9,7 +9,7 @@ class HomeController extends GetxController {
 
   late LoginModel? userToken;
 
-  RxInt currentIndex = 2.obs;
+  RxInt currentIndex = 0.obs;
 
   @override
   Future<void> onInit() async {

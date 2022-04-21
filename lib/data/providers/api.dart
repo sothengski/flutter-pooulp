@@ -145,4 +145,9 @@ class API {
     int? pageNumber = 1,
   }) =>
       '/rooms/$roomId/messages?page=$pageNumber';
+
+  static String postMessageByRoomID({
+    required String? roomId,
+  }) =>
+      '/rooms/$roomId/messages';
 }

@@ -137,7 +137,7 @@ class MessagingController extends GetxController
   }
 
   void onChangedTextCtrl(String? q) {
-    if (sendingTextCtrl.text != '') {
+    if (sendingTextCtrl.text.trim().isNotEmpty) {
       if (enableSendingBtn.value == false) {
         enableSendingBtn.value = true;
       } else {}
@@ -171,7 +171,7 @@ class MessagingController extends GetxController
   }) async {
     final tempResp = await messagingProvider.postMessageByRoomID(
       roomId: roomId,
-      message: message,
+      message: message!.trim(),
     );
     if (tempResp.success!) {
       sendingTextCtrl.text = '';

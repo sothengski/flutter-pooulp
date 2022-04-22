@@ -90,6 +90,7 @@ class RoomCard extends StatelessWidget {
                         child: CustomTextWidget(
                           text: lastestMessage.toString(),
                           color: ColorsManager.grey600,
+                          maxLine: 1,
                         ),
                       ),
                       //===== Unseen Message Component =====//

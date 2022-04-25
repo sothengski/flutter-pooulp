@@ -44,7 +44,8 @@ class MessagingPage extends GetView<MessagingController> {
                             child: (controller
                                     .roomMessagingDetailsRepsonse.isNotEmpty)
                                 ? ListView.builder(
-                                    controller: controller.scrollController,
+                                    controller:
+                                        controller.messagingScrollController,
                                     reverse: true,
                                     itemCount: controller
                                         .roomMessagingDetailsRepsonse.length,

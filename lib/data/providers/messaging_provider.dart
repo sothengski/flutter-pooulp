@@ -7,6 +7,9 @@ abstract class IMessagingProvider {
   Future<List<MessagingModel>> getMessagingRoomList({
     required int? pageNumber,
   });
+  Future<MessagingPaginationModel> getMessagingRoomAsPage({
+    required int? pageNumber,
+  });
   Future<List<MessagingModel>> getMessagesListByRoomID({
     required String? roomId,
     required int? pageNumber,
@@ -50,6 +53,28 @@ class MessagingProvider extends BaseProvider implements IMessagingProvider {
           roomList.add(e);
         }
         return roomList;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  /// GET Method for getting the Messaging Room Pagination from Server
+  @override
+  Future<MessagingPaginationModel> getMessagingRoomAsPage({
+    required int? pageNumber,
+  }) async {
+    try {
+      final dataResponse = await get(
+        API.getMessagingRoomList(pageNumber: pageNumber),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse = json.decode(dataResponse.bodyString.toString());
+        return MessagingPaginationModel.fromJson(
+          apiResponse as Map<String, dynamic>,
+        );
       }
     } catch (e) {
       return Future.error(e.toString());

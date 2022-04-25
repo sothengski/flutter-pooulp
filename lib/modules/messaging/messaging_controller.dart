@@ -7,16 +7,17 @@ class MessagingController extends GetxController
     with StateMixin<RxList<MessagingModel>> {
   final messagingProvider = Get.find<MessagingProvider>();
 
+  final ScrollController roomScrollController = ScrollController();
+  Rx<MessagingPaginationModel> roomsAsPageRepsonse =
+      MessagingPaginationModel().obs;
   RxList<MessagingModel> roomListRepsonse = <MessagingModel>[].obs;
-  int pageNumForRoomList = 1;
 
   Rx<MessagingModel> selectedRoom = MessagingModel().obs;
 
-  final ScrollController scrollController = ScrollController();
+  final ScrollController messagingScrollController = ScrollController();
   Rx<MessagingPaginationModel> messagesAsPageRepsonse =
       MessagingPaginationModel().obs;
   RxList<MessagingModel> roomMessagingDetailsRepsonse = <MessagingModel>[].obs;
-  int pageNumForMessages = 1;
   RxBool isMessageLoading = true.obs;
   RxBool enableSendingBtn = false.obs;
   TextEditingController sendingTextCtrl = TextEditingController(text: '');
@@ -25,6 +26,7 @@ class MessagingController extends GetxController
   @override
   void onInit() {
     getRoomListDataState(refresh: true);
+    addRoomToChatRooms();
     addMessagesToChat();
     super.onInit();
   }
@@ -47,13 +49,19 @@ class MessagingController extends GetxController
   Future<RxList<MessagingModel>> getRoomListResponseProvider({
     bool? refresh = false,
   }) async {
-    // roomListRepsonse.clear();
-    // final List<MessagingModel> roomTempListResponse = [];
-    // final MessagingPaginationModel roomListPaginationRepsonse =
-    //     MessagingPaginationModel();
-    roomListRepsonse.value =
-        await messagingProvider.getMessagingRoomList(pageNumber: 1);
-
+    if (refresh == true) {
+      roomListRepsonse.clear();
+      // roomListRepsonse.value = await messagingProvider.getMessagingRoomList(
+      //   pageNumber: refresh == true ? 1 : 1 + 1,
+      // );
+    }
+    roomsAsPageRepsonse.value = await messagingProvider.getMessagingRoomAsPage(
+      pageNumber: refresh == true
+          ? 1
+          : roomsAsPageRepsonse.value.meta!.currentPage! + 1,
+    );
+    roomListRepsonse.addAll(roomsAsPageRepsonse.value.data!);
+    isLoadingIndicator.value = false;
     return roomListRepsonse;
   }
 
@@ -108,10 +116,23 @@ class MessagingController extends GetxController
     // if failed,use refreshFailed()
   }
 
+  Future<void> addRoomToChatRooms() async {
+    roomScrollController.addListener(() {
+      if (roomScrollController.position.maxScrollExtent ==
+              roomScrollController.position.pixels &&
+          isLoadingIndicator.value == false &&
+          roomsAsPageRepsonse.value.meta!.currentPage! <
+              roomsAsPageRepsonse.value.meta!.lastPage!) {
+        isLoadingIndicator.value = true;
+        getRoomListResponseProvider();
+      }
+    });
+  }
+
   Future<void> addMessagesToChat() async {
-    scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-              scrollController.position.pixels &&
+    messagingScrollController.addListener(() {
+      if (messagingScrollController.position.maxScrollExtent ==
+              messagingScrollController.position.pixels &&
           isLoadingIndicator.value == false &&
           messagesAsPageRepsonse.value.meta!.currentPage! <
               messagesAsPageRepsonse.value.meta!.lastPage!) {
@@ -160,7 +181,7 @@ class MessagingController extends GetxController
       roomId: roomId,
     );
     if (tempResp.success!) {
-      await getRoomListResponseProvider();
+      await getRoomListResponseProvider(refresh: true);
       update();
     }
   }
@@ -176,7 +197,7 @@ class MessagingController extends GetxController
     if (tempResp.success!) {
       sendingTextCtrl.text = '';
       onChangedTextCtrl('');
-      await getRoomListResponseProvider();
+      await getRoomListResponseProvider(refresh: true);
       if (tempResp.data != null) {
         final tempData =
             MessagingModel.fromJson(tempResp.data as Map<String, dynamic>);

@@ -25,42 +25,64 @@ class RoomListPage extends GetView<MessagingController> {
                     text: 'messaging.noChatRoom'.tr,
                   ),
                 )
-              : ListView.builder(
-                  // shrinkWrap: true,
-                  padding: const EdgeInsets.only(
-                    bottom: kFloatingActionButtonMargin + 10,
-                  ),
-                  itemCount: controller.roomListRepsonse.length,
-                  // physics: const BouncingScrollPhysics(),
-                  // scrollDirection: Axis.vertical,
-                  itemBuilder: (_, index) {
-                    return GestureDetector(
-                      onTap: () => {
-                        controller.roomOnClick(
-                          roomValue: controller.roomListRepsonse[index],
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        controller: controller.roomScrollController,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.only(
+                          bottom: kFloatingActionButtonMargin + 10,
                         ),
-                        Get.toNamed(Routes.roomDetailsRoute),
-                      },
-                      child: RoomCard(
-                        imgUrl: controller.roomListRepsonse[index].participants!
-                            .first.pictureUrl,
-                        shortName: controller.roomListRepsonse[index]
-                            .participants!.first.shortName,
-                        participantName: controller.roomListRepsonse[index]
-                            .participants!.first.fullName,
-                        lastestMessage:
-                            controller.roomListRepsonse[index].latestMessage !=
-                                    null
-                                ? controller.roomListRepsonse[index]
-                                    .latestMessage!.message
-                                : '',
-                        date: controller
-                            .roomListRepsonse[index].lastestMessageDate,
-                        unseenMessage:
-                            controller.roomListRepsonse[index].unseenMessages,
+                        itemCount: controller.roomListRepsonse.length,
+                        // scrollDirection: Axis.vertical,
+                        itemBuilder: (_, index) {
+                          return GestureDetector(
+                            onTap: () => {
+                              controller.roomOnClick(
+                                roomValue: controller.roomListRepsonse[index],
+                              ),
+                              Get.toNamed(Routes.roomDetailsRoute),
+                            },
+                            child: RoomCard(
+                              imgUrl: controller.roomListRepsonse[index]
+                                  .participants!.first.pictureUrl,
+                              shortName: controller.roomListRepsonse[index]
+                                  .participants!.first.shortName,
+                              participantName: controller
+                                  .roomListRepsonse[index]
+                                  .participants!
+                                  .first
+                                  .fullName,
+                              lastestMessage: controller.roomListRepsonse[index]
+                                          .latestMessage !=
+                                      null
+                                  ? controller.roomListRepsonse[index]
+                                      .latestMessage!.message
+                                  : '',
+                              date: controller
+                                  .roomListRepsonse[index].lastestMessageDate,
+                              unseenMessage: controller
+                                  .roomListRepsonse[index].unseenMessages,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                    Obx(
+                      () => controller.isLoadingIndicator.value == true
+                          ? Container(
+                              color: Colors.transparent,
+                              height: 30,
+                              child: const LoadingWidget(
+                                isTreeBounceLoading: true,
+                              ),
+                            )
+                          : Container(),
+                    ),
+                  ],
                 ),
         ),
         onLoading: const Center(

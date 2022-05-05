@@ -39,6 +39,7 @@ class IconsManager {
   static const IconData close = Icons.close;
   static const IconData check = Icons.check;
   static const IconData dateRangeOutlined = Icons.date_range_outlined;
+  static const IconData schedule = Icons.schedule;
   static const IconData arrowDropDown = Icons.arrow_drop_down;
 
   static const String montserrat = "Montserrat";

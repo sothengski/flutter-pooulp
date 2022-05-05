@@ -4,7 +4,12 @@ import 'package:get/get.dart';
 
 import '../core.dart';
 
-enum DialogType { bottomSheetDialog, alertDialog, dateTimePickerDialog }
+enum DialogType {
+  bottomSheetDialog,
+  alertDialog,
+  dateTimePickerDialog,
+  timePickerDialog,
+}
 
 class ContainerDialogWidget extends StatelessWidget {
   final String? inputTitle;
@@ -40,12 +45,15 @@ class ContainerDialogWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextWidget(
-          text: inputTitle,
-          marginTop: inputTitleMarginTop,
-          textAlign: TextAlign.left,
-          // marginBottom: inputTitleMarginBottom,
-        ),
+        if (inputTitle!.isEmpty)
+          Container()
+        else
+          CustomTextWidget(
+            text: inputTitle,
+            marginTop: inputTitleMarginTop,
+            textAlign: TextAlign.left,
+            // marginBottom: inputTitleMarginBottom,
+          ),
         const SizedBox(
           height: 3.0,
         ),
@@ -95,6 +103,23 @@ class ContainerDialogWidget extends StatelessWidget {
                         //   //   selectedItem: '${date.year}-${date.month}-${date.day}',
                         //   // );
                         // },
+                      )
+                    else if (dialogType == DialogType.timePickerDialog)
+                      DatePicker.showTimePicker(
+                        context,
+                        locale: dateLocale == 'fr'
+                            ? LocaleType.fr
+                            : dateLocale == 'nl'
+                                ? LocaleType.nl
+                                : LocaleType.en,
+                        showSecondsColumn: false,
+                        onChanged: (date) {
+                          // print(
+                          //   'change $date in time zone ${date.timeZoneOffset.inHours}',
+                          // );
+                        },
+                        onConfirm: onConfirmDate,
+                        currentTime: currentTime,
                       )
                     else
                       dialogType == DialogType.bottomSheetDialog

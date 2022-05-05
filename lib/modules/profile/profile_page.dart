@@ -879,8 +879,54 @@ class ProfilePage extends GetView<ProfileController> {
                                                   )
                                                   .toList(),
                                             ),
-                                          )
+                                          ),
                                           //===== Certificates Component =====//
+
+                                          ///===== Availabilities Component =====//
+                                          CustomContainerWidget(
+                                            leftMargin: AppSize.s16,
+                                            rightMargin: AppSize.s16,
+                                            // topMargin: AppSize.s12,
+                                            bottomMargin: AppSize.s12,
+                                            leftTitle: 'profile.availabilities'
+                                                .tr
+                                                .toUpperCase(),
+                                            titleFontSize: AppSize.s16,
+                                            rightWidget: CustomIconButtonWidget(
+                                              iconData: Icons.add,
+                                              padding: 0.0,
+                                              isConstraints: true,
+                                              onClick: () => {
+                                                Get.toNamed(
+                                                  Routes
+                                                      .addOrEditAvailabilityRoute,
+                                                  arguments: [
+                                                    Keys.addOperation,
+                                                  ],
+                                                ),
+                                              },
+                                            ),
+                                            child: Column(
+                                              children: controller
+                                                  .studentInfoRepsonse
+                                                  .value
+                                                  .periods!
+                                                  .map(
+                                                    (e) => Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                        AppSize.s4,
+                                                      ),
+                                                      child:
+                                                          AvailabilityComponent(
+                                                        availabilityData: e,
+                                                      ),
+                                                    ),
+                                                  )
+                                                  .toList(),
+                                            ),
+                                          )
+                                          //===== Availabilities Component =====//
                                         ],
                                       )
                                     : const Center(

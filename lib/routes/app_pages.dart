@@ -94,6 +94,11 @@ class AppPages {
       binding: SkillBinding(),
     ),
     GetPage(
+      name: Routes.addOrEditAvailabilityRoute,
+      page: () => const AddOrEditAvailabilityPage(),
+      binding: AvailabilityBinding(),
+    ),
+    GetPage(
       name: Routes.messagingRoomsRoute,
       page: () => const RoomListPage(),
       binding: MessagingBinding(),

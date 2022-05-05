@@ -18,6 +18,7 @@ class Routes {
   static const addOrEditCertificateRoute = '/add_or_edit_certificate';
   static const addOrEditLanguageUsageRoute = '/add_or_edit_language_usage';
   static const addOrEditSkillRoute = '/add_or_edit_skill';
+  static const addOrEditAvailabilityRoute = '/add_or_edit_availability';
   static const messagingRoomsRoute = '/messaging_rooms';
   static const roomDetailsRoute = '/room_details';
 }

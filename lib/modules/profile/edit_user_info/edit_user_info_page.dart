@@ -35,10 +35,12 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
               child: Stack(
                 children: [
                   Obx(
-                    () => CachedNetworkImgWidget(
-                      imgUrl: controller
-                          .profileController.userProfileInfo.value.pictureUrl,
-                      borderRadius: 75,
+                    () => Center(
+                      child: CachedNetworkImgWidget(
+                        imgUrl: controller
+                            .profileController.userProfileInfo.value.pictureUrl,
+                        borderRadius: 75,
+                      ),
                     ),
                   ),
                   Align(

@@ -6,11 +6,13 @@ class WeeklyModel {
   final int? day;
   final String? dayLabel;
   final List<SlotModel>? slots;
+  bool isOpen;
 
   WeeklyModel({
     this.day,
     this.dayLabel,
     this.slots,
+    this.isOpen = true,
   });
 
   factory WeeklyModel.fromRawJson(String str) =>

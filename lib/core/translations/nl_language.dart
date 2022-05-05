@@ -273,6 +273,23 @@ const Map<String, String> nlNL = {
   'profile.certificateAddSuccessMsg': "Certificaat met succes toegevoegd",
   'profile.certificateEditSuccessMsg': "Certificaat succesvol bewerkt",
   'profile.certificateDeleteSuccessMsg': "Certificaat is succesvol verwijderd",
+  //availability
+  'profile.availabilities': "Beschikbaarheid",
+  'profile.availability': "Beschikbaarheid",
+  'profile.addAvailability': "Voeg beschikbaarheid toe",
+  'profile.editAvailability': "Beschikbaarheid bewerken",
+  'profile.periodFromTo': "Periode van @dateFrom naar @dateTo",
+  'profile.from': "Van",
+  'profile.to': "Tot",
+  'profile.period': "Punt uit",
+  'profile.open': "Open",
+  'profile.closed': "Gesloten",
+  'profile.customAvailabilities': "Aangepaste beschikbaarheid",
+  'profile.availabilityAddSuccessMsg':
+      "Beschikbaarheid is succesvol toegevoegd",
+  'profile.availabilityEditSuccessMsg': "Beschikbaarheid met succes bewerkt",
+  'profile.availabilityDeleteSuccessMsg':
+      "Beschikbaarheid is succesvol verwijderd",
   //messaging
   'messaging.messagingHint': "Schrijf je bericht...",
   'messaging.noMessages': "Geen berichten hier nog...",

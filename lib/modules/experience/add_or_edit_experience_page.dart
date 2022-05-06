@@ -215,7 +215,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                                 )
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: dateFormatDashYYYYMMDD(
+                                    text: dateFormatSlashDDMMYYYY(
                                       date: DateTime.tryParse(
                                         controller
                                             .selectedStartedDateString.value,
@@ -273,7 +273,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                                 )
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: dateFormatDashYYYYMMDD(
+                                    text: dateFormatSlashDDMMYYYY(
                                       date: DateTime.tryParse(
                                         controller.selectedEndDateString.value,
                                       ),

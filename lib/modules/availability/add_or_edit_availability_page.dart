@@ -125,7 +125,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                                 )
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: dateFormatDashYYYYMMDD(
+                                    text: dateFormatSlashDDMMYYYY(
                                       date: DateTime.tryParse(
                                         controller.selectedFromDateString.value,
                                       ),
@@ -185,7 +185,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                                 )
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: dateFormatDashYYYYMMDD(
+                                    text: dateFormatSlashDDMMYYYY(
                                       date: DateTime.tryParse(
                                         controller.selectedToDateString.value,
                                       ),

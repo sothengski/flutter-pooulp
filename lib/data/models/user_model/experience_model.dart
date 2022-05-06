@@ -31,8 +31,8 @@ class ExperienceModel {
     this.tags,
   });
 
-  String? get attendedFrom => dateFormatDashYYYYMMDD(date: dateStart);
-  String? get attendedTo => dateFormatDashYYYYMMDD(date: dateEnd);
+  String? get attendedFrom => dateFormatSlashDDMMYYYY(date: dateStart);
+  String? get attendedTo => dateFormatSlashDDMMYYYY(date: dateEnd);
   String? get attendedFromTo =>
       '$attendedFrom ${attendedTo == null || attendedTo == '' ? '' : '- $attendedTo'}';
 

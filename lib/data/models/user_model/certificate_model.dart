@@ -16,9 +16,9 @@ class CertificateModel {
     this.receivedDate,
     this.expirationDate,
   });
-  String? get receivedDateFormat => dateFormatDashYYYYMMDD(date: receivedDate);
+  String? get receivedDateFormat => dateFormatSlashDDMMYYYY(date: receivedDate);
   String? get expirationDateFormat =>
-      dateFormatDashYYYYMMDD(date: expirationDate);
+      dateFormatSlashDDMMYYYY(date: expirationDate);
 
   factory CertificateModel.fromRawJson(String str) => CertificateModel.fromJson(
         json.decode(str) as Map<String, dynamic>,

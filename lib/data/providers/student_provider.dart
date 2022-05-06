@@ -745,8 +745,8 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
       );
       // debugPrint(
       //   '''
-      //   ${API.putOrDeleteSpokenLanguage(spokenLanguageId: spokenLanguageId)}\n
-      //   POST Data: ${spokenLanguageData.toRawJson()}\n
+      //   ${API.putOrDeleteAvailabilities(availabilityId: availabilityId)},
+      //   availabilityData: ${availabilityData.toRawJson()}\n
       //   response::${dataResponse.bodyString}''',
       // );
       if (dataResponse.hasError) {

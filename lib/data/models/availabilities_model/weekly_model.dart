@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 import 'slot_model.dart';
 
 class WeeklyModel {
@@ -14,6 +16,24 @@ class WeeklyModel {
     this.slots,
     this.isOpen = true,
   });
+
+  String get getDayLabelByLanguage {
+    if (day == 1) {
+      return 'profile.monday'.tr;
+    } else if (day == 2) {
+      return 'profile.tuesday'.tr;
+    } else if (day == 3) {
+      return 'profile.wednesday'.tr;
+    } else if (day == 4) {
+      return 'profile.thursday'.tr;
+    } else if (day == 5) {
+      return 'profile.friday'.tr;
+    } else if (day == 6) {
+      return 'profile.saturday'.tr;
+    } else {
+      return 'profile.sunday'.tr;
+    }
+  }
 
   factory WeeklyModel.fromRawJson(String str) =>
       WeeklyModel.fromJson(json.decode(str) as Map<String, dynamic>);

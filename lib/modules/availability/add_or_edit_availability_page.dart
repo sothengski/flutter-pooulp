@@ -26,10 +26,10 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
               onClick: () => Get.dialog(
                 ConfirmationDialogWidget(
                   onPressed: () => {
-                    // controller.makeRequestToCertificateAPI(
-                    //   certificateId: controller.certificateId,
-                    //   operation: Keys.deleteOperation,
-                    // ),
+                    controller.makeRequestToAvailabilitiesAPI(
+                      availabilityId: controller.availabilityId,
+                      operation: Keys.deleteOperation,
+                    ),
                     Get.back(),
                   },
                 ),
@@ -250,228 +250,42 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                 ///
                 Obx(
                   () => Wrap(
-                    children: [
-                      ...controller.weeklyAvailability
-                          .map(
-                            (element) => FromToHourSelectionWidget(
-                              dayIndex: element.day,
-                              dayLabel: element.dayLabel,
-                              dateLanguage: controller.profileController
-                                  .userProfileInfo.value.uiLanguage,
-                              swichingValue: element.isOpen,
-                              // controller
-                              //     .weeklyAvailabilitiesList[element.day! - 1],
-                              swichingFunction: (value) {
-                                element.isOpen = switchingBooleanValue(
-                                  boolValue: element.isOpen,
-                                );
-                                controller.getUpdate();
-                              },
-                              slotList: element.slots,
-                              isUpdateTrigger: controller.isUpdateTrigger.value,
-                              // modifySlotListFunction: () {
-                              //   controller.modifySlotInWeekDay(
-                              //     isRemove: controller.weeklyAvailability[0].slots!.map((e) => e.id),
-                              //     removeWhichIndex: -1,
-                              //     slotToBeAdd: controller.defaultSlotValue,
-                              //     slotList: controller.weeklyAvailability[0].slots,
-                              //   );
-                              // },
-                              // timeFrom: controller.selectedFromDateString.value,
-                              // onConfirmTimeFrom: (date) {
-                              //   controller.selectedFromDateString.value =
-                              //       dateTimeToString(selectedItem: date);
-                              // },
-                              // timeTo: controller.selectedToDateString.value,
-                              // onConfirmTimeTo: (date) {
-                              //   controller.selectedToDateString.value =
-                              //       dateTimeToString(selectedItem: date);
-                              // },
-                              validatorFunction: (_) =>
-                                  Validator().notEmptyValidator(
-                                controller.selectedFromDateString.value,
+                    children: controller.isCustomAvailability.value == false
+                        ? [
+                            Center(
+                              child: CustomTextWidget(
+                                text: 'profile.alwaysAvailable'.tr,
                               ),
-                            ),
-                          )
-                          .toList()
-                    ],
+                            )
+                          ]
+                        : [
+                            ...controller.weeklyAvailability
+                                .map(
+                                  (element) => FromToHourSelectionWidget(
+                                    dayIndex: element.day,
+                                    dayLabel: element.getDayLabelByLanguage,
+                                    dateLanguage: controller.profileController
+                                        .userProfileInfo.value.uiLanguage,
+                                    swichingValue: element.isOpen,
+                                    swichingFunction: (value) {
+                                      element.isOpen = switchingBooleanValue(
+                                        boolValue: element.isOpen,
+                                      );
+                                      controller.getUpdate();
+                                    },
+                                    slotList: element.slots,
+                                    isUpdateTrigger:
+                                        controller.isUpdateTrigger.value,
+                                    validatorFunction: (_) =>
+                                        Validator().notEmptyValidator(
+                                      controller.selectedFromDateString.value,
+                                    ),
+                                  ),
+                                )
+                                .toList()
+                          ],
                   ),
                 ),
-                // Obx(
-                //   () => FromToHourSelectionWidget(
-                //     day: 'Monday',
-                //     dateLanguage: controller
-                //         .profileController.userProfileInfo.value.uiLanguage,
-                //     swichingValue: controller.isCustomAvailability.value,
-                //     swichingFunction: (value) {
-                //       controller.isCustomAvailability.value =
-                //           switchingBooleanValue(
-                //         boolValue: controller.isCustomAvailability.value,
-                //       );
-                //     },
-                //     timeFrom: controller.selectedFromDateString.value,
-                //     onConfirmTimeFrom: (date) {
-                //       controller.selectedFromDateString.value =
-                //           dateTimeToString(selectedItem: date);
-                //     },
-                //     timeTo: controller.selectedToDateString.value,
-                //     onConfirmTimeTo: (date) {
-                //       controller.selectedToDateString.value =
-                //           dateTimeToString(selectedItem: date);
-                //     },
-                //     validatorFunction: (_) => Validator().notEmptyValidator(
-                //       controller.selectedFromDateString.value,
-                //     ),
-                //   ),
-                // ),
-
-                // Obx(
-                //   () => Column(
-                //     children: [
-                //       RowContentInputWidget(
-                //         centerWidget: const CustomTextWidget(
-                //           textAlign: TextAlign.center,
-                //           text: 'Tuesday',
-                //         ),
-                //         suffixWidget: Switch(
-                //           value: controller.isCustomAvailability.value,
-                //           onChanged: (value) {
-                //             controller.isCustomAvailability.value =
-                //                 switchingBooleanValue(
-                //               boolValue: controller.isCustomAvailability.value,
-                //             );
-                //           },
-                //           activeTrackColor: ColorsManager.primary25,
-                //           activeColor: ColorsManager.primary,
-                //         ),
-                //       ),
-
-                //       ///===== Top of From Date & To Date Component =====//
-                //       Row(
-                //         children: [
-                //           ///===== Top of From Date Component =====//
-                //           Expanded(
-                //             flex: 40,
-                //             child: ContainerDialogWidget(
-                //               // inputTitle: 'profile.from'.tr,
-                //               // inputTitleMarginTop: AppSize.s0,
-                //               validatorFunction: (_) =>
-                //                   Validator().notEmptyValidator(
-                //                 controller.selectedFromDateString.value,
-                //               ),
-                //               dialogType: DialogType.dateTimePickerDialog,
-                //               dateLocale: controller.profileController
-                //                   .userProfileInfo.value.uiLanguage,
-                //               currentTime: DateTime.tryParse(
-                //                     controller.selectedFromDateString.value,
-                //                   ) ??
-                //                   DateTime.now(),
-                //               onConfirmDate: (date) {
-                //                 controller.selectedFromDateString.value =
-                //                     dateTimeToString(selectedItem: date);
-                //               },
-                //               containerWidget: Obx(
-                //                 () => controller.selectedFromDateString.value ==
-                //                         ''
-                //                     ? RowContentInputWidget(
-                //                         centerWidget: CustomTextWidget(
-                //                           text: 'profile.from'.tr,
-                //                           color: ColorsManager.grey400,
-                //                           fontWeight: FontWeight.w400,
-                //                           fontSize: AppSize.s16,
-                //                         ),
-                //                         suffixWidgetFlex: 20,
-                //                         suffixWidget: const Icon(
-                //                           IconsManager.schedule,
-                //                           color: ColorsManager.grey600,
-                //                         ),
-                //                       )
-                //                     : RowContentInputWidget(
-                //                         centerWidget: CustomTextWidget(
-                //                           text: dateFormatDashYYYYMMDD(
-                //                             date: DateTime.tryParse(
-                //                               controller
-                //                                   .selectedFromDateString.value,
-                //                             ),
-                //                           ),
-                //                           color: ColorsManager.black,
-                //                           fontSize: AppSize.s16,
-                //                         ),
-                //                         suffixWidgetFlex: 20,
-                //                         suffixWidget: const Icon(
-                //                           IconsManager.schedule,
-                //                           color: ColorsManager.grey600,
-                //                         ),
-                //                       ),
-                //               ),
-                //             ),
-                //           ),
-                //           //===== Bottom of From Date Component =====//
-                //           const SizedBox(
-                //             width: AppSize.s12,
-                //           ),
-
-                //           ///===== Top of To Date Component =====//
-                //           Expanded(
-                //             flex: 40,
-                //             child: ContainerDialogWidget(
-                //               // inputTitle: 'profile.to'.tr,
-                //               inputTitleMarginBottom: AppSize.s0,
-                //               dialogType: DialogType.dateTimePickerDialog,
-                //               dateLocale: controller.profileController
-                //                   .userProfileInfo.value.uiLanguage,
-                //               currentTime: DateTime.tryParse(
-                //                     controller.selectedToDateString.value,
-                //                   ) ??
-                //                   DateTime.now(),
-                //               onConfirmDate: (date) {
-                //                 controller.selectedToDateString.value =
-                //                     dateTimeToString(selectedItem: date);
-                //               },
-                //               containerWidget: Obx(
-                //                 () =>
-                //                     controller.selectedToDateString.value == ''
-                //                         ? RowContentInputWidget(
-                //                             centerWidget: CustomTextWidget(
-                //                               text: 'profile.to'.tr,
-                //                               color: ColorsManager.grey400,
-                //                               fontWeight: FontWeight.w400,
-                //                               fontSize: AppSize.s16,
-                //                             ),
-                //                             suffixWidgetFlex: 20,
-                //                             suffixWidget: const Icon(
-                //                               IconsManager.schedule,
-                //                               color: ColorsManager.grey600,
-                //                             ),
-                //                           )
-                //                         : RowContentInputWidget(
-                //                             centerWidget: CustomTextWidget(
-                //                               text: dateFormatDashYYYYMMDD(
-                //                                 date: DateTime.tryParse(
-                //                                   controller
-                //                                       .selectedToDateString
-                //                                       .value,
-                //                                 ),
-                //                               ),
-                //                               color: ColorsManager.black,
-                //                               fontSize: AppSize.s16,
-                //                             ),
-                //                             suffixWidgetFlex: 20,
-                //                             suffixWidget: const Icon(
-                //                               IconsManager.schedule,
-                //                               color: ColorsManager.grey600,
-                //                             ),
-                //                           ),
-                //               ),
-                //             ),
-                //           ),
-                //           //===== Bottom of To Date Component =====//
-                //         ],
-                //       ),
-                //       //===== Bottom of From Date & To Date Component =====//
-                //     ],
-                //   ),
-                // ),
                 //===== Bottom of Custom Availabilities Component =====//
               ],
             ),

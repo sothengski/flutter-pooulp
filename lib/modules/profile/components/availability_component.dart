@@ -41,43 +41,52 @@ class AvailabilityComponent extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Wrap(
-                children: availabilityData!.weekly!.map(
-                  (e) {
-                    return e.slots!.isEmpty
-                        ? Container()
-                        : Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 30,
-                                child: CustomTextWidget(
-                                  text: '${e.dayLabel}',
-                                  color: ColorsManager.black,
+              if (availabilityData!.isCustom == 0)
+                CustomTextWidget(
+                  text: 'profile.alwaysAvailable'.tr,
+                  fontSize: AppSize.s16,
+                  fontWeight: FontWeight.w400,
+                  marginTop: AppSize.s12,
+                )
+              else
+                Wrap(
+                  children: availabilityData!.weekly!.map(
+                    (e) {
+                      return e.slots!.isEmpty
+                          ? Container()
+                          : Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 30,
+                                  child: CustomTextWidget(
+                                    text: '${e.dayLabel}',
+                                    color: ColorsManager.black,
+                                  ),
                                 ),
-                              ),
-                              Expanded(
-                                flex: 70,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: e.slots!
-                                      .map(
-                                        (e) => CustomTextWidget(
-                                          text:
-                                              '${e.startTimeToHour} - ${e.endTimeToHour}',
-                                          color: ColorsManager.black,
-                                          marginTop: AppSize.s2,
-                                          marginBottom: AppSize.s2,
-                                        ),
-                                      )
-                                      .toList(),
+                                Expanded(
+                                  flex: 70,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: e.slots!
+                                        .map(
+                                          (e) => CustomTextWidget(
+                                            text:
+                                                '${e.startTimeToHour} - ${e.endTimeToHour}',
+                                            color: ColorsManager.black,
+                                            marginTop: AppSize.s2,
+                                            marginBottom: AppSize.s2,
+                                          ),
+                                        )
+                                        .toList(),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                  },
-                ).toList(),
-              ),
+                              ],
+                            );
+                    },
+                  ).toList(),
+                ),
               Align(
                 alignment: Alignment.topRight,
                 child: CustomIconButtonWidget(

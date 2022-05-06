@@ -128,14 +128,19 @@ class ContainerDialogWidget extends StatelessWidget {
                           //   'change $date in time zone ${date.timeZoneOffset.inHours}',
                           // );
                         },
+                        locale: dateLocale == 'fr'
+                            ? LocaleType.fr
+                            : dateLocale == 'nl'
+                                ? LocaleType.nl
+                                : LocaleType.en,
                         onConfirm: onConfirmDate,
                         pickerModel: CustomPicker(
                           currentTime: currentTime,
-                          locale: dateLocale == 'fr'
-                              ? LocaleType.fr
-                              : dateLocale == 'nl'
-                                  ? LocaleType.nl
-                                  : LocaleType.en,
+                          // locale: dateLocale == 'fr'
+                          //     ? LocaleType.fr
+                          //     : dateLocale == 'nl'
+                          //         ? LocaleType.nl
+                          //         : LocaleType.en,
                         ),
                       )
                     else

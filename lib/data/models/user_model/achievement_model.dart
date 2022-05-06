@@ -18,7 +18,7 @@ class AchievementModel {
     this.fields,
   });
   String? get dateCompletionFormat =>
-      dateFormatDashYYYYMMDD(date: dateCompletion);
+      dateFormatSlashDDMMYYYY(date: dateCompletion);
 
   factory AchievementModel.fromRawJson(String str) =>
       AchievementModel.fromJson(json.decode(str) as Map<String, dynamic>);

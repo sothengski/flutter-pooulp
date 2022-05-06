@@ -179,7 +179,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                                 )
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: dateFormatDashYYYYMMDD(
+                                    text: dateFormatSlashDDMMYYYY(
                                       date: DateTime.tryParse(
                                         controller
                                             .selectedStartedDateString.value,
@@ -238,7 +238,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                                 )
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: dateFormatDashYYYYMMDD(
+                                    text: dateFormatSlashDDMMYYYY(
                                       date: DateTime.tryParse(
                                         controller.selectedEndDateString.value,
                                       ),

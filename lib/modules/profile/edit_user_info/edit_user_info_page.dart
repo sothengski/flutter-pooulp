@@ -257,7 +257,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
                                     //marginLeft: 4.0,
-                                    text: dateFormatDashYYYYMMDD(
+                                    text: dateFormatSlashDDMMYYYY(
                                       date: controller.selectedBirthday.value,
                                     ),
                                     color: ColorsManager.black,

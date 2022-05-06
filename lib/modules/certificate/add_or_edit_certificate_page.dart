@@ -102,7 +102,7 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                                     )
                                   : RowContentInputWidget(
                                       centerWidget: CustomTextWidget(
-                                        text: dateFormatDashYYYYMMDD(
+                                        text: dateFormatSlashDDMMYYYY(
                                           date: DateTime.tryParse(
                                             controller
                                                 .selectedReceivedDateString
@@ -160,7 +160,7 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                                 )
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: dateFormatDashYYYYMMDD(
+                                    text: dateFormatSlashDDMMYYYY(
                                       date: DateTime.tryParse(
                                         controller
                                             .selectedExpireDateString.value,

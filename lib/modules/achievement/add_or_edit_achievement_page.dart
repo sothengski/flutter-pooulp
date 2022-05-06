@@ -95,7 +95,7 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                           )
                         : RowContentInputWidget(
                             centerWidget: CustomTextWidget(
-                              text: dateFormatDashYYYYMMDD(
+                              text: dateFormatSlashDDMMYYYY(
                                 date: DateTime.tryParse(
                                   controller.selectedCompletionDateString.value,
                                 ),

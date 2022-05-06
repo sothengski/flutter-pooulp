@@ -154,6 +154,9 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                         inputTitle: 'profile.to'.tr,
                         // 'End Date(Or Expected)',
                         inputTitleMarginTop: AppSize.s16,
+                        validatorFunction: (_) => Validator().notEmptyValidator(
+                          controller.selectedToDateString.value,
+                        ),
                         dialogType: DialogType.dateTimePickerDialog,
                         dateLocale: controller
                             .profileController.userProfileInfo.value.uiLanguage,
@@ -246,31 +249,52 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                 ///===== Top of Custom Availabilities Component =====//
                 ///
                 Obx(
-                  () => FromToHourSelectionWidget(
-                    day: controller.weeklyAvailability[0].dayLabel,
-                    dateLanguage: controller
-                        .profileController.userProfileInfo.value.uiLanguage,
-                    swichingValue: controller.weeklyAvailabilitiesList[0],
-                    swichingFunction: (value) {
-                      controller.weeklyAvailabilitiesList[0] =
-                          switchingBooleanValue(
-                        boolValue: controller.weeklyAvailabilitiesList[0],
-                      );
-                    },
-                    slotList: controller.weeklyAvailability[0].slots,
-                    timeFrom: controller.selectedFromDateString.value,
-                    onConfirmTimeFrom: (date) {
-                      controller.selectedFromDateString.value =
-                          dateTimeToString(selectedItem: date);
-                    },
-                    timeTo: controller.selectedToDateString.value,
-                    onConfirmTimeTo: (date) {
-                      controller.selectedToDateString.value =
-                          dateTimeToString(selectedItem: date);
-                    },
-                    validatorFunction: (_) => Validator().notEmptyValidator(
-                      controller.selectedFromDateString.value,
-                    ),
+                  () => Wrap(
+                    children: [
+                      ...controller.weeklyAvailability
+                          .map(
+                            (element) => FromToHourSelectionWidget(
+                              dayIndex: element.day,
+                              dayLabel: element.dayLabel,
+                              dateLanguage: controller.profileController
+                                  .userProfileInfo.value.uiLanguage,
+                              swichingValue: element.isOpen,
+                              // controller
+                              //     .weeklyAvailabilitiesList[element.day! - 1],
+                              swichingFunction: (value) {
+                                element.isOpen = switchingBooleanValue(
+                                  boolValue: element.isOpen,
+                                );
+                                controller.getUpdate();
+                              },
+                              slotList: element.slots,
+                              isUpdateTrigger: controller.isUpdateTrigger.value,
+                              // modifySlotListFunction: () {
+                              //   controller.modifySlotInWeekDay(
+                              //     isRemove: controller.weeklyAvailability[0].slots!.map((e) => e.id),
+                              //     removeWhichIndex: -1,
+                              //     slotToBeAdd: controller.defaultSlotValue,
+                              //     slotList: controller.weeklyAvailability[0].slots,
+                              //   );
+                              // },
+                              // timeFrom: controller.selectedFromDateString.value,
+                              // onConfirmTimeFrom: (date) {
+                              //   controller.selectedFromDateString.value =
+                              //       dateTimeToString(selectedItem: date);
+                              // },
+                              // timeTo: controller.selectedToDateString.value,
+                              // onConfirmTimeTo: (date) {
+                              //   controller.selectedToDateString.value =
+                              //       dateTimeToString(selectedItem: date);
+                              // },
+                              validatorFunction: (_) =>
+                                  Validator().notEmptyValidator(
+                                controller.selectedFromDateString.value,
+                              ),
+                            ),
+                          )
+                          .toList()
+                    ],
                   ),
                 ),
                 // Obx(

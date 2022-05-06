@@ -86,6 +86,19 @@ abstract class IStudentProvider {
     required int? skillId,
   });
   //===== Bottom of Skill Section =====//
+
+  ///===== Top of Availability Section =====//
+  Future<JsonResponse> postStudentAvailability({
+    PeriodModel? availabilityData,
+  });
+  Future<JsonResponse> putStudentAvailability({
+    required int? availabilityId,
+    PeriodModel? availabilityData,
+  });
+  Future<JsonResponse> deleteStudentAvailability({
+    required int? availabilityId,
+  });
+  //===== Bottom of Availability Section =====//
 }
 
 class StudentProvider extends BaseProvider implements IStudentProvider {
@@ -683,6 +696,99 @@ class StudentProvider extends BaseProvider implements IStudentProvider {
       return Future.error(e.toString());
     }
   }
-
   //===== Bottom of Skill Section =====//
+
+  ///===== Top of Availability Section =====//
+  ///
+  ///POST Method for Add a New Availability Information
+  @override
+  Future<JsonResponse> postStudentAvailability({
+    PeriodModel? availabilityData,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postOrGetAvailabilities].toString(),
+        availabilityData!.toRawJson(),
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.paths[Endpoint.postOrGetAvailabilities]},
+      //   availabilityData: ${availabilityData.toRawJson()}
+      //   ''',
+      // );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///PUT Method for Editing/Updating an Availability Information
+  @override
+  Future<JsonResponse> putStudentAvailability({
+    required int? availabilityId,
+    PeriodModel? availabilityData,
+  }) async {
+    try {
+      final dataResponse = await put(
+        API.putOrDeleteAvailabilities(availabilityId: availabilityId),
+        availabilityData!.toRawJson(),
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.putOrDeleteSpokenLanguage(spokenLanguageId: spokenLanguageId)}\n
+      //   POST Data: ${spokenLanguageData.toRawJson()}\n
+      //   response::${dataResponse.bodyString}''',
+      // );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///DELETE Method for Deleting an Availability Information by ID
+  @override
+  Future<JsonResponse> deleteStudentAvailability({
+    required int? availabilityId,
+  }) async {
+    try {
+      final dataResponse = await delete(
+        API.putOrDeleteAvailabilities(availabilityId: availabilityId),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  //===== Bottom of Availability Section =====//
 }

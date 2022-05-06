@@ -45,6 +45,7 @@ enum Endpoint {
   postOrGetOnBoardingData,
   // getMessagingRoomList,
   // getMessagesByRoomID,
+  postOrGetAvailabilities,
 }
 
 class API {
@@ -90,6 +91,8 @@ class API {
     Endpoint.getOnlyHardSkills: '/tags/hardskills',
     Endpoint.getOnlySoftSkills: '/tags/softskills',
     Endpoint.postOrGetOnBoardingData: '/onboarding',
+    Endpoint.postOrGetAvailabilities:
+        '/users/me/student_profile/availabilities',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';
@@ -134,6 +137,9 @@ class API {
     required int? skillId,
   }) =>
       '/users/me/student_profile/$skillCategory/$skillId';
+
+  static String putOrDeleteAvailabilities({required int? availabilityId}) =>
+      '/users/me/student_profile/availabilities/$availabilityId';
 
   static String getMessagingRoomList({
     int? pageNumber = 1,

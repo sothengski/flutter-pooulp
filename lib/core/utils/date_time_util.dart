@@ -63,6 +63,10 @@ String dateFormatTo24HourMn({DateTime? date}) {
   return DateFormat('kk:mm').format(date!);
 }
 
+int dateTimeConvertToSecond({int? hour = 0, int? minute = 0, int? second = 0}) {
+  return (hour! * 3600) + (minute! * 60) + second!;
+}
+
 String intToActuallyHoursMins({
   int? value,
   bool? clock24 = true,

@@ -48,5 +48,6 @@ class WeeklyModel {
     day: $day, 
     dayLabel: $dayLabel, 
     slots: $slots,
+    isOpen: $isOpen,
   )''';
 }

@@ -18,6 +18,9 @@ class JobOfferModel {
   final int? telecommuting;
   final int? shifting;
   final int? numberOfWorkingHourPerWeek;
+  final String? remunerationMax;
+  final String? remunerationMin;
+  final String? currencySymbol;
   final String? addressStreet;
   final String? addressCity;
   final String? addressZip;
@@ -52,6 +55,9 @@ class JobOfferModel {
     this.telecommuting = 2,
     this.shifting,
     this.numberOfWorkingHourPerWeek,
+    this.remunerationMax,
+    this.remunerationMin,
+    this.currencySymbol,
     this.addressStreet,
     this.addressCity,
     this.addressZip,
@@ -76,7 +82,12 @@ class JobOfferModel {
 
   String? get numberOfWorkPerWeek => numberOfWorkingHourPerWeek == null
       ? 'N/A'
-      : '$numberOfWorkingHourPerWeek hrs/week';
+      : "$numberOfWorkingHourPerWeek ${'offer.hrsWeek'.tr}";
+
+  String? get remunerationMaxMin => remunerationMax == null &&
+          remunerationMin == null
+      ? 'N/A'
+      : "${remunerationMin == null ? '' : '$remunerationMin${currencySymbol ?? ''}'} - ${remunerationMax == null ? '' : '$remunerationMax${currencySymbol ?? ''}'}/${'offer.hour'.tr}";
 
   String? get companyNameAndLocation =>
       '${enterprise!.name} ($companyLocation)';
@@ -141,6 +152,9 @@ class JobOfferModel {
         shifting: json['shifting'] as int?,
         numberOfWorkingHourPerWeek:
             json['number_of_working_hour_per_week'] as int?,
+        remunerationMax: json['remuneration_max'] as String?,
+        remunerationMin: json['remuneration_min'] as String?,
+        currencySymbol: json['currency_symbol'] as String?,
         addressStreet: json['address_street'] as String?,
         addressCity: json['address_city'] as String?,
         addressZip: json['address_zip'] as String?,
@@ -294,6 +308,9 @@ class JobOfferModel {
       telecommuting: $telecommuting,
       shifting: $shifting,
       numberOfWorkingHourPerWeek: $numberOfWorkingHourPerWeek,
+      remunerationMax: $remunerationMax,
+      remunerationMin: $remunerationMin,
+      currencySymbol: $currencySymbol,
       addressStreet: $addressStreet,
       addressCity: $addressCity,
       addressZip: $addressZip,

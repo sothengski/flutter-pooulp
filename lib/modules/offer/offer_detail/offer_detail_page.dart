@@ -209,7 +209,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Working Period Component =====//
 
                           ///===== Working Duration Component =====//
-                          if (jobOfferDetail.types!.isNotEmpty)
+                          if (jobOfferDetail.numberOfWorkPerWeek!.isNotEmpty)
                             OutlineContainerWidget(
                               title: 'offer.workingDuration'.tr,
                               titleColor: ColorsManager.primaryBlue,
@@ -226,6 +226,25 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           else
                             Container(),
                           //===== Working Duration Component =====//
+
+                          ///===== Remuneration Component =====//
+                          if (jobOfferDetail.remunerationMaxMin!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'offer.remuneration'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: CustomBoxWidget(
+                                child: CustomTextWidget(
+                                  textAlign: TextAlign.center,
+                                  text: '${jobOfferDetail.remunerationMaxMin}',
+                                  fontWeight: FontWeightManager.regular,
+                                  fontSize: AppSize.s12,
+                                  // marginBottom: AppSize.s10,
+                                ),
+                              ),
+                            )
+                          else
+                            Container(),
+                          //===== Remuneration Component =====//
 
                           ///===== Types Component =====//
                           if (jobOfferDetail.types!.isNotEmpty)

@@ -105,21 +105,38 @@ class ContainerDialogWidget extends StatelessWidget {
                         // },
                       )
                     else if (dialogType == DialogType.timePickerDialog)
-                      DatePicker.showTimePicker(
+                      // DatePicker.showTimePicker(
+                      //   context,
+                      //   locale: dateLocale == 'fr'
+                      //       ? LocaleType.fr
+                      //       : dateLocale == 'nl'
+                      //           ? LocaleType.nl
+                      //           : LocaleType.en,
+                      //   showSecondsColumn: false,
+                      //   onChanged: (date) {
+                      //     // print(
+                      //     //   'change $date in time zone ${date.timeZoneOffset.inHours}',
+                      //     // );
+                      //   },
+                      //   onConfirm: onConfirmDate,
+                      //   currentTime: currentTime,
+                      // )
+                      DatePicker.showPicker(
                         context,
-                        locale: dateLocale == 'fr'
-                            ? LocaleType.fr
-                            : dateLocale == 'nl'
-                                ? LocaleType.nl
-                                : LocaleType.en,
-                        showSecondsColumn: false,
                         onChanged: (date) {
                           // print(
                           //   'change $date in time zone ${date.timeZoneOffset.inHours}',
                           // );
                         },
                         onConfirm: onConfirmDate,
-                        currentTime: currentTime,
+                        pickerModel: CustomPicker(
+                          currentTime: currentTime,
+                          locale: dateLocale == 'fr'
+                              ? LocaleType.fr
+                              : dateLocale == 'nl'
+                                  ? LocaleType.nl
+                                  : LocaleType.en,
+                        ),
                       )
                     else
                       dialogType == DialogType.bottomSheetDialog

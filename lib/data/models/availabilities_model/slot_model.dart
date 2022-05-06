@@ -4,8 +4,8 @@ import '../../../core/core.dart';
 
 class SlotModel {
   final int? id;
-  final int? startTime;
-  final int? endTime;
+  int? startTime;
+  int? endTime;
 
   SlotModel({
     this.id,

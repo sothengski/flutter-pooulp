@@ -14,6 +14,7 @@ export 'custom_indicator.dart';
 export 'custom_list.dart';
 export 'custom_list_tile_widget.dart';
 export 'custom_material_button.dart';
+export 'custom_picker.dart';
 export 'custom_snackbar.dart';
 export 'custom_text_input.dart';
 export 'custom_text_widget.dart';

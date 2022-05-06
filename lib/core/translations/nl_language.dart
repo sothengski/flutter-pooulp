@@ -290,6 +290,16 @@ const Map<String, String> nlNL = {
   'profile.availabilityEditSuccessMsg': "Beschikbaarheid met succes bewerkt",
   'profile.availabilityDeleteSuccessMsg':
       "Beschikbaarheid is succesvol verwijderd",
+  'profile.alwaysAvailable': "Altijd beschikbaar",
+  'profile.monday': "Maandag",
+  'profile.tuesday': "Dinsdag",
+  'profile.wednesday': "Woensdag",
+  'profile.thursday': "Donderdag",
+  'profile.friday': "Vrijdag",
+  'profile.saturday': "zaterdag",
+  'profile.sunday': "Zondag",
+  'profile.dayNotAvailable': "@day niet beschikbaar",
+
   //messaging
   'messaging.messagingHint': "Schrijf je bericht...",
   'messaging.noMessages': "Geen berichten hier nog...",

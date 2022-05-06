@@ -14,58 +14,48 @@ class AvailabilityController extends GetxController {
 
   final editAvailabilityFormKey = GlobalKey<FormState>();
 
+  final defaultSlot = SlotModel(startTime: 28800, endTime: 64800);
+
   RxList<WeeklyModel> weeklyAvailability = <WeeklyModel>[
     WeeklyModel(
       day: 1,
-      dayLabel: 'Monday',
+      // dayLabel: 'Monday',
       slots: [
-        SlotModel(
-          startTime: 28800,
-          endTime: 64800,
-        ), // 28800 == 08:00 // 64800 == 18:00
-        // SlotModel(
-        //   startTime: 3600,
-        //   endTime: 64800,
-        // ), // 3600 == 01:00 // 64800 == 18:00
+        SlotModel(startTime: 28800, endTime: 64800),
+        // 28800 == 08:00 // 64800 == 18:00
       ],
     ),
     WeeklyModel(
       day: 2,
-      dayLabel: 'Tuesday',
+      // dayLabel: 'Tuesday',
       slots: [
-        SlotModel(
-          startTime: 28800,
-          endTime: 64800,
-        ), // 28800 == 08:00 // 64800 == 18:00
-        // SlotModel(
-        //   startTime: 50400,
-        //   endTime: 79200,
-        // ) // 50400 == 14:00 // 79200 == 22:00
+        SlotModel(startTime: 28800, endTime: 64800),
+        // 28800 == 08:00 // 64800 == 18:00
       ],
     ),
     WeeklyModel(
       day: 3,
-      dayLabel: 'Wednesday',
+      // dayLabel: 'Wednesday',
       slots: [SlotModel(startTime: 28800, endTime: 64800)],
     ),
     WeeklyModel(
       day: 4,
-      dayLabel: 'Thursday',
+      // dayLabel: 'Thursday',
       slots: [SlotModel(startTime: 28800, endTime: 64800)],
     ),
     WeeklyModel(
       day: 5,
-      dayLabel: 'Friday',
+      // dayLabel: 'Friday',
       slots: [SlotModel(startTime: 28800, endTime: 64800)],
     ),
     WeeklyModel(
       day: 6,
-      dayLabel: 'Saturday',
+      // dayLabel: 'Saturday',
       slots: [SlotModel(startTime: 28800, endTime: 64800)],
     ),
     WeeklyModel(
       day: 7,
-      dayLabel: 'Sunday',
+      // dayLabel: 'Sunday',
       slots: [SlotModel(startTime: 28800, endTime: 64800)],
     ),
   ].obs;
@@ -85,14 +75,38 @@ class AvailabilityController extends GetxController {
     super.onInit();
     title = (Get.arguments as List)[0].toString();
     if (title == Keys.editOperation) {
-      // final AchievementModel achievementDataArg =
-      //     (Get.arguments as List)[1] as AchievementModel;
-      // availabilityId = availabilityIdDataArg.id!;
+      final PeriodModel availabilityIdDataArg =
+          (Get.arguments as List)[1] as PeriodModel;
+      availabilityId = availabilityIdDataArg.id!;
 
-      // selectedCompletionDateString.value =
-      //     achievementDataArg.dateCompletion == null
-      //         ? ''
-      //         : achievementDataArg.dateCompletion.toString();
+      selectedFromDateString.value = availabilityIdDataArg.from == null
+          ? ''
+          : availabilityIdDataArg.from.toString();
+      selectedToDateString.value = availabilityIdDataArg.to == null
+          ? ''
+          : availabilityIdDataArg.to.toString();
+
+      if (availabilityIdDataArg.isCustom == 1) {
+        isCustomAvailability.value = true;
+      } else {
+        isCustomAvailability.value = false;
+      }
+
+      final List<WeeklyModel> tempWeeklyAvailability = [];
+      for (final element in availabilityIdDataArg.weekly!) {
+        tempWeeklyAvailability.add(
+          element.slots!.isEmpty
+              ? WeeklyModel(
+                  day: element.day,
+                  dayLabel: element.dayLabel,
+                  slots: [defaultSlot],
+                  isOpen: false,
+                )
+              : element,
+        );
+      }
+      weeklyAvailability.value = [];
+      weeklyAvailability.addAll(tempWeeklyAvailability);
     }
   }
 
@@ -107,9 +121,6 @@ class AvailabilityController extends GetxController {
     required int? removeIndex,
     required SlotModel slotToBeAdd,
   }) {
-    // print("isRemove: $isRemove");
-    // print("dayIndex: $dayIndex");
-    // print("removeIndex: $removeIndex");
     // [Remove]
     if (isRemove!) {
       // print('[Remove]');
@@ -126,9 +137,6 @@ class AvailabilityController extends GetxController {
           .firstWhere((element) => element.day == dayIndex)
           .slots!
           .add(slotToBeAdd);
-
-      // print('dayIndex:: $dayIndex');
-      // print('slotToBeAdd:: $slotToBeAdd');
     }
     getUpdate();
   }
@@ -153,19 +161,6 @@ class AvailabilityController extends GetxController {
           );
         }
       }
-      // else {
-      //   tempWeeklyAvailability = [];
-      // }
-      // debugPrint(
-      //   '''
-      // save::
-      // From: $selectedFromDateString
-      // To: $selectedToDateString
-      // Custom Availabilities: $isCustomAvailability
-
-      // Weekly Slots: $tempWeeklyAvailability,
-      // ''',
-      // );
       final PeriodModel periodToBeAddOrUpdate = PeriodModel(
         from: selectedFromDateString.value == ''
             ? null
@@ -182,6 +177,7 @@ class AvailabilityController extends GetxController {
       );
       makeRequestToAvailabilitiesAPI(
         operation: title,
+        availabilityId: availabilityId,
         periodData: periodToBeAddOrUpdate,
       );
     }
@@ -229,12 +225,5 @@ class AvailabilityController extends GetxController {
         duration: DurationConstant.d1500,
       );
     }
-
-    // debugPrint(
-    //   '''
-    //   operation: $operation,
-    //   periodData: ${periodData!.toRawJson()},
-    //   ''',
-    // );
   }
 }

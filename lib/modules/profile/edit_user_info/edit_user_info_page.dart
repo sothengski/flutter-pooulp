@@ -129,6 +129,16 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ///===== Top of First name Component =====//
+                      CustomTextWidget(
+                        text: "*${'profile.shareInfoMsg'.tr}",
+                        fontWeight: FontWeight.w600,
+                        maxLine: 3,
+                        marginBottom: AppSize.s8,
+                      ),
+
+                      //===== Bottom of First name Component =====//
+
+                      ///===== Top of First name Component =====//
                       CustomTextInput(
                         controller: controller.firstNameCtrl,
                         inputTitle: 'auth.firstName'.tr,

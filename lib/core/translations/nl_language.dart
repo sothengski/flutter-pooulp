@@ -302,7 +302,8 @@ const Map<String, String> nlNL = {
   'profile.saturday': "zaterdag",
   'profile.sunday': "Zondag",
   'profile.dayNotAvailable': "@day niet beschikbaar",
-
+  'profile.shareInfoMsg':
+      "Ik accepteer om mijn informatie te delen met ondernemingen waarmee ik match.",
   //messaging
   'messaging.messagingHint': "Schrijf je bericht...",
   'messaging.noMessages': "Geen berichten hier nog...",

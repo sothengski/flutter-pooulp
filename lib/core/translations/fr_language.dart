@@ -304,6 +304,8 @@ const Map<String, String> frFR = {
   'profile.saturday': "Samedi",
   'profile.sunday': "Dimanche",
   'profile.dayNotAvailable': "@day non disponible",
+  'profile.shareInfoMsg':
+      "J'accepte de partager mes informations avec les entreprises avec lesquelles je correspond.",
   //messaging
   'messaging.messagingHint': "Tapez votre message...",
   'messaging.noMessages': "Pas de messages ici encore...",

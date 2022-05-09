@@ -67,6 +67,9 @@ const Map<String, String> enUS = {
   'auth.register': "Register",
   'auth.acountExist': "You already have an account?",
   'auth.memberPooulp': "You're now a member of Pooulp.",
+  'auth.forgotPasswordNoted':
+      "We will send you a verification token to reset your password.",
+  'auth.sendEmail': "Send Email",
 
   ///===== Settings =====//
   'settings.settingsTitle': "Settings",

@@ -67,6 +67,9 @@ const Map<String, String> nlNL = {
   'auth.register': "Register",
   'auth.acountExist': "Je hebt al een account?",
   'auth.memberPooulp': "Je bent nu lid van Pooulp.",
+  'auth.forgotPasswordNoted':
+      "We sturen u een verificatietoken om uw wachtwoord te resetten.",
+  'auth.sendEmail': "Stuur e -mail",
 
   ///===== Settings =====//
   'settings.settingsTitle': "Instellingen",

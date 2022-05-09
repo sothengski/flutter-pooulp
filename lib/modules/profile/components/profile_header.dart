@@ -161,6 +161,7 @@ class ProfileHeader extends StatelessWidget {
                 child: CachedNetworkImgWidget(
                   imgUrl: profileImg,
                   borderRadius: 75,
+                  defaultImg: AssetsManager.logoStudentDefault,
                 ),
               ),
             ),

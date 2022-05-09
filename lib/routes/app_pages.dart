@@ -40,6 +40,11 @@ class AppPages {
       binding: SignInBinding(),
     ),
     GetPage(
+      name: Routes.forgotPasswordRoute,
+      page: () => const ForgotPasswordPage(),
+      binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
       name: Routes.editUserInfoRoute,
       page: () => const EditUserInformationPage(),
       binding: EditUserInformationBinding(),

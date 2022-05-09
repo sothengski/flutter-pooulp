@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/core.dart';
+import '../../../../routes/routes.dart';
 import '../../../modules.dart';
 
 class SignInForm extends GetView<SignInController> {
@@ -73,10 +74,7 @@ class SignInForm extends GetView<SignInController> {
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () => customSnackbar(
-                    msgTitle: 'This Page is under construction!',
-                    msgContent: 'This Page is only view.\n Data will not save.',
-                  ),
+                  onTap: () => Get.toNamed(Routes.forgotPasswordRoute),
                   child: CustomTextWidget(
                     text: 'auth.forgotPassword'.tr,
                     color: ColorsManager.primary,

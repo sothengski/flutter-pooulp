@@ -162,6 +162,7 @@ const Map<String, String> enUS = {
   'home.profile': "Profile",
   'profile.completeness': "Profile Completeness",
   'profile.information': "Personal Information",
+  'profile.seeAllInfo': "See all contact info",
   'profile.email': "Email",
   'profile.phone': "Phone",
   'profile.vdoLink': "Video presentation link",

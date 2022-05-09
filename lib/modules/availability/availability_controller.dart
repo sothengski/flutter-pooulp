@@ -125,10 +125,11 @@ class AvailabilityController extends GetxController {
     if (isRemove!) {
       // print('[Remove]');
       weeklyAvailability
-          .firstWhere((element) => element.day == dayIndex)
-          .slots!
-          .removeAt(removeIndex!)
-          .printInfo(info: 'dayIndex:: $dayIndex');
+              .firstWhere((element) => element.day == dayIndex)
+              .slots!
+              .removeAt(removeIndex!)
+          // .printInfo(info: 'dayIndex:: $dayIndex')
+          ;
     }
     // [Add]
     else {

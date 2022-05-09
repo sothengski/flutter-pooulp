@@ -8,6 +8,7 @@ class AssetsManager {
   static const String facebookLogo = '$iconPath/facebook-logo.png';
   static const String googleLogo = '$iconPath/google-logo.png';
   static const String linkedInLogo = '$iconPath/linkedin-logo.png';
+  static const String linkedInLogo1 = '$iconPath/linkedin-logo1.png';
 
   ///==================== Images ====================
 

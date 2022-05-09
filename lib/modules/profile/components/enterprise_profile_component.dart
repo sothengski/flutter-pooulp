@@ -25,13 +25,13 @@ class EnterpriseProfileComponent extends StatelessWidget {
         //===== Profile Header Widget =====//
 
         ///===== Personal Information Widget =====//
-        ContactInformationComponent(
-          headerTitle: 'Enterprise Information',
-          email: controller.userInfoRepsonse.value.enterprise!.email,
-          phone: controller.userInfoRepsonse.value.enterprise!.fullPhone1Format,
-          videoPreentationLink:
-              controller.userInfoRepsonse.value.enterprise!.description,
-        ),
+        // ContactInformationComponent(
+        //   headerTitle: 'Enterprise Information',
+        //   email: controller.userInfoRepsonse.value.enterprise!.email,
+        //   phone: controller.userInfoRepsonse.value.enterprise!.fullPhone1Format,
+        //   videoPreentationLink:
+        //       controller.userInfoRepsonse.value.enterprise!.description,
+        // ),
         //===== Personal Information Widget =====//
       ],
     );

@@ -165,6 +165,7 @@ const Map<String, String> frFR = {
   'home.profile': "Profil",
   'profile.completeness': "Composition du profil",
   'profile.information': "Renseignements personnels",
+  'profile.seeAllInfo': "Voir toutes les coordonnées",
   'profile.email': "E-mail",
   'profile.phone': "Téléphoner",
   'profile.vdoLink': "Lien de présentation vidéo",

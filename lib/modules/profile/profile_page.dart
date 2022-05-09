@@ -64,9 +64,6 @@ class ProfilePage extends GetView<ProfileController> {
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            //update the Network State
-                            // GetBuilder<GetXNetworkManager>(builder: (builder)=>Text((_networkManager.connectionType == 0 )? 'No Internet' : (_networkManager.connectionType == 1) ? 'You are Connected to Wifi' : 'You are Connected to Mobile Internet',style: TextStyle(fontSize: 30),)),
-
                             ///===== Profile Header Component =====//
                             ProfileHeader(
                               userName:
@@ -120,95 +117,15 @@ class ProfilePage extends GetView<ProfileController> {
                             ),
 
                             ///===== Personal Information Component =====//
-                            // ContactInformationComponent(
-                            //   headerTitle: 'Personal Information',
-                            //   email: controller.userInfoRepsonse.value.email,
-                            //   phone: controller.userInfoRepsonse.value.profile!
-                            //       .fullPhone1Format,
-                            //   videoPreentationLink: controller
-                            //       .userInfoRepsonse.value.profile!.description,
-                            // ),
-
-                            CustomContainerWidget(
-                              leftMargin: AppSize.s16,
-                              rightMargin: AppSize.s16,
-                              topMargin: AppSize.s12,
-                              bottomMargin: AppSize.s12,
-                              leftTitle: 'profile.information'.tr.toUpperCase(),
-                              titleFontSize: AppSize.s16,
-                              rightWidget: CustomIconButtonWidget(
-                                iconData: Icons.edit_outlined,
-                                padding: 0.0,
-                                isConstraints: true,
-                                onClick: () => {
-                                  Get.toNamed(Routes.editUserInfoRoute),
-                                },
-                              ),
-                              child: Column(
-                                children: [
-                                  if (controller.userInfoRepsonse.value.profile!
-                                          .description ==
-                                      '')
-                                    Container()
-                                  else
-                                    CustomTextWidget(
-                                      text:
-                                          '${controller.userProfileInfo.value.description}',
-                                      color: ColorsManager.grey850,
-                                      maxLine: 3,
-                                      marginTop: AppSize.s4,
-                                      marginLeft: AppSize.s16,
-                                      marginRight: AppSize.s16,
-                                      marginBottom: AppSize.s4,
-                                    ),
-                                  CustomListTileWidget(
-                                    text1: 'profile.email'.tr,
-                                    text2:
-                                        controller.userInfoRepsonse.value.email,
-                                    // isLauching: true,
-                                    text2Color: ColorsManager.blue,
-                                    leftWidget: const CustomBoxWidget(
-                                      child: Icon(
-                                        Icons.email_outlined,
-                                        color: ColorsManager.grey,
-                                        size: AppSize.s24,
-                                      ),
-                                    ),
-                                  ),
-                                  CustomListTileWidget(
-                                    text1: 'profile.phone'.tr,
-                                    text2: controller
-                                        .userProfileInfo.value.fullPhone1Format,
-                                    // isLauching: true,
-                                    text2Color: ColorsManager.blue,
-                                    leftWidget: const CustomBoxWidget(
-                                      child: Icon(
-                                        Icons.phone_outlined,
-                                        color: ColorsManager.grey,
-                                        size: AppSize.s24,
-                                      ),
-                                    ),
-                                  ),
-                                  CustomListTileWidget(
-                                    text1: 'profile.vdoLink'.tr,
-                                    text2: controller
-                                        .studentInfoRepsonse.value.youtubeLink,
-                                    // isLauching: true,
-                                    text2Color: ColorsManager.blue,
-                                    bottomPadding: 8.0,
-                                    isDivider: false,
-                                    leftWidget: const CustomBoxWidget(
-                                      child: Icon(
-                                        Icons.video_library_outlined,
-                                        color: ColorsManager.grey,
-                                        size: AppSize.s24,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            PersonalInformationComponent(
+                              routeNameForEdit: Routes.editUserInfoRoute,
+                              profileModel: controller.userProfileInfo.value,
+                              userModel: controller.userInfoRepsonse.value,
+                              studentProfileModel:
+                                  controller.studentInfoRepsonse.value,
                             ),
                             //===== Personal Information Component =====//
+
                             if (controller
                                     .homeController.userToken!.accountType !=
                                 'student')

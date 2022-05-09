@@ -40,6 +40,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         imgUrl: controller
                             .profileController.userProfileInfo.value.pictureUrl,
                         borderRadius: 75,
+                        defaultImg: AssetsManager.logoStudentDefault,
                       ),
                     ),
                   ),

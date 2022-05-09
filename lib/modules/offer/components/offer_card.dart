@@ -87,6 +87,7 @@ class OfferCard extends StatelessWidget {
                       rightPadding: 2.0,
                       child: CachedNetworkImgWidget(
                         imgUrl: '${jobOfferItem!.enterprise!.logoUrl}',
+                        defaultImg: AssetsManager.logoEnterpriseDefault,
                       ),
                     ),
                   ),

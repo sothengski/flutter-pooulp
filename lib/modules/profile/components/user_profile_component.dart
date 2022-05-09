@@ -24,12 +24,12 @@ class UserProfileComponent extends StatelessWidget {
         //===== Profile Header Component =====//
 
         ///===== Personal Information Component =====//
-        ContactInformationComponent(
-          headerTitle: 'Personal Information',
-          email: controller.userInfoRepsonse.value.email,
-          phone: controller.userProfileInfo.value.fullPhone1Format,
-          videoPreentationLink: controller.userProfileInfo.value.description,
-        ),
+        // ContactInformationComponent(
+        //   headerTitle: 'Personal Information',
+        //   email: controller.userInfoRepsonse.value.email,
+        //   phone: controller.userProfileInfo.value.fullPhone1Format,
+        //   videoPreentationLink: controller.userProfileInfo.value.description,
+        // ),
         //===== Personal Information Component =====//
 
         ///===== Education Component =====//

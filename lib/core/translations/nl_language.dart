@@ -162,6 +162,7 @@ const Map<String, String> nlNL = {
   'home.profile': "Profiel",
   'profile.completeness': "Profiel compleetheid",
   'profile.information': "Persoonsgegevens",
+  'profile.seeAllInfo': "Bekijk alle contactgegevens",
   'profile.email': "E-mail",
   'profile.phone': "Telefoon",
   'profile.vdoLink': "Video Presentation Link",

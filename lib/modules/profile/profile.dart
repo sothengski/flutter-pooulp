@@ -1,6 +1,6 @@
 export 'components/availability_component.dart';
-export 'components/contact_information_component.dart';
 export 'components/enterprise_profile_component.dart';
+export 'components/personal_information_component.dart';
 export 'components/profile_header.dart';
 export 'components/user_profile_component.dart';
 export 'edit_user_info/address_search.dart';

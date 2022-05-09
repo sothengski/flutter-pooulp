@@ -80,7 +80,7 @@ class EditUserInformationController extends GetxController {
     lastNameCtrl.text = profileController.userProfileInfo.value.lastName!;
 
     selectedGender.value =
-        profileController.studentInfoRepsonse.value.gender.toString();
+        profileController.studentInfoRepsonse.value.gender ?? '';
     if (profileController.userProfileInfo.value.birthDate != null) {
       selectedBirthday.value =
           profileController.userProfileInfo.value.birthDate!;

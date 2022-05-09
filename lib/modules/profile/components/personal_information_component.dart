@@ -77,7 +77,7 @@ class PersonalInformationComponent extends StatelessWidget {
           ),
           CustomListTileWidget(
             text1: 'profile.address'.tr,
-            text2: profileModel!.addressStreet,
+            text2: '${profileModel!.addressStreet} ',
             // isLauching: true,
             text2Color: ColorsManager.black,
             leftWidget: const CustomBoxWidget(
@@ -153,7 +153,7 @@ class PersonalInformationComponent extends StatelessWidget {
                     ),
                     CustomListTileWidget(
                       text1: 'profile.gender'.tr,
-                      text2: studentProfileModel!.gender ?? '',
+                      text2: studentProfileModel!.gender ?? ' ',
                       // isLauching: true,
                       text2Color: ColorsManager.black,
                       leftWidget: const CustomBoxWidget(
@@ -197,7 +197,7 @@ class PersonalInformationComponent extends StatelessWidget {
                     ),
                     CustomListTileWidget(
                       text1: 'profile.address'.tr,
-                      text2: profileModel!.addressStreet,
+                      text2: '${profileModel!.addressStreet} ',
                       // isLauching: true,
                       text2Color: ColorsManager.black,
                       leftWidget: const CustomBoxWidget(
@@ -210,7 +210,7 @@ class PersonalInformationComponent extends StatelessWidget {
                     ),
                     CustomListTileWidget(
                       text1: 'profile.linkedInAcc'.tr,
-                      text2: studentProfileModel!.linkedinLink,
+                      text2: '${studentProfileModel!.linkedinLink} ',
                       // isLauching: true,
                       text2Color: ColorsManager.blue,
                       bottomPadding: 8.0,

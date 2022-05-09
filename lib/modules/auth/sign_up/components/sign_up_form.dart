@@ -94,14 +94,14 @@ class SignUpForm extends GetView<SignUpController> {
                               color: ColorsManager.primary,
                               marginBottom: AppSize.s24,
                             ),
-                            CustomTextInput(
-                              controller: controller.tokenCtrl,
-                              inputTitle: 'auth.token'.tr,
-                              hintText: 'auth.tokenHint'.tr,
-                              isFilled: true,
-                              topPadding: AppSize.s12,
-                              validator: Validator().notEmptyValidator,
-                            ),
+                            // CustomTextInput(
+                            //   controller: controller.tokenCtrl,
+                            //   inputTitle: 'auth.token'.tr,
+                            //   hintText: 'auth.tokenHint'.tr,
+                            //   isFilled: true,
+                            //   topPadding: AppSize.s12,
+                            //   validator: Validator().notEmptyValidator,
+                            // ),
                             CustomTextInput(
                               controller: controller.firstNameCtrl,
                               inputTitle: 'auth.firstName'.tr,

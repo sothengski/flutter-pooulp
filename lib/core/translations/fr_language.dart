@@ -71,6 +71,13 @@ const Map<String, String> frFR = {
   'auth.forgotPasswordNoted':
       "Nous vous enverrons un jeton de vérification pour réinitialiser votre mot de passe.",
   'auth.sendEmail': "Envoyer un e-mail",
+  'auth.emailSent': "Email envoyé",
+  'auth.sentToEmail': "Un e-mail a été envoyé à votre adresse e-mail: @email",
+  'auth.resetPasswordGuide':
+      "Cliquez sur le lien dans l'e-mail pour réinitialiser votre mot de passe.",
+  'auth.ForgotPasswordTryAgain':
+      "Si aucun e-mail n'a été reçu dans les 2 minutes, veuillez réessayer et cliquer sur le bouton Ressayer ci-dessous.",
+  'auth.tryAgain': "Réessayer",
 
   ///===== Settings =====//
   'settings.settingsTitle': "Réglages",

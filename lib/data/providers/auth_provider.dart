@@ -78,7 +78,7 @@ class AuthProvider extends BaseProvider {
 
   ///===== Top of Change Password Section =====//
   ///
-  ///PUT Method for Add a New Skill Information
+  ///PUT Method for Change Password
   Future<JsonResponse> putChangePassword({
     required String? currentPassword,
     required String? newPassword,
@@ -115,6 +115,37 @@ class AuthProvider extends BaseProvider {
       // } else {
       return response;
       // }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///===== Top of Forgot Password Section =====//
+  ///
+  ///POST Method for Forgot Password
+  Future<JsonResponse> postForgotPassword({
+    required String? email,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postForgotPassword].toString(),
+        {
+          "email": email,
+        },
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.paths[Endpoint.postForgotPassword].toString()},
+      //   {"email": $email,},
+      //   ''',
+      // );
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      return response;
     } catch (e) {
       return Future.error(e.toString());
     }

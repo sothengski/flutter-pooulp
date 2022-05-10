@@ -70,6 +70,13 @@ const Map<String, String> enUS = {
   'auth.forgotPasswordNoted':
       "We will send you a verification token to reset your password.",
   'auth.sendEmail': "Send Email",
+  'auth.emailSent': "Email Sent",
+  'auth.sentToEmail': "An email has been sent to your email address: @email",
+  'auth.resetPasswordGuide':
+      "Click on the link from the email to reset your password.",
+  'auth.ForgotPasswordTryAgain':
+      "If no email has been received within 2 minutes, please retry and click on the try again button below.",
+  'auth.tryAgain': "Try Again",
 
   ///===== Settings =====//
   'settings.settingsTitle': "Settings",

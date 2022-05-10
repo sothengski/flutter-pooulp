@@ -70,6 +70,14 @@ const Map<String, String> nlNL = {
   'auth.forgotPasswordNoted':
       "We sturen u een verificatietoken om uw wachtwoord te resetten.",
   'auth.sendEmail': "Stuur e -mail",
+  'auth.emailSent': "Email verzonden",
+  'auth.sentToEmail':
+      "Er is een e -mail verzonden naar uw e -mailadres: @email",
+  'auth.resetPasswordGuide':
+      "Klik op de link vanuit de e -mail om uw wachtwoord te resetten.",
+  'auth.ForgotPasswordTryAgain':
+      "Als er binnen 2 minuten geen e -mail is ontvangen, probeer dan opnieuw en klik op de onderstaande knop opnieuw proberen.",
+  'auth.tryAgain': "Probeer het nog eens",
 
   ///===== Settings =====//
   'settings.settingsTitle': "Instellingen",

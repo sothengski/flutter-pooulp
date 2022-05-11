@@ -626,15 +626,15 @@ class SignUpForm extends GetView<SignUpController> {
                                         ),
                                       ),
                                     ),
-                                    CircleAvatar(
-                                      radius: 20.0,
-                                      backgroundColor: ColorsManager.white,
-                                      child: Image(
-                                        image: AssetImage(
-                                          AssetsManager.facebookLogo,
-                                        ),
-                                      ),
-                                    ),
+                                    // CircleAvatar(
+                                    //   radius: 20.0,
+                                    //   backgroundColor: ColorsManager.white,
+                                    //   child: Image(
+                                    //     image: AssetImage(
+                                    //       AssetsManager.facebookLogo,
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),

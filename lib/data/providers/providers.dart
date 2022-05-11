@@ -6,6 +6,7 @@ export 'feed_provider.dart';
 export 'messaging_provider.dart';
 export 'offer_provider.dart';
 export 'onboarding_provider.dart';
+export 'social_media_signin_api.dart';
 export 'student_provider.dart';
 export 'tag_provider.dart';
 export 'user_info_provider.dart';

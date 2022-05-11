@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:linkedin_login/linkedin_login.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
@@ -22,6 +23,12 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
 
   late LoginModel loginRepsonseData;
 
+  String? socialMediaEmail;
+  String? socialMediaUserId;
+  String? socialMediaFirstName;
+  String? socialMediaLastName;
+  String? socialMediaToken;
+
   // @override
   // void onInit() {
   //   final String lang = StorageServices().readData('language') as String;
@@ -37,6 +44,109 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
     passwordCtrl.dispose();
   }
 
+  Future googleSignInMethod() async {
+    final userInfo = await GoogleSignInApi.login();
+    final userToken = await GoogleSignInApi.getUserToken();
+
+    debugPrint("googleSignInMethod");
+    if (userInfo!.id.isNotEmpty) {
+      debugPrint("email:: ${userInfo.email}");
+      debugPrint("serverAuthCode:: ${userInfo.serverAuthCode}");
+      debugPrint("displayName:: ${userInfo.displayName}");
+      debugPrint("id:: ${userInfo.id}");
+      debugPrint("AccessToken:: ${userToken!.accessToken}");
+      debugPrint("IdToken:: ${userToken.idToken}");
+      socialMediaEmail = userInfo.email;
+      socialMediaUserId = userInfo.id;
+      socialMediaFirstName = userInfo.displayName;
+      socialMediaLastName = userInfo.displayName;
+      socialMediaToken = userToken.accessToken;
+    }
+  }
+
+  Future linkedInSignInMethod({
+    String? redirectUrl,
+    String? clientId,
+    String? clientSecret,
+  }) async {
+    Get.dialog(
+      LinkedInUserWidget(
+        appBar: AppBar(
+          title: const Text('widget.title'),
+        ),
+
+        redirectUrl: redirectUrl ?? APIKeys.linkedInRedirectUrl,
+        clientId: clientId ?? APIKeys.linkedInClientId,
+        clientSecret: clientSecret ?? APIKeys.linkedInClientSecret,
+        onGetUserProfile: (linkedInUser) async {
+          if (linkedInUser.user.userId != null) {
+            debugPrint(
+              'Access token ${linkedInUser.user.token.accessToken}',
+            );
+            debugPrint('User id: ${linkedInUser.user.userId}');
+            debugPrint(
+              'User email: ${linkedInUser.user.email!.elements![0].handleDeep!.emailAddress}',
+            );
+            debugPrint(
+              'User firstName: ${linkedInUser.user.localizedFirstName}',
+            );
+            debugPrint('User lastName: ${linkedInUser.user.localizedLastName}');
+            socialMediaEmail =
+                linkedInUser.user.email!.elements![0].handleDeep!.emailAddress;
+            socialMediaUserId = linkedInUser.user.userId;
+            socialMediaFirstName = linkedInUser.user.localizedFirstName;
+            socialMediaLastName = linkedInUser.user.localizedLastName;
+            socialMediaToken = linkedInUser.user.token.accessToken;
+            Get.back();
+          }
+          // user = UserObject(
+          //   firstName: linkedInUser.user.firstName?.localized?.label,
+          //   lastName: linkedInUser.user.lastName?.localized?.label,
+          //   email:
+          //       linkedInUser.user.email?.elements[0].handleDeep?.emailAddress,
+          //   profileImageUrl: linkedInUser.user.profilePicture
+          //       ?.displayImageContent?.elements[0].identifiers[0].identifier,
+          // );
+
+          /// This api call retrives profile picture
+          // final Response response = await dio.get(
+          //   "https://api.linkedin.com/v2/me?projection=(profilePicture(displayImage~:playableStreams))",
+          //   options: Options(
+          //     responseType: ResponseType.json,
+          //     sendTimeout: 60000,
+          //     receiveTimeout: 60000,
+          //     headers: {
+          //       HttpHeaders.authorizationHeader:
+          //           "Bearer ${linkedInUser.token.accessToken}"
+          //     },
+          //   ),
+          // );
+          // final profilePic = response.data["profilePicture"]["displayImage~"]
+          //     ["elements"][0]["identifiers"][0]["identifier"];
+
+          // final Map<String, dynamic> postJson = {
+          //   "user_id": linkedInUser.userId,
+          //   "email": linkedInUser.email.elements[0].handleDeep.emailAddress,
+          //   "pic_url": profilePic,
+          //   "name":
+          //       '${linkedInUser.firstName.localized.label} ${linkedInUser.lastName.localized.label}',
+          //   "token": linkedInUser.token.accessToken,
+          //   "expires_in": linkedInUser.token.expiresIn
+          // };
+          // setState(() {
+          //   result = postJson;
+          // });
+          // Navigator.of(context).pop();
+        },
+        // catchError: (LinkedInErrorObject error) {
+        //   print(
+        //     'Error description: ${error.description} Error code: ${error.statusCode.toString()}',
+        //   );
+        // },
+      ),
+    );
+  }
+
   bool showPasswordBoolSwitching({bool? boolValue}) =>
       showPassword.value = !boolValue!;
 
@@ -50,7 +160,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
     isSubmitBtnProcessing.value = false;
   }
 
-  dynamic loginButtonOnClick() async {
+  Future<void> loginButtonOnClick() async {
     if (signInFormKey.currentState!.validate()) {
       swithcingBoolValueLoginBtn(boolValue: true);
       final loginData = ProfileModel(

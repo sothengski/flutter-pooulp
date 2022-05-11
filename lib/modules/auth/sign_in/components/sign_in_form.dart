@@ -151,28 +151,34 @@ class SignInForm extends GetView<SignInController> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      CircleAvatar(
-                        radius: 20.0,
-                        backgroundColor: ColorsManager.white,
-                        child: Image(
-                          image: AssetImage(AssetsManager.googleLogo),
+                    children: [
+                      GestureDetector(
+                        onTap: controller.googleSignInMethod,
+                        child: const CircleAvatar(
+                          radius: 20.0,
+                          backgroundColor: ColorsManager.white,
+                          child: Image(
+                            image: AssetImage(AssetsManager.googleLogo),
+                          ),
                         ),
                       ),
-                      CircleAvatar(
-                        radius: 20.0,
-                        backgroundColor: ColorsManager.white,
-                        child: Image(
-                          image: AssetImage(AssetsManager.linkedInLogo),
+                      GestureDetector(
+                        onTap: controller.linkedInSignInMethod,
+                        child: const CircleAvatar(
+                          radius: 20.0,
+                          backgroundColor: ColorsManager.white,
+                          child: Image(
+                            image: AssetImage(AssetsManager.linkedInLogo),
+                          ),
                         ),
                       ),
-                      CircleAvatar(
-                        radius: 20.0,
-                        backgroundColor: ColorsManager.white,
-                        child: Image(
-                          image: AssetImage(AssetsManager.facebookLogo),
-                        ),
-                      ),
+                      // const CircleAvatar(
+                      //   radius: 20.0,
+                      //   backgroundColor: ColorsManager.white,
+                      //   child: Image(
+                      //     image: AssetImage(AssetsManager.facebookLogo),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

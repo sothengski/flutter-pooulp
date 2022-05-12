@@ -43,26 +43,28 @@ class ForgotPasswordForm extends GetView<ForgotPasswordController> {
             keyboardType: TextInputType.emailAddress,
             bottomPadding: AppSize.s20,
           ),
-          Visibility(
-            child: CustomMaterialButton(
-              text: 'auth.sendEmail'.tr,
-              fontSize: 20.0,
-              buttonWidth: getWidth,
-              childWidget: controller.isSubmitBtnProcessing.value == true
-                  ? const SizedBox(
-                      height: 40,
-                      child: LoadingWidget(
-                        isTreeBounceLoading: true,
-                        color: ColorsManager.white,
-                      ),
-                    )
-                  : null,
-              onPressed: () {
-                unFocusKeyBoard(context);
-                if (!controller.isSubmitBtnProcessing.value == true) {
-                  controller.sendEmailButtonOnClick();
-                }
-              },
+          Obx(
+            () => Visibility(
+              child: CustomMaterialButton(
+                text: 'auth.sendEmail'.tr,
+                fontSize: 20.0,
+                buttonWidth: getWidth,
+                childWidget: controller.isSubmitBtnProcessing.value == true
+                    ? const SizedBox(
+                        height: 40,
+                        child: LoadingWidget(
+                          isTreeBounceLoading: true,
+                          color: ColorsManager.white,
+                        ),
+                      )
+                    : null,
+                onPressed: () {
+                  unFocusKeyBoard(context);
+                  if (!controller.isSubmitBtnProcessing.value == true) {
+                    controller.sendEmailButtonOnClick();
+                  }
+                },
+              ),
             ),
           ),
         ],

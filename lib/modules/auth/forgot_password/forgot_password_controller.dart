@@ -39,25 +39,31 @@ class ForgotPasswordController extends GetxController {
           .postForgotPassword(
         email: emailCtrl.text,
       )
-          .then((value) async {
-        isSubmitBtnProcessing.value = switchingBooleanValue(
-          boolValue: isSubmitBtnProcessing.value,
-        );
-        if (value.success == true) {
-          isForgotPwdForm.value = false;
-          customSnackbar(
-            msgTitle: 'auth.emailSent'.tr,
-            msgContent: 'auth.sentToEmail'.trParams({'email': emailCtrl.text}),
-            bgColor: ColorsManager.green,
+          .then(
+        (value) async {
+          // isSubmitBtnProcessing.value = switchingBooleanValue(
+          //   boolValue: isSubmitBtnProcessing.value,
+          // );
+          if (value.success == true) {
+            isForgotPwdForm.value = false;
+            customSnackbar(
+              msgTitle: 'auth.emailSent'.tr,
+              msgContent:
+                  'auth.sentToEmail'.trParams({'email': emailCtrl.text}),
+              bgColor: ColorsManager.green,
+            );
+          } else {
+            customSnackbar(
+              msgTitle: value.status.toString(),
+              msgContent: value.message.toString(),
+              bgColor: ColorsManager.red,
+            );
+          }
+          isSubmitBtnProcessing.value = switchingBooleanValue(
+            boolValue: isSubmitBtnProcessing.value,
           );
-        } else {
-          customSnackbar(
-            msgTitle: value.status.toString(),
-            msgContent: value.message.toString(),
-            bgColor: ColorsManager.red,
-          );
-        }
-      });
+        },
+      );
     }
   }
 }

@@ -50,17 +50,21 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
 
     debugPrint("googleSignInMethod");
     if (userInfo!.id.isNotEmpty) {
+      socialMediaEmail = userInfo.email;
+      socialMediaUserId = userInfo.id;
+      final splittedDisplayName = userInfo.displayName!.split(' ');
+      socialMediaFirstName = splittedDisplayName[0];
+      socialMediaLastName = splittedDisplayName[1]; //userInfo.displayName;
+      socialMediaToken = userToken!.accessToken;
+
       debugPrint("email:: ${userInfo.email}");
       debugPrint("serverAuthCode:: ${userInfo.serverAuthCode}");
       debugPrint("displayName:: ${userInfo.displayName}");
+      debugPrint("FirstName:: $socialMediaFirstName");
+      debugPrint("LastName:: $socialMediaLastName");
       debugPrint("id:: ${userInfo.id}");
-      debugPrint("AccessToken:: ${userToken!.accessToken}");
+      debugPrint("AccessToken:: ${userToken.accessToken}");
       debugPrint("IdToken:: ${userToken.idToken}");
-      socialMediaEmail = userInfo.email;
-      socialMediaUserId = userInfo.id;
-      socialMediaFirstName = userInfo.displayName;
-      socialMediaLastName = userInfo.displayName;
-      socialMediaToken = userToken.accessToken;
     }
   }
 

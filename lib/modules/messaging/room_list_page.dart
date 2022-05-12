@@ -56,12 +56,8 @@ class RoomListPage extends GetView<MessagingController> {
                                   .participants!
                                   .first
                                   .fullName,
-                              lastestMessage: controller.roomListRepsonse[index]
-                                          .latestMessage !=
-                                      null
-                                  ? controller.roomListRepsonse[index]
-                                      .latestMessage!.message
-                                  : '',
+                              lastestMessage:
+                                  controller.roomListRepsonse[index].name ?? '',
                               date: controller
                                   .roomListRepsonse[index].lastestMessageDate,
                               unseenMessage: controller

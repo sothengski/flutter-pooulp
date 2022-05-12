@@ -45,7 +45,7 @@ class MessagingModel {
   String? get lastestMessageDate => latestMessage != null &&
           latestMessage!.createdAt != null
       ? DateOnlyCompare(latestMessage!.createdAt!)
-              .isSameDate(other: latestMessage!.createdAt)
+              .isSameDate(other: DateTime.now())
           ? dateFormatToHourMn(date: latestMessage!.createdAt!.toLocal())
           : dateFormatSlashDDMMYYYY(date: latestMessage!.createdAt!.toLocal())
       : dateFormatSlashDDMMYYYY(date: createdAt!.toLocal());

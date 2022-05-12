@@ -153,7 +153,7 @@ class SignInForm extends GetView<SignInController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
-                        onTap: controller.googleSignInMethod,
+                        // onTap: controller.googleSignInMethod,
                         child: const CircleAvatar(
                           radius: 20.0,
                           backgroundColor: ColorsManager.white,
@@ -163,7 +163,7 @@ class SignInForm extends GetView<SignInController> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: controller.linkedInSignInMethod,
+                        // onTap: controller.linkedInSignInMethod,
                         child: const CircleAvatar(
                           radius: 20.0,
                           backgroundColor: ColorsManager.white,

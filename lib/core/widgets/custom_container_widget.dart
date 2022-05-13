@@ -50,6 +50,31 @@ class CustomContainerWidget extends StatelessWidget {
     this.bottomMargin = 0.0,
   }) : super(key: key);
 
+  const CustomContainerWidget.profileComponent({
+    Key? key,
+    this.leftTitle = '',
+    this.rightWidget,
+    this.titleFontSize = 16.0,
+    this.titleLeftPadding = 10,
+    this.titleRightPadding = 10,
+    this.titleTopPadding = 10,
+    this.titleBottomPadding = 10,
+    this.titleColor = ColorsManager.primaryBlue,
+    this.titleFontWeight = FontWeight.w600,
+    this.child,
+    this.containerBackground = ColorsManager.white,
+    this.onTap,
+    this.borderRadius = 10.0,
+    this.elevation = 5.0,
+    this.titleInSide = true,
+    this.isBoxShadow = true,
+    this.childPadding = 0.0,
+    this.leftMargin = 16.0,
+    this.topMargin = 0.0,
+    this.rightMargin = 16.0,
+    this.bottomMargin = 12.0,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

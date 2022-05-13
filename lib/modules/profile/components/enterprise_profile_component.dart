@@ -16,7 +16,7 @@ class EnterpriseProfileComponent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         ///===== Profile Header Widget =====//
-        ProfileHeader(
+        ProfileHeaderComponent(
           userName: controller.userInfoRepsonse.value.enterprise!.name,
           // userRole: controller.userInfoRepsonse.value.enterprise!.enterpriseID,
           // numberStarRate: 0.0,

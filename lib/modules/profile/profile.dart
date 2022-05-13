@@ -1,7 +1,14 @@
-export 'components/availability_component.dart';
 export 'components/enterprise_profile_component.dart';
 export 'components/personal_information_component.dart';
-export 'components/profile_header.dart';
+export 'components/profile_achievement_component.dart';
+export 'components/profile_availability_component.dart';
+export 'components/profile_certificate_component.dart';
+export 'components/profile_completion_component.dart';
+export 'components/profile_edu_component.dart';
+export 'components/profile_exp_component.dart';
+export 'components/profile_header_component.dart';
+export 'components/profile_language_component.dart';
+export 'components/profile_skill_component.dart';
 export 'components/user_profile_component.dart';
 export 'edit_user_info/address_search.dart';
 export 'edit_user_info/edit_user_info_binding.dart';

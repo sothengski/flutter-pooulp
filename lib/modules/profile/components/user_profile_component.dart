@@ -17,7 +17,7 @@ class UserProfileComponent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         ///===== Profile Header Component =====//
-        ProfileHeader(
+        ProfileHeaderComponent(
           userName: controller.userProfileInfo.value.fullName,
           // userRole: controller.userInfoRepsonse.value.profile!.accountType,
         ),

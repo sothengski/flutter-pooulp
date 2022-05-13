@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
-import '../../data/data.dart';
 import '../../routes/routes.dart';
 import 'profile.dart';
 
@@ -65,7 +64,7 @@ class ProfilePage extends GetView<ProfileController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             ///===== Profile Header Component =====//
-                            ProfileHeader(
+                            ProfileHeaderComponent(
                               userName:
                                   controller.userProfileInfo.value.fullName,
                               // userRole: controller.userInfoRepsonse.value.profile!.accountType,
@@ -76,45 +75,14 @@ class ProfilePage extends GetView<ProfileController> {
                             //===== Profile Header Component =====//
 
                             ///===== Profile Completion Component =====//
-                            CustomContainerWidget(
-                              leftMargin: AppSize.s16,
-                              rightMargin: AppSize.s16,
-                              topMargin: AppSize.s12,
-                              // bottomMargin: AppSize.s12,
-                              leftTitle:
-                                  'profile.completeness'.tr.toUpperCase(),
-                              rightWidget: CustomTextWidget(
-                                text:
-                                    '${controller.studentInfoRepsonse.value.calculatingProfileCompleteness.toString()} %',
-                                fontWeight: FontWeightManager.medium,
-                              ),
-                              titleFontSize: AppSize.s16,
-                              child: CustomBoxWidget(
-                                leftMargin: AppSize.s8,
-                                rightMargin: AppSize.s8,
-                                bottomMargin: AppSize.s12,
-                                backgroundColor: ColorsManager.grey200,
-                                topPadding: AppSize.s0,
-                                leftPadding: AppSize.s0,
-                                rightPadding: controller
-                                            .studentInfoRepsonse
-                                            .value
-                                            .calculatingProfileCompleteness!
-                                            .toInt() ==
-                                        100
-                                    ? 0
-                                    : (getWidth - AppSize.s48) -
-                                        ((getWidth - AppSize.s48) *
-                                            controller.studentInfoRepsonse.value
-                                                .calculatingProfileCompleteness!
-                                                .toInt() /
-                                            100),
-                                bottomPadding: AppSize.s0,
-                                child: const CustomBoxWidget(
-                                  backgroundColor: ColorsManager.primary75,
-                                ),
-                              ),
+                            ProfileCompletionComponent(
+                              title: 'profile.completeness'.tr,
+                              completionPercentage: controller
+                                  .studentInfoRepsonse
+                                  .value
+                                  .calculatingProfileCompleteness,
                             ),
+                            //===== Profile Completion Component =====//
 
                             ///===== Personal Information Component =====//
                             PersonalInformationComponent(
@@ -139,709 +107,101 @@ class ProfilePage extends GetView<ProfileController> {
                                     ? Wrap(
                                         children: [
                                           ///===== Education Component =====//
-                                          Obx(
-                                            () => CustomContainerWidget(
-                                              leftMargin: AppSize.s16,
-                                              rightMargin: AppSize.s16,
-                                              // topMargin: AppSize.s12,
-                                              bottomMargin: AppSize.s12,
-                                              leftTitle: 'profile.edu'
-                                                  .tr
-                                                  .toUpperCase(),
-                                              titleFontSize: AppSize.s16,
-                                              rightWidget:
-                                                  CustomIconButtonWidget(
-                                                iconData: Icons.add,
-                                                padding: 0.0,
-                                                isConstraints: true,
-                                                onClick: () => {
-                                                  Get.toNamed(
-                                                    Routes
-                                                        .addOrEditEducationRoute,
-                                                    arguments: [
-                                                      Keys.addOperation
-                                                    ],
-                                                  ),
-                                                },
-                                              ),
-                                              child: Column(
-                                                children: controller
-                                                    .studentInfoRepsonse
-                                                    .value
-                                                    .educations!
-                                                    .map(
-                                                      (e) =>
-                                                          CustomListTileWidget(
-                                                        text1: e.school!.name,
-                                                        text1Color:
-                                                            ColorsManager
-                                                                .grey850,
-                                                        text1FontWeight:
-                                                            FontWeightManager
-                                                                .medium,
-                                                        text1FontSize:
-                                                            AppSize.s16,
-                                                        text2: e.degree,
-                                                        text2Color:
-                                                            ColorsManager
-                                                                .grey800,
-                                                        text3:
-                                                            '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
-                                                        // bottomPadding: 8.0,
-                                                        // leftWidget:
-                                                        //     const CustomBoxWidget(
-                                                        //   size: 40,
-                                                        // ),
-                                                        leftWidget:
-                                                            const CustomBoxWidget(
-                                                          size: 40,
-                                                          child: Icon(
-                                                            Icons
-                                                                .school_rounded,
-                                                            color: ColorsManager
-                                                                .primary75,
-                                                            size: AppSize.s20,
-                                                          ),
-                                                        ),
-                                                        rightWidget:
-                                                            CustomIconButtonWidget(
-                                                          iconData: Icons
-                                                              .edit_outlined,
-                                                          padding: 0.0,
-                                                          iconSize: 20.0,
-                                                          isConstraints: true,
-                                                          onClick: () => {
-                                                            Get.toNamed(
-                                                              Routes
-                                                                  .addOrEditEducationRoute,
-                                                              arguments: [
-                                                                Keys.editOperation,
-                                                                e
-                                                              ],
-                                                            ),
-                                                          },
-                                                        ),
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                              ),
-                                            ),
+                                          ProfileEduComponent(
+                                            title: 'profile.edu'.tr,
+                                            addOrEditEduRoute:
+                                                Routes.addOrEditEducationRoute,
+                                            eduList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .educations,
                                           ),
                                           //===== Education Component =====//
 
                                           ///===== Professional Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle: 'profile.professionalExp'
-                                                .tr
-                                                .toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                Get.toNamed(
-                                                  Routes
-                                                      .addOrEditExperienceRoute,
-                                                  arguments: [
-                                                    Keys.addOperation,
-                                                    AppStrings.professionalKey,
-                                                  ],
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .experiences!
-                                                  .map(
-                                                    (e) => e.type ==
-                                                            AppStrings
-                                                                .professionalKey
-                                                        ? CustomListTileWidget(
-                                                            text1: e.name,
-                                                            text1Color:
-                                                                ColorsManager
-                                                                    .grey850,
-                                                            text1FontWeight:
-                                                                FontWeightManager
-                                                                    .medium,
-                                                            text1FontSize:
-                                                                AppSize.s16,
-                                                            text2: e.company,
-                                                            text2Color:
-                                                                ColorsManager
-                                                                    .grey800,
-                                                            text3:
-                                                                '${e.attendedFromTo} at ${e.companyCityAndCountry}',
-                                                            // bottomPadding: 8.0,
-                                                            leftWidget:
-                                                                const CustomBoxWidget(
-                                                              size: 40,
-                                                              child: Icon(
-                                                                Icons.work,
-                                                                color: ColorsManager
-                                                                    .primary75,
-                                                                size:
-                                                                    AppSize.s20,
-                                                              ),
-                                                            ),
-                                                            rightWidget:
-                                                                CustomIconButtonWidget(
-                                                              iconData: Icons
-                                                                  .edit_outlined,
-                                                              padding: 0.0,
-                                                              iconSize: 20.0,
-                                                              isConstraints:
-                                                                  true,
-                                                              onClick: () => {
-                                                                Get.toNamed(
-                                                                  Routes
-                                                                      .addOrEditExperienceRoute,
-                                                                  arguments: [
-                                                                    Keys.editOperation,
-                                                                    AppStrings
-                                                                        .professionalKey,
-                                                                    e,
-                                                                  ],
-                                                                ),
-                                                              },
-                                                            ),
-                                                          )
-                                                        : Container(),
-                                                  )
-                                                  .toList(),
-                                            ),
+                                          ProfileExpComponent(
+                                            title: 'profile.professionalExp'.tr,
+                                            addOrEditExpRoute:
+                                                Routes.addOrEditExperienceRoute,
+                                            expTypeKey:
+                                                AppStrings.professionalKey,
+                                            expList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .experiences,
                                           ),
                                           //===== Professional Component =====//
 
                                           ///===== Personal Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle: 'profile.personalExp'
-                                                .tr
-                                                .toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                Get.toNamed(
-                                                  Routes
-                                                      .addOrEditExperienceRoute,
-                                                  arguments: [
-                                                    Keys.addOperation,
-                                                    AppStrings.personalKey,
-                                                  ],
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .experiences!
-                                                  .map(
-                                                    (e) => e.type ==
-                                                            AppStrings
-                                                                .personalKey
-                                                        ? CustomListTileWidget(
-                                                            text1: e.name,
-                                                            text1Color:
-                                                                ColorsManager
-                                                                    .grey850,
-                                                            text1FontWeight:
-                                                                FontWeightManager
-                                                                    .medium,
-                                                            text1FontSize:
-                                                                AppSize.s16,
-                                                            text2: e.company,
-                                                            text2Color:
-                                                                ColorsManager
-                                                                    .grey800,
-                                                            text3:
-                                                                '${e.attendedFromTo} at ${e.companyCityAndCountry}',
-                                                            // bottomPadding: 8.0,
-                                                            leftWidget:
-                                                                const CustomBoxWidget(
-                                                              size: 40,
-                                                              child: Icon(
-                                                                Icons.work,
-                                                                color: ColorsManager
-                                                                    .primary75,
-                                                                size:
-                                                                    AppSize.s20,
-                                                              ),
-                                                            ),
-                                                            rightWidget:
-                                                                CustomIconButtonWidget(
-                                                              iconData: Icons
-                                                                  .edit_outlined,
-                                                              padding: 0.0,
-                                                              iconSize: 20.0,
-                                                              isConstraints:
-                                                                  true,
-                                                              onClick: () => {
-                                                                Get.toNamed(
-                                                                  Routes
-                                                                      .addOrEditExperienceRoute,
-                                                                  arguments: [
-                                                                    Keys.editOperation,
-                                                                    AppStrings
-                                                                        .personalKey,
-                                                                    e,
-                                                                  ],
-                                                                ),
-                                                              },
-                                                            ),
-                                                          )
-                                                        : Container(),
-                                                  )
-                                                  .toList(),
-                                            ),
+                                          ProfileExpComponent(
+                                            title: 'profile.personalExp'.tr,
+                                            addOrEditExpRoute:
+                                                Routes.addOrEditExperienceRoute,
+                                            expTypeKey: AppStrings.personalKey,
+                                            expList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .experiences,
                                           ),
                                           //===== Personal Component =====//
 
                                           ///===== Skills Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle: 'profile.skills'
-                                                .tr
-                                                .toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.edit_outlined,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                Get.toNamed(
-                                                  Routes.addOrEditSkillRoute,
-                                                  arguments: [
-                                                    Keys.addOperation
-                                                  ],
-                                                ),
-                                              },
-                                            ),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Expanded(
-                                                  flex: 50,
-                                                  child: Container(
-                                                    padding: const EdgeInsets
-                                                        .fromLTRB(
-                                                      24.0,
-                                                      0.0,
-                                                      8.0,
-                                                      0.0,
-                                                    ),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        CustomTextWidget(
-                                                          text:
-                                                              'profile.hardSkills'
-                                                                  .tr,
-                                                          marginBottom: 5.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: ColorsManager
-                                                              .grey850,
-                                                        ),
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: controller
-                                                              .studentInfoRepsonse
-                                                              .value
-                                                              .skills!
-                                                              .map(
-                                                                (e) => e.type ==
-                                                                        Type.hardSkill
-                                                                    ? CustomTextWidget(
-                                                                        text:
-                                                                            '${e.displayLabelAndCategory} \n   ${e.displayLevel}',
-                                                                        color: ColorsManager
-                                                                            .grey800,
-                                                                        marginBottom:
-                                                                            8.0,
-                                                                        maxLine:
-                                                                            3,
-                                                                      )
-                                                                    : Container(),
-                                                              )
-                                                              .toList(),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 50,
-                                                  child: Container(
-                                                    padding: const EdgeInsets
-                                                        .fromLTRB(
-                                                      24.0,
-                                                      0.0,
-                                                      8.0,
-                                                      0.0,
-                                                    ),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        CustomTextWidget(
-                                                          text:
-                                                              'profile.softSkills'
-                                                                  .tr,
-                                                          color: ColorsManager
-                                                              .grey850,
-                                                          marginBottom: 5.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: controller
-                                                              .studentInfoRepsonse
-                                                              .value
-                                                              .skills!
-                                                              .map(
-                                                                (e) => e.type ==
-                                                                        Type.softSkill
-                                                                    ? CustomTextWidget(
-                                                                        text:
-                                                                            '• ${e.label}',
-                                                                        color: ColorsManager
-                                                                            .grey800,
-                                                                        marginBottom:
-                                                                            8.0,
-                                                                        maxLine:
-                                                                            3,
-                                                                      )
-                                                                    : Container(),
-                                                              )
-                                                              .toList(),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                          ProfileSkillComponent(
+                                            title: 'profile.skills'.tr,
+                                            addOrEditSkillRoute:
+                                                Routes.addOrEditSkillRoute,
+                                            skillList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .skills,
                                           ),
                                           //===== Skills Component =====//
 
                                           ///===== Languages Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle: 'profile.languages'
-                                                .tr
-                                                .toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.edit_outlined,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                Get.toNamed(
-                                                  Routes
-                                                      .addOrEditLanguageUsageRoute,
-                                                  arguments: [
-                                                    Keys.addOperation
-                                                  ],
-                                                ),
-                                              },
-                                            ),
-                                            // child: CustomList(
-                                            //   subtitleList: controller.languageList,
-                                            // ),
-                                            child: controller
-                                                        .studentInfoRepsonse
-                                                        .value
-                                                        .spokenLanguages ==
-                                                    []
-                                                ? Container()
-                                                : Container(
-                                                    padding: const EdgeInsets
-                                                        .fromLTRB(
-                                                      24.0,
-                                                      0.0,
-                                                      8.0,
-                                                      0.0,
-                                                    ),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: controller
-                                                          .studentInfoRepsonse
-                                                          .value
-                                                          .spokenLanguages!
-                                                          .map(
-                                                            (e) =>
-                                                                CustomTextWidget(
-                                                              text:
-                                                                  '${e.displayLabelAndLevel}',
-                                                              color:
-                                                                  ColorsManager
-                                                                      .grey800,
-                                                              marginBottom:
-                                                                  AppSize.s8,
-                                                            ),
-                                                          )
-                                                          .toList(),
-                                                    ),
-                                                  ),
+                                          ProfileLanguageComponent(
+                                            title: 'profile.languages'.tr,
+                                            addOrEditLangRoute: Routes
+                                                .addOrEditLanguageUsageRoute,
+                                            spokenLanguageList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .spokenLanguages,
                                           ),
                                           //===== Languages Component =====//
 
                                           ///===== Achievement Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle: 'profile.achievement'
-                                                .tr
-                                                .toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                Get.toNamed(
-                                                  Routes
-                                                      .addOrEditAchievementRoute,
-                                                  arguments: [
-                                                    Keys.addOperation,
-                                                  ],
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .achievements!
-                                                  .map(
-                                                    (e) => CustomListTileWidget(
-                                                      text1: e.name,
-                                                      text1Color:
-                                                          ColorsManager.grey850,
-                                                      text1FontWeight:
-                                                          FontWeightManager
-                                                              .medium,
-                                                      text1FontSize:
-                                                          AppSize.s16,
-                                                      text2:
-                                                          'profile.issuedDate'
-                                                              .trParams({
-                                                        'date':
-                                                            '${e.dateCompletionFormat}'
-                                                      }),
-                                                      text2Color:
-                                                          ColorsManager.grey800,
-                                                      text3: e.description,
-                                                      // bottomPadding: 8.0,
-                                                      leftWidget:
-                                                          const CustomBoxWidget(
-                                                        size: 40,
-                                                        child: Icon(
-                                                          Icons.card_membership,
-                                                          color: ColorsManager
-                                                              .primary75,
-                                                          size: AppSize.s20,
-                                                        ),
-                                                      ),
-                                                      rightWidget:
-                                                          CustomIconButtonWidget(
-                                                        iconData:
-                                                            Icons.edit_outlined,
-                                                        padding: 0.0,
-                                                        iconSize: 20.0,
-                                                        isConstraints: true,
-                                                        onClick: () => {
-                                                          Get.toNamed(
-                                                            Routes
-                                                                .addOrEditAchievementRoute,
-                                                            arguments: [
-                                                              Keys.editOperation,
-                                                              e
-                                                            ],
-                                                          ),
-                                                        },
-                                                      ),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            ),
+                                          ProfileAchievementComponent(
+                                            title: 'profile.achievement'.tr,
+                                            addOrEditAchievementRoute: Routes
+                                                .addOrEditAchievementRoute,
+                                            achievementList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .achievements,
                                           ),
                                           //===== Achievement Component =====//
 
                                           ///===== Certificates Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle: 'profile.certificates'
-                                                .tr
-                                                .toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                Get.toNamed(
-                                                  Routes
-                                                      .addOrEditCertificateRoute,
-                                                  arguments: [
-                                                    Keys.addOperation,
-                                                  ],
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .certificates!
-                                                  .map(
-                                                    (e) => CustomListTileWidget(
-                                                      text1: e.title,
-                                                      text1Color:
-                                                          ColorsManager.grey850,
-                                                      text1FontWeight:
-                                                          FontWeightManager
-                                                              .medium,
-                                                      text1FontSize:
-                                                          AppSize.s16,
-                                                      text2:
-                                                          'profile.issuedDate'
-                                                              .trParams({
-                                                        'date':
-                                                            '${e.receivedDateFormat}'
-                                                      }),
-                                                      // 'Issued: ${e.receivedDateFormat}',
-                                                      text2Color:
-                                                          ColorsManager.grey800,
-                                                      text3: e.expirationDate !=
-                                                              null
-                                                          ? 'profile.expiredDate'
-                                                              .trParams({
-                                                              'date':
-                                                                  '${e.receivedDateFormat}'
-                                                            })
-                                                          // 'Expired: ${e.expirationDateFormat}'
-                                                          : 'profile.noExpiredDate'
-                                                              .tr,
-                                                      text3FontSize:
-                                                          AppSize.s14,
-                                                      text4: e.description,
-                                                      // bottomPadding: 8.0,
-                                                      leftWidget:
-                                                          const CustomBoxWidget(
-                                                        size: 40,
-                                                        child: Icon(
-                                                          Icons.emoji_events,
-                                                          color: ColorsManager
-                                                              .primary75,
-                                                          size: AppSize.s20,
-                                                        ),
-                                                      ),
-                                                      rightWidget:
-                                                          CustomIconButtonWidget(
-                                                        iconData:
-                                                            Icons.edit_outlined,
-                                                        padding: 0.0,
-                                                        iconSize: 20.0,
-                                                        isConstraints: true,
-                                                        onClick: () => {
-                                                          Get.toNamed(
-                                                            Routes
-                                                                .addOrEditCertificateRoute,
-                                                            arguments: [
-                                                              Keys.editOperation,
-                                                              e
-                                                            ],
-                                                          ),
-                                                        },
-                                                      ),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            ),
+                                          ProfileCertificateComponent(
+                                            title: 'profile.certificates'.tr,
+                                            addOrEditCertificateRoute: Routes
+                                                .addOrEditCertificateRoute,
+                                            certificateList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .certificates,
                                           ),
                                           //===== Certificates Component =====//
 
                                           ///===== Availabilities Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle: 'profile.availabilities'
-                                                .tr
-                                                .toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                Get.toNamed(
-                                                  Routes
-                                                      .addOrEditAvailabilityRoute,
-                                                  arguments: [
-                                                    Keys.addOperation,
-                                                  ],
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .periods!
-                                                  .map(
-                                                    (e) => Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                        AppSize.s4,
-                                                      ),
-                                                      child:
-                                                          AvailabilityComponent(
-                                                        availabilityData: e,
-                                                      ),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            ),
+                                          ProfileAvailabilityComponent(
+                                            title: 'profile.availabilities'.tr,
+                                            addOrEditAvailabilityRoute: Routes
+                                                .addOrEditAvailabilityRoute,
+                                            availabilityList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .periods,
                                           )
                                           //===== Availabilities Component =====//
                                         ],

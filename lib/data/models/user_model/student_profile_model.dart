@@ -83,7 +83,9 @@ class StudentProfileModel {
         completePercent += fullPercentage / fieldCounter;
       }
     }
-    return double.tryParse(completePercent.toStringAsFixed(2));
+    return double.tryParse(
+      completePercent.toStringAsFixed(2),
+    );
   }
 
   int get radiusFromMeterToKM => radius! ~/ 1000;

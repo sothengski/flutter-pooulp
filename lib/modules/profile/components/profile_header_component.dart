@@ -5,7 +5,7 @@ import '../../../core/core.dart';
 import '../../../routes/routes.dart';
 import '../profile.dart';
 
-class ProfileHeader extends StatelessWidget {
+class ProfileHeaderComponent extends StatelessWidget {
   final String? profileImg;
   final String? coverImg;
   final String? userName;
@@ -14,7 +14,7 @@ class ProfileHeader extends StatelessWidget {
   final double? headerHigh;
   final ProfileController? controller;
 
-  const ProfileHeader({
+  const ProfileHeaderComponent({
     this.profileImg = AssetsManager.appLogoSymbol,
     this.coverImg = AssetsManager.coverImg,
     this.userName = '...',

@@ -30,8 +30,8 @@ class EducationModel {
     this.fields,
   });
 
-  String? get attendedFrom => dateFormatSlashDDMMYYYY(date: dateStart);
-  String? get attendedTo => dateFormatSlashDDMMYYYY(date: dateEnd);
+  String? get attendedFrom => dateFormatSlashMMYYYY(date: dateStart);
+  String? get attendedTo => dateFormatSlashMMYYYY(date: dateEnd);
   String? get attendedFromTo =>
       '$attendedFrom ${attendedTo == null || attendedTo == '' ? '' : '- $attendedTo'}';
 

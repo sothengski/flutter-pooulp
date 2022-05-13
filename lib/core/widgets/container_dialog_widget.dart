@@ -8,7 +8,16 @@ enum DialogType {
   bottomSheetDialog,
   alertDialog,
   dateTimePickerDialog,
+  dateWithoutDayPickerDialog,
   timePickerDialog,
+}
+
+LocaleType localeTypeFunc({required String? dateLocale}) {
+  return dateLocale == 'fr'
+      ? LocaleType.fr
+      : dateLocale == 'nl'
+          ? LocaleType.nl
+          : LocaleType.en;
 }
 
 class ContainerDialogWidget extends StatelessWidget {
@@ -65,15 +74,53 @@ class ContainerDialogWidget extends StatelessWidget {
                     if (dialogType == DialogType.dateTimePickerDialog)
                       DatePicker.showDatePicker(
                         context,
-                        locale: dateLocale == 'fr'
-                            ? LocaleType.fr
-                            : dateLocale == 'nl'
-                                ? LocaleType.nl
-                                : LocaleType.en,
+                        locale: localeTypeFunc(dateLocale: dateLocale),
                         minTime: DateTime(1970),
                         // maxTime: DateTime(2009, 12, 31),
                         currentTime: currentTime,
                         // locale: LocaleType.kh,
+                        theme: const DatePickerTheme(
+                          headerColor: ColorsManager.grey100,
+                          backgroundColor: ColorsManager.grey100,
+                          itemStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                          doneStyle: TextStyle(
+                            color: ColorsManager.primaryBlue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onChanged: (date) {
+                          // print(
+                          //   'change $date in time zone ${date.timeZoneOffset.inHours}',
+                          // );
+                        },
+                        onConfirm: onConfirmDate,
+                        // (date) {
+                        //   // print('confirm $date');
+                        //   controller!.selectedBirthdayOnClick(
+                        //     selectedItem: date,
+                        //   );
+                        //   // controller!.selectedBirthdayOnClick(
+                        //   //   selectedItem: '${date.year}-${date.month}-${date.day}',
+                        //   // );
+                        // },
+                      )
+                    else if (dialogType ==
+                        DialogType.dateWithoutDayPickerDialog)
+                      DatePicker.showPicker(
+                        context,
+                        locale: localeTypeFunc(dateLocale: dateLocale),
+                        pickerModel: CustomMonthPicker(
+                          currentTime: currentTime,
+                          locale: localeTypeFunc(dateLocale: dateLocale),
+                          minTime: DateTime(1970),
+                          // maxTime: DateTime(2009, 12, 31),
+                          // locale: LocaleType.kh,
+                        ),
                         theme: const DatePickerTheme(
                           headerColor: ColorsManager.grey100,
                           backgroundColor: ColorsManager.grey100,
@@ -128,11 +175,7 @@ class ContainerDialogWidget extends StatelessWidget {
                           //   'change $date in time zone ${date.timeZoneOffset.inHours}',
                           // );
                         },
-                        locale: dateLocale == 'fr'
-                            ? LocaleType.fr
-                            : dateLocale == 'nl'
-                                ? LocaleType.nl
-                                : LocaleType.en,
+                        locale: localeTypeFunc(dateLocale: dateLocale),
                         onConfirm: onConfirmDate,
                         pickerModel: CustomPicker(
                           currentTime: currentTime,

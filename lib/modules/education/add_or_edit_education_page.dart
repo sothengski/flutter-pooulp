@@ -151,7 +151,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedStartedDateString.value,
                         ),
-                        dialogType: DialogType.dateTimePickerDialog,
+                        dialogType: DialogType.dateWithoutDayPickerDialog,
                         dateLocale: controller
                             .profileController.userProfileInfo.value.uiLanguage,
                         currentTime: DateTime.tryParse(
@@ -179,7 +179,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                                 )
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: dateFormatSlashDDMMYYYY(
+                                    text: dateFormatSlashMMYYYY(
                                       date: DateTime.tryParse(
                                         controller
                                             .selectedStartedDateString.value,
@@ -210,7 +210,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                             "${'profile.endDate'.tr}(${'profile.expectedDate'.tr})",
                         // 'End Date(Or Expected)',
                         inputTitleMarginTop: AppSize.s16,
-                        dialogType: DialogType.dateTimePickerDialog,
+                        dialogType: DialogType.dateWithoutDayPickerDialog,
                         dateLocale: controller
                             .profileController.userProfileInfo.value.uiLanguage,
                         currentTime: DateTime.tryParse(
@@ -238,7 +238,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                                 )
                               : RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: dateFormatSlashDDMMYYYY(
+                                    text: dateFormatSlashMMYYYY(
                                       date: DateTime.tryParse(
                                         controller.selectedEndDateString.value,
                                       ),

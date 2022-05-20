@@ -65,8 +65,12 @@ class PersonalInformationComponent extends StatelessWidget {
           CustomListTileWidget(
             text1: 'profile.phone'.tr,
             text2: profileModel!.fullPhone1Format,
-            // isLauching: true,
+            // isUnderLine: true,
             text2Color: ColorsManager.blue,
+            // onClick: () => urlLauncherUtils(
+            //   thingToLaunch: profileModel!.fullPhone1Format,
+            //   laucherType: LauncherType.phone,
+            // ),
             leftWidget: const CustomBoxWidget(
               child: Icon(
                 Icons.phone_outlined,

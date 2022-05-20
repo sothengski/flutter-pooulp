@@ -58,6 +58,7 @@ class API {
   /// Based API End Point URLs
   static const String host =
       //'localhost:80'; //Local BASEURL
+      // 'https://pooulp_api.test'; //Local Valet BASEURL
       'http://api.dev-lamp-01.srv.pooulp.eu'; //Development BASEURL
   // 'http://uat-api.pooulp.eu'; //UAT BASEURL
   // 'pooulp.eu'; //Production BASEURL

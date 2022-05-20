@@ -12,7 +12,7 @@ class CustomListTileWidget extends StatelessWidget {
   final Color? text2Color;
   final FontWeight? text2FontWeight;
   final String? text3;
-  final bool? isLauching;
+  final bool? isUnderLine;
   final double? text3FontSize;
   final Color? text3Color;
   final FontWeight? text3FontWeight;
@@ -41,7 +41,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.text2Color = ColorsManager.grey,
     this.text2FontWeight = FontWeight.w400,
     this.text3 = '',
-    this.isLauching = false,
+    this.isUnderLine = false,
     this.text3FontSize = 12.0,
     this.text3Color = ColorsManager.grey800,
     this.text3FontWeight = FontWeight.w400,
@@ -143,7 +143,7 @@ class CustomListTileWidget extends StatelessWidget {
                               color: text2Color,
                               fontSize: text2FontSize,
                               fontWeight: text2FontWeight,
-                              textDecoration: isLauching == true
+                              textDecoration: isUnderLine == true
                                   ? TextDecoration.underline
                                   : TextDecoration.none,
                               marginBottom: 5.0,

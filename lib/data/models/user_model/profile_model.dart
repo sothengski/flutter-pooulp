@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../../core/core.dart';
+
 import '../../data.dart';
 
 class ProfileModel {
@@ -105,6 +107,8 @@ class ProfileModel {
       phone2CountryCode == null || phone2CountryCode == ''
           ? ''
           : '($phone2CountryCode) $phone2';
+
+  String? get birthDateFormat => dateFormatSlashDDMMYYYY(date: birthDate);
 
   factory ProfileModel.fromRawJson(String str) =>
       ProfileModel.fromJson(json.decode(str) as Map<String, dynamic>);

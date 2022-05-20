@@ -53,7 +53,30 @@ class ProfileHeaderComponent extends StatelessWidget {
           top: 5.0,
           right: 50.0,
           child: controller!.homeController.userToken!.accountType == 'student'
-              ? Container()
+              ? CustomIconButtonWidget(
+                  iconData: Icons.contact_page_outlined,
+                  iconColor: ColorsManager.grey300,
+                  tooltip: 'Settings',
+                  onClick: () => Get.dialog(
+                    ConfirmationDialogWidget(
+                      dialogTitle: 'Job Title',
+                      contentWidget: CustomTextWidget(text: 'CV body'.tr),
+                      actionWidget: OutlinedButton.icon(
+                        onPressed: () async => {await controller!.generateCV()},
+                        icon: const Icon(
+                          IconsManager.check,
+                          color: Colors.white,
+                        ),
+                        label: CustomTextWidget(
+                          marginRight: AppSize.s24,
+                          text: 'generate CV'.tr,
+                          color: Colors.red,
+                        ),
+                      ),
+                      onPressed: null,
+                    ),
+                  ),
+                )
               : controller!.enterpriseSwitching.value == true
                   ? CustomIconButtonWidget(
                       iconData: Icons.person,

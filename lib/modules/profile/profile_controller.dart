@@ -9,6 +9,10 @@ class ProfileController extends GetxController {
 
   final userInfoProvider = Get.find<UserInfoProvider>();
 
+  final cvGenerate = CVGenerate();
+
+  final pdfService = PdfService();
+
   RxBool enterpriseSwitching = false.obs;
 
   Rx<UserModel> userInfoRepsonse = UserModel().obs;
@@ -86,5 +90,15 @@ class ProfileController extends GetxController {
         languageKey,
       );
     }
+  }
+
+  Future<void> generateCV() async {
+    final pdfFile = await cvGenerate.generate(
+      userData: userInfoRepsonse.value,
+      studentProfileData: studentInfoRepsonse.value,
+      profileData: userProfileInfo.value,
+    );
+    // print(pdfFile);
+    await pdfService.openFile(pdfFile);
   }
 }

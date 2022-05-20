@@ -39,7 +39,7 @@ class AddressSearchBarWidget extends SearchDelegate<GooglePlaceSearchModel> {
   @override
   Widget buildResults(BuildContext context) {
     // return null;
-    SchedulerBinding.instance!.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       Get.back();
     });
 

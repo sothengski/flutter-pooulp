@@ -8,12 +8,14 @@ class ConfirmationDialogWidget extends StatelessWidget {
   final String? dialogTitle;
   final String? dialogBody;
   final Widget? contentWidget;
+  final Widget? actionWidget;
 
   const ConfirmationDialogWidget({
     Key? key,
     this.dialogTitle, // = AppStrings.confirmationText,
     this.dialogBody, // = "Would you like to remove this information?",
     this.contentWidget,
+    this.actionWidget,
     required this.onPressed,
   }) : super(key: key);
 
@@ -31,53 +33,54 @@ class ConfirmationDialogWidget extends StatelessWidget {
               maxLine: 5,
             ),
           ),
-      actionWidget: Row(
-        children: [
-          Expanded(
-            flex: 40,
-            child: OutlinedButton.icon(
-              onPressed: () {
-                Navigator.pop(
-                  context,
-                  true,
-                );
-              },
-              icon: const Icon(
-                IconsManager.close,
-                color: Colors.white,
+      actionWidget: actionWidget ??
+          Row(
+            children: [
+              Expanded(
+                flex: 40,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(
+                      context,
+                      true,
+                    );
+                  },
+                  icon: const Icon(
+                    IconsManager.close,
+                    color: Colors.white,
+                  ),
+                  label: CustomTextWidget(
+                    marginRight: AppSize.s24,
+                    text: 'core.no'.tr,
+                    color: Colors.blue,
+                  ),
+                ),
               ),
-              label: CustomTextWidget(
-                marginRight: AppSize.s24,
-                text: 'core.no'.tr,
-                color: Colors.blue,
+              const SizedBox(
+                height: AppSize.s28,
+                child: VerticalDivider(
+                  color: ColorsManager.grey,
+                  thickness: 0.5,
+                  width: 0.5,
+                ),
               ),
-            ),
+              Expanded(
+                flex: 40,
+                child: OutlinedButton.icon(
+                  onPressed: onPressed,
+                  icon: const Icon(
+                    IconsManager.check,
+                    color: Colors.white,
+                  ),
+                  label: CustomTextWidget(
+                    marginRight: AppSize.s24,
+                    text: 'core.yes'.tr,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: AppSize.s28,
-            child: VerticalDivider(
-              color: ColorsManager.grey,
-              thickness: 0.5,
-              width: 0.5,
-            ),
-          ),
-          Expanded(
-            flex: 40,
-            child: OutlinedButton.icon(
-              onPressed: onPressed,
-              icon: const Icon(
-                IconsManager.check,
-                color: Colors.white,
-              ),
-              label: CustomTextWidget(
-                marginRight: AppSize.s24,
-                text: 'core.yes'.tr,
-                color: Colors.red,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

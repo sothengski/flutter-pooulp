@@ -175,13 +175,27 @@ class EditUserInformationController extends GetxController {
         // compressFormat: ImageCompressFormat.jpg,
         aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
         cropStyle: CropStyle.circle,
-        androidUiSettings: const AndroidUiSettings(
-          toolbarWidgetColor: ColorsManager.white,
-          toolbarColor: ColorsManager.primary,
-          toolbarTitle: "Crop Image",
-          statusBarColor: ColorsManager.grey400,
-          backgroundColor: ColorsManager.white,
-        ),
+        // androidUiSettings: const AndroidUiSettings(
+        //   toolbarWidgetColor: ColorsManager.white,
+        //   toolbarColor: ColorsManager.primary,
+        //   toolbarTitle: "Crop Image",
+        //   statusBarColor: ColorsManager.grey400,
+        //   backgroundColor: ColorsManager.white,
+        // ),
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarWidgetColor: ColorsManager.white,
+            toolbarColor: ColorsManager.primary,
+            toolbarTitle: "Crop Image",
+            statusBarColor: ColorsManager.grey400,
+            backgroundColor: ColorsManager.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false,
+          ),
+          IOSUiSettings(
+            title: 'Crop Image',
+          )
+        ],
       );
       if (cropImageFile != null) {
         cropImagePath.value = cropImageFile.path;
@@ -217,7 +231,7 @@ class EditUserInformationController extends GetxController {
     }
   }
 
-  Future<void> uploadImage(File? file, String? fileName) async {
+  Future<void> uploadImage(CroppedFile? file, String? fileName) async {
     uploadImgBoolSwitching();
     await userInfoProvider
         .uploadImage(filepath: file!.path, fileName: fileName)

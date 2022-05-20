@@ -41,7 +41,7 @@ class OfferSearchPage extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    SchedulerBinding.instance!.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       assignKeywordtoVariable();
       feedController.getFeedsDataState();
       Get.back();

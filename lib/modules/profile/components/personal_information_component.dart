@@ -151,7 +151,7 @@ class PersonalInformationComponent extends StatelessWidget {
                         child: Icon(
                           Icons.email_outlined,
                           color: ColorsManager.grey,
-                          size: AppSize.s24,
+                          size: AppSize.s20,
                         ),
                       ),
                     ),
@@ -164,7 +164,7 @@ class PersonalInformationComponent extends StatelessWidget {
                         child: Icon(
                           Icons.group_outlined,
                           color: ColorsManager.grey,
-                          size: AppSize.s24,
+                          size: AppSize.s20,
                         ),
                       ),
                     ),
@@ -182,7 +182,7 @@ class PersonalInformationComponent extends StatelessWidget {
                           child: Icon(
                             Icons.date_range_outlined,
                             color: ColorsManager.grey,
-                            size: AppSize.s24,
+                            size: AppSize.s20,
                           ),
                         ),
                       ),
@@ -195,7 +195,7 @@ class PersonalInformationComponent extends StatelessWidget {
                         child: Icon(
                           Icons.phone_outlined,
                           color: ColorsManager.grey,
-                          size: AppSize.s24,
+                          size: AppSize.s20,
                         ),
                       ),
                     ),
@@ -208,7 +208,7 @@ class PersonalInformationComponent extends StatelessWidget {
                         child: Icon(
                           Icons.pin_drop_outlined,
                           color: ColorsManager.grey,
-                          size: AppSize.s24,
+                          size: AppSize.s20,
                         ),
                       ),
                     ),
@@ -225,7 +225,7 @@ class PersonalInformationComponent extends StatelessWidget {
                         // Icon(
                         //   Icons.video_library_outlined,
                         //   color: ColorsManager.grey,
-                        //   size: AppSize.s24,
+                        //   size: AppSize.s20,
                         // ),
                       ),
                     ),
@@ -240,7 +240,7 @@ class PersonalInformationComponent extends StatelessWidget {
                         child: Icon(
                           Icons.video_library_outlined,
                           color: ColorsManager.grey,
-                          size: AppSize.s24,
+                          size: AppSize.s20,
                         ),
                       ),
                     ),

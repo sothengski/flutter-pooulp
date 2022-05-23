@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/data.dart';
@@ -19,6 +20,8 @@ class ProfileController extends GetxController {
   Rx<ProfileModel> userProfileInfo = const ProfileModel().obs;
 
   Rx<StudentProfileModel> studentInfoRepsonse = StudentProfileModel().obs;
+
+  TextEditingController jobTitleTextCtrl = TextEditingController(text: '');
 
   RxBool isProcessingUserInfoRepsonse = false.obs;
   RxBool isProcessingStudentInfoRepsonse = false.obs;
@@ -95,8 +98,9 @@ class ProfileController extends GetxController {
   Future<void> generateCV() async {
     final pdfFile = await cvGenerate.generate(
       userData: userInfoRepsonse.value,
-      studentProfileData: studentInfoRepsonse.value,
+      studentData: studentInfoRepsonse.value,
       profileData: userProfileInfo.value,
+      jobTitle: jobTitleTextCtrl.text,
     );
     // print(pdfFile);
     await pdfService.openFile(pdfFile);

@@ -59,8 +59,23 @@ class ProfileHeaderComponent extends StatelessWidget {
                   tooltip: 'Settings',
                   onClick: () => Get.dialog(
                     ConfirmationDialogWidget(
-                      dialogTitle: 'Job Title',
-                      contentWidget: CustomTextWidget(text: 'CV body'.tr),
+                      dialogTitle: 'profile.jobTitle'.tr,
+                      contentWidget:
+                          // CustomTextWidget(text: 'CV body'.tr),
+                          TextField(
+                        controller: controller!.jobTitleTextCtrl,
+                        // focusNode: ref.read(messageController).messageFieldNode,
+                        // onTap: ref.read(emojiVisiblityController.notifier).onFieldTap,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                          isCollapsed: true,
+                          isDense: true,
+                          hintText: 'profile.jobTitleHint'.tr,
+                          border: InputBorder.none,
+                        ),
+                        maxLines: 2,
+                        // onChanged: controller.onChangedTextCtrl,
+                      ),
                       actionWidget: OutlinedButton.icon(
                         onPressed: () async => {await controller!.generateCV()},
                         icon: const Icon(
@@ -69,7 +84,7 @@ class ProfileHeaderComponent extends StatelessWidget {
                         ),
                         label: CustomTextWidget(
                           marginRight: AppSize.s24,
-                          text: 'generate CV'.tr,
+                          text: 'profile.generateCV'.tr,
                           color: Colors.red,
                         ),
                       ),

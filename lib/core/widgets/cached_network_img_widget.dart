@@ -45,7 +45,7 @@ class CachedNetworkImgWidget extends StatelessWidget {
                 ),
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),

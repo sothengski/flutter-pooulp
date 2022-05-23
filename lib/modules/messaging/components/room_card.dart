@@ -38,17 +38,14 @@ class RoomCard extends StatelessWidget {
             flex: 15,
 
             ///===== Image Component =====//
-            child: CustomBoxWidget(
+            child: CustomBoxWidget.chatAvatarDefault(
               size: 60,
-              isCircle: true,
-              topPadding: 2.0,
-              bottomPadding: 2.0,
-              leftPadding: 2.0,
-              rightPadding: 2.0,
+              backgroundColor: ColorsManager.grey100,
               child: CachedNetworkImgWidget(
                 imgUrl: imgUrl,
                 iconSize: 30,
                 logoAsText: shortName,
+                borderRadius: 30,
               ),
             ),
             //===== Image Component =====//

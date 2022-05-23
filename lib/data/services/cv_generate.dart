@@ -79,7 +79,7 @@ class CVGenerate {
                           contentWidget: textWidgetPdf(
                             text: '${profileData!.description}',
                             topPadding: 2.0,
-                            bottomPadding: 4.0,
+                            // bottomPadding: 4.0,
                           ),
                         ),
                         //===== Description Component =====//
@@ -110,22 +110,20 @@ class CVGenerate {
                         //===== Education Component =====//
 
                         ///===== Professional Experiences Component =====//
-                        if (studentData.experiences!.isNotEmpty)
-                          textWidgetPdf(
-                            text: 'Professional Experiences',
-                            fontSize: 16.0,
-                            fontWeight: pw.FontWeight.bold,
-                            fontColor: PdfColors.grey700,
-                            topPadding: 2.0,
-                          ),
-                        if (studentData.experiences!.isNotEmpty)
-                          sizeBoxPdf(
-                            width: double.infinity,
-                            height: 2.0,
-                            dividerThickness: 0.5,
-                            isDivider: true,
-                            dividerColor: PdfColors.grey500,
-                          ),
+                        textWidgetPdf(
+                          text: 'Professional Experiences',
+                          fontSize: 16.0,
+                          fontWeight: pw.FontWeight.bold,
+                          fontColor: PdfColors.grey700,
+                          topPadding: 2.0,
+                        ),
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 2.0,
+                          dividerThickness: 0.5,
+                          isDivider: true,
+                          dividerColor: PdfColors.grey500,
+                        ),
                         if (studentData.experiences!.isNotEmpty)
                           for (var data in studentData.experiences!)
                             if (data.type == AppStrings.professionalKey)
@@ -139,22 +137,20 @@ class CVGenerate {
                         //===== Professional Experiences Component =====//
 
                         ///===== Personal Experiences Component =====//
-                        if (studentData.experiences!.isNotEmpty)
-                          textWidgetPdf(
-                            text: 'Personal Experiences',
-                            fontSize: 16.0,
-                            fontWeight: pw.FontWeight.bold,
-                            fontColor: PdfColors.grey700,
-                            topPadding: 2.0,
-                          ),
-                        if (studentData.experiences!.isNotEmpty)
-                          sizeBoxPdf(
-                            width: double.infinity,
-                            height: 2.0,
-                            dividerThickness: 0.5,
-                            isDivider: true,
-                            dividerColor: PdfColors.grey500,
-                          ),
+                        textWidgetPdf(
+                          text: 'Personal Experiences',
+                          fontSize: 16.0,
+                          fontWeight: pw.FontWeight.bold,
+                          fontColor: PdfColors.grey700,
+                          topPadding: 2.0,
+                        ),
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 2.0,
+                          dividerThickness: 0.5,
+                          isDivider: true,
+                          dividerColor: PdfColors.grey500,
+                        ),
                         if (studentData.experiences!.isNotEmpty)
                           for (var data in studentData.experiences!)
                             if (data.type == AppStrings.personalKey)
@@ -173,14 +169,13 @@ class CVGenerate {
                         ),
 
                         ///===== Skills Component =====//
-                        if (studentData.skills!.isNotEmpty)
-                          textWidgetPdf(
-                            text: 'Skills',
-                            fontSize: 16.0,
-                            fontWeight: pw.FontWeight.bold,
-                            fontColor: PdfColors.grey700,
-                            topPadding: 2.0,
-                          ),
+                        textWidgetPdf(
+                          text: 'Skills',
+                          fontSize: 16.0,
+                          fontWeight: pw.FontWeight.bold,
+                          fontColor: PdfColors.grey700,
+                          topPadding: 2.0,
+                        ),
                         if (studentData.skills!.isNotEmpty)
                           sizeBoxPdf(
                             width: double.infinity,
@@ -199,22 +194,20 @@ class CVGenerate {
                         ),
 
                         ///===== Languages Component =====//
-                        if (studentData.spokenLanguages!.isNotEmpty)
-                          textWidgetPdf(
-                            text: 'Languages',
-                            fontSize: 16.0,
-                            fontWeight: pw.FontWeight.bold,
-                            fontColor: PdfColors.grey700,
-                            topPadding: 4.0,
-                          ),
-                        if (studentData.spokenLanguages!.isNotEmpty)
-                          sizeBoxPdf(
-                            width: double.infinity,
-                            height: 2.0,
-                            dividerThickness: 0.5,
-                            isDivider: true,
-                            dividerColor: PdfColors.grey500,
-                          ),
+                        textWidgetPdf(
+                          text: 'Languages',
+                          fontSize: 16.0,
+                          fontWeight: pw.FontWeight.bold,
+                          fontColor: PdfColors.grey700,
+                          topPadding: 2.0,
+                        ),
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 2.0,
+                          dividerThickness: 0.5,
+                          isDivider: true,
+                          dividerColor: PdfColors.grey500,
+                        ),
                         if (studentData.spokenLanguages!.isNotEmpty)
                           pw.Column(
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -234,22 +227,20 @@ class CVGenerate {
                         ),
 
                         ///===== Achievements Component =====//
-                        if (studentData.achievements!.isNotEmpty)
-                          textWidgetPdf(
-                            text: 'Achievements',
-                            fontSize: 16.0,
-                            fontWeight: pw.FontWeight.bold,
-                            fontColor: PdfColors.grey700,
-                            topPadding: 2.0,
-                          ),
-                        if (studentData.achievements!.isNotEmpty)
-                          sizeBoxPdf(
-                            width: double.infinity,
-                            height: 2.0,
-                            dividerThickness: 0.5,
-                            isDivider: true,
-                            dividerColor: PdfColors.grey500,
-                          ),
+                        textWidgetPdf(
+                          text: 'Achievements',
+                          fontSize: 16.0,
+                          fontWeight: pw.FontWeight.bold,
+                          fontColor: PdfColors.grey700,
+                          topPadding: 2.0,
+                        ),
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 2.0,
+                          dividerThickness: 0.5,
+                          isDivider: true,
+                          dividerColor: PdfColors.grey500,
+                        ),
                         if (studentData.achievements!.isNotEmpty)
                           for (var data in studentData.achievements!)
                             sectionCardComponent(
@@ -265,22 +256,20 @@ class CVGenerate {
                         ),
 
                         ///===== Certificates Component =====//
-                        if (studentData.certificates!.isNotEmpty)
-                          textWidgetPdf(
-                            text: 'Certificates',
-                            fontSize: 16.0,
-                            fontWeight: pw.FontWeight.bold,
-                            fontColor: PdfColors.grey700,
-                            topPadding: 4.0,
-                          ),
-                        if (studentData.certificates!.isNotEmpty)
-                          sizeBoxPdf(
-                            width: double.infinity,
-                            height: 2.0,
-                            dividerThickness: 0.5,
-                            isDivider: true,
-                            dividerColor: PdfColors.grey500,
-                          ),
+                        textWidgetPdf(
+                          text: 'Certificates',
+                          fontSize: 16.0,
+                          fontWeight: pw.FontWeight.bold,
+                          fontColor: PdfColors.grey700,
+                          topPadding: 2.0,
+                        ),
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 2.0,
+                          dividerThickness: 0.5,
+                          isDivider: true,
+                          dividerColor: PdfColors.grey500,
+                        ),
                         if (studentData.certificates!.isNotEmpty)
                           for (var data in studentData.certificates!)
                             sectionCardComponent(
@@ -331,27 +320,32 @@ class CVGenerate {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
-        textWidgetPdf(
-          text: 'Hard skills',
-          fontSize: 12.0,
-          fontWeight: pw.FontWeight.bold,
-          fontColor: PdfColors.grey600,
-          topPadding: 2.0,
-        ),
-        for (var index = 0; index < dataList!.length; index++)
+        if (dataList!.map((e) => e.type).contains(Type.hardSkill))
+          textWidgetPdf(
+            text: 'Hard skills',
+            fontSize: 12.0,
+            fontWeight: pw.FontWeight.bold,
+            fontColor: PdfColors.grey600,
+            topPadding: 2.0,
+          )
+        else
+          pw.Container(),
+        for (var index = 0; index < dataList.length; index++)
           if (dataList[index].type == Type.hardSkill)
             textWidgetPdf(
               text:
                   '${dataList[index].displayDashLabelAndCategory} - ${dataList[index].displayLevel}',
             ),
-        sizeBoxPdf(),
-        textWidgetPdf(
-          text: 'Soft skills',
-          fontSize: 12.0,
-          fontWeight: pw.FontWeight.bold,
-          fontColor: PdfColors.grey600,
-          topPadding: 2.0,
-        ),
+        if (dataList.map((e) => e.type).contains(Type.softSkill))
+          textWidgetPdf(
+            text: 'Soft skills',
+            fontSize: 12.0,
+            fontWeight: pw.FontWeight.bold,
+            fontColor: PdfColors.grey600,
+            topPadding: 2.0,
+          )
+        else
+          pw.Container(),
         for (var index = 0; index < dataList.length; index++)
           if (dataList[index].type == Type.softSkill)
             textWidgetPdf(
@@ -683,17 +677,17 @@ class CVGenerate {
     double? leftPadding = 0.0,
     double? rightPadding = 0.0,
   }) =>
-      pw.Padding(
-        padding: pw.EdgeInsets.only(
-          top: topPadding! * PdfPageFormat.mm,
-          bottom: bottomPadding! * PdfPageFormat.mm,
-          left: leftPadding! * PdfPageFormat.mm,
-          right: rightPadding! * PdfPageFormat.mm,
-        ),
-        child: text! == ''
-            ? pw.Container()
-            : pw.Text(
-                text,
+      text == ''
+          ? pw.Container()
+          : pw.Padding(
+              padding: pw.EdgeInsets.only(
+                top: topPadding! * PdfPageFormat.mm,
+                bottom: bottomPadding! * PdfPageFormat.mm,
+                left: leftPadding! * PdfPageFormat.mm,
+                right: rightPadding! * PdfPageFormat.mm,
+              ),
+              child: pw.Text(
+                text!,
                 // softWrap: true,
                 style: textStyle ??
                     pw.TextStyle(
@@ -706,7 +700,7 @@ class CVGenerate {
                 //     .defaultTextStyle
                 //     .copyWith(color: PdfColors.grey),
               ),
-      );
+            );
   //===== Text Widget for PDF Component =====//
 
   ///===== SizedBox include Divider for PDF Component =====//

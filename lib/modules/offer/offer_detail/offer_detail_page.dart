@@ -87,6 +87,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             rightPadding: AppSize.s2,
                             child: CachedNetworkImgWidget(
                               imgUrl: '${jobOfferDetail.enterprise!.logoUrl}',
+                              borderRadius: 25,
                               defaultImg: AssetsManager.logoEnterpriseDefault,
                             ),
                           ),

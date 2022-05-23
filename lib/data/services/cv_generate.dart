@@ -10,312 +10,293 @@ import 'pdf_service.dart';
 class CVGenerate {
   Future<File> generate({
     required UserModel? userData,
-    required StudentProfileModel? studentProfileData,
+    required StudentProfileModel? studentData,
     required ProfileModel? profileData,
+    required String? jobTitle,
   }) async {
     final pdf = pw.Document();
     final pdfService = PdfService();
-    // final children = <pw.Widget>[
-    //   pw.Row(
-    //     crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //     children: [
-    //       // /===== Contact Info Component =====//
-    //       pw.Expanded(
-    //         flex: 33,
-    //         child: pw.ConstrainedBox(
-    //           constraints: const pw.BoxConstraints(
-    //             minWidth: double.infinity,
-    //             minHeight: 839,
-    //             // maxHeight: double.infinity,
-    //           ),
-    //           child: contactInfoComponent(
-    //             userData: userData,
-    //             studentData: studentProfileData,
-    //           ),
-    //         ),
-    //         // ),
-    //       ),
-    //       // ===== Contact Info Component =====//
-
-    //       // /===== Personal Info Component =====//
-    //       pw.Expanded(
-    //         flex: 67,
-    //         child: personalInfoComponent(
-    //           studentData: studentProfileData,
-    //           profileData: profileData,
-    //         ),
-    //       ),
-    //       // ===== Personal Info Component =====//
-    //     ],
-    //   ),
-    // ];
+    // final netImage = await networkImage('https://www.nfet.net/nfet.jpg');
 
     pdf.addPage(
       pw.MultiPage(
         // pageFormat: PdfPageFormat.a4,
-        margin: const pw.EdgeInsets.all(1.0),
-        build: (context) => <pw.Widget>[
-          pw.Wrap(
-            // children: children,
+        pageTheme: pw.PageTheme(
+          margin: const pw.EdgeInsets.all(1.0),
+          buildBackground: (pw.Context context) => pw.Row(
             children: [
-              // List<Widget>.generate(
-              //     studentProfileData!.experiences!.length, (int index) {
-              //   final issue = studentProfileData.experiences![index];
-              //   return Container(
-              //     child: Column(
-              //       children: <Widget>[
-              //         Header(
-              //           text: "Issue n°${issue.id}",
-              //           textStyle: const TextStyle(fontSize: 20),
-              //         ),
-              //         SizedBox(height: 100),
-              //         Text(
-              //           "Description :",
-              //           textAlign: TextAlign.left,
-              //           style: const TextStyle(fontSize: 15),
-              //         ),
-              //       ],
-              //     ),
-              //   );
-              // }),
-              // for (var i = 0; i < 8; i++)
-              //   if (i == 0)
-              //     pw.Row(
-              //       crossAxisAlignment: pw.CrossAxisAlignment.start,
-              //       children: [
-              //         pw.Expanded(
-              //           flex: 33,
-              //           // child: pw.ConstrainedBox(
-              //           //   constraints: const pw.BoxConstraints(
-              //           //     minWidth: double.infinity,
-              //           //     minHeight: 839,
-              //           //     // maxHeight: double.infinity,
-              //           //   ),
-              //           child: contactInfoComponent(
-              //             userData: userData,
-              //             studentData: studentProfileData,
-              //           ),
-              //           // ),
-              //           // ),
-              //         ),
-              //         pw.Expanded(
-              //           flex: 67,
-              //           child: pw.Container(
-              //             padding: const pw.EdgeInsets.symmetric(
-              //               horizontal: 10.0 * PdfPageFormat.mm,
-              //               vertical: 12.0 * PdfPageFormat.mm,
-              //             ),
-              //             child: pw.Wrap(
-              //               children: [
-              //                 //                       pw.Column(
-              //                 // crossAxisAlignment: pw.CrossAxisAlignment.start,
-              //                 // children: [
-              //                 ///===== Job Title Component =====//
-              //                 textWidgetPdf(
-              //                   text: 'jobTitle',
-              //                   fontSize: 20.0,
-              //                   fontWeight: pw.FontWeight.bold,
-              //                   fontColor: PdfColor.fromHex('#fda10d'),
-              //                 ),
-              //                 //===== Job Title Component =====//
-
-              //                 ///===== Description Component =====//
-              //                 infoSectionComponent(
-              //                   title: 'Description',
-              //                   contentWidget: textWidgetPdf(
-              //                     text: '${profileData!.description}',
-              //                     topPadding: 2.0,
-              //                     bottomPadding: 4.0,
-              //                   ),
-              //                 ),
-              //                 //===== Description Component =====//
-              //                 // pw.ListView(
-              //                 //   children: buildPdfPersonalData(
-              //                 //     studentProfileData!.experiences,
-              //                 //   ),
-              //                 // ),
-              //                 // pw.ListView(
-              //                 //   children: buildPdfPersonalData(
-              //                 //     studentProfileData.experiences,
-              //                 //   ),
-              //                 // ),
-              //                 // pw.ListView(
-              //                 //   children: buildPdfPersonalData(
-              //                 //     studentProfileData.experiences,
-              //                 //   ),
-              //                 // )
-              //               ],
-              //             ),
-              //           ),
-              //         )
-              //       ],
-              //     )
-              //   else if (i == 1)
-              //     pw.Row(
-              //       crossAxisAlignment: pw.CrossAxisAlignment.start,
-              //       children: [
-              //         pw.Expanded(
-              //           flex: 33,
-              //           child: pw.Container(),
-              //           // ),
-              //         ),
-              //         pw.Expanded(
-              //           flex: 67,
-              //           child: pw.Container(
-              //             padding: const pw.EdgeInsets.symmetric(
-              //               horizontal: 10.0 * PdfPageFormat.mm,
-              //               vertical: 12.0 * PdfPageFormat.mm,
-              //             ),
-              //             child: pw.Wrap(
-              //               children: [
-              //                 //                       pw.Column(
-              //                 // crossAxisAlignment: pw.CrossAxisAlignment.start,
-              //                 // children: [
-              //                 ///===== Job Title Component =====//
-              //                 textWidgetPdf(
-              //                   text: 'jobTitle',
-              //                   fontSize: 20.0,
-              //                   fontWeight: pw.FontWeight.bold,
-              //                   fontColor: PdfColor.fromHex('#fda10d'),
-              //                 ),
-              //                 //===== Job Title Component =====//
-
-              //                 ///===== Description Component =====//
-              //                 infoSectionComponent(
-              //                   title: 'Description',
-              //                   contentWidget: textWidgetPdf(
-              //                     text: '${profileData!.description}',
-              //                     topPadding: 2.0,
-              //                     bottomPadding: 4.0,
-              //                   ),
-              //                 ),
-              //                 //===== Description Component =====//
-              //                 // pw.ListView(
-              //                 //   children: buildPdfPersonalData(
-              //                 //     studentProfileData!.experiences,
-              //                 //   ),
-              //                 // ),
-              //                 // pw.ListView(
-              //                 //   children: buildPdfPersonalData(
-              //                 //     studentProfileData.experiences,
-              //                 //   ),
-              //                 // ),
-              //                 // pw.ListView(
-              //                 //   children: buildPdfPersonalData(
-              //                 //     studentProfileData.experiences,
-              //                 //   ),
-              //                 // )
-              //               ],
-              //             ),
-              //           ),
-              //         )
-              //       ],
-              //     ),
-              // pw.ListView(
-              //   children: // [
-              // infoSectionComponent(
-              //   title: 'Personal Experiences',
-              //   contentWidget: pw.Column(
-              //     crossAxisAlignment: pw.CrossAxisAlignment.start,
-              //     children: studentProfileData!.experiences!
-              //         .map(
-              //           (e) => e.type == AppStrings.personalKey
-              //               ? sectionCardComponent(
-              //                   textTitle: '${e.name}',
-              //                   textLocation: '${e.company}',
-              //                   textDate:
-              //                       '${e.attendedFromTo} at ${e.companyCityAndCountry}',
-              //                   textDescription: e.description,
-              //                 )
-              //               : pw.Container(),
-              //         )
-              //         .toList(),
-              //   ),
-              // ),
-              // infoSectionComponent(
-              //   title: 'Personal Experiences',
-              //   contentWidget: pw.Column(
-              //     crossAxisAlignment: pw.CrossAxisAlignment.start,
-              //     children: studentProfileData.experiences!
-              //         .map(
-              //           (e) => e.type == AppStrings.personalKey
-              //               ? sectionCardComponent(
-              //                   textTitle: '${e.name}',
-              //                   textLocation: '${e.company}',
-              //                   textDate:
-              //                       '${e.attendedFromTo} at ${e.companyCityAndCountry}',
-              //                   textDescription: e.description,
-              //                 )
-              //               : pw.Container(),
-              //         )
-              //         .toList(),
-              //   ),
-              // ),
-              // infoSectionComponent(
-              //   title: 'Personal Experiences',
-              //   contentWidget: pw.Column(
-              //     crossAxisAlignment: pw.CrossAxisAlignment.start,
-              //     children:
-              //         buildPdfPersonalData(studentProfileData!.experiences),
-              // studentProfileData.experiences!
-              //     .map(
-              //       (e) => e.type == AppStrings.personalKey
-              //           ? sectionCardComponent(
-              //               textTitle: '${e.name}',
-              //               textLocation: '${e.company}',
-              //               textDate:
-              //                   '${e.attendedFromTo} at ${e.companyCityAndCountry}',
-              //               textDescription: e.description,
-              //             )
-              //           : pw.Container(),
-              //     )
-              //     .toList(),
-              //   ),
-              // ),
-              // buildPdfPersonalData(studentProfileData!.experiences),
-              // ],
-              // ),
-              // pw.ListView(
-              //   children: buildPdfPersonalData(studentProfileData.experiences),
-              // ),
-              // pw.ListView(
-              //   children: buildPdfPersonalData(studentProfileData.experiences),
-              // )
-              pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  // ///===== Contact Info Component =====//
-                  pw.Expanded(
-                    flex: 33,
-                    child: pw.ConstrainedBox(
-                      constraints: const pw.BoxConstraints(
-                        minWidth: double.infinity,
-                        minHeight: 839,
-                        // maxHeight: double.infinity,
-                      ),
-                      child: contactInfoComponent(
-                        userData: userData,
-                        studentData: studentProfileData,
-                      ),
-                    ),
-                    // ),
-                  ),
-                  // ===== Contact Info Component =====//
-
-                  // /===== Personal Info Component =====//
-                  pw.Expanded(
-                    flex: 67,
-                    child: personalInfoComponent(
-                      studentData: studentProfileData,
-                      profileData: profileData,
-                    ),
-                  ),
-                  // ===== Personal Info Component =====//
-                ],
+              pw.Expanded(
+                flex: 33,
+                child: pw.Container(
+                  color: PdfColor.fromHex('#364454'),
+                ),
               ),
+              pw.Expanded(
+                flex: 67,
+                child: pw.Container(color: PdfColors.white),
+              )
             ],
           ),
-        ],
+          // theme: pw.ThemeData.withFont(base: regular, italic: italic, bold: bold, boldItalic: boldItalic),
+        ),
+        build: (context) {
+          return [
+            pw.Partitions(
+              children: [
+                pw.Partition(
+                  flex: 33,
+                  child: pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      contactInfoComponent(
+                        userData: userData,
+                        studentData: studentData,
+                      ),
+                    ],
+                  ),
+                ),
+                pw.Partition(
+                  flex: 67,
+                  child: pw.Container(
+                    padding: const pw.EdgeInsets.symmetric(
+                      horizontal: 10.0 * PdfPageFormat.mm,
+                      vertical: 12.0 * PdfPageFormat.mm,
+                    ),
+                    child: pw.Wrap(
+                      children: [
+                        ///===== Job Title Component =====//
+                        textWidgetPdf(
+                          text: '$jobTitle',
+                          fontSize: 20.0,
+                          fontWeight: pw.FontWeight.bold,
+                          fontColor: PdfColor.fromHex('#fda10d'),
+                        ),
+                        //===== Job Title Component =====//
+
+                        ///===== Description Component =====//
+                        infoSectionComponent(
+                          title: 'Description',
+                          contentWidget: textWidgetPdf(
+                            text: '${profileData!.description}',
+                            topPadding: 2.0,
+                            bottomPadding: 4.0,
+                          ),
+                        ),
+                        //===== Description Component =====//
+
+                        ///===== Education Component =====//
+                        textWidgetPdf(
+                          text: 'Education',
+                          fontSize: 16.0,
+                          fontWeight: pw.FontWeight.bold,
+                          fontColor: PdfColors.grey700,
+                          topPadding: 2.0,
+                        ),
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 2.0,
+                          dividerThickness: 0.5,
+                          isDivider: true,
+                          dividerColor: PdfColors.grey500,
+                        ),
+                        for (var data in studentData!.educations!)
+                          sectionCardComponent(
+                            textTitle: data.school!.name,
+                            textLocation: '${data.degree}, ${data.name}',
+                            textDate:
+                                '${data.attendedFromTo} at ${data.schoolCityAndCountry}',
+                            textDescription: data.description,
+                          ),
+                        //===== Education Component =====//
+
+                        ///===== Professional Experiences Component =====//
+                        if (studentData.experiences!.isNotEmpty)
+                          textWidgetPdf(
+                            text: 'Professional Experiences',
+                            fontSize: 16.0,
+                            fontWeight: pw.FontWeight.bold,
+                            fontColor: PdfColors.grey700,
+                            topPadding: 2.0,
+                          ),
+                        if (studentData.experiences!.isNotEmpty)
+                          sizeBoxPdf(
+                            width: double.infinity,
+                            height: 2.0,
+                            dividerThickness: 0.5,
+                            isDivider: true,
+                            dividerColor: PdfColors.grey500,
+                          ),
+                        if (studentData.experiences!.isNotEmpty)
+                          for (var data in studentData.experiences!)
+                            if (data.type == AppStrings.professionalKey)
+                              sectionCardComponent(
+                                textTitle: '${data.name}',
+                                textLocation: '${data.company}',
+                                textDate:
+                                    '${data.attendedFromTo} at ${data.companyCityAndCountry}',
+                                textDescription: data.description,
+                              ),
+                        //===== Professional Experiences Component =====//
+
+                        ///===== Personal Experiences Component =====//
+                        if (studentData.experiences!.isNotEmpty)
+                          textWidgetPdf(
+                            text: 'Personal Experiences',
+                            fontSize: 16.0,
+                            fontWeight: pw.FontWeight.bold,
+                            fontColor: PdfColors.grey700,
+                            topPadding: 2.0,
+                          ),
+                        if (studentData.experiences!.isNotEmpty)
+                          sizeBoxPdf(
+                            width: double.infinity,
+                            height: 2.0,
+                            dividerThickness: 0.5,
+                            isDivider: true,
+                            dividerColor: PdfColors.grey500,
+                          ),
+                        if (studentData.experiences!.isNotEmpty)
+                          for (var data in studentData.experiences!)
+                            if (data.type == AppStrings.personalKey)
+                              sectionCardComponent(
+                                textTitle: '${data.name}',
+                                textLocation: '${data.company}',
+                                textDate:
+                                    '${data.attendedFromTo} at ${data.companyCityAndCountry}',
+                                textDescription: data.description,
+                              ),
+                        //===== Personal Experiences Component =====//
+
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 1.0,
+                        ),
+
+                        ///===== Skills Component =====//
+                        if (studentData.skills!.isNotEmpty)
+                          textWidgetPdf(
+                            text: 'Skills',
+                            fontSize: 16.0,
+                            fontWeight: pw.FontWeight.bold,
+                            fontColor: PdfColors.grey700,
+                            topPadding: 2.0,
+                          ),
+                        if (studentData.skills!.isNotEmpty)
+                          sizeBoxPdf(
+                            width: double.infinity,
+                            height: 2.0,
+                            dividerThickness: 0.5,
+                            isDivider: true,
+                            dividerColor: PdfColors.grey500,
+                          ),
+                        if (studentData.skills!.isNotEmpty)
+                          buildPdfSkillList(dataList: studentData.skills),
+                        //===== Skills Component =====//
+
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 1.0,
+                        ),
+
+                        ///===== Languages Component =====//
+                        if (studentData.spokenLanguages!.isNotEmpty)
+                          textWidgetPdf(
+                            text: 'Languages',
+                            fontSize: 16.0,
+                            fontWeight: pw.FontWeight.bold,
+                            fontColor: PdfColors.grey700,
+                            topPadding: 4.0,
+                          ),
+                        if (studentData.spokenLanguages!.isNotEmpty)
+                          sizeBoxPdf(
+                            width: double.infinity,
+                            height: 2.0,
+                            dividerThickness: 0.5,
+                            isDivider: true,
+                            dividerColor: PdfColors.grey500,
+                          ),
+                        if (studentData.spokenLanguages!.isNotEmpty)
+                          pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              sizeBoxPdf(height: 2.0),
+                              for (var data in studentData.spokenLanguages!)
+                                textWidgetPdf(
+                                  text: '- ${data.label}',
+                                ),
+                            ],
+                          ),
+                        //===== Languages Component =====//
+
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 1.0,
+                        ),
+
+                        ///===== Achievements Component =====//
+                        if (studentData.achievements!.isNotEmpty)
+                          textWidgetPdf(
+                            text: 'Achievements',
+                            fontSize: 16.0,
+                            fontWeight: pw.FontWeight.bold,
+                            fontColor: PdfColors.grey700,
+                            topPadding: 2.0,
+                          ),
+                        if (studentData.achievements!.isNotEmpty)
+                          sizeBoxPdf(
+                            width: double.infinity,
+                            height: 2.0,
+                            dividerThickness: 0.5,
+                            isDivider: true,
+                            dividerColor: PdfColors.grey500,
+                          ),
+                        if (studentData.achievements!.isNotEmpty)
+                          for (var data in studentData.achievements!)
+                            sectionCardComponent(
+                              textTitle: '${data.name}',
+                              textDate: '${data.dateCompletionFormat}',
+                              textDescription: data.description,
+                            ),
+                        //===== Achievements Component =====//
+
+                        sizeBoxPdf(
+                          width: double.infinity,
+                          height: 1.0,
+                        ),
+
+                        ///===== Certificates Component =====//
+                        if (studentData.certificates!.isNotEmpty)
+                          textWidgetPdf(
+                            text: 'Certificates',
+                            fontSize: 16.0,
+                            fontWeight: pw.FontWeight.bold,
+                            fontColor: PdfColors.grey700,
+                            topPadding: 4.0,
+                          ),
+                        if (studentData.certificates!.isNotEmpty)
+                          sizeBoxPdf(
+                            width: double.infinity,
+                            height: 2.0,
+                            dividerThickness: 0.5,
+                            isDivider: true,
+                            dividerColor: PdfColors.grey500,
+                          ),
+                        if (studentData.certificates!.isNotEmpty)
+                          for (var data in studentData.certificates!)
+                            sectionCardComponent(
+                              textTitle: '${data.title}',
+                              textDate: '${data.receivedDateFormat}',
+                              textDescription: data.description,
+                            ),
+                        //===== Certificates Component =====//
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ];
+        },
       ),
     );
 
@@ -341,6 +322,43 @@ class CVGenerate {
               : pw.Container(),
         )
     ];
+  }
+
+  pw.Widget buildPdfSkillList({
+    List<SkillModel>? dataList,
+    String? dataType,
+  }) {
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        textWidgetPdf(
+          text: 'Hard skills',
+          fontSize: 12.0,
+          fontWeight: pw.FontWeight.bold,
+          fontColor: PdfColors.grey600,
+          topPadding: 2.0,
+        ),
+        for (var index = 0; index < dataList!.length; index++)
+          if (dataList[index].type == Type.hardSkill)
+            textWidgetPdf(
+              text:
+                  '${dataList[index].displayDashLabelAndCategory} - ${dataList[index].displayLevel}',
+            ),
+        sizeBoxPdf(),
+        textWidgetPdf(
+          text: 'Soft skills',
+          fontSize: 12.0,
+          fontWeight: pw.FontWeight.bold,
+          fontColor: PdfColors.grey600,
+          topPadding: 2.0,
+        ),
+        for (var index = 0; index < dataList.length; index++)
+          if (dataList[index].type == Type.softSkill)
+            textWidgetPdf(
+              text: '- ${dataList[index].label}',
+            ),
+      ],
+    );
   }
 
   pw.Widget contactInfoComponent({
@@ -371,6 +389,15 @@ class CVGenerate {
             //     fontWeight: FontWeight.bold,
             //   ),
             // ),
+            ///===== Profile Picture Component =====//
+            // pw.Center(
+            //   child: pw.Image(
+            //     networkImage('https://www.nfet.net/nfet.jpg')
+            //         as pw.ImageProvider,
+            //   ),
+            // ),
+            //===== Profile Picture Component =====//
+
             ///===== Full Name Component =====//
             textWidgetPdf(
               text: userData!.profile!.fullName,
@@ -521,47 +548,7 @@ class CVGenerate {
                 },
               ),
             ),
-            //   ],
-            // ),
 
-            // Column(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: studentData!.educations!
-            //       .map(
-            //         (e) => sectionCardComponent(
-            //           textTitle: e.school!.name,
-            //           textLocation: '${e.degree}, ${e.name}',
-            //           textDate:
-            //               '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
-            //           textDescription: e.description,
-            //         ),
-            //       )
-            //       .toList(),
-            // ),
-
-            //===== Education Component =====//
-
-            ///===== Professional Experiences Component =====//
-            // infoSectionComponent(
-            //   title: 'Professional Experiences',
-            //   contentWidget: pw.ListView.builder(
-            //     itemCount: studentData.experiences!.length,
-            //     itemBuilder: (context, index) {
-            //       final item = studentData.experiences![index];
-            //       return item.type == AppStrings.professionalKey
-            //           ? sectionCardComponent(
-            //               textTitle: item.name,
-            //               textLocation: '${item.company}',
-            //               textDate:
-            //                   '${item.attendedFromTo} at ${item.companyCityAndCountry}',
-            //               textDescription: item.description,
-            //             )
-            //           : pw.Container();
-            //     },
-            //   ),
-            // ),
-            // pw.Wrap(
-            //   children: [
             infoSectionComponent(
               title: 'Professional Experiences',
               contentWidget: pw.Column(
@@ -581,9 +568,6 @@ class CVGenerate {
                     .toList(),
               ),
             ),
-            //   ],
-            // ),
-
             //===== Professional Experiences Component =====//
 
             ///===== Personal Experiences Component =====//
@@ -610,7 +594,6 @@ class CVGenerate {
             //     ),
             //   ],
             // ),
-
             //===== Personal Experiences Component =====//
           ],
         ),
@@ -646,6 +629,9 @@ class CVGenerate {
   ///===== Scetion Card for PDF Component =====//
   pw.Column sectionCardComponent({
     String? textTitle = '',
+    double? textTitleFontSize = 12.0,
+    pw.FontWeight? textTitleFontWeight = pw.FontWeight.bold,
+    PdfColor textTitleColor = PdfColors.grey600,
     String? textLocation = '',
     String? textDate = '',
     String? textDescription = '',
@@ -655,21 +641,32 @@ class CVGenerate {
         children: [
           textWidgetPdf(
             text: '$textTitle',
-            fontSize: 12.0,
-            fontWeight: pw.FontWeight.bold,
-            fontColor: PdfColors.grey600,
+            fontSize: textTitleFontSize,
+            fontWeight: textTitleFontWeight,
+            fontColor: textTitleColor,
             topPadding: 4.0,
           ),
-          textWidgetPdf(
-            text: '$textLocation',
-          ),
-          textWidgetPdf(
-            text: '$textDate',
-          ),
-          textWidgetPdf(
-            text: '$textDescription',
-            bottomPadding: 4.0,
-          ),
+          if (textLocation == '')
+            pw.Container()
+          else
+            textWidgetPdf(
+              text: '$textLocation',
+              fontColor: PdfColors.grey700,
+            ),
+          if (textDate == '')
+            pw.Container()
+          else
+            textWidgetPdf(
+              fontColor: PdfColors.grey600,
+              text: '$textDate',
+            ),
+          if (textDescription == '')
+            pw.Container()
+          else
+            textWidgetPdf(
+              text: '$textDescription',
+              bottomPadding: 4.0,
+            ),
         ],
       );
   //===== Scetion Card for PDF Component =====//

@@ -51,6 +51,9 @@ class SkillModel {
   String? get displayLabelAndCategory =>
       category == null ? '• $label' : '• $label - $category';
 
+  String? get displayDashLabelAndCategory =>
+      category == null ? '- $label' : '- $label - $category';
+
   factory SkillModel.fromRawJson(String str) => SkillModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
       );

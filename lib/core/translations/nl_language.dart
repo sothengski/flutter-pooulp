@@ -316,6 +316,10 @@ const Map<String, String> nlNL = {
   'profile.dayNotAvailable': "@day niet beschikbaar",
   'profile.shareInfoMsg':
       "Ik accepteer om mijn informatie te delen met ondernemingen waarmee ik match.",
+  'profile.jobTitle': "Functietitel",
+  'profile.jobTitleHint': "Voer de functie in",
+  'profile.generateCV': "genereer CV",
+
   //messaging
   'messaging.messagingHint': "Schrijf je bericht...",
   'messaging.noMessages': "Geen berichten hier nog...",

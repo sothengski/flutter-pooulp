@@ -313,6 +313,9 @@ const Map<String, String> enUS = {
   'profile.dayNotAvailable': "@day not available",
   'profile.shareInfoMsg':
       "I accept to share my informations with enterprises that I match with.",
+  'profile.jobTitle': "Job Title",
+  'profile.jobTitleHint': "Enter the Job Title",
+  'profile.generateCV': "generate CV",
   //messaging
   'messaging.messagingHint': "Type your message...",
   'messaging.noMessages': "No messages here yet...",

@@ -37,10 +37,12 @@ Future urlLauncherUtils({
   } else {
     if (laucherType == LauncherType.phone) {
       final Uri launchUri = Uri(
-        scheme: Platform.isIOS ? "tel://" : 'tel:',
+        // scheme: Platform.isIOS ? "tel://" : "tel:",
+        scheme: 'tel',
         path: thingToLaunch,
       );
-      thingWillLaunch = launchUri.toString();
+      thingWillLaunch =
+          "${Platform.isIOS ? "tel://" : "tel:"}${launchUri.path}";
       // thingWillLaunch = 'tel://$thingToLaunch';
 
       // await _urlLauncher(url: launchUri.toString());

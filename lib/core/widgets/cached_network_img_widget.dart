@@ -12,6 +12,7 @@ class CachedNetworkImgWidget extends StatelessWidget {
   final IconData iconData;
   final String? logoAsText;
   final String? defaultImg;
+  final bool? isCircle;
 
   const CachedNetworkImgWidget({
     this.imgUrl = '',
@@ -21,6 +22,7 @@ class CachedNetworkImgWidget extends StatelessWidget {
     this.iconData = Icons.image_outlined,
     this.logoAsText = '',
     this.defaultImg = '',
+    this.isCircle = false,
     Key? key,
   }) : super(key: key);
 
@@ -35,14 +37,16 @@ class CachedNetworkImgWidget extends StatelessWidget {
             ) =>
                 Container(
               decoration: BoxDecoration(
-                // shape: BoxShape.circle,
+                shape: isCircle == true ? BoxShape.circle : BoxShape.rectangle,
                 border: Border.all(
                   color: ColorsManager.white,
                   width: 0,
                 ),
-                borderRadius: BorderRadius.circular(
-                  borderRadius!,
-                ),
+                borderRadius: isCircle == true
+                    ? null
+                    : BorderRadius.circular(
+                        borderRadius!,
+                      ),
                 image: DecorationImage(
                   image: imageProvider,
                   fit: BoxFit.fitHeight,

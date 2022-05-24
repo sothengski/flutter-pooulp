@@ -45,7 +45,8 @@ class RoomCard extends StatelessWidget {
                 imgUrl: imgUrl,
                 iconSize: 30,
                 logoAsText: shortName,
-                borderRadius: 30,
+                borderRadius: 100,
+                isCircle: true,
               ),
             ),
             //===== Image Component =====//

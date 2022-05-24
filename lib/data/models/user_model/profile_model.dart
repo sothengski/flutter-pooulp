@@ -109,6 +109,9 @@ class ProfileModel {
 
   String? get birthDateFormat => dateFormatSlashDDMMYYYY(date: birthDate);
 
+  String? get companyAddress =>
+      addressStreet!.isNotEmpty ? '$addressStreet, ' : '';
+
   factory ProfileModel.fromRawJson(String str) =>
       ProfileModel.fromJson(json.decode(str) as Map<String, dynamic>);
 

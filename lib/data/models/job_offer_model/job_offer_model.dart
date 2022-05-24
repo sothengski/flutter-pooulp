@@ -93,15 +93,16 @@ class JobOfferModel {
       '${enterprise!.name} ($companyLocation)';
 
   String? get companyLocation =>
-      '${enterprise!.addressCity}, ${enterprise!.addressCountry}';
+      "${enterprise!.addressCity!.isNotEmpty ? '${enterprise!.addressCity}, ' : ''}${enterprise!.addressCountry}";
 
   String? get companyNameAndJobOfferOffice =>
-      '${enterprise!.name} ($jobOfferOffice)';
+      "${enterprise!.name} ${jobOfferOffice!.isEmpty ? '' : '($jobOfferOffice)'}";
 
-  String? get jobOfferOffice => '$addressCity, $addressCountry';
+  String? get jobOfferOffice =>
+      "${addressCity!.isNotEmpty ? '$addressCity, ' : ''}$addressCountry";
 
   String? get jobOfferFullOfficeAddress =>
-      '$addressStreet, $addressCity, $addressCountry';
+      "${addressStreet!.isNotEmpty ? '$addressStreet, ' : ''}${addressCity!.isNotEmpty ? '$addressCity, ' : ''}$addressCountry";
 
   String? get workPlaceType =>
       telecommuting == 1 ? 'offer.remote'.tr : 'offer.onSite'.tr;

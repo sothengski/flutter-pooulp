@@ -77,7 +77,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           text1Color: ColorsManager.primary,
                           text1FontSize: AppSize.s16,
                           text2:
-                              '${jobOfferDetail.companyLocation} (${jobOfferDetail.workPlaceType})',
+                              '${jobOfferDetail.companyLocation}(${jobOfferDetail.workPlaceType})',
                           leftWidget: CustomBoxWidget(
                             size: 50,
                             isCircle: true,
@@ -501,7 +501,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomTextWidget(
                               text:
-                                  '${jobOfferDetail.enterprise!.addressStreet}, ${jobOfferDetail.companyLocation}',
+                                  '${jobOfferDetail.enterprise!.companyAddress}${jobOfferDetail.companyLocation}',
                               fontWeight: FontWeightManager.regular,
                               maxLine: 3,
                             ),

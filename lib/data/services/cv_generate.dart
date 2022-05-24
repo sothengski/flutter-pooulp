@@ -22,13 +22,13 @@ class CVGenerate {
       pw.MultiPage(
         // pageFormat: PdfPageFormat.a4,
         pageTheme: pw.PageTheme(
-          margin: const pw.EdgeInsets.all(1.0),
+          margin: pw.EdgeInsets.zero,
           buildBackground: (pw.Context context) => pw.Row(
             children: [
               pw.Expanded(
                 flex: 33,
                 child: pw.Container(
-                  color: PdfColor.fromHex('#364454'),
+                  color: PdfColor.fromHex('#000E8A'),
                 ),
               ),
               pw.Expanded(
@@ -367,11 +367,11 @@ class CVGenerate {
           horizontal: 10.0 * PdfPageFormat.mm,
           vertical: 12.0 * PdfPageFormat.mm,
         ),
-        decoration: pw.BoxDecoration(
-          color: PdfColor.fromHex('#364454'),
-          // border:
-          //     BoxBorder(bottom: true, width: 0.5, color: PdfColors.grey)
-        ),
+        // decoration: pw.BoxDecoration(
+        //   color: PdfColor.fromHex('#364454'),
+        // border:
+        //     BoxBorder(bottom: true, width: 0.5, color: PdfColors.grey)
+        // ),
         child: pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
@@ -450,34 +450,47 @@ class CVGenerate {
             //===== Phone Number Component =====//
 
             ///===== Birth Date Component =====//
-            textWidgetPdf(
-              text: 'Birthdate: ${userData.profile!.birthDateFormat}',
-              fontColor: PdfColors.white,
-            ),
+            if (userData.profile!.birthDate != null)
+              textWidgetPdf(
+                text: 'Birthdate: ${userData.profile!.birthDateFormat}',
+                fontColor: PdfColors.white,
+              ),
             //===== Birth Date Component =====//
 
             ///===== LinkedIn Profile Component =====//
-            textWidgetPdf(
-              text: 'LinkedIn profile:',
-              fontColor: PdfColors.white,
-              topPadding: 4.0,
-            ),
-            textWidgetPdf(
-              text: '${studentData!.linkedinLink}',
-              fontColor: PdfColors.white,
-            ),
+            if (studentData!.linkedinLink!.isNotEmpty)
+              pw.Wrap(
+                children: [
+                  textWidgetPdf(
+                    text: 'LinkedIn profile:',
+                    fontColor: PdfColors.white,
+                    topPadding: 4.0,
+                  ),
+                  textWidgetPdf(
+                    text: '${studentData.linkedinLink}',
+                    fontColor: PdfColors.white,
+                  ),
+                ],
+              ),
+
             //===== LinkedIn Profile Component =====//
 
             ///===== Video Presentation Link Component =====//
-            textWidgetPdf(
-              text: 'Video presentation link:',
-              fontColor: PdfColors.white,
-              topPadding: 4.0,
-            ),
-            textWidgetPdf(
-              text: '${studentData.youtubeLink}',
-              fontColor: PdfColors.white,
-            ),
+            if (studentData.youtubeLink!.isNotEmpty)
+              pw.Wrap(
+                children: [
+                  textWidgetPdf(
+                    text: 'Video presentation link:',
+                    fontColor: PdfColors.white,
+                    topPadding: 4.0,
+                  ),
+                  textWidgetPdf(
+                    text: '${studentData.youtubeLink}',
+                    fontColor: PdfColors.white,
+                  ),
+                ],
+              ),
+
             //===== Video Presentation Link Component =====//
           ],
         ),

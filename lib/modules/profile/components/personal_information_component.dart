@@ -217,10 +217,13 @@ class PersonalInformationComponent extends StatelessWidget {
                       text2: '${studentProfileModel!.linkedinLink} ',
                       // isLauching: true,
                       text2Color: ColorsManager.blue,
-                      bottomPadding: 8.0,
+                      // bottomPadding: 8.0,
                       leftWidget: const CustomBoxWidget(
-                        child: Image(
-                          image: AssetImage(AssetsManager.linkedInLogo1),
+                        child: SizedBox(
+                          height: AppSize.s20,
+                          child: Image(
+                            image: AssetImage(AssetsManager.linkedInLogo1),
+                          ),
                         ),
                         // Icon(
                         //   Icons.video_library_outlined,

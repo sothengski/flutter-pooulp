@@ -316,6 +316,7 @@ const Map<String, String> enUS = {
   'profile.jobTitle': "Job Title",
   'profile.jobTitleHint': "Enter the Job Title",
   'profile.generateCV': "generate CV",
+  'profile.soon': "soon",
   //messaging
   'messaging.messagingHint': "Type your message...",
   'messaging.noMessages': "No messages here yet...",

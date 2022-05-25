@@ -320,7 +320,7 @@ const Map<String, String> frFR = {
   'profile.jobTitle': "Titre d'emploi",
   'profile.jobTitleHint': "Entrez le titre du poste",
   'profile.generateCV': "Générer CV",
-
+  'profile.soon': "bientôt",
   //messaging
   'messaging.messagingHint': "Tapez votre message...",
   'messaging.noMessages': "Pas de messages ici encore...",

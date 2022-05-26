@@ -69,7 +69,11 @@ class OnboardingPage extends GetView<OnboardingController> {
                                             () => TextCardClickableWidget(
                                               size: 50.0,
                                               bottomMargin: AppSize.s40,
+                                              topPadding: 0.0,
+                                              bottomPadding: 0.0,
+                                              rightPadding: 0.0,
                                               text: item.label,
+                                              // rightTopText: 'profile.soon'.tr,
                                               maxLine:
                                                   controller.isUpdate.value ==
                                                           true

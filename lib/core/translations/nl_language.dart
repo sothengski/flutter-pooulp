@@ -319,7 +319,7 @@ const Map<String, String> nlNL = {
   'profile.jobTitle': "Functietitel",
   'profile.jobTitleHint': "Voer de functie in",
   'profile.generateCV': "genereer CV",
-
+  'profile.soon': "spoedig",
   //messaging
   'messaging.messagingHint': "Schrijf je bericht...",
   'messaging.noMessages': "Geen berichten hier nog...",

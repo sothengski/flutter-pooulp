@@ -221,8 +221,8 @@ class ProfileHeaderComponent extends StatelessWidget {
                       // color: ColorsManager.primaryBlue,
                       fontSize: AppSize.s20,
                       fontWeight: FontWeight.bold,
-                      marginTop: AppSize.s2,
-                      marginBottom: AppSize.s4,
+                      marginTop: AppSize.s20,
+                      // marginBottom: AppSize.s4,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

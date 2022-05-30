@@ -23,7 +23,7 @@ class PersonalInformationComponent extends StatelessWidget {
     return CustomContainerWidget(
       leftMargin: AppSize.s16,
       rightMargin: AppSize.s16,
-      topMargin: AppSize.s12,
+      // topMargin: AppSize.s12,
       bottomMargin: AppSize.s12,
       leftTitle: 'profile.information'.tr.toUpperCase(),
       titleFontSize: AppSize.s16,

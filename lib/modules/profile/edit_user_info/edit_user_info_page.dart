@@ -282,114 +282,129 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         ),
                       ),
                       //===== Bottom of Birthday Component =====//
+                      const SizedBox(height: AppSize.s12),
 
                       ///===== Top of Phone Number Component =====//
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            flex: 40,
-                            child: ContainerDialogWidget(
-                              inputTitle: 'auth.phoneNumber'.tr,
-                              dialogType: DialogType.bottomSheetDialog,
-                              dialogWidget: Container(
-                                height: getHeight,
-                                decoration: const ShapeDecoration(
-                                  color: ColorsManager.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(
-                                        16,
+                          CustomTextWidget(
+                            text: 'auth.phoneNumber'.tr,
+                            // marginTop: inputTitleMarginTop,
+                            textAlign: TextAlign.left,
+                            // marginBottom: inputTitleMarginBottom,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 40,
+                                child: ContainerDialogWidget(
+                                  // inputTitle: 'auth.phoneNumber'.tr,
+                                  dialogType: DialogType.bottomSheetDialog,
+                                  dialogWidget: Container(
+                                    height: getHeight,
+                                    decoration: const ShapeDecoration(
+                                      color: ColorsManager.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(
+                                            16,
+                                          ),
+                                          topRight: Radius.circular(
+                                            16,
+                                          ),
+                                        ),
                                       ),
-                                      topRight: Radius.circular(
-                                        16,
+                                    ),
+                                    child: Obx(
+                                      () => CountryListSelector(
+                                        countrylist: countryList,
+                                        selectedCountry: controller
+                                            .selectedCountryPhoneNumber.value,
+                                        onTap: (country) {
+                                          controller
+                                              .selectedCountryPhoneNumberOnClick(
+                                            country,
+                                          );
+                                          Navigator.pop(
+                                            context,
+                                            true,
+                                          ); // Issue:: It's not working properly on first click with Get.back();
+                                        },
                                       ),
                                     ),
                                   ),
-                                ),
-                                child: Obx(
-                                  () => CountryListSelector(
-                                    countrylist: countryList,
-                                    selectedCountry: controller
-                                        .selectedCountryPhoneNumber.value,
-                                    onTap: (country) {
-                                      controller
-                                          .selectedCountryPhoneNumberOnClick(
-                                        country,
-                                      );
-                                      Navigator.pop(
-                                        context,
-                                        true,
-                                      ); // Issue:: It's not working properly on first click with Get.back();
-                                    },
+                                  containerWidget: Obx(
+                                    () => controller.selectedCountryPhoneNumber
+                                                .value.phoneCode ==
+                                            null
+                                        ? RowContentInputWidget(
+                                            centerWidget: CustomTextWidget(
+                                              text: 'auth.countryCode'.tr,
+                                              color: ColorsManager.grey400,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 16.0,
+                                            ),
+                                          )
+                                        : RowContentInputWidget(
+                                            prefixWidgetFlex: 25,
+                                            prefixWidget: CircleFlag(
+                                              controller
+                                                  .selectedCountryPhoneNumber
+                                                  .value
+                                                  .isoCode
+                                                  .toString(),
+                                            ),
+                                            prefixWidgetRightPadding:
+                                                AppSize.s12,
+                                            centerWidgetFlex: 75,
+                                            centerWidget: CustomTextWidget(
+                                              //marginLeft: 4.0,
+                                              text: controller
+                                                  .selectedCountryPhoneNumber
+                                                  .value
+                                                  .phoneCode,
+                                              color: ColorsManager.black,
+                                              fontSize: 16.0,
+                                            ),
+                                          ),
                                   ),
                                 ),
                               ),
-                              containerWidget: Obx(
-                                () => controller.selectedCountryPhoneNumber
-                                            .value.phoneCode ==
-                                        null
-                                    ? RowContentInputWidget(
-                                        centerWidget: CustomTextWidget(
-                                          text: 'auth.countryCode'.tr,
-                                          color: ColorsManager.grey400,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.0,
-                                        ),
-                                      )
-                                    : RowContentInputWidget(
-                                        prefixWidgetFlex: 25,
-                                        prefixWidget: CircleFlag(
-                                          controller.selectedCountryPhoneNumber
-                                              .value.isoCode
-                                              .toString(),
-                                        ),
-                                        prefixWidgetRightPadding: AppSize.s12,
-                                        centerWidgetFlex: 75,
-                                        centerWidget: CustomTextWidget(
-                                          //marginLeft: 4.0,
-                                          text: controller
-                                              .selectedCountryPhoneNumber
-                                              .value
-                                              .phoneCode,
-                                          color: ColorsManager.black,
-                                          fontSize: 16.0,
-                                        ),
+                              const SizedBox(
+                                width: AppSize.s8,
+                              ),
+                              Expanded(
+                                flex: 60,
+                                child: CustomTextInput(
+                                  controller: controller.phoneNumberCtrl,
+                                  // inputTitle: "",
+                                  hintText: 'auth.phoneNumberHint'.tr,
+                                  keyboardType: TextInputType.phone,
+                                  isFilled: true,
+                                  // topPadding: AppSize.s12,
+                                  leftPadding: AppSize.s4,
+                                  validator: Validator().notEmptyValidator,
+                                  // validator: (_) =>
+                                  //     controller.isPhoneNumberValidate(
+                                  //   isPhoneNumberField: true,
+                                  // ),
+                                  maxLength: 13,
+                                  inputFormatterList: [
+                                    FilteringTextInputFormatter.deny(
+                                      RegExp(
+                                        Validator.avoidSpaceRegExpPattern,
                                       ),
+                                    ),
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(
+                                        Validator.numberRegExpPattern,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: AppSize.s8,
-                          ),
-                          Expanded(
-                            flex: 60,
-                            child: CustomTextInput(
-                              controller: controller.phoneNumberCtrl,
-                              inputTitle: "",
-                              hintText: 'auth.phoneNumberHint'.tr,
-                              keyboardType: TextInputType.phone,
-                              isFilled: true,
-                              topPadding: AppSize.s12,
-                              leftPadding: AppSize.s4,
-                              validator: Validator().notEmptyValidator,
-                              // validator: (_) =>
-                              //     controller.isPhoneNumberValidate(
-                              //   isPhoneNumberField: true,
-                              // ),
-                              maxLength: 13,
-                              inputFormatterList: [
-                                FilteringTextInputFormatter.deny(
-                                  RegExp(
-                                    Validator.avoidSpaceRegExpPattern,
-                                  ),
-                                ),
-                                FilteringTextInputFormatter.allow(
-                                  RegExp(
-                                    Validator.numberRegExpPattern,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            ],
                           ),
                         ],
                       ),

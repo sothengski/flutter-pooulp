@@ -55,8 +55,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                 child: pageData.pageIndex == 0
                                     ? ListView.builder(
                                         shrinkWrap: true,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
+                                        // physics:
+                                        //     const NeverScrollableScrollPhysics(),
                                         itemCount: controller
                                             .onboardingPages[pageIndex]
                                             .selectionItems!
@@ -102,8 +102,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     : pageData.pageIndex == 1
                                         ? GridView.builder(
                                             shrinkWrap: true,
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
+                                            // physics:
+                                            //     const NeverScrollableScrollPhysics(),
                                             gridDelegate:
                                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,

@@ -166,39 +166,39 @@ class OnboardingController extends GetxController
       if (!interestedInSelectionListPage1.value.selectionItems!
           .contains(itemToBeAdd)) {
         interestedInSelectionListPage1.value.selectionItems!.add(itemToBeAdd!);
-        for (final fieldItem in onboardingPages) {
-          if (fieldItem.pageIndex == pageIndex! + 1) {
-            goodAtListSelectionPage2BasedonPage1.value.selectionItems!.add(
-              fieldItem.selectionItems!
-                  .firstWhere((element) => element.id == itemToBeAdd.id),
-            );
-            final tempGoodAtfieldList = <FieldModel>{};
-            for (final subField
-                in goodAtListSelectionPage2BasedonPage1.value.selectionItems!) {
-              tempGoodAtfieldList.addAll(subField.subFieldList!);
-            }
-            goodAtfieldList!.clear();
+        // for (final fieldItem in onboardingPages) {
+        // if (fieldItem.pageIndex == pageIndex! + 1) {
+        //   goodAtListSelectionPage2BasedonPage1.value.selectionItems!.add(
+        //     fieldItem.selectionItems!
+        //         .firstWhere((element) => element.id == itemToBeAdd.id),
+        //   );
+        //   final tempGoodAtfieldList = <FieldModel>{};
+        //   for (final subField
+        //       in goodAtListSelectionPage2BasedonPage1.value.selectionItems!) {
+        //     tempGoodAtfieldList.addAll(subField.subFieldList!);
+        //   }
+        //   goodAtfieldList!.clear();
 
-            /// remove duplicate fieldItem based on ID
-            for (final item in tempGoodAtfieldList) {
-              final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
-              if (i <= -1) {
-                goodAtfieldList!.add(item);
-              }
-            }
-            // debugPrint(
-            //   'goodAtListSelectionPage2BasedonPage1:: $goodAtListSelectionPage2BasedonPage1',
-            // );
-            // print(
-            //   'add:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.length}',
-            // );
-            // print(
-            //   'add:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.map(
-            //     (e) => e.subFieldList!.length,
-            //   )}',
-            // );
-          }
-        }
+        //   /// remove duplicate fieldItem based on ID
+        //   for (final item in tempGoodAtfieldList) {
+        //     final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
+        //     if (i <= -1) {
+        //       goodAtfieldList!.add(item);
+        //     }
+        //   }
+        //   // debugPrint(
+        //   //   'goodAtListSelectionPage2BasedonPage1:: $goodAtListSelectionPage2BasedonPage1',
+        //   // );
+        //   // print(
+        //   //   'add:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.length}',
+        //   // );
+        //   // print(
+        //   //   'add:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.map(
+        //   //     (e) => e.subFieldList!.length,
+        //   //   )}',
+        //   // );
+        // }
+        // }
 
         // print('add:');
       } else if (interestedInSelectionListPage1.value.selectionItems!
@@ -207,35 +207,35 @@ class OnboardingController extends GetxController
             .removeWhere((element) => element.id == itemToBeAdd!.id);
         // print('remove:');
 
-        for (final fieldItem in onboardingPages) {
-          if (fieldItem.pageIndex == pageIndex! + 1) {
-            goodAtListSelectionPage2BasedonPage1.value.selectionItems!
-                .removeWhere(
-              (element) => element.id == itemToBeAdd!.id,
-            );
-            final tempGoodAtfieldList = <FieldModel>{};
-            for (final subField
-                in goodAtListSelectionPage2BasedonPage1.value.selectionItems!) {
-              tempGoodAtfieldList.addAll(subField.subFieldList!);
-            }
-            goodAtListSelectionPage2.value.selectionItems!.clear();
-            goodAtfieldList!.clear();
+        //   for (final fieldItem in onboardingPages) {
+        //     if (fieldItem.pageIndex == pageIndex! + 1) {
+        //       goodAtListSelectionPage2BasedonPage1.value.selectionItems!
+        //           .removeWhere(
+        //         (element) => element.id == itemToBeAdd!.id,
+        //       );
+        //       final tempGoodAtfieldList = <FieldModel>{};
+        //       for (final subField
+        //           in goodAtListSelectionPage2BasedonPage1.value.selectionItems!) {
+        //         tempGoodAtfieldList.addAll(subField.subFieldList!);
+        //       }
+        //       goodAtListSelectionPage2.value.selectionItems!.clear();
+        //       goodAtfieldList!.clear();
 
-            /// remove duplicate fieldItem based on ID
-            for (final item in tempGoodAtfieldList) {
-              final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
-              if (i <= -1) {
-                goodAtfieldList!.add(item);
-              }
-            }
-            // debugPrint(
-            //   'goodAtListSelectionPage2BasedonPage1:: $goodAtListSelectionPage2BasedonPage1',
-            // );
-            // print(
-            //   'remove:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.length}',
-            // );
-          }
-        }
+        //       /// remove duplicate fieldItem based on ID
+        //       for (final item in tempGoodAtfieldList) {
+        //         final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
+        //         if (i <= -1) {
+        //           goodAtfieldList!.add(item);
+        //         }
+        //       }
+        //       // debugPrint(
+        //       //   'goodAtListSelectionPage2BasedonPage1:: $goodAtListSelectionPage2BasedonPage1',
+        //       // );
+        //       // print(
+        //       //   'remove:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.length}',
+        //       // );
+        //     }
+        //   }
       }
     }
     if (pageIndex == 2) {

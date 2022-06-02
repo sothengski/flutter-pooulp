@@ -322,3 +322,51 @@ class Viewport {
       southwest: $southwest,
     )''';
 }
+
+class PlaceDetailModel {
+  final String? country;
+  final String? areaLevel1;
+  final String? areaLevel2;
+  final String? postalCode;
+  final String? fullAddress;
+  final double? lat;
+  final double? lng;
+
+  PlaceDetailModel({
+    this.country,
+    this.areaLevel1,
+    this.areaLevel2,
+    this.postalCode,
+    this.fullAddress,
+    this.lat,
+    this.lng,
+  });
+
+  factory PlaceDetailModel.fromRawJson(String str) =>
+      PlaceDetailModel.fromJson(json.decode(str) as Map<String, dynamic>);
+
+  String toRawJson() => json.encode(toJson());
+
+  factory PlaceDetailModel.fromJson(Map<String, dynamic> json) =>
+      PlaceDetailModel(
+        lat: json["lat"] as double?,
+        lng: json["lng"] as double?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "lat": lat,
+        "lng": lng,
+      };
+
+  @override
+  String toString() => '''
+    Location(
+      country: $country, 
+      areaLevel1: $areaLevel1,
+      areaLevel2: $areaLevel2, 
+      postalCode: $postalCode,
+      fullAddress: $fullAddress,
+      lat: $lat, 
+      lng: $lng,
+    )''';
+}

@@ -8,6 +8,7 @@ import '../../routes/routes.dart';
 class OnboardingController extends GetxController
     with StateMixin<Rx<OnboardingModel>> {
   final onboardingProvider = Get.find<OnboardingProvider>();
+  final placeApiProvider = Get.put(PlaceApiProvider());
 
   PageController pageController = PageController();
   RxInt selectedPageIndex = 0.obs;
@@ -38,6 +39,13 @@ class OnboardingController extends GetxController
   RxList<FieldModel> belgiumCitiesToField = <FieldModel>[].obs;
   RxList<FieldModel> belgiumCitiesToFieldSelected = <FieldModel>[].obs;
 
+  String? sessionToken = '';
+  PlaceDetailModel? placeDetail;
+  GooglePlaceSearchModel? results;
+
+  TextEditingController addressCtrl = TextEditingController();
+  RxInt radiusRxInt = 10.obs;
+
   // Rx<FieldModel> belgiumCitySelected = FieldModel(label: '').obs;
 
   @override
@@ -52,6 +60,8 @@ class OnboardingController extends GetxController
     await getOffersDataState();
     getBelgiumCities();
   }
+
+  void uuidTokenGenerator() => sessionToken = UuidGenerator().uuidV4();
 
   Future<void> getOffersDataState({bool? refresh}) async {
     change(null, status: RxStatus.loading());
@@ -285,27 +295,32 @@ class OnboardingController extends GetxController
     // debugPrint('goodAtListSelectionPage2: $goodAtListSelectionPage2');
     // debugPrint('languageSelectionListPage3: $languageSelectionListPage3');
     // debugPrint('belgiumCitiesToFieldSelected: $belgiumCitiesToFieldSelected');
-    if (belgiumCitiesToFieldSelected == [] ||
-        belgiumCitiesToFieldSelected.isEmpty) {
-      customSnackbar(
-        msgTitle: 'validator.requireFieldsMsg'.tr,
-        msgContent: '',
-        bgColor: ColorsManager.red,
-        duration: DurationConstant.d1500,
-      );
-    } else {
-      final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
-        offerTypePreferences: lookingForSelectionListPage0.value.selectionItems,
-        fieldPreferences: interestedInSelectionListPage1.value.selectionItems,
-        skills: goodAtListSelectionPage2.value.selectionItems,
-        languages: languageSelectionListPage3.value.selectionItems,
-        location: belgiumCitiesToFieldSelected.first.label,
-        locationLat: belgiumCitiesToFieldSelected.first.type,
-        locationLng: belgiumCitiesToFieldSelected.first.category,
-      );
-      // debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
-      submitDataToAPI(onboardingData: onboardingDataToBeAdd);
-    }
+    // if (belgiumCitiesToFieldSelected == [] ||
+    //     belgiumCitiesToFieldSelected.isEmpty) {
+    //   customSnackbar(
+    //     msgTitle: 'validator.requireFieldsMsg'.tr,
+    //     msgContent: '',
+    //     bgColor: ColorsManager.red,
+    //     duration: DurationConstant.d1500,
+    //   );
+    // } else {
+    final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
+      offerTypePreferences: lookingForSelectionListPage0.value.selectionItems,
+      fieldPreferences: interestedInSelectionListPage1.value.selectionItems,
+      skills: goodAtListSelectionPage2.value.selectionItems,
+      languages: languageSelectionListPage3.value.selectionItems,
+      location: 'beligum', //belgiumCitiesToFieldSelected.first.label,
+      locationLat: '12.111', // belgiumCitiesToFieldSelected.first.type,
+      locationLng: '51.999', //  belgiumCitiesToFieldSelected.first.category,
+      locationRadius: radiusRxInt.value,
+    );
+
+    debugPrint('placeDetail: $placeDetail');
+    // debugPrint('results: $results');
+
+    debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
+    // submitDataToAPI(onboardingData: onboardingDataToBeAdd);
+    // }
   }
 
   Future<void> submitDataToAPI({OnboardingModel? onboardingData}) async {

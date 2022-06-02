@@ -320,60 +320,171 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                   )
                                                 : pageData.pageIndex == 4
                                                     ? SingleChildScrollView(
-                                                        child: Wrap(
-                                                          children: controller
-                                                              .belgiumCitiesToField
-                                                              .map(
-                                                                (element) =>
-                                                                    Obx(
-                                                                  () => Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                      right:
-                                                                          AppSize
-                                                                              .s8,
-                                                                      bottom:
-                                                                          AppSize
-                                                                              .s12,
+                                                        child: Obx(
+                                                          () => Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              ///===== Top of Address Component =====//
+                                                              GestureDetector(
+                                                                onTap:
+                                                                    () async {
+                                                                  controller
+                                                                      .uuidTokenGenerator();
+                                                                  controller
+                                                                          .results =
+                                                                      await showSearch(
+                                                                    context:
+                                                                        context,
+                                                                    delegate:
+                                                                        OnBoardingAddressSearchBarWidget(
+                                                                      sessionToken:
+                                                                          UuidGenerator()
+                                                                              .uuidV4(),
                                                                     ),
-                                                                    child:
-                                                                        TextCardClickableWidget(
-                                                                      isCenterText:
-                                                                          false,
-                                                                      text: element
-                                                                          .label
-                                                                          .toString(),
-                                                                      maxLine: controller.isUpdate.value ==
-                                                                              true
-                                                                          ? 3
-                                                                          : 3,
-                                                                      fontSize:
-                                                                          AppSize
-                                                                              .s24,
-                                                                      itemList:
-                                                                          controller
-                                                                              .belgiumCitiesToFieldSelected,
-                                                                      item:
-                                                                          element,
-                                                                      onClick:
-                                                                          () {
+                                                                  );
+                                                                  debugPrint(
+                                                                    'results: ${controller.results}',
+                                                                  );
+                                                                },
+                                                                child:
+                                                                    AbsorbPointer(
+                                                                  child:
+                                                                      CustomTextInput(
+                                                                    controller:
                                                                         controller
-                                                                            .addOrRemoveDataInList(
-                                                                          pageIndex:
-                                                                              pageIndex,
-                                                                          itemToBeAdd:
-                                                                              element,
-                                                                        );
-                                                                      },
-                                                                    ),
+                                                                            .addressCtrl,
+                                                                    inputTitle:
+                                                                        "${'profile.city'.tr} / ${'profile.zipCode'.tr} *",
+                                                                    titleColor:
+                                                                        ColorsManager
+                                                                            .white,
+                                                                    hintText:
+                                                                        'profile.address'
+                                                                            .tr,
+                                                                    isFilled:
+                                                                        true,
+                                                                    isReadOnly:
+                                                                        true,
+                                                                    topContentPadding:
+                                                                        12.0,
+                                                                    bottomContentPadding:
+                                                                        12.0,
+                                                                    topPadding:
+                                                                        AppSize
+                                                                            .s12,
+                                                                    // counter: true,
+                                                                    maxLines: 5,
+                                                                    maxLength:
+                                                                        150,
+                                                                    keyboardType:
+                                                                        TextInputType
+                                                                            .multiline,
                                                                   ),
                                                                 ),
-                                                              )
-                                                              .toSet()
-                                                              .toList(),
+                                                              ),
+                                                              //===== Bottom of Address Component =====//
+
+                                                              ///===== Top of Radius Component =====//
+                                                              CustomTextWidget(
+                                                                text:
+                                                                    "Radius: ${controller.radiusRxInt.value} Km",
+                                                                color:
+                                                                    ColorsManager
+                                                                        .white,
+                                                                marginTop:
+                                                                    AppSize.s32,
+                                                              ),
+                                                              Slider(
+                                                                value: controller
+                                                                    .radiusRxInt
+                                                                    .value
+                                                                    .toDouble(),
+                                                                max: 100.0,
+                                                                divisions: 100,
+                                                                activeColor:
+                                                                    ColorsManager
+                                                                        .primary,
+                                                                inactiveColor:
+                                                                    ColorsManager
+                                                                        .grey300,
+                                                                thumbColor:
+                                                                    ColorsManager
+                                                                        .primary,
+                                                                label:
+                                                                    '${controller.radiusRxInt.value}',
+                                                                onChanged: (
+                                                                  double
+                                                                      newValue,
+                                                                ) {
+                                                                  controller
+                                                                          .radiusRxInt
+                                                                          .value =
+                                                                      newValue
+                                                                          .toInt();
+                                                                },
+                                                              ),
+                                                              //===== Bottom of Radius Component =====//
+                                                            ],
+                                                          ),
                                                         ),
                                                       )
+                                                    // SingleChildScrollView(
+                                                    //     child: Wrap(
+                                                    //       children: controller
+                                                    //           .belgiumCitiesToField
+                                                    //           .map(
+                                                    //             (element) =>
+                                                    //                 Obx(
+                                                    //               () => Padding(
+                                                    //                 padding:
+                                                    //                     const EdgeInsets
+                                                    //                         .only(
+                                                    //                   right:
+                                                    //                       AppSize
+                                                    //                           .s8,
+                                                    //                   bottom:
+                                                    //                       AppSize
+                                                    //                           .s12,
+                                                    //                 ),
+                                                    //                 child:
+                                                    //                     TextCardClickableWidget(
+                                                    //                   isCenterText:
+                                                    //                       false,
+                                                    //                   text: element
+                                                    //                       .label
+                                                    //                       .toString(),
+                                                    //                   maxLine: controller.isUpdate.value ==
+                                                    //                           true
+                                                    //                       ? 3
+                                                    //                       : 3,
+                                                    //                   fontSize:
+                                                    //                       AppSize
+                                                    //                           .s24,
+                                                    //                   itemList:
+                                                    //                       controller
+                                                    //                           .belgiumCitiesToFieldSelected,
+                                                    //                   item:
+                                                    //                       element,
+                                                    //                   onClick:
+                                                    //                       () {
+                                                    //                     controller
+                                                    //                         .addOrRemoveDataInList(
+                                                    //                       pageIndex:
+                                                    //                           pageIndex,
+                                                    //                       itemToBeAdd:
+                                                    //                           element,
+                                                    //                     );
+                                                    //                   },
+                                                    //                 ),
+                                                    //               ),
+                                                    //             ),
+                                                    //           )
+                                                    //           .toSet()
+                                                    //           .toList(),
+                                                    //     ),
+                                                    //   )
                                                     : const CustomTextWidget(
                                                         text: ' ',
                                                         color:

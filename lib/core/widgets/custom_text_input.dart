@@ -8,6 +8,7 @@ import '../core.dart';
 class CustomTextInput extends StatelessWidget {
   final TextEditingController? controller;
   final String? inputTitle;
+  final Color? titleColor;
   final String? hintText;
   final TextInputType? keyboardType;
   final TextInputAction? inputAction;
@@ -58,6 +59,7 @@ class CustomTextInput extends StatelessWidget {
   const CustomTextInput({
     this.controller,
     this.inputTitle,
+    this.titleColor = ColorsManager.primaryBlue,
     this.hintText,
     this.keyboardType = TextInputType.text,
     this.inputAction = TextInputAction.next,
@@ -120,6 +122,7 @@ class CustomTextInput extends StatelessWidget {
           if (inputTitle != null)
             CustomTextWidget(
               text: inputTitle,
+              color: titleColor,
             )
           else
             const SizedBox.shrink(),

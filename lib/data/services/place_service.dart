@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../data.dart';
@@ -72,6 +73,68 @@ class PlaceApiProvider extends GetConnect {
     // debugPrint('<=====End of getPlace=====>');
 
     return jsonResp;
+  }
+
+  Future<PlaceDetailModel> getGooglePlaceFilterDetail({
+    String? placeId,
+    String? sessionToken = '',
+  }) async {
+    debugPrint('<=====getGooglePlaceDetail=====>');
+    String? addressCountry;
+    String? addressAreaLevel1;
+    String? fullAddress;
+    String? addressPostalCode;
+    double? addressLat;
+    double? addressLng;
+
+    final url =
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$key&sessiontoken=$sessionToken';
+    final response = await httpClient.get(url);
+
+    final apiResponse = response.body;
+
+    // final jsonResult = apiResponse['result'] as Map<String, dynamic>;
+
+    final jsonResp =
+        GooglePlaceDetailModel.fromJson(apiResponse as Map<String, dynamic>);
+    final data = jsonResp.result!.addressComponents;
+    for (final c in data!) {
+      if (c.types!.contains('country')) {
+        addressCountry = c.longName;
+      }
+      if (c.types!.contains('administrative_area_level_2')) {
+        // cityStateCtrl.text = c.longName!;
+      }
+      if (c.types!.contains('administrative_area_level_1')) {
+        addressAreaLevel1 = c.longName;
+      }
+      if (c.types!.contains('postal_code')) {
+        addressPostalCode = c.longName;
+      }
+    }
+    addressLat = jsonResp.result!.geometry!.location!.lat;
+
+    addressLng = jsonResp.result!.geometry!.location!.lng;
+    // countryCtrl.text = googlePlaceDetail.value.result!.googlePlaceCountry;
+    fullAddress = jsonResp.result!.formattedAddress;
+    final PlaceDetailModel temp = PlaceDetailModel(
+      country: addressCountry,
+      areaLevel1: addressAreaLevel1,
+      postalCode: addressPostalCode,
+      fullAddress: fullAddress,
+      lat: addressLat,
+      lng: addressLng,
+    );
+    debugPrint('result: $temp');
+
+    return PlaceDetailModel(
+      country: addressCountry,
+      areaLevel1: addressAreaLevel1,
+      postalCode: addressPostalCode,
+      fullAddress: fullAddress,
+      lat: addressLat,
+      lng: addressLng,
+    );
   }
 
   // Future<List<Place>> getPlaces(

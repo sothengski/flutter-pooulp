@@ -71,7 +71,7 @@ class OnboardingModel {
         'location_preference': location,
         'location_latitude': locationLat,
         'location_longitude': locationLng,
-        'radius': locationRadius ?? 6000,
+        'radius': locationRadius! * 1000,
       }..removeWhere((_, v) => v == null);
 
   @override

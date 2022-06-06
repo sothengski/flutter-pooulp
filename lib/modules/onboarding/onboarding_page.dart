@@ -344,9 +344,6 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                                               .uuidV4(),
                                                                     ),
                                                                   );
-                                                                  debugPrint(
-                                                                    'results: ${controller.results}',
-                                                                  );
                                                                 },
                                                                 child:
                                                                     AbsorbPointer(
@@ -360,9 +357,15 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                                     titleColor:
                                                                         ColorsManager
                                                                             .white,
-                                                                    hintText:
+                                                                    hintText: controller
+                                                                            .placeDetail!
+                                                                            .value
+                                                                            .fullAddress ??
                                                                         'profile.address'
                                                                             .tr,
+                                                                    hintTextColor:
+                                                                        ColorsManager
+                                                                            .black,
                                                                     isFilled:
                                                                         true,
                                                                     isReadOnly:

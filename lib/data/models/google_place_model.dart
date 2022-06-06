@@ -328,6 +328,8 @@ class PlaceDetailModel {
   final String? areaLevel1;
   final String? areaLevel2;
   final String? postalCode;
+  final String? streetNumber;
+  final String? route;
   final String? fullAddress;
   final double? lat;
   final double? lng;
@@ -337,6 +339,8 @@ class PlaceDetailModel {
     this.areaLevel1,
     this.areaLevel2,
     this.postalCode,
+    this.streetNumber,
+    this.route,
     this.fullAddress,
     this.lat,
     this.lng,
@@ -365,6 +369,8 @@ class PlaceDetailModel {
       areaLevel1: $areaLevel1,
       areaLevel2: $areaLevel2, 
       postalCode: $postalCode,
+      streetNumber: $streetNumber,
+      route: $route,
       fullAddress: $fullAddress,
       lat: $lat, 
       lng: $lng,

@@ -10,6 +10,7 @@ class CustomTextInput extends StatelessWidget {
   final String? inputTitle;
   final Color? titleColor;
   final String? hintText;
+  final Color? hintTextColor;
   final TextInputType? keyboardType;
   final TextInputAction? inputAction;
   final Function? onSubmitted;
@@ -61,6 +62,7 @@ class CustomTextInput extends StatelessWidget {
     this.inputTitle,
     this.titleColor = ColorsManager.primaryBlue,
     this.hintText,
+    this.hintTextColor = ColorsManager.grey400,
     this.keyboardType = TextInputType.text,
     this.inputAction = TextInputAction.next,
     this.isLastField = false,
@@ -187,7 +189,7 @@ class CustomTextInput extends StatelessWidget {
                     fillColor: fillColor,
                     hintText: hintText,
                     hintStyle: TextStyle(
-                      color: ColorsManager.grey400,
+                      color: hintTextColor,
                       fontSize: hintTexFontSize,
                     ),
                     // isDense: true,

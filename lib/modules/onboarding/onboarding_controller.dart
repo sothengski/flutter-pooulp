@@ -40,7 +40,7 @@ class OnboardingController extends GetxController
   RxList<FieldModel> belgiumCitiesToFieldSelected = <FieldModel>[].obs;
 
   String? sessionToken = '';
-  PlaceDetailModel? placeDetail;
+  Rx<PlaceDetailModel>? placeDetail = PlaceDetailModel().obs;
   GooglePlaceSearchModel? results;
 
   TextEditingController addressCtrl = TextEditingController();
@@ -62,6 +62,17 @@ class OnboardingController extends GetxController
   }
 
   void uuidTokenGenerator() => sessionToken = UuidGenerator().uuidV4();
+
+  Future<Rx<PlaceDetailModel>> getPlaceDetail({
+    String? placeId,
+    String? sessionToken,
+  }) async {
+    placeDetail!.value = await placeApiProvider.getGooglePlaceFilterDetail(
+      placeId: placeId,
+      sessionToken: sessionToken,
+    );
+    return placeDetail!;
+  }
 
   Future<void> getOffersDataState({bool? refresh}) async {
     change(null, status: RxStatus.loading());
@@ -309,17 +320,24 @@ class OnboardingController extends GetxController
       fieldPreferences: interestedInSelectionListPage1.value.selectionItems,
       skills: goodAtListSelectionPage2.value.selectionItems,
       languages: languageSelectionListPage3.value.selectionItems,
-      location: 'beligum', //belgiumCitiesToFieldSelected.first.label,
-      locationLat: '12.111', // belgiumCitiesToFieldSelected.first.type,
-      locationLng: '51.999', //  belgiumCitiesToFieldSelected.first.category,
+      location: placeDetail!
+          .value.fullAddress, //belgiumCitiesToFieldSelected.first.label,
+      locationStreet:
+          placeDetail!.value.streetNumber ?? placeDetail!.value.route,
+      locationZipCode: placeDetail!.value.postalCode,
+      locationCity: placeDetail!.value.areaLevel1,
+      locationCountry: placeDetail!.value.country,
+      locationLat: placeDetail!.value.lat
+          .toString(), // belgiumCitiesToFieldSelected.first.type,
+      locationLng: placeDetail!.value.lng
+          .toString(), //  belgiumCitiesToFieldSelected.first.category,
       locationRadius: radiusRxInt.value,
     );
 
-    debugPrint('placeDetail: $placeDetail');
-    // debugPrint('results: $results');
+    // debugPrint('placeDetail: $placeDetail');
 
-    debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
-    // submitDataToAPI(onboardingData: onboardingDataToBeAdd);
+    // debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
+    submitDataToAPI(onboardingData: onboardingDataToBeAdd);
     // }
   }
 

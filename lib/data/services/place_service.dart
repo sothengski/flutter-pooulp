@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../data.dart';
@@ -79,10 +78,13 @@ class PlaceApiProvider extends GetConnect {
     String? placeId,
     String? sessionToken = '',
   }) async {
-    debugPrint('<=====getGooglePlaceDetail=====>');
+    // debugPrint('<=====getGooglePlaceDetail=====>');
     String? addressCountry;
     String? addressAreaLevel1;
+    String? addressAreaLevel2;
     String? fullAddress;
+    String? addressStreet;
+    String? addressRoute;
     String? addressPostalCode;
     double? addressLat;
     double? addressLng;
@@ -103,7 +105,7 @@ class PlaceApiProvider extends GetConnect {
         addressCountry = c.longName;
       }
       if (c.types!.contains('administrative_area_level_2')) {
-        // cityStateCtrl.text = c.longName!;
+        addressAreaLevel2 = c.longName;
       }
       if (c.types!.contains('administrative_area_level_1')) {
         addressAreaLevel1 = c.longName;
@@ -111,25 +113,34 @@ class PlaceApiProvider extends GetConnect {
       if (c.types!.contains('postal_code')) {
         addressPostalCode = c.longName;
       }
+      if (c.types!.contains('street_number')) {
+        addressStreet = c.longName;
+      }
+      if (c.types!.contains('route')) {
+        addressRoute = c.longName;
+      }
     }
     addressLat = jsonResp.result!.geometry!.location!.lat;
-
     addressLng = jsonResp.result!.geometry!.location!.lng;
     // countryCtrl.text = googlePlaceDetail.value.result!.googlePlaceCountry;
     fullAddress = jsonResp.result!.formattedAddress;
-    final PlaceDetailModel temp = PlaceDetailModel(
-      country: addressCountry,
-      areaLevel1: addressAreaLevel1,
-      postalCode: addressPostalCode,
-      fullAddress: fullAddress,
-      lat: addressLat,
-      lng: addressLng,
-    );
-    debugPrint('result: $temp');
+    // final PlaceDetailModel temp = PlaceDetailModel(
+    //   country: addressCountry,
+    //   areaLevel1: addressAreaLevel1,
+    //   postalCode: addressPostalCode,
+    //   fullAddress: fullAddress,
+    //   lat: addressLat,
+    //   lng: addressLng,
+    // );
+    // debugPrint('result: $temp');
+    // debugPrint('<=====getGooglePlaceDetail=====>');
 
     return PlaceDetailModel(
       country: addressCountry,
       areaLevel1: addressAreaLevel1,
+      areaLevel2: addressAreaLevel2,
+      streetNumber: addressStreet,
+      route: addressRoute,
       postalCode: addressPostalCode,
       fullAddress: fullAddress,
       lat: addressLat,

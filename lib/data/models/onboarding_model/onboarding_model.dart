@@ -18,6 +18,10 @@ class OnboardingModel {
   final List<FieldModel>? skills;
   final List<FieldModel>? languages;
   final String? location;
+  final String? locationStreet;
+  final String? locationZipCode;
+  final String? locationCity;
+  final String? locationCountry;
   final String? locationLat;
   final String? locationLng;
   final int? locationRadius;
@@ -30,6 +34,10 @@ class OnboardingModel {
     this.skills,
     this.languages,
     this.location,
+    this.locationStreet,
+    this.locationZipCode,
+    this.locationCity,
+    this.locationCountry,
     this.locationLat,
     this.locationLng,
     this.locationRadius,
@@ -69,6 +77,10 @@ class OnboardingModel {
           languages!.map((x) => x.toJsonForOnboarding(usedTagId: true)),
         ),
         'location_preference': location,
+        'location_street': locationStreet,
+        'location_zipcode': locationZipCode,
+        'location_city': locationCity,
+        'location_country': locationCountry,
         'location_latitude': locationLat,
         'location_longitude': locationLng,
         'radius': locationRadius! * 1000,
@@ -84,6 +96,10 @@ class OnboardingModel {
       skills: $skills,
       languages: $languages,
       location: $location,
+      locationStreet: $locationStreet,
+      locationZipCode': $locationZipCode,
+      locationCity: $locationCity,
+      locationCountry: $locationCountry,
       locationLat: $locationLat,
       locationLng: $locationLng,
       locationRadius: $locationRadius,

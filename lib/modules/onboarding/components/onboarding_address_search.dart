@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
+import '../../modules.dart';
 
 class OnBoardingAddressSearchBarWidget
     extends SearchDelegate<GooglePlaceSearchModel> {
-  // final editInformationController = Get.find<EditUserInformationController>();
-  final placeApiProvider = Get.put(PlaceApiProvider());
+  final onboardingController = Get.find<OnboardingController>();
   final String? sessionToken;
 
   OnBoardingAddressSearchBarWidget({
@@ -56,7 +56,7 @@ class OnBoardingAddressSearchBarWidget
     return FutureBuilder(
       future: query == ""
           ? null
-          : placeApiProvider.getGooglePlacesAutocomplete(
+          : onboardingController.placeApiProvider.getGooglePlacesAutocomplete(
               search: query,
               sessionToken: sessionToken,
               // Localizations.localeOf(context).languageCode,
@@ -76,7 +76,7 @@ class OnBoardingAddressSearchBarWidget
                 return ListTile(
                   title: Text(' ${place.description.toString()}'),
                   onTap: () async {
-                    placeApiProvider.getGooglePlaceFilterDetail(
+                    onboardingController.getPlaceDetail(
                       placeId: place.placeId,
                       sessionToken: sessionToken,
                     );

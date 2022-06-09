@@ -65,10 +65,11 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                   object2: controller.typeSelected.value.label,
                   isTextColor: false,
                 ),
+                //Noted:: Enable this for row list of jobOfferTypes in the feed Page
                 onSelected: (_) {
-                  controller.selectType(
-                    type: controller.listJobOfferTypes[index],
-                  );
+                  // controller.selectType(
+                  //   type: controller.listJobOfferTypes[index],
+                  // );
                 },
               ),
             ),

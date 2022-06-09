@@ -101,15 +101,22 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                           Expanded(
                             flex: 15,
                             child: IconButton(
+                              alignment: Alignment.topCenter,
                               icon: const Icon(Icons.filter_list),
                               color: ColorsManager.white,
                               onPressed: () {
-                                controller.updateKeyword();
-                                Get.dialog(
-                                  OfferFeedFilterSearch(
+                                // controller.updateKeyword();
+                                customGeneralDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  widget: OfferFeedFilterSearch(
                                     title: 'offer.filterTitle'.tr,
                                   ),
-                                  // barrierDismissible: false,
+                                  // Get.dialog(
+                                  //   OfferFeedFilterSearch(
+                                  //     title: 'offer.filterTitle'.tr,
+                                  //   ),
+                                  //   // barrierDismissible: false,
                                 );
                               },
                             ),
@@ -130,16 +137,17 @@ class OfferFeedPage extends GetView<OfferFeedController> {
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    flex: 9,
-                    child: Obx(
-                      () => controller.listJobOfferTypes.isNotEmpty
-                          ? OfferFeedTypesListComponent()
-                          : const ItemListShimmerLoadingWidget(
-                              isBodyList: false,
-                            ),
-                    ),
-                  ),
+                  // Expanded(
+                  //   flex: 9,
+                  //   child: Obx(
+                  //     () => controller.listJobOfferTypes.isNotEmpty
+                  //         ? OfferFeedTypesListComponent()
+                  //         : const ItemListShimmerLoadingWidget(
+                  //             isBodyList: false,
+                  //           ),
+                  //   ),
+                  // ),
+                  const SizedBox(height: AppSize.s4),
                   Expanded(
                     flex: 90,
                     child: controller.obx(

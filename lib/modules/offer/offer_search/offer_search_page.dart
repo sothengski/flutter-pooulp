@@ -85,7 +85,8 @@ class OfferSearchPage extends SearchDelegate {
   void assignKeywordtoVariable({bool? isAssignToQuery = false}) {
     isAssignToQuery == true
         ? query = feedController.keywordToBeSearch.value.trim()
-        : feedController.keywordToBeSearch.value = query.trim();
+        : feedController.syncKeyWord(newKeyword: query.trim());
+    // : feedController.keywordToBeSearch.value = query.trim();
     // debugPrint(
     //   'assignKeywordtoVariable keywordForSearch:: ${feedController.keywordForSearch.value}',
     // );

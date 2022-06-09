@@ -19,6 +19,12 @@ const Map<String, String> frFR = {
   'core.back': "Arrière",
   'core.next': "Suivant",
   'core.finish': "Finir",
+  'core.select': "Sélectionner",
+  'core.ok': "D'accord",
+  'core.cancel': "Annuler",
+  'core.done': "Confirmer",
+  'core.search': "Chercher",
+  'core.searchByName': "Recherche par nom",
 
   ///===== Validator =====//
   'validator.requireField': "Ce champ est requis.",
@@ -138,6 +144,7 @@ const Map<String, String> frFR = {
   'offer.searchByTitle': "Recherche par titre",
   'offer.hello': "Bonjour @name",
   'offer.filterTitle': "Recherche Avancée",
+  'offer.jobTitle': "Titre d'emploi",
   'offer.all': "Tout",
   'offer.remote': "Télécommande",
   'offer.onSite': "Sur site",
@@ -167,6 +174,7 @@ const Map<String, String> frFR = {
   'offer.skills': "Compétences",
   'offer.enterpriseID': "Entreprise d'entreprise",
   'offer.description': "La description",
+  'offer.jobTypes': "Types d'emploi",
 
   ///===== Profile =====//
   'home.feed': "Nourrir",

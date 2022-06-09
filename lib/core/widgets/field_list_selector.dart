@@ -32,7 +32,7 @@ class FieldListSelector extends StatefulWidget {
     this.showPhoneCode = true,
     this.showCountry = true,
     @required this.selectedItem,
-    this.inputHintText = 'Search School Name',
+    this.inputHintText = 'Search...',
     // this.selectedItems = const [],
   }) : super(key: key);
 

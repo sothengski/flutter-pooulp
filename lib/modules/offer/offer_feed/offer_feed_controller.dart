@@ -10,6 +10,7 @@ class OfferFeedController extends GetxController
   // final feedProvider = Get.find<FeedProvider>();
   final offerProvider = Get.find<OfferProvider>();
   final tagProvider = Get.find<TagProvider>();
+  final placeApiProvider = Get.put(PlaceApiProvider());
 
   final offerHelper = OfferHelper();
 
@@ -48,12 +49,17 @@ class OfferFeedController extends GetxController
   RxList<FieldModel> languageListInFilter = <FieldModel>[].obs;
 
   RxString keywordToBeSearch = ''.obs;
+  TextEditingController keywordToBeSearchTextCtrl = TextEditingController();
+
   RxInt workPlaceTypesToBeSearch = 2.obs;
   Rx<CountryModel> countryToBeSearch = const CountryModel().obs;
   RxList<FieldModel> typesListToBeSearch = <FieldModel>[].obs;
   RxList<FieldModel> fieldListToBeSearch = <FieldModel>[].obs;
   // RxList<int> fieldListToBeSearch = <int>[].obs;
   RxList<FieldModel> languageListToBeSearch = <FieldModel>[].obs;
+
+  Rx<PlaceDetailModel>? placeDetail = PlaceDetailModel().obs;
+  TextEditingController addressCtrl = TextEditingController();
 
   RxBool isLoadingIndicator = false.obs;
 
@@ -92,6 +98,11 @@ class OfferFeedController extends GetxController
   String updateKeyword({String? newKeyword = ''}) =>
       keywordToBeSearch.value = newKeyword.toString();
 
+  void syncKeyWord({String? newKeyword = ''}) => {
+        keywordToBeSearch.value = newKeyword.toString(),
+        keywordToBeSearchTextCtrl.text = newKeyword.toString(),
+      };
+
   CountryModel selectedCountryOnClick(CountryModel selectedItem) {
     return selectedCountryInFilter.value = selectedItem;
   }
@@ -127,16 +138,19 @@ class OfferFeedController extends GetxController
 
   void clearAllFilterToBeSearch() {
     keywordToBeSearch.value = '';
+    keywordToBeSearchTextCtrl.text = '';
     selectedCountryInFilter.value = const CountryModel();
 
     workPlaceTypesInFilter.value = 2; // 2 == Hybrid(Default)
     languageListInFilter.value = [];
     fieldListInFilter.value = [];
+    typesListInFilter.value = [];
 
     countryToBeSearch.value = const CountryModel();
     workPlaceTypesToBeSearch.value = 2; // 2 == Hybrid(Default)
     languageListToBeSearch.value = [];
     fieldListToBeSearch.value = [];
+    typesListToBeSearch.value = [];
 
     // debugPrint(
     //   'clearAllFilterToBeSearch',
@@ -150,13 +164,15 @@ class OfferFeedController extends GetxController
   }
 
   void dismissFilter() {
+    keywordToBeSearchTextCtrl.text = keywordToBeSearch.value;
     workPlaceTypesInFilter.value = workPlaceTypesToBeSearch.value;
     selectedCountryInFilter.value = countryToBeSearch.value;
-    languageListInFilter.value = [];
+    languageListInFilter.clear();
+    fieldListInFilter.clear();
+    typesListInFilter.clear();
     languageListInFilter.addAll(languageListToBeSearch);
-    fieldListInFilter.value = [];
     fieldListInFilter.addAll(fieldListToBeSearch);
-
+    typesListInFilter.addAll(typesListToBeSearch);
     // debugPrint('dismissFilter');
     // debugPrint(
     //   'languageListToBeSearch:: ${languageListToBeSearch.map((element) => '${element.label}\n')}',
@@ -167,11 +183,16 @@ class OfferFeedController extends GetxController
   }
 
   void applyFilterToBeSearch() {
-    // keywordForSearch.value = '';
+    keywordToBeSearch.value = keywordToBeSearchTextCtrl.text;
     workPlaceTypesToBeSearch.value = workPlaceTypesInFilter.value;
     countryToBeSearch.value = selectedCountryInFilter.value;
+    languageListToBeSearch.clear();
+    fieldListToBeSearch.clear();
+    typesListToBeSearch.clear();
     languageListToBeSearch.addAll(languageListInFilter);
     fieldListToBeSearch.addAll(fieldListInFilter);
+    typesListToBeSearch.addAll(typesListInFilter);
+    getFeedsDataState();
 
     // debugPrint(
     //   'applyFilterToBeSearch',
@@ -213,10 +234,10 @@ class OfferFeedController extends GetxController
   Future<List<FieldModel>> getjobOfferTypesListResponseProvider({
     bool? refresh = false,
   }) async {
-    listJobOfferTypes.add(allType);
+    // listJobOfferTypes.add(allType);
 
     listJobOfferTypes.addAll(await tagProvider.getJobOfferTypes());
-    selectType(type: listJobOfferTypes[0]);
+    // selectType(type: listJobOfferTypes[0]);
 
     return listJobOfferTypes;
   }
@@ -252,9 +273,10 @@ class OfferFeedController extends GetxController
       title: keywordToBeSearch.value,
       location: countryToBeSearch.value.name,
       telecommuting: workPlaceTypesToBeSearch.value,
-      types: [
-        typeSelected.value,
-      ],
+      types: typesListToBeSearch,
+      // types: [
+      //   typeSelected.value,
+      // ],
       spokenLanguages: languageListToBeSearch,
       fields: fieldListToBeSearch,
     );
@@ -370,13 +392,13 @@ class OfferFeedController extends GetxController
       await offerController.onRefresh();
     } else {}
   }
-
-  void selectType({FieldModel? type}) {
-    FieldModel tempType = allType;
-    if (typeSelected.value != type) {
-      tempType = type!;
-    }
-    typeSelected.value = tempType;
-    onRefresh();
-  }
+  //Noted:: this function for filter the job offer list in feed Page
+  // void selectType({FieldModel? type}) {
+  //   FieldModel tempType = allType;
+  //   if (typeSelected.value != type) {
+  //     tempType = type!;
+  //   }
+  //   typeSelected.value = tempType;
+  //   onRefresh();
+  // }
 }

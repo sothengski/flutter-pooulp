@@ -19,6 +19,12 @@ const Map<String, String> nlNL = {
   'core.back': "Rug",
   'core.next': "Volgende",
   'core.finish': "Finish",
+  'core.select': "Uitkiezen",
+  'core.ok': "OK",
+  'core.cancel': "Annuleer",
+  'core.done': "Klaar",
+  'core.search': "Zoeken",
+  'core.searchByName': "Zoek op naam",
 
   ///===== Validator =====//
   'validator.requireField': "Dit veld is verplicht.",
@@ -136,6 +142,7 @@ const Map<String, String> nlNL = {
   'offer.searchByTitle': "Zoeken op titel",
   'offer.hello': "Hallo @name",
   'offer.filterTitle': "geavanceerd zoeken",
+  'offer.jobTitle': "Functietitel",
   'offer.all': "Alle",
   'offer.remote': "Op afstand",
   'offer.onSite': "Ter plekke",
@@ -165,6 +172,7 @@ const Map<String, String> nlNL = {
   'offer.skills': "Vaardigheden",
   'offer.enterpriseID': "Enterprise-ID",
   'offer.description': "Beschrijving",
+  'offer.jobTypes': "Types",
 
   ///===== Profile =====//
   'home.feed': "Voer",

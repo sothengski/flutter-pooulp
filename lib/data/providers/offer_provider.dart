@@ -182,14 +182,13 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
     JobOfferModel? jobOfferForSearch,
   }) async {
     try {
-      // debugPrint(
-      //   'Page: $pageNumber, Param:${jobOfferForSearch!.toSearchJson()}',
-      // );
-
       final dataResponse = await post(
         API.postSearchOffer(pageNumber: pageNumber),
         jobOfferForSearch!.toSearchJson(),
       );
+      // debugPrint(
+      //   'Page: $pageNumber, Param:${jobOfferForSearch.toSearchJson()}',
+      // );
       // debugPrint(
       //   'API: ${API.postSearchOffer(pageNumber: pageNumber)}',
       // );

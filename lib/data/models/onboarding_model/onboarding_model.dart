@@ -78,7 +78,7 @@ class OnboardingModel {
         ),
         'location_preference': location,
         'location_street': locationStreet,
-        'location_zipcode': locationZipCode,
+        'location_zip': locationZipCode,
         'location_city': locationCity,
         'location_country': locationCountry,
         'location_latitude': locationLat,

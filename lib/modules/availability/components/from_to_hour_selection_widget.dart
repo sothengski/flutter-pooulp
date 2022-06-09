@@ -145,7 +145,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
                           flex: 40,
                           child: ContainerDialogWidget(
                             // inputTitle: 'profile.to'.tr,
-                            inputTitleMarginBottom: AppSize.s0,
+                            // inputTitleMarginBottom: AppSize.s0,
                             dialogType: DialogType.timePickerDialog,
                             dateLocale: dateLanguage,
                             currentTime: DateTime(2022, 02, 22)

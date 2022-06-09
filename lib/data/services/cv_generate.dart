@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import '../../core/core.dart';
 
+import '../../core/core.dart';
 import '../models/models.dart';
 import 'pdf_service.dart';
 

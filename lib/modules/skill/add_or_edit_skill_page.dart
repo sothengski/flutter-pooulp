@@ -143,6 +143,7 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                 SkillCategoryStrings.softSkill
                             ? controller.softSkillListForSelection.isNotEmpty
                                 ? FieldListSelector(
+                                    inputHintText: 'profile.searchSkill'.tr,
                                     dataListforSelected:
                                         controller.softSkillListForSelection,
                                     selectedItem:

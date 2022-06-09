@@ -19,6 +19,12 @@ const Map<String, String> enUS = {
   'core.back': "Back",
   'core.next': "Next",
   'core.finish': "Finish",
+  'core.select': "Select",
+  'core.ok': "Ok",
+  'core.cancel': "Cancel",
+  'core.done': "Done",
+  'core.search': "Search",
+  'core.searchByName': "Search By Name",
 
   ///===== Validator =====//
   'validator.requireField': "This field is required.",
@@ -135,6 +141,7 @@ const Map<String, String> enUS = {
   'offer.searchByTitle': "Search by title",
   'offer.hello': "Hello @name",
   'offer.filterTitle': "Advanced Search",
+  'offer.jobTitle': "Job Title",
   'offer.all': "All",
   'offer.remote': "Remote",
   'offer.onSite': "On-Site",
@@ -164,6 +171,7 @@ const Map<String, String> enUS = {
   'offer.skills': "Skills",
   'offer.enterpriseID': "Enterprise ID",
   'offer.description': "Description",
+  'offer.jobTypes': "Job Types",
 
   ///===== Profile =====//
   'home.feed': "Feed",

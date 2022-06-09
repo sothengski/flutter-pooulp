@@ -330,8 +330,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                               GestureDetector(
                                                                 onTap:
                                                                     () async {
-                                                                  controller
-                                                                      .uuidTokenGenerator();
+                                                                  // controller
+                                                                  //     .uuidTokenGenerator();
                                                                   controller
                                                                           .results =
                                                                       await showSearch(

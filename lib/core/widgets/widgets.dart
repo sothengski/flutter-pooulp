@@ -21,6 +21,7 @@ export 'custom_text_widget.dart';
 export 'dropdown_picker.dart';
 export 'field_list_multiple_selector.dart';
 export 'field_list_selector.dart';
+export 'google_address_search_bar_widget.dart';
 export 'handler_widget.dart';
 export 'item_list_shimmer_loading_widget.dart';
 export 'loading_widget.dart';

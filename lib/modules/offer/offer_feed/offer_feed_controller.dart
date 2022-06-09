@@ -58,7 +58,7 @@ class OfferFeedController extends GetxController
   // RxList<int> fieldListToBeSearch = <int>[].obs;
   RxList<FieldModel> languageListToBeSearch = <FieldModel>[].obs;
 
-  Rx<PlaceDetailModel>? placeDetail = PlaceDetailModel().obs;
+  Rx<PlaceDetailModel> placeDetail = PlaceDetailModel().obs;
   TextEditingController addressCtrl = TextEditingController();
 
   RxBool isLoadingIndicator = false.obs;
@@ -271,7 +271,6 @@ class OfferFeedController extends GetxController
     final JobOfferModel jobOfferToBeSearch = JobOfferModel(
       // title: 'commercial',
       title: keywordToBeSearch.value,
-      location: countryToBeSearch.value.name,
       telecommuting: workPlaceTypesToBeSearch.value,
       types: typesListToBeSearch,
       // types: [
@@ -279,6 +278,14 @@ class OfferFeedController extends GetxController
       // ],
       spokenLanguages: languageListToBeSearch,
       fields: fieldListToBeSearch,
+      // location: countryToBeSearch.value.name,
+      location: placeDetail.value.fullAddress,
+      addressStreet: placeDetail.value.fullAddress,
+      addressLatitude: placeDetail.value.lat.toString(),
+      addressLongitude: placeDetail.value.lng.toString(),
+      addressCity: placeDetail.value.areaLevel1,
+      addressCountry: placeDetail.value.country,
+      addressZip: placeDetail.value.postalCode,
     );
     // debugPrint(
     //   'feedListPagination current page:: ${feedListPagination.value.meta!.currentPage!}',

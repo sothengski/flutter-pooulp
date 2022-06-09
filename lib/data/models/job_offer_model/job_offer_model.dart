@@ -249,12 +249,12 @@ class JobOfferModel {
   Map<String, dynamic> toSearchJson() => {
         'keywords': title, //'title': title,
         'telecommuting': telecommuting,
-        'address_street': addressStreet,
-        'address_city': addressCity,
-        'address_zip': addressZip,
-        'address_country': addressCountry,
-        'address_latitude': addressLatitude,
-        'address_longitude': addressLongitude,
+        'street': addressStreet,
+        'city': addressCity,
+        'zipcode': addressZip,
+        'country': addressCountry,
+        'latitude': addressLatitude,
+        'longitude': addressLongitude,
         'types': types == null || types == []
             ? []
             : List<dynamic>.from(

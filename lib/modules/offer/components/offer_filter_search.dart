@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/core.dart';
+import '../../../data/data.dart';
 import '../offer.dart';
 
 class OfferFeedFilterSearch extends GetView<OfferFeedController> {
@@ -29,6 +30,16 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
     this.onPressed2,
     this.onPressed3,
   }) : super(key: key);
+
+  Future<PlaceDetailModel?> showSearchFunc(BuildContext context) async {
+    return showSearch(
+      context: context,
+      delegate: GoogleAddressSearchBarWidget(
+        placeDetailData: controller.placeDetail.value,
+        sessionToken: UuidGenerator().uuidV4(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -194,9 +205,6 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                     list: controller.typesListInFilter,
                                     fieldValue: e,
                                   );
-                                  // debugPrint(
-                                  //   'Fields on Click::${e.label}(${e.id})',
-                                  // );
                                 },
                               ),
                             )
@@ -317,7 +325,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     //   ),
                     // ),
                     //===== Bottom of Fields Component =====//
-                    const SizedBox(height: 8.0),
+                    // const SizedBox(height: 8.0),
 
                     ///===== Top of Languages Component =====//
                     ContainerDialogWidget(
@@ -432,7 +440,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     //   ),
                     // ),
                     // //===== Bottom of Languages Component =====//
-                    const SizedBox(height: 8.0),
+                    // const SizedBox(height: 8.0),
 
                     ///===== Top of Location Component =====//
                     Container(
@@ -442,13 +450,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       ),
                       child: GestureDetector(
                         onTap: () async {
-                          UuidGenerator().uuidV4();
-                          // controller.results = await showSearch(
-                          //   context: context,
-                          // delegate: OnBoardingAddressSearchBarWidget(
-                          //   sessionToken: UuidGenerator().uuidV4(),
-                          // ),
-                          // );
+                          controller.placeDetail.value =
+                              (await showSearchFunc(context))!;
                         },
                         child: AbsorbPointer(
                           child: CustomTextInput(
@@ -457,7 +460,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             fontSizeTitle: AppSize.s16,
                             fontWeightTitle: FontWeight.w600,
                             hintText:
-                                controller.placeDetail!.value.fullAddress ?? '',
+                                controller.placeDetail.value.fullAddress ??
+                                    'Null',
                             hintTextColor: ColorsManager.black,
                             isFilled: true,
                             isReadOnly: true,
@@ -647,6 +651,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     //   ),
                     // ),
                     //===== Bottom of Location Component =====//
+                    const SizedBox(height: 8.0),
                   ],
                 ),
               ),

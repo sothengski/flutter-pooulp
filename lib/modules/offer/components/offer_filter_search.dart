@@ -151,41 +151,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     //===== Bottom of Workplace Type Component =====//
                     const SizedBox(height: 8.0),
 
-                    ///===== Top of Job Type Component =====//
-                    // CustomContainerWidget(
-                    //   isBoxShadow: false,
-                    //   leftTitle: 'Job Type',
-                    //   titleTopPadding: AppSize.s5,
-                    //   titleFontSize: AppSize.s16,
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       RowDataSelectionWidget.checkBox(
-                    //         text: 'Internship',
-                    //         onPressed: () {
-                    //           debugPrint('Internship click');
-                    //         },
-                    //       ),
-                    //       RowDataSelectionWidget.checkBox(
-                    //         isClickingValue: true,
-                    //         text: 'Study Subject',
-                    //         onPressed: () {
-                    //           debugPrint('Study Subject click');
-                    //         },
-                    //       ),
-                    //       RowDataSelectionWidget.checkBox(
-                    //         isClickingValue: true,
-                    //         text: 'Job',
-                    //         onPressed: () {
-                    //           debugPrint('Job click');
-                    //         },
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    //===== Bottom of Job Type Component =====//
-                    // const SizedBox(height: 8.0),
-                    ///===== Top of Fields Component =====//
+                    ///===== Top of Job Types Component =====//
                     CustomContainerWidget(
                       isBoxShadow: false,
                       leftTitle: 'offer.jobTypes'.tr,
@@ -211,7 +177,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             .toList(),
                       ),
                     ),
-                    //===== Bottom of Fields Component =====//
+                    //===== Bottom of Job Types Component =====//
                     const SizedBox(height: 8.0),
 
                     ///===== Top of Fields Component =====//
@@ -293,37 +259,6 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         ],
                       ),
                     ),
-                    //===== Bottom of Fields Component =====//
-
-                    ///===== Top of Fields Component =====//
-                    // CustomContainerWidget(
-                    //   isBoxShadow: false,
-                    //   leftTitle: 'offer.fields'.tr,
-                    //   titleTopPadding: AppSize.s5,
-                    //   titleFontSize: AppSize.s16,
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: controller.fieldListForSearch
-                    //         .map(
-                    //           (e) => RowDataSelectionWidget.checkBox(
-                    //             isClickingValue:
-                    //                 controller.fieldListInFilter.contains(e),
-                    //             text: e.label,
-                    //             onPressed: () {
-                    //               controller
-                    //                   .addingOrRemovingFieldInFieldListToBeSearch(
-                    //                 list: controller.fieldListInFilter,
-                    //                 fieldValue: e,
-                    //               );
-                    //               // debugPrint(
-                    //               //   'Fields on Click::${e.label}(${e.id})',
-                    //               // );
-                    //             },
-                    //           ),
-                    //         )
-                    //         .toList(),
-                    //   ),
-                    // ),
                     //===== Bottom of Fields Component =====//
                     // const SizedBox(height: 8.0),
 
@@ -409,37 +344,6 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       ),
                     ),
                     //===== Bottom of Languages Component =====//
-
-                    // ///===== Top of Languages Component =====//
-                    // CustomContainerWidget(
-                    //   isBoxShadow: false,
-                    //   leftTitle: 'offer.languages'.tr,
-                    //   titleTopPadding: AppSize.s5,
-                    //   titleFontSize: AppSize.s16,
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: controller.languageListForSearch
-                    //         .map(
-                    //           (e) => RowDataSelectionWidget.checkBox(
-                    //             isClickingValue:
-                    //                 controller.languageListInFilter.contains(e),
-                    //             text: e.label,
-                    //             onPressed: () {
-                    //               controller
-                    //                   .addingOrRemovingFieldInFieldListToBeSearch(
-                    //                 list: controller.languageListInFilter,
-                    //                 fieldValue: e,
-                    //               );
-                    //               // debugPrint(
-                    //               //   'Languages on Click::${e.label}(${e.id})',
-                    //               // );
-                    //             },
-                    //           ),
-                    //         )
-                    //         .toList(),
-                    //   ),
-                    // ),
-                    // //===== Bottom of Languages Component =====//
                     // const SizedBox(height: 8.0),
 
                     ///===== Top of Location Component =====//
@@ -460,8 +364,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             fontSizeTitle: AppSize.s16,
                             fontWeightTitle: FontWeight.w600,
                             hintText:
-                                controller.placeDetail.value.fullAddress ??
-                                    'Null',
+                                controller.placeDetail.value.fullAddress ?? '',
                             hintTextColor: ColorsManager.black,
                             isFilled: true,
                             isReadOnly: true,
@@ -476,182 +379,34 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         ),
                       ),
                     ),
-                    // CustomContainerWidget(
-                    //   isBoxShadow: false,
-                    //   // topMargin: AppSize.s12,
-                    //   // bottomMargin: AppSize.s12,
-                    //   leftTitle: 'offer.location'.tr,
-                    //   titleTopPadding: AppSize.s5,
-                    //   titleFontSize: AppSize.s16,
-                    //   child: Container(
-                    //     padding: const EdgeInsets.symmetric(
-                    //       vertical: 8.0,
-                    //       horizontal: 8.0,
-                    //     ),
-                    //     child: Column(
-                    //       crossAxisAlignment: CrossAxisAlignment.start,
-                    //       children: [
-                    //         CustomTextWidget(
-                    //           text: 'profile.country'.tr,
-                    //           // marginTop: AppSize.s12,
-                    //           textAlign: TextAlign.left,
-                    //           // marginBottom: AppSize.s4,
-                    //         ),
-                    //         const SizedBox(
-                    //           height: 3.0,
-                    //         ),
-                    //         GestureDetector(
-                    //           onTap: () => Get.bottomSheet(
-                    //             Container(
-                    //               height: getHeight,
-                    //               decoration: const ShapeDecoration(
-                    //                 color: ColorsManager.white,
-                    //                 shape: RoundedRectangleBorder(
-                    //                   borderRadius: BorderRadius.only(
-                    //                     topLeft: Radius.circular(
-                    //                       16,
-                    //                     ),
-                    //                     topRight: Radius.circular(
-                    //                       16,
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //               child: CountryListSelector(
-                    //                 showPhoneCode: false,
-                    //                 countrylist: countryList,
-                    //                 selectedCountry: controller
-                    //                     .selectedCountryInFilter.value,
-                    //                 onTap: (country) {
-                    //                   controller.selectedCountryOnClick(
-                    //                     country,
-                    //                   );
-                    //                   Get.back();
-                    //                 },
-                    //               ),
-                    //             ),
-                    //           ),
-                    //           child: Container(
-                    //             alignment: Alignment.centerLeft,
-                    //             padding: EdgeInsets.zero,
-                    //             child: FormField(
-                    //               // validator: (_) =>
-                    //               //     controller.isPhoneNumberValidate(),
-                    //               builder: (
-                    //                 FormFieldState<String> state,
-                    //               ) {
-                    //                 return InputDecorator(
-                    //                   // alignedDropdown: true,
-                    //                   decoration: InputDecoration(
-                    //                     contentPadding:
-                    //                         const EdgeInsets.fromLTRB(
-                    //                       4,
-                    //                       0,
-                    //                       4,
-                    //                       0,
-                    //                     ),
-                    //                     fillColor: ColorsManager.grey100,
-                    //                     filled: true,
-                    //                     border: OutlineInputBorder(
-                    //                       borderRadius: BorderRadius.circular(
-                    //                         AppSize.s8,
-                    //                       ),
-                    //                     ),
-                    //                     errorText: state.hasError
-                    //                         ? state.errorText
-                    //                         : null,
-                    //                     enabledBorder: OutlineInputBorder(
-                    //                       borderRadius: BorderRadius.circular(
-                    //                         AppSize.s8,
-                    //                       ),
-                    //                       borderSide: const BorderSide(
-                    //                         color: ColorsManager.grey100,
-                    //                       ),
-                    //                     ),
-                    //                     errorBorder: OutlineInputBorder(
-                    //                       borderRadius: BorderRadius.circular(
-                    //                         AppSize.s8,
-                    //                       ),
-                    //                       borderSide: const BorderSide(
-                    //                         color: ColorsManager.red900,
-                    //                       ),
-                    //                     ),
-                    //                     focusedBorder: OutlineInputBorder(
-                    //                       borderRadius: BorderRadius.circular(
-                    //                         AppSize.s8,
-                    //                       ),
-                    //                       borderSide: const BorderSide(
-                    //                         color: ColorsManager.grey300,
-                    //                       ),
-                    //                     ),
-                    //                   ),
-                    //                   child: Obx(
-                    //                     () => controller.selectedCountryInFilter
-                    //                                 .value.name ==
-                    //                             null
-                    //                         ? Row(
-                    //                             mainAxisAlignment:
-                    //                                 MainAxisAlignment
-                    //                                     .spaceBetween,
-                    //                             children: [
-                    //                               CustomTextWidget(
-                    //                                 marginLeft: AppSize.s8,
-                    //                                 text: 'profile.country'.tr,
-                    //                                 color:
-                    //                                     ColorsManager.grey400,
-                    //                                 fontWeight: FontWeight.w400,
-                    //                                 fontSize: 16.0,
-                    //                               ),
-                    //                               const Icon(
-                    //                                 Icons.arrow_drop_down,
-                    //                                 color:
-                    //                                     ColorsManager.grey600,
-                    //                               ),
-                    //                             ],
-                    //                           )
-                    //                         : Row(
-                    //                             children: [
-                    //                               SizedBox(
-                    //                                 height: 15.0,
-                    //                                 child: CircleFlag(
-                    //                                   controller
-                    //                                       .selectedCountryInFilter
-                    //                                       .value
-                    //                                       .isoCode
-                    //                                       .toString(),
-                    //                                 ),
-                    //                               ),
-                    //                               Expanded(
-                    //                                 child: CustomTextWidget(
-                    //                                   marginLeft: AppSize.s8,
-                    //                                   text: controller
-                    //                                       .selectedCountryInFilter
-                    //                                       .value
-                    //                                       .name,
-                    //                                   color:
-                    //                                       ColorsManager.black,
-                    //                                   fontSize: 16.0,
-                    //                                 ),
-                    //                               ),
-                    //                               const Icon(
-                    //                                 Icons.arrow_drop_down,
-                    //                                 color:
-                    //                                     ColorsManager.grey600,
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                   ),
-                    //                 );
-                    //               },
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
                     //===== Bottom of Location Component =====//
                     const SizedBox(height: 8.0),
+
+                    ///===== Top of Radius Component =====//
+                    RowContentInputWidget(
+                      centerWidgetFlex: 50,
+                      centerWidget: CustomTextWidget(
+                        marginLeft: AppSize.s12,
+                        textAlign: TextAlign.center,
+                        text:
+                            '${'settings.radius'.tr}(Km): ${controller.radiusRxInt.value}',
+                        fontSize: AppSize.s16,
+                      ),
+                      suffixWidgetFlex: 50,
+                      suffixWidget: Slider(
+                        value: controller.radiusRxInt.value.toDouble(),
+                        max: 100.0,
+                        divisions: 100,
+                        activeColor: ColorsManager.primary,
+                        inactiveColor: ColorsManager.grey300,
+                        thumbColor: ColorsManager.primary,
+                        label: '${controller.radiusRxInt.value}',
+                        onChanged: (double newValue) {
+                          controller.radiusRxInt.value = newValue.toInt();
+                        },
+                      ),
+                    ),
+                    //===== Bottom of Radius Component =====//
                   ],
                 ),
               ),

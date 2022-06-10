@@ -26,6 +26,7 @@ class StateHandlerWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Image(
             height: getWidth * .65,
@@ -49,6 +50,7 @@ class StateHandlerWidget extends StatelessWidget {
           const SizedBox(height: 30),
           if (buttonText != null)
             CustomMaterialButton(
+              horizonalPadding: AppSize.s8,
               text: buttonText,
               fontSize: 20.0,
               // primaryColor: primaryColor,

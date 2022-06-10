@@ -31,6 +31,7 @@ class JobOfferModel {
   final List<FieldModel>? fields;
   final List<FieldModel>? spokenLanguages;
   final List<SkillModel>? skills;
+  final List<FieldModel>? availabilities;
   final ProfileModel? enterprise;
   final JobOfferStateModel? jobOfferStateModel;
   bool? applyState;
@@ -68,6 +69,7 @@ class JobOfferModel {
     this.fields,
     this.spokenLanguages,
     this.skills,
+    this.availabilities,
     this.enterprise,
     this.jobOfferStateModel,
     this.applyState = false,
@@ -199,6 +201,16 @@ class JobOfferModel {
                   ),
                 )
                 .toList(),
+        availabilities:
+            json['availabilities'] == null || json['availabilities'] == []
+                ? []
+                : (json['availabilities'] as List)
+                    .map(
+                      (i) => FieldModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList(),
         enterprise: json['enterprise'] == null
             ? null
             : ProfileModel.fromJson(
@@ -242,6 +254,9 @@ class JobOfferModel {
         'spoken_languages': spokenLanguages != null || spokenLanguages != []
             ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
             : null,
+        'availabilities': availabilities != null || availabilities != []
+            ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
+            : null,
         'enterprise': enterprise?.toJson(),
         'job_offer_state': jobOfferStateModel?.toJson(),
       }..removeWhere((_, v) => v == null);
@@ -249,12 +264,12 @@ class JobOfferModel {
   Map<String, dynamic> toSearchJson() => {
         'keywords': title, //'title': title,
         'telecommuting': telecommuting,
-        'street': addressStreet,
-        'city': addressCity,
-        'zipcode': addressZip,
-        'country': addressCountry,
-        'latitude': addressLatitude,
-        'longitude': addressLongitude,
+        'street': addressStreet ?? '',
+        'city': addressCity ?? '',
+        'zipcode': addressZip ?? '',
+        'country': addressCountry ?? '',
+        'latitude': addressLatitude ?? '',
+        'longitude': addressLongitude ?? '',
         'types': types == null || types == []
             ? []
             : List<dynamic>.from(
@@ -279,7 +294,7 @@ class JobOfferModel {
                     ),
               ),
         'languages': spokenLanguages == null || spokenLanguages == []
-            ? null
+            ? []
             : List<dynamic>.from(
                 spokenLanguages!
                     .skipWhile(
@@ -289,9 +304,20 @@ class JobOfferModel {
                       (e) => e.id,
                     ),
               ),
-        'location': location,
+        'availabilities': availabilities == null || availabilities == []
+            ? []
+            : List<dynamic>.from(
+                availabilities!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'location': location ?? '',
         'is_range_search': isRangeSearch,
-        'range': range,
+        'range': range! * 1000,
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -322,6 +348,7 @@ class JobOfferModel {
       fields: $fields,
       spokenLanguages: $spokenLanguages,
       skills: $skills,
+      availabilities: $availabilities,
       enterprise: $enterprise,
       jobOfferStateModel: $jobOfferStateModel,
       'location': $location,

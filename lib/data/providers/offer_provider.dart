@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import '../data.dart';
 
 abstract class IOfferProvider {
@@ -188,11 +186,14 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
         API.postSearchOffer(pageNumber: pageNumber),
         jobOfferForSearch!.toSearchJson(),
       );
-      debugPrint(
-        'Page: $pageNumber, Param:${jobOfferForSearch.toSearchJson()}',
-      );
+      // debugPrint(
+      //   'Page: $pageNumber, Param:${jobOfferForSearch.toSearchJson()}',
+      // );
       // debugPrint(
       //   'API: ${API.postSearchOffer(pageNumber: pageNumber)}',
+      // );
+      // debugPrint(
+      //   'Data::${dataResponse.bodyString}',
       // );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";

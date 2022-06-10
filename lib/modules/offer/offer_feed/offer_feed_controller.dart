@@ -61,6 +61,8 @@ class OfferFeedController extends GetxController
   Rx<PlaceDetailModel> placeDetail = PlaceDetailModel().obs;
   TextEditingController addressCtrl = TextEditingController();
 
+  RxInt radiusRxInt = 10.obs;
+
   RxBool isLoadingIndicator = false.obs;
 
   List<String> suggestionWordList = [
@@ -151,6 +153,8 @@ class OfferFeedController extends GetxController
     languageListToBeSearch.value = [];
     fieldListToBeSearch.value = [];
     typesListToBeSearch.value = [];
+
+    placeDetail.value = PlaceDetailModel();
 
     // debugPrint(
     //   'clearAllFilterToBeSearch',
@@ -281,11 +285,14 @@ class OfferFeedController extends GetxController
       // location: countryToBeSearch.value.name,
       location: placeDetail.value.fullAddress,
       addressStreet: placeDetail.value.fullAddress,
-      addressLatitude: placeDetail.value.lat.toString(),
-      addressLongitude: placeDetail.value.lng.toString(),
+      addressLatitude:
+          placeDetail.value.lat == null ? '' : placeDetail.value.lat.toString(),
+      addressLongitude:
+          placeDetail.value.lng == null ? '' : placeDetail.value.lng.toString(),
       addressCity: placeDetail.value.areaLevel1,
       addressCountry: placeDetail.value.country,
       addressZip: placeDetail.value.postalCode,
+      range: radiusRxInt.value,
     );
     // debugPrint(
     //   'feedListPagination current page:: ${feedListPagination.value.meta!.currentPage!}',

@@ -252,7 +252,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ///===== Work Availabilities Component =====//
                           if (jobOfferDetail.availabilities!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'offer.workAvailabilities'.tr,
+                              title: 'offer.timeSlots'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.availabilities != []
                                   ? Wrap(

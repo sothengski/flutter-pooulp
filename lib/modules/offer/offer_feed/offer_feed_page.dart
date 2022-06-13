@@ -122,29 +122,34 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                     );
                                   },
                                 ),
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  padding:
-                                      const EdgeInsets.only(left: AppSize.s4),
-                                  child: CustomBoxWidget(
-                                    borderRadius: AppSize.s16,
-                                    topPadding: AppSize.s2,
-                                    bottomPadding: AppSize.s2,
-                                    leftPadding: AppSize.s0,
-                                    rightPadding: AppSize.s0,
-                                    backgroundColor: ColorsManager.primary,
-                                    child: Obx(
-                                      () => CustomTextWidget(
-                                        text: controller.filterCountRxInt.value
-                                            .toString(),
-                                        fontSize: AppSize.s12,
-                                        color: ColorsManager.white,
-                                        textAlign: TextAlign.center,
-                                        marginLeft: AppSize.s6,
-                                        marginRight: AppSize.s6,
-                                      ),
-                                    ),
-                                  ),
+                                Obx(
+                                  () => controller.filterCountRxInt.value == 0
+                                      ? Container()
+                                      : Container(
+                                          alignment: Alignment.topCenter,
+                                          padding: const EdgeInsets.only(
+                                            left: AppSize.s4,
+                                          ),
+                                          child: CustomBoxWidget(
+                                            borderRadius: AppSize.s16,
+                                            topPadding: AppSize.s2,
+                                            bottomPadding: AppSize.s2,
+                                            leftPadding: AppSize.s0,
+                                            rightPadding: AppSize.s0,
+                                            backgroundColor:
+                                                ColorsManager.primary,
+                                            child: CustomTextWidget(
+                                              text: controller
+                                                  .filterCountRxInt.value
+                                                  .toString(),
+                                              fontSize: AppSize.s12,
+                                              color: ColorsManager.white,
+                                              textAlign: TextAlign.center,
+                                              marginLeft: AppSize.s6,
+                                              marginRight: AppSize.s6,
+                                            ),
+                                          ),
+                                        ),
                                 ),
                               ],
                             ),

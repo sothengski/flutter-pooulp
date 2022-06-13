@@ -352,7 +352,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     ContainerDialogWidget(
                       leftPadding: AppSize.s10,
                       rightPadding: AppSize.s10,
-                      inputTitle: 'offer.workAvailabilities'.tr,
+                      inputTitle: 'offer.timeSlots'.tr,
                       fontSizeTitle: AppSize.s16,
                       fontWeightTitle: FontWeight.w600,
                       inputTitleMarginBottom: AppSize.s6,
@@ -398,7 +398,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       ),
                       containerWidget: RowContentInputWidget(
                         centerWidget: CustomTextWidget(
-                          text: 'offer.workAvailabilities'.tr,
+                          text: 'offer.timeSlots'.tr,
                           color: ColorsManager.grey400,
                           fontWeight: FontWeight.w400,
                           fontSize: AppSize.s16,
@@ -449,23 +449,43 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                               (await showSearchFunc(context))!;
                         },
                         child: AbsorbPointer(
-                          child: CustomTextInput(
-                            controller: controller.addressCtrl,
-                            inputTitle: 'offer.location'.tr,
-                            fontSizeTitle: AppSize.s16,
-                            fontWeightTitle: FontWeight.w600,
-                            hintText:
-                                controller.placeDetail.value.fullAddress ?? '',
-                            hintTextColor: ColorsManager.black,
-                            isFilled: true,
-                            isReadOnly: true,
-                            topContentPadding: 12.0,
-                            bottomContentPadding: 12.0,
-                            topPadding: AppSize.s12,
-                            // counter: true,
-                            maxLines: 5,
-                            maxLength: 150,
-                            keyboardType: TextInputType.multiline,
+                          child: Stack(
+                            children: [
+                              // Container(
+                              //   alignment: Alignment.centerRight,
+                              //   padding:
+                              //       const EdgeInsets.only(top: AppSize.s16),
+                              //   child: const Icon(
+                              //     Icons.cancel,
+                              //     color: ColorsManager.red,
+                              //     size: AppSize.s16,
+                              //   ),
+                              // ),
+                              CustomTextInput(
+                                controller: controller.addressCtrl,
+                                inputTitle: 'offer.location'.tr,
+                                fontSizeTitle: AppSize.s16,
+                                fontWeightTitle: FontWeight.w600,
+                                hintText:
+                                    controller.placeDetail.value.fullAddress ??
+                                        '',
+                                hintTextColor: ColorsManager.black,
+                                isFilled: true,
+                                isReadOnly: true,
+                                topContentPadding: 12.0,
+                                bottomContentPadding: 12.0,
+                                topPadding: AppSize.s12,
+                                // counter: true,
+                                maxLines: 5,
+                                maxLength: 150,
+                                keyboardType: TextInputType.multiline,
+                                // suffixIcon: const Icon(
+                                //   Icons.cancel,
+                                //   color: ColorsManager.red,
+                                //   size: AppSize.s16,
+                                // ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

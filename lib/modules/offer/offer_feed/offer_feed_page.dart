@@ -100,25 +100,50 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                           ),
                           Expanded(
                             flex: 15,
-                            child: IconButton(
-                              alignment: Alignment.topCenter,
-                              icon: const Icon(Icons.filter_list),
-                              color: ColorsManager.white,
-                              onPressed: () {
-                                // controller.updateKeyword();
-                                customGeneralDialog(
-                                  context: context,
-                                  barrierDismissible: true,
-                                  widget: OfferFeedFilterSearch(
-                                    title: 'offer.filterTitle'.tr,
+                            child: Stack(
+                              children: [
+                                IconButton(
+                                  alignment: Alignment.topCenter,
+                                  icon: const Icon(Icons.filter_list),
+                                  color: ColorsManager.white,
+                                  onPressed: () {
+                                    // controller.updateKeyword();
+                                    customGeneralDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      widget: OfferFeedFilterSearch(
+                                        title: 'offer.filterTitle'.tr,
+                                      ),
+                                      // Get.dialog(
+                                      //   OfferFeedFilterSearch(
+                                      //     title: 'offer.filterTitle'.tr,
+                                      //   ),
+                                      //   // barrierDismissible: false,
+                                    );
+                                  },
+                                ),
+                                Container(
+                                  alignment: Alignment.topCenter,
+                                  padding:
+                                      const EdgeInsets.only(left: AppSize.s4),
+                                  child: const CustomBoxWidget(
+                                    borderRadius: AppSize.s16,
+                                    topPadding: AppSize.s2,
+                                    bottomPadding: AppSize.s2,
+                                    leftPadding: AppSize.s0,
+                                    rightPadding: AppSize.s0,
+                                    backgroundColor: ColorsManager.primary,
+                                    child: CustomTextWidget(
+                                      text: '0',
+                                      fontSize: AppSize.s12,
+                                      color: ColorsManager.white,
+                                      textAlign: TextAlign.center,
+                                      marginLeft: AppSize.s6,
+                                      marginRight: AppSize.s6,
+                                    ),
                                   ),
-                                  // Get.dialog(
-                                  //   OfferFeedFilterSearch(
-                                  //     title: 'offer.filterTitle'.tr,
-                                  //   ),
-                                  //   // barrierDismissible: false,
-                                );
-                              },
+                                ),
+                              ],
                             ),
                           ),
                         ],

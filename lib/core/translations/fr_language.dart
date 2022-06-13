@@ -175,6 +175,7 @@ const Map<String, String> frFR = {
   'offer.enterpriseID': "Entreprise d'entreprise",
   'offer.description': "La description",
   'offer.jobTypes': "Types d'emploi",
+  'offer.workAvailabilities': "Disponités de travail",
 
   ///===== Profile =====//
   'home.feed': "Nourrir",

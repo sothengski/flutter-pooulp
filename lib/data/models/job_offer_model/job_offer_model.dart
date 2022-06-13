@@ -255,7 +255,7 @@ class JobOfferModel {
             ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
             : null,
         'availabilities': availabilities != null || availabilities != []
-            ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
+            ? List<dynamic>.from(availabilities!.map((x) => x.toJson()))
             : null,
         'enterprise': enterprise?.toJson(),
         'job_offer_state': jobOfferStateModel?.toJson(),

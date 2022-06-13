@@ -249,6 +249,43 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             Container(),
                           //===== Remuneration Component =====//
 
+                          ///===== Work Availabilities Component =====//
+                          if (jobOfferDetail.availabilities!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'offer.workAvailabilities'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.availabilities != []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i <
+                                                jobOfferDetail
+                                                    .availabilities!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.availabilities![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Work Availabilities Component =====//
+
                           ///===== Types Component =====//
                           if (jobOfferDetail.types!.isNotEmpty)
                             OutlineContainerWidget(

@@ -19,7 +19,7 @@ class SettingController extends GetxController {
   RxBool drivingLicenseRxBool = false.obs;
   RxBool hasAutoMobileRxBool = false.obs;
   RxBool emailNotificationRxBool = false.obs;
-  RxInt radiusRxInt = 0.obs;
+  RxInt radiusRxInt = 10.obs;
   RxString languageRxString = 'en'.obs;
 
   RxBool isUpdating = false.obs;
@@ -36,7 +36,9 @@ class SettingController extends GetxController {
     hasAutoMobileRxBool.value =
         profileController.studentInfoRepsonse.value.hasAutomobile!;
     radiusRxInt.value =
-        profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
+        profileController.studentInfoRepsonse.value.radiusFromMeterToKM <= 5
+            ? 5
+            : profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
     languageRxString.value =
         profileController.userProfileInfo.value.uiLanguage!;
     emailNotificationRxBool.value =

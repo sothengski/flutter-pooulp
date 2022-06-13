@@ -11,6 +11,7 @@ abstract class ITagProvider {
   Future<List<FieldModel>> getHardAndSoftSkills();
   Future<List<FieldModel>> getOnlyHardSkills();
   Future<List<FieldModel>> getOnlySoftSkills();
+  Future<List<FieldModel>> getAvailabilitiesTags();
 }
 
 class TagProvider extends BaseProvider implements ITagProvider {
@@ -185,6 +186,29 @@ class TagProvider extends BaseProvider implements ITagProvider {
           softSkillList.add(FieldModel.fromJson(e as Map<String, dynamic>));
         }
         return softSkillList;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<List<FieldModel>> getAvailabilitiesTags() async {
+    try {
+      final dataResponse = await get(
+        API.paths[Endpoint.getAvailabilitiesTags].toString(),
+      );
+      final List<FieldModel> availabilitiesTags = <FieldModel>[];
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse =
+            json.decode(dataResponse.bodyString.toString()) as List;
+        for (final e in apiResponse) {
+          availabilitiesTags
+              .add(FieldModel.fromJson(e as Map<String, dynamic>));
+        }
+        return availabilitiesTags;
       }
     } catch (e) {
       return Future.error(e.toString());

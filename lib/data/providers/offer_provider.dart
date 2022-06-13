@@ -8,6 +8,7 @@ abstract class IOfferProvider {
   Future<List<JobOfferModel>> getMatchedOffers();
   Future<List<JobOfferModel>> getSavedOffers();
   Future<List<JobOfferModel>> getRejectedOffers();
+  Future<SearchPreferencesModel> getSearchPreferences();
   Future<List<JobOfferModel>> postSearchOffer({
     int? pageNumber = 1,
     JobOfferModel jobOfferForSearch,
@@ -133,6 +134,26 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
               .add(JobOfferModel.fromJson(e as Map<String, dynamic>));
         }
         return rejectedOfferList;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<SearchPreferencesModel> getSearchPreferences() async {
+    try {
+      final dataResponse = await get(
+        API.paths[Endpoint.getSearchPreferences].toString(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse = json.decode(dataResponse.bodyString.toString());
+
+        return SearchPreferencesModel.fromJson(
+          apiResponse as Map<String, dynamic>,
+        );
       }
     } catch (e) {
       return Future.error(e.toString());

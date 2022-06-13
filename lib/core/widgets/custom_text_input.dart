@@ -58,6 +58,7 @@ class CustomTextInput extends StatelessWidget {
   final Color? fontColor;
   final bool? isReadOnly;
   final double? hintTexFontSize;
+  final Color? enabledBorderColor;
 
   const CustomTextInput({
     this.controller,
@@ -111,6 +112,7 @@ class CustomTextInput extends StatelessWidget {
     this.fontColor = Colors.black,
     this.isReadOnly = false,
     this.hintTexFontSize = 16,
+    this.enabledBorderColor = ColorsManager.grey100,
   });
 
   @override
@@ -222,7 +224,7 @@ class CustomTextInput extends StatelessWidget {
                       ),
                     ),
                     enabledBorder: outlineInputBorder(
-                      borderColor: ColorsManager.grey100,
+                      borderColor: enabledBorderColor,
                       borderRadius: borderRadius,
                     ),
                     // OutlineInputBorder(

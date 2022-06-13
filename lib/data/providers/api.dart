@@ -47,6 +47,8 @@ enum Endpoint {
   // getMessagingRoomList,
   // getMessagesByRoomID,
   postOrGetAvailabilities,
+  getSearchPreferences,
+  getAvailabilitiesTags,
 }
 
 class API {
@@ -93,9 +95,11 @@ class API {
     Endpoint.getHardAndSoftSkills: '/tags/skills',
     Endpoint.getOnlyHardSkills: '/tags/hardskills',
     Endpoint.getOnlySoftSkills: '/tags/softskills',
+    Endpoint.getAvailabilitiesTags: '/tags/availabilities',
     Endpoint.postOrGetOnBoardingData: '/onboarding',
     Endpoint.postOrGetAvailabilities:
         '/users/me/student_profile/availabilities',
+    Endpoint.getSearchPreferences: '/search/preferences',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

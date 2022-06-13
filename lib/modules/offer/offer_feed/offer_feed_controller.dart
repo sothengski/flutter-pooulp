@@ -32,21 +32,23 @@ class OfferFeedController extends GetxController
   Rx<FieldModel> typeSelected = FieldModel(label: 'All').obs;
   // FieldModel? typeSelected;
 
-  List<FieldModel> listFilterTypes = [];
+  // List<FieldModel> listFilterTypes = [];
   RxList<FieldModel> listJobOfferTypes = <FieldModel>[].obs;
 
   Set<String?> setOfListTypes = {};
 
   RxInt workPlaceTypesForSearch = 2.obs;
-  RxList<FieldModel> typesListForSearch = <FieldModel>[].obs;
+  // RxList<FieldModel> typesListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> fieldListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> languageListForSearch = <FieldModel>[].obs;
+  RxList<FieldModel> availabilitiesTagListForSearch = <FieldModel>[].obs;
 
   RxInt workPlaceTypesInFilter = 2.obs;
   Rx<CountryModel> selectedCountryInFilter = const CountryModel().obs;
   RxList<FieldModel> typesListInFilter = <FieldModel>[].obs;
   RxList<FieldModel> fieldListInFilter = <FieldModel>[].obs;
   RxList<FieldModel> languageListInFilter = <FieldModel>[].obs;
+  RxList<FieldModel> availabilitiesTagListInFilter = <FieldModel>[].obs;
 
   RxString keywordToBeSearch = ''.obs;
   TextEditingController keywordToBeSearchTextCtrl = TextEditingController();
@@ -57,11 +59,16 @@ class OfferFeedController extends GetxController
   RxList<FieldModel> fieldListToBeSearch = <FieldModel>[].obs;
   // RxList<int> fieldListToBeSearch = <int>[].obs;
   RxList<FieldModel> languageListToBeSearch = <FieldModel>[].obs;
+  RxList<FieldModel> availabilitiesTagListToBeSearch = <FieldModel>[].obs;
 
   Rx<PlaceDetailModel> placeDetail = PlaceDetailModel().obs;
   TextEditingController addressCtrl = TextEditingController();
 
   RxInt radiusRxInt = 10.obs;
+
+  Rx<JobOfferModel> jobOfferToBeSearch = JobOfferModel().obs;
+  Rx<SearchPreferencesModel> searchPreferenceData =
+      SearchPreferencesModel().obs;
 
   RxBool isLoadingIndicator = false.obs;
 
@@ -88,9 +95,11 @@ class OfferFeedController extends GetxController
   @override
   Future<void> onInit() async {
     super.onInit();
+    await getSearchPreferenceResponseProvider();
     await getjobOfferTypesListResponseProvider();
     await getFieldsListResponseProvider();
     await getLanguagesListResponseProvider();
+    await getAvailabilitiesTagListResponseProvider();
     await getFeedsDataState(refresh: true)
         // .then((value) => isProcessingStudentInfoRepsonse.value = true)
         ;
@@ -147,14 +156,17 @@ class OfferFeedController extends GetxController
     languageListInFilter.value = [];
     fieldListInFilter.value = [];
     typesListInFilter.value = [];
+    availabilitiesTagListInFilter.value = [];
 
     countryToBeSearch.value = const CountryModel();
     workPlaceTypesToBeSearch.value = 2; // 2 == Hybrid(Default)
     languageListToBeSearch.value = [];
     fieldListToBeSearch.value = [];
     typesListToBeSearch.value = [];
+    availabilitiesTagListToBeSearch.value = [];
 
     placeDetail.value = PlaceDetailModel();
+    radiusRxInt.value = 5;
 
     // debugPrint(
     //   'clearAllFilterToBeSearch',
@@ -174,9 +186,11 @@ class OfferFeedController extends GetxController
     languageListInFilter.clear();
     fieldListInFilter.clear();
     typesListInFilter.clear();
+    availabilitiesTagListInFilter.clear();
     languageListInFilter.addAll(languageListToBeSearch);
     fieldListInFilter.addAll(fieldListToBeSearch);
     typesListInFilter.addAll(typesListToBeSearch);
+    availabilitiesTagListInFilter.addAll(availabilitiesTagListToBeSearch);
     // debugPrint('dismissFilter');
     // debugPrint(
     //   'languageListToBeSearch:: ${languageListToBeSearch.map((element) => '${element.label}\n')}',
@@ -193,9 +207,11 @@ class OfferFeedController extends GetxController
     languageListToBeSearch.clear();
     fieldListToBeSearch.clear();
     typesListToBeSearch.clear();
+    availabilitiesTagListToBeSearch.clear();
     languageListToBeSearch.addAll(languageListInFilter);
     fieldListToBeSearch.addAll(fieldListInFilter);
     typesListToBeSearch.addAll(typesListInFilter);
+    availabilitiesTagListToBeSearch.addAll(availabilitiesTagListInFilter);
     getFeedsDataState();
 
     // debugPrint(
@@ -235,6 +251,34 @@ class OfferFeedController extends GetxController
     );
   }
 
+  Future<SearchPreferencesModel> getSearchPreferenceResponseProvider({
+    bool? refresh = false,
+  }) async {
+    searchPreferenceData.value = await offerProvider.getSearchPreferences();
+    typesListToBeSearch
+        .addAll(searchPreferenceData.value.offerTypePreferences!);
+    languageListToBeSearch.addAll([]);
+    fieldListToBeSearch.addAll(searchPreferenceData.value.fieldPreferences!);
+    availabilitiesTagListToBeSearch
+        .addAll(searchPreferenceData.value.availabilityPreferences!);
+    placeDetail.value = PlaceDetailModel(
+      fullAddress: searchPreferenceData.value.locationPreference,
+      streetNumber: searchPreferenceData.value.locationStreet,
+      lat: double.tryParse(
+        searchPreferenceData.value.locationLatitude.toString(),
+      ),
+      lng: double.tryParse(
+        searchPreferenceData.value.locationLongitude.toString(),
+      ),
+      areaLevel1: searchPreferenceData.value.locationCity,
+      country: searchPreferenceData.value.locationCountry,
+      postalCode: searchPreferenceData.value.locationZip,
+    );
+    radiusRxInt.value = (searchPreferenceData.value.radius! / 1000).round();
+    dismissFilter();
+    return searchPreferenceData.value;
+  }
+
   Future<List<FieldModel>> getjobOfferTypesListResponseProvider({
     bool? refresh = false,
   }) async {
@@ -266,13 +310,24 @@ class OfferFeedController extends GetxController
     return languageListForSearch;
   }
 
+  Future<List<FieldModel>> getAvailabilitiesTagListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    availabilitiesTagListForSearch
+        .addAll(await tagProvider.getAvailabilitiesTags());
+    // debugPrint(
+    //   'availabilitiesTagListForSearch:: ${availabilitiesTagListForSearch.map((element) => '${element.label}\n')}',
+    // );
+    return availabilitiesTagListForSearch;
+  }
+
   Future<RxList<JobOfferModel>> getfeedListResponseProvider({
     bool? refresh = false,
   }) async {
     final List<JobOfferModel> feedTempListResponse =
         []; // feedListRepsonse.clear();
     PaginationModel feedListPaginationRepsonse = PaginationModel();
-    final JobOfferModel jobOfferToBeSearch = JobOfferModel(
+    jobOfferToBeSearch.value = JobOfferModel(
       // title: 'commercial',
       title: keywordToBeSearch.value,
       telecommuting: workPlaceTypesToBeSearch.value,
@@ -282,6 +337,7 @@ class OfferFeedController extends GetxController
       // ],
       spokenLanguages: languageListToBeSearch,
       fields: fieldListToBeSearch,
+      availabilities: availabilitiesTagListToBeSearch,
       // location: countryToBeSearch.value.name,
       location: placeDetail.value.fullAddress,
       addressStreet: placeDetail.value.fullAddress,
@@ -309,7 +365,7 @@ class OfferFeedController extends GetxController
         feedListPaginationRepsonse =
             await offerProvider.postSearchOfferWithPagination(
           pageNumber: pageNum,
-          jobOfferForSearch: jobOfferToBeSearch,
+          jobOfferForSearch: jobOfferToBeSearch.value,
         );
         feedListPagination.value = feedListPaginationRepsonse;
         feedTempListResponse.addAll(feedListPagination.value.data!);
@@ -321,7 +377,7 @@ class OfferFeedController extends GetxController
       feedListPaginationRepsonse =
           await offerProvider.postSearchOfferWithPagination(
         pageNumber: 1,
-        jobOfferForSearch: jobOfferToBeSearch,
+        jobOfferForSearch: jobOfferToBeSearch.value,
       );
       feedListPagination.value = feedListPaginationRepsonse;
       feedTempListResponse.addAll(feedListPagination.value.data!);

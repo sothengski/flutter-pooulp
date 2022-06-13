@@ -22,11 +22,11 @@ class StudentProfileModel {
   final List<PeriodModel>? periods;
 
   StudentProfileModel({
-    this.telecommuting,
-    this.shifting,
+    this.telecommuting = false,
+    this.shifting = false,
     this.radius,
-    this.drivingLicense,
-    this.hasAutomobile,
+    this.drivingLicense = false,
+    this.hasAutomobile = false,
     this.facebookLink,
     this.linkedinLink,
     this.whatsappLink,
@@ -88,7 +88,7 @@ class StudentProfileModel {
     );
   }
 
-  int get radiusFromMeterToKM => radius! ~/ 1000;
+  int get radiusFromMeterToKM => radius == null ? 0 : radius! ~/ 1000;
 
   factory StudentProfileModel.fromRawJson(String str) =>
       StudentProfileModel.fromJson(

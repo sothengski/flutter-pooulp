@@ -173,6 +173,7 @@ const Map<String, String> nlNL = {
   'offer.enterpriseID': "Enterprise-ID",
   'offer.description': "Beschrijving",
   'offer.jobTypes': "Types",
+  'offer.workAvailabilities': "Werkbeschikbaarheid",
 
   ///===== Profile =====//
   'home.feed': "Voer",

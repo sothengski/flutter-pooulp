@@ -162,8 +162,10 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         children: controller.listJobOfferTypes
                             .map(
                               (e) => RowDataSelectionWidget.checkBox(
-                                isClickingValue:
-                                    controller.typesListInFilter.contains(e),
+                                isClickingValue: controller.typesListInFilter
+                                    .where((item) => item.id == e.id)
+                                    .isNotEmpty,
+                                // controller.typesListInFilter.contains(e),
                                 text: e.label,
                                 onPressed: () {
                                   controller
@@ -346,6 +348,95 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     //===== Bottom of Languages Component =====//
                     // const SizedBox(height: 8.0),
 
+                    ///===== Top of Availabilities Tags Component =====//
+                    ContainerDialogWidget(
+                      leftPadding: AppSize.s10,
+                      rightPadding: AppSize.s10,
+                      inputTitle: 'offer.workAvailabilities'.tr,
+                      fontSizeTitle: AppSize.s16,
+                      fontWeightTitle: FontWeight.w600,
+                      inputTitleMarginBottom: AppSize.s6,
+                      // validatorFunction: (_) => Validator().notEmptyValidator(
+                      //   controller.selectedLanguage.value.label ?? '',
+                      // ),
+                      dialogType: DialogType.bottomSheetDialog,
+                      dialogWidget: Container(
+                        height: getHeight,
+                        decoration: const ShapeDecoration(
+                          color: ColorsManager.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(
+                                AppSize.s16,
+                              ),
+                              topRight: Radius.circular(
+                                AppSize.s16,
+                              ),
+                            ),
+                          ),
+                        ),
+                        child: Obx(
+                          () => controller
+                                  .availabilitiesTagListForSearch.isNotEmpty
+                              ? FieldListMultipleSelector(
+                                  inputHintText: 'core.search'.tr,
+                                  dataListforSelected:
+                                      controller.availabilitiesTagListForSearch,
+                                  selectedItems:
+                                      controller.availabilitiesTagListInFilter,
+                                  onTap: (field) {
+                                    controller
+                                        .addingOrRemovingFieldInFieldListToBeSearch(
+                                      list: controller
+                                          .availabilitiesTagListInFilter,
+                                      fieldValue: field,
+                                    );
+                                  },
+                                )
+                              : const LoadingWidget(),
+                        ),
+                      ),
+                      containerWidget: RowContentInputWidget(
+                        centerWidget: CustomTextWidget(
+                          text: 'offer.workAvailabilities'.tr,
+                          color: ColorsManager.grey400,
+                          fontWeight: FontWeight.w400,
+                          fontSize: AppSize.s16,
+                        ),
+                        suffixWidget: const Icon(
+                          IconsManager.arrowDropDown,
+                          color: ColorsManager.grey600,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(
+                        left: AppSize.s10,
+                        right: AppSize.s10,
+                      ),
+                      child: Wrap(
+                        children: [
+                          for (var i = 0;
+                              i <
+                                  controller
+                                      .availabilitiesTagListInFilter.length;
+                              i++)
+                            RemovableTextCardWidget(
+                              text:
+                                  '${controller.availabilitiesTagListInFilter[i].label}',
+                              onRemove: () => controller
+                                  .addingOrRemovingFieldInFieldListToBeSearch(
+                                list: controller.availabilitiesTagListInFilter,
+                                fieldValue:
+                                    controller.availabilitiesTagListInFilter[i],
+                              ),
+                            )
+                        ],
+                      ),
+                    ),
+                    //===== Bottom of Availabilities Tags Component =====//
+                    // const SizedBox(height: 8.0),
+
                     ///===== Top of Location Component =====//
                     Container(
                       padding: const EdgeInsets.only(
@@ -395,6 +486,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       suffixWidgetFlex: 50,
                       suffixWidget: Slider(
                         value: controller.radiusRxInt.value.toDouble(),
+                        min: 5.0,
                         max: 100.0,
                         divisions: 100,
                         activeColor: ColorsManager.primary,

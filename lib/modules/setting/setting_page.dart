@@ -163,6 +163,7 @@ class SettingPage extends GetView<SettingController> {
                         suffixWidgetFlex: 50,
                         suffixWidget: Slider(
                           value: controller.radiusRxInt.value.toDouble(),
+                          min: 5.0,
                           max: 100.0,
                           divisions: 100,
                           activeColor: ColorsManager.primary,

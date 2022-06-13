@@ -172,6 +172,7 @@ const Map<String, String> enUS = {
   'offer.enterpriseID': "Enterprise ID",
   'offer.description': "Description",
   'offer.jobTypes': "Job Types",
+  'offer.workAvailabilities': "Work Availabilities",
 
   ///===== Profile =====//
   'home.feed': "Feed",

@@ -61,6 +61,7 @@ class _FieldListSelectorState extends State<FieldListSelector> {
               Icons.search,
               // color: ColorsManager.grey400,
             ),
+            enabledBorderColor: ColorsManager.grey300,
             onChanged: filterSearchResults,
           ),
         ),

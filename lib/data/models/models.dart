@@ -9,6 +9,7 @@ export 'feed_model/feed_model.dart';
 export 'google_place_model.dart';
 export 'job_offer_model/job_offer_model.dart';
 export 'job_offer_model/job_offer_state_model.dart';
+export 'job_offer_model/search_preference_model.dart';
 export 'json_response.dart';
 export 'login_model.dart';
 export 'messaging_model/latest_message_model.dart';

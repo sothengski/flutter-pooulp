@@ -86,6 +86,7 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
             hintText: widget.inputHintText,
             suffixIcon: const Icon(Icons.search),
             onChanged: filterSearchResults,
+            enabledBorderColor: ColorsManager.grey300,
           ),
         ),
         Flexible(
@@ -105,8 +106,10 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
                       elevation: 0.0,
                       color: ColorsManager.white,
                       child: RowDataSelectionWidget.checkBox(
-                        isClickingValue:
-                            widget.selectedItems!.contains(fieldItem),
+                        isClickingValue: widget.selectedItems!
+                            .where((item) => item.id == fieldItem.id)
+                            .isNotEmpty,
+                        // widget.selectedItems!.contains(fieldItem),
                         text: fieldItem.label,
                         onPressed: () => {
                           setState(

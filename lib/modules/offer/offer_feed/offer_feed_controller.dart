@@ -70,6 +70,8 @@ class OfferFeedController extends GetxController
   Rx<SearchPreferencesModel> searchPreferenceData =
       SearchPreferencesModel().obs;
 
+  RxInt filterCountRxInt = 0.obs;
+
   RxBool isLoadingIndicator = false.obs;
 
   List<String> suggestionWordList = [
@@ -167,6 +169,7 @@ class OfferFeedController extends GetxController
 
     placeDetail.value = PlaceDetailModel();
     radiusRxInt.value = 5;
+    countFilterField();
 
     // debugPrint(
     //   'clearAllFilterToBeSearch',
@@ -191,6 +194,7 @@ class OfferFeedController extends GetxController
     fieldListInFilter.addAll(fieldListToBeSearch);
     typesListInFilter.addAll(typesListToBeSearch);
     availabilitiesTagListInFilter.addAll(availabilitiesTagListToBeSearch);
+    countFilterField();
     // debugPrint('dismissFilter');
     // debugPrint(
     //   'languageListToBeSearch:: ${languageListToBeSearch.map((element) => '${element.label}\n')}',
@@ -212,6 +216,7 @@ class OfferFeedController extends GetxController
     fieldListToBeSearch.addAll(fieldListInFilter);
     typesListToBeSearch.addAll(typesListInFilter);
     availabilitiesTagListToBeSearch.addAll(availabilitiesTagListInFilter);
+    countFilterField();
     getFeedsDataState();
 
     // debugPrint(
@@ -223,6 +228,33 @@ class OfferFeedController extends GetxController
     // debugPrint(
     //   'fieldListForSearch:: ${fieldListForSearch.map((element) => '${element.label}\n')}',
     // );
+  }
+
+  void countFilterField() {
+    int tempCount = 0;
+    if (keywordToBeSearchTextCtrl.text.isNotEmpty) {
+      tempCount += 1;
+    }
+    if (workPlaceTypesInFilter.value != 2) {
+      tempCount += 1;
+    }
+    if (languageListInFilter.isNotEmpty) {
+      tempCount += 1;
+    }
+    if (fieldListInFilter.isNotEmpty) {
+      tempCount += 1;
+    }
+    if (typesListInFilter.isNotEmpty) {
+      tempCount += 1;
+    }
+    if (availabilitiesTagListInFilter.isNotEmpty) {
+      tempCount += 1;
+    }
+    if (placeDetail.value.country != '' && placeDetail.value.country != null) {
+      tempCount += 1;
+    }
+
+    filterCountRxInt.value = tempCount;
   }
 
   bool jobOfferOnClickBoolSwitching({bool? boolValue}) {

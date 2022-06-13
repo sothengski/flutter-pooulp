@@ -126,20 +126,23 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                   alignment: Alignment.topCenter,
                                   padding:
                                       const EdgeInsets.only(left: AppSize.s4),
-                                  child: const CustomBoxWidget(
+                                  child: CustomBoxWidget(
                                     borderRadius: AppSize.s16,
                                     topPadding: AppSize.s2,
                                     bottomPadding: AppSize.s2,
                                     leftPadding: AppSize.s0,
                                     rightPadding: AppSize.s0,
                                     backgroundColor: ColorsManager.primary,
-                                    child: CustomTextWidget(
-                                      text: '0',
-                                      fontSize: AppSize.s12,
-                                      color: ColorsManager.white,
-                                      textAlign: TextAlign.center,
-                                      marginLeft: AppSize.s6,
-                                      marginRight: AppSize.s6,
+                                    child: Obx(
+                                      () => CustomTextWidget(
+                                        text: controller.filterCountRxInt.value
+                                            .toString(),
+                                        fontSize: AppSize.s12,
+                                        color: ColorsManager.white,
+                                        textAlign: TextAlign.center,
+                                        marginLeft: AppSize.s6,
+                                        marginRight: AppSize.s6,
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -289,7 +289,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextWidget(
-                            text: 'auth.phoneNumber'.tr,
+                            text: 'profile.phone'.tr,
                             // marginTop: inputTitleMarginTop,
                             textAlign: TextAlign.left,
                             // marginBottom: inputTitleMarginBottom,
@@ -425,7 +425,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Video presentation link Component =====//
                       CustomTextInput(
                         controller: controller.videoLinkCtrl,
-                        inputTitle: 'profile.vdoLink'.tr,
+                        inputTitle: "${'profile.vdoLink'.tr} Youtube",
                         hintText: 'profile.vdoLinkHint'.tr,
                         isFilled: true,
                         topPadding: AppSize.s12,
@@ -493,14 +493,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       //===== Bottom of Address Component =====//
 
                       ///===== Top of Country & City/State Component =====//
-                      CustomTextInput(
-                        controller: controller.countryCtrl,
-                        inputTitle: 'profile.country'.tr,
-                        hintText: 'profile.country'.tr,
-                        isFilled: true,
-                        maxLength: 10,
-                        topPadding: AppSize.s12,
-                      ),
+
                       CustomTextInput(
                         controller: controller.cityStateCtrl,
                         inputTitle: 'profile.city'.tr,
@@ -516,6 +509,14 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         controller: controller.zipCodeCtrl,
                         inputTitle: 'profile.zipCode'.tr,
                         hintText: 'profile.zipCode'.tr,
+                        isFilled: true,
+                        maxLength: 10,
+                        topPadding: AppSize.s12,
+                      ),
+                      CustomTextInput(
+                        controller: controller.countryCtrl,
+                        inputTitle: 'profile.country'.tr,
+                        hintText: 'profile.country'.tr,
                         isFilled: true,
                         maxLength: 10,
                         topPadding: AppSize.s12,

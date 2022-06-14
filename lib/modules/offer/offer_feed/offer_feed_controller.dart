@@ -149,6 +149,11 @@ class OfferFeedController extends GetxController
     }
   }
 
+  void clearPlaceDetail() {
+    addressCtrl.clear();
+    placeDetail.value = PlaceDetailModel();
+  }
+
   void clearAllFilterToBeSearch() {
     keywordToBeSearch.value = '';
     keywordToBeSearchTextCtrl.text = '';

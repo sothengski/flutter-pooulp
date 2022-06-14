@@ -443,51 +443,76 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         left: AppSize.s10,
                         right: AppSize.s10,
                       ),
-                      child: GestureDetector(
-                        onTap: () async {
-                          controller.placeDetail.value =
-                              (await showSearchFunc(context))!;
-                        },
-                        child: AbsorbPointer(
-                          child: Stack(
-                            children: [
-                              // Container(
-                              //   alignment: Alignment.centerRight,
-                              //   padding:
-                              //       const EdgeInsets.only(top: AppSize.s16),
-                              //   child: const Icon(
-                              //     Icons.cancel,
-                              //     color: ColorsManager.red,
-                              //     size: AppSize.s16,
-                              //   ),
-                              // ),
-                              CustomTextInput(
-                                controller: controller.addressCtrl,
-                                inputTitle: 'offer.location'.tr,
-                                fontSizeTitle: AppSize.s16,
-                                fontWeightTitle: FontWeight.w600,
-                                hintText:
-                                    controller.placeDetail.value.fullAddress ??
+                      child: Stack(
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              controller.placeDetail.value =
+                                  (await showSearchFunc(context))!;
+                            },
+                            child: AbsorbPointer(
+                              child: Stack(
+                                children: [
+                                  // Container(
+                                  //   alignment: Alignment.centerRight,
+                                  //   padding:
+                                  //       const EdgeInsets.only(top: AppSize.s16),
+                                  //   child: const Icon(
+                                  //     Icons.cancel,
+                                  //     color: ColorsManager.red,
+                                  //     size: AppSize.s16,
+                                  //   ),
+                                  // ),
+                                  CustomTextInput(
+                                    controller: controller.addressCtrl,
+                                    inputTitle: 'offer.location'.tr,
+                                    fontSizeTitle: AppSize.s16,
+                                    fontWeightTitle: FontWeight.w600,
+                                    hintText: controller
+                                            .placeDetail.value.fullAddress ??
                                         '',
-                                hintTextColor: ColorsManager.black,
-                                isFilled: true,
-                                isReadOnly: true,
-                                topContentPadding: 12.0,
-                                bottomContentPadding: 12.0,
-                                topPadding: AppSize.s12,
-                                // counter: true,
-                                maxLines: 5,
-                                maxLength: 150,
-                                keyboardType: TextInputType.multiline,
-                                // suffixIcon: const Icon(
-                                //   Icons.cancel,
-                                //   color: ColorsManager.red,
-                                //   size: AppSize.s16,
-                                // ),
+                                    hintTextColor: ColorsManager.black,
+                                    isFilled: true,
+                                    isReadOnly: true,
+                                    topContentPadding: 12.0,
+                                    bottomContentPadding: 12.0,
+                                    topPadding: AppSize.s12,
+                                    // counter: true,
+                                    maxLines: 5,
+                                    maxLength: 150,
+                                    keyboardType: TextInputType.multiline,
+                                    // suffixIcon: const Icon(
+                                    //   Icons.cancel,
+                                    //   color: ColorsManager.red,
+                                    //   size: AppSize.s16,
+                                    // ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                          if (controller.placeDetail.value.fullAddress == null)
+                            Container()
+                          else
+                            Positioned(
+                              top: 50,
+                              left: 0,
+                              right: 10,
+                              child: Container(
+                                alignment: Alignment.centerRight,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    controller.clearPlaceDetail();
+                                  },
+                                  child: const Icon(
+                                    Icons.cancel,
+                                    color: ColorsManager.red,
+                                    size: AppSize.s20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                     //===== Bottom of Location Component =====//

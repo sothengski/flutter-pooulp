@@ -5,10 +5,14 @@ import '../../data/data.dart';
 import '../../routes/routes.dart';
 
 class SplashController extends GetxController {
+  final appBasicProvider = Get.find<AppBasicProvider>();
+
   @override
   void onReady() {
     super.onReady();
     checkAuth();
+    // getAppBasicStatusProvider();
+    // getAllTranslationLangsProvider();
   }
 
   Future<void> checkAuth() async {
@@ -28,5 +32,13 @@ class SplashController extends GetxController {
           }
       },
     );
+  }
+
+  Future<void> getAppBasicStatusProvider() async {
+    await appBasicProvider.getAppBasicStatus();
+  }
+
+  Future<void> getAllTranslationLangsProvider() async {
+    await appBasicProvider.getAllTranslationLangs();
   }
 }

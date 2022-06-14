@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../data/data.dart';
 import '../modules.dart';
 
 class SplashBinding implements Bindings {
@@ -7,6 +8,9 @@ class SplashBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<SplashController>(
       () => SplashController(),
+    );
+    Get.lazyPut<AppBasicProvider>(
+      () => AppBasicProvider(),
     );
   }
 }

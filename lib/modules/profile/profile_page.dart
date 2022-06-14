@@ -183,7 +183,8 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Certificates Component =====//
                                           ProfileCertificateComponent(
-                                            title: 'profile.certificates'.tr,
+                                            title:
+                                                "${'profile.diplomas'.tr} / ${'profile.certificates'.tr}",
                                             addOrEditCertificateRoute: Routes
                                                 .addOrEditCertificateRoute,
                                             certificateList: controller

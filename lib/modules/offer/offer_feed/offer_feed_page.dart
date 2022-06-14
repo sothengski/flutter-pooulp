@@ -87,7 +87,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                 () => CustomTextWidget(
                                   text: controller.keywordToBeSearch.value != ''
                                       ? controller.keywordToBeSearch.value
-                                      : 'offer.searchByTitle'.tr,
+                                      : 'offer.searchJobTitle'.tr,
                                 ),
                               ),
                               onTap: () {
@@ -112,7 +112,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                       context: context,
                                       barrierDismissible: true,
                                       widget: OfferFeedFilterSearch(
-                                        title: 'offer.filterTitle'.tr,
+                                        title: 'offer.filter'.tr,
                                       ),
                                       // Get.dialog(
                                       //   OfferFeedFilterSearch(

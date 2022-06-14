@@ -9,7 +9,7 @@ class OfferSearchPage extends SearchDelegate {
 
   @override
   // String get searchFieldLabel => OfferStrings.searchByTitle;
-  String get searchFieldLabel => 'offer.searchByTitle'.tr;
+  String get searchFieldLabel => 'offer.searchJobTitle'.tr;
 
   @override
   List<Widget> buildActions(BuildContext context) {

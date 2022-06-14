@@ -87,7 +87,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       inputTitle: 'offer.jobTitle'.tr,
                       fontSizeTitle: AppSize.s16,
                       fontWeightTitle: FontWeight.w600,
-                      hintText: 'offer.searchByTitle'.tr,
+                      hintText: 'offer.searchJobTitle'.tr,
                       isFilled: true,
                       // validator: Validator().notEmptyValidator,
                     ),
@@ -560,7 +560,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
               children: [
                 ///===== Top of Clear All Button Component =====//
                 Expanded(
-                  flex: 50,
+                  flex: 40,
                   child: Container(
                     alignment: Alignment.centerLeft,
                     child: CustomMaterialButton(
@@ -583,8 +583,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                   child: CustomMaterialButton(
                     buttonColor: ColorsManager.white,
                     elevation: 0.0,
-                    text: buttonLabel2 ?? 'offer.dismissBtn'.tr,
-                    textColor: ColorsManager.primaryBlue,
+                    text: buttonLabel2 ?? 'core.close'.tr,
+                    textColor: ColorsManager.red,
                     fontSize: 14,
                     onPressed: () {
                       controller.dismissFilter();
@@ -596,11 +596,11 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
 
                 ///===== Top of Apply Button Component =====//
                 Expanded(
-                  flex: 25,
+                  flex: 35,
                   child: CustomMaterialButton(
                     childWidget: CustomTextWidget(
                       textAlign: TextAlign.left,
-                      text: buttonLabel3 ?? 'offer.applyBtn'.tr,
+                      text: buttonLabel3 ?? 'offer.applyFilter'.tr,
                     ),
                     buttonColor: ColorsManager.white,
                     elevation: 0.0,

@@ -180,7 +180,7 @@ const Map<String, String> enUS = {
 
   ///===== Profile =====//
   'home.feed': "Feed",
-  'home.myOffers': "MyOffers",
+  'home.myOffers': "My offers",
   'home.messaging': "Messaging",
   'home.profile': "Profile",
   'profile.completeness': "Profile Completeness",

@@ -182,8 +182,8 @@ const Map<String, String> frFR = {
   'offer.timeSlots': "Créneaux horaires",
 
   ///===== Profile =====//
-  'home.feed': "Nourrir",
-  'home.myOffers': "Myoffers",
+  'home.feed': "Fil d'actualité", //"Alimentation",
+  'home.myOffers': "Mes offres",
   'home.messaging': "Messagerie",
   'home.profile': "Profil",
   'profile.completeness': "Composition du profil",

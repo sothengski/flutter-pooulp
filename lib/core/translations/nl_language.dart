@@ -180,7 +180,7 @@ const Map<String, String> nlNL = {
 
   ///===== Profile =====//
   'home.feed': "Voer",
-  'home.myOffers': "Myoffers",
+  'home.myOffers': "Mijn aanbiedingen",
   'home.messaging': "Berichten",
   'home.profile': "Profiel",
   'profile.completeness': "Profiel compleetheid",

@@ -144,7 +144,7 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
           leftPadding: AppSize.s12,
           rightPadding: AppSize.s12,
           bottomPadding: AppSize.s20,
-          text: 'settings.changePasswordButton'.tr,
+          text: 'core.saveBtn'.tr,
           childWidget: controller.isSubmitBtnProcessing.value == true
               ? const SizedBox(
                   height: 40,

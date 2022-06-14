@@ -11,7 +11,7 @@ const Map<String, String> frFR = {
   'core.connectionFailedMsg':
       "Assurez-vous que les données Wi-Fi ou mobile sont activées et réessayez ..",
   'core.tryAgain': "Réessayer",
-  'core.saveBtn': "Sauver",
+  'core.saveBtn': "Sauvegarder",
   'core.addBtn': "Ajouter",
   'core.add': "Ajouter",
   'core.edit': "Modifier",
@@ -88,17 +88,19 @@ const Map<String, String> frFR = {
 
   ///===== Settings =====//
   'settings.settingsTitle': "Réglages",
-  'settings.moreInformation': "Plus d'information",
-  'settings.telecommunicating': "Télécommunication",
+  'settings.moreInformation': "Information", //"Plus d'information",
+  'settings.telecommunicating': "Télétravail", //"Télécommunication",
   'settings.shifting': "Déplacement",
-  'settings.drivingLicense': "Permis de conduire",
-  'settings.hasAutomobile': "A automobile",
+  'settings.drivingLicense':
+      "Permis de conduire requis", //"Permis de conduire",
+  'settings.hasAutomobile': "En possesion d'une voiture ?", //"A automobile",
   'settings.radius': "Rayon",
   'settings.language': "Langue",
-  'settings.emailNotifications': "Notifications par Email",
+  'settings.emailNotifications':
+      "Notifications e-mail", //"Notifications par Email",
   'settings.changePassword': "Changer le mot de passe",
-  'settings.deleteAccount': "Supprimer le compte",
-  'settings.signOutButton': "Se déconnecter",
+  'settings.deleteAccount': "Supprimer mon compte",
+  'settings.signOutButton': "Déconnexion", //"Se déconnecter",
   'settings.appVersion': "Version de l'application",
   'settings.selectALanguage': "Sélectionne une langue",
   'settings.delectAccountWarming':
@@ -109,11 +111,12 @@ const Map<String, String> frFR = {
 
   ///===== Change Password =====//
   'settings.changePasswordTitle': "Changer le mot de passe",
-  'settings.currentPassword': "Mot de passe actuel",
-  'settings.currentPasswordHint': "Entrer votre mot de passe actuel",
+  'settings.currentPassword': "Mot de passe",
+  'settings.currentPasswordHint': "Entrer votre mot de passe",
   'settings.newPassword': "Nouveau mot de passe",
   'settings.newPasswordHint': "Entrez votre nouveau mot de passe",
-  'settings.confirmNewPassword': "Confirmer le nouveau mot de passe",
+  'settings.confirmNewPassword':
+      "Confirmation du nouveau mot de passe", //"Confirmer le nouveau mot de passe",
   'settings.confirmNewPasswordHint':
       "Entrez à nouveau votre nouveau mot de passe",
   'settings.changePasswordButton': "Changer le mot de passe",

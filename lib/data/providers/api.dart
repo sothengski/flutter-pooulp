@@ -49,6 +49,8 @@ enum Endpoint {
   postOrGetAvailabilities,
   getSearchPreferences,
   getAvailabilitiesTags,
+  getStatus,
+  getAllTranslationLangs,
 }
 
 class API {
@@ -100,6 +102,8 @@ class API {
     Endpoint.postOrGetAvailabilities:
         '/users/me/student_profile/availabilities',
     Endpoint.getSearchPreferences: '/search/preferences',
+    Endpoint.getStatus: '/status',
+    Endpoint.getAllTranslationLangs: '/translations',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

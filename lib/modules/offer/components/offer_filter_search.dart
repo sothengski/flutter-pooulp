@@ -555,63 +555,68 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
             ),
 
             ///===== Top of Button Actions List Component =====//
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ///===== Top of Clear All Button Component =====//
-                Expanded(
-                  flex: 40,
-                  child: Container(
-                    alignment: Alignment.centerLeft,
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: AppSize.s8, right: AppSize.s8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ///===== Top of Clear All Button Component =====//
+                  Expanded(
+                    flex: 40,
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: CustomMaterialButton(
+                        buttonColor: ColorsManager.white,
+                        elevation: 0.0,
+                        text: buttonLabel1 ?? 'offer.clearAllBtn'.tr,
+                        textColor: ColorsManager.redAccent700,
+                        fontSize: 14,
+                        onPressed: () {
+                          controller.clearAllFilterToBeSearch();
+                        },
+                      ),
+                    ),
+                  ),
+                  //===== Bottom of Clear All Button Component =====//
+
+                  ///===== Top of Dismiss Button Component =====//
+                  Expanded(
+                    flex: 25,
                     child: CustomMaterialButton(
                       buttonColor: ColorsManager.white,
                       elevation: 0.0,
-                      text: buttonLabel1 ?? 'offer.clearAllBtn'.tr,
-                      textColor: ColorsManager.primaryBlue,
+                      text: buttonLabel2 ?? 'core.close'.tr,
+                      textColor: ColorsManager.grey900,
                       fontSize: 14,
                       onPressed: () {
-                        controller.clearAllFilterToBeSearch();
+                        controller.dismissFilter();
+                        Get.back();
                       },
                     ),
                   ),
-                ),
-                //===== Bottom of Clear All Button Component =====//
+                  //===== Bottom of Dismiss Button Component =====//
 
-                ///===== Top of Dismiss Button Component =====//
-                Expanded(
-                  flex: 25,
-                  child: CustomMaterialButton(
-                    buttonColor: ColorsManager.white,
-                    elevation: 0.0,
-                    text: buttonLabel2 ?? 'core.close'.tr,
-                    textColor: ColorsManager.red,
-                    fontSize: 14,
-                    onPressed: () {
-                      controller.dismissFilter();
-                      Get.back();
-                    },
-                  ),
-                ),
-                //===== Bottom of Dismiss Button Component =====//
-
-                ///===== Top of Apply Button Component =====//
-                Expanded(
-                  flex: 35,
-                  child: CustomMaterialButton(
-                    childWidget: CustomTextWidget(
-                      textAlign: TextAlign.left,
-                      text: buttonLabel3 ?? 'offer.applyFilter'.tr,
+                  ///===== Top of Apply Button Component =====//
+                  Expanded(
+                    flex: 35,
+                    child: CustomMaterialButton(
+                      childWidget: CustomTextWidget(
+                        textAlign: TextAlign.left,
+                        text: buttonLabel3 ?? 'offer.applyFilter'.tr,
+                        color: ColorsManager.white,
+                      ),
+                      // buttonColor: ColorsManager.primary,
+                      elevation: 1.0,
+                      onPressed: () {
+                        controller.applyFilterToBeSearch();
+                        Get.back();
+                      },
                     ),
-                    buttonColor: ColorsManager.white,
-                    elevation: 0.0,
-                    onPressed: () {
-                      controller.applyFilterToBeSearch();
-                      Get.back();
-                    },
                   ),
-                ),
-                //===== Bottom of Apply Button Component =====//
-              ],
+                  //===== Bottom of Apply Button Component =====//
+                ],
+              ),
             ),
             //===== Bottom of Button Actions List Fields Component =====//
           ],

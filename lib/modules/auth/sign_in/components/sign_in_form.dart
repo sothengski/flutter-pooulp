@@ -23,7 +23,7 @@ class SignInForm extends GetView<SignInController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomTextWidget(
-                text: 'auth.logIn'.tr,
+                text: 'auth.signInToUrAcc'.tr,
                 fontSize: 24.0,
                 fontWeight: FontWeight.w700,
                 color: ColorsManager.primary,

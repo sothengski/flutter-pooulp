@@ -46,9 +46,12 @@ const Map<String, String> frFR = {
   'auth.forgotPassword': "Mot de passe oublié?",
   'auth.loginButton': "Connexion",
   'auth.or': "Ou",
-  'auth.dontHaveAccount': "Vous n'avez pas encore de compte?",
+  'auth.signInToUrAcc': "Se connecter à mon compte",
+  'auth.dontHaveAccount':
+      "Pas encore de compte?", //"Vous n'avez pas encore de compte?",
   'auth.registerNow': "S'inscrire maintenant!",
-  'auth.registerAs': "Enregistrer un compte comme",
+  'auth.registerAs':
+      "Créer un compte en tant que", //"Enregistrer un compte comme",
   'auth.student': "Étudiant",
   'auth.enterprise': "Entreprise",
   'auth.createStudentAccount': "Créer un compte étudiant",

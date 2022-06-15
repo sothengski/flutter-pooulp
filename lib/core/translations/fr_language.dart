@@ -87,13 +87,14 @@ const Map<String, String> frFR = {
   'auth.tryAgain': "Réessayer",
 
   ///===== Settings =====//
-  'settings.settingsTitle': "Réglages",
+  'settings.settings': "Réglages",
+  'settings.settingsTitle': "Préférences",
   'settings.moreInformation': "Information", //"Plus d'information",
   'settings.telecommunicating': "Télétravail", //"Télécommunication",
   'settings.shifting': "Déplacement",
   'settings.drivingLicense':
-      "Permis de conduire requis", //"Permis de conduire",
-  'settings.hasAutomobile': "En possesion d'une voiture ?", //"A automobile",
+      "En possession du permis de conduire", //"Permis de conduire",
+  'settings.hasAutomobile': "Motorisé", //"A automobile",
   'settings.radius': "Rayon",
   'settings.language': "Langue",
   'settings.emailNotifications':

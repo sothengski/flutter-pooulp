@@ -87,12 +87,13 @@ const Map<String, String> nlNL = {
   'auth.tryAgain': "Probeer het nog eens",
 
   ///===== Settings =====//
-  'settings.settingsTitle': "Instellingen",
+  'settings.settings': "Instellingen",
+  'settings.settingsTitle': "Voorkeuren",
   'settings.moreInformation': "Meer informatie",
   'settings.telecommunicating': "Telecommunicatie",
   'settings.shifting': "Schakelen",
-  'settings.drivingLicense': "Rijbewijs vereist",
-  'settings.hasAutomobile': "Heeft automobiel",
+  'settings.drivingLicense': "Het rijbewijs hebben",
+  'settings.hasAutomobile': "Gemotoriseerd",
   'settings.radius': "Straal",
   'settings.language': "Taal",
   'settings.emailNotifications': "E-mail notificaties",

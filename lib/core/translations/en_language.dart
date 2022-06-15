@@ -86,12 +86,13 @@ const Map<String, String> enUS = {
   'auth.tryAgain': "Try Again",
 
   ///===== Settings =====//
-  'settings.settingsTitle': "Settings",
-  'settings.moreInformation': "More Information",
+  'settings.settings': "Settings",
+  'settings.settingsTitle': "Preferences",
+  'settings.moreInformation': "Information",
   'settings.telecommunicating': "Telecommunicating",
   'settings.shifting': "Shifting",
-  'settings.drivingLicense': "Driving license required", //"Driving License",
-  'settings.hasAutomobile': "Has automobile",
+  'settings.drivingLicense': "Have Driving license", //"Driving License",
+  'settings.hasAutomobile': "Motorized", //"Has automobile",
   'settings.radius': "Radius",
   'settings.language': "Language",
   'settings.emailNotifications': "Email notifications",

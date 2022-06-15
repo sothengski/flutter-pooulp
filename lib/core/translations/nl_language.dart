@@ -26,6 +26,7 @@ const Map<String, String> nlNL = {
   'core.search': "Zoeken",
   'core.searchByName': "Zoek op naam",
   'core.close': "Dichtbij",
+  'core.name': "Naam",
 
   ///===== Validator =====//
   'validator.requireField': "Dit veld is verplicht.",

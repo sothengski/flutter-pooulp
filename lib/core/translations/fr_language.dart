@@ -26,6 +26,7 @@ const Map<String, String> frFR = {
   'core.search': "Chercher",
   'core.searchByName': "Recherche par nom",
   'core.close': "Fermer",
+  'core.name': "Nom",
 
   ///===== Validator =====//
   'validator.requireField': "Ce champ est requis.",
@@ -299,11 +300,11 @@ const Map<String, String> frFR = {
   'profile.langEditSuccessMsg': "Langue éditée avec succès",
   'profile.langDeleteSuccessMsg': "Langue supprimée avec succès",
   //Achievement
-  'profile.addAchievement': "Ajouter une réussite",
-  'profile.editAchievement': "Modifier la réussite",
-  'profile.achievementTitle': "Titre de la réussite",
+  'profile.addAchievement': "Ajouter une réalisation",
+  'profile.editAchievement': "Modifier la réalisation",
+  'profile.achievementTitle': "Nom", //"Titre de la réussite",
   'profile.achievementTitleHint': "Entrez votre titre de réussite",
-  'profile.completionDate': "Date d'achèvement",
+  'profile.completionDate': "Date d'achèvement", //"Fait le",
   'profile.achievementAddSuccessMsg': "Réalisation a ajouté avec succès",
   'profile.achievementEditSuccessMsg': "Réalisation édité avec succès",
   'profile.achievementDeleteSuccessMsg': "Réalisation supprimé avec succès",

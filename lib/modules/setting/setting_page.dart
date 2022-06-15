@@ -46,11 +46,11 @@ class SettingPage extends GetView<SettingController> {
                   rightMargin: AppSize.s12,
                   topMargin: AppSize.s12,
                   bottomMargin: AppSize.s12,
-                  leftTitle: 'settings.moreInformation'.tr,
-                  titleFontSize: AppSize.s16,
-                  titleFontWeight: FontWeight.bold,
-                  titleTopPadding: AppSize.s12,
-                  titleBottomPadding: AppSize.s4,
+                  // leftTitle: 'settings.moreInformation'.tr,
+                  // titleFontSize: AppSize.s16,
+                  // titleFontWeight: FontWeight.bold,
+                  // titleTopPadding: AppSize.s12,
+                  // titleBottomPadding: AppSize.s4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -149,10 +149,10 @@ class SettingPage extends GetView<SettingController> {
                         ),
                       ),
                       //===== Bottom of Has AutomobileComponent =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                      // const Divider(
+                      //   height: 10,
+                      //   thickness: 1,
+                      // ),
 
                       ///===== Top of Radius Component =====//
                       // RowContentInputWidget(

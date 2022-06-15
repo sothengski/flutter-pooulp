@@ -26,6 +26,7 @@ const Map<String, String> enUS = {
   'core.search': "Search",
   'core.searchByName': "Search By Name",
   'core.close': "Close",
+  'core.name': "Name",
 
   ///===== Validator =====//
   'validator.requireField': "This field is required.",

@@ -68,7 +68,7 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'profile.receivedDate'.tr,
+                        inputTitle: 'profile.received'.tr,
                         inputTitleMarginTop: AppSize.s0,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedReceivedDateString.value,
@@ -130,7 +130,7 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'profile.expireDate'.tr,
+                        inputTitle: 'profile.expire'.tr,
                         inputTitleMarginTop: AppSize.s0,
                         dialogType: DialogType.dateTimePickerDialog,
                         dateLocale: controller

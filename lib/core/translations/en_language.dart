@@ -45,6 +45,7 @@ const Map<String, String> enUS = {
   'auth.forgotPassword': "Forgot Password?",
   'auth.loginButton': "Login",
   'auth.or': "Or",
+  'auth.signInToUrAcc': "Sign In to your account",
   'auth.dontHaveAccount': "Don't have an account yet?",
   'auth.registerNow': "Register Now!",
   'auth.registerAs': "Register an account as",

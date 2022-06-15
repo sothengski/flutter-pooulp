@@ -45,6 +45,7 @@ const Map<String, String> nlNL = {
   'auth.forgotPassword': "Wachtwoord vergeten?",
   'auth.loginButton': "Log in",
   'auth.or': "Of",
+  'auth.signInToUrAcc': "Log in op uw account",
   'auth.dontHaveAccount': "Heb je nog geen account?",
   'auth.registerNow': "Registreer nu!",
   'auth.registerAs': "Registreer een account als",

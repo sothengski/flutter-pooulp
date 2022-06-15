@@ -46,7 +46,11 @@ class SettingPage extends GetView<SettingController> {
                   rightMargin: AppSize.s12,
                   topMargin: AppSize.s12,
                   bottomMargin: AppSize.s12,
-                  leftTitle: 'settings.moreInformation'.tr.toUpperCase(),
+                  leftTitle: 'settings.moreInformation'.tr,
+                  titleFontSize: AppSize.s16,
+                  titleFontWeight: FontWeight.bold,
+                  titleTopPadding: AppSize.s12,
+                  titleBottomPadding: AppSize.s4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -76,29 +80,29 @@ class SettingPage extends GetView<SettingController> {
                       ),
 
                       ///===== Top of ShiftingComponent =====//
-                      RowContentInputWidget(
-                        centerWidget: CustomTextWidget(
-                          marginLeft: AppSize.s12,
-                          textAlign: TextAlign.center,
-                          text: 'settings.shifting'.tr,
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidgetFlex: 20,
-                        suffixWidget: Switch(
-                          value: controller.shiftingRxBool.value,
-                          onChanged: (value) {
-                            controller.shiftingRxBool.value =
-                                controller.updatingBoolValue(newValue: value)!;
-                          },
-                          activeTrackColor: ColorsManager.primary25,
-                          activeColor: ColorsManager.primary,
-                        ),
-                      ),
-                      //===== Bottom of ShiftingComponent =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                      // RowContentInputWidget(
+                      //   centerWidget: CustomTextWidget(
+                      //     marginLeft: AppSize.s12,
+                      //     textAlign: TextAlign.center,
+                      //     text: 'settings.shifting'.tr,
+                      //     fontSize: AppSize.s16,
+                      //   ),
+                      //   suffixWidgetFlex: 20,
+                      //   suffixWidget: Switch(
+                      //     value: controller.shiftingRxBool.value,
+                      //     onChanged: (value) {
+                      //       controller.shiftingRxBool.value =
+                      //           controller.updatingBoolValue(newValue: value)!;
+                      //     },
+                      //     activeTrackColor: ColorsManager.primary25,
+                      //     activeColor: ColorsManager.primary,
+                      //   ),
+                      // ),
+                      // //===== Bottom of ShiftingComponent =====//
+                      // const Divider(
+                      //   height: 10,
+                      //   thickness: 1,
+                      // ),
 
                       ///===== Top of Driving License Component =====//
                       RowContentInputWidget(
@@ -151,31 +155,31 @@ class SettingPage extends GetView<SettingController> {
                       ),
 
                       ///===== Top of Radius Component =====//
-                      RowContentInputWidget(
-                        centerWidgetFlex: 50,
-                        centerWidget: CustomTextWidget(
-                          marginLeft: AppSize.s12,
-                          textAlign: TextAlign.center,
-                          text:
-                              '${'settings.radius'.tr}(Km): ${controller.radiusRxInt.value}',
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidgetFlex: 50,
-                        suffixWidget: Slider(
-                          value: controller.radiusRxInt.value.toDouble(),
-                          min: 5.0,
-                          max: 100.0,
-                          divisions: 100,
-                          activeColor: ColorsManager.primary,
-                          inactiveColor: ColorsManager.grey300,
-                          thumbColor: ColorsManager.primary,
-                          label: '${controller.radiusRxInt.value}',
-                          onChanged: (double newValue) {
-                            controller.isUpdating.value = true;
-                            controller.radiusRxInt.value = newValue.toInt();
-                          },
-                        ),
-                      ),
+                      // RowContentInputWidget(
+                      //   centerWidgetFlex: 50,
+                      //   centerWidget: CustomTextWidget(
+                      //     marginLeft: AppSize.s12,
+                      //     textAlign: TextAlign.center,
+                      //     text:
+                      //         '${'settings.radius'.tr}(Km): ${controller.radiusRxInt.value}',
+                      //     fontSize: AppSize.s16,
+                      //   ),
+                      //   suffixWidgetFlex: 50,
+                      //   suffixWidget: Slider(
+                      //     value: controller.radiusRxInt.value.toDouble(),
+                      //     min: 5.0,
+                      //     max: 100.0,
+                      //     divisions: 100,
+                      //     activeColor: ColorsManager.primary,
+                      //     inactiveColor: ColorsManager.grey300,
+                      //     thumbColor: ColorsManager.primary,
+                      //     label: '${controller.radiusRxInt.value}',
+                      //     onChanged: (double newValue) {
+                      //       controller.isUpdating.value = true;
+                      //       controller.radiusRxInt.value = newValue.toInt();
+                      //     },
+                      //   ),
+                      // ),
                       //===== Bottom of Radius Component =====//
                     ],
                   ),
@@ -188,7 +192,11 @@ class SettingPage extends GetView<SettingController> {
                   rightMargin: AppSize.s12,
                   // topMargin: AppSize.s12,
                   bottomMargin: AppSize.s12,
-                  // leftTitle: 'More Information'.toUpperCase(),
+                  leftTitle: 'settings.settings'.tr,
+                  titleFontSize: AppSize.s16,
+                  titleFontWeight: FontWeight.bold,
+                  titleTopPadding: AppSize.s12,
+                  titleBottomPadding: AppSize.s4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

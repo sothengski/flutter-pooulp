@@ -118,7 +118,7 @@ class ProfileHeaderComponent extends StatelessWidget {
           top: 5.0,
           right: 0.0,
           child: CustomIconButtonWidget(
-            iconData: Icons.settings_outlined,
+            iconData: Icons.tune,
             iconColor: ColorsManager.grey300,
             tooltip: 'Settings',
             onClick: () => {Get.toNamed(Routes.settingsRoute)},

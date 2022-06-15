@@ -309,11 +309,15 @@ const Map<String, String> frFR = {
   'profile.achievementEditSuccessMsg': "Réalisation édité avec succès",
   'profile.achievementDeleteSuccessMsg': "Réalisation supprimé avec succès",
   //Certificate
-  'profile.addCertificate': "Ajouter un certificat",
-  'profile.editCertificate': "Édition de certificat",
-  'profile.certificateTitle': "Titre de certificat",
+  'profile.addCertificate':
+      "Ajouter Diplômes/Certificats", // "Ajouter un certificat",
+  'profile.editCertificate':
+      "Modifier Diplômes/Certificats", // "Édition de certificat",
+  'profile.certificateTitle': "Titre", //"Titre de certificat",
   'profile.certificateTitleHint': "Entrez votre titre de certificat",
+  'profile.received': "Reçu",
   'profile.receivedDate': "Date de réception",
+  'profile.expire': "Expirer",
   'profile.expireDate': "Date d'expiration",
   'profile.certificateAddSuccessMsg': "Certificat ajouté avec succès",
   'profile.certificateEditSuccessMsg': "Certificat édité avec succès",

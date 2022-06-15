@@ -182,7 +182,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'profile.startDate'.tr,
+                        inputTitle: 'profile.startFrom'.tr,
                         inputTitleMarginTop: AppSize.s0,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedStartedDateString.value,
@@ -202,7 +202,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                           () => controller.selectedStartedDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'profile.startDate'.tr,
+                                    text: 'profile.startFrom'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
@@ -243,7 +243,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                       flex: 40,
                       child: ContainerDialogWidget(
                         inputTitle:
-                            "${'profile.endDate'.tr}(${'profile.expectedDate'.tr})",
+                            "${'profile.endOn'.tr}(${'profile.expectedDate'.tr})",
                         inputTitleMarginTop: AppSize.s0,
                         dialogType: DialogType.dateTimePickerDialog,
                         dateLocale: controller

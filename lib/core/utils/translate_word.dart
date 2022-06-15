@@ -8,9 +8,9 @@ String translateStateWords({required String? stateWord}) {
   } else if (stateWord == OfferStrings.matchedState) {
     return 'offer.matched'.tr;
   } else if (stateWord == OfferStrings.savedState) {
-    return 'offer.saved'.tr;
+    return 'offer.savedOffers'.tr;
   } else if (stateWord == OfferStrings.rejectedState) {
-    return 'offer.rejected'.tr;
+    return 'offer.refused'.tr;
   } else if (stateWord == SkillCategoryStrings.hardSkill) {
     return 'profile.hardSkill'.tr;
   } else if (stateWord == SkillCategoryStrings.softSkill) {

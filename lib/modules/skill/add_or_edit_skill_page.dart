@@ -364,140 +364,180 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                     .studentInfoRepsonse.value.skills!
                                     .map(
                                       (e) => e.type == Type.hardSkill
-                                          ? Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Wrap(
-                                                  children: [
-                                                    CustomIconButtonWidget(
-                                                      iconData:
-                                                          Icons.remove_circle,
-                                                      iconColor:
-                                                          ColorsManager.red,
-                                                      isConstraints: true,
-                                                      iconSize: AppSize.s20,
-                                                      onClick: () {
-                                                        controller
-                                                            .makeRequestToSkillAPI(
-                                                          skillId: e.id,
-                                                          operation: Keys
-                                                              .deleteOperation,
-                                                        );
-                                                      },
-                                                    ),
-                                                    CustomTextWidget(
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(
+                                                bottom: AppSize.s16,
+                                              ),
+                                              child: Row(
+                                                // crossAxisAlignment:
+                                                //     CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  // Flexible(
+                                                  //   flex: 73,
+                                                  //   child: Wrap(
+                                                  //     children: [
+                                                  //       CustomIconButtonWidget(
+                                                  //         iconData:
+                                                  //             Icons.remove_circle,
+                                                  //         iconColor:
+                                                  //             ColorsManager.red,
+                                                  //         isConstraints: true,
+                                                  //         iconSize: AppSize.s20,
+                                                  //         onClick: () {
+                                                  //           controller
+                                                  //               .makeRequestToSkillAPI(
+                                                  //             skillId: e.id,
+                                                  //             operation: Keys
+                                                  //                 .deleteOperation,
+                                                  //           );
+                                                  //         },
+                                                  //       ),
+                                                  //       CustomTextWidget(
+                                                  //         maxLine: 3,
+                                                  //         text: '${e.label}',
+                                                  //         fontSize: AppSize.s16,
+                                                  //         fontWeight:
+                                                  //             FontWeight.w500,
+                                                  //         marginLeft: AppSize.s10,
+                                                  //         marginTop: AppSize.s8,
+                                                  //         marginBottom:
+                                                  //             AppSize.s24,
+                                                  //       ),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
+                                                  CustomIconButtonWidget(
+                                                    iconData:
+                                                        Icons.remove_circle,
+                                                    iconColor:
+                                                        ColorsManager.red,
+                                                    isConstraints: true,
+                                                    iconSize: AppSize.s20,
+                                                    onClick: () {
+                                                      controller
+                                                          .makeRequestToSkillAPI(
+                                                        skillId: e.id,
+                                                        operation: Keys
+                                                            .deleteOperation,
+                                                      );
+                                                    },
+                                                  ),
+                                                  Expanded(
+                                                    child: CustomTextWidget(
+                                                      maxLine: 3,
                                                       text: '${e.label}',
                                                       fontSize: AppSize.s16,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       marginLeft: AppSize.s10,
                                                       marginTop: AppSize.s8,
-                                                      marginBottom: AppSize.s24,
-                                                    ),
-                                                  ],
-                                                ),
-                                                CustomBoxWidget(
-                                                  leftPadding: AppSize.s12,
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      Get.dialog(
-                                                        MaterialDialogWidget(
-                                                          title:
-                                                              'profile.proficiencyHint'
-                                                                  .tr,
-                                                          contentWidget:
-                                                              ListView
-                                                                  .separated(
-                                                            shrinkWrap: true,
-                                                            itemCount: controller
-                                                                .proficiencyList
-                                                                .length,
-                                                            itemBuilder: (
-                                                              context,
-                                                              index,
-                                                            ) {
-                                                              return Obx(
-                                                                () => RowDataSelectionWidget
-                                                                    .radioButton(
-                                                                  isLeftSideText:
-                                                                      false,
-                                                                  isClickingValue:
-                                                                      intComparation(
-                                                                    object1: controller
-                                                                        .proficiencyList[
-                                                                            index]
-                                                                        .level,
-                                                                    object2:
-                                                                        e.level,
-                                                                  ),
-                                                                  text:
-                                                                      '${controller.proficiencyList[index].displayLevel}',
-                                                                  onPressed:
-                                                                      () {
-                                                                    controller
-                                                                        .makeRequestToSkillAPI(
-                                                                      skillId:
-                                                                          e.id,
-                                                                      skillData:
-                                                                          FieldModel(
-                                                                        level: controller
-                                                                            .proficiencyList[index]
-                                                                            .level,
-                                                                        videoUrl:
-                                                                            '',
-                                                                      ),
-                                                                      operation:
-                                                                          Keys.editOperation,
-                                                                    );
-                                                                    Navigator
-                                                                        .pop(
-                                                                      context,
-                                                                      true,
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              );
-                                                            },
-                                                            separatorBuilder: (
-                                                              context,
-                                                              index,
-                                                            ) {
-                                                              return const Divider(
-                                                                height: 1.0,
-                                                                color:
-                                                                    ColorsManager
-                                                                        .grey300,
-                                                              );
-                                                            },
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                    child: Row(
-                                                      children: [
-                                                        CustomTextWidget(
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          text:
-                                                              '${e.displayLevel}',
-                                                          fontSize: AppSize.s16,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                        const Icon(
-                                                          Icons.arrow_drop_down,
-                                                          color: ColorsManager
-                                                              .grey600,
-                                                        ),
-                                                      ],
+                                                      // marginBottom: AppSize.s12,
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                  CustomBoxWidget(
+                                                    leftPadding: AppSize.s12,
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        Get.dialog(
+                                                          MaterialDialogWidget(
+                                                            title:
+                                                                'profile.proficiencyHint'
+                                                                    .tr,
+                                                            contentWidget:
+                                                                ListView
+                                                                    .separated(
+                                                              shrinkWrap: true,
+                                                              itemCount: controller
+                                                                  .proficiencyList
+                                                                  .length,
+                                                              itemBuilder: (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return Obx(
+                                                                  () => RowDataSelectionWidget
+                                                                      .radioButton(
+                                                                    isLeftSideText:
+                                                                        false,
+                                                                    isClickingValue:
+                                                                        intComparation(
+                                                                      object1: controller
+                                                                          .proficiencyList[
+                                                                              index]
+                                                                          .level,
+                                                                      object2: e
+                                                                          .level,
+                                                                    ),
+                                                                    text:
+                                                                        '${controller.proficiencyList[index].displayLevel}',
+                                                                    onPressed:
+                                                                        () {
+                                                                      controller
+                                                                          .makeRequestToSkillAPI(
+                                                                        skillId:
+                                                                            e.id,
+                                                                        skillData:
+                                                                            FieldModel(
+                                                                          level: controller
+                                                                              .proficiencyList[index]
+                                                                              .level,
+                                                                          videoUrl:
+                                                                              '',
+                                                                        ),
+                                                                        operation:
+                                                                            Keys.editOperation,
+                                                                      );
+                                                                      Navigator
+                                                                          .pop(
+                                                                        context,
+                                                                        true,
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                );
+                                                              },
+                                                              separatorBuilder:
+                                                                  (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return const Divider(
+                                                                  height: 1.0,
+                                                                  color: ColorsManager
+                                                                      .grey300,
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Row(
+                                                        children: [
+                                                          CustomTextWidget(
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            text:
+                                                                '${e.displayLevel}',
+                                                            fontSize:
+                                                                AppSize.s16,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                          const Icon(
+                                                            Icons
+                                                                .arrow_drop_down,
+                                                            color: ColorsManager
+                                                                .grey600,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             )
                                           : Container(),
                                     )
@@ -505,6 +545,7 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                               ),
                               CustomTextWidget(
                                 text: 'profile.softSkills'.tr,
+                                marginTop: AppSize.s12,
                                 marginBottom: AppSize.s12,
                                 fontSize: AppSize.s16,
                                 fontWeight: FontWeight.w400,

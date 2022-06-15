@@ -146,7 +146,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'profile.startDate'.tr,
+                        inputTitle: 'profile.startFrom'.tr,
                         inputTitleMarginTop: AppSize.s16,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedStartedDateString.value,
@@ -166,7 +166,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                           () => controller.selectedStartedDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'profile.startDate'.tr,
+                                    text: 'profile.startFrom'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
@@ -266,7 +266,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     verticalPadding: AppSize.s16,
                     horizontalPadding: AppSize.s0,
                     isClickingValue: controller.isCheckGraduated.value,
-                    text: 'profile.graduated'.tr,
+                    text: 'profile.currentlyStudying'.tr,
                     isLeftSideText: false,
                     onPressed: () {
                       controller.isCheckGraduated.value = switchingBooleanValue(

@@ -11,6 +11,8 @@ class HomeController extends GetxController {
 
   RxInt currentIndex = 0.obs;
 
+  RxBool isBag = false.obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -38,6 +40,9 @@ class HomeController extends GetxController {
   }
 
   void pageNavigate({int? index = 0}) {
+    if (index == 1) {
+      isBag.value = false;
+    }
     currentIndex.value = index!;
   }
 }

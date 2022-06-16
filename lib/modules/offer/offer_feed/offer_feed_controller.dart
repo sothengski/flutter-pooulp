@@ -14,6 +14,8 @@ class OfferFeedController extends GetxController
 
   final offerHelper = OfferHelper();
 
+  final homeController = Get.put(HomeController());
+
   final profileController = Get.put(ProfileController());
   final ScrollController scrollController = ScrollController();
   // final RefreshController refreshController =
@@ -73,6 +75,8 @@ class OfferFeedController extends GetxController
   RxInt filterCountRxInt = 0.obs;
 
   RxBool isLoadingIndicator = false.obs;
+
+  RxBool isBag = false.obs;
 
   List<String> suggestionWordList = [
     'Operator',
@@ -467,6 +471,8 @@ class OfferFeedController extends GetxController
             ),
           );
       await offerController.onRefresh();
+      homeController.isBag.value =
+          true; // for Bag status active in My Offer tab
     } else if (actionType == OfferStrings.saveAction) {
       await offerProvider.postSaveOffer(
         jobOfferId: jobOfferId,

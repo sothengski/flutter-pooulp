@@ -50,11 +50,12 @@ class ProfileSkillComponent extends StatelessWidget {
                         .map(
                           (e) => e.type == Type.hardSkill
                               ? CustomTextWidget(
-                                  text:
-                                      '${e.displayLabelAndCategory} \n   ${e.displayLevel}',
+                                  text: e.level == null || e.level == 0
+                                      ? '${e.displayLabelAndCategory}'
+                                      : '${e.displayLabelAndCategory} \n  - ${e.displayLevel}',
                                   color: ColorsManager.grey800,
                                   marginBottom: 8.0,
-                                  maxLine: 3,
+                                  maxLine: 5,
                                 )
                               : Container(),
                         )

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
+import '../../../core/core.dart';
 
 enum Type { softSkill, hardSkill }
 
@@ -43,8 +43,10 @@ class SkillModel {
   });
 
   // String? get displayLevel => level == null ? '' : 'Level $level';
-  String? get displayLevel =>
-      level == null ? '' : "${'profile.level'.tr} $level";
+  String? get displayLevel => level == null
+      ? ''
+      : //  "${'profile.level'.tr} $level";
+      getLevelString(level: level);
   String? get displayLabelAndLevel =>
       level == null ? '• $label' : '• $label - Level $level';
 

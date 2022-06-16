@@ -20,7 +20,7 @@ String translateStateWords({required String? stateWord}) {
   } else if (stateWord == LevelStrings.beginner) {
     return 'profile.beginner'.tr;
   } else if (stateWord == LevelStrings.intermediate) {
-    return 'profile.itermediate'.tr;
+    return 'profile.intermediate'.tr;
   } else if (stateWord == LevelStrings.professional) {
     return 'profile.professional'.tr;
   } else if (stateWord == LevelStrings.motherTongue) {
@@ -33,4 +33,19 @@ String translateStateWords({required String? stateWord}) {
   else {
     return 'offer.na'.tr;
   }
+}
+
+String? getLevelString({int? level}) {
+  // if (level == 0) {
+  //   return 'profile.undefined'.tr;
+  // }
+  return level == 1
+      ? 'profile.beginner'.tr
+      : level == 2
+          ? 'profile.intermediate'.tr
+          : level == 3
+              ? 'profile.confirmed'.tr
+              : level == 4
+                  ? 'profile.expert'.tr
+                  : 'profile.undefined'.tr;
 }

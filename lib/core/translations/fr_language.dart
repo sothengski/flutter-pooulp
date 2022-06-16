@@ -297,7 +297,7 @@ const Map<String, String> frFR = {
   'profile.level': "Niveau",
   'profile.undefined': "Indéfini",
   'profile.beginner': "Débutant",
-  'profile.itermediate': "Intermédiaire",
+  'profile.intermediate': "Intermédiaire",
   'profile.confirmed': "Confirmé",
   'profile.professional': "Professionnel",
   'profile.expert': "Expert",

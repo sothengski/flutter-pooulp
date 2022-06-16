@@ -284,7 +284,7 @@ const Map<String, String> nlNL = {
   'profile.level': "Peil",
   'profile.undefined': "Niet gedefinieerd",
   'profile.beginner': "Beginner",
-  'profile.itermediate': "Tussenliggend",
+  'profile.intermediate': "Tussenliggend",
   'profile.confirmed': "Bevestigd",
   'profile.professional': "Professioneel",
   'profile.expert': "Deskundige",

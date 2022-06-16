@@ -284,7 +284,7 @@ const Map<String, String> enUS = {
   'profile.level': "Level",
   'profile.undefined': "Undefined",
   'profile.beginner': "Beginner",
-  'profile.itermediate': "Intermediate",
+  'profile.intermediate': "Intermediate",
   'profile.confirmed': "Confirmed",
   'profile.professional': "Professional",
   'profile.expert': "Expert",

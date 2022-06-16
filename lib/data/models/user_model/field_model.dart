@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
-
 import '/core/core.dart';
 
 List<FieldModel>? proficiencyList = <FieldModel>[
@@ -59,10 +57,12 @@ class FieldModel {
       proficiencyList!.firstWhere((element) => element.level == level).label;
 
   // String? get displayLevel => level == null ? '' : 'Level $level';
-  String? get displayLevel =>
-      level == null ? '' : "${'profile.level'.tr} $level";
+  String? get displayLevel => level == null
+      ? ''
+      : //"${'profile.level'.tr} $level";
+      getLevelString(level: level);
 
-  String? get displayLabelAndLevel => level == null
+  String? get displayLabelAndLevel => level == null || level == 0
       ? '• $label'
       : "• $label - ${translateStateWords(stateWord: getLabelProficiencyLevel)}";
 

@@ -294,7 +294,8 @@ class OfferFeedController extends GetxController
     searchPreferenceData.value = await offerProvider.getSearchPreferences();
     typesListToBeSearch
         .addAll(searchPreferenceData.value.offerTypePreferences!);
-    languageListToBeSearch.addAll([]);
+    languageListToBeSearch
+        .addAll(searchPreferenceData.value.languagePreferences!);
     fieldListToBeSearch.addAll(searchPreferenceData.value.fieldPreferences!);
     availabilitiesTagListToBeSearch
         .addAll(searchPreferenceData.value.availabilityPreferences!);

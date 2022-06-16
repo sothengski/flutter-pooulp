@@ -491,7 +491,9 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                               ),
                             ),
                           ),
-                          if (controller.placeDetail.value.fullAddress == null)
+                          if (controller.placeDetail.value.fullAddress ==
+                                  null ||
+                              controller.placeDetail.value.fullAddress == '')
                             Container()
                           else
                             Positioned(

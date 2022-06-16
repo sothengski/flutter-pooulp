@@ -7,6 +7,7 @@ import '../../data.dart';
 class SearchPreferencesModel {
   final List<FieldModel>? offerTypePreferences;
   final List<FieldModel>? fieldPreferences;
+  final List<FieldModel>? languagePreferences;
   final List<FieldModel>? availabilityPreferences;
   final String? locationPreference;
   final String? locationStreet;
@@ -22,6 +23,7 @@ class SearchPreferencesModel {
   SearchPreferencesModel({
     this.offerTypePreferences,
     this.fieldPreferences,
+    this.languagePreferences,
     this.availabilityPreferences,
     this.locationPreference,
     this.locationStreet,
@@ -62,6 +64,16 @@ class SearchPreferencesModel {
                       ),
                     )
                     .toList(),
+        languagePreferences: json['language_preferences'] == null ||
+                json['language_preferences'] == []
+            ? []
+            : (json['language_preferences'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
         availabilityPreferences: json['availability_preferences'] == null ||
                 json['availability_preferences'] == []
             ? []
@@ -92,6 +104,10 @@ class SearchPreferencesModel {
         'field_preferences': fieldPreferences != null || fieldPreferences != []
             ? List<dynamic>.from(fieldPreferences!.map((x) => x.toJson()))
             : [],
+        'language_preferences': languagePreferences != null ||
+                languagePreferences != []
+            ? List<dynamic>.from(languagePreferences!.map((x) => x.toJson()))
+            : [],
         'availability_preferences':
             availabilityPreferences != null || availabilityPreferences != []
                 ? List<dynamic>.from(
@@ -115,6 +131,7 @@ class SearchPreferencesModel {
   SearchPreferencesModel(
     offerTypePreferences: $offerTypePreferences,
     fieldPreferences: $fieldPreferences,
+    languagePreferences: $languagePreferences,
     availabilityPreferences: $availabilityPreferences,
     locationPreference: $locationPreference,
     locationStreet: $locationStreet,

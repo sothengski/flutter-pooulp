@@ -129,10 +129,8 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                         ),
                         unselectedLabelColor: ColorsManager.grey,
                         tabs: [
-                          // 'Job Summary',
-                          // 'Company',
-                          'offer.jobSummary'.tr,
-                          'offer.company'.tr
+                          'offer.jobInformation'.tr,
+                          'offer.companyInformation'.tr
                         ]
                             .map(
                               (e) => Tab(
@@ -141,6 +139,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                   textAlign: TextAlign.center,
                                   fontWeight: FontWeight.w500,
                                   color: null,
+                                  maxLine: 2,
                                 ),
                               ),
                             )
@@ -212,7 +211,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Working Period Component =====//
 
                           ///===== Working Duration Component =====//
-                          if (jobOfferDetail.numberOfWorkPerWeek!.isNotEmpty)
+                          if (jobOfferDetail.numberOfWorkPerWeek! == '')
                             OutlineContainerWidget(
                               title: 'offer.workingDuration'.tr,
                               titleColor: ColorsManager.primaryBlue,
@@ -231,7 +230,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Working Duration Component =====//
 
                           ///===== Remuneration Component =====//
-                          if (jobOfferDetail.remunerationMaxMin!.isNotEmpty)
+                          if (jobOfferDetail.remunerationMaxMin! == '')
                             OutlineContainerWidget(
                               title: 'offer.remuneration'.tr,
                               titleColor: ColorsManager.primaryBlue,
@@ -357,28 +356,31 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Fields Component =====//
 
                           ///===== Office Address Component =====//
-                          OutlineContainerWidget(
-                            title: 'offer.officeAddress'.tr,
-                            titleColor: ColorsManager.primaryBlue,
-                            childWidget: CustomTextWidget(
-                              text:
-                                  '${jobOfferDetail.jobOfferFullOfficeAddress}',
-                              fontWeight: FontWeightManager.regular,
-                              maxLine: 3,
+                          if (jobOfferDetail
+                              .jobOfferFullOfficeAddress!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'offer.officeAddress'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    '${jobOfferDetail.jobOfferFullOfficeAddress}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 3,
+                              ),
                             ),
-                          ),
                           //===== Office Address Component =====//
 
                           ///===== Job Description Component =====//
-                          OutlineContainerWidget(
-                            title: 'offer.jobDescription'.tr,
-                            titleColor: ColorsManager.primaryBlue,
-                            childWidget: CustomTextWidget(
-                              text: '${jobOfferDetail.description}',
-                              fontWeight: FontWeightManager.regular,
-                              maxLine: 200,
+                          if (jobOfferDetail.description!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'offer.jobDescription'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: CustomTextWidget(
+                                text: '${jobOfferDetail.description}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
                             ),
-                          ),
                           //===== Job Description Component =====//
 
                           ///===== Languages Component =====//
@@ -464,20 +466,20 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ),
 
                           ///===== Enterprise ID Component =====//
-                          OutlineContainerWidget(
-                            title: 'offer.enterpriseID'.tr,
-                            titleColor: ColorsManager.primaryBlue,
-                            childWidget: CustomBoxWidget(
-                              child: CustomTextWidget(
-                                textAlign: TextAlign.center,
-                                text:
-                                    '${jobOfferDetail.enterprise!.enterpriseID}',
-                                fontWeight: FontWeightManager.regular,
-                                fontSize: AppSize.s12,
-                                // marginBottom: AppSize.s10,
-                              ),
-                            ),
-                          ),
+                          // OutlineContainerWidget(
+                          //   title: 'offer.enterpriseID'.tr,
+                          //   titleColor: ColorsManager.primaryBlue,
+                          //   childWidget: CustomBoxWidget(
+                          //     child: CustomTextWidget(
+                          //       textAlign: TextAlign.center,
+                          //       text:
+                          //           '${jobOfferDetail.enterprise!.enterpriseID}',
+                          //       fontWeight: FontWeightManager.regular,
+                          //       fontSize: AppSize.s12,
+                          //       // marginBottom: AppSize.s10,
+                          //     ),
+                          //   ),
+                          // ),
                           //===== Enterprise ID Component =====//
 
                           ///===== Contact Phone Component =====//

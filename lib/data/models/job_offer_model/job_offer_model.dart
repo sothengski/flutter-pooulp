@@ -153,8 +153,7 @@ class JobOfferModel {
             : null,
         telecommuting: json['telecommuting'] as int?,
         shifting: json['shifting'] as int?,
-        numberOfWorkingHourPerWeek:
-            json['number_of_working_hour_per_week'] as int?,
+        numberOfWorkingHourPerWeek: json['number_of_working_hour'] as int?,
         remunerationMax: json['remuneration_max'] as String?,
         remunerationMin: json['remuneration_min'] as String?,
         currencySymbol: json['currency_symbol'] as String?,
@@ -235,7 +234,7 @@ class JobOfferModel {
         'date_job_end': dateJobEnd?.toIso8601String(),
         'telecommuting': telecommuting,
         'shifting': shifting,
-        'number_of_working_hour_per_week': numberOfWorkingHourPerWeek,
+        'number_of_working_hour': numberOfWorkingHourPerWeek,
         'address_street': addressStreet,
         'address_city': addressCity,
         'address_zip': addressZip,

@@ -40,6 +40,7 @@ class ProfileModel {
   final String? facebookLink; //enterprise
   final String? linkedinLink; //enterprise
   final String? whatsAppLink; //enterprise
+  final String? youtubeLink; //enterprise
   final int? statusCode; //enterprise
   final String? uuid; //enterprise
 
@@ -86,6 +87,7 @@ class ProfileModel {
     this.facebookLink,
     this.linkedinLink,
     this.whatsAppLink,
+    this.youtubeLink,
     this.statusCode,
     this.uuid,
     // this.school,
@@ -158,6 +160,7 @@ class ProfileModel {
         facebookLink: json['facebook_link'] as String?,
         linkedinLink: json['linkedin_link'] as String?,
         whatsAppLink: json['whatsapp_link'] as String?,
+        youtubeLink: json['youtube_link'] as String?,
         statusCode: json['statecode'] as int?,
         uuid: json['uuid'] as String?,
         // school: School.fromJson(json['school']),
@@ -230,6 +233,7 @@ class ProfileModel {
         'facebook_link': facebookLink,
         'linkedin_link': linkedinLink,
         'whatsapp_link': whatsAppLink,
+        'youtube_link': youtubeLink,
         'statecode': statusCode,
         'uuid': uuid,
         // 'school': school.toJson(),
@@ -282,7 +286,8 @@ class ProfileModel {
       updatedAt: $updatedAt, 
       facebookLink: $facebookLink, 
       linkedinLink: $linkedinLink, 
-      whatsAppLink: $whatsAppLink, 
+      whatsAppLink: $whatsAppLink,
+      youtubeLink: $youtubeLink,
       statusCode: $statusCode, 
       uuid: $uuid,
       spokenLanguages: $spokenLanguages,

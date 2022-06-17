@@ -185,6 +185,7 @@ const Map<String, String> nlNL = {
   'offer.description': "Beschrijving",
   'offer.jobTypes': "Types",
   'offer.timeSlots': "Tijdslots",
+  'offer.companyVdoIntro': "Video -presentatie van het bedrijf",
 
   ///===== Profile =====//
   'home.feed': "Voer",

@@ -67,12 +67,20 @@ class AuthProvider extends BaseProvider {
     }
   }
 
+  // Object responseBodyHandler({Response? resp}) {
+  //   return '''${resp!.body['invitation_token'][0] != null ? "\n- ${resp.body['invitation_token']?[0]}" : ""}'''
+  //           '''${resp.body['email'] != null ? "\n- ${resp.body!['email']?[0]}" : ""}'''
+  //           '''${resp.body!['password'] != null ? "\n- ${resp.body!['password']?[0]}" : ""}'''
+  //           '''${resp.body['message'] != null ? "\n- ${resp.body!['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}" : ""}'''
+  //       // "${reps.body['code'] != null ? "\n- ${reps.body!['code']}" : ""}"
+  //       ;
+  // }
+
   Object responseBodyHandler({Response? resp}) {
-    return '''${resp!.body['invitation_token'][0] != null ? "\n- ${resp.body['invitation_token']?[0]}" : ""}'''
-            '''${resp.body['email'] != null ? "\n- ${resp.body!['email']?[0]}" : ""}'''
-            '''${resp.body!['password'] != null ? "\n- ${resp.body!['password']?[0]}" : ""}'''
-            '''${resp.body['message'] != null ? "\n- ${resp.body!['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}" : ""}'''
-        // "${reps.body['code'] != null ? "\n- ${reps.body!['code']}" : ""}"
+    return resp!.body['message'] != null
+            ? "\n- ${resp.body!['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}"
+            : ""
+        // ''' "${resp.body['code'] != null ? "\n- ${resp.body!['code']}" : ""}"'''
         ;
   }
 

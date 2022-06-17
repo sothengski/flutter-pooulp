@@ -40,6 +40,8 @@ dependencies:
   # open pdf document
   open_file: ^3.2.1
 
+  youtube_player_iframe: ^2.3.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

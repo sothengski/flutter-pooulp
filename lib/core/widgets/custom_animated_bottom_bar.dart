@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pooulp_flutter/core/constants/constants.dart';
+import '../constants/constants.dart';
 
 class CustomAnimatedBottomBar extends StatelessWidget {
   const CustomAnimatedBottomBar({

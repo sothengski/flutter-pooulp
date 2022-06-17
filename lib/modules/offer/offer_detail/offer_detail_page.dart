@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
@@ -15,6 +16,11 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
   @override
   Widget build(BuildContext context) {
+    const player = YoutubePlayerIFrame();
+    controller.youtubeVideoId = jobOfferDetail.enterprise!.youtubeLink == null
+        ? ''
+        : jobOfferDetail.enterprise!.youtubeLink!.split('=').last;
+
     return Scaffold(
       // backgroundColor: ColorsManager.primary,
       appBar: CustomAppBar(
@@ -589,7 +595,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           OutlineContainerWidget(
                             title: 'offer.description'.tr,
                             titleColor: ColorsManager.primaryBlue,
-                            isDivider: false,
+                            // isDivider: false,
                             childWidget: CustomTextWidget(
                               text: '${jobOfferDetail.enterprise!.description}',
                               fontWeight: FontWeightManager.regular,
@@ -597,6 +603,257 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             ),
                           ),
                           //===== Description Component =====//
+
+                          ///===== Youtube Link Component =====//
+                          if (controller.youtubeVideoId != '')
+                            OutlineContainerWidget(
+                              horizontalPadding: AppSize.s4,
+                              title: 'offer.companyVdoIntro'
+                                  .tr, //'offer.description'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              titleMarginLeft: AppSize.s12,
+                              isDivider: false,
+                              childWidget:
+                                  // CustomTextWidget(
+                                  //   text: '${jobOfferDetail.enterprise!.youtubeLink}',
+                                  //   fontWeight: FontWeightManager.regular,
+                                  //   maxLine: 200,
+                                  // ),
+                                  SizedBox(
+                                height: 350,
+                                child: YoutubePlayerControllerProvider(
+                                  // Passing controller to widgets below.
+                                  controller: controller.youtubeController,
+                                  child: LayoutBuilder(
+                                    builder: (context, constraints) {
+                                      //  if (kIsWeb && constraints.maxWidth > 800) {
+                                      return ListView(
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              player,
+                                              Positioned.fill(
+                                                child: YoutubeValueBuilder(
+                                                  controller: controller
+                                                      .youtubeController,
+                                                  builder: (context, value) {
+                                                    return AnimatedCrossFade(
+                                                      firstChild: const SizedBox
+                                                          .shrink(),
+                                                      secondChild: Material(
+                                                        child: DecoratedBox(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            image:
+                                                                DecorationImage(
+                                                              image:
+                                                                  NetworkImage(
+                                                                YoutubePlayerController
+                                                                    .getThumbnail(
+                                                                  videoId: controller
+                                                                      .youtubeController
+                                                                      .params
+                                                                      .playlist
+                                                                      .last,
+                                                                  quality:
+                                                                      ThumbnailQuality
+                                                                          .medium,
+                                                                ),
+                                                              ),
+                                                              fit: BoxFit
+                                                                  .fitWidth,
+                                                            ),
+                                                          ),
+                                                          child: const Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      crossFadeState:
+                                                          value.isReady
+                                                              ? CrossFadeState
+                                                                  .showFirst
+                                                              : CrossFadeState
+                                                                  .showSecond,
+                                                      duration: const Duration(
+                                                        milliseconds: 300,
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          // const Controls(),
+                                        ],
+                                      );
+                                      // }
+                                    },
+                                  ),
+                                ),
+                              ),
+                            )
+                          else
+                            Container(),
+                          // SizedBox(
+                          //   height: 350,
+                          //   child: YoutubePlayerControllerProvider(
+                          //     // Passing controller to widgets below.
+                          //     controller: controller.youtubeController,
+                          //     child: LayoutBuilder(
+                          //       builder: (context, constraints) {
+                          //         //  if (kIsWeb && constraints.maxWidth > 800) {
+                          //         return
+                          //             // Column(
+                          //             //   children: const [
+                          //             //     Expanded(child: player),
+                          //             //     SizedBox(
+                          //             //       width: 100,
+                          //             //       child: SingleChildScrollView(
+                          //             //         child: Controls(),
+                          //             //       ),
+                          //             //     ),
+                          //             //   ],
+                          //             // );
+                          //             ListView(
+                          //           children: [
+                          //             Stack(
+                          //               children: [
+                          //                 player,
+                          //                 Positioned.fill(
+                          //                   child: YoutubeValueBuilder(
+                          //                     controller:
+                          //                         controller.youtubeController,
+                          //                     builder: (context, value) {
+                          //                       return AnimatedCrossFade(
+                          //                         firstChild:
+                          //                             const SizedBox.shrink(),
+                          //                         secondChild: Material(
+                          //                           child: DecoratedBox(
+                          //                             decoration: BoxDecoration(
+                          //                               image: DecorationImage(
+                          //                                 image: NetworkImage(
+                          //                                   YoutubePlayerController
+                          //                                       .getThumbnail(
+                          //                                     videoId: controller
+                          //                                         .youtubeController
+                          //                                         .params
+                          //                                         .playlist
+                          //                                         .last,
+                          //                                     quality:
+                          //                                         ThumbnailQuality
+                          //                                             .medium,
+                          //                                   ),
+                          //                                 ),
+                          //                                 fit: BoxFit.fitWidth,
+                          //                               ),
+                          //                             ),
+                          //                             child: const Center(
+                          //                               child:
+                          //                                   CircularProgressIndicator(),
+                          //                             ),
+                          //                           ),
+                          //                         ),
+                          //                         crossFadeState: value.isReady
+                          //                             ? CrossFadeState.showFirst
+                          //                             : CrossFadeState
+                          //                                 .showSecond,
+                          //                         duration: const Duration(
+                          //                           milliseconds: 300,
+                          //                         ),
+                          //                       );
+                          //                     },
+                          //                   ),
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //             // const Controls(),
+                          //           ],
+                          //         );
+                          //         // }
+                          //       },
+                          //     ),
+                          //     // Scaffold(
+                          //     //   body: LayoutBuilder(
+                          //     //     builder: (context, constraints) {
+                          //     //       if (kIsWeb && constraints.maxWidth > 800) {
+                          //     //         return
+                          //     //         Row(
+                          //     //           crossAxisAlignment:
+                          //     //               CrossAxisAlignment.start,
+                          //     //           children: const [
+                          //     //             Expanded(child: player),
+                          //     //             SizedBox(
+                          //     //               width: 500,
+                          //     //               child: SingleChildScrollView(
+                          //     //                   // child: Controls(),
+                          //     //                   ),
+                          //     //             ),
+                          //     //           ],
+                          //     //         );
+                          //     //       }
+                          //     //       return ListView(
+                          //     //         children: [
+                          //     //           Stack(
+                          //     //             children: [
+                          //     //               player,
+                          //     //               Positioned.fill(
+                          //     //                 child: YoutubeValueBuilder(
+                          //     //                   controller:
+                          //     //                       controller.youtubeController,
+                          //     //                   builder: (context, value) {
+                          //     //                     return AnimatedCrossFade(
+                          //     //                       firstChild:
+                          //     //                           const SizedBox.shrink(),
+                          //     //                       secondChild: Material(
+                          //     //                         child: DecoratedBox(
+                          //     //                           decoration: BoxDecoration(
+                          //     //                             image: DecorationImage(
+                          //     //                               image: NetworkImage(
+                          //     //                                 YoutubePlayerController
+                          //     //                                     .getThumbnail(
+                          //     //                                   videoId: controller
+                          //     //                                       .youtubeController
+                          //     //                                       .params
+                          //     //                                       .playlist
+                          //     //                                       .first,
+                          //     //                                   quality:
+                          //     //                                       ThumbnailQuality
+                          //     //                                           .medium,
+                          //     //                                 ),
+                          //     //                               ),
+                          //     //                               fit: BoxFit.fitWidth,
+                          //     //                             ),
+                          //     //                           ),
+                          //     //                           child: const Center(
+                          //     //                             child:
+                          //     //                                 CircularProgressIndicator(),
+                          //     //                           ),
+                          //     //                         ),
+                          //     //                       ),
+                          //     //                       crossFadeState: value.isReady
+                          //     //                           ? CrossFadeState.showFirst
+                          //     //                           : CrossFadeState
+                          //     //                               .showSecond,
+                          //     //                       duration: const Duration(
+                          //     //                         milliseconds: 300,
+                          //     //                       ),
+                          //     //                     );
+                          //     //                   },
+                          //     //                 ),
+                          //     //               ),
+                          //     //             ],
+                          //     //           ),
+                          //     //           // const Controls(),
+                          //     //         ],
+                          //     //       );
+                          //     //     },
+                          //     //   ),
+                          //     // ),
+                          //   ),
+                          // )
+                          //===== Youtube Link Component =====//
                         ],
                       ),
                       //===== Second Tab Component =====//
@@ -717,4 +974,37 @@ class OfferDetailPage extends GetView<OfferDetailController> {
       ),
     );
   }
+}
+
+///
+class Controls extends StatelessWidget {
+  ///
+  const Controls();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _space,
+          const Text(
+            'data',
+          ),
+          // MetaDataSection(),
+          _space,
+          // SourceInputSection(),
+          _space,
+          // PlayPauseButtonBar(),
+          _space,
+          // VolumeSlider(),
+          _space,
+          // PlayerStateSection(),
+        ],
+      ),
+    );
+  }
+
+  Widget get _space => const SizedBox(height: 10);
 }

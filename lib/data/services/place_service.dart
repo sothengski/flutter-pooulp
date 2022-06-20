@@ -13,7 +13,7 @@ class PlaceApiProvider extends GetConnect {
     String? sessionToken = '',
   }) async {
     final url =
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$search&language=$lang&types=address&key=$key&sessiontoken=$sessionToken';
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$search&language=$lang&types=(regions)&key=$key&sessiontoken=$sessionToken';
     //         'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&types=address&language=$lang&components=country:ch&key=$apiKey&sessiontoken=$sessionToken';
     final response = await get(url);
     final apiResponse = response

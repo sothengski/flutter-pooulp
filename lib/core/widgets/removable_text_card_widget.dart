@@ -9,7 +9,7 @@ class RemovableTextCardWidget extends StatelessWidget {
   const RemovableTextCardWidget({
     Key? key,
     this.text = '',
-    required this.onRemove,
+    this.onRemove,
   }) : super(key: key);
 
   @override
@@ -33,14 +33,17 @@ class RemovableTextCardWidget extends StatelessWidget {
               fontWeight: FontWeightManager.regular,
               marginRight: AppSize.s4,
             ),
-            InkWell(
-              onTap: onRemove,
-              child: const Icon(
-                IconsManager.close,
-                size: AppSize.s14,
-                color: ColorsManager.grey600,
+            if (onRemove == null)
+              Container()
+            else
+              InkWell(
+                onTap: onRemove,
+                child: const Icon(
+                  IconsManager.close,
+                  size: AppSize.s14,
+                  color: ColorsManager.grey600,
+                ),
               ),
-            ),
           ],
         ),
       ),

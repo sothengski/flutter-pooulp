@@ -27,6 +27,7 @@ const Map<String, String> frFR = {
   'core.searchByName': "Recherche par nom",
   'core.close': "Fermer",
   'core.name': "Nom",
+  'core.at': "à",
 
   ///===== Validator =====//
   'validator.requireField': "Ce champ est requis.",

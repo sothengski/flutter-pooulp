@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pooulp_flutter/data/data.dart';
 
 import '../core.dart';
 
@@ -43,6 +45,17 @@ Color containerColorState({
     return isTextColor! ? equalStateColor! : unEqualStateColor!;
   } else {
     return isTextColor! ? unEqualStateColor! : equalStateColor!;
+  }
+}
+
+void addingOrRemovingFieldInFieldList({
+  RxList<FieldModel>? list,
+  FieldModel? fieldValue,
+}) {
+  if (list!.contains(fieldValue)) {
+    list.removeWhere((element) => element.id == fieldValue!.id);
+  } else {
+    list.add(fieldValue!);
   }
 }
 

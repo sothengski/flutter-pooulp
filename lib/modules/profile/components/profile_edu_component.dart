@@ -34,39 +34,51 @@ class ProfileEduComponent extends StatelessWidget {
       child: Column(
         children: eduList!
             .map(
-              (e) => CustomListTileWidget(
-                text1: e.school!.name,
-                text1Color: ColorsManager.grey850,
-                text1FontWeight: FontWeightManager.medium,
-                text1FontSize: AppSize.s16,
-                text2: e.degree,
-                text2Color: ColorsManager.grey800,
-                text3: '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
-                // bottomPadding: 8.0,
-                // leftWidget:
-                //     const CustomBoxWidget(
-                //   size: 40,
-                // ),
-                leftWidget: const CustomBoxWidget(
-                  size: 40,
-                  child: Icon(
-                    Icons.school_rounded,
-                    color: ColorsManager.primary75,
-                    size: AppSize.s20,
-                  ),
-                ),
-                rightWidget: CustomIconButtonWidget(
-                  iconData: Icons.edit_outlined,
-                  padding: 0.0,
-                  iconSize: 20.0,
-                  isConstraints: true,
-                  onClick: () => {
-                    Get.toNamed(
-                      addOrEditEduRoute!,
-                      arguments: [Keys.editOperation, e],
+              (e) => Column(
+                children: [
+                  CustomListTileWidget(
+                    text1: e.school!.name,
+                    text1Color: ColorsManager.grey850,
+                    text1FontWeight: FontWeightManager.medium,
+                    text1FontSize: AppSize.s16,
+                    text2: '${e.degree}, ${e.name}',
+                    text2Color: ColorsManager.grey800,
+                    text3:
+                        '${e.attendedFromTo} ${'core.at'.tr} ${e.schoolCityAndCountry}',
+                    leftWidget: const CustomBoxWidget(
+                      size: 40,
+                      child: Icon(
+                        Icons.school_rounded,
+                        color: ColorsManager.primary75,
+                        size: AppSize.s20,
+                      ),
                     ),
-                  },
-                ),
+                    rightWidget: CustomIconButtonWidget(
+                      iconData: Icons.edit_outlined,
+                      padding: 0.0,
+                      iconSize: 20.0,
+                      isConstraints: true,
+                      onClick: () => {
+                        Get.toNamed(
+                          addOrEditEduRoute!,
+                          arguments: [Keys.editOperation, e],
+                        ),
+                      },
+                    ),
+                    child: Container(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Wrap(
+                        children: [
+                          // Text('a')
+                          for (var i = 0; i < e.fields!.length; i++)
+                            RemovableTextCardWidget(
+                              text: '${e.fields![i].label}',
+                            )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             )
             .toList(),

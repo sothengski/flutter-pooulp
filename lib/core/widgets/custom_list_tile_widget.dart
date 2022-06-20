@@ -20,6 +20,7 @@ class CustomListTileWidget extends StatelessWidget {
   final double? text4FontSize;
   final Color? text4Color;
   final FontWeight? text4FontWeight;
+  final Widget? child;
   final Widget? leftWidget;
   final Widget? rightWidget;
   final Function()? onClick;
@@ -49,6 +50,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.text4FontSize = 12.0,
     this.text4Color = ColorsManager.grey800,
     this.text4FontWeight = FontWeight.w400,
+    this.child,
     this.leftWidget,
     this.rightWidget,
     this.onClick,
@@ -170,6 +172,7 @@ class CustomListTileWidget extends StatelessWidget {
                               fontWeight: text4FontWeight,
                               maxLine: 2,
                             ),
+                          child ?? Container(),
                         ],
                       ),
                     ),

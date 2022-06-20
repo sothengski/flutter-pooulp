@@ -21,8 +21,10 @@ class EducationController extends GetxController {
   TextEditingController fieldOfStudyTextCtrl = TextEditingController();
   TextEditingController degreeTextCtrl = TextEditingController();
   TextEditingController descriptionTextCtrl = TextEditingController();
+  RxList<FieldModel> fieldListForSelect = <FieldModel>[].obs;
 
   Rx<SchoolModel> selectedSchool = SchoolModel().obs;
+  RxList<FieldModel> fieldListSelected = <FieldModel>[].obs;
 
   // Rx<DateTime> selectedStartedDate = DateTime.now().obs;
   Rx<String> selectedStartedDateString = ''.obs;
@@ -53,10 +55,12 @@ class EducationController extends GetxController {
           eduDataArg.dateEnd == null ? '' : eduDataArg.dateEnd.toString();
       isCheckGraduated.value = eduDataArg.completed!;
       descriptionTextCtrl.text = eduDataArg.description!;
+      fieldListSelected.value = eduDataArg.fields!;
       // debugPrint('eduDataArg:: $eduDataArg');
     }
 
     await getSchoolListResponseProvider();
+    await getFieldsListResponseProvider();
   }
 
   Future<List<SchoolModel>> getSchoolListResponseProvider({
@@ -64,6 +68,16 @@ class EducationController extends GetxController {
   }) async {
     schoolList.addAll(await tagProvider.getSchools());
     return schoolList;
+  }
+
+  Future<List<FieldModel>> getFieldsListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    fieldListForSelect.addAll(await tagProvider.getAllFields());
+    // debugPrint(
+    //   'fieldListForSelect:: ${fieldListForSelect.map((element) => '${element.label}\n')}',
+    // );
+    return fieldListForSelect;
   }
 
   SchoolModel selectedSchoolOnClick({SchoolModel? selectedItem}) {
@@ -98,7 +112,7 @@ class EducationController extends GetxController {
               ),
         completed: isCheckGraduated.value,
         description: descriptionTextCtrl.text.trim(),
-        fields: [],
+        fields: [...fieldListSelected],
       );
       makeRequestToEducationAPI(
         eduId: eduId,

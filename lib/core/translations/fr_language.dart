@@ -186,6 +186,7 @@ const Map<String, String> frFR = {
   'offer.types': "Types", //"Les types",
   'offer.type': "Type", //"Taper",
   'offer.fields': "Domaines", //"Des champs",
+  'offer.fieldsHint': "Sélectionnez vos domaines",
   'offer.officeAddress': "Adresse de bureau",
   'offer.jobDescription': "Description de l'emploi",
   'offer.languages': "Langues",
@@ -247,7 +248,6 @@ const Map<String, String> frFR = {
   'profile.searchCountry': "Nom du pays de recherche",
   'profile.noResult': "Aucun résultat trouvé",
   'profile.editSucessMsg': "Informations de profil mis à jour",
-
   // Education
   'profile.addEdu': "Ajouter une éducation",
   'profile.editEdu': "Modifier l'éducation",
@@ -256,6 +256,8 @@ const Map<String, String> frFR = {
   'profile.schoolHint': "Sélectionnez votre école",
   'profile.fieldStudy': "Domaine d'études",
   'profile.fieldStudyHint': "Entrez votre domaine d'étude",
+  'profile.major': "Spécialisation",
+  'profile.majorHint': "Entrez votre spécialisation",
   'profile.degree': "Type de diplôme", //"Diplôme",
   'profile.degreeHint': "Entrez votre diplôme",
   'profile.startDate': "Date de début",

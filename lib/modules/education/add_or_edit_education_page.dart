@@ -121,12 +121,86 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.fieldOfStudyTextCtrl,
-                  inputTitle: 'profile.fieldStudy'.tr,
-                  hintText: 'profile.fieldStudyHint'.tr,
+                  inputTitle: 'profile.major'.tr,
+                  hintText: 'profile.majorHint'.tr,
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
                 //===== Bottom of Field of Study Component =====//
+
+                ///===== Top of Fields Component =====//
+                ContainerDialogWidget(
+                  inputTitle: 'offer.fields'.tr,
+                  fontSizeTitle: AppSize.s16,
+                  // validatorFunction: (_) => Validator().notEmptyValidator(
+                  //   controller.selectedLanguage.value.label ?? '',
+                  // ),
+                  dialogType: DialogType.bottomSheetDialog,
+                  dialogWidget: Container(
+                    height: getHeight,
+                    decoration: const ShapeDecoration(
+                      color: ColorsManager.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(
+                            AppSize.s16,
+                          ),
+                          topRight: Radius.circular(
+                            AppSize.s16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    child: Obx(
+                      () => controller.fieldListForSelect.isNotEmpty
+                          ? FieldListMultipleSelector(
+                              inputHintText: 'core.search'.tr,
+                              dataListforSelected:
+                                  controller.fieldListForSelect,
+                              selectedItems: controller.fieldListSelected,
+                              onTap: (field) {
+                                addingOrRemovingFieldInFieldList(
+                                  list: controller.fieldListSelected,
+                                  fieldValue: field,
+                                );
+                              },
+                            )
+                          : const LoadingWidget(),
+                    ),
+                  ),
+                  containerWidget: RowContentInputWidget(
+                    centerWidget: CustomTextWidget(
+                      text: 'offer.fieldsHint'.tr,
+                      color: ColorsManager.grey400,
+                      fontWeight: FontWeight.w400,
+                      fontSize: AppSize.s16,
+                    ),
+                    suffixWidget: const Icon(
+                      IconsManager.arrowDropDown,
+                      color: ColorsManager.grey600,
+                    ),
+                  ),
+                ),
+                Obx(
+                  () => Container(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Wrap(
+                      children: [
+                        for (var i = 0;
+                            i < controller.fieldListSelected.length;
+                            i++)
+                          RemovableTextCardWidget(
+                            text: '${controller.fieldListSelected[i].label}',
+                            onRemove: () => addingOrRemovingFieldInFieldList(
+                              list: controller.fieldListSelected,
+                              fieldValue: controller.fieldListSelected[i],
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                ),
+                //===== Bottom of Fields Component =====//
 
                 ///===== Top of Degree Component =====//
                 CustomTextInput(

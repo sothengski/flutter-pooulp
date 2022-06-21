@@ -51,6 +51,7 @@ enum Endpoint {
   getAvailabilitiesTags,
   getStatus,
   getAllTranslationLangs,
+  postVerifyEmail,
 }
 
 class API {
@@ -104,6 +105,7 @@ class API {
     Endpoint.getSearchPreferences: '/search/preferences',
     Endpoint.getStatus: '/status',
     Endpoint.getAllTranslationLangs: '/translations',
+    Endpoint.postVerifyEmail: '/users/email-verification',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

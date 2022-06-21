@@ -112,6 +112,9 @@ const Map<String, String> nlNL = {
   'settings.logOutConfirm': "Weet je zeker dat je wilt uitloggen?",
 
   ///===== Change Password =====//
+  'settings.verified': "Geverifieerd",
+  'settings.verify': "Controleer je email",
+  'settings.checkEmailMsg': "Controleer uw e -mail en bevestig",
   'settings.changePasswordTitle': "Wijzig wachtwoord",
   'settings.currentPassword': "Huidig ​​wachtwoord",
   'settings.currentPasswordHint': "voer uw huidige wachtwoord in",

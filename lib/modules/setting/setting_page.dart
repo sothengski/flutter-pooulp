@@ -219,15 +219,6 @@ class SettingPage extends GetView<SettingController> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     onTap: () => {
-                                      // controller.languageRxString.value =
-                                      //     controller.languageController
-                                      //         .languageOptions[index].key,
-                                      // controller.isUpdating.value = true,
-                                      // controller.languageController
-                                      //     .updateLanguage(
-                                      //       controller.languageController
-                                      //           .languageOptions[index].key,
-                                      //     ).then((value) => Get.back())
                                       controller.changeLanguage(
                                         languageKey: controller
                                             .languageController
@@ -308,6 +299,113 @@ class SettingPage extends GetView<SettingController> {
                         ),
                       ),
                       //===== Bottom of Change Language Component =====//
+                      const Divider(
+                        height: 10,
+                        thickness: 1,
+                      ),
+
+                      ///===== Top of Verify Email Component =====//
+                      Padding(
+                        padding:
+                            const EdgeInsets.symmetric(vertical: AppSize.s12),
+                        child: RowContentInputWidget(
+                          centerWidgetFlex: 30,
+                          centerWidget: CustomTextWidget(
+                            marginLeft: AppSize.s12,
+                            textAlign: TextAlign.center,
+                            text: 'auth.email'.tr,
+                            fontSize: AppSize.s16,
+                          ),
+                          suffixWidgetFlex: 70,
+                          suffixWidget: Padding(
+                            padding: const EdgeInsets.only(right: AppSize.s12),
+                            child: controller.profileController.userInfoRepsonse
+                                        .value.emailConfirmedAt !=
+                                    null
+                                ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      CustomTextWidget(
+                                        textAlign: TextAlign.center,
+                                        text: 'settings.verified'
+                                            .tr, //Check your email and confirm
+                                        color: ColorsManager.green,
+                                      ),
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: AppSize.s8,
+                                        ),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: ColorsManager.green,
+                                          size: AppSize.s18,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : InkWell(
+                                    onTap: () => {
+                                      controller
+                                          .makeRequestToAuthVerifyEmailAPI(
+                                        email: controller.profileController
+                                            .userInfoRepsonse.value.email,
+                                      ),
+                                    },
+                                    child: Obx(
+                                      () => controller
+                                                  .isVerifyEmailSent.value ==
+                                              true
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                CustomTextWidget(
+                                                  textAlign: TextAlign.center,
+                                                  text: 'auth.emailSent'.tr,
+                                                  color: ColorsManager.grey,
+                                                ),
+                                                const Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: AppSize.s4,
+                                                  ),
+                                                  child: Icon(
+                                                    Icons.check_circle,
+                                                    color: ColorsManager.grey,
+                                                    size: AppSize.s18,
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          : Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                CustomTextWidget(
+                                                  textAlign: TextAlign.center,
+                                                  text: 'settings.verify'.tr,
+                                                  color: ColorsManager.blue,
+                                                  textDecoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                const Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: AppSize.s4,
+                                                  ),
+                                                  child: Icon(
+                                                    Icons
+                                                        .keyboard_arrow_right_outlined,
+                                                    color:
+                                                        ColorsManager.grey800,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                    ),
+                                  ),
+                          ),
+                        ),
+                      ),
+                      //===== Bottom of Verify Email Component =====//
                       const Divider(
                         height: 10,
                         thickness: 1,

@@ -7,6 +7,7 @@ class UserModel {
   final String? uuid;
   final String? email;
   final bool? isActivated;
+  final DateTime? emailConfirmedAt;
   final ProfileModel? profile;
   final ProfileModel? enterprise;
 
@@ -18,6 +19,7 @@ class UserModel {
     this.uuid,
     this.email,
     this.isActivated,
+    this.emailConfirmedAt,
     this.profile,
     this.enterprise,
     this.role,
@@ -39,6 +41,9 @@ class UserModel {
         uuid: json['uuid'] as String?,
         email: json['email'] as String?,
         isActivated: json['is_activated'] as bool?,
+        emailConfirmedAt: json['email_confirmed_at'] != null
+            ? DateTime.parse(json['email_confirmed_at'].toString())
+            : null,
         profile: json['profile'] == null
             ? null
             : ProfileModel.fromJson(
@@ -62,6 +67,7 @@ class UserModel {
         'uuid': uuid,
         'email': email,
         'is_activated': isActivated,
+        'email_confirmed_at': emailConfirmedAt?.toIso8601String(),
         'profile': profile?.toJson(),
         'enterprise': enterprise?.toJson(),
         'role': role,
@@ -76,6 +82,7 @@ class UserModel {
       uuid: $uuid,
       email: $email,
       isActivated: $isActivated,
+      emailConfirmedAt: $emailConfirmedAt,
       profile: $profile,
       enterprise: $enterprise,
       role: $role,

@@ -116,6 +116,9 @@ const Map<String, String> frFR = {
   'settings.logOutConfirm': "Êtes-vous sûr de vouloir vous déconnecter?",
 
   ///===== Change Password =====//
+  'settings.verified': "Vérifiée",
+  'settings.verify': "Vérifiez votre e-mail",
+  'settings.checkEmailMsg': "Vérifiez votre e-mail et confirmez",
   'settings.changePasswordTitle': "Changer le mot de passe",
   'settings.currentPassword': "Mot de passe",
   'settings.currentPasswordHint': "Entrer votre mot de passe",

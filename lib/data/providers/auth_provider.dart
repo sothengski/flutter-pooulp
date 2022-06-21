@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 import '../data.dart';
@@ -183,7 +184,34 @@ class AuthProvider extends BaseProvider {
       return Future.error(e.toString());
     }
   }
+
+  ///===== Top of Verify Email Section =====//
+  ///
+  ///POST Method for Verify Email
+  Future<JsonResponse> verifyEmail({
+    required String? email,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postVerifyEmail].toString(),
+        {
+          "email": email,
+        },
+      );
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      debugPrint('response: $response');
+      return response;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }
+
 
 // RESPONSE CODES#
 // 200: Success

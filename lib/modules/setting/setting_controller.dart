@@ -21,6 +21,7 @@ class SettingController extends GetxController {
   RxBool emailNotificationRxBool = false.obs;
   RxInt radiusRxInt = 10.obs;
   RxString languageRxString = 'en'.obs;
+  RxBool isVerifyEmailSent = false.obs;
 
   RxBool isUpdating = false.obs;
 
@@ -125,6 +126,27 @@ class SettingController extends GetxController {
         msgContent: 'Profile Information Updated',
         bgColor: ColorsManager.green,
       );
+    });
+  }
+
+  void makeRequestToAuthVerifyEmailAPI({required String? email}) {
+    authProvider.verifyEmail(email: email).then((value) {
+      if (value.status == 200) {
+        isVerifyEmailSent.value = true;
+        customSnackbar(
+          msgTitle: 'auth.emailSent'.tr,
+          msgContent: 'settings.checkEmailMsg'.tr,
+          bgColor: ColorsManager.green,
+        );
+      } else {
+        customSnackbar(
+          msgTitle: 'Failed',
+          msgContent: value.status == 403
+              ? 'Email Already Verified'
+              : value.message.toString(),
+          bgColor: ColorsManager.red,
+        );
+      }
     });
   }
 

@@ -80,7 +80,7 @@ const Map<String, String> enUS = {
   'auth.forgotPasswordNoted':
       "We will send you a verification token to reset your password.",
   'auth.sendEmail': "Send Email",
-  'auth.emailSent': "Email Sent",
+  'auth.emailSent': "Email sent",
   'auth.sentToEmail': "An email has been sent to your email address: @email",
   'auth.resetPasswordGuide':
       "Click on the link from the email to reset your password.",
@@ -111,6 +111,9 @@ const Map<String, String> enUS = {
   'settings.logOutConfirm': "Are you sure you want to logout?",
 
   ///===== Change Password =====//
+  'settings.verified': "Verified",
+  'settings.verify': "Verify your email",
+  'settings.checkEmailMsg': "Check your email and confirm",
   'settings.changePasswordTitle': "Change Password",
   'settings.currentPassword': "Current password",
   'settings.currentPasswordHint': "Enter your current password",

@@ -158,7 +158,7 @@ const Map<String, String> nlNL = {
   'offer.remote': "Op afstand",
   'offer.onSite': "Ter plekke",
   'offer.hybrid': "Beide", //"Hybride",
-  'offer.startDate': "Begin datum: @date",
+  'offer.startFrom': "Start van: @date",
   'offer.location': "Plaats",
   'offer.workplaceType': "Werkplek type",
   'offer.clearAllBtn': "Wis alles",

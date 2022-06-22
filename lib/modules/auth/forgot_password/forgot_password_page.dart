@@ -55,7 +55,7 @@ class ForgotPasswordPage extends GetView<ForgotPasswordController> {
                   ),
                 ),
                 CustomTextWidget(
-                  text: 'auth.acountExist'.tr,
+                  text: 'registerCallLogin'.tr, //'auth.acountExist'.tr,
                   color: ColorsManager.white,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
@@ -65,7 +65,7 @@ class ForgotPasswordPage extends GetView<ForgotPasswordController> {
                 GestureDetector(
                   onTap: () => Get.back(),
                   child: CustomTextWidget(
-                    text: 'auth.logIn'.tr,
+                    text: 'signIn'.tr, //'auth.logIn'.tr,
                     color: ColorsManager.white,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,

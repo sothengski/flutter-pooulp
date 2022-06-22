@@ -15,7 +15,7 @@ class ForgotPasswordForm extends GetView<ForgotPasswordController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomTextWidget(
-            text: 'auth.forgotPassword'.tr,
+            text: 'forgotPassword'.tr, //'auth.forgotPassword'.tr,
             fontSize: 24.0,
             fontWeight: FontWeight.w700,
             color: ColorsManager.primary,
@@ -24,7 +24,8 @@ class ForgotPasswordForm extends GetView<ForgotPasswordController> {
           Align(
             alignment: Alignment.centerLeft,
             child: CustomTextWidget(
-              text: 'auth.forgotPasswordNoted'.tr,
+              text: 'weWillSendYouAVerificationToken'
+                  .tr, //'auth.forgotPasswordNoted'.tr,
               maxLine: 5,
               color: ColorsManager.black,
               fontWeight: FontWeight.w300,
@@ -35,8 +36,8 @@ class ForgotPasswordForm extends GetView<ForgotPasswordController> {
           ),
           CustomTextInput(
             controller: controller.emailCtrl,
-            inputTitle: 'auth.email'.tr,
-            hintText: 'auth.emailHint'.tr,
+            inputTitle: 'email'.tr, //'auth.email'.tr,
+            hintText: 'emailHint'.tr, //'auth.emailHint'.tr,
             isFilled: true,
             topPadding: AppSize.s12,
             validator: Validator().emailValidator,
@@ -46,7 +47,7 @@ class ForgotPasswordForm extends GetView<ForgotPasswordController> {
           Obx(
             () => Visibility(
               child: CustomMaterialButton(
-                text: 'auth.sendEmail'.tr,
+                text: 'sendEmail'.tr, //'auth.sendEmail'.tr,
                 fontSize: 20.0,
                 buttonWidth: getWidth,
                 childWidget: controller.isSubmitBtnProcessing.value == true

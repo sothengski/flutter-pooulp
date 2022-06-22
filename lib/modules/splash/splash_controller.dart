@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pooulp_flutter/data/services/app_basic_services.dart';
 
 import '../../core/core.dart';
 import '../../data/data.dart';
+import '../../data/services/app_basic_services.dart';
 import '../../routes/routes.dart';
 
 class SplashController extends GetxController {
@@ -16,8 +16,6 @@ class SplashController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     await getAppBasicStatusProvider();
-    await getAllTranslationLangsProvider(lang: 'en');
-    await getAllTranslationLangsProvider(lang: 'fr');
   }
 
   @override
@@ -28,6 +26,8 @@ class SplashController extends GetxController {
 
   Future<void> checkAuth() async {
     final bool isHomeNavigate = AuthServices().isUserLoggedIn();
+    // await getAllTranslationLangsProvider(lang: 'en');
+    // await getAllTranslationLangsProvider(lang: 'fr');
     await AppBasicServices().getLangsFromFile(lang: 'en');
     await AppBasicServices().getLangsFromFile(lang: 'fr');
     await Future.delayed(
@@ -60,6 +60,7 @@ class SplashController extends GetxController {
         await appBasicProvider.getAllTranslationLangs(lang: lang);
 
     if (respData.success == true) {
+      // print('fileName:: $fileName,, resp: $respData.data');
       file.writeAsStringSync(
         jsonEncode(respData.data),
         flush: true, // mode: FileMode.write

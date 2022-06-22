@@ -9,6 +9,8 @@ import '../../core/core.dart';
 
 class AppBasicServices extends GetxService {
   final GetStorage boxStorage = GetStorage(LocalStorage.appBasic);
+  Map<String, String> enLangFile = {};
+  Map<String, String> frLangFile = {};
 
   Future<Map<String, dynamic>> getLangsFromFile({required String? lang}) async {
     final String fileName = "${lang}TranslationWords.json";
@@ -19,9 +21,15 @@ class AppBasicServices extends GetxService {
 
     if (file.existsSync()) {
       final jsonData = file.readAsStringSync();
-      print('map: $jsonData');
+      // print('map: $jsonData');
 
       map = jsonDecode(jsonData) as Map<String, dynamic>;
+      if (lang == 'en') {
+        enLangFile = map.map((key, value) => MapEntry(key, value.toString()));
+      } else {
+        frLangFile = map.map((key, value) => MapEntry(key, value.toString()));
+      }
+      // print(enLangFile);
     }
     return map;
   }

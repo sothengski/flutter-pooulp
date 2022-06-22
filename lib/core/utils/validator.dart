@@ -17,7 +17,7 @@ class Validator {
   static const String numberRegExpPattern = r'^\d+$';
 
   static const requiredMsg = "This is required.";
-  String requiredFieldMsg = 'validator.requireField'.tr;
+  String requiredFieldMsg = 'requiredField'.tr; //'validator.requireField'.tr;
   // static const requiredFieldMsg = "This field is required.";
 
   static const formatNotValid = "format is not valid.";

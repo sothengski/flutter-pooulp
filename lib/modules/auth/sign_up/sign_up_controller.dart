@@ -120,8 +120,8 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
       if (selectedCountry.value.phoneCode == null &&
           phoneNumberCtrl.text.isEmpty) {
         return isPhoneNumberField == false
-            ? 'validator.requireField'.tr
-            : 'validator.requireField'.tr;
+            ? 'requiredField'.tr //'validator.requireField'.tr
+            : 'requiredField'.tr; //'validator.requireField'.tr;
       }
       if (selectedCountry.value.phoneCode == null &&
           Validator().isPhoneNumberValidate(
@@ -129,14 +129,14 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
               ) ==
               false) {
         return isPhoneNumberField == false
-            ? 'validator.requireField'.tr
+            ? 'requiredField'.tr //'validator.requireField'.tr
             : '${Validator().phoneNumberValidator(phoneNumberCtrl.text)}';
       }
       if (selectedCountry.value.phoneCode == null) {
-        return isPhoneNumberField == false ? 'validator.requireField'.tr : '';
+        return isPhoneNumberField == false ? 'requiredField'.tr : '';
       }
       if (phoneNumberCtrl.text.isEmpty) {
-        return isPhoneNumberField == false ? '' : 'validator.requireField'.tr;
+        return isPhoneNumberField == false ? '' : 'requiredField'.tr;
       }
       //else condition
       return isPhoneNumberField == false
@@ -178,11 +178,11 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
         (LoginModel value) {
           Get.dialog(
             CustomAlertDialog(
-              title: 'core.success'.tr,
-              content: 'auth.memberPooulp'.tr,
+              title: 'success'.tr, //'core.success'.tr,
+              content: 'pooulpMember'.tr, //'auth.memberPooulp'.tr,
               routePath: Routes.homeRoute,
               type: AlertDialogType.success,
-              buttonLabel: 'core.continue'.tr,
+              buttonLabel: 'continue'.tr, //'core.continue'.tr,
               onPressed: () async {
                 final bool loginStatus = await AuthServices().saveUserToken(
                   bodyData: value,
@@ -205,7 +205,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
         },
         onError: (error) {
           customSnackbar(
-            msgTitle: 'core.sthWentWrong'.tr,
+            msgTitle: 'sthWentWrong'.tr, //'core.sthWentWrong'.tr,
             msgContent: '$error',
             bgColor: ColorsManager.red,
           );
@@ -219,7 +219,8 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
       // }
     } else {
       customSnackbar(
-        msgTitle: 'validator.completeRequiredFields'.tr,
+        msgTitle: 'completeRequiredFields'
+            .tr, //'validator.completeRequiredFields'.tr,
         msgContent: '',
         bgColor: ColorsManager.red,
       );

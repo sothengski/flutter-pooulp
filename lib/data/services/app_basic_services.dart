@@ -9,8 +9,29 @@ import '../../core/core.dart';
 
 class AppBasicServices extends GetxService {
   final GetStorage boxStorage = GetStorage(LocalStorage.appBasic);
-  Map<String, String> enLangFile = {};
-  Map<String, String> frLangFile = {};
+
+  Future<bool> saveAppBasicTime({
+    String? urlKey = LocalStorage.appBasic,
+    String? bodyData,
+    // Duration duration = const Duration(days: 1000),
+  }) async {
+    // final String jsonData = jsonEncode(bodyData);
+    // if (jsonData.isNotEmpty) {
+    await boxStorage.write(urlKey.toString(), bodyData);
+    return true;
+    // }
+    // return false;
+  }
+
+  String? getAppBasicTime() {
+    final appBasic = boxStorage.read(LocalStorage.appBasic);
+    if (appBasic != null) {
+      return appBasic.toString();
+    } else {
+      // return '';
+      return defaultDate;
+    }
+  }
 
   Future<Map<String, dynamic>> getLangsFromFile({required String? lang}) async {
     final String fileName = "${lang}TranslationWords.json";
@@ -21,42 +42,13 @@ class AppBasicServices extends GetxService {
 
     if (file.existsSync()) {
       final jsonData = file.readAsStringSync();
-      // print('map: $jsonData');
-
       map = jsonDecode(jsonData) as Map<String, dynamic>;
       if (lang == 'en') {
         enLangFile = map.map((key, value) => MapEntry(key, value.toString()));
       } else {
         frLangFile = map.map((key, value) => MapEntry(key, value.toString()));
       }
-      // print(enLangFile);
     }
     return map;
   }
-
-  // Future<bool> saveAppStatus({
-  //   AppBasicModel? bodyData,
-  //   String? urlKey = LocalStorage.authTokenData,
-  //   // Duration duration = const Duration(days: 1000),
-  // }) async {
-  // final tokenExpireDate = DateTime.now().add(const Duration(seconds: 7));
-
-  // final tokenExpireDate =
-  //     DateTime.now().add(Duration(seconds: bodyData!.expireIn!));
-  // final LoginModel userData = LoginModel(
-  //   token: bodyData.token,
-  //   tokenType: bodyData.tokenType,
-  //   expireIn: bodyData.expireIn,
-  //   accountType: bodyData.accountType,
-  //   tokenExpirationDate: tokenExpireDate,
-  // );
-  // final String jsonData = jsonEncode(userData.toJson());
-
-  // if (jsonData.isNotEmpty) {
-  //   await boxStorage.write(urlKey.toString(), jsonData);
-  //   await boxStorage.write(LocalStorage.isLogged, true);
-  //   return true;
-  // }
-  // return false;
-  // }
 }

@@ -31,7 +31,7 @@ class SignInForm extends GetView<SignInController> {
               ),
               CustomTextInput(
                 controller: controller.emailCtrl,
-                inputTitle: 'auth.email'.tr,
+                inputTitle: 'email'.tr, //'auth.email'.tr,
                 hintText: 'auth.emailHint'.tr,
                 isFilled: true,
                 topPadding: AppSize.s12,
@@ -40,7 +40,7 @@ class SignInForm extends GetView<SignInController> {
               ),
               CustomTextInput(
                 controller: controller.passwordCtrl,
-                inputTitle: 'auth.password'.tr,
+                inputTitle: 'password'.tr, //'auth.password'.tr,
                 hintText: 'auth.passwordHint'.tr,
                 suffixIcon: IconButton(
                   icon: !controller.showPassword.value
@@ -105,7 +105,7 @@ class SignInForm extends GetView<SignInController> {
               Visibility(
                 visible: !controller.isSubmitBtnProcessing.value,
                 child: CustomMaterialButton(
-                  text: 'auth.loginButton'.tr,
+                  text: 'signIn'.tr, //'auth.loginButton'.tr,
                   fontSize: 20.0,
                   buttonWidth: getWidth,
                   onPressed: () {

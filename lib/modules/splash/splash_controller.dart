@@ -6,7 +6,6 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../core/core.dart';
 import '../../data/data.dart';
-import '../../data/services/app_basic_services.dart';
 import '../../routes/routes.dart';
 
 class SplashController extends GetxController {
@@ -15,7 +14,8 @@ class SplashController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getAppBasicStatusProvider();
+    await checkAppBasicTime();
+    // await getAppBasicStatusProvider();
   }
 
   @override
@@ -26,10 +26,6 @@ class SplashController extends GetxController {
 
   Future<void> checkAuth() async {
     final bool isHomeNavigate = AuthServices().isUserLoggedIn();
-    // await getAllTranslationLangsProvider(lang: 'en');
-    // await getAllTranslationLangsProvider(lang: 'fr');
-    await AppBasicServices().getLangsFromFile(lang: 'en');
-    await AppBasicServices().getLangsFromFile(lang: 'fr');
     await Future.delayed(
       DurationConstant.d2000,
       () async => {
@@ -46,8 +42,33 @@ class SplashController extends GetxController {
     );
   }
 
-  Future<void> getAppBasicStatusProvider() async {
-    await appBasicProvider.getAppBasicStatus();
+  Future<void> checkAppBasicTime() async {
+    final String? appBasicTimeStamp = AppBasicServices().getAppBasicTime();
+    await Future.delayed(
+      DurationConstant.d1000,
+      () async =>
+          {await getAppBasicStatusProvider(lastSyncDate: appBasicTimeStamp)},
+    );
+  }
+
+  Future<void> getAppBasicStatusProvider({String? lastSyncDate}) async {
+    await appBasicProvider.getAppBasicStatus().then(
+          (value) async => {
+            if (DateOnlyCompare(
+                  value.latestTranslationUpdate!,
+                ).isSameDateTime(other: DateTime.parse(lastSyncDate!)) ==
+                false)
+              {
+                await AppBasicServices().saveAppBasicTime(
+                  bodyData: value.latestTranslationUpdate.toString(),
+                ),
+                await getAllTranslationLangsProvider(lang: 'en'),
+                await getAllTranslationLangsProvider(lang: 'fr')
+              }
+            else
+              {}
+          },
+        );
   }
 
   Future<void> getAllTranslationLangsProvider({required String? lang}) async {

@@ -11,6 +11,14 @@ extension DateOnlyCompare on DateTime {
   bool isSameDate({DateTime? other}) {
     return year == other!.year && month == other.month && day == other.day;
   }
+
+  bool isSameDateTime({DateTime? other}) {
+    return year == other!.year &&
+        month == other.month &&
+        day == other.day &&
+        hour == other.hour &&
+        minute == other.minute;
+  }
 }
 
 String fullDateFormat({DateTime? date}) {

@@ -10,6 +10,7 @@ class Keys {
 }
 
 const String textAppVersion = "1.0.18 (18)";
+const String defaultDate = "2020-02-20T06:52:01.000000Z";
 
 class LocalStorage {
   static const credentialName = 'Pooulp';

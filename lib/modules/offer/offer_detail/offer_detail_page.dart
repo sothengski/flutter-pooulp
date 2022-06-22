@@ -167,7 +167,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           OutlineContainerWidget(
                             title: 'offer.workingPeriod'.tr,
                             titleColor: ColorsManager.primaryBlue,
-                            childWidget: Column(
+                            childWidget: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomBoxWidget(
@@ -175,7 +175,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                     textAlign: TextAlign.center,
                                     text: jobOfferDetail.dateJobStartFormat !=
                                             ''
-                                        ? 'offer.startDate'.trParams(
+                                        ? 'offer.startFrom'.trParams(
                                             {
                                               'date':
                                                   '${jobOfferDetail.dateJobStartFormat}'
@@ -188,25 +188,21 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                     // marginBottom: AppSize.s10,
                                   ),
                                 ),
-                                if (jobOfferDetail.dateJobEndFormat == null)
-                                  Container(
-                                    margin: const EdgeInsetsDirectional.only(
-                                      top: AppSize.s4,
-                                    ),
-                                    child: CustomBoxWidget(
-                                      child: CustomTextWidget(
-                                        textAlign: TextAlign.center,
-                                        text: 'offer.endDate'.trParams(
-                                          {
-                                            'date':
-                                                '${jobOfferDetail.dateJobEndFormat}'
-                                          },
-                                        ),
-                                        // 'End Date: ${jobOfferDetail.dateJobEndFormat}',
-                                        fontWeight: FontWeightManager.regular,
-                                        fontSize: AppSize.s12,
-                                        // marginBottom: AppSize.s10,
+                                const SizedBox(width: AppSize.s12),
+                                if (jobOfferDetail.dateJobEndFormat != '')
+                                  CustomBoxWidget(
+                                    child: CustomTextWidget(
+                                      textAlign: TextAlign.center,
+                                      text: 'offer.endDate'.trParams(
+                                        {
+                                          'date':
+                                              '${jobOfferDetail.dateJobEndFormat}'
+                                        },
                                       ),
+                                      // 'End Date: ${jobOfferDetail.dateJobEndFormat}',
+                                      fontWeight: FontWeightManager.regular,
+                                      fontSize: AppSize.s12,
+                                      // marginBottom: AppSize.s10,
                                     ),
                                   )
                                 else

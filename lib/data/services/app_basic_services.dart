@@ -1,10 +1,30 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../core/core.dart';
 
-class AuthServices extends GetxService {
-  final GetStorage boxStorage = GetStorage(LocalStorage.credentialName);
+class AppBasicServices extends GetxService {
+  final GetStorage boxStorage = GetStorage(LocalStorage.appBasic);
+
+  Future<Map<String, dynamic>> getLangsFromFile({required String? lang}) async {
+    final String fileName = "${lang}TranslationWords.json";
+
+    final dir = await getTemporaryDirectory();
+    final File file = File("${dir.path}/$fileName");
+    Map<String, dynamic> map = {};
+
+    if (file.existsSync()) {
+      final jsonData = file.readAsStringSync();
+      print('map: $jsonData');
+
+      map = jsonDecode(jsonData) as Map<String, dynamic>;
+    }
+    return map;
+  }
 
   // Future<bool> saveAppStatus({
   //   AppBasicModel? bodyData,

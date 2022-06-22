@@ -15,6 +15,7 @@ class LocalStorage {
   static const credentialName = 'Pooulp';
   static const authTokenData = "authUserData";
   static const isLogged = 'isLogged';
+  static const appBasic = 'appBasic';
 }
 
 ///==================== Texts ====================

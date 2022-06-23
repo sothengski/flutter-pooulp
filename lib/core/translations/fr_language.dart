@@ -166,7 +166,7 @@ const Map<String, String> frFR = {
   'offer.remote': "À distance",
   'offer.onSite': "Sur site",
   'offer.hybrid': "Les deux", //"Hybride",
-  'offer.startDate': "Date de début: @date",
+  'offer.startFrom': "Commence le: @date", //"Date de début: @date",
   'offer.location': "Lieu", //"Emplacement",
   'offer.workplaceType': "Type de travail",
   'offer.clearAllBtn': "Effacer tout", //"Tout effacer",

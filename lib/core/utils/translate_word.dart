@@ -4,13 +4,13 @@ import '../core.dart';
 
 String translateStateWords({required String? stateWord}) {
   if (stateWord == OfferStrings.pendingState) {
-    return 'offer.pending'.tr;
+    return 'pending'.tr;
   } else if (stateWord == OfferStrings.matchedState) {
-    return 'offer.matched'.tr;
+    return 'matchings'.tr;
   } else if (stateWord == OfferStrings.savedState) {
-    return 'offer.savedOffers'.tr;
+    return 'savedOffers'.tr;
   } else if (stateWord == OfferStrings.rejectedState) {
-    return 'offer.refused'.tr;
+    return 'refused'.tr;
   } else if (stateWord == SkillCategoryStrings.hardSkill) {
     return 'profile.hardSkill'.tr;
   } else if (stateWord == SkillCategoryStrings.softSkill) {

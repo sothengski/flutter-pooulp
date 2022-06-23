@@ -59,7 +59,7 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
                 child: GestureDetector(
                   onTap: () => Navigator.pop(context, true),
                   child: CustomTextWidget(
-                    text: 'core.cancel'.tr,
+                    text: 'cancel'.tr,
                     color: ColorsManager.grey,
                     fontWeight: FontWeight.w400,
                     fontSize: AppSize.s16,
@@ -71,7 +71,7 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
                   onTap: () => Navigator.pop(context, true),
                   child: CustomTextWidget(
                     textAlign: TextAlign.right,
-                    text: 'core.done'.tr,
+                    text: 'done'.tr,
                     fontWeight: FontWeight.w600,
                     fontSize: AppSize.s16,
                   ),

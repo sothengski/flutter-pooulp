@@ -151,12 +151,12 @@ class EducationController extends GetxController {
           switchingBooleanValue(boolValue: isSubmitBtnProcessing.value);
       Get.back();
       customSnackbar(
-        msgTitle: 'core.success'.tr,
+        msgTitle: 'success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'profile.eduAddSuccessMsg'.tr
+            ? 'successfullyAdded'.tr //'profile.eduAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'profile.eduEditSuccessMsg'.tr
-                : 'profile.eduDeleteSuccessMsg'.tr,
+                ? 'successfullyUpdated'.tr //'profile.eduEditSuccessMsg'.tr
+                : 'successfullyDeleted'.tr, //'profile.eduDeleteSuccessMsg'.tr,
         // 'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Education Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

@@ -76,7 +76,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                             ///===== Profile Completion Component =====//
                             ProfileCompletionComponent(
-                              title: 'profile.completeness'.tr,
+                              title: 'profileCompletion'.tr,
                               completionPercentage: controller
                                   .studentInfoRepsonse
                                   .value
@@ -108,7 +108,7 @@ class ProfilePage extends GetView<ProfileController> {
                                         children: [
                                           ///===== Education Component =====//
                                           ProfileEduComponent(
-                                            title: 'profile.edu'.tr,
+                                            title: 'educations'.tr,
                                             addOrEditEduRoute:
                                                 Routes.addOrEditEducationRoute,
                                             eduList: controller
@@ -120,7 +120,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Professional Component =====//
                                           ProfileExpComponent(
-                                            title: 'profile.professionalExp'.tr,
+                                            title: 'professionalExperiences'.tr,
                                             addOrEditExpRoute:
                                                 Routes.addOrEditExperienceRoute,
                                             expTypeKey:
@@ -134,7 +134,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Personal Component =====//
                                           ProfileExpComponent(
-                                            title: 'profile.personalExp'.tr,
+                                            title: 'personalExperiences'.tr,
                                             addOrEditExpRoute:
                                                 Routes.addOrEditExperienceRoute,
                                             expTypeKey: AppStrings.personalKey,
@@ -147,7 +147,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Skills Component =====//
                                           ProfileSkillComponent(
-                                            title: 'profile.skills'.tr,
+                                            title: 'skills'.tr,
                                             addOrEditSkillRoute:
                                                 Routes.addOrEditSkillRoute,
                                             skillList: controller
@@ -159,7 +159,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Languages Component =====//
                                           ProfileLanguageComponent(
-                                            title: 'profile.languages'.tr,
+                                            title: 'languages'.tr,
                                             addOrEditLangRoute: Routes
                                                 .addOrEditLanguageUsageRoute,
                                             spokenLanguageList: controller
@@ -171,7 +171,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Achievement Component =====//
                                           ProfileAchievementComponent(
-                                            title: 'profile.achievement'.tr,
+                                            title: 'achievement'.tr,
                                             addOrEditAchievementRoute: Routes
                                                 .addOrEditAchievementRoute,
                                             achievementList: controller
@@ -184,7 +184,7 @@ class ProfilePage extends GetView<ProfileController> {
                                           ///===== Certificates Component =====//
                                           ProfileCertificateComponent(
                                             title:
-                                                "${'profile.diplomas'.tr} / ${'profile.certificates'.tr}",
+                                                "${'diplomas'.tr} / ${'certificates'.tr}",
                                             addOrEditCertificateRoute: Routes
                                                 .addOrEditCertificateRoute,
                                             certificateList: controller
@@ -196,7 +196,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Availabilities Component =====//
                                           ProfileAvailabilityComponent(
-                                            title: 'profile.availabilities'.tr,
+                                            title: 'availabilities'.tr,
                                             addOrEditAvailabilityRoute: Routes
                                                 .addOrEditAvailabilityRoute,
                                             availabilityList: controller

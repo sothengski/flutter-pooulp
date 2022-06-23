@@ -39,8 +39,9 @@ class ProfileAchievementComponent extends StatelessWidget {
                 text1Color: ColorsManager.grey850,
                 text1FontWeight: FontWeightManager.medium,
                 text1FontSize: AppSize.s16,
-                text2: 'profile.issuedDate'
-                    .trParams({'date': '${e.dateCompletionFormat}'}),
+                text2: '${e.dateCompletionFormat}',
+                // text2: 'profile.issuedDate'
+                //     .trParams({'date': '${e.dateCompletionFormat}'}),
                 text2Color: ColorsManager.grey800,
                 text3: e.description,
                 // bottomPadding: 8.0,

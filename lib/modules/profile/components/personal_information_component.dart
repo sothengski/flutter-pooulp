@@ -25,7 +25,7 @@ class PersonalInformationComponent extends StatelessWidget {
       rightMargin: AppSize.s16,
       // topMargin: AppSize.s12,
       bottomMargin: AppSize.s12,
-      leftTitle: 'profile.information'.tr.toUpperCase(),
+      leftTitle: 'personalInformation'.tr.toUpperCase(),
       titleFontSize: AppSize.s16,
       rightWidget: CustomIconButtonWidget(
         iconData: Icons.edit_outlined,
@@ -50,7 +50,7 @@ class PersonalInformationComponent extends StatelessWidget {
               marginBottom: AppSize.s4,
             ),
           CustomListTileWidget(
-            text1: 'profile.email'.tr,
+            text1: 'email'.tr,
             text2: userModel!.email,
             // isLauching: true,
             text2Color: ColorsManager.blue,
@@ -63,7 +63,7 @@ class PersonalInformationComponent extends StatelessWidget {
             ),
           ),
           CustomListTileWidget(
-            text1: 'profile.phone'.tr,
+            text1: 'phone'.tr,
             text2: profileModel!.fullPhone1Format,
             // isUnderLine: true,
             text2Color: ColorsManager.blue,
@@ -80,7 +80,7 @@ class PersonalInformationComponent extends StatelessWidget {
             ),
           ),
           CustomListTileWidget(
-            text1: 'profile.address'.tr,
+            text1: 'address'.tr,
             text2: '${profileModel!.addressStreet} ',
             // isLauching: true,
             text2Color: ColorsManager.black,
@@ -115,7 +115,7 @@ class PersonalInformationComponent extends StatelessWidget {
           InkWell(
             onTap: () => Get.dialog(
               MaterialDialogWidget(
-                title: 'profile.information'.tr,
+                title: 'personalInformation'.tr,
                 titleHorizontalMargin: AppSize.s12,
                 dialogMargin: AppSize.s28,
                 rightWidget: CustomIconButtonWidget(
@@ -143,7 +143,7 @@ class PersonalInformationComponent extends StatelessWidget {
                         marginBottom: AppSize.s4,
                       ),
                     CustomListTileWidget(
-                      text1: 'profile.email'.tr,
+                      text1: 'email'.tr,
                       text2: userModel!.email,
                       // isLauching: true,
                       text2Color: ColorsManager.blue,
@@ -156,7 +156,7 @@ class PersonalInformationComponent extends StatelessWidget {
                       ),
                     ),
                     CustomListTileWidget(
-                      text1: 'profile.gender'.tr,
+                      text1: 'gender'.tr,
                       text2: studentProfileModel!.gender ?? ' ',
                       // isLauching: true,
                       text2Color: ColorsManager.black,
@@ -172,7 +172,7 @@ class PersonalInformationComponent extends StatelessWidget {
                       Container()
                     else
                       CustomListTileWidget(
-                        text1: 'profile.birthday'.tr,
+                        text1: 'birthdate'.tr,
                         text2: dateFormatSlashDDMMYYYY(
                           date: profileModel!.birthDate,
                         ),
@@ -187,7 +187,7 @@ class PersonalInformationComponent extends StatelessWidget {
                         ),
                       ),
                     CustomListTileWidget(
-                      text1: 'profile.phone'.tr,
+                      text1: 'phone'.tr,
                       text2: profileModel!.fullPhone1Format,
                       // isLauching: true,
                       text2Color: ColorsManager.blue,
@@ -200,7 +200,7 @@ class PersonalInformationComponent extends StatelessWidget {
                       ),
                     ),
                     CustomListTileWidget(
-                      text1: 'profile.address'.tr,
+                      text1: 'address'.tr,
                       text2: '${profileModel!.addressStreet} ',
                       // isLauching: true,
                       text2Color: ColorsManager.black,
@@ -213,7 +213,7 @@ class PersonalInformationComponent extends StatelessWidget {
                       ),
                     ),
                     CustomListTileWidget(
-                      text1: 'profile.linkedInAcc'.tr,
+                      text1: 'linkedinProfile'.tr,
                       text2: '${studentProfileModel!.linkedinLink} ',
                       // isLauching: true,
                       text2Color: ColorsManager.blue,
@@ -233,7 +233,7 @@ class PersonalInformationComponent extends StatelessWidget {
                       ),
                     ),
                     CustomListTileWidget(
-                      text1: 'profile.vdoLink'.tr,
+                      text1: 'videoPresentation'.tr,
                       text2: studentProfileModel!.youtubeLink,
                       // isLauching: true,
                       text2Color: ColorsManager.blue,
@@ -260,7 +260,7 @@ class PersonalInformationComponent extends StatelessWidget {
               color: ColorsManager.grey100,
               child: Center(
                 child: CustomTextWidget(
-                  text: 'profile.seeAllInfo'.tr,
+                  text: 'seeAllContactInfo'.tr,
                   fontWeight: FontWeight.w500,
                 ),
               ),

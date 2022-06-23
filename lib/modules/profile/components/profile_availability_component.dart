@@ -53,13 +53,14 @@ class ProfileAvailabilityComponent extends StatelessWidget {
                       right: AppSize.s12,
                     ),
                     title: CustomTextWidget(
-                      text: 'profile.periodFromTo'.trParams(
-                        {
-                          'dateFrom': '${period.dateFromFormat}',
-                          'dateTo': '${period.dateToFormat}'
-                        },
-                      ),
-                      // 'Period from ${e!.dateFromFormat} to ${e!.dateToFormat}',
+                      text:
+                          "${'periodFrom'.tr} ${period.dateFromFormat} ${'to'.tr} ${period.dateToFormat}",
+                      // text: 'profile.periodFromTo'.trParams(
+                      //   {
+                      //     'dateFrom': '${period.dateFromFormat}',
+                      //     'dateTo': '${period.dateToFormat}'
+                      //   },
+                      // ),
                       fontWeight: FontWeight.w600,
                       color: ColorsManager.black,
                     ),
@@ -68,7 +69,7 @@ class ProfileAvailabilityComponent extends StatelessWidget {
                         children: [
                           if (period.isCustom == 0)
                             CustomTextWidget(
-                              text: 'profile.alwaysAvailable'.tr,
+                              text: 'alwaysAvailable'.tr,
                               fontSize: AppSize.s16,
                               fontWeight: FontWeight.w400,
                               marginTop: AppSize.s12,

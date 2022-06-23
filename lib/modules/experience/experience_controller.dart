@@ -152,12 +152,12 @@ class ExperienceController extends GetxController {
       );
       Get.back();
       customSnackbar(
-        msgTitle: 'core.success'.tr,
+        msgTitle: 'success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'profile.expAddSuccessMsg'.tr
+            ? 'successfullyAdded'.tr
             : operation == Keys.editOperation
-                ? 'profile.expEditSuccessMsg'.tr
-                : 'profile.expDeleteSuccessMsg'.tr,
+                ? 'successfullyUpdated'.tr //'profile.expEditSuccessMsg'.tr
+                : 'successfullyDeleted'.tr, //'profile.expDeleteSuccessMsg'.tr,
         // 'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Experience Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

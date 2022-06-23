@@ -353,7 +353,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                                         controller
                                                                             .addressCtrl,
                                                                     inputTitle:
-                                                                        "${'profile.city'.tr} / ${'profile.zipCode'.tr} *",
+                                                                        "${'city'.tr} / ${'zipcode'.tr} *",
+                                                                    // "${'profile.city'.tr} / ${'profile.zipCode'.tr} *",
                                                                     titleColor:
                                                                         ColorsManager
                                                                             .white,
@@ -361,8 +362,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                                             .placeDetail!
                                                                             .value
                                                                             .fullAddress ??
-                                                                        'profile.address'
+                                                                        'address'
                                                                             .tr,
+                                                                    // 'profile.address'.tr,
                                                                     hintTextColor:
                                                                         ColorsManager
                                                                             .black,
@@ -392,7 +394,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                               ///===== Top of Radius Component =====//
                                                               CustomTextWidget(
                                                                 text:
-                                                                    "Radius: ${controller.radiusRxInt.value} Km",
+                                                                    "${'radius'.tr}: ${controller.radiusRxInt.value} Km",
                                                                 color:
                                                                     ColorsManager
                                                                         .white,
@@ -545,7 +547,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     ),
                                   ),
                                   child: CustomTextWidget(
-                                    text: 'core.back'.tr,
+                                    text: 'back'.tr, // 'core.back'.tr,
                                     color: ColorsManager.white,
                                     fontSize: AppSize.s16,
                                     fontWeight: FontWeight.bold,
@@ -579,8 +581,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                             ),
                             child: CustomTextWidget(
                               text: controller.isLastPage
-                                  ? 'core.finish'.tr
-                                  : 'core.next'.tr,
+                                  ? 'finish'.tr //'core.finish'.tr
+                                  : 'next'.tr, //'core.next'.tr,
                               color: ColorsManager.white,
                               fontSize: AppSize.s16,
                               fontWeight: FontWeight.bold,

@@ -22,14 +22,14 @@ class ConfirmationDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialDialogWidget(
-      title: dialogTitle ?? 'core.confirmation'.tr,
+      title: dialogTitle ?? 'confirmation'.tr,
       titleHorizontalMargin: AppSize.s12,
       contentWidget: contentWidget ??
           Center(
             child: CustomTextWidget(
               marginTop: AppSize.s12,
               marginBottom: AppSize.s12,
-              text: dialogBody ?? 'core.removeConfirm'.tr,
+              text: dialogBody ?? 'removeConfirm'.tr,
               maxLine: 5,
             ),
           ),
@@ -51,7 +51,7 @@ class ConfirmationDialogWidget extends StatelessWidget {
                   ),
                   label: CustomTextWidget(
                     marginRight: AppSize.s24,
-                    text: 'core.no'.tr,
+                    text: 'no'.tr,
                     color: Colors.blue,
                   ),
                 ),
@@ -74,7 +74,7 @@ class ConfirmationDialogWidget extends StatelessWidget {
                   ),
                   label: CustomTextWidget(
                     marginRight: AppSize.s24,
-                    text: 'core.yes'.tr,
+                    text: 'yes'.tr,
                     color: Colors.red,
                   ),
                 ),

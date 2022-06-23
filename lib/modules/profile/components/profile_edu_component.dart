@@ -44,7 +44,7 @@ class ProfileEduComponent extends StatelessWidget {
                     text2: '${e.degree}, ${e.name}',
                     text2Color: ColorsManager.grey800,
                     text3:
-                        '${e.attendedFromTo} ${'core.at'.tr} ${e.schoolCityAndCountry}',
+                        '${e.attendedFromTo} ${'at'.tr} ${e.schoolCityAndCountry}',
                     leftWidget: const CustomBoxWidget(
                       size: 40,
                       child: Icon(

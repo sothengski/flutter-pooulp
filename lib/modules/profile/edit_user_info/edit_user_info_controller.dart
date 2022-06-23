@@ -408,16 +408,16 @@ class EditUserInformationController extends GetxController {
           .then((ProfileModel value) {
         profileController.userProfileInfo.value = value;
         customSnackbar(
-          msgTitle: 'core.success'.tr,
-          msgContent: 'profile.editSucessMsg'.tr,
+          msgTitle: 'success'.tr,
+          msgContent: 'successfullyUpdated'.tr,
           bgColor: ColorsManager.green,
         );
         saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
       });
     } else {
       customSnackbar(
-        msgTitle: 'validator.requireFields'.tr,
-        msgContent: 'validator.requireFieldsMsg'.tr,
+        msgTitle: 'requireFields'.tr,
+        msgContent: 'requireFieldsMsg'.tr,
         bgColor: ColorsManager.orange,
       );
     }

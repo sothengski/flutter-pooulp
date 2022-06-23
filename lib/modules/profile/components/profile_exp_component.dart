@@ -45,7 +45,7 @@ class ProfileExpComponent extends StatelessWidget {
                       text2: e.company,
                       text2Color: ColorsManager.grey800,
                       text3:
-                          '${e.attendedFromTo} at ${e.companyCityAndCountry}',
+                          '${e.attendedFromTo} ${'at'.tr} ${e.companyCityAndCountry}',
                       // bottomPadding: 8.0,
                       leftWidget: const CustomBoxWidget(
                         size: 40,

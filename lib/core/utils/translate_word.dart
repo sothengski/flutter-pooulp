@@ -12,19 +12,25 @@ String translateStateWords({required String? stateWord}) {
   } else if (stateWord == OfferStrings.rejectedState) {
     return 'refused'.tr;
   } else if (stateWord == SkillCategoryStrings.hardSkill) {
-    return 'profile.hardSkill'.tr;
+    return 'hardSkill'.tr;
   } else if (stateWord == SkillCategoryStrings.softSkill) {
-    return 'profile.softSkill'.tr;
+    return 'softSkill'.tr;
   } else if (stateWord == LevelStrings.undefined) {
-    return 'profile.undefined'.tr;
+    return 'undefined'.tr;
   } else if (stateWord == LevelStrings.beginner) {
-    return 'profile.beginner'.tr;
+    return 'beginner'.tr;
   } else if (stateWord == LevelStrings.intermediate) {
-    return 'profile.intermediate'.tr;
+    return 'intermediate'.tr;
   } else if (stateWord == LevelStrings.professional) {
-    return 'profile.professional'.tr;
+    return 'professional'.tr;
   } else if (stateWord == LevelStrings.motherTongue) {
-    return 'profile.motherTongue'.tr;
+    return 'motherTongue'.tr;
+  } else if (stateWord == GenderStrings.male) {
+    return 'male'.tr;
+  } else if (stateWord == GenderStrings.female) {
+    return 'female'.tr;
+  } else if (stateWord == GenderStrings.others) {
+    return 'others'.tr;
   }
 
   // else if (stateWord == 'All') {
@@ -40,12 +46,12 @@ String? getLevelString({int? level}) {
   //   return 'profile.undefined'.tr;
   // }
   return level == 1
-      ? 'profile.beginner'.tr
+      ? 'beginner'.tr
       : level == 2
-          ? 'profile.intermediate'.tr
+          ? 'intermediate'.tr
           : level == 3
-              ? 'profile.confirmed'.tr
+              ? 'confirmed'.tr
               : level == 4
-                  ? 'profile.expert'.tr
-                  : 'profile.undefined'.tr;
+                  ? 'expert'.tr
+                  : 'undefined'.tr;
 }

@@ -59,7 +59,7 @@ class ProfileHeaderComponent extends StatelessWidget {
                   tooltip: 'Settings',
                   onClick: () => Get.dialog(
                     ConfirmationDialogWidget(
-                      dialogTitle: 'profile.jobTitle'.tr,
+                      dialogTitle: 'jobTitle'.tr,
                       contentWidget:
                           // CustomTextWidget(text: 'CV body'.tr),
                           TextField(
@@ -70,7 +70,7 @@ class ProfileHeaderComponent extends StatelessWidget {
                           contentPadding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                           isCollapsed: true,
                           isDense: true,
-                          hintText: 'profile.jobTitleHint'.tr,
+                          hintText: 'jobTitleHint'.tr,
                           border: InputBorder.none,
                         ),
                         maxLines: 2,
@@ -84,7 +84,7 @@ class ProfileHeaderComponent extends StatelessWidget {
                         ),
                         label: CustomTextWidget(
                           marginRight: AppSize.s24,
-                          text: 'profile.generateCV'.tr,
+                          text: 'generateCv'.tr,
                           color: Colors.red,
                         ),
                       ),

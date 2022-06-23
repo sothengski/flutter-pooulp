@@ -53,6 +53,12 @@ class SkillCategoryStrings {
   static const String hardSkill = 'Hard Skill';
 }
 
+class GenderStrings {
+  static const String male = 'male';
+  static const String female = 'female';
+  static const String others = 'others';
+}
+
 class OfferStrings {
   static const String pendingState = 'Pending';
   static const String matchedState = 'Matched';

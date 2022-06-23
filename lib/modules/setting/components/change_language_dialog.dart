@@ -10,7 +10,7 @@ void changeLanguageDialog({
 }) {
   Get.dialog(
     MaterialDialogWidget(
-      title: 'settings.selectALanguage'.tr,
+      title: 'selectALanguage'.tr,
       titleHorizontalMargin: AppSize.s12,
       contentWidget: Center(
         child: ListView.separated(

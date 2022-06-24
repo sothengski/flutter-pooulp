@@ -64,11 +64,12 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
               ),
               child: Center(
                 child: CustomTextWidget(
-                  text: 'profile.dayNotAvailable'.trParams(
-                    {
-                      'day': dayLabel!,
-                    },
-                  ),
+                  text: "$dayLabel ${'notAvailable'.tr}",
+                  // text: 'profile.dayNotAvailable'.trParams(
+                  //   {
+                  //     'day': dayLabel!,
+                  //   },
+                  // ),
                 ),
               ),
             )
@@ -108,7 +109,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
                             containerWidget: e.startTime.toString() == ''
                                 ? RowContentInputWidget(
                                     centerWidget: CustomTextWidget(
-                                      text: 'profile.from'.tr,
+                                      text: 'from'.tr,
                                       color: ColorsManager.grey400,
                                       fontWeight: FontWeight.w400,
                                       fontSize: AppSize.s16,
@@ -163,7 +164,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
                             containerWidget: e.endTime.toString() == ''
                                 ? RowContentInputWidget(
                                     centerWidget: CustomTextWidget(
-                                      text: 'profile.to'.tr,
+                                      text: 'to'.tr,
                                       color: ColorsManager.grey400,
                                       fontWeight: FontWeight.w400,
                                       fontSize: AppSize.s16,

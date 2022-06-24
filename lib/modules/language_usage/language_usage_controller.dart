@@ -130,12 +130,12 @@ class LanguageUsageController extends GetxController {
       languageListFilter();
       // Get.back();
       customSnackbar(
-        msgTitle: 'core.success'.tr,
+        msgTitle: 'success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'profile.langAddSuccessMsg'.tr
+            ? 'successfullyAdded'.tr //'profile.langAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'profile.langEditSuccessMsg'.tr
-                : 'profile.langDeleteSuccessMsg'.tr,
+                ? 'successfullyUpdated'.tr //'profile.langEditSuccessMsg'.tr
+                : 'successfullyDeleted'.tr, //'profile.langDeleteSuccessMsg'.tr,
         //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Language Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

@@ -13,8 +13,8 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
       ///===== Top of appBar Component =====//
       appBar: CustomAppBar(
         title: controller.title == AppStrings.addText
-            ? 'profile.addAvailability'.tr
-            : 'profile.editAvailability'.tr,
+            ? 'addAvailability'.tr
+            : 'editAvailability'.tr,
         actions: [
           if (controller.title != Keys.editOperation)
             Container()
@@ -65,7 +65,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                       ),
                     ),
                     CustomTextWidget(
-                      text: 'profile.period'.tr,
+                      text: 'period'.tr,
                       fontSize: AppSize.s16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -92,7 +92,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'profile.from'.tr,
+                        inputTitle: 'from'.tr,
                         inputTitleMarginTop: AppSize.s16,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedFromDateString.value,
@@ -112,7 +112,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                           () => controller.selectedFromDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'profile.from'.tr,
+                                    text: 'from'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
@@ -151,7 +151,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'profile.to'.tr,
+                        inputTitle: 'to'.tr,
                         // 'End Date(Or Expected)',
                         inputTitleMarginTop: AppSize.s16,
                         validatorFunction: (_) => Validator().notEmptyValidator(
@@ -172,7 +172,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                           () => controller.selectedToDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'profile.to'.tr,
+                                    text: 'to'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
@@ -224,7 +224,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                     verticalPadding: AppSize.s16,
                     horizontalPadding: AppSize.s0,
                     isClickingValue: controller.isCustomAvailability.value,
-                    text: 'profile.customAvailabilities'.tr,
+                    text: 'customAvailabilities'.tr,
                     isLeftSideText: false,
                     onPressed: () {
                       controller.isCustomAvailability.value =
@@ -254,7 +254,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                         ? [
                             Center(
                               child: CustomTextWidget(
-                                text: 'profile.alwaysAvailable'.tr,
+                                text: 'alwaysAvailable'.tr,
                               ),
                             )
                           ]
@@ -299,7 +299,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
           leftPadding: AppSize.s12,
           rightPadding: AppSize.s12,
           bottomPadding: AppSize.s20,
-          text: 'core.saveBtn'.tr,
+          text: 'save'.tr,
           childWidget: controller.isSubmitBtnProcessing.value == true
               ? const SizedBox(
                   height: 40,

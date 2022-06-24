@@ -142,12 +142,13 @@ class SkillController extends GetxController {
       skillListFilter();
       // Get.back();
       customSnackbar(
-        msgTitle: 'core.success'.tr,
+        msgTitle: 'success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'profile.skillAddSuccessMsg'.tr
+            ? 'successfullyAdded'.tr //'profile.skillAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'profile.skillEditSuccessMsg'.tr
-                : 'profile.skillDeleteSuccessMsg'.tr,
+                ? 'successfullyUpdated'.tr //'profile.skillEditSuccessMsg'.tr
+                : 'successfullyDeleted'
+                    .tr, //'profile.skillDeleteSuccessMsg'.tr,
         // 'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Skill Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

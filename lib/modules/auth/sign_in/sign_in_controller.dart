@@ -199,7 +199,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
         onError: (error) {
           swithcingBoolValueLoginBtn(boolValue: false);
           customSnackbar(
-            msgTitle: "Something went wrong!",
+            msgTitle: 'sthWentWrong'.tr,
             msgContent: "$error",
             bgColor: ColorsManager.red,
           );

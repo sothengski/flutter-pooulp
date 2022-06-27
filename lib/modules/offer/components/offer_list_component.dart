@@ -37,7 +37,7 @@ class OfferListComponent extends StatelessWidget {
                     Expanded(
                       key: const ValueKey(OfferStrings.cancelAction),
                       child: OutlineIconButtonWidget(
-                        buttonTitle: 'offer.cancel'.tr,
+                        buttonTitle: 'cancel'.tr,
                         iconDataOnClick: Icons.cancel,
                         iconData: Icons.cancel_outlined,
                         // iconColor: ColorsManager.grey600,
@@ -62,7 +62,7 @@ class OfferListComponent extends StatelessWidget {
                         Expanded(
                           key: const ValueKey(OfferStrings.callAction),
                           child: OutlineIconButtonWidget(
-                            buttonTitle: 'offer.call'.tr,
+                            buttonTitle: 'call'.tr,
                             iconData: Icons.phone_outlined,
                             iconDataOnClick: Icons.phone,
                             // iconColor: ColorsManager.grey600,
@@ -89,7 +89,7 @@ class OfferListComponent extends StatelessWidget {
                         Expanded(
                           key: const ValueKey(OfferStrings.informationAction),
                           child: OutlineIconButtonWidget(
-                            buttonTitle: 'offer.information'.tr,
+                            buttonTitle: 'information'.tr,
                             // iconColor: ColorsManager.grey600,
                             iconColorOnClick: ColorsManager.primaryBlue,
                             buttonState: offerList![index].informationState,
@@ -109,7 +109,7 @@ class OfferListComponent extends StatelessWidget {
                         Expanded(
                           key: const ValueKey(OfferStrings.emailAction),
                           child: OutlineIconButtonWidget(
-                            buttonTitle: 'offer.email'.tr,
+                            buttonTitle: 'email'.tr,
                             iconData: Icons.email_outlined,
                             iconDataOnClick: Icons.email,
                             // iconColor: ColorsManager.grey600,
@@ -140,7 +140,7 @@ class OfferListComponent extends StatelessWidget {
                             Expanded(
                               key: const ValueKey(OfferStrings.applyAction),
                               child: OutlineIconButtonWidget(
-                                buttonTitle: 'offer.apply'.tr,
+                                buttonTitle: 'apply'.tr,
                                 iconData: Icons.thumb_up_outlined,
                                 iconDataOnClick: Icons.thumb_up,
                                 // iconColor: ColorsManager.grey600,
@@ -165,7 +165,7 @@ class OfferListComponent extends StatelessWidget {
                                 OfferStrings.informationAction,
                               ),
                               child: OutlineIconButtonWidget(
-                                buttonTitle: 'offer.information'.tr,
+                                buttonTitle: 'information'.tr,
                                 // iconColor: ColorsManager.grey600,
                                 iconColorOnClick: ColorsManager.primaryBlue,
                                 buttonState: offerList![index].informationState,
@@ -187,7 +187,7 @@ class OfferListComponent extends StatelessWidget {
                             Expanded(
                               key: const ValueKey(OfferStrings.unSaveAction),
                               child: OutlineIconButtonWidget(
-                                buttonTitle: 'offer.unsave'.tr,
+                                buttonTitle: 'unsave'.tr,
                                 iconData: Icons.bookmark_remove_outlined,
                                 iconDataOnClick: Icons.bookmark_remove,
                                 // iconColor: ColorsManager.grey600,
@@ -214,7 +214,7 @@ class OfferListComponent extends StatelessWidget {
                                 OfferStrings.informationAction,
                               ),
                               child: OutlineIconButtonWidget(
-                                buttonTitle: 'offer.information'.tr,
+                                buttonTitle: 'information'.tr,
                                 // iconColor: ColorsManager.grey600,
                                 iconColorOnClick: ColorsManager.primaryBlue,
                                 buttonState: offerList![index].informationState,

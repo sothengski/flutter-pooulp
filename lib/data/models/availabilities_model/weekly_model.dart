@@ -19,19 +19,19 @@ class WeeklyModel {
 
   String get getDayLabelByLanguage {
     if (day == 1) {
-      return 'profile.monday'.tr;
+      return 'monday'.tr;
     } else if (day == 2) {
-      return 'profile.tuesday'.tr;
+      return 'tuesday'.tr;
     } else if (day == 3) {
-      return 'profile.wednesday'.tr;
+      return 'wednesday'.tr;
     } else if (day == 4) {
-      return 'profile.thursday'.tr;
+      return 'thursday'.tr;
     } else if (day == 5) {
-      return 'profile.friday'.tr;
+      return 'friday'.tr;
     } else if (day == 6) {
-      return 'profile.saturday'.tr;
+      return 'saturday'.tr;
     } else {
-      return 'profile.sunday'.tr;
+      return 'sunday'.tr;
     }
   }
 

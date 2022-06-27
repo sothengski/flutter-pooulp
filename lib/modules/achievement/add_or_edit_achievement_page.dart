@@ -13,8 +13,8 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
       ///===== Top of appBar Component =====//
       appBar: CustomAppBar(
         title: controller.title == AppStrings.addText
-            ? 'profile.addAchievement'.tr
-            : 'profile.editAchievement'.tr,
+            ? 'addAchievement'.tr
+            : 'editAchievement'.tr,
         // '${controller.title} Achievement',
         actions: [
           if (controller.title != Keys.editOperation)
@@ -54,8 +54,8 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.achievementNameTextCtrl,
-                  inputTitle: 'profile.achievementTitle'.tr,
-                  hintText: 'profile.achievementTitleHint'.tr,
+                  inputTitle: 'name'.tr,
+                  hintText: 'name'.tr,
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
@@ -63,7 +63,7 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
 
                 ///===== Top of Completion Date Component =====//
                 ContainerDialogWidget(
-                  inputTitle: 'profile.completionDate'.tr,
+                  inputTitle: 'completionDate'.tr,
                   inputTitleMarginTop: AppSize.s16,
                   validatorFunction: (_) => Validator().notEmptyValidator(
                     controller.selectedCompletionDateString.value,
@@ -83,7 +83,7 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                     () => controller.selectedCompletionDateString.value == ''
                         ? RowContentInputWidget(
                             centerWidget: CustomTextWidget(
-                              text: 'profile.completionDate'.tr,
+                              text: 'completionDate'.tr,
                               color: ColorsManager.grey400,
                               fontWeight: FontWeight.w400,
                               fontSize: AppSize.s16,
@@ -116,8 +116,8 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.descriptionTextCtrl,
-                  inputTitle: 'offer.description'.tr,
-                  hintText: "${'offer.description'.tr}...",
+                  inputTitle: 'description'.tr,
+                  hintText: "${'description'.tr}...",
                   isFilled: true,
                   topContentPadding: AppSize.s12,
                   bottomContentPadding: AppSize.s12,
@@ -143,7 +143,7 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
           leftPadding: AppSize.s12,
           rightPadding: AppSize.s12,
           bottomPadding: AppSize.s20,
-          text: 'core.saveBtn'.tr,
+          text: 'save'.tr,
           childWidget: controller.isSubmitBtnProcessing.value == true
               ? const SizedBox(
                   height: 40,

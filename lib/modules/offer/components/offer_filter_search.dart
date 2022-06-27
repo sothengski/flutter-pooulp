@@ -84,10 +84,10 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       leftPadding: AppSize.s8,
                       rightPadding: AppSize.s8,
                       controller: controller.keywordToBeSearchTextCtrl,
-                      inputTitle: 'offer.jobTitle'.tr,
+                      inputTitle: 'jobTitle'.tr,
                       fontSizeTitle: AppSize.s16,
                       fontWeightTitle: FontWeight.w600,
-                      hintText: 'offer.searchJobTitle'.tr,
+                      hintText: 'searchJobTitle'.tr,
                       isFilled: true,
                       // validator: Validator().notEmptyValidator,
                     ),
@@ -97,7 +97,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     ///===== Top of Workplace Type Component =====//
                     CustomContainerWidget(
                       isBoxShadow: false,
-                      leftTitle: 'offer.workplaceType'.tr,
+                      leftTitle: 'workplaceType'.tr,
                       titleTopPadding: AppSize.s5,
                       titleFontSize: AppSize.s16,
                       child: Column(
@@ -108,7 +108,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                               object1: controller.workPlaceTypesInFilter.value,
                               object2: 0,
                             ),
-                            text: 'offer.onSite'.tr,
+                            text: 'onSite'.tr,
                             onPressed: () {
                               controller.workPlaceTypesInFilter.value = 0;
                               // controller.workPlaceTypesForSearch.value = 0;
@@ -122,7 +122,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                               object1: controller.workPlaceTypesInFilter.value,
                               object2: 1,
                             ),
-                            text: 'offer.remote'.tr,
+                            text: 'remote'.tr,
                             onPressed: () {
                               controller.workPlaceTypesInFilter.value = 1;
                               // controller.workPlaceTypesForSearch.value = 1;
@@ -136,7 +136,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                               object1: controller.workPlaceTypesInFilter.value,
                               object2: 2,
                             ),
-                            text: 'offer.hybrid'.tr,
+                            text: 'both'.tr,
                             onPressed: () {
                               controller.workPlaceTypesInFilter.value = 2;
                               // controller.workPlaceTypesForSearch.value = 2;
@@ -154,7 +154,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     ///===== Top of Job Types Component =====//
                     CustomContainerWidget(
                       isBoxShadow: false,
-                      leftTitle: 'offer.jobTypes'.tr,
+                      leftTitle: 'jobTypes'.tr,
                       titleTopPadding: AppSize.s5,
                       titleFontSize: AppSize.s16,
                       child: Column(
@@ -186,7 +186,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     ContainerDialogWidget(
                       leftPadding: AppSize.s10,
                       rightPadding: AppSize.s10,
-                      inputTitle: 'offer.fields'.tr,
+                      inputTitle: 'fields'.tr,
                       fontSizeTitle: AppSize.s16,
                       fontWeightTitle: FontWeight.w600,
                       inputTitleMarginBottom: AppSize.s6,
@@ -212,7 +212,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         child: Obx(
                           () => controller.fieldListForSearch.isNotEmpty
                               ? FieldListMultipleSelector(
-                                  inputHintText: 'core.search'.tr,
+                                  inputHintText: 'search'.tr,
                                   dataListforSelected:
                                       controller.fieldListForSearch,
                                   selectedItems: controller.fieldListInFilter,
@@ -229,7 +229,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       ),
                       containerWidget: RowContentInputWidget(
                         centerWidget: CustomTextWidget(
-                          text: 'offer.fields'.tr,
+                          text: 'fields'.tr,
                           color: ColorsManager.grey400,
                           fontWeight: FontWeight.w400,
                           fontSize: AppSize.s16,
@@ -268,7 +268,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     ContainerDialogWidget(
                       leftPadding: AppSize.s10,
                       rightPadding: AppSize.s10,
-                      inputTitle: 'offer.languages'.tr,
+                      inputTitle: 'languages'.tr,
                       fontSizeTitle: AppSize.s16,
                       fontWeightTitle: FontWeight.w600,
                       inputTitleMarginBottom: AppSize.s6,
@@ -294,7 +294,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         child: Obx(
                           () => controller.languageListForSearch.isNotEmpty
                               ? FieldListMultipleSelector(
-                                  inputHintText: 'core.search'.tr,
+                                  inputHintText: 'search'.tr,
                                   dataListforSelected:
                                       controller.languageListForSearch,
                                   selectedItems:
@@ -312,7 +312,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       ),
                       containerWidget: RowContentInputWidget(
                         centerWidget: CustomTextWidget(
-                          text: 'offer.languages'.tr,
+                          text: 'languages'.tr,
                           color: ColorsManager.grey400,
                           fontWeight: FontWeight.w400,
                           fontSize: AppSize.s16,
@@ -352,7 +352,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     ContainerDialogWidget(
                       leftPadding: AppSize.s10,
                       rightPadding: AppSize.s10,
-                      inputTitle: 'offer.timeSlots'.tr,
+                      inputTitle: 'workAvailability'.tr, //'timeSlots'.tr,
                       fontSizeTitle: AppSize.s16,
                       fontWeightTitle: FontWeight.w600,
                       inputTitleMarginBottom: AppSize.s6,
@@ -379,7 +379,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                           () => controller
                                   .availabilitiesTagListForSearch.isNotEmpty
                               ? FieldListMultipleSelector(
-                                  inputHintText: 'core.search'.tr,
+                                  inputHintText: 'search'.tr,
                                   dataListforSelected:
                                       controller.availabilitiesTagListForSearch,
                                   selectedItems:
@@ -398,7 +398,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       ),
                       containerWidget: RowContentInputWidget(
                         centerWidget: CustomTextWidget(
-                          text: 'offer.timeSlots'.tr,
+                          text: 'workAvailability'.tr,
                           color: ColorsManager.grey400,
                           fontWeight: FontWeight.w400,
                           fontSize: AppSize.s16,
@@ -465,7 +465,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   // ),
                                   CustomTextInput(
                                     controller: controller.addressCtrl,
-                                    inputTitle: 'offer.location'.tr,
+                                    inputTitle: 'location'.tr,
                                     fontSizeTitle: AppSize.s16,
                                     fontWeightTitle: FontWeight.w600,
                                     hintText: controller
@@ -527,7 +527,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         marginLeft: AppSize.s12,
                         textAlign: TextAlign.center,
                         text:
-                            '${'settings.radius'.tr}(Km): ${controller.radiusRxInt.value}',
+                            '${'radius'.tr}(Km): ${controller.radiusRxInt.value}',
                         fontSize: AppSize.s16,
                       ),
                       suffixWidgetFlex: 50,
@@ -571,7 +571,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       child: CustomMaterialButton(
                         buttonColor: ColorsManager.white,
                         elevation: 0.0,
-                        text: buttonLabel1 ?? 'offer.clearAllBtn'.tr,
+                        text: buttonLabel1 ?? 'clearAll'.tr,
                         textColor: ColorsManager.redAccent700,
                         fontSize: 14,
                         onPressed: () {
@@ -588,7 +588,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     child: CustomMaterialButton(
                       buttonColor: ColorsManager.white,
                       elevation: 0.0,
-                      text: buttonLabel2 ?? 'core.close'.tr,
+                      text: buttonLabel2 ?? 'close'.tr,
                       textColor: ColorsManager.grey900,
                       fontSize: 14,
                       onPressed: () {
@@ -605,7 +605,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     child: CustomMaterialButton(
                       childWidget: CustomTextWidget(
                         textAlign: TextAlign.left,
-                        text: buttonLabel3 ?? 'offer.applyFilter'.tr,
+                        text: buttonLabel3 ?? 'applyFilter'.tr,
                         color: ColorsManager.white,
                       ),
                       // buttonColor: ColorsManager.primary,

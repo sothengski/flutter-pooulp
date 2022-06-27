@@ -348,7 +348,7 @@ class OnboardingController extends GetxController
     if (responseData.success!) {
       // debugPrint('=====success=====');
       customSnackbar(
-        msgTitle: 'core.success'.tr,
+        msgTitle: 'success'.tr,
         msgContent: '',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

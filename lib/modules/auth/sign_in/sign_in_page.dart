@@ -58,7 +58,7 @@ class SignInPage extends GetView<SignInController> {
                   child: SignInForm(),
                 ),
                 CustomTextWidget(
-                  text: 'auth.dontHaveAccount'.tr,
+                  text: 'loginCallRegister'.tr, //'auth.dontHaveAccount'.tr,
                   color: ColorsManager.white,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
@@ -68,7 +68,7 @@ class SignInPage extends GetView<SignInController> {
                 GestureDetector(
                   onTap: () => Get.toNamed(Routes.signUpRoute),
                   child: CustomTextWidget(
-                    text: 'auth.registerNow'.tr,
+                    text: 'registerNow'.tr, //'auth.registerNow'.tr,
                     color: ColorsManager.white,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,

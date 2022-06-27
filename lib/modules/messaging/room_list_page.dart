@@ -12,7 +12,7 @@ class RoomListPage extends GetView<MessagingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'home.messaging'.tr,
+        title: 'messaging'.tr,
         elevation: 0.0,
       ),
       body: controller.obx(
@@ -22,7 +22,7 @@ class RoomListPage extends GetView<MessagingController> {
           child: controller.roomListRepsonse.isEmpty
               ? Center(
                   child: CustomTextWidget(
-                    text: 'messaging.noChatRoom'.tr,
+                    text: 'noMessagesMsg'.tr,
                   ),
                 )
               : Column(
@@ -89,9 +89,9 @@ class RoomListPage extends GetView<MessagingController> {
         onError: (error) => Center(
           child: StateHandlerWidget(
             imgPath: AssetsManager.emptyDataIcon,
-            headerText: 'core.sthWentWrong'.tr,
-            bodyText: 'core.connectionFailedMsg'.tr,
-            buttonText: 'core.tryAgain'.tr,
+            headerText: 'sthWentWrong'.tr,
+            bodyText: 'connectionFailedMsg'.tr,
+            buttonText: 'tryAgain'.tr,
             onPressedFunctionCall: controller.onRefreshForRoomChat,
           ),
         ),

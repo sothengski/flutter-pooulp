@@ -44,7 +44,7 @@ class _SchoolListSelectorState extends State<SchoolListSelector> {
         Padding(
           padding: const EdgeInsets.all(8),
           child: CustomTextInput(
-            hintText: 'profile.searchSchool'.tr,
+            hintText: 'search'.tr,
             suffixIcon: const Icon(
               Icons.search,
               // color: ColorsManager.grey400,
@@ -132,7 +132,7 @@ class _SchoolListSelectorState extends State<SchoolListSelector> {
                   key: const Key('no-result'),
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Text(
-                    'profile.noResult'.tr,
+                    'noResult'.tr,
                   ),
                 ),
         ),

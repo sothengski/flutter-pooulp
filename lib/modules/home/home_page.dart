@@ -37,7 +37,7 @@ class HomePage extends GetView<HomeController> {
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.explore),
                 inActiveIcon: const Icon(Icons.explore_outlined),
-                title: Text('home.feed'.tr),
+                title: Text('feed'.tr),
                 activeColor: ColorsManager.primary,
               ),
               // BottomNavBarItem(
@@ -49,20 +49,20 @@ class HomePage extends GetView<HomeController> {
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.description),
                 inActiveIcon: const Icon(Icons.description_outlined),
-                title: Text('home.myOffers'.tr),
+                title: Text('myOffers'.tr),
                 activeColor: ColorsManager.primary,
                 isBag: controller.isBag.value,
               ),
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.message_rounded),
                 inActiveIcon: const Icon(Icons.message_outlined),
-                title: Text('home.messaging'.tr),
+                title: Text('messaging'.tr),
                 activeColor: ColorsManager.primary,
               ),
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.person),
                 inActiveIcon: const Icon(Icons.person_outlined),
-                title: Text('home.profile'.tr),
+                title: Text('profile'.tr),
                 activeColor: ColorsManager.primary,
               ),
             ],

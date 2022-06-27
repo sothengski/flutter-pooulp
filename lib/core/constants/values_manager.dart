@@ -5,6 +5,9 @@ import 'package:get/get.dart';
 double getWidth = Get.width;
 double getHeight = Get.height;
 
+Map<String, String> enLangFile = {};
+Map<String, String> frLangFile = {};
+
 class AppSize {
   static const double s0 = 0;
   static const double s0_5 = 0.5;

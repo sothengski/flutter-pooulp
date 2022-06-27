@@ -31,7 +31,7 @@ class SettingPage extends GetView<SettingController> {
         //===== Bottom of Will Pop Scope Component =====//
         child: Scaffold(
           appBar: CustomAppBar(
-            title: 'settings.settingsTitle'.tr,
+            title: 'preferences'.tr,
           ),
 
           ///===== Top of body Component =====//
@@ -59,7 +59,7 @@ class SettingPage extends GetView<SettingController> {
                         centerWidget: CustomTextWidget(
                           marginLeft: AppSize.s12,
                           textAlign: TextAlign.center,
-                          text: 'settings.telecommunicating'.tr,
+                          text: 'telecommuting'.tr,
                           fontSize: AppSize.s16,
                         ),
                         suffixWidgetFlex: 20,
@@ -109,7 +109,7 @@ class SettingPage extends GetView<SettingController> {
                         centerWidget: CustomTextWidget(
                           marginLeft: AppSize.s12,
                           textAlign: TextAlign.center,
-                          text: 'settings.drivingLicense'.tr,
+                          text: 'haveDrivingLicense'.tr,
                           fontSize: AppSize.s16,
                         ),
                         suffixWidgetFlex: 20,
@@ -134,7 +134,7 @@ class SettingPage extends GetView<SettingController> {
                         centerWidget: CustomTextWidget(
                           marginLeft: AppSize.s12,
                           textAlign: TextAlign.center,
-                          text: 'settings.hasAutomobile'.tr,
+                          text: 'motorized'.tr,
                           fontSize: AppSize.s16,
                         ),
                         suffixWidgetFlex: 20,
@@ -192,7 +192,7 @@ class SettingPage extends GetView<SettingController> {
                   rightMargin: AppSize.s12,
                   // topMargin: AppSize.s12,
                   bottomMargin: AppSize.s12,
-                  leftTitle: 'settings.settings'.tr,
+                  leftTitle: 'settings'.tr,
                   titleFontSize: AppSize.s16,
                   titleFontWeight: FontWeight.bold,
                   titleTopPadding: AppSize.s12,
@@ -204,7 +204,7 @@ class SettingPage extends GetView<SettingController> {
                       InkWell(
                         onTap: () => Get.dialog(
                           MaterialDialogWidget(
-                            title: 'settings.selectALanguage'.tr,
+                            title: 'selectALanguage'.tr,
                             titleHorizontalMargin: AppSize.s12,
                             contentWidget: Center(
                               child: ListView.separated(
@@ -262,7 +262,7 @@ class SettingPage extends GetView<SettingController> {
                             centerWidget: CustomTextWidget(
                               marginLeft: AppSize.s12,
                               textAlign: TextAlign.center,
-                              text: 'settings.language'.tr,
+                              text: 'language'.tr,
                               fontSize: AppSize.s16,
                             ),
                             suffixWidgetFlex: 50,
@@ -313,7 +313,7 @@ class SettingPage extends GetView<SettingController> {
                           centerWidget: CustomTextWidget(
                             marginLeft: AppSize.s12,
                             textAlign: TextAlign.center,
-                            text: 'auth.email'.tr,
+                            text: 'email'.tr,
                             fontSize: AppSize.s16,
                           ),
                           suffixWidgetFlex: 70,
@@ -327,7 +327,7 @@ class SettingPage extends GetView<SettingController> {
                                     children: [
                                       CustomTextWidget(
                                         textAlign: TextAlign.center,
-                                        text: 'settings.verified'
+                                        text: 'verified'
                                             .tr, //Check your email and confirm
                                         color: ColorsManager.green,
                                       ),
@@ -361,7 +361,7 @@ class SettingPage extends GetView<SettingController> {
                                               children: [
                                                 CustomTextWidget(
                                                   textAlign: TextAlign.center,
-                                                  text: 'auth.emailSent'.tr,
+                                                  text: 'emailSent'.tr,
                                                   color: ColorsManager.grey,
                                                 ),
                                                 const Padding(
@@ -382,7 +382,7 @@ class SettingPage extends GetView<SettingController> {
                                               children: [
                                                 CustomTextWidget(
                                                   textAlign: TextAlign.center,
-                                                  text: 'settings.verify'.tr,
+                                                  text: 'verify'.tr,
                                                   color: ColorsManager.blue,
                                                   textDecoration:
                                                       TextDecoration.underline,
@@ -394,8 +394,7 @@ class SettingPage extends GetView<SettingController> {
                                                   child: Icon(
                                                     Icons
                                                         .keyboard_arrow_right_outlined,
-                                                    color:
-                                                        ColorsManager.grey800,
+                                                    color: ColorsManager.grey,
                                                   ),
                                                 ),
                                               ],
@@ -423,7 +422,7 @@ class SettingPage extends GetView<SettingController> {
                           centerWidget: CustomTextWidget(
                             marginLeft: AppSize.s12,
                             textAlign: TextAlign.center,
-                            text: 'settings.emailNotifications'.tr,
+                            text: 'emailNotifications'.tr,
                             fontSize: AppSize.s16,
                           ),
                           suffixWidgetFlex: 20,
@@ -458,7 +457,7 @@ class SettingPage extends GetView<SettingController> {
                             centerWidget: CustomTextWidget(
                               marginLeft: AppSize.s12,
                               textAlign: TextAlign.center,
-                              text: 'settings.changePassword'.tr,
+                              text: 'changePassword'.tr,
                               fontSize: AppSize.s16,
                             ),
                             suffixWidget: const Padding(
@@ -482,7 +481,7 @@ class SettingPage extends GetView<SettingController> {
                         onTap: () => Get.dialog(
                           ConfirmationDialogWidget(
                             dialogBody:
-                                "${'settings.delectAccountWarming'.tr}\n\n${'settings.deleteAccountConfirm'.tr}",
+                                "${'delectAccountWarming'.tr}\n\n${'deleteAccountConfirmMsg'.tr}",
                             onPressed: () async => {
                               Get.dialog(
                                 const LoadingWidget(),
@@ -505,7 +504,7 @@ class SettingPage extends GetView<SettingController> {
                             centerWidget: CustomTextWidget(
                               marginLeft: AppSize.s12,
                               textAlign: TextAlign.center,
-                              text: 'settings.deleteAccount'.tr,
+                              text: 'deleteAccount'.tr,
                               color: ColorsManager.red,
                               fontSize: AppSize.s16,
                             ),
@@ -531,7 +530,7 @@ class SettingPage extends GetView<SettingController> {
                 ///===== Top of App Version Component =====//
                 CustomTextWidget(
                   textAlign: TextAlign.center,
-                  text: "${'settings.appVersion'.tr}: $textAppVersion",
+                  text: "${'appVersion'.tr}: $textAppVersion",
                 ),
                 //===== Bottom of App Version Component =====//
               ],
@@ -544,14 +543,14 @@ class SettingPage extends GetView<SettingController> {
             leftPadding: AppSize.s12,
             rightPadding: AppSize.s12,
             bottomPadding: AppSize.s20,
-            text: 'settings.signOutButton'.tr,
+            text: 'logout'.tr,
             fontSize: 20.0,
             buttonWidth: getWidth,
             onPressed: () {
               unFocusKeyBoard(context);
               Get.dialog(
                 ConfirmationDialogWidget(
-                  dialogBody: 'settings.logOutConfirm'.tr,
+                  dialogBody: 'logOutConfirmMsg'.tr,
                   onPressed: () => {
                     controller.homeController.signOut(),
                   },

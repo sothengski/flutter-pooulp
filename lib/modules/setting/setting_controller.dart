@@ -134,8 +134,8 @@ class SettingController extends GetxController {
       if (value.status == 200) {
         isVerifyEmailSent.value = true;
         customSnackbar(
-          msgTitle: 'auth.emailSent'.tr,
-          msgContent: 'settings.checkEmailMsg'.tr,
+          msgTitle: 'emailSent'.tr,
+          msgContent: 'emailVerifySentLabel'.tr,
           bgColor: ColorsManager.green,
         );
       } else {

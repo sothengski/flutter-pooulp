@@ -43,7 +43,7 @@ class SignUpPage extends StatelessWidget {
               Column(
                 children: [
                   CustomTextWidget(
-                    text: 'auth.registerAs'.tr,
+                    text: 'registerAccountAs'.tr, //'auth.registerAs'.tr,
                     color: ColorsManager.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 20,
@@ -51,7 +51,7 @@ class SignUpPage extends StatelessWidget {
                     marginBottom: AppSize.s32,
                   ),
                   CustomMaterialButton(
-                    text: 'auth.student'.tr,
+                    text: 'student'.tr, //'auth.student'.tr,
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
                     textColor: ColorsManager.primary,
@@ -69,7 +69,7 @@ class SignUpPage extends StatelessWidget {
                     height: 40.0,
                   ),
                   CustomMaterialButton(
-                    text: 'auth.enterprise'.tr,
+                    text: 'enterprise'.tr, // 'auth.enterprise'.tr,
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
                     textColor: ColorsManager.primary,

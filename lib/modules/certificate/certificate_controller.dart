@@ -99,12 +99,14 @@ class CertificateController extends GetxController {
       );
       Get.back();
       customSnackbar(
-        msgTitle: 'core.success'.tr,
+        msgTitle: 'success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'profile.certificateAddSuccessMsg'.tr
+            ? 'successfullyAdded'.tr //'profile.certificateAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'profile.certificateEditSuccessMsg'.tr
-                : 'profile.certificateDeleteSuccessMsg'.tr,
+                ? 'successfullyUpdated'
+                    .tr //'profile.certificateEditSuccessMsg'.tr
+                : 'successfullyDeleted'
+                    .tr, //'profile.certificateDeleteSuccessMsg'.tr,
         //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Certificate Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

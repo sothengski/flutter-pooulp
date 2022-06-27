@@ -106,8 +106,7 @@ class JobOfferModel {
   String? get jobOfferFullOfficeAddress =>
       "${addressStreet!.isNotEmpty ? '$addressStreet, ' : ''}${addressCity!.isNotEmpty ? '$addressCity, ' : ''}$addressCountry";
 
-  String? get workPlaceType =>
-      telecommuting == 1 ? 'offer.remote'.tr : 'offer.onSite'.tr;
+  String? get workPlaceType => telecommuting == 1 ? 'remote'.tr : 'onSite'.tr;
 
   String? get dateOfferStartFormat =>
       dateFormatSlashDDMMYYYY(date: dateOfferStart);

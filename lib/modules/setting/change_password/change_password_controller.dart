@@ -27,7 +27,7 @@ class ChangePasswordController extends GetxController {
       return Validator()
           .passwordValidatorWithMin6Chars(newPasswordConfirmationCtrl.text);
     } else {
-      return 'validator.passwordsDontMatch'.tr;
+      return 'passwordsDontMatch'.tr;
     }
   }
 
@@ -81,8 +81,8 @@ class ChangePasswordController extends GetxController {
             if (value.status == 200)
               {
                 customSnackbar(
-                  msgTitle: 'core.success'.tr,
-                  msgContent: 'settings.passwordUpdated'.tr,
+                  msgTitle: 'success'.tr,
+                  msgContent: 'passwordUpdated'.tr,
                   bgColor: ColorsManager.green,
                 ),
                 cleanUpFormData(),
@@ -90,8 +90,8 @@ class ChangePasswordController extends GetxController {
             else
               {
                 customSnackbar(
-                  msgTitle: 'core.failed'.tr,
-                  msgContent: 'settings.recheckPassword'.tr,
+                  msgTitle: 'failed'.tr,
+                  msgContent: 'recheckPassword'.tr,
                   bgColor: ColorsManager.red,
                 ),
               }

@@ -93,10 +93,12 @@ class AchievementController extends GetxController {
       customSnackbar(
         msgTitle: 'core.success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'profile.achievementAddSuccessMsg'.tr
+            ? 'successfullyAdded'.tr //'profile.achievementAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'profile.achievementEditSuccessMsg'.tr
-                : 'profile.achievementDeleteSuccessMsg'.tr,
+                ? 'successfullyUpdated'
+                    .tr //'profile.achievementEditSuccessMsg'.tr
+                : 'successfullyDeleted'
+                    .tr, //'profile.achievementDeleteSuccessMsg'.tr,
         //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Achievement Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

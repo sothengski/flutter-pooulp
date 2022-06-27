@@ -23,7 +23,7 @@ class SignInForm extends GetView<SignInController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomTextWidget(
-                text: 'auth.signInToUrAcc'.tr,
+                text: 'signInToYourAccount'.tr, //'auth.signInToUrAcc'.tr,
                 fontSize: 24.0,
                 fontWeight: FontWeight.w700,
                 color: ColorsManager.primary,
@@ -31,8 +31,8 @@ class SignInForm extends GetView<SignInController> {
               ),
               CustomTextInput(
                 controller: controller.emailCtrl,
-                inputTitle: 'auth.email'.tr,
-                hintText: 'auth.emailHint'.tr,
+                inputTitle: 'email'.tr, //'auth.email'.tr,
+                hintText: 'emailHint'.tr, //'auth.emailHint'.tr,
                 isFilled: true,
                 topPadding: AppSize.s12,
                 validator: Validator().emailValidator,
@@ -40,8 +40,8 @@ class SignInForm extends GetView<SignInController> {
               ),
               CustomTextInput(
                 controller: controller.passwordCtrl,
-                inputTitle: 'auth.password'.tr,
-                hintText: 'auth.passwordHint'.tr,
+                inputTitle: 'password'.tr, //'auth.password'.tr,
+                hintText: 'passwordHint'.tr, //'auth.passwordHint'.tr,
                 suffixIcon: IconButton(
                   icon: !controller.showPassword.value
                       ? const Icon(
@@ -76,7 +76,7 @@ class SignInForm extends GetView<SignInController> {
                 child: GestureDetector(
                   onTap: () => Get.toNamed(Routes.forgotPasswordRoute),
                   child: CustomTextWidget(
-                    text: 'auth.forgotPassword'.tr,
+                    text: 'forgotPassword'.tr, //'auth.forgotPassword'.tr,
                     color: ColorsManager.primary,
                     textDecoration: TextDecoration.underline,
                     marginTop: AppSize.s16,
@@ -105,7 +105,7 @@ class SignInForm extends GetView<SignInController> {
               Visibility(
                 visible: !controller.isSubmitBtnProcessing.value,
                 child: CustomMaterialButton(
-                  text: 'auth.loginButton'.tr,
+                  text: 'signIn'.tr, //'auth.loginButton'.tr,
                   fontSize: 20.0,
                   buttonWidth: getWidth,
                   onPressed: () {
@@ -125,7 +125,7 @@ class SignInForm extends GetView<SignInController> {
                   ),
                   const SizedBox(width: 10),
                   CustomTextWidget(
-                    text: 'auth.or'.tr,
+                    text: 'or'.tr, //'auth.or'.tr,
                     fontSize: 20.0,
                     marginTop: AppSize.s16,
                     marginBottom: AppSize.s16,

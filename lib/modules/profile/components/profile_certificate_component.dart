@@ -39,16 +39,18 @@ class ProfileCertificateComponent extends StatelessWidget {
                 text1Color: ColorsManager.grey850,
                 text1FontWeight: FontWeightManager.medium,
                 text1FontSize: AppSize.s16,
-                text2: 'profile.issuedDate'
-                    .trParams({'date': '${e.receivedDateFormat}'}),
+
+                text2: "${'received'.tr} ${e.receivedDateFormat}",
+                // text2: 'profile.issuedDate'
+                //     .trParams({'date': '${e.receivedDateFormat}'}),
                 // 'Issued: ${e.receivedDateFormat}',
                 text2Color: ColorsManager.grey800,
-                text3: e.expirationDate != null
-                    ? 'profile.expiredDate'
-                        .trParams({'date': '${e.receivedDateFormat}'})
-                    // 'Expired: ${e.expirationDateFormat}'
-                    : 'profile.noExpiredDate'.tr,
-                text3FontSize: AppSize.s14,
+                // text3: e.expirationDate != null
+                //     ? 'profile.expiredDate'
+                //         .trParams({'date': '${e.receivedDateFormat}'})
+                //     // 'Expired: ${e.expirationDateFormat}'
+                //     : 'profile.noExpiredDate'.tr,
+                // text3FontSize: AppSize.s14,
                 text4: e.description,
                 // bottomPadding: 8.0,
                 leftWidget: const CustomBoxWidget(

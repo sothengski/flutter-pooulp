@@ -66,7 +66,7 @@ class API {
       // 'https://pooulp_api.test'; //Local Valet BASEURL
       'http://api.dev-lamp-01.srv.pooulp.eu'; //Development BASEURL
   // 'http://uat-api.pooulp.eu'; //UAT BASEURL
-  // 'pooulp.eu'; //Production BASEURL
+  // 'https://api.pooulp.com'; //Production BASEURL
 
   /// API End Point Path URLs
   static final Map<Endpoint, String> paths = {

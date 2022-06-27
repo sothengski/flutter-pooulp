@@ -12,7 +12,7 @@ class OfferPage extends GetView<OfferController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'offer.myOffers'.tr,
+        title: 'myOffers'.tr,
       ),
       body: Column(
         children: [
@@ -35,7 +35,7 @@ class OfferPage extends GetView<OfferController> {
                       controller: controller,
                       offerList: controller.pendingOfferListRepsonse,
                       jobOfferType: OfferStrings.pendingState,
-                      noDataHeader: 'offer.noPendingMsg'.tr,
+                      noDataHeader: 'noResult'.tr,
                     )
                   : controller.isJobOfferStateList(
                       inputValue: OfferStrings.matchedState,
@@ -44,7 +44,7 @@ class OfferPage extends GetView<OfferController> {
                           controller: controller,
                           offerList: controller.matchedOfferListRepsonse,
                           jobOfferType: OfferStrings.matchedState,
-                          noDataHeader: 'offer.noMatchedMsg'.tr,
+                          noDataHeader: 'noResult'.tr,
                         )
                       : controller.isJobOfferStateList(
                           inputValue: OfferStrings.savedState,
@@ -53,13 +53,13 @@ class OfferPage extends GetView<OfferController> {
                               controller: controller,
                               offerList: controller.savedOfferListFilter,
                               jobOfferType: OfferStrings.savedState,
-                              noDataHeader: 'offer.noSavedMsg'.tr,
+                              noDataHeader: 'noResult'.tr,
                             )
                           : OfferListStateComponent(
                               controller: controller,
                               offerList: controller.rejectedOfferListRepsonse,
                               jobOfferType: OfferStrings.rejectedState,
-                              noDataHeader: 'offer.noRejectedMsg'.tr,
+                              noDataHeader: 'noResult'.tr,
                             ),
             ),
           )
@@ -84,7 +84,7 @@ class OfferListStateComponent extends StatelessWidget {
     this.offerList,
     this.jobOfferType,
     this.noDataHeader = 'No feed results found.',
-    this.noDataBody,
+    this.noDataBody = '',
     this.errorHeader,
     this.errorBody,
   }) : super(key: key);
@@ -106,8 +106,8 @@ class OfferListStateComponent extends StatelessWidget {
                   child: StateHandlerWidget(
                     imgPath: AssetsManager.emptyDataIcon,
                     headerText: noDataHeader,
-                    bodyText: noDataBody ?? 'offer.contentMsg'.tr,
-                    buttonText: 'core.tryAgain'.tr,
+                    bodyText: noDataBody, //?? 'offer.contentMsg'.tr,
+                    buttonText: 'tryAgain'.tr,
                     onPressedFunctionCall: controller.onRefresh,
                   ),
                 ),
@@ -120,9 +120,9 @@ class OfferListStateComponent extends StatelessWidget {
         onError: (error) => Center(
           child: StateHandlerWidget(
             imgPath: AssetsManager.emptyDataIcon,
-            headerText: errorHeader ?? 'core.sthWentWrong'.tr,
-            bodyText: errorBody ?? 'core.connectionFailedMsg'.tr,
-            buttonText: 'core.tryAgain'.tr,
+            headerText: errorHeader ?? 'sthWentWrong'.tr,
+            bodyText: errorBody ?? 'connectionFailedMsg'.tr,
+            buttonText: 'tryAgain'.tr,
             onPressedFunctionCall: controller.onRefresh,
           ),
         ),

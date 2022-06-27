@@ -217,10 +217,12 @@ class AvailabilityController extends GetxController {
       customSnackbar(
         msgTitle: 'core.success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'profile.availabilityAddSuccessMsg'.tr
+            ? 'successfullyAdded'.tr //'profile.availabilityAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'profile.availabilityEditSuccessMsg'.tr
-                : 'profile.availabilityDeleteSuccessMsg'.tr,
+                ? 'successfullyUpdated'
+                    .tr //'profile.availabilityEditSuccessMsg'.tr
+                : 'successfullyDeleted'
+                    .tr, //'profile.availabilityDeleteSuccessMsg'.tr,
         //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Availability Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

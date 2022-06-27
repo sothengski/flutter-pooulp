@@ -37,7 +37,7 @@ class ProfileSkillComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextWidget(
-                  text: 'profile.hardSkills'.tr,
+                  text: 'hardSkills'.tr,
                   marginBottom: 5.0,
                   fontWeight: FontWeight.w600,
                   color: ColorsManager.grey850,
@@ -93,7 +93,7 @@ class ProfileSkillComponent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextWidget(
-                    text: 'profile.softSkills'.tr,
+                    text: 'softSkills'.tr,
                     color: ColorsManager.grey850,
                     marginBottom: 5.0,
                     fontWeight: FontWeight.w600,

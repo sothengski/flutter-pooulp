@@ -12,7 +12,7 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
-        title: 'settings.changePasswordTitle'.tr,
+        title: 'changePassword'.tr,
       ),
 
       ///===== Top of body Component =====//
@@ -29,8 +29,8 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                   ///===== Top of Current Password Component =====//
                   CustomTextInput(
                     controller: controller.currentPasswordCtrl,
-                    inputTitle: 'settings.currentPassword'.tr,
-                    hintText: 'settings.currentPasswordHint'.tr,
+                    inputTitle: 'password'.tr,
+                    hintText: 'passwordHint'.tr,
                     suffixIcon: IconButton(
                       icon: !controller.showCurrentPassword.value
                           ? const Icon(
@@ -64,8 +64,8 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                   ///===== Top of New Password Component =====//
                   CustomTextInput(
                     controller: controller.newPasswordCtrl,
-                    inputTitle: 'settings.newPassword'.tr,
-                    hintText: 'settings.newPasswordHint'.tr,
+                    inputTitle: 'newPassword'.tr,
+                    hintText: 'newPasswordHint'.tr,
                     suffixIcon: IconButton(
                       icon: !controller.showNewPassword.value
                           ? const Icon(
@@ -99,8 +99,8 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                   ///===== Top of New Password Confirmation Component =====//
                   CustomTextInput(
                     controller: controller.newPasswordConfirmationCtrl,
-                    inputTitle: 'settings.confirmNewPassword'.tr,
-                    hintText: 'settings.confirmNewPasswordHint'.tr,
+                    inputTitle: 'newPasswordConfirmation'.tr,
+                    hintText: 'newPasswordConfirmHint'.tr,
                     suffixIcon: IconButton(
                       icon: !controller.showNewPasswordConfirmation.value
                           ? const Icon(
@@ -144,7 +144,7 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
           leftPadding: AppSize.s12,
           rightPadding: AppSize.s12,
           bottomPadding: AppSize.s20,
-          text: 'core.saveBtn'.tr,
+          text: 'save'.tr,
           childWidget: controller.isSubmitBtnProcessing.value == true
               ? const SizedBox(
                   height: 40,

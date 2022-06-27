@@ -47,9 +47,9 @@ class ForgotPasswordController extends GetxController {
           if (value.success == true) {
             isForgotPwdForm.value = false;
             customSnackbar(
-              msgTitle: 'auth.emailSent'.tr,
-              msgContent:
-                  'auth.sentToEmail'.trParams({'email': emailCtrl.text}),
+              msgTitle: 'emailSent'.tr, //'auth.emailSent'.tr,
+              msgContent: 'emailHasBeenSentToYourEmailAddress'.tr,
+              // 'auth.sentToEmail'.trParams({'email': emailCtrl.text}),
               bgColor: ColorsManager.green,
             );
           } else {

@@ -9,12 +9,14 @@ class Keys {
   static const String deleteOperation = 'Delete';
 }
 
-const String textAppVersion = "1.0.18 (18)";
+const String textAppVersion = "1.0.19 (19)";
+const String defaultDate = "2020-02-20T06:52:01.000000Z";
 
 class LocalStorage {
   static const credentialName = 'Pooulp';
   static const authTokenData = "authUserData";
   static const isLogged = 'isLogged';
+  static const appBasic = 'appBasic';
 }
 
 ///==================== Texts ====================
@@ -49,6 +51,12 @@ class LevelStrings {
 class SkillCategoryStrings {
   static const String softSkill = 'Soft Skill';
   static const String hardSkill = 'Hard Skill';
+}
+
+class GenderStrings {
+  static const String male = 'male';
+  static const String female = 'female';
+  static const String others = 'others';
 }
 
 class OfferStrings {

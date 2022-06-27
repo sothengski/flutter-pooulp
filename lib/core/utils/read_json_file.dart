@@ -5,12 +5,10 @@ import 'package:flutter/services.dart';
 import '../../data/data.dart';
 
 // Fetch content from the json file
-Future<List<dynamic>> readJson() async {
-  final String response =
-      await rootBundle.loadString('assets/data/beligium-cities.json');
+//'assets/data/beligium-cities.json'
+Future<JsonResponse> readJsonFromFile({String? path}) async {
+  final String response = await rootBundle.loadString(path!);
   final data = await json.decode(response);
-  return List<CityModel>.from(
-    (data as List).map((i) => CityModel.fromJson(i as Map<String, dynamic>))
-        as List,
-  );
+  final jsonResp = JsonResponse(data: data);
+  return jsonResp;
 }

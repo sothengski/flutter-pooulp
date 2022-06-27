@@ -112,7 +112,7 @@ class MessagingPage extends GetView<MessagingController> {
                                   )
                                 : Center(
                                     child: CustomTextWidget(
-                                      text: 'messaging.noMessages'.tr,
+                                      text: 'noMessages'.tr,
                                     ),
                                   ),
                           ),
@@ -148,7 +148,7 @@ class MessagingPage extends GetView<MessagingController> {
                                           const EdgeInsets.fromLTRB(8, 8, 8, 8),
                                       isCollapsed: true,
                                       isDense: true,
-                                      hintText: 'messaging.messagingHint'.tr,
+                                      hintText: 'messagingHint'.tr,
                                       border: InputBorder.none,
                                     ),
                                     maxLines: null,

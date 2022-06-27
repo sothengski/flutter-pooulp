@@ -11,8 +11,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
     return Scaffold(
       appBar: CustomAppBar(
         title: controller.title == AppStrings.addText
-            ? 'profile.addEdu'.tr
-            : 'profile.editEdu'.tr,
+            ? 'addEducation'.tr
+            : 'editEducation'.tr,
         // '${controller.title} Education',
         actions: [
           if (controller.title != Keys.editOperation)
@@ -48,7 +48,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
               children: [
                 ///===== Top of School Component =====//
                 ContainerDialogWidget(
-                  inputTitle: 'profile.school'.tr,
+                  inputTitle: 'school'.tr,
                   validatorFunction: (_) => Validator().notEmptyValidator(
                     controller.selectedSchool.value.name ?? '',
                   ),
@@ -92,7 +92,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     () => controller.selectedSchool.value.id == null
                         ? RowContentInputWidget(
                             centerWidget: CustomTextWidget(
-                              text: 'profile.schoolHint'.tr,
+                              text: 'schoolHint'.tr,
                               color: ColorsManager.grey400,
                               fontWeight: FontWeight.w400,
                               fontSize: AppSize.s16,
@@ -121,8 +121,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.fieldOfStudyTextCtrl,
-                  inputTitle: 'profile.major'.tr,
-                  hintText: 'profile.majorHint'.tr,
+                  inputTitle: 'major'.tr,
+                  hintText: 'majorHint'.tr,
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
@@ -130,7 +130,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
 
                 ///===== Top of Fields Component =====//
                 ContainerDialogWidget(
-                  inputTitle: 'offer.fields'.tr,
+                  inputTitle: 'fields'.tr,
                   fontSizeTitle: AppSize.s16,
                   // validatorFunction: (_) => Validator().notEmptyValidator(
                   //   controller.selectedLanguage.value.label ?? '',
@@ -154,7 +154,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     child: Obx(
                       () => controller.fieldListForSelect.isNotEmpty
                           ? FieldListMultipleSelector(
-                              inputHintText: 'core.search'.tr,
+                              inputHintText: 'search'.tr,
                               dataListforSelected:
                                   controller.fieldListForSelect,
                               selectedItems: controller.fieldListSelected,
@@ -170,7 +170,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                   ),
                   containerWidget: RowContentInputWidget(
                     centerWidget: CustomTextWidget(
-                      text: 'offer.fieldsHint'.tr,
+                      text: 'fieldsHint'.tr,
                       color: ColorsManager.grey400,
                       fontWeight: FontWeight.w400,
                       fontSize: AppSize.s16,
@@ -206,8 +206,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 CustomTextInput(
                   topPadding: AppSize.s16,
                   controller: controller.degreeTextCtrl,
-                  inputTitle: 'profile.degree'.tr,
-                  hintText: 'profile.degreeHint'.tr,
+                  inputTitle: 'degree'.tr,
+                  hintText: 'degreeHint'.tr,
                   isFilled: true,
                   validator: Validator().notEmptyValidator,
                 ),
@@ -220,7 +220,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'profile.startFrom'.tr,
+                        inputTitle: 'startFrom'.tr,
                         inputTitleMarginTop: AppSize.s16,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedStartedDateString.value,
@@ -240,7 +240,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                           () => controller.selectedStartedDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'profile.startFrom'.tr,
+                                    text: 'startFrom'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
@@ -280,8 +280,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle:
-                            "${'profile.endDate'.tr}(${'profile.expectedDate'.tr})",
+                        inputTitle: "${'endDate'.tr}(${'expectedDate'.tr})",
                         // 'End Date(Or Expected)',
                         inputTitleMarginTop: AppSize.s16,
                         dialogType: DialogType.dateWithoutDayPickerDialog,
@@ -299,7 +298,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                           () => controller.selectedEndDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'profile.endDate'.tr,
+                                    text: 'endDate'.tr,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
@@ -340,7 +339,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     verticalPadding: AppSize.s16,
                     horizontalPadding: AppSize.s0,
                     isClickingValue: controller.isCheckGraduated.value,
-                    text: 'profile.currentlyStudying'.tr,
+                    text: 'iAmCurrentlyStudying'.tr,
                     isLeftSideText: false,
                     onPressed: () {
                       controller.isCheckGraduated.value = switchingBooleanValue(
@@ -354,8 +353,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 ///===== Top of Description Component =====//
                 CustomTextInput(
                   controller: controller.descriptionTextCtrl,
-                  inputTitle: 'offer.description'.tr,
-                  hintText: "${'offer.description'.tr}...",
+                  inputTitle: 'description'.tr,
+                  hintText: "${'description'.tr}...",
                   isFilled: true,
                   topContentPadding: AppSize.s12,
                   bottomContentPadding: AppSize.s12,
@@ -398,7 +397,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 leftPadding: AppSize.s12,
                 rightPadding: AppSize.s12,
                 bottomPadding: AppSize.s20,
-                text: 'core.saveBtn'.tr,
+                text: 'save'.tr,
                 fontSize: AppSize.s20,
                 buttonWidth: getWidth,
                 onPressed: () {

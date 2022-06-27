@@ -11,6 +11,10 @@ import 'routes/routes.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init(LocalStorage.credentialName);
+  // await getAllTranslationLangsProvider(lang: 'en');
+  // await getAllTranslationLangsProvider(lang: 'fr');
+  await AppBasicServices().getLangsFromFile(lang: 'en');
+  await AppBasicServices().getLangsFromFile(lang: 'fr');
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,

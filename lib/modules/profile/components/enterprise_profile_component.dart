@@ -16,7 +16,7 @@ class EnterpriseProfileComponent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         ///===== Profile Header Widget =====//
-        ProfileHeader(
+        ProfileHeaderComponent(
           userName: controller.userInfoRepsonse.value.enterprise!.name,
           // userRole: controller.userInfoRepsonse.value.enterprise!.enterpriseID,
           // numberStarRate: 0.0,
@@ -25,13 +25,13 @@ class EnterpriseProfileComponent extends StatelessWidget {
         //===== Profile Header Widget =====//
 
         ///===== Personal Information Widget =====//
-        ContactInformationComponent(
-          headerTitle: 'Enterprise Information',
-          email: controller.userInfoRepsonse.value.enterprise!.email,
-          phone: controller.userInfoRepsonse.value.enterprise!.fullPhone1Format,
-          videoPreentationLink:
-              controller.userInfoRepsonse.value.enterprise!.description,
-        ),
+        // ContactInformationComponent(
+        //   headerTitle: 'Enterprise Information',
+        //   email: controller.userInfoRepsonse.value.enterprise!.email,
+        //   phone: controller.userInfoRepsonse.value.enterprise!.fullPhone1Format,
+        //   videoPreentationLink:
+        //       controller.userInfoRepsonse.value.enterprise!.description,
+        // ),
         //===== Personal Information Widget =====//
       ],
     );

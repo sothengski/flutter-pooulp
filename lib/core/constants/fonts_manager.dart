@@ -31,3 +31,16 @@ class FontSize {
   static const double s30 = 30.0;
   static const double s32 = 32.0;
 }
+
+///==================== Icons ====================
+
+class IconsManager {
+  static const IconData deleteForeverOutlined = Icons.delete_forever_outlined;
+  static const IconData close = Icons.close;
+  static const IconData check = Icons.check;
+  static const IconData dateRangeOutlined = Icons.date_range_outlined;
+  static const IconData schedule = Icons.schedule;
+  static const IconData arrowDropDown = Icons.arrow_drop_down;
+
+  static const String montserrat = "Montserrat";
+}

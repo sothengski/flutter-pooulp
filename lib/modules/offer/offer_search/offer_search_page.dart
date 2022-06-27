@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
-import '../../../core/core.dart';
 import '../../modules.dart';
 
 class OfferSearchPage extends SearchDelegate {
   final feedController = Get.find<OfferFeedController>();
 
   @override
-  String get searchFieldLabel => OfferStrings.searchByTitle;
+  // String get searchFieldLabel => OfferStrings.searchByTitle;
+  String get searchFieldLabel => 'searchJobTitle'.tr;
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -41,7 +41,7 @@ class OfferSearchPage extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    SchedulerBinding.instance!.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       assignKeywordtoVariable();
       feedController.getFeedsDataState();
       Get.back();
@@ -85,7 +85,8 @@ class OfferSearchPage extends SearchDelegate {
   void assignKeywordtoVariable({bool? isAssignToQuery = false}) {
     isAssignToQuery == true
         ? query = feedController.keywordToBeSearch.value.trim()
-        : feedController.keywordToBeSearch.value = query.trim();
+        : feedController.syncKeyWord(newKeyword: query.trim());
+    // : feedController.keywordToBeSearch.value = query.trim();
     // debugPrint(
     //   'assignKeywordtoVariable keywordForSearch:: ${feedController.keywordForSearch.value}',
     // );

@@ -8,16 +8,14 @@ class LanguageController extends GetxController {
   final language = "".obs;
   final storage = Get.find<StorageServices>();
 
-  // final List<String> languageOptions = [
-  //   'English',
-  //   'ភាសាខ្មែរ',
-  // ];
   final String defaultLanguage = 'en';
 
   final List<MenuOptionsModel> languageOptions = [
-    MenuOptionsModel(key: "en", value: "English"), //English
-    MenuOptionsModel(key: "km", value: "ភាសាខ្មែរ"), //Khmer
-    MenuOptionsModel(key: "zh", value: "简体中文"), //Chinese
+    MenuOptionsModel(key: "en", value: "English", flagPath: 'GB'), //English
+    MenuOptionsModel(key: "fr", value: "Français", flagPath: 'FR'), //Khmer
+    // MenuOptionsModel(key: "nl", value: "Nederlands", flagPath: 'NL'), //Chinese
+    // MenuOptionsModel(key: "km", value: "ភាសាខ្មែរ", flagPath: 'KH'), //Khmer
+    // MenuOptionsModel(key: "zh", value: "简体中文", flagPath: 'CN'), //Chinese
   ];
 
   // RxString selected = "English".obs;
@@ -38,8 +36,8 @@ class LanguageController extends GetxController {
 
   static final locales = [
     const Locale('en', 'US'),
-    const Locale('km', 'KH'),
-    const Locale('zh', 'ZH'),
+    const Locale('nl', 'NL'),
+    const Locale('fr', 'FR'),
   ];
 
   // gets the language locale app is set to
@@ -51,7 +49,7 @@ class LanguageController extends GetxController {
       //set the stored string country code to the locale
       return currentLanguageStore.value == 'en'
           ? locales[0]
-          : currentLanguageStore.value == 'km'
+          : currentLanguageStore.value == 'nl'
               ? locales[1]
               : locales[2];
     }

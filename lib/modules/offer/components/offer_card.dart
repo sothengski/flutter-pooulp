@@ -80,8 +80,15 @@ class OfferCard extends StatelessWidget {
                     ),
                     child: CustomBoxWidget(
                       size: 40,
-                      insideObj: CachedNetworkImgWidget(
+                      isCircle: true,
+                      topPadding: 2.0,
+                      bottomPadding: 2.0,
+                      leftPadding: 2.0,
+                      rightPadding: 2.0,
+                      child: CachedNetworkImgWidget(
                         imgUrl: '${jobOfferItem!.enterprise!.logoUrl}',
+                        borderRadius: 20,
+                        defaultImg: AssetsManager.logoEnterpriseDefault,
                       ),
                     ),
                   ),
@@ -153,7 +160,11 @@ class OfferCard extends StatelessWidget {
                                 CustomTextWidget(
                                   marginLeft: AppSize.s4,
                                   text:
-                                      'Starting Date: ${jobOfferItem!.dateJobStartFormat}',
+                                      "${'startFrom'.tr}: ${jobOfferItem!.dateJobStartFormat}",
+                                  // text: 'offer.startFrom'.trParams({
+                                  //   'date':
+                                  //       '${jobOfferItem!.dateJobStartFormat}'
+                                  // }),
                                   fontSize: AppSize.s12,
                                   fontWeight: FontWeightManager.regular,
                                   maxLine: 3,

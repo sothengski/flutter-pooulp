@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 import '../../../core/core.dart';
 import '../../data.dart';
 
@@ -16,6 +18,9 @@ class JobOfferModel {
   final int? telecommuting;
   final int? shifting;
   final int? numberOfWorkingHourPerWeek;
+  final String? remunerationMax;
+  final String? remunerationMin;
+  final String? currencySymbol;
   final String? addressStreet;
   final String? addressCity;
   final String? addressZip;
@@ -26,6 +31,7 @@ class JobOfferModel {
   final List<FieldModel>? fields;
   final List<FieldModel>? spokenLanguages;
   final List<SkillModel>? skills;
+  final List<FieldModel>? availabilities;
   final ProfileModel? enterprise;
   final JobOfferStateModel? jobOfferStateModel;
   bool? applyState;
@@ -50,6 +56,9 @@ class JobOfferModel {
     this.telecommuting = 2,
     this.shifting,
     this.numberOfWorkingHourPerWeek,
+    this.remunerationMax,
+    this.remunerationMin,
+    this.currencySymbol,
     this.addressStreet,
     this.addressCity,
     this.addressZip,
@@ -60,6 +69,7 @@ class JobOfferModel {
     this.fields,
     this.spokenLanguages,
     this.skills,
+    this.availabilities,
     this.enterprise,
     this.jobOfferStateModel,
     this.applyState = false,
@@ -74,23 +84,29 @@ class JobOfferModel {
 
   String? get numberOfWorkPerWeek => numberOfWorkingHourPerWeek == null
       ? 'N/A'
-      : '$numberOfWorkingHourPerWeek hrs/week';
+      : "$numberOfWorkingHourPerWeek ${'offer.hrsWeek'.tr}";
+
+  String? get remunerationMaxMin => remunerationMax == null &&
+          remunerationMin == null
+      ? 'N/A'
+      : "${remunerationMin == null ? '' : '$remunerationMin${currencySymbol ?? ''}'} - ${remunerationMax == null ? '' : '$remunerationMax${currencySymbol ?? ''}'}/${'offer.hour'.tr}";
 
   String? get companyNameAndLocation =>
       '${enterprise!.name} ($companyLocation)';
 
   String? get companyLocation =>
-      '${enterprise!.addressCity}, ${enterprise!.addressCountry}';
+      "${enterprise!.addressCity!.isNotEmpty ? '${enterprise!.addressCity}, ' : ''}${enterprise!.addressCountry}";
 
   String? get companyNameAndJobOfferOffice =>
-      '${enterprise!.name} ($jobOfferOffice)';
+      "${enterprise!.name} ${jobOfferOffice!.isEmpty ? '' : '($jobOfferOffice)'}";
 
-  String? get jobOfferOffice => '$addressCity, $addressCountry';
+  String? get jobOfferOffice =>
+      "${addressCity!.isNotEmpty ? '$addressCity, ' : ''}$addressCountry";
 
   String? get jobOfferFullOfficeAddress =>
-      '$addressStreet, $addressCity, $addressCountry';
+      "${addressStreet!.isNotEmpty ? '$addressStreet, ' : ''}${addressCity!.isNotEmpty ? '$addressCity, ' : ''}$addressCountry";
 
-  String? get workPlaceType => telecommuting == 1 ? 'Remote' : 'On-Site';
+  String? get workPlaceType => telecommuting == 1 ? 'remote'.tr : 'onSite'.tr;
 
   String? get dateOfferStartFormat =>
       dateFormatSlashDDMMYYYY(date: dateOfferStart);
@@ -136,8 +152,10 @@ class JobOfferModel {
             : null,
         telecommuting: json['telecommuting'] as int?,
         shifting: json['shifting'] as int?,
-        numberOfWorkingHourPerWeek:
-            json['number_of_working_hour_per_week'] as int?,
+        numberOfWorkingHourPerWeek: json['number_of_working_hour'] as int?,
+        remunerationMax: json['remuneration_max'] as String?,
+        remunerationMin: json['remuneration_min'] as String?,
+        currencySymbol: json['currency_symbol'] as String?,
         addressStreet: json['address_street'] as String?,
         addressCity: json['address_city'] as String?,
         addressZip: json['address_zip'] as String?,
@@ -181,6 +199,16 @@ class JobOfferModel {
                   ),
                 )
                 .toList(),
+        availabilities:
+            json['availabilities'] == null || json['availabilities'] == []
+                ? []
+                : (json['availabilities'] as List)
+                    .map(
+                      (i) => FieldModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList(),
         enterprise: json['enterprise'] == null
             ? null
             : ProfileModel.fromJson(
@@ -205,7 +233,7 @@ class JobOfferModel {
         'date_job_end': dateJobEnd?.toIso8601String(),
         'telecommuting': telecommuting,
         'shifting': shifting,
-        'number_of_working_hour_per_week': numberOfWorkingHourPerWeek,
+        'number_of_working_hour': numberOfWorkingHourPerWeek,
         'address_street': addressStreet,
         'address_city': addressCity,
         'address_zip': addressZip,
@@ -224,6 +252,9 @@ class JobOfferModel {
         'spoken_languages': spokenLanguages != null || spokenLanguages != []
             ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
             : null,
+        'availabilities': availabilities != null || availabilities != []
+            ? List<dynamic>.from(availabilities!.map((x) => x.toJson()))
+            : null,
         'enterprise': enterprise?.toJson(),
         'job_offer_state': jobOfferStateModel?.toJson(),
       }..removeWhere((_, v) => v == null);
@@ -231,12 +262,12 @@ class JobOfferModel {
   Map<String, dynamic> toSearchJson() => {
         'keywords': title, //'title': title,
         'telecommuting': telecommuting,
-        'address_street': addressStreet,
-        'address_city': addressCity,
-        'address_zip': addressZip,
-        'address_country': addressCountry,
-        'address_latitude': addressLatitude,
-        'address_longitude': addressLongitude,
+        'street': addressStreet ?? '',
+        'city': addressCity ?? '',
+        'zipcode': addressZip ?? '',
+        'country': addressCountry ?? '',
+        'latitude': addressLatitude ?? '',
+        'longitude': addressLongitude ?? '',
         'types': types == null || types == []
             ? []
             : List<dynamic>.from(
@@ -261,7 +292,7 @@ class JobOfferModel {
                     ),
               ),
         'languages': spokenLanguages == null || spokenLanguages == []
-            ? null
+            ? []
             : List<dynamic>.from(
                 spokenLanguages!
                     .skipWhile(
@@ -271,9 +302,20 @@ class JobOfferModel {
                       (e) => e.id,
                     ),
               ),
-        'location': location,
+        'availabilities': availabilities == null || availabilities == []
+            ? []
+            : List<dynamic>.from(
+                availabilities!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'location': location ?? '',
         'is_range_search': isRangeSearch,
-        'range': range,
+        'range': range! * 1000,
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -291,6 +333,9 @@ class JobOfferModel {
       telecommuting: $telecommuting,
       shifting: $shifting,
       numberOfWorkingHourPerWeek: $numberOfWorkingHourPerWeek,
+      remunerationMax: $remunerationMax,
+      remunerationMin: $remunerationMin,
+      currencySymbol: $currencySymbol,
       addressStreet: $addressStreet,
       addressCity: $addressCity,
       addressZip: $addressZip,
@@ -301,6 +346,7 @@ class JobOfferModel {
       fields: $fields,
       spokenLanguages: $spokenLanguages,
       skills: $skills,
+      availabilities: $availabilities,
       enterprise: $enterprise,
       jobOfferStateModel: $jobOfferStateModel,
       'location': $location,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/core.dart';
-import '../../data/data.dart';
 import '../../routes/routes.dart';
 import 'profile.dart';
 
@@ -64,131 +63,37 @@ class ProfilePage extends GetView<ProfileController> {
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            //update the Network State
-                            // GetBuilder<GetXNetworkManager>(builder: (builder)=>Text((_networkManager.connectionType == 0 )? 'No Internet' : (_networkManager.connectionType == 1) ? 'You are Connected to Wifi' : 'You are Connected to Mobile Internet',style: TextStyle(fontSize: 30),)),
-
                             ///===== Profile Header Component =====//
-                            ProfileHeader(
-                              userName: controller
-                                  .userInfoRepsonse.value.profile!.fullName,
+                            ProfileHeaderComponent(
+                              userName:
+                                  controller.userProfileInfo.value.fullName,
                               // userRole: controller.userInfoRepsonse.value.profile!.accountType,
                               controller: controller,
+                              profileImg:
+                                  controller.userProfileInfo.value.pictureUrl,
                             ),
                             //===== Profile Header Component =====//
 
                             ///===== Profile Completion Component =====//
-                            CustomContainerWidget(
-                              leftMargin: AppSize.s16,
-                              rightMargin: AppSize.s16,
-                              topMargin: AppSize.s12,
-                              // bottomMargin: AppSize.s12,
-                              leftTitle: 'Profile Progress',
-                              rightWidget: const CustomTextWidget(
-                                text: '0%',
-                                fontWeight: FontWeightManager.medium,
-                              ),
-                              titleFontSize: AppSize.s16,
-                              child: Container(),
+                            ProfileCompletionComponent(
+                              title: 'profileCompletion'.tr,
+                              completionPercentage: controller
+                                  .studentInfoRepsonse
+                                  .value
+                                  .calculatingProfileCompleteness,
                             ),
+                            //===== Profile Completion Component =====//
 
                             ///===== Personal Information Component =====//
-                            // ContactInformationComponent(
-                            //   headerTitle: 'Personal Information',
-                            //   email: controller.userInfoRepsonse.value.email,
-                            //   phone: controller.userInfoRepsonse.value.profile!
-                            //       .fullPhone1Format,
-                            //   videoPreentationLink: controller
-                            //       .userInfoRepsonse.value.profile!.description,
-                            // ),
-
-                            CustomContainerWidget(
-                              leftMargin: AppSize.s16,
-                              rightMargin: AppSize.s16,
-                              topMargin: AppSize.s12,
-                              bottomMargin: AppSize.s12,
-                              leftTitle: 'Personal Information'.toUpperCase(),
-                              titleFontSize: AppSize.s16,
-                              rightWidget: CustomIconButtonWidget(
-                                iconData: Icons.edit_outlined,
-                                padding: 0.0,
-                                isConstraints: true,
-                                onClick: () => {
-                                  customSnackbar(
-                                    msgTitle:
-                                        'This Page is under construction!',
-                                    msgContent:
-                                        'This Page is only view.\n Data will not save.',
-                                  ),
-                                  Get.toNamed(Routes.editUserInfoRoute),
-                                },
-                              ),
-                              child: Column(
-                                children: [
-                                  if (controller.userInfoRepsonse.value.profile!
-                                          .description ==
-                                      '')
-                                    Container()
-                                  else
-                                    CustomTextWidget(
-                                      text:
-                                          '${controller.userInfoRepsonse.value.profile!.description}',
-                                      maxLine: 3,
-                                      marginTop: AppSize.s4,
-                                      marginLeft: AppSize.s16,
-                                      marginRight: AppSize.s16,
-                                      marginBottom: AppSize.s4,
-                                    ),
-                                  CustomListTileWidget(
-                                    text1: 'Email',
-                                    text2:
-                                        controller.userInfoRepsonse.value.email,
-                                    // isLauching: true,
-                                    text2Color: ColorsManager.blue,
-                                    leftWidget: const CustomBoxWidget(
-                                      insideObj: Icon(
-                                        Icons.email_outlined,
-                                        color: ColorsManager.grey,
-                                        size: AppSize.s24,
-                                      ),
-                                      backgroundColor: ColorsManager.white,
-                                    ),
-                                  ),
-                                  CustomListTileWidget(
-                                    text1: 'Phone',
-                                    text2: controller.userInfoRepsonse.value
-                                        .profile!.fullPhone1Format,
-                                    // isLauching: true,
-                                    text2Color: ColorsManager.blue,
-                                    leftWidget: const CustomBoxWidget(
-                                      insideObj: Icon(
-                                        Icons.phone_outlined,
-                                        color: ColorsManager.grey,
-                                        size: AppSize.s24,
-                                      ),
-                                      backgroundColor: ColorsManager.white,
-                                    ),
-                                  ),
-                                  CustomListTileWidget(
-                                    text1: 'Video presentation link',
-                                    text2: controller
-                                        .studentInfoRepsonse.value.youtubeLink,
-                                    // isLauching: true,
-                                    text2Color: ColorsManager.blue,
-                                    bottomPadding: 8.0,
-                                    isDivider: false,
-                                    leftWidget: const CustomBoxWidget(
-                                      insideObj: Icon(
-                                        Icons.video_library_outlined,
-                                        color: ColorsManager.grey,
-                                        size: AppSize.s24,
-                                      ),
-                                      backgroundColor: ColorsManager.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            PersonalInformationComponent(
+                              routeNameForEdit: Routes.editUserInfoRoute,
+                              profileModel: controller.userProfileInfo.value,
+                              userModel: controller.userInfoRepsonse.value,
+                              studentProfileModel:
+                                  controller.studentInfoRepsonse.value,
                             ),
                             //===== Personal Information Component =====//
+
                             if (controller
                                     .homeController.userToken!.accountType !=
                                 'student')
@@ -202,597 +107,119 @@ class ProfilePage extends GetView<ProfileController> {
                                     ? Wrap(
                                         children: [
                                           ///===== Education Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Education'.toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .educations!
-                                                  .map(
-                                                    (e) => CustomListTileWidget(
-                                                      text1: e.school!.name,
-                                                      text1Color:
-                                                          ColorsManager.grey850,
-                                                      text1FontWeight:
-                                                          FontWeightManager
-                                                              .medium,
-                                                      text1FontSize:
-                                                          AppSize.s16,
-                                                      text2: e.degree,
-                                                      text2Color:
-                                                          ColorsManager.grey800,
-                                                      text3:
-                                                          '${e.attendedFromTo} at ${e.schoolCityAndCountry}',
-                                                      // bottomPadding: 8.0,
-                                                      leftWidget:
-                                                          const CustomBoxWidget(
-                                                        size: 40,
-                                                      ),
-                                                      // leftWidget:
-                                                      //     const CustomBoxWidget(
-                                                      //   insideObj: Icon(
-                                                      //     Icons.school,
-                                                      //     color: ColorsManager
-                                                      //         .primary75,
-                                                      //     size: AppSize.s20,
-                                                      //   ),
-                                                      // ),
-                                                      rightWidget:
-                                                          CustomIconButtonWidget(
-                                                        iconData:
-                                                            Icons.edit_outlined,
-                                                        padding: 0.0,
-                                                        iconSize: 20.0,
-                                                        isConstraints: true,
-                                                        onClick: () => {
-                                                          customSnackbar(
-                                                            msgTitle:
-                                                                'This Page is under construction!',
-                                                            msgContent:
-                                                                'This Page is only view.\n Data will not save.',
-                                                          ),
-                                                        },
-                                                      ),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            ),
+                                          ProfileEduComponent(
+                                            title: 'educations'.tr,
+                                            addOrEditEduRoute:
+                                                Routes.addOrEditEducationRoute,
+                                            eduList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .educations,
                                           ),
                                           //===== Education Component =====//
 
                                           ///===== Professional Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Professional Experiences'
-                                                    .toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .experiences!
-                                                  .map(
-                                                    (e) => e.type ==
-                                                            'professional'
-                                                        ? CustomListTileWidget(
-                                                            text1: e.name,
-                                                            text1Color:
-                                                                ColorsManager
-                                                                    .grey850,
-                                                            text1FontWeight:
-                                                                FontWeightManager
-                                                                    .medium,
-                                                            text1FontSize:
-                                                                AppSize.s16,
-                                                            text2: e.company,
-                                                            text2Color:
-                                                                ColorsManager
-                                                                    .grey800,
-                                                            text3:
-                                                                '${e.attendedFromTo} at ${e.companyCityAndCountry}',
-                                                            // bottomPadding: 8.0,
-                                                            leftWidget:
-                                                                const CustomBoxWidget(
-                                                              size: 40,
-                                                              insideObj: Icon(
-                                                                Icons.work,
-                                                                color: ColorsManager
-                                                                    .primary75,
-                                                                size:
-                                                                    AppSize.s20,
-                                                              ),
-                                                            ),
-                                                            rightWidget:
-                                                                CustomIconButtonWidget(
-                                                              iconData: Icons
-                                                                  .edit_outlined,
-                                                              padding: 0.0,
-                                                              iconSize: 20.0,
-                                                              isConstraints:
-                                                                  true,
-                                                              onClick: () => {
-                                                                customSnackbar(
-                                                                  msgTitle:
-                                                                      'This Page is under construction!',
-                                                                  msgContent:
-                                                                      'This Page is only view.\n Data will not save.',
-                                                                ),
-                                                              },
-                                                            ),
-                                                          )
-                                                        : Container(),
-                                                  )
-                                                  .toList(),
-                                            ),
+                                          ProfileExpComponent(
+                                            title: 'professionalExperiences'.tr,
+                                            addOrEditExpRoute:
+                                                Routes.addOrEditExperienceRoute,
+                                            expTypeKey:
+                                                AppStrings.professionalKey,
+                                            expList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .experiences,
                                           ),
                                           //===== Professional Component =====//
 
                                           ///===== Personal Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle: 'Personal Experiences'
-                                                .toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .experiences!
-                                                  .map(
-                                                    (e) => e.type == 'personal'
-                                                        ? CustomListTileWidget(
-                                                            text1: e.name,
-                                                            text1Color:
-                                                                ColorsManager
-                                                                    .grey850,
-                                                            text1FontWeight:
-                                                                FontWeightManager
-                                                                    .medium,
-                                                            text1FontSize:
-                                                                AppSize.s16,
-                                                            text2: e.company,
-                                                            text2Color:
-                                                                ColorsManager
-                                                                    .grey800,
-                                                            text3:
-                                                                '${e.attendedFromTo} at ${e.companyCityAndCountry}',
-                                                            // bottomPadding: 8.0,
-                                                            leftWidget:
-                                                                const CustomBoxWidget(
-                                                              size: 40,
-                                                              insideObj: Icon(
-                                                                Icons.work,
-                                                                color: ColorsManager
-                                                                    .primary75,
-                                                                size:
-                                                                    AppSize.s20,
-                                                              ),
-                                                            ),
-                                                            rightWidget:
-                                                                CustomIconButtonWidget(
-                                                              iconData: Icons
-                                                                  .edit_outlined,
-                                                              padding: 0.0,
-                                                              iconSize: 20.0,
-                                                              isConstraints:
-                                                                  true,
-                                                              onClick: () => {
-                                                                customSnackbar(
-                                                                  msgTitle:
-                                                                      'This Page is under construction!',
-                                                                  msgContent:
-                                                                      'This Page is only view.\n Data will not save.',
-                                                                ),
-                                                              },
-                                                            ),
-                                                          )
-                                                        : Container(),
-                                                  )
-                                                  .toList(),
-                                            ),
+                                          ProfileExpComponent(
+                                            title: 'personalExperiences'.tr,
+                                            addOrEditExpRoute:
+                                                Routes.addOrEditExperienceRoute,
+                                            expTypeKey: AppStrings.personalKey,
+                                            expList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .experiences,
                                           ),
                                           //===== Personal Component =====//
 
                                           ///===== Skills Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle: 'Skills'.toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.edit_outlined,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                // CustomList(
-                                                //   title: 'Soft Skill',
-                                                //   subtitleList:
-                                                //       controller.mockSkillList,
-                                                // ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                    24.0,
-                                                    0.0,
-                                                    8.0,
-                                                    8.0,
-                                                  ),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const CustomTextWidget(
-                                                        text: 'Soft Skill',
-                                                        marginBottom: 5.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: controller
-                                                            .studentInfoRepsonse
-                                                            .value
-                                                            .skills!
-                                                            .map(
-                                                              (e) => e.type ==
-                                                                      Type.softSkill
-                                                                  ? CustomTextWidget(
-                                                                      text:
-                                                                          '• ${e.label}',
-                                                                      marginBottom:
-                                                                          5.0,
-                                                                    )
-                                                                  : Container(),
-                                                            )
-                                                            .toList(),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                    24.0,
-                                                    0.0,
-                                                    8.0,
-                                                    8.0,
-                                                  ),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const CustomTextWidget(
-                                                        text: 'Hard Skill',
-                                                        marginBottom: 5.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: controller
-                                                            .studentInfoRepsonse
-                                                            .value
-                                                            .skills!
-                                                            .map(
-                                                              (e) => e.type ==
-                                                                      Type.hardSkill
-                                                                  ? CustomTextWidget(
-                                                                      text:
-                                                                          '${e.displayLabelAndCategory}',
-                                                                      marginBottom:
-                                                                          5.0,
-                                                                    )
-                                                                  : Container(),
-                                                            )
-                                                            .toList(),
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            ),
+                                          ProfileSkillComponent(
+                                            title: 'skills'.tr,
+                                            addOrEditSkillRoute:
+                                                Routes.addOrEditSkillRoute,
+                                            skillList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .skills,
                                           ),
                                           //===== Skills Component =====//
 
                                           ///===== Languages Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Languages'.toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.edit_outlined,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
-                                                ),
-                                              },
-                                            ),
-                                            // child: CustomList(
-                                            //   subtitleList: controller.languageList,
-                                            // ),
-                                            child: controller
-                                                        .studentInfoRepsonse
-                                                        .value
-                                                        .spokenLanguages ==
-                                                    []
-                                                ? Container()
-                                                : Container(
-                                                    padding: const EdgeInsets
-                                                        .fromLTRB(
-                                                      24.0,
-                                                      0.0,
-                                                      8.0,
-                                                      0.0,
-                                                    ),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: controller
-                                                          .studentInfoRepsonse
-                                                          .value
-                                                          .spokenLanguages!
-                                                          .map(
-                                                            (e) =>
-                                                                CustomTextWidget(
-                                                              text:
-                                                                  '${e.displayLabelAndLevel}',
-                                                              marginBottom: 5.0,
-                                                            ),
-                                                          )
-                                                          .toList(),
-                                                    ),
-                                                  ),
+                                          ProfileLanguageComponent(
+                                            title: 'languages'.tr,
+                                            addOrEditLangRoute: Routes
+                                                .addOrEditLanguageUsageRoute,
+                                            spokenLanguageList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .spokenLanguages,
                                           ),
                                           //===== Languages Component =====//
 
                                           ///===== Achievement Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Achievement'.toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .achievements!
-                                                  .map(
-                                                    (e) => CustomListTileWidget(
-                                                      text1: e.name,
-                                                      text1Color:
-                                                          ColorsManager.grey850,
-                                                      text1FontWeight:
-                                                          FontWeightManager
-                                                              .medium,
-                                                      text1FontSize:
-                                                          AppSize.s16,
-                                                      text2:
-                                                          'Issued: ${e.dateCompletionFormat}',
-                                                      text2Color:
-                                                          ColorsManager.grey800,
-                                                      text3: e.description,
-                                                      // bottomPadding: 8.0,
-                                                      leftWidget:
-                                                          const CustomBoxWidget(
-                                                        size: 40,
-                                                        insideObj: Icon(
-                                                          Icons.card_membership,
-                                                          color: ColorsManager
-                                                              .primary75,
-                                                          size: AppSize.s20,
-                                                        ),
-                                                      ),
-                                                      rightWidget:
-                                                          CustomIconButtonWidget(
-                                                        iconData:
-                                                            Icons.edit_outlined,
-                                                        padding: 0.0,
-                                                        iconSize: 20.0,
-                                                        isConstraints: true,
-                                                        onClick: () => {
-                                                          customSnackbar(
-                                                            msgTitle:
-                                                                'This Page is under construction!',
-                                                            msgContent:
-                                                                'This Page is only view.\n Data will not save.',
-                                                          ),
-                                                        },
-                                                      ),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            ),
+                                          ProfileAchievementComponent(
+                                            title: 'achievement'.tr,
+                                            addOrEditAchievementRoute: Routes
+                                                .addOrEditAchievementRoute,
+                                            achievementList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .achievements,
                                           ),
                                           //===== Achievement Component =====//
 
                                           ///===== Certificates Component =====//
-                                          CustomContainerWidget(
-                                            leftMargin: AppSize.s16,
-                                            rightMargin: AppSize.s16,
-                                            // topMargin: AppSize.s12,
-                                            bottomMargin: AppSize.s12,
-                                            leftTitle:
-                                                'Certificates'.toUpperCase(),
-                                            titleFontSize: AppSize.s16,
-                                            rightWidget: CustomIconButtonWidget(
-                                              iconData: Icons.add,
-                                              padding: 0.0,
-                                              isConstraints: true,
-                                              onClick: () => {
-                                                customSnackbar(
-                                                  msgTitle:
-                                                      'This Page is under construction!',
-                                                  msgContent:
-                                                      'This Page is only view.\n Data will not save.',
-                                                ),
-                                              },
-                                            ),
-                                            child: Column(
-                                              children: controller
-                                                  .studentInfoRepsonse
-                                                  .value
-                                                  .certificates!
-                                                  .map(
-                                                    (e) => CustomListTileWidget(
-                                                      text1: e.title,
-                                                      text1Color:
-                                                          ColorsManager.grey850,
-                                                      text1FontWeight:
-                                                          FontWeightManager
-                                                              .medium,
-                                                      text1FontSize:
-                                                          AppSize.s16,
-                                                      text2:
-                                                          'Issued: ${e.receivedDateFormat}',
-                                                      text2Color:
-                                                          ColorsManager.grey800,
-                                                      text3: e.expirationDate !=
-                                                              null
-                                                          ? 'Expired: ${e.expirationDateFormat}'
-                                                          : 'No Expiration Date',
-                                                      text3FontSize:
-                                                          AppSize.s14,
-                                                      text4: e.description,
-                                                      // bottomPadding: 8.0,
-                                                      leftWidget:
-                                                          const CustomBoxWidget(
-                                                        size: 40,
-                                                        insideObj: Icon(
-                                                          Icons.emoji_events,
-                                                          color: ColorsManager
-                                                              .primary75,
-                                                          size: AppSize.s20,
-                                                        ),
-                                                      ),
-                                                      rightWidget:
-                                                          CustomIconButtonWidget(
-                                                        iconData:
-                                                            Icons.edit_outlined,
-                                                        padding: 0.0,
-                                                        iconSize: 20.0,
-                                                        isConstraints: true,
-                                                        onClick: () => {
-                                                          customSnackbar(
-                                                            msgTitle:
-                                                                'This Page is under construction!',
-                                                            msgContent:
-                                                                'This Page is only view.\n Data will not save.',
-                                                          ),
-                                                        },
-                                                      ),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            ),
-                                          )
+                                          ProfileCertificateComponent(
+                                            title:
+                                                "${'diplomas'.tr} / ${'certificates'.tr}",
+                                            addOrEditCertificateRoute: Routes
+                                                .addOrEditCertificateRoute,
+                                            certificateList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .certificates,
+                                          ),
                                           //===== Certificates Component =====//
+
+                                          ///===== Availabilities Component =====//
+                                          ProfileAvailabilityComponent(
+                                            title: 'availabilities'.tr,
+                                            addOrEditAvailabilityRoute: Routes
+                                                .addOrEditAvailabilityRoute,
+                                            availabilityList: controller
+                                                .studentInfoRepsonse
+                                                .value
+                                                .periods,
+                                          )
+                                          //===== Availabilities Component =====//
                                         ],
                                       )
-                                    : const Center(child: Text('Loading...')),
+                                    : const Center(
+                                        child: LoadingWidget(
+                                          isTreeBounceLoading: true,
+                                        ),
+                                      ),
                               )
                           ],
                         )
-                      : const Center(child: Text('Loading...')),
+                      : const Center(
+                          child: LoadingWidget(
+                            isTreeBounceLoading: true,
+                          ),
+                        ),
             ),
           ),
         ),

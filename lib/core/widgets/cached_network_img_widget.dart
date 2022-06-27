@@ -9,18 +9,26 @@ class CachedNetworkImgWidget extends StatelessWidget {
   final double? borderRadius;
   final bool? isHost;
   final double iconSize;
+  final IconData iconData;
+  final String? logoAsText;
+  final String? defaultImg;
+  final bool? isCircle;
 
   const CachedNetworkImgWidget({
-    required this.imgUrl,
+    this.imgUrl = '',
     this.borderRadius = 0.0,
     this.isHost = true,
     this.iconSize = AppSize.s20,
+    this.iconData = Icons.image_outlined,
+    this.logoAsText = '',
+    this.defaultImg = '',
+    this.isCircle = false,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return imgUrl! != ''
+    return imgUrl != null && imgUrl != ''
         ? CachedNetworkImage(
             imageUrl: isHost == true ? '${API.host}$imgUrl' : imgUrl!,
             imageBuilder: (
@@ -29,12 +37,19 @@ class CachedNetworkImgWidget extends StatelessWidget {
             ) =>
                 Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  borderRadius!,
+                shape: isCircle == true ? BoxShape.circle : BoxShape.rectangle,
+                border: Border.all(
+                  color: ColorsManager.white,
+                  width: 0,
                 ),
+                borderRadius: isCircle == true
+                    ? null
+                    : BorderRadius.circular(
+                        borderRadius!,
+                      ),
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
@@ -52,10 +67,24 @@ class CachedNetworkImgWidget extends StatelessWidget {
               size: iconSize,
             ),
           )
-        : Icon(
-            Icons.image_outlined,
-            color: ColorsManager.grey,
-            size: iconSize,
-          );
+        : logoAsText != ''
+            ? Center(
+                child: CustomTextWidget(
+                  text: logoAsText,
+                  fontSize: AppSize.s20,
+                  fontWeight: FontWeight.w800,
+                  textAlign: TextAlign.center,
+                ),
+              )
+            : defaultImg != ''
+                ? Image(
+                    // height: 80,
+                    image: AssetImage(defaultImg!),
+                  )
+                : Icon(
+                    iconData,
+                    color: ColorsManager.grey,
+                    size: iconSize,
+                  );
   }
 }

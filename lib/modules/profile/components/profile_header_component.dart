@@ -5,7 +5,7 @@ import '../../../core/core.dart';
 import '../../../routes/routes.dart';
 import '../profile.dart';
 
-class ProfileHeader extends StatelessWidget {
+class ProfileHeaderComponent extends StatelessWidget {
   final String? profileImg;
   final String? coverImg;
   final String? userName;
@@ -14,13 +14,13 @@ class ProfileHeader extends StatelessWidget {
   final double? headerHigh;
   final ProfileController? controller;
 
-  const ProfileHeader({
+  const ProfileHeaderComponent({
     this.profileImg = AssetsManager.appLogoSymbol,
     this.coverImg = AssetsManager.coverImg,
     this.userName = '...',
     this.userRole = '',
     this.numberStarRate = 0.0,
-    this.headerHigh = 100,
+    this.headerHigh = 110,
     this.controller,
     Key? key,
   }) : super(key: key);
@@ -53,7 +53,45 @@ class ProfileHeader extends StatelessWidget {
           top: 5.0,
           right: 50.0,
           child: controller!.homeController.userToken!.accountType == 'student'
-              ? Container()
+              ? CustomIconButtonWidget(
+                  iconData: Icons.contact_page_outlined,
+                  iconColor: ColorsManager.grey300,
+                  tooltip: 'Settings',
+                  onClick: () => Get.dialog(
+                    ConfirmationDialogWidget(
+                      dialogTitle: 'jobTitle'.tr,
+                      contentWidget:
+                          // CustomTextWidget(text: 'CV body'.tr),
+                          TextField(
+                        controller: controller!.jobTitleTextCtrl,
+                        // focusNode: ref.read(messageController).messageFieldNode,
+                        // onTap: ref.read(emojiVisiblityController.notifier).onFieldTap,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                          isCollapsed: true,
+                          isDense: true,
+                          hintText: 'jobTitleHint'.tr,
+                          border: InputBorder.none,
+                        ),
+                        maxLines: 2,
+                        // onChanged: controller.onChangedTextCtrl,
+                      ),
+                      actionWidget: OutlinedButton.icon(
+                        onPressed: () async => {await controller!.generateCV()},
+                        icon: const Icon(
+                          IconsManager.check,
+                          color: Colors.white,
+                        ),
+                        label: CustomTextWidget(
+                          marginRight: AppSize.s24,
+                          text: 'generateCv'.tr,
+                          color: Colors.red,
+                        ),
+                      ),
+                      onPressed: null,
+                    ),
+                  ),
+                )
               : controller!.enterpriseSwitching.value == true
                   ? CustomIconButtonWidget(
                       iconData: Icons.person,
@@ -80,7 +118,7 @@ class ProfileHeader extends StatelessWidget {
           top: 5.0,
           right: 0.0,
           child: CustomIconButtonWidget(
-            iconData: Icons.settings_outlined,
+            iconData: Icons.tune,
             iconColor: ColorsManager.grey300,
             tooltip: 'Settings',
             onClick: () => {Get.toNamed(Routes.settingsRoute)},
@@ -130,14 +168,14 @@ class ProfileHeader extends StatelessWidget {
                 left: AppSize.s16,
                 top: AppSize.s60,
               ),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: ColorsManager.white,
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: ColorsManager.white,
-                  width: 3,
-                ),
-                boxShadow: const [
+                // border: Border.all(
+                //   color: ColorsManager.red,
+                //   width: 2,
+                // ),
+                boxShadow: [
                   BoxShadow(
                     color: ColorsManager.grey300,
                     blurRadius: 1.0,
@@ -150,10 +188,19 @@ class ProfileHeader extends StatelessWidget {
                 //   image: AssetImage(ImageAssets.appLogoSymbol),
                 // ),
               ),
-              child: const CustomBoxWidget(
-                size: 75,
-                backgroundColor: ColorsManager.white,
+              child: CustomBoxWidget(
+                size: 150,
+                // backgroundColor: ColorsManager.grey100,
                 isCircle: true,
+                topPadding: 2.0,
+                bottomPadding: 2.0,
+                leftPadding: 2.0,
+                rightPadding: 2.0,
+                child: CachedNetworkImgWidget(
+                  imgUrl: profileImg,
+                  borderRadius: 75,
+                  defaultImg: AssetsManager.logoStudentDefault,
+                ),
               ),
             ),
             Expanded(
@@ -171,11 +218,11 @@ class ProfileHeader extends StatelessWidget {
                     CustomTextWidget(
                       text: '$userName',
                       maxLine: 2,
-                      color: ColorsManager.white,
+                      // color: ColorsManager.primaryBlue,
                       fontSize: AppSize.s20,
                       fontWeight: FontWeight.bold,
-                      marginTop: AppSize.s2,
-                      marginBottom: AppSize.s4,
+                      marginTop: AppSize.s20,
+                      // marginBottom: AppSize.s4,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

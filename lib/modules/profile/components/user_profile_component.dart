@@ -17,20 +17,19 @@ class UserProfileComponent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         ///===== Profile Header Component =====//
-        ProfileHeader(
-          userName: controller.userInfoRepsonse.value.profile!.fullName,
+        ProfileHeaderComponent(
+          userName: controller.userProfileInfo.value.fullName,
           // userRole: controller.userInfoRepsonse.value.profile!.accountType,
         ),
         //===== Profile Header Component =====//
 
         ///===== Personal Information Component =====//
-        ContactInformationComponent(
-          headerTitle: 'Personal Information',
-          email: controller.userInfoRepsonse.value.email,
-          phone: controller.userInfoRepsonse.value.profile!.fullPhone1Format,
-          videoPreentationLink:
-              controller.userInfoRepsonse.value.profile!.description,
-        ),
+        // ContactInformationComponent(
+        //   headerTitle: 'Personal Information',
+        //   email: controller.userInfoRepsonse.value.email,
+        //   phone: controller.userProfileInfo.value.fullPhone1Format,
+        //   videoPreentationLink: controller.userProfileInfo.value.description,
+        // ),
         //===== Personal Information Component =====//
 
         ///===== Education Component =====//
@@ -70,7 +69,7 @@ class UserProfileComponent extends StatelessWidget {
                   bottomPadding: 8.0,
                   isDivider: false,
                   leftWidget: CustomBoxWidget(
-                    insideObj: Icon(
+                    child: Icon(
                       Icons.work,
                       color: ColorsManager.primary75,
                       size: AppSize.s20,
@@ -233,7 +232,7 @@ class UserProfileComponent extends StatelessWidget {
                   bottomPadding: 8.0,
                   isDivider: false,
                   leftWidget: CustomBoxWidget(
-                    insideObj: Icon(
+                    child: Icon(
                       Icons.assignment,
                       color: ColorsManager.primary75,
                       size: AppSize.s20,

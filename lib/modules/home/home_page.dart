@@ -11,7 +11,8 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: ColorsManager.primary,
+        //change bgColor here also change the status Bar Color
+        backgroundColor: ColorsManager.primaryBlue,
         body: SafeArea(
           child: IndexedStack(
             index: controller.currentIndex.value,
@@ -19,6 +20,7 @@ class HomePage extends GetView<HomeController> {
               OfferFeedPage(),
               // FeedPage(),
               OfferPage(),
+              RoomListPage(),
               ProfilePage(),
             ],
           ),
@@ -26,6 +28,7 @@ class HomePage extends GetView<HomeController> {
         bottomNavigationBar: Obx(
           () => CustomAnimatedBottomBar(
             containerHeight: 60,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             // backgroundColor: ColorsManager.grey100,
             selectedIndex: controller.currentIndex.value,
             itemCornerRadius: 10,
@@ -34,7 +37,7 @@ class HomePage extends GetView<HomeController> {
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.explore),
                 inActiveIcon: const Icon(Icons.explore_outlined),
-                title: const Text('Feed'),
+                title: Text('feed'.tr),
                 activeColor: ColorsManager.primary,
               ),
               // BottomNavBarItem(
@@ -46,13 +49,20 @@ class HomePage extends GetView<HomeController> {
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.description),
                 inActiveIcon: const Icon(Icons.description_outlined),
-                title: const Text('My Offers'),
+                title: Text('myOffers'.tr),
+                activeColor: ColorsManager.primary,
+                isBag: controller.isBag.value,
+              ),
+              BottomNavBarItem(
+                activeIcon: const Icon(Icons.message_rounded),
+                inActiveIcon: const Icon(Icons.message_outlined),
+                title: Text('messaging'.tr),
                 activeColor: ColorsManager.primary,
               ),
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.person),
                 inActiveIcon: const Icon(Icons.person_outlined),
-                title: const Text('Profile'),
+                title: Text('profile'.tr),
                 activeColor: ColorsManager.primary,
               ),
             ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/constants.dart';
+
 class CustomAnimatedBottomBar extends StatelessWidget {
   const CustomAnimatedBottomBar({
     Key? key,
@@ -48,21 +50,24 @@ class CustomAnimatedBottomBar extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: containerHeight,
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2),
           child: Row(
             mainAxisAlignment: mainAxisAlignment,
             children: items.map((item) {
               final index = items.indexOf(item);
-              return GestureDetector(
-                onTap: () => onItemSelected(index),
-                child: ItemWidget(
-                  item: item,
-                  iconSize: iconSize,
-                  isSelected: index == selectedIndex,
-                  backgroundColor: bgColor,
-                  itemCornerRadius: itemCornerRadius,
-                  animationDuration: animationDuration,
-                  curve: curve,
+              return Flexible(
+                child: GestureDetector(
+                  onTap: () => onItemSelected(index),
+                  child: ItemWidget(
+                    item: item,
+                    isBag: items[index].isBag!,
+                    iconSize: iconSize,
+                    isSelected: index == selectedIndex,
+                    backgroundColor: bgColor,
+                    itemCornerRadius: itemCornerRadius,
+                    animationDuration: animationDuration,
+                    curve: curve,
+                  ),
                 ),
               );
             }).toList(),
@@ -80,6 +85,7 @@ class ItemWidget extends StatelessWidget {
   final Color backgroundColor;
   final double itemCornerRadius;
   final Duration animationDuration;
+  final bool isBag;
   final Curve curve;
 
   const ItemWidget({
@@ -90,6 +96,7 @@ class ItemWidget extends StatelessWidget {
     required this.animationDuration,
     required this.itemCornerRadius,
     required this.iconSize,
+    this.isBag = false,
     this.curve = Curves.linear,
   }) : super(key: key);
 
@@ -99,7 +106,7 @@ class ItemWidget extends StatelessWidget {
       container: true,
       selected: isSelected,
       child: AnimatedContainer(
-        width: 130,
+        width: double.infinity, //130
         // width: isSelected ? 130 : 50,
         height: double.maxFinite,
         duration: animationDuration,
@@ -120,6 +127,22 @@ class ItemWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: AppSize.s16),
+                  child:
+                      // isBag == false
+                      //     ? Container()
+                      //     :
+                      IconTheme(
+                    data: IconThemeData(
+                      size: AppSize.s8,
+                      color: isBag == false
+                          ? ColorsManager.white
+                          : ColorsManager.red,
+                    ),
+                    child: const Icon(Icons.circle),
+                  ),
+                ),
                 IconTheme(
                   data: IconThemeData(
                     size: iconSize,
@@ -195,6 +218,7 @@ class BottomNavBarItem {
   final Color activeColor;
   final Color? inActiveColor;
   final TextAlign? textAlign;
+  final bool? isBag;
 
   BottomNavBarItem({
     required this.activeIcon,
@@ -203,5 +227,6 @@ class BottomNavBarItem {
     this.activeColor = Colors.blue,
     this.textAlign = TextAlign.center,
     this.inActiveColor = Colors.grey,
+    this.isBag = false,
   });
 }

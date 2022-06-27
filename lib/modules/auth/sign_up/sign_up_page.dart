@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../core/core.dart';
 import '../../modules.dart';
@@ -10,7 +10,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.primary,
+      backgroundColor: ColorsManager.primaryBlue,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -24,25 +24,26 @@ class SignUpPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
+              const Padding(
+                padding: EdgeInsets.only(
                   left: AppSize.s72,
                   right: AppSize.s72,
                   top: AppSize.s72,
                 ),
-                child: SvgPicture.asset(
-                  AssetsManager.appLogoWhiteSvg,
-                  height: 80,
-                  matchTextDirection: true,
-                ),
-                // child: Image(
-                //   image: AssetImage(AssetsManager.appLogoWhite),
+                // child: SvgPicture.asset(
+                //   AssetsManager.appLogoWhiteSvg,
+                //   height: 80,
+                //   matchTextDirection: true,
                 // ),
+                child: Image(
+                  // height: 80,
+                  image: AssetImage(AssetsManager.appLogoRose),
+                ),
               ),
               Column(
                 children: [
-                  const CustomTextWidget(
-                    text: "Register an account as",
+                  CustomTextWidget(
+                    text: 'registerAccountAs'.tr, //'auth.registerAs'.tr,
                     color: ColorsManager.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 20,
@@ -50,7 +51,7 @@ class SignUpPage extends StatelessWidget {
                     marginBottom: AppSize.s32,
                   ),
                   CustomMaterialButton(
-                    text: "Student",
+                    text: 'student'.tr, //'auth.student'.tr,
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
                     textColor: ColorsManager.primary,
@@ -68,7 +69,7 @@ class SignUpPage extends StatelessWidget {
                     height: 40.0,
                   ),
                   CustomMaterialButton(
-                    text: "Enterprise",
+                    text: 'enterprise'.tr, // 'auth.enterprise'.tr,
                     fontSize: 20.0,
                     buttonWidth: getWidth * 0.85,
                     textColor: ColorsManager.primary,

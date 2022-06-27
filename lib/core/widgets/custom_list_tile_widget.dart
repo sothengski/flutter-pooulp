@@ -12,7 +12,7 @@ class CustomListTileWidget extends StatelessWidget {
   final Color? text2Color;
   final FontWeight? text2FontWeight;
   final String? text3;
-  final bool? isLauching;
+  final bool? isUnderLine;
   final double? text3FontSize;
   final Color? text3Color;
   final FontWeight? text3FontWeight;
@@ -20,6 +20,7 @@ class CustomListTileWidget extends StatelessWidget {
   final double? text4FontSize;
   final Color? text4Color;
   final FontWeight? text4FontWeight;
+  final Widget? child;
   final Widget? leftWidget;
   final Widget? rightWidget;
   final Function()? onClick;
@@ -29,6 +30,7 @@ class CustomListTileWidget extends StatelessWidget {
   final double? bottomPadding;
   final Color? backgroundColor;
   final int? leftFlex;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const CustomListTileWidget({
     this.text1 = '',
@@ -40,7 +42,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.text2Color = ColorsManager.grey,
     this.text2FontWeight = FontWeight.w400,
     this.text3 = '',
-    this.isLauching = false,
+    this.isUnderLine = false,
     this.text3FontSize = 12.0,
     this.text3Color = ColorsManager.grey800,
     this.text3FontWeight = FontWeight.w400,
@@ -48,6 +50,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.text4FontSize = 12.0,
     this.text4Color = ColorsManager.grey800,
     this.text4FontWeight = FontWeight.w400,
+    this.child,
     this.leftWidget,
     this.rightWidget,
     this.onClick,
@@ -57,6 +60,7 @@ class CustomListTileWidget extends StatelessWidget {
     this.bottomPadding = 0.0,
     this.backgroundColor = ColorsManager.white,
     this.leftFlex = 10,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
     Key? key,
   }) : super(key: key);
 
@@ -83,7 +87,7 @@ class CustomListTileWidget extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: crossAxisAlignment,
           children: <Widget>[
             const SizedBox(
               width: 8.0,
@@ -141,7 +145,7 @@ class CustomListTileWidget extends StatelessWidget {
                               color: text2Color,
                               fontSize: text2FontSize,
                               fontWeight: text2FontWeight,
-                              textDecoration: isLauching == true
+                              textDecoration: isUnderLine == true
                                   ? TextDecoration.underline
                                   : TextDecoration.none,
                               marginBottom: 5.0,
@@ -168,6 +172,7 @@ class CustomListTileWidget extends StatelessWidget {
                               fontWeight: text4FontWeight,
                               maxLine: 2,
                             ),
+                          child ?? Container(),
                         ],
                       ),
                     ),

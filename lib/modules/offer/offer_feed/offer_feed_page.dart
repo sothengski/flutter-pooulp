@@ -14,7 +14,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
       body: Column(
         children: [
           Expanded(
-            flex: 17,
+            flex: 18,
             child: Card(
               elevation: 5.0,
               margin: EdgeInsets.zero,
@@ -26,25 +26,21 @@ class OfferFeedPage extends GetView<OfferFeedController> {
               ),
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: Container(
+                alignment: Alignment.centerLeft,
                 decoration: const BoxDecoration(
                   // color: ColorsManager.primary,
-                  color: ColorsManager.primary,
+                  color: ColorsManager.primaryBlue,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15.0),
                     bottomRight: Radius.circular(15.0),
                   ),
                 ),
-                // padding: const EdgeInsets.symmetric(
-                //   vertical: AppSize.s8,
-                //   horizontal: AppSize.s8,
-                // ),
                 child: Column(
-                  // mainAxisSize: MainAxisSize.min,
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      flex: 50,
+                      flex: 45,
                       child: Obx(
                         () => controller.profileController.userInfoRepsonse
                                     .value.profile ==
@@ -58,18 +54,23 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                               )
                             : CustomTextWidget(
                                 text:
-                                    'Hello ${controller.profileController.userInfoRepsonse.value.profile!.firstName}',
+                                    "${'greeting'.tr} ${controller.profileController.userInfoRepsonse.value.profile!.firstName}",
+                                // text: 'hello'.trParams({
+                                //   'name':
+                                //       '${controller.profileController.userInfoRepsonse.value.profile!.firstName}',
+                                // }),
                                 fontSize: 24,
                                 fontWeight: FontWeightManager.semiBold,
                                 color: ColorsManager.white,
-                                marginTop: AppSize.s16,
+                                marginTop: AppSize.s12,
                                 marginLeft: AppSize.s16,
-                                marginBottom: AppSize.s16,
+                                // marginBottom: AppSize.s16,
                               ),
                       ),
                     ),
+                    // const SizedBox(height: 4.0),
                     Expanded(
-                      flex: 50,
+                      flex: 45,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +80,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                             // width: getWidth * 0.80,
                             child: CustomContainerWidget(
                               isBoxShadow: false,
-                              topMargin: AppSize.s6,
+                              // topMargin: AppSize.s6,
                               leftMargin: AppSize.s16,
                               containerBackground: ColorsManager.grey100,
                               childPadding: AppSize.s12,
@@ -88,8 +89,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                 () => CustomTextWidget(
                                   text: controller.keywordToBeSearch.value != ''
                                       ? controller.keywordToBeSearch.value
-                                      : OfferStrings
-                                          .searchByTitle, //'Search the title',
+                                      : 'searchJobTitle'.tr,
                                 ),
                               ),
                               onTap: () {
@@ -102,43 +102,58 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                           ),
                           Expanded(
                             flex: 15,
-                            child: IconButton(
-                              icon: const Icon(Icons.filter_list),
-                              color: ColorsManager.white,
-                              onPressed: () {
-                                controller.updateKeyword();
-                                Get.dialog(
-                                  const OfferFeedFilterSearch(
-                                    title: 'Advanced Search',
-                                    // contentWidget: Container(
-                                    //   alignment: Alignment.topLeft,
-                                    //   padding: const EdgeInsets.all(AppSize.s8),
-                                    //   child: Column(
-                                    //     children: [
-                                    //       CustomContainerWidget(
-                                    //         isBoxShadow: false,
-                                    //         // topMargin: AppSize.s12,
-                                    //         // bottomMargin: AppSize.s12,
-                                    //         leftTitle: 'Profile Progress',
-                                    //         titleTopPadding: AppSize.s5,
-
-                                    //         titleFontSize: AppSize.s16,
-                                    //         child: Container(),
-                                    //       ),
-                                    //       const Text('body asd'),
-                                    //       const Text('body asd'),
-                                    //     ],
-                                    //   ),
-                                    // ),
-                                  ),
-                                  // barrierDismissible: false,
-                                );
-                                // customSnackbar(
-                                //   msgTitle: 'This Page is under construction!',
-                                //   msgContent:
-                                //       'This Page is only view.\n Data will not save.',
-                                // );
-                              },
+                            child: Stack(
+                              children: [
+                                IconButton(
+                                  alignment: Alignment.topCenter,
+                                  icon: const Icon(Icons.filter_list),
+                                  color: ColorsManager.white,
+                                  onPressed: () {
+                                    // controller.updateKeyword();
+                                    customGeneralDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      widget: OfferFeedFilterSearch(
+                                        title: 'filter'.tr,
+                                      ),
+                                      // Get.dialog(
+                                      //   OfferFeedFilterSearch(
+                                      //     title: 'offer.filterTitle'.tr,
+                                      //   ),
+                                      //   // barrierDismissible: false,
+                                    );
+                                  },
+                                ),
+                                Obx(
+                                  () => controller.filterCountRxInt.value == 0
+                                      ? Container()
+                                      : Container(
+                                          alignment: Alignment.topCenter,
+                                          padding: const EdgeInsets.only(
+                                            left: AppSize.s4,
+                                          ),
+                                          child: CustomBoxWidget(
+                                            borderRadius: AppSize.s16,
+                                            topPadding: AppSize.s2,
+                                            bottomPadding: AppSize.s2,
+                                            leftPadding: AppSize.s0,
+                                            rightPadding: AppSize.s0,
+                                            backgroundColor:
+                                                ColorsManager.primary,
+                                            child: CustomTextWidget(
+                                              text: controller
+                                                  .filterCountRxInt.value
+                                                  .toString(),
+                                              fontSize: AppSize.s12,
+                                              color: ColorsManager.white,
+                                              textAlign: TextAlign.center,
+                                              marginLeft: AppSize.s6,
+                                              marginRight: AppSize.s6,
+                                            ),
+                                          ),
+                                        ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -150,23 +165,24 @@ class OfferFeedPage extends GetView<OfferFeedController> {
             ),
           ),
           Expanded(
-            flex: 83,
+            flex: 82,
             child: RefreshIndicator(
               color: ColorsManager.primary,
               onRefresh: () => controller.onRefresh(),
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    flex: 9,
-                    child: Obx(
-                      () => controller.listJobOfferTypes.isNotEmpty
-                          ? OfferFeedTypesListComponent()
-                          : const ItemListShimmerLoadingWidget(
-                              isBodyList: false,
-                            ),
-                    ),
-                  ),
+                  // Expanded(
+                  //   flex: 9,
+                  //   child: Obx(
+                  //     () => controller.listJobOfferTypes.isNotEmpty
+                  //         ? OfferFeedTypesListComponent()
+                  //         : const ItemListShimmerLoadingWidget(
+                  //             isBodyList: false,
+                  //           ),
+                  //   ),
+                  // ),
+                  const SizedBox(height: AppSize.s4),
                   Expanded(
                     flex: 90,
                     child: controller.obx(
@@ -179,10 +195,9 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                 : Center(
                                     child: StateHandlerWidget(
                                       imgPath: AssetsManager.emptyDataIcon,
-                                      headerText: 'No feed results found.',
-                                      bodyText:
-                                          "Make sure you complete your profile information.",
-                                      buttonText: 'Try again',
+                                      headerText: 'noResult'.tr,
+                                      // bodyText: 'offer.contentMsg'.tr,
+                                      buttonText: 'tryAgain'.tr,
                                       onPressedFunctionCall:
                                           controller.onRefresh,
                                     ),
@@ -208,10 +223,9 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                       onError: (error) => Center(
                         child: StateHandlerWidget(
                           imgPath: AssetsManager.emptyDataIcon,
-                          headerText: 'Sorry! Something went wrong',
-                          bodyText:
-                              "Make sure that Wi-Fi or mobile data is turned on and try again..",
-                          buttonText: 'Try again',
+                          headerText: 'sthWentWrong'.tr,
+                          bodyText: 'connectionFailedMsg'.tr,
+                          buttonText: 'tryAgain'.tr,
                           onPressedFunctionCall: controller.onRefresh,
                         ),
                       ),

@@ -1,5 +1,28 @@
 import 'dart:convert';
 
+import '/core/core.dart';
+
+List<FieldModel>? proficiencyList = <FieldModel>[
+  FieldModel(id: 0, label: LevelStrings.undefined, level: 0),
+  FieldModel(id: 1, label: LevelStrings.beginner, level: 1),
+  FieldModel(id: 2, label: LevelStrings.intermediate, level: 2),
+  FieldModel(id: 3, label: LevelStrings.professional, level: 3),
+  FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
+];
+
+List<FieldModel>? skillCategoryList = <FieldModel>[
+  FieldModel(id: 0, label: SkillCategoryStrings.hardSkill),
+  FieldModel(id: 1, label: SkillCategoryStrings.softSkill),
+];
+
+List<FieldModel> fieldListFromJson(String str) => List<FieldModel>.from(
+      (json.decode(str) as List)
+          .map((x) => FieldModel.fromJson(x as Map<String, dynamic>)) as List,
+    );
+
+String fieldListToJson(List<FieldModel?>? data) =>
+    json.encode(List<dynamic>.from(data!.map((x) => x!.toJson())));
+
 class FieldModel {
   final int? id;
   final int? tagId;
@@ -10,6 +33,8 @@ class FieldModel {
   final String? category;
   final String? videoUrl;
   int? total;
+  bool? selected;
+  final List<FieldModel>? subFieldList;
 
   FieldModel({
     this.id,
@@ -21,12 +46,25 @@ class FieldModel {
     this.category,
     this.videoUrl,
     this.total,
+    this.selected = false,
+    this.subFieldList,
   });
 
-  String? get displayLevel => level == null ? '' : 'Level $level';
+  // FieldModel? get getProficiencyLevel =>
+  //     proficiencyList.firstWhere((element) => element.level == level);
 
-  String? get displayLabelAndLevel =>
-      level == null ? '• $label' : '• $label - Level $level';
+  String? get getLabelProficiencyLevel =>
+      proficiencyList!.firstWhere((element) => element.level == level).label;
+
+  // String? get displayLevel => level == null ? '' : 'Level $level';
+  String? get displayLevel => level == null
+      ? ''
+      : //"${'profile.level'.tr} $level";
+      getLevelString(level: level);
+
+  String? get displayLabelAndLevel => level == null || level == 0
+      ? '• $label'
+      : "• $label - ${translateStateWords(stateWord: getLabelProficiencyLevel)}";
 
   factory FieldModel.fromRawJson(String str) => FieldModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
@@ -43,6 +81,15 @@ class FieldModel {
         categoryId: json['category_id'] as int?,
         category: json['category'] as String?,
         videoUrl: json['video_url'] as String?,
+        subFieldList: json['skills'] == null || json['skills'] == []
+            ? []
+            : (json['skills'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,20 +101,31 @@ class FieldModel {
         'category_id': categoryId,
         'category': category,
         'video_url': videoUrl,
+        'skills': subFieldList == null || subFieldList == []
+            ? null
+            : List<dynamic>.from(subFieldList!.map((x) => x.toJson())),
+      }..removeWhere((_, v) => v == null);
+
+  Map<String, dynamic> toJsonForOnboarding({bool? usedTagId = false}) => {
+        usedTagId == true ? 'tag_id' : 'id': id,
+        // 'id': usedTagId == true ? null : id,
+        // 'tag_id': usedTagId == true ? id : null,
       }..removeWhere((_, v) => v == null);
 
   @override
   String toString() {
     return '''
-    FieldModel(id: $id,
+    FieldModel(
+      id: $id,
       tagId: $tagId,
       type: $type,
       label: $label,
-      'level': $level,
+      level: $level,
       categoryId: $categoryId,
       category: $category,
       video_url: $videoUrl,
       total: $total,
+      subFieldList: $subFieldList
     )''';
   }
 }

@@ -49,7 +49,9 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                   // vertical: AppSize.s0,
                 ),
                 label: CustomTextWidget(
-                  text: '${controller.listJobOfferTypes[index].label}',
+                  text: controller.listJobOfferTypes[index].label == 'All'
+                      ? 'all'.tr
+                      : '${controller.listJobOfferTypes[index].label}',
                   // fontSize: AppSize.s14,
                   fontWeight: FontWeightManager.light,
                   color: containerColorState(
@@ -63,10 +65,11 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                   object2: controller.typeSelected.value.label,
                   isTextColor: false,
                 ),
+                //Noted:: Enable this for row list of jobOfferTypes in the feed Page
                 onSelected: (_) {
-                  controller.selectType(
-                    type: controller.listJobOfferTypes[index],
-                  );
+                  // controller.selectType(
+                  //   type: controller.listJobOfferTypes[index],
+                  // );
                 },
               ),
             ),

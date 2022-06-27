@@ -17,12 +17,18 @@ class Validator {
   static const String numberRegExpPattern = r'^\d+$';
 
   static const requiredMsg = "This is required.";
-  static const requiredFieldMsg = "This field is required.";
+  String requiredFieldMsg = 'requiredField'.tr; //'validator.requireField'.tr;
+  // static const requiredFieldMsg = "This field is required.";
 
   static const formatNotValid = "format is not valid.";
   static const inValidFieldMsg = "This is invalid.";
 
   static const enterAValidField = "Please enter a valid";
+
+  TextInputFormatter avoidSpaceInputFormatter() =>
+      FilteringTextInputFormatter.deny(
+        RegExp(Validator.avoidSpaceRegExpPattern),
+      );
 
   String? emailValidator(String? value) {
     final RegExp regex = RegExp(emailRegExpPattern);
@@ -36,12 +42,13 @@ class Validator {
     }
   }
 
-  String? passwordValidator(String? value) {
+  String? passwordValidatorWithMin6Chars(String? value) {
     final RegExp regex = RegExp(lengthMin6RegExppattern);
     if (value!.isEmpty || regex.hasMatch(emptySpaceRegExpPattern)) {
       return requiredFieldMsg;
     } else if (!regex.hasMatch(value)) {
-      return 'Password should be 6~15 characters.';
+      return 'passwordMin6'.tr; //'validator.passwordMin6'.tr;
+      // return 'Password should be at least 6 characters.';
     } else {
       return null;
     }

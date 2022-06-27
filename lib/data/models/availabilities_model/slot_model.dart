@@ -1,15 +1,21 @@
 import 'dart:convert';
 
+import '../../../core/core.dart';
+
 class SlotModel {
   final int? id;
-  final int? startTime;
-  final int? endTime;
+  int? startTime;
+  int? endTime;
 
   SlotModel({
     this.id,
     this.startTime,
     this.endTime,
   });
+
+  String? get startTimeToHour => intToActuallyHoursMins(value: startTime);
+
+  String? get endTimeToHour => intToActuallyHoursMins(value: endTime);
 
   factory SlotModel.fromRawJson(String str) =>
       SlotModel.fromJson(json.decode(str) as Map<String, dynamic>);

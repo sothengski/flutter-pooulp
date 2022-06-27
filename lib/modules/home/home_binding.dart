@@ -45,5 +45,13 @@ class HomeBinding implements Bindings {
     Get.lazyPut<ProfileController>(
       () => ProfileController(),
     );
+
+    Get.lazyPut<MessagingProvider>(
+      () => MessagingProvider(),
+    );
+
+    Get.lazyPut<MessagingController>(
+      () => MessagingController(),
+    );
   }
 }

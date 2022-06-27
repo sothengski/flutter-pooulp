@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'dart:convert';
 
 import '../data.dart';
@@ -137,11 +135,11 @@ String linksListToJson(List<LinksModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 List<LinksModel> linksListFromJson(String str) => List<LinksModel>.from(
-      json.decode(str).map(
-            (x) => LinksModel.fromJson(
-              x as Map<String, dynamic>,
-            ),
-          ) as List,
+      (json.decode(str) as List).map(
+        (x) => LinksModel.fromJson(
+          x as Map<String, dynamic>,
+        ),
+      ) as List,
     );
 
 LinksModel linksFromJson(String str) =>

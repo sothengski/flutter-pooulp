@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../../core/core.dart';
 import '../../data.dart';
 
 class ProfileModel {
@@ -39,6 +40,7 @@ class ProfileModel {
   final String? facebookLink; //enterprise
   final String? linkedinLink; //enterprise
   final String? whatsAppLink; //enterprise
+  final String? youtubeLink; //enterprise
   final int? statusCode; //enterprise
   final String? uuid; //enterprise
 
@@ -85,6 +87,7 @@ class ProfileModel {
     this.facebookLink,
     this.linkedinLink,
     this.whatsAppLink,
+    this.youtubeLink,
     this.statusCode,
     this.uuid,
     // this.school,
@@ -105,6 +108,11 @@ class ProfileModel {
       phone2CountryCode == null || phone2CountryCode == ''
           ? ''
           : '($phone2CountryCode) $phone2';
+
+  String? get birthDateFormat => dateFormatSlashDDMMYYYY(date: birthDate);
+
+  String? get companyAddress =>
+      addressStreet!.isNotEmpty ? '$addressStreet, ' : '';
 
   factory ProfileModel.fromRawJson(String str) =>
       ProfileModel.fromJson(json.decode(str) as Map<String, dynamic>);
@@ -127,17 +135,17 @@ class ProfileModel {
         description: json['description'] as String? ?? '',
         phone2CountryCode: json['phone2_country_code'] as String?,
         phone2: json['phone2'] as String?,
-        birthDate: json['birthdate'] != null
-            ? DateTime.parse(json['birthdate'].toString())
-            : null,
+        birthDate: json['birthdate'] == null
+            ? null
+            : DateTime.parse(json['birthdate'].toString()),
         pictureUrl: json['picture_url'] as String?,
         emailNotification: json['settings_notifications_email'] as bool?,
         addressStreet: json['address_street'] as String?,
         addressCity: json['address_city'] as String?,
         addressZip: json['address_zip'] as String?,
         addressCountry: json['address_country'] as String?,
-        // addressLatitude: json['address_latitude'] as String?,
-        // addressLongitude: json['address_longitude'] as String?,
+        addressLatitude: json['address_latitude'] as String?,
+        addressLongitude: json['address_longitude'] as String?,
         id: json['id'] as int?,
         name: json['name'] as String?,
         // subsidiaryOf: json['subsidiary_of'] as String?,
@@ -152,6 +160,7 @@ class ProfileModel {
         facebookLink: json['facebook_link'] as String?,
         linkedinLink: json['linkedin_link'] as String?,
         whatsAppLink: json['whatsapp_link'] as String?,
+        youtubeLink: json['youtube_link'] as String?,
         statusCode: json['statecode'] as int?,
         uuid: json['uuid'] as String?,
         // school: School.fromJson(json['school']),
@@ -202,7 +211,10 @@ class ProfileModel {
         'description': description,
         'phone2_country_code': phone2CountryCode,
         'phone2': phone2,
-        'birthdate': birthDate?.toString(),
+        // 'birthdate': birthDate?.toString(),
+        'birthdate': birthDate == null
+            ? null
+            : "${birthDate!.year.toString().padLeft(4, '0')}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}",
         'picture_url': pictureUrl,
         'settings_notifications_email': emailNotification,
         'address_street': addressStreet,
@@ -221,6 +233,7 @@ class ProfileModel {
         'facebook_link': facebookLink,
         'linkedin_link': linkedinLink,
         'whatsapp_link': whatsAppLink,
+        'youtube_link': youtubeLink,
         'statecode': statusCode,
         'uuid': uuid,
         // 'school': school.toJson(),
@@ -273,7 +286,8 @@ class ProfileModel {
       updatedAt: $updatedAt, 
       facebookLink: $facebookLink, 
       linkedinLink: $linkedinLink, 
-      whatsAppLink: $whatsAppLink, 
+      whatsAppLink: $whatsAppLink,
+      youtubeLink: $youtubeLink,
       statusCode: $statusCode, 
       uuid: $uuid,
       spokenLanguages: $spokenLanguages,

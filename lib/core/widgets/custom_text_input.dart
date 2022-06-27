@@ -8,7 +8,11 @@ import '../core.dart';
 class CustomTextInput extends StatelessWidget {
   final TextEditingController? controller;
   final String? inputTitle;
+  final double? fontSizeTitle;
+  final FontWeight? fontWeightTitle;
+  final Color? titleColor;
   final String? hintText;
+  final Color? hintTextColor;
   final TextInputType? keyboardType;
   final TextInputAction? inputAction;
   final Function? onSubmitted;
@@ -20,9 +24,9 @@ class CustomTextInput extends StatelessWidget {
   final String? errorText;
   final bool? enabled;
   final bool? obscureText;
-  final bool? suffixIcon;
+  final Widget? suffixIcon;
   final Widget? inputIcon;
-  final IconData? prefixIcon;
+  final Widget? prefixIcon;
   final TextCapitalization? textCapitalization;
   final TextAlign? textAlign;
   final int? maxLength;
@@ -52,11 +56,18 @@ class CustomTextInput extends StatelessWidget {
   final int? maxLines;
   final double? fontSize;
   final Color? fontColor;
+  final bool? isReadOnly;
+  final double? hintTexFontSize;
+  final Color? enabledBorderColor;
 
   const CustomTextInput({
     this.controller,
     this.inputTitle,
+    this.fontSizeTitle = AppSize.s14,
+    this.fontWeightTitle = FontWeight.w400,
+    this.titleColor = ColorsManager.primaryBlue,
     this.hintText,
+    this.hintTextColor = ColorsManager.grey400,
     this.keyboardType = TextInputType.text,
     this.inputAction = TextInputAction.next,
     this.isLastField = false,
@@ -68,7 +79,7 @@ class CustomTextInput extends StatelessWidget {
     this.onValidator,
     this.onChanged,
     this.obscureText = false,
-    this.suffixIcon = false,
+    this.suffixIcon,
     this.inputIcon,
     this.prefixIcon,
     this.textCapitalization,
@@ -99,6 +110,9 @@ class CustomTextInput extends StatelessWidget {
     this.maxLines = 1,
     this.fontSize = 16.0,
     this.fontColor = Colors.black,
+    this.isReadOnly = false,
+    this.hintTexFontSize = 16,
+    this.enabledBorderColor = ColorsManager.grey100,
   });
 
   @override
@@ -116,6 +130,9 @@ class CustomTextInput extends StatelessWidget {
           if (inputTitle != null)
             CustomTextWidget(
               text: inputTitle,
+              fontSize: fontSizeTitle,
+              fontWeight: fontWeightTitle,
+              color: titleColor,
             )
           else
             const SizedBox.shrink(),
@@ -146,6 +163,7 @@ class CustomTextInput extends StatelessWidget {
                   focusNode: focusNodeName,
                   autocorrect: autocorrect!,
                   enableSuggestions: enableSuggestions!,
+                  readOnly: isReadOnly!,
                   style: TextStyle(
                     fontSize: fontSize,
                     color: fontColor,
@@ -170,31 +188,17 @@ class CustomTextInput extends StatelessWidget {
                     //   prefixIcon,
                     //   // color: primary,
                     // ),
+                    // focusColor: Colors.white,
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    prefixIcon: prefixIcon,
                     prefixText: " ",
-                    suffixIcon: suffixIcon!
-                        ? obscureText == true
-                            ? IconButton(
-                                icon: const Icon(
-                                  Icons.visibility_outlined,
-                                  color: ColorsManager.grey400,
-                                  size: 20.0,
-                                ),
-                                onPressed: changeShowPassword,
-                              )
-                            : IconButton(
-                                icon: const Icon(
-                                  Icons.visibility_off_outlined,
-                                  color: ColorsManager.grey400,
-                                  size: 20.0,
-                                ),
-                                onPressed: changeShowPassword,
-                              )
-                        : null,
+                    suffixIcon: suffixIcon,
                     filled: isFilled,
                     fillColor: fillColor,
                     hintText: hintText,
-                    hintStyle: const TextStyle(
-                      color: ColorsManager.grey400,
+                    hintStyle: TextStyle(
+                      color: hintTextColor,
+                      fontSize: hintTexFontSize,
                     ),
                     // isDense: true,
                     // contentPadding: EdgeInsets.zero,
@@ -219,12 +223,16 @@ class CustomTextInput extends StatelessWidget {
                         color: ColorsManager.grey600,
                       ),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(borderRadius!),
-                      borderSide: const BorderSide(
-                        color: ColorsManager.grey100,
-                      ),
+                    enabledBorder: outlineInputBorder(
+                      borderColor: enabledBorderColor,
+                      borderRadius: borderRadius,
                     ),
+                    // OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(borderRadius!),
+                    //   borderSide: const BorderSide(
+                    //     color: ColorsManager.grey100,
+                    //   ),
+                    // ),
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(borderRadius!),
                       borderSide: const BorderSide(

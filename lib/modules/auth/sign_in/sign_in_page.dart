@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/core.dart';
@@ -12,7 +11,7 @@ class SignInPage extends GetView<SignInController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.primary,
+      backgroundColor: ColorsManager.primaryBlue,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -20,8 +19,10 @@ class SignInPage extends GetView<SignInController> {
           IconButton(
             icon: const Icon(Icons.flag),
             color: ColorsManager.grey300,
-            tooltip: 'Language',
-            onPressed: () => changeLanguageDialog(context),
+            tooltip: 'settings.language'.tr,
+            onPressed: () => changeLanguageDialog(
+              languageOptions: controller.languageController.languageOptions,
+            ),
           ),
         ],
       ),
@@ -36,27 +37,28 @@ class SignInPage extends GetView<SignInController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
+                const Padding(
+                  padding: EdgeInsets.only(
                     left: AppSize.s72,
                     right: AppSize.s72,
                     bottom: AppSize.s12,
                   ),
-                  child: SvgPicture.asset(
-                    AssetsManager.appLogoWhiteSvg,
-                    height: 80,
-                    matchTextDirection: true,
-                  ),
-                  // child: Image(
-                  //   image: AssetImage(AssetsManager.appLogoWhite),
+                  // child: SvgPicture.asset(
+                  //   AssetsManager.appLogoWhiteSvg,
+                  //   height: 80,
+                  //   matchTextDirection: true,
                   // ),
+                  child: Image(
+                    // height: 80,
+                    image: AssetImage(AssetsManager.appLogoRose),
+                  ),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(AppSize.s16),
                   child: SignInForm(),
                 ),
-                const CustomTextWidget(
-                  text: "Don't have an account yet?",
+                CustomTextWidget(
+                  text: 'loginCallRegister'.tr, //'auth.dontHaveAccount'.tr,
                   color: ColorsManager.white,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
@@ -65,8 +67,8 @@ class SignInPage extends GetView<SignInController> {
                 ),
                 GestureDetector(
                   onTap: () => Get.toNamed(Routes.signUpRoute),
-                  child: const CustomTextWidget(
-                    text: 'Register Now!',
+                  child: CustomTextWidget(
+                    text: 'registerNow'.tr, //'auth.registerNow'.tr,
                     color: ColorsManager.white,
                     textDecoration: TextDecoration.underline,
                     fontWeight: FontWeight.w700,

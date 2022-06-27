@@ -5,6 +5,7 @@ import '../../data.dart';
 
 class EducationModel {
   final int? id;
+  final int? schoolId;
   final String? name;
   final String? description;
   final String? degree;
@@ -17,6 +18,7 @@ class EducationModel {
 
   EducationModel({
     this.id,
+    this.schoolId,
     this.name,
     this.description,
     this.degree,
@@ -28,12 +30,13 @@ class EducationModel {
     this.fields,
   });
 
-  String? get attendedFrom => dateFormatDashYYYYMMDD(date: dateStart);
-  String? get attendedTo => dateFormatDashYYYYMMDD(date: dateEnd);
-  String? get attendedFromTo => '$attendedFrom - $attendedTo';
+  String? get attendedFrom => dateFormatSlashMMYYYY(date: dateStart);
+  String? get attendedTo => dateFormatSlashMMYYYY(date: dateEnd);
+  String? get attendedFromTo =>
+      '$attendedFrom ${attendedTo == null || attendedTo == '' ? '' : '- $attendedTo'}';
 
   String? get schoolCityAndCountry =>
-      '${school!.addressCity} - ${school!.addressCountry}';
+      '${school!.addressCity} ${school!.addressCountry == null || school!.addressCountry == '' ? '' : '- ${school!.addressCountry}'}';
 
   factory EducationModel.fromRawJson(String str) => EducationModel.fromJson(
         json.decode(str) as Map<String, dynamic>,
@@ -43,6 +46,7 @@ class EducationModel {
 
   factory EducationModel.fromJson(Map<String, dynamic> json) => EducationModel(
         id: json['id'] as int?,
+        schoolId: json['school_id'] as int?,
         name: json['name'] as String?,
         description: json['description'] as String?,
         degree: json['degree'] as String?,
@@ -72,19 +76,22 @@ class EducationModel {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'school_id': schoolId,
         'name': name,
         'description': description,
         'degree': degree,
         'studying_year': studyingYear,
-        'date_start':
-            "${dateStart!.year.toString().padLeft(4, '0')}-${dateStart!.month.toString().padLeft(2, '0')}-${dateStart!.day.toString().padLeft(2, '0')}",
-        'date_end':
-            "${dateEnd!.year.toString().padLeft(4, '0')}-${dateEnd!.month.toString().padLeft(2, '0')}-${dateEnd!.day.toString().padLeft(2, '0')}",
+        'date_start': dateStart == null
+            ? null
+            : "${dateStart!.year.toString().padLeft(4, '0')}-${dateStart!.month.toString().padLeft(2, '0')}-${dateStart!.day.toString().padLeft(2, '0')}",
+        'date_end': dateEnd == null
+            ? null
+            : "${dateEnd!.year.toString().padLeft(4, '0')}-${dateEnd!.month.toString().padLeft(2, '0')}-${dateEnd!.day.toString().padLeft(2, '0')}",
         'completed': completed,
         'school': school?.toJson(),
-        'fields': fields != null || fields != []
-            ? List<dynamic>.from(fields!.map((x) => x.toJson()))
-            : null,
+        'fields': fields == null //|| fields == []
+            ? null
+            : List<dynamic>.from(fields!.map((x) => x.toJson())),
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -92,6 +99,7 @@ class EducationModel {
     return '''
     EducationModel(
       id: $id,
+      'schoolId': $schoolId,
       name: $name,
       description: $description,
       degree: $degree,

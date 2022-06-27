@@ -1,3 +1,24 @@
+///==================== Keys ====================
+
+class Keys {
+  static const String localStorageKey = 'Pooulp';
+
+  static const String readOperation = 'Read';
+  static const String addOperation = 'Add';
+  static const String editOperation = 'Edit';
+  static const String deleteOperation = 'Delete';
+}
+
+const String textAppVersion = "1.0.19 (19)";
+const String defaultDate = "2020-02-20T06:52:01.000000Z";
+
+class LocalStorage {
+  static const credentialName = 'Pooulp';
+  static const authTokenData = "authUserData";
+  static const isLogged = 'isLogged';
+  static const appBasic = 'appBasic';
+}
+
 ///==================== Texts ====================
 class AppStrings {
   static const String appNameText = 'Pooulp';
@@ -7,6 +28,35 @@ class AppStrings {
 
   static const String dashText = '-';
   static const String emptyText = '';
+  static const String noText = 'No';
+  static const String yesText = 'Yes';
+  static const String cancelText = 'Cancel';
+  static const String removeText = 'Remove';
+  static const String confirmationText = 'Confirmation';
+  static const String saveText = 'Save';
+  static const String addText = 'Add';
+
+  static const String personalKey = 'personal';
+  static const String professionalKey = 'professional';
+}
+
+class LevelStrings {
+  static const String undefined = 'Undefined';
+  static const String beginner = 'Beginner';
+  static const String intermediate = 'Intermediate';
+  static const String professional = 'Professional';
+  static const String motherTongue = 'Mother tongue';
+}
+
+class SkillCategoryStrings {
+  static const String softSkill = 'Soft Skill';
+  static const String hardSkill = 'Hard Skill';
+}
+
+class GenderStrings {
+  static const String male = 'male';
+  static const String female = 'female';
+  static const String others = 'others';
 }
 
 class OfferStrings {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../../core/core.dart';
 import 'weekly_model.dart';
 
 class PeriodModel {
@@ -16,6 +17,10 @@ class PeriodModel {
     this.isCustom,
     this.weekly,
   });
+
+  String? get dateFromFormat => dateFormatSlashDDMMYYYY(date: from);
+
+  String? get dateToFormat => dateFormatSlashDDMMYYYY(date: to);
 
   factory PeriodModel.fromRawJson(String str) =>
       PeriodModel.fromJson(json.decode(str) as Map<String, dynamic>);
@@ -36,14 +41,14 @@ class PeriodModel {
             : null,
         isCustom: json['is_custom'] as int?,
         weekly: json['weekly'] == null || json['weekly'] == []
-            ? (json['weekly'] as List)
+            ? []
+            : (json['weekly'] as List)
                 .map(
                   (i) => WeeklyModel.fromJson(
                     i as Map<String, dynamic>,
                   ),
                 )
-                .toList()
-            : [],
+                .toList(),
       );
 
   Map<String, dynamic> toJson() => {

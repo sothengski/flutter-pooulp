@@ -68,7 +68,8 @@ class LightColors implements IColors {
 
   LightColors() {
     primaryColor = ColorsManager.primary; //appBar text Color
-    appBarColor = ColorsManager.primary; //appBar BgColor
+    appBarColor =
+        ColorsManager.primaryBlue; //appBar BgColor //b4 ColorsManager.primary;
     accentColor = ColorsManager.grey800;
     scaffoldBackgroundColor =
         ColorsManager.white; //ColorsManager.grey100; //bgBody
@@ -76,7 +77,8 @@ class LightColors implements IColors {
     tabbarNormalColor = ColorsManager.green900;
     tabbarSelectedColor = ColorsManager.red200;
     colorScheme = const ColorScheme.light().copyWith(
-      onPrimary: ColorsManager.white,
+      primary: ColorsManager.primaryBlue, //for icon in inputtext when on focus
+      onPrimary: ColorsManager.primaryBlue,
       onSecondary: ColorsManager
           .primary25, //Icon Color inside floatingButton and Bg on Card Widget
       onSurface: ColorsManager.grey300, //border around the OutlinedButton

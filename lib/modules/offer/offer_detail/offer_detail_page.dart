@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
 import '../offer.dart';
 
 class OfferDetailPage extends GetView<OfferDetailController> {
-  // ignore: avoid_dynamic_calls
-  final JobOfferModel jobOfferDetail = Get.arguments[0] as JobOfferModel;
-  // ignore: avoid_dynamic_calls
-  final List<Widget>? actionButtons = Get.arguments[1] as List<Widget>;
+  final JobOfferModel jobOfferDetail =
+      (Get.arguments as List)[0] as JobOfferModel;
+  final List<Widget>? actionButtons =
+      (Get.arguments as List)[1] as List<Widget>;
 
   // const OfferDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    const player = YoutubePlayerIFrame();
+    controller.youtubeVideoId = jobOfferDetail.enterprise!.youtubeLink == null
+        ? ''
+        : jobOfferDetail.enterprise!.youtubeLink!.split('=').last;
+
     return Scaffold(
       // backgroundColor: ColorsManager.primary,
       appBar: CustomAppBar(
-        title: 'Offer Details',
+        title: 'offerDetails'.tr,
         elevation: 0.0,
       ),
       body: Column(
@@ -77,11 +83,19 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           text1Color: ColorsManager.primary,
                           text1FontSize: AppSize.s16,
                           text2:
-                              '${jobOfferDetail.companyLocation} (${jobOfferDetail.workPlaceType})',
+                              '${jobOfferDetail.companyLocation}(${jobOfferDetail.workPlaceType})',
                           leftWidget: CustomBoxWidget(
                             size: 50,
-                            insideObj: CachedNetworkImgWidget(
+                            isCircle: true,
+                            topPadding: AppSize.s2,
+                            bottomPadding: AppSize.s2,
+                            leftPadding: AppSize.s2,
+                            rightPadding: AppSize.s2,
+                            child: CachedNetworkImgWidget(
                               imgUrl: '${jobOfferDetail.enterprise!.logoUrl}',
+                              borderRadius: 100,
+                              isCircle: true,
+                              defaultImg: AssetsManager.logoEnterpriseDefault,
                             ),
                           ),
                         ),
@@ -89,7 +103,11 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                     ],
                   ),
                   CustomTextWidget(
-                    text: 'Posted: ${jobOfferDetail.dateOfferStartFormat}',
+                    text:
+                        "${'posted'.tr}: ${jobOfferDetail.dateOfferStartFormat}",
+                    // text: 'offer.posted'.trParams(
+                    //   {'date': '${jobOfferDetail.dateOfferStartFormat}'},
+                    // ),
                     // textAlign: TextAlign.center,
                     fontSize: AppSize.s12,
                     fontWeight: FontWeight.w500,
@@ -117,10 +135,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ),
                         ),
                         unselectedLabelColor: ColorsManager.grey,
-                        tabs: [
-                          'Job Summary',
-                          'Company',
-                        ]
+                        tabs: ['jobInformation'.tr, 'companyInformation'.tr]
                             .map(
                               (e) => Tab(
                                 child: CustomTextWidget(
@@ -128,6 +143,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                   textAlign: TextAlign.center,
                                   fontWeight: FontWeight.w500,
                                   color: null,
+                                  maxLine: 2,
                                 ),
                               ),
                             )
@@ -147,37 +163,47 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
                           ///===== Working Period Component =====//
                           OutlineContainerWidget(
-                            title: 'Working Period',
+                            title: 'workingPeriod'.tr,
                             titleColor: ColorsManager.primaryBlue,
-                            childWidget: Column(
+                            childWidget: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomBoxWidget(
-                                  insideObj: CustomTextWidget(
+                                  child: CustomTextWidget(
                                     textAlign: TextAlign.center,
                                     text: jobOfferDetail.dateJobStartFormat !=
                                             ''
-                                        ? 'Starting Date: ${jobOfferDetail.dateJobStartFormat}'
-                                        : 'N/A',
+                                        ? "${'startFrom'.tr}: ${jobOfferDetail.dateJobStartFormat}"
+                                        : '',
+                                    // ? 'offer.startFrom'.trParams(
+                                    //     {
+                                    //       'date':
+                                    //           '${jobOfferDetail.dateJobStartFormat}'
+                                    //     },
+                                    //   )
+                                    // // 'Starting Date: ${jobOfferDetail.dateJobStartFormat}'
+                                    // : 'offer.na'.tr,
                                     fontWeight: FontWeightManager.regular,
                                     fontSize: AppSize.s12,
                                     // marginBottom: AppSize.s10,
                                   ),
                                 ),
-                                if (jobOfferDetail.dateJobEndFormat == null)
-                                  Container(
-                                    margin: const EdgeInsetsDirectional.only(
-                                      top: AppSize.s4,
-                                    ),
-                                    child: CustomBoxWidget(
-                                      insideObj: CustomTextWidget(
-                                        textAlign: TextAlign.center,
-                                        text:
-                                            'End Date: ${jobOfferDetail.dateJobEndFormat}',
-                                        fontWeight: FontWeightManager.regular,
-                                        fontSize: AppSize.s12,
-                                        // marginBottom: AppSize.s10,
-                                      ),
+                                const SizedBox(width: AppSize.s12),
+                                if (jobOfferDetail.dateJobEndFormat != '')
+                                  CustomBoxWidget(
+                                    child: CustomTextWidget(
+                                      textAlign: TextAlign.center,
+                                      text:
+                                          "${'endDate'.tr}: ${jobOfferDetail.dateJobEndFormat}",
+                                      // text: 'offer.endDate'.trParams(
+                                      //   {
+                                      //     'date':
+                                      //         '${jobOfferDetail.dateJobEndFormat}'
+                                      //   },
+                                      // ),
+                                      fontWeight: FontWeightManager.regular,
+                                      fontSize: AppSize.s12,
+                                      // marginBottom: AppSize.s10,
                                     ),
                                   )
                                 else
@@ -188,12 +214,12 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Working Period Component =====//
 
                           ///===== Working Duration Component =====//
-                          if (jobOfferDetail.types!.isNotEmpty)
+                          if (jobOfferDetail.numberOfWorkPerWeek! == '')
                             OutlineContainerWidget(
-                              title: 'Working Duration',
+                              title: 'workDuraction'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: CustomBoxWidget(
-                                insideObj: CustomTextWidget(
+                                child: CustomTextWidget(
                                   textAlign: TextAlign.center,
                                   text: '${jobOfferDetail.numberOfWorkPerWeek}',
                                   fontWeight: FontWeightManager.regular,
@@ -206,10 +232,66 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             Container(),
                           //===== Working Duration Component =====//
 
+                          ///===== Remuneration Component =====//
+                          if (jobOfferDetail.remunerationMaxMin! == '')
+                            OutlineContainerWidget(
+                              title: 'remuneration'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: CustomBoxWidget(
+                                child: CustomTextWidget(
+                                  textAlign: TextAlign.center,
+                                  text: '${jobOfferDetail.remunerationMaxMin}',
+                                  fontWeight: FontWeightManager.regular,
+                                  fontSize: AppSize.s12,
+                                  // marginBottom: AppSize.s10,
+                                ),
+                              ),
+                            )
+                          else
+                            Container(),
+                          //===== Remuneration Component =====//
+
+                          ///===== Work Availabilities Component =====//
+                          if (jobOfferDetail.availabilities!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'workAvailability'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.availabilities != []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i <
+                                                jobOfferDetail
+                                                    .availabilities!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.availabilities![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Work Availabilities Component =====//
+
                           ///===== Types Component =====//
                           if (jobOfferDetail.types!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Types',
+                              title: 'types'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.types != []
                                   ? Wrap(
@@ -223,7 +305,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                               bottom: AppSize.s4,
                                             ),
                                             child: CustomBoxWidget(
-                                              insideObj: CustomTextWidget(
+                                              child: CustomTextWidget(
                                                 textAlign: TextAlign.center,
                                                 text:
                                                     '${jobOfferDetail.types![i].label}',
@@ -244,7 +326,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ///===== Fields Component =====//
                           if (jobOfferDetail.fields!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Fields',
+                              title: 'fields'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.fields != []
                                   ? Wrap(
@@ -258,7 +340,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                               bottom: AppSize.s4,
                                             ),
                                             child: CustomBoxWidget(
-                                              insideObj: CustomTextWidget(
+                                              child: CustomTextWidget(
                                                 textAlign: TextAlign.center,
                                                 text:
                                                     '${jobOfferDetail.fields![i].label}',
@@ -277,34 +359,37 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Fields Component =====//
 
                           ///===== Office Address Component =====//
-                          OutlineContainerWidget(
-                            title: 'Office Address',
-                            titleColor: ColorsManager.primaryBlue,
-                            childWidget: CustomTextWidget(
-                              text:
-                                  '${jobOfferDetail.jobOfferFullOfficeAddress}',
-                              fontWeight: FontWeightManager.regular,
-                              maxLine: 3,
+                          if (jobOfferDetail
+                              .jobOfferFullOfficeAddress!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'jobOfferAddress'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    '${jobOfferDetail.jobOfferFullOfficeAddress}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 3,
+                              ),
                             ),
-                          ),
                           //===== Office Address Component =====//
 
                           ///===== Job Description Component =====//
-                          OutlineContainerWidget(
-                            title: 'Job Description',
-                            titleColor: ColorsManager.primaryBlue,
-                            childWidget: CustomTextWidget(
-                              text: '${jobOfferDetail.description}',
-                              fontWeight: FontWeightManager.regular,
-                              maxLine: 200,
+                          if (jobOfferDetail.description!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'jobDescription'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: CustomTextWidget(
+                                text: '${jobOfferDetail.description}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
                             ),
-                          ),
                           //===== Job Description Component =====//
 
                           ///===== Languages Component =====//
                           if (jobOfferDetail.spokenLanguages!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Languages',
+                              title: 'languages'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.spokenLanguages != []
                                   ? Wrap(
@@ -340,7 +425,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ///===== Skills Component =====//
                           if (jobOfferDetail.skills!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Skills',
+                              title: 'skills'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.skills != []
                                   ? Wrap(
@@ -384,20 +469,20 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           ),
 
                           ///===== Enterprise ID Component =====//
-                          OutlineContainerWidget(
-                            title: 'Enterprise ID',
-                            titleColor: ColorsManager.primaryBlue,
-                            childWidget: CustomBoxWidget(
-                              insideObj: CustomTextWidget(
-                                textAlign: TextAlign.center,
-                                text:
-                                    '${jobOfferDetail.enterprise!.enterpriseID}',
-                                fontWeight: FontWeightManager.regular,
-                                fontSize: AppSize.s12,
-                                // marginBottom: AppSize.s10,
-                              ),
-                            ),
-                          ),
+                          // OutlineContainerWidget(
+                          //   title: 'offer.enterpriseID'.tr,
+                          //   titleColor: ColorsManager.primaryBlue,
+                          //   childWidget: CustomBoxWidget(
+                          //     child: CustomTextWidget(
+                          //       textAlign: TextAlign.center,
+                          //       text:
+                          //           '${jobOfferDetail.enterprise!.enterpriseID}',
+                          //       fontWeight: FontWeightManager.regular,
+                          //       fontSize: AppSize.s12,
+                          //       // marginBottom: AppSize.s10,
+                          //     ),
+                          //   ),
+                          // ),
                           //===== Enterprise ID Component =====//
 
                           ///===== Contact Phone Component =====//
@@ -452,22 +537,23 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           // ),
                           //===== Contact Email Component =====//
 
-                          ///===== Office Address Component =====//
+                          ///===== Enterprise HQ Office Address Component =====//
                           OutlineContainerWidget(
-                            title: 'Office Address',
+                            title: 'officeAddress'.tr,
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomTextWidget(
                               text:
-                                  '${jobOfferDetail.enterprise!.addressStreet}, ${jobOfferDetail.companyLocation}',
+                                  '${jobOfferDetail.enterprise!.companyAddress}${jobOfferDetail.companyLocation}',
                               fontWeight: FontWeightManager.regular,
+                              maxLine: 3,
                             ),
                           ),
-                          //===== Office Address Component =====//
+                          //===== Enterprise HQ Office Address Component =====//
 
                           ///===== Fields Component =====//
                           if (jobOfferDetail.enterprise!.fields!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'Fields',
+                              title: 'fields'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: jobOfferDetail.enterprise!.fields !=
                                       []
@@ -484,7 +570,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                               bottom: AppSize.s4,
                                             ),
                                             child: CustomBoxWidget(
-                                              insideObj: CustomTextWidget(
+                                              child: CustomTextWidget(
                                                 textAlign: TextAlign.center,
                                                 text:
                                                     '${jobOfferDetail.enterprise!.fields![i].label}',
@@ -504,9 +590,9 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
                           ///===== Description Component =====//
                           OutlineContainerWidget(
-                            title: 'Description',
+                            title: 'description'.tr,
                             titleColor: ColorsManager.primaryBlue,
-                            isDivider: false,
+                            // isDivider: false,
                             childWidget: CustomTextWidget(
                               text: '${jobOfferDetail.enterprise!.description}',
                               fontWeight: FontWeightManager.regular,
@@ -514,6 +600,256 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             ),
                           ),
                           //===== Description Component =====//
+
+                          ///===== Youtube Link Component =====//
+                          if (controller.youtubeVideoId != '')
+                            OutlineContainerWidget(
+                              horizontalPadding: AppSize.s4,
+                              title: 'companyVdoInto'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              titleMarginLeft: AppSize.s12,
+                              isDivider: false,
+                              childWidget:
+                                  // CustomTextWidget(
+                                  //   text: '${jobOfferDetail.enterprise!.youtubeLink}',
+                                  //   fontWeight: FontWeightManager.regular,
+                                  //   maxLine: 200,
+                                  // ),
+                                  SizedBox(
+                                height: 350,
+                                child: YoutubePlayerControllerProvider(
+                                  // Passing controller to widgets below.
+                                  controller: controller.youtubeController,
+                                  child: LayoutBuilder(
+                                    builder: (context, constraints) {
+                                      //  if (kIsWeb && constraints.maxWidth > 800) {
+                                      return ListView(
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              player,
+                                              Positioned.fill(
+                                                child: YoutubeValueBuilder(
+                                                  controller: controller
+                                                      .youtubeController,
+                                                  builder: (context, value) {
+                                                    return AnimatedCrossFade(
+                                                      firstChild: const SizedBox
+                                                          .shrink(),
+                                                      secondChild: Material(
+                                                        child: DecoratedBox(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            image:
+                                                                DecorationImage(
+                                                              image:
+                                                                  NetworkImage(
+                                                                YoutubePlayerController
+                                                                    .getThumbnail(
+                                                                  videoId: controller
+                                                                      .youtubeController
+                                                                      .params
+                                                                      .playlist
+                                                                      .last,
+                                                                  quality:
+                                                                      ThumbnailQuality
+                                                                          .medium,
+                                                                ),
+                                                              ),
+                                                              fit: BoxFit
+                                                                  .fitWidth,
+                                                            ),
+                                                          ),
+                                                          child: const Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      crossFadeState:
+                                                          value.isReady
+                                                              ? CrossFadeState
+                                                                  .showFirst
+                                                              : CrossFadeState
+                                                                  .showSecond,
+                                                      duration: const Duration(
+                                                        milliseconds: 300,
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          // const Controls(),
+                                        ],
+                                      );
+                                      // }
+                                    },
+                                  ),
+                                ),
+                              ),
+                            )
+                          else
+                            Container(),
+                          // SizedBox(
+                          //   height: 350,
+                          //   child: YoutubePlayerControllerProvider(
+                          //     // Passing controller to widgets below.
+                          //     controller: controller.youtubeController,
+                          //     child: LayoutBuilder(
+                          //       builder: (context, constraints) {
+                          //         //  if (kIsWeb && constraints.maxWidth > 800) {
+                          //         return
+                          //             // Column(
+                          //             //   children: const [
+                          //             //     Expanded(child: player),
+                          //             //     SizedBox(
+                          //             //       width: 100,
+                          //             //       child: SingleChildScrollView(
+                          //             //         child: Controls(),
+                          //             //       ),
+                          //             //     ),
+                          //             //   ],
+                          //             // );
+                          //             ListView(
+                          //           children: [
+                          //             Stack(
+                          //               children: [
+                          //                 player,
+                          //                 Positioned.fill(
+                          //                   child: YoutubeValueBuilder(
+                          //                     controller:
+                          //                         controller.youtubeController,
+                          //                     builder: (context, value) {
+                          //                       return AnimatedCrossFade(
+                          //                         firstChild:
+                          //                             const SizedBox.shrink(),
+                          //                         secondChild: Material(
+                          //                           child: DecoratedBox(
+                          //                             decoration: BoxDecoration(
+                          //                               image: DecorationImage(
+                          //                                 image: NetworkImage(
+                          //                                   YoutubePlayerController
+                          //                                       .getThumbnail(
+                          //                                     videoId: controller
+                          //                                         .youtubeController
+                          //                                         .params
+                          //                                         .playlist
+                          //                                         .last,
+                          //                                     quality:
+                          //                                         ThumbnailQuality
+                          //                                             .medium,
+                          //                                   ),
+                          //                                 ),
+                          //                                 fit: BoxFit.fitWidth,
+                          //                               ),
+                          //                             ),
+                          //                             child: const Center(
+                          //                               child:
+                          //                                   CircularProgressIndicator(),
+                          //                             ),
+                          //                           ),
+                          //                         ),
+                          //                         crossFadeState: value.isReady
+                          //                             ? CrossFadeState.showFirst
+                          //                             : CrossFadeState
+                          //                                 .showSecond,
+                          //                         duration: const Duration(
+                          //                           milliseconds: 300,
+                          //                         ),
+                          //                       );
+                          //                     },
+                          //                   ),
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //             // const Controls(),
+                          //           ],
+                          //         );
+                          //         // }
+                          //       },
+                          //     ),
+                          //     // Scaffold(
+                          //     //   body: LayoutBuilder(
+                          //     //     builder: (context, constraints) {
+                          //     //       if (kIsWeb && constraints.maxWidth > 800) {
+                          //     //         return
+                          //     //         Row(
+                          //     //           crossAxisAlignment:
+                          //     //               CrossAxisAlignment.start,
+                          //     //           children: const [
+                          //     //             Expanded(child: player),
+                          //     //             SizedBox(
+                          //     //               width: 500,
+                          //     //               child: SingleChildScrollView(
+                          //     //                   // child: Controls(),
+                          //     //                   ),
+                          //     //             ),
+                          //     //           ],
+                          //     //         );
+                          //     //       }
+                          //     //       return ListView(
+                          //     //         children: [
+                          //     //           Stack(
+                          //     //             children: [
+                          //     //               player,
+                          //     //               Positioned.fill(
+                          //     //                 child: YoutubeValueBuilder(
+                          //     //                   controller:
+                          //     //                       controller.youtubeController,
+                          //     //                   builder: (context, value) {
+                          //     //                     return AnimatedCrossFade(
+                          //     //                       firstChild:
+                          //     //                           const SizedBox.shrink(),
+                          //     //                       secondChild: Material(
+                          //     //                         child: DecoratedBox(
+                          //     //                           decoration: BoxDecoration(
+                          //     //                             image: DecorationImage(
+                          //     //                               image: NetworkImage(
+                          //     //                                 YoutubePlayerController
+                          //     //                                     .getThumbnail(
+                          //     //                                   videoId: controller
+                          //     //                                       .youtubeController
+                          //     //                                       .params
+                          //     //                                       .playlist
+                          //     //                                       .first,
+                          //     //                                   quality:
+                          //     //                                       ThumbnailQuality
+                          //     //                                           .medium,
+                          //     //                                 ),
+                          //     //                               ),
+                          //     //                               fit: BoxFit.fitWidth,
+                          //     //                             ),
+                          //     //                           ),
+                          //     //                           child: const Center(
+                          //     //                             child:
+                          //     //                                 CircularProgressIndicator(),
+                          //     //                           ),
+                          //     //                         ),
+                          //     //                       ),
+                          //     //                       crossFadeState: value.isReady
+                          //     //                           ? CrossFadeState.showFirst
+                          //     //                           : CrossFadeState
+                          //     //                               .showSecond,
+                          //     //                       duration: const Duration(
+                          //     //                         milliseconds: 300,
+                          //     //                       ),
+                          //     //                     );
+                          //     //                   },
+                          //     //                 ),
+                          //     //               ),
+                          //     //             ],
+                          //     //           ),
+                          //     //           // const Controls(),
+                          //     //         ],
+                          //     //       );
+                          //     //     },
+                          //     //   ),
+                          //     // ),
+                          //   ),
+                          // )
+                          //===== Youtube Link Component =====//
                         ],
                       ),
                       //===== Second Tab Component =====//
@@ -634,4 +970,37 @@ class OfferDetailPage extends GetView<OfferDetailController> {
       ),
     );
   }
+}
+
+///
+class Controls extends StatelessWidget {
+  ///
+  const Controls();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _space,
+          const Text(
+            'data',
+          ),
+          // MetaDataSection(),
+          _space,
+          // SourceInputSection(),
+          _space,
+          // PlayPauseButtonBar(),
+          _space,
+          // VolumeSlider(),
+          _space,
+          // PlayerStateSection(),
+        ],
+      ),
+    );
+  }
+
+  Widget get _space => const SizedBox(height: 10);
 }

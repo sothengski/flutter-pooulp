@@ -23,6 +23,8 @@ class CustomMaterialButton extends StatelessWidget {
   final double? topPadding;
   final double? rightPadding;
   final double? bottomPadding;
+  final double? horizonalPadding;
+  final double? verticalPadding;
   final Widget? childWidget;
 
   const CustomMaterialButton({
@@ -47,6 +49,8 @@ class CustomMaterialButton extends StatelessWidget {
     this.topPadding = 0.0,
     this.rightPadding = 0.0,
     this.bottomPadding = 0.0,
+    this.horizonalPadding = 0.0,
+    this.verticalPadding = 0.0,
     this.childWidget,
   }) : super(key: key);
 
@@ -61,7 +65,12 @@ class CustomMaterialButton extends StatelessWidget {
       ),
       child: MaterialButton(
         // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        padding: EdgeInsets.zero,
+        padding: horizonalPadding != 0.0 || verticalPadding != 0.0
+            ? EdgeInsets.symmetric(
+                vertical: verticalPadding!,
+                horizontal: horizonalPadding!,
+              )
+            : EdgeInsets.zero,
         color: buttonColor,
         minWidth: buttonWidth,
         height: buttonHeight,

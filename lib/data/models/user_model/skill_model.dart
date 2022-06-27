@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../../core/core.dart';
+
 enum Type { softSkill, hardSkill }
 
 EnumValues<Type> typeValues = EnumValues({
@@ -40,13 +42,19 @@ class SkillModel {
     this.level,
   });
 
-  String? get displayLevel => level == null ? '' : 'Level $level';
-
+  // String? get displayLevel => level == null ? '' : 'Level $level';
+  String? get displayLevel => level == null
+      ? ''
+      : //  "${'profile.level'.tr} $level";
+      getLevelString(level: level);
   String? get displayLabelAndLevel =>
       level == null ? '• $label' : '• $label - Level $level';
 
   String? get displayLabelAndCategory =>
       category == null ? '• $label' : '• $label - $category';
+
+  String? get displayDashLabelAndCategory =>
+      category == null ? '- $label' : '- $label - $category';
 
   factory SkillModel.fromRawJson(String str) => SkillModel.fromJson(
         json.decode(str) as Map<String, dynamic>,

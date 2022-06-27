@@ -8,6 +8,7 @@ abstract class IOfferProvider {
   Future<List<JobOfferModel>> getMatchedOffers();
   Future<List<JobOfferModel>> getSavedOffers();
   Future<List<JobOfferModel>> getRejectedOffers();
+  Future<SearchPreferencesModel> getSearchPreferences();
   Future<List<JobOfferModel>> postSearchOffer({
     int? pageNumber = 1,
     JobOfferModel jobOfferForSearch,
@@ -140,6 +141,26 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
   }
 
   @override
+  Future<SearchPreferencesModel> getSearchPreferences() async {
+    try {
+      final dataResponse = await get(
+        API.paths[Endpoint.getSearchPreferences].toString(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse = json.decode(dataResponse.bodyString.toString());
+
+        return SearchPreferencesModel.fromJson(
+          apiResponse as Map<String, dynamic>,
+        );
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
   Future<List<JobOfferModel>> postSearchOffer({
     int? pageNumber,
     JobOfferModel? jobOfferForSearch,
@@ -182,16 +203,18 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
     JobOfferModel? jobOfferForSearch,
   }) async {
     try {
-      // debugPrint(
-      //   'Page: $pageNumber, Param:${jobOfferForSearch!.toSearchJson()}',
-      // );
-
       final dataResponse = await post(
         API.postSearchOffer(pageNumber: pageNumber),
         jobOfferForSearch!.toSearchJson(),
       );
       // debugPrint(
+      //   'Page: $pageNumber, Param:${jobOfferForSearch.toSearchJson()}',
+      // );
+      // debugPrint(
       //   'API: ${API.postSearchOffer(pageNumber: pageNumber)}',
+      // );
+      // debugPrint(
+      //   'Data::${dataResponse.bodyString}',
       // );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";

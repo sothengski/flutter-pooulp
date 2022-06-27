@@ -22,11 +22,11 @@ class StudentProfileModel {
   final List<PeriodModel>? periods;
 
   StudentProfileModel({
-    this.telecommuting,
-    this.shifting,
+    this.telecommuting = false,
+    this.shifting = false,
     this.radius,
-    this.drivingLicense,
-    this.hasAutomobile,
+    this.drivingLicense = false,
+    this.hasAutomobile = false,
     this.facebookLink,
     this.linkedinLink,
     this.whatsappLink,
@@ -40,6 +40,55 @@ class StudentProfileModel {
     this.certificates,
     this.periods,
   });
+
+  double? get calculatingProfileCompleteness {
+    const int fieldCounter = 8;
+    const int fullPercentage = 100;
+    double completePercent = 0;
+    if (linkedinLink != '') {
+      completePercent += fullPercentage / fieldCounter;
+    }
+    if (skills != null) {
+      if (skills!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (spokenLanguages != null) {
+      if (spokenLanguages!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (educations != null) {
+      if (educations!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (experiences != null) {
+      if (experiences!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (achievements != null) {
+      if (achievements!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (certificates != null) {
+      if (certificates!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    if (periods != null) {
+      if (periods!.isNotEmpty) {
+        completePercent += fullPercentage / fieldCounter;
+      }
+    }
+    return double.tryParse(
+      completePercent.toStringAsFixed(2),
+    );
+  }
+
+  int get radiusFromMeterToKM => radius == null ? 0 : radius! ~/ 1000;
 
   factory StudentProfileModel.fromRawJson(String str) =>
       StudentProfileModel.fromJson(
@@ -106,15 +155,15 @@ class StudentProfileModel {
                 )
                 .toList()
             : [],
-        certificates: json['certificates'] != null || json['certificates'] != []
-            ? (json['certificates'] as List)
+        certificates: json['certificates'] == null || json['certificates'] == []
+            ? []
+            : (json['certificates'] as List)
                 .map(
                   (i) => CertificateModel.fromJson(
                     i as Map<String, dynamic>,
                   ),
                 )
-                .toList()
-            : [],
+                .toList(),
         periods: json['periods'] != null || json['periods'] != []
             ? (json['periods'] as List)
                 .map(
@@ -129,7 +178,7 @@ class StudentProfileModel {
   Map<String, dynamic> toJson() => {
         'telecommuting': telecommuting,
         'shifting': shifting,
-        'radius': radius,
+        'radius': radius! * 1000,
         'driving_license': drivingLicense,
         'has_automobile': hasAutomobile,
         'facebook_link': facebookLink,
@@ -137,27 +186,27 @@ class StudentProfileModel {
         'whatsapp_link': whatsappLink,
         'youtube_link': youtubeLink,
         'gender': gender,
-        'skills': skills != null || skills != []
-            ? List<dynamic>.from(skills!.map((x) => x.toJson()))
-            : null,
-        'spoken_languages': spokenLanguages != null || spokenLanguages != []
-            ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
-            : null,
-        'educations': educations != null || educations != []
-            ? List<dynamic>.from(educations!.map((x) => x.toJson()))
-            : null,
-        'experiences': experiences != null || experiences != []
-            ? List<dynamic>.from(experiences!.map((x) => x.toJson()))
-            : null,
-        'achievements': achievements != null || achievements != []
-            ? List<dynamic>.from(achievements!.map((x) => x.toJson()))
-            : null,
-        'certificates': certificates != null || certificates != []
-            ? List<dynamic>.from(certificates!.map((x) => x.toJson()))
-            : null,
-        'periods': periods != null || periods != []
-            ? List<dynamic>.from(periods!.map((x) => x.toJson()))
-            : null,
+        'skills': skills == null || skills == []
+            ? null
+            : List<dynamic>.from(skills!.map((x) => x.toJson())),
+        'spoken_languages': spokenLanguages == null || spokenLanguages == []
+            ? null
+            : List<dynamic>.from(spokenLanguages!.map((x) => x.toJson())),
+        'educations': educations == null || educations == []
+            ? null
+            : List<dynamic>.from(educations!.map((x) => x.toJson())),
+        'experiences': experiences == null || experiences == []
+            ? null
+            : List<dynamic>.from(experiences!.map((x) => x.toJson())),
+        'achievements': achievements == null || achievements == []
+            ? null
+            : List<dynamic>.from(achievements!.map((x) => x.toJson())),
+        'certificates': certificates == null || certificates == []
+            ? null
+            : List<dynamic>.from(certificates!.map((x) => x.toJson())),
+        'periods': periods == null || periods == []
+            ? null
+            : List<dynamic>.from(periods!.map((x) => x.toJson())),
       }..removeWhere((_, v) => v == null);
 
   @override

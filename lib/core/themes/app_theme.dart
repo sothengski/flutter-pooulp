@@ -101,6 +101,10 @@ mixin ThemeManager {
         ),
         unselectedWidgetColor: theme.colors.buttonTextColor,
         inputDecorationTheme: InputDecorationTheme(
+          // iconColor: ColorsManager.grey400,
+          // prefixIconColor: ColorsManager.grey400,
+          // suffixIconColor: ColorsManager.grey400,
+          suffixStyle: TextStyle(color: theme.colors.iconColor),
           prefixStyle: TextStyle(color: theme.colors.iconColor),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(

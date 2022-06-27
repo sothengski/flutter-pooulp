@@ -11,6 +11,10 @@ import 'routes/routes.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init(LocalStorage.credentialName);
+  // await getAllTranslationLangsProvider(lang: 'en');
+  // await getAllTranslationLangsProvider(lang: 'fr');
+  await AppBasicServices().getLangsFromFile(lang: 'en');
+  await AppBasicServices().getLangsFromFile(lang: 'fr');
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,
@@ -70,11 +74,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeManager.createTheme(
         AppThemeLight(),
       ),
-      locale: storageServices!.languageCode == 'km'
-          ? const Locale('km', 'KH')
-          : storageServices!.languageCode == 'zh'
-              ? const Locale('zh', 'ZH')
-              : const Locale('en', 'US'),
+      locale: LanguageController().getLocale,
+      // locale: storageServices!.languageCode == 'nl'
+      //     ? const Locale('nl', 'NL')
+      //     : storageServices!.languageCode == 'fr'
+      //         ? const Locale('fr', 'FR')
+      //         : const Locale('en', 'US'),
 
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),

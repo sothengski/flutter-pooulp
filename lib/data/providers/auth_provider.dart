@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 import '../data.dart';
@@ -67,15 +68,150 @@ class AuthProvider extends BaseProvider {
     }
   }
 
+  // Object responseBodyHandler({Response? resp}) {
+  //   return '''${resp!.body['invitation_token'][0] != null ? "\n- ${resp.body['invitation_token']?[0]}" : ""}'''
+  //           '''${resp.body['email'] != null ? "\n- ${resp.body!['email']?[0]}" : ""}'''
+  //           '''${resp.body!['password'] != null ? "\n- ${resp.body!['password']?[0]}" : ""}'''
+  //           '''${resp.body['message'] != null ? "\n- ${resp.body!['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}" : ""}'''
+  //       // "${reps.body['code'] != null ? "\n- ${reps.body!['code']}" : ""}"
+  //       ;
+  // }
+
   Object responseBodyHandler({Response? resp}) {
-    return '''${resp!.body['invitation_token']?[0] != null ? "\n- ${resp.body['invitation_token']?[0]}" : ""}'''
-            '''${resp.body['email'] != null ? "\n- ${resp.body!['email']?[0]}" : ""}'''
-            '''${resp.body!['password'] != null ? "\n- ${resp.body!['password']?[0]}" : ""}'''
-            '''${resp.body['message'] != null ? "\n- ${resp.body!['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}" : ""}'''
-        // "${reps.body['code'] != null ? "\n- ${reps.body!['code']}" : ""}"
+    return resp!.body['message'] != null
+            ? "\n- ${resp.body!['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}"
+            : ""
+        // ''' "${resp.body['code'] != null ? "\n- ${resp.body!['code']}" : ""}"'''
         ;
   }
+
+  ///===== Top of Change Password Section =====//
+  ///
+  ///PUT Method for Change Password
+  Future<JsonResponse> putChangePassword({
+    required String? currentPassword,
+    required String? newPassword,
+    required String? newPasswordConfirmation,
+  }) async {
+    try {
+      final dataResponse = await put(
+        API.paths[Endpoint.putChangePassword].toString(),
+        {
+          "password": currentPassword,
+          "newPassword": newPassword,
+          "newPassword_confirmation": newPasswordConfirmation,
+        },
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.paths[Endpoint.putChangePassword].toString()},
+      //   {
+      //     "password": $currentPassword,
+      //     "newPassword": $newPassword,
+      //     "newPassword_confirmation": $newPasswordConfirmation,
+      //   },
+      //   ''',
+      // );
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      // if (dataResponse.hasError) {
+      //   // throw "(resp: ${dataResponse.bodyString})";
+      //   return response;
+      // } else {
+      return response;
+      // }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///===== Top of Forgot Password Section =====//
+  ///
+  ///POST Method for Forgot Password
+  Future<JsonResponse> postForgotPassword({
+    required String? email,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postForgotPassword].toString(),
+        {
+          "email": email,
+        },
+      );
+      // debugPrint(
+      //   '''
+      //   ${API.paths[Endpoint.postForgotPassword].toString()},
+      //   {"email": $email,},
+      //   ''',
+      // );
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      return response;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///===== Top of Delete User Account Section =====//
+  ///
+  ///DELETE Method for Auth Delete User Account Information
+  Future<JsonResponse> deleteUserAccount() async {
+    try {
+      final dataResponse = await delete(
+        API.paths[Endpoint.userInfo].toString(),
+      );
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      // if (dataResponse.hasError) {
+      //   // throw "(resp: ${dataResponse.bodyString})";
+      //   return response;
+      // } else {
+      return response;
+      // }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  ///===== Top of Verify Email Section =====//
+  ///
+  ///POST Method for Verify Email
+  Future<JsonResponse> verifyEmail({
+    required String? email,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postVerifyEmail].toString(),
+        {
+          "email": email,
+        },
+      );
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      debugPrint('response: $response');
+      return response;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }
+
 
 // RESPONSE CODES#
 // 200: Success

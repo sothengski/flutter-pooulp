@@ -8,6 +8,8 @@ class OutlineContainerWidget extends StatelessWidget {
   final String? title;
   final double? fontSizeTitle;
   final Color? titleColor;
+  final double? titleMarginLeft;
+  final double? titleMarginRight;
   final FontWeight? fontWeightTitle;
   final Widget? childWidget;
   final bool? isDivider;
@@ -21,6 +23,8 @@ class OutlineContainerWidget extends StatelessWidget {
     this.fontSizeTitle = 14,
     this.titleColor = ColorsManager.grey,
     this.fontWeightTitle = FontWeightManager.regular,
+    this.titleMarginLeft = AppSize.s0,
+    this.titleMarginRight = AppSize.s0,
     this.childWidget,
     this.isDivider = true,
     this.heightDivider = AppSize.s8,
@@ -47,6 +51,8 @@ class OutlineContainerWidget extends StatelessWidget {
               fontWeight: fontWeightTitle,
               color: titleColor,
               marginBottom: AppSize.s8,
+              marginLeft: titleMarginLeft,
+              marginRight: titleMarginRight,
             ),
           Padding(
             padding: const EdgeInsets.only(

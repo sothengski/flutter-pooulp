@@ -1,16 +1,27 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/data.dart';
-import '../home/home.dart';
+import '../modules.dart';
 
 class ProfileController extends GetxController {
   final homeController = Get.put(HomeController());
+  final languageController = Get.put(LanguageController());
+
   final userInfoProvider = Get.find<UserInfoProvider>();
+
+  final cvGenerate = CVGenerate();
+
+  final pdfService = PdfService();
 
   RxBool enterpriseSwitching = false.obs;
 
   Rx<UserModel> userInfoRepsonse = UserModel().obs;
+  Rx<ProfileModel> userProfileInfo = const ProfileModel().obs;
+
   Rx<StudentProfileModel> studentInfoRepsonse = StudentProfileModel().obs;
+
+  TextEditingController jobTitleTextCtrl = TextEditingController(text: '');
 
   RxBool isProcessingUserInfoRepsonse = false.obs;
   RxBool isProcessingStudentInfoRepsonse = false.obs;
@@ -53,7 +64,11 @@ class ProfileController extends GetxController {
     bool? refresh = false,
   }) async {
     userInfoRepsonse.value = await userInfoProvider.getUserInfo();
+    userProfileInfo.value = userInfoRepsonse.value.profile!;
     // debugPrint('userInfoRepsonse: $userInfoRepsonse');
+    changeLanguageBasedOnProfileLanguage(
+      languageKey: userProfileInfo.value.uiLanguage,
+    );
     return userInfoRepsonse;
   }
 
@@ -70,5 +85,24 @@ class ProfileController extends GetxController {
 
   bool updateSwitchingToggle({bool? switchingNewValue}) {
     return !switchingNewValue!;
+  }
+
+  void changeLanguageBasedOnProfileLanguage({required String? languageKey}) {
+    if (languageController.currentLanguage != languageKey) {
+      languageController.updateLanguage(
+        languageKey,
+      );
+    }
+  }
+
+  Future<void> generateCV() async {
+    final pdfFile = await cvGenerate.generate(
+      userData: userInfoRepsonse.value,
+      studentData: studentInfoRepsonse.value,
+      profileData: userProfileInfo.value,
+      jobTitle: jobTitleTextCtrl.text,
+    );
+    // print(pdfFile);
+    await pdfService.openFile(pdfFile);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../core/core.dart';
 import '../modules/modules.dart';
 import 'routes.dart';
 
@@ -23,11 +24,11 @@ class AppPages {
       page: () => const HomePage(),
       binding: HomeBinding(),
     ),
-    // GetPage(
-    //   name: Routes.onBoardingRoute,
-    //   page: () => const OnBoardingPage(),
-    //   binding: OnboardingBinding(),
-    // ),
+    GetPage(
+      name: Routes.onBoardingRoute,
+      page: () => const OnboardingPage(),
+      binding: OnboardingBinding(),
+    ),
     GetPage(
       name: Routes.signUpRoute,
       page: () => const SignUpPage(),
@@ -39,6 +40,11 @@ class AppPages {
       binding: SignInBinding(),
     ),
     GetPage(
+      name: Routes.forgotPasswordRoute,
+      page: () => const ForgotPasswordPage(),
+      binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
       name: Routes.editUserInfoRoute,
       page: () => const EditUserInformationPage(),
       binding: EditUserInformationBinding(),
@@ -47,11 +53,65 @@ class AppPages {
       name: Routes.settingsRoute,
       page: () => const SettingPage(),
       binding: SettingBinding(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: DurationConstant.d350,
+    ),
+    GetPage(
+      name: Routes.changePasswordRoute,
+      page: () => const ChangePasswordPage(),
+      binding: ChangePasswordBinding(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: DurationConstant.d350,
     ),
     GetPage(
       name: Routes.offerdetailRoute,
       page: () => OfferDetailPage(),
       binding: OfferDetailBinding(),
+    ),
+    GetPage(
+      name: Routes.addOrEditEducationRoute,
+      page: () => AddOrEditEducationPage(),
+      binding: EducationBinding(),
+    ),
+    GetPage(
+      name: Routes.addOrEditExperienceRoute,
+      page: () => const AddOrEditExperiencePage(),
+      binding: ExperienceBinding(),
+    ),
+    GetPage(
+      name: Routes.addOrEditAchievementRoute,
+      page: () => const AddOrEditAchievementPage(),
+      binding: AchievementBinding(),
+    ),
+    GetPage(
+      name: Routes.addOrEditCertificateRoute,
+      page: () => const AddOrEditCertificatePage(),
+      binding: CertificateBinding(),
+    ),
+    GetPage(
+      name: Routes.addOrEditLanguageUsageRoute,
+      page: () => const AddOrEditLanguageUsagePage(),
+      binding: LanguageUsageBinding(),
+    ),
+    GetPage(
+      name: Routes.addOrEditSkillRoute,
+      page: () => const AddOrEditSkillPage(),
+      binding: SkillBinding(),
+    ),
+    GetPage(
+      name: Routes.addOrEditAvailabilityRoute,
+      page: () => const AddOrEditAvailabilityPage(),
+      binding: AvailabilityBinding(),
+    ),
+    GetPage(
+      name: Routes.messagingRoomsRoute,
+      page: () => const RoomListPage(),
+      binding: MessagingBinding(),
+    ),
+    GetPage(
+      name: Routes.roomDetailsRoute,
+      page: () => const MessagingPage(),
+      binding: MessagingBinding(),
     ),
   ];
 }

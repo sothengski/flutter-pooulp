@@ -7,10 +7,12 @@ class UserModel {
   final String? uuid;
   final String? email;
   final bool? isActivated;
+  final DateTime? emailConfirmedAt;
   final ProfileModel? profile;
   final ProfileModel? enterprise;
 
-  final String? role; //offer in feed endpoint
+  final int? role; //offer in feed endpoint
+  final String? roleLabel; //offer in feed endpoint
   final UserModel? user; //offer in feed endpoint
 
   UserModel({
@@ -18,9 +20,11 @@ class UserModel {
     this.uuid,
     this.email,
     this.isActivated,
+    this.emailConfirmedAt,
     this.profile,
     this.enterprise,
     this.role,
+    this.roleLabel,
     this.user,
   });
   String get managerPhoneContact =>
@@ -39,6 +43,9 @@ class UserModel {
         uuid: json['uuid'] as String?,
         email: json['email'] as String?,
         isActivated: json['is_activated'] as bool?,
+        emailConfirmedAt: json['email_confirmed_at'] != null
+            ? DateTime.parse(json['email_confirmed_at'].toString())
+            : null,
         profile: json['profile'] == null
             ? null
             : ProfileModel.fromJson(
@@ -49,7 +56,8 @@ class UserModel {
             : ProfileModel.fromJson(
                 json['enterprise'] as Map<String, dynamic>,
               ),
-        role: json['role'] as String?,
+        role: json['role'] as int?,
+        roleLabel: json['role_label'] as String?,
         user: json['user'] == null
             ? null
             : UserModel.fromJson(
@@ -62,9 +70,11 @@ class UserModel {
         'uuid': uuid,
         'email': email,
         'is_activated': isActivated,
+        'email_confirmed_at': emailConfirmedAt?.toIso8601String(),
         'profile': profile?.toJson(),
         'enterprise': enterprise?.toJson(),
         'role': role,
+        'role_label': roleLabel,
         'user': user?.toJson(),
       }..removeWhere((_, v) => v == null);
 
@@ -76,9 +86,11 @@ class UserModel {
       uuid: $uuid,
       email: $email,
       isActivated: $isActivated,
+      emailConfirmedAt: $emailConfirmedAt,
       profile: $profile,
       enterprise: $enterprise,
       role: $role,
+      roleLabel: $roleLabel,
       user: $user,
     )''';
   }

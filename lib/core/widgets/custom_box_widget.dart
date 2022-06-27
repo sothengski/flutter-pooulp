@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../core.dart';
 
 class CustomBoxWidget extends StatelessWidget {
-  final Widget? insideObj;
+  final Widget? child;
   final Color? backgroundColor;
   final double? size;
   final double? borderRadius;
@@ -21,7 +21,7 @@ class CustomBoxWidget extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
 
   const CustomBoxWidget({
-    this.insideObj,
+    this.child,
     this.backgroundColor = ColorsManager.grey100,
     this.size,
     this.borderRadius = 8.0,
@@ -34,6 +34,25 @@ class CustomBoxWidget extends StatelessWidget {
     this.leftMargin = 0.0,
     this.rightMargin = 0.0,
     this.isCircle = false,
+    this.borderWidth = 0.0,
+    this.boxShadow,
+    Key? key,
+  }) : super(key: key);
+
+  const CustomBoxWidget.chatAvatarDefault({
+    this.child,
+    this.backgroundColor = ColorsManager.white,
+    this.size = 35,
+    this.borderRadius = 8.0,
+    this.topPadding = 2.0,
+    this.bottomPadding = 2.0,
+    this.leftPadding = 2.0,
+    this.rightPadding = 2.0,
+    this.topMargin = 0.0,
+    this.bottomMargin = 0.0,
+    this.leftMargin = 0.0,
+    this.rightMargin = 0.0,
+    this.isCircle = true,
     this.borderWidth = 0.0,
     this.boxShadow,
     Key? key,
@@ -70,10 +89,16 @@ class CustomBoxWidget extends StatelessWidget {
           left: leftMargin!,
           right: rightMargin!,
         ),
-        child: insideObj ??
+        child: child ??
             Container(
               decoration: BoxDecoration(
                 shape: isCircle! ? BoxShape.circle : BoxShape.rectangle,
+                // border: Border.all(
+                //   color: borderWidth == 0.0
+                //       ? ColorsManager.white
+                //       : ColorsManager.grey400,
+                //   width: 0,
+                // ),
                 image: const DecorationImage(
                   image: AssetImage(AssetsManager.appLogoSymbol),
                   opacity: 0.75,

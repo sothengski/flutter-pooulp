@@ -10,6 +10,7 @@ class JobOfferModel {
   final String? title;
   final String? studySubject;
   final String? description;
+  final String? additionalInfo;
   final bool? isDraft;
   final DateTime? dateOfferStart;
   final DateTime? dateOfferEnd;
@@ -18,6 +19,7 @@ class JobOfferModel {
   final int? telecommuting;
   final int? shifting;
   final int? numberOfWorkingHourPerWeek;
+  final int? drivingLicence;
   final String? remunerationMax;
   final String? remunerationMin;
   final String? currencySymbol;
@@ -48,6 +50,7 @@ class JobOfferModel {
     this.title,
     this.studySubject,
     this.description,
+    this.additionalInfo,
     this.isDraft,
     this.dateOfferStart,
     this.dateOfferEnd,
@@ -56,6 +59,7 @@ class JobOfferModel {
     this.telecommuting = 2,
     this.shifting,
     this.numberOfWorkingHourPerWeek,
+    this.drivingLicence,
     this.remunerationMax,
     this.remunerationMin,
     this.currencySymbol,
@@ -83,13 +87,13 @@ class JobOfferModel {
   });
 
   String? get numberOfWorkPerWeek => numberOfWorkingHourPerWeek == null
-      ? 'N/A'
-      : "$numberOfWorkingHourPerWeek ${'offer.hrsWeek'.tr}";
+      ? ''
+      : "$numberOfWorkingHourPerWeek ${'hrs'.tr}/${'day'.tr}".toLowerCase();
 
   String? get remunerationMaxMin => remunerationMax == null &&
           remunerationMin == null
-      ? 'N/A'
-      : "${remunerationMin == null ? '' : '$remunerationMin${currencySymbol ?? ''}'} - ${remunerationMax == null ? '' : '$remunerationMax${currencySymbol ?? ''}'}/${'offer.hour'.tr}";
+      ? ''
+      : "${remunerationMin == null ? '' : '$remunerationMin${currencySymbol ?? ''}'} - ${remunerationMax == null ? '' : '$remunerationMax${currencySymbol ?? ''}'}/${'perHour'.tr}";
 
   String? get companyNameAndLocation =>
       '${enterprise!.name} ($companyLocation)';
@@ -126,6 +130,7 @@ class JobOfferModel {
         title: json['title'] as String?,
         studySubject: json['study_subject'] as String?,
         description: json['description'] as String?,
+        additionalInfo: json['additional_information'] as String?,
         isDraft: json['is_draft'] as bool?,
         dateOfferStart:
             json['date_offer_start'] != null && json['date_offer_start'] != ''
@@ -153,6 +158,7 @@ class JobOfferModel {
         telecommuting: json['telecommuting'] as int?,
         shifting: json['shifting'] as int?,
         numberOfWorkingHourPerWeek: json['number_of_working_hour'] as int?,
+        drivingLicence: json['driving_license_required'] as int?,
         remunerationMax: json['remuneration_max'] as String?,
         remunerationMin: json['remuneration_min'] as String?,
         currencySymbol: json['currency_symbol'] as String?,
@@ -226,6 +232,7 @@ class JobOfferModel {
         'title': title,
         'study_subject': studySubject,
         'description': description,
+        'additional_information': additionalInfo,
         'is_draft': isDraft,
         'date_offer_start': dateOfferStart?.toIso8601String(),
         'date_offer_end': dateOfferEnd?.toIso8601String(),
@@ -234,6 +241,7 @@ class JobOfferModel {
         'telecommuting': telecommuting,
         'shifting': shifting,
         'number_of_working_hour': numberOfWorkingHourPerWeek,
+        'driving_license_required': drivingLicence,
         'address_street': addressStreet,
         'address_city': addressCity,
         'address_zip': addressZip,
@@ -325,6 +333,7 @@ class JobOfferModel {
       title: $title,
       studySubject: $studySubject,
       description: $description,
+      additionalInfo: $additionalInfo,
       isDraft: $isDraft,
       dateOfferStart: $dateOfferStart,
       dateOfferEnd: $dateOfferEnd,
@@ -333,6 +342,7 @@ class JobOfferModel {
       telecommuting: $telecommuting,
       shifting: $shifting,
       numberOfWorkingHourPerWeek: $numberOfWorkingHourPerWeek,
+      drivingLicence: $drivingLicence,
       remunerationMax: $remunerationMax,
       remunerationMin: $remunerationMin,
       currencySymbol: $currencySymbol,

@@ -214,7 +214,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Working Period Component =====//
 
                           ///===== Working Duration Component =====//
-                          if (jobOfferDetail.numberOfWorkPerWeek! == '')
+                          if (jobOfferDetail.numberOfWorkPerWeek! != '')
                             OutlineContainerWidget(
                               title: 'workDuraction'.tr,
                               titleColor: ColorsManager.primaryBlue,
@@ -233,7 +233,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Working Duration Component =====//
 
                           ///===== Remuneration Component =====//
-                          if (jobOfferDetail.remunerationMaxMin! == '')
+                          if (jobOfferDetail.remunerationMaxMin! != '')
                             OutlineContainerWidget(
                               title: 'remuneration'.tr,
                               titleColor: ColorsManager.primaryBlue,
@@ -241,6 +241,25 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                 child: CustomTextWidget(
                                   textAlign: TextAlign.center,
                                   text: '${jobOfferDetail.remunerationMaxMin}',
+                                  fontWeight: FontWeightManager.regular,
+                                  fontSize: AppSize.s12,
+                                  // marginBottom: AppSize.s10,
+                                ),
+                              ),
+                            )
+                          else
+                            Container(),
+                          //===== Remuneration Component =====//
+
+                          ///===== Remuneration Component =====//
+                          if (jobOfferDetail.drivingLicence! == 1)
+                            OutlineContainerWidget(
+                              title: 'required'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: CustomBoxWidget(
+                                child: CustomTextWidget(
+                                  textAlign: TextAlign.center,
+                                  text: 'drivingLicense'.tr,
                                   fontWeight: FontWeightManager.regular,
                                   fontSize: AppSize.s12,
                                   // marginBottom: AppSize.s10,
@@ -358,6 +377,78 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             Container(),
                           //===== Fields Component =====//
 
+                          ///===== Skills Component =====//
+                          if (jobOfferDetail.skills!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'skills'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.skills != []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i < jobOfferDetail.skills!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.skills![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Skills Component =====//
+
+                          ///===== Spoken Languages Component =====//
+                          if (jobOfferDetail.spokenLanguages!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'spokenLanguages'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.spokenLanguages != []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i <
+                                                jobOfferDetail
+                                                    .spokenLanguages!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.spokenLanguages![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Spoken Languages Component =====//
+
                           ///===== Office Address Component =====//
                           if (jobOfferDetail
                               .jobOfferFullOfficeAddress!.isNotEmpty)
@@ -386,74 +477,87 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             ),
                           //===== Job Description Component =====//
 
-                          ///===== Languages Component =====//
-                          if (jobOfferDetail.spokenLanguages!.isNotEmpty)
+                          ///===== Additional Information Component =====//
+                          if (jobOfferDetail.additionalInfo!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'languages'.tr,
+                              title: 'additional_information'.tr,
                               titleColor: ColorsManager.primaryBlue,
-                              childWidget: jobOfferDetail.spokenLanguages != []
-                                  ? Wrap(
-                                      direction: Axis.vertical,
-                                      children: [
-                                        for (var i = 0;
-                                            i <
-                                                jobOfferDetail
-                                                    .spokenLanguages!.length;
-                                            i++)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              right: AppSize.s4,
-                                              bottom: AppSize.s4,
-                                            ),
-                                            child: CustomTextWidget(
-                                              textAlign: TextAlign.center,
-                                              text:
-                                                  '${jobOfferDetail.spokenLanguages![i].displayLabelAndLevel}',
-                                              fontWeight:
-                                                  FontWeightManager.regular,
-                                              // fontSize: AppSize.s12,
-                                            ),
-                                          ),
-                                      ],
-                                    )
-                                  : Container(),
-                            )
-                          else
-                            Container(),
+                              childWidget: CustomTextWidget(
+                                text: '${jobOfferDetail.additionalInfo}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== Additional Information Component =====//
+
+                          ///===== Languages Component =====//
+                          // if (jobOfferDetail.spokenLanguages!.isNotEmpty)
+                          //   OutlineContainerWidget(
+                          //     title: 'languages'.tr,
+                          //     titleColor: ColorsManager.primaryBlue,
+                          //     childWidget: jobOfferDetail.spokenLanguages != []
+                          //         ? Wrap(
+                          //             direction: Axis.vertical,
+                          //             children: [
+                          //               for (var i = 0;
+                          //                   i <
+                          //                       jobOfferDetail
+                          //                           .spokenLanguages!.length;
+                          //                   i++)
+                          //                 Padding(
+                          //                   padding: const EdgeInsets.only(
+                          //                     right: AppSize.s4,
+                          //                     bottom: AppSize.s4,
+                          //                   ),
+                          //                   child: CustomTextWidget(
+                          //                     textAlign: TextAlign.center,
+                          //                     text:
+                          //                         '${jobOfferDetail.spokenLanguages![i].displayLabelAndLevel}',
+                          //                     fontWeight:
+                          //                         FontWeightManager.regular,
+                          //                     // fontSize: AppSize.s12,
+                          //                   ),
+                          //                 ),
+                          //             ],
+                          //           )
+                          //         : Container(),
+                          //   )
+                          // else
+                          //   Container(),
                           //===== Languages Component =====//
 
                           ///===== Skills Component =====//
-                          if (jobOfferDetail.skills!.isNotEmpty)
-                            OutlineContainerWidget(
-                              title: 'skills'.tr,
-                              titleColor: ColorsManager.primaryBlue,
-                              childWidget: jobOfferDetail.skills != []
-                                  ? Wrap(
-                                      direction: Axis.vertical,
-                                      children: [
-                                        for (var i = 0;
-                                            i < jobOfferDetail.skills!.length;
-                                            i++)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              right: AppSize.s4,
-                                              bottom: AppSize.s4,
-                                            ),
-                                            child: CustomTextWidget(
-                                              textAlign: TextAlign.center,
-                                              text:
-                                                  '${jobOfferDetail.skills![i].displayLabelAndLevel}',
-                                              fontWeight:
-                                                  FontWeightManager.regular,
-                                              // fontSize: AppSize.s12,
-                                            ),
-                                          ),
-                                      ],
-                                    )
-                                  : Container(),
-                            )
-                          else
-                            Container(),
+                          // if (jobOfferDetail.skills!.isNotEmpty)
+                          //   OutlineContainerWidget(
+                          //     title: 'skills'.tr,
+                          //     titleColor: ColorsManager.primaryBlue,
+                          //     childWidget: jobOfferDetail.skills != []
+                          //         ? Wrap(
+                          //             direction: Axis.vertical,
+                          //             children: [
+                          //               for (var i = 0;
+                          //                   i < jobOfferDetail.skills!.length;
+                          //                   i++)
+                          //                 Padding(
+                          //                   padding: const EdgeInsets.only(
+                          //                     right: AppSize.s4,
+                          //                     bottom: AppSize.s4,
+                          //                   ),
+                          //                   child: CustomTextWidget(
+                          //                     textAlign: TextAlign.center,
+                          //                     text:
+                          //                         '${jobOfferDetail.skills![i].displayLabelAndLevel}',
+                          //                     fontWeight:
+                          //                         FontWeightManager.regular,
+                          //                     // fontSize: AppSize.s12,
+                          //                   ),
+                          //                 ),
+                          //             ],
+                          //           )
+                          //         : Container(),
+                          //   )
+                          // else
+                          //   Container(),
                           //===== Skills Component =====//
                         ],
                       ),

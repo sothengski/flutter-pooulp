@@ -11,7 +11,8 @@ class UserModel {
   final ProfileModel? profile;
   final ProfileModel? enterprise;
 
-  final String? role; //offer in feed endpoint
+  final int? role; //offer in feed endpoint
+  final String? roleLabel; //offer in feed endpoint
   final UserModel? user; //offer in feed endpoint
 
   UserModel({
@@ -23,6 +24,7 @@ class UserModel {
     this.profile,
     this.enterprise,
     this.role,
+    this.roleLabel,
     this.user,
   });
   String get managerPhoneContact =>
@@ -54,7 +56,8 @@ class UserModel {
             : ProfileModel.fromJson(
                 json['enterprise'] as Map<String, dynamic>,
               ),
-        role: json['role'] as String?,
+        role: json['role'] as int?,
+        roleLabel: json['role_label'] as String?,
         user: json['user'] == null
             ? null
             : UserModel.fromJson(
@@ -71,6 +74,7 @@ class UserModel {
         'profile': profile?.toJson(),
         'enterprise': enterprise?.toJson(),
         'role': role,
+        'role_label': roleLabel,
         'user': user?.toJson(),
       }..removeWhere((_, v) => v == null);
 
@@ -86,6 +90,7 @@ class UserModel {
       profile: $profile,
       enterprise: $enterprise,
       role: $role,
+      roleLabel: $roleLabel,
       user: $user,
     )''';
   }

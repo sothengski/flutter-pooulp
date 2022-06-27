@@ -48,6 +48,18 @@ class AppBasicServices extends GetxService {
       } else {
         frLangFile = map.map((key, value) => MapEntry(key, value.toString()));
       }
+    } else {
+      final jsonData = await readJsonFromFile(path: 'assets/data/langs.json');
+
+      if (lang == 'en') {
+        final jsonBody = (jsonData.data as Map<String, dynamic>)['en'];
+        map = jsonBody as Map<String, dynamic>;
+        enLangFile = map.map((key, value) => MapEntry(key, value.toString()));
+      } else {
+        map = (jsonData.data as Map<String, dynamic>)['fr']
+            as Map<String, dynamic>;
+        frLangFile = map.map((key, value) => MapEntry(key, value.toString()));
+      }
     }
     return map;
   }

@@ -89,7 +89,7 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                               controller.selectedReceivedDateString.value == ''
                                   ? RowContentInputWidget(
                                       centerWidget: CustomTextWidget(
-                                        text: 'received'.tr,
+                                        text: ddmmyyyyFormat,
                                         color: ColorsManager.grey400,
                                         fontWeight: FontWeight.w400,
                                         fontSize: AppSize.s16,
@@ -147,7 +147,7 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                           () => controller.selectedExpireDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'expire'.tr,
+                                    text: ddmmyyyyFormat,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,

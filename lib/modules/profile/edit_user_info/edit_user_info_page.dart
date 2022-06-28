@@ -260,7 +260,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                   controller.now.year
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'birthdateHint'.tr,
+                                    text: ddmmyyyyFormat,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16.0,

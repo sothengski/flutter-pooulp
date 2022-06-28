@@ -202,7 +202,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                           () => controller.selectedStartedDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'startFrom'.tr,
+                                    text: ddmmyyyyFormat,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
@@ -259,7 +259,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                           () => controller.selectedEndDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'endDate'.tr,
+                                    text: ddmmyyyyFormat,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,

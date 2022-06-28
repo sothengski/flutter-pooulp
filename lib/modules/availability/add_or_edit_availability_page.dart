@@ -112,7 +112,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                           () => controller.selectedFromDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'from'.tr,
+                                    text: ddmmyyyyFormat,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
@@ -172,7 +172,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                           () => controller.selectedToDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'to'.tr,
+                                    text: ddmmyyyyFormat,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,

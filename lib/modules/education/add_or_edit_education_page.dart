@@ -240,7 +240,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                           () => controller.selectedStartedDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'startFrom'.tr,
+                                    text: mmyyyyFormat,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,
@@ -298,7 +298,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                           () => controller.selectedEndDateString.value == ''
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
-                                    text: 'endDate'.tr,
+                                    text: mmyyyyFormat,
                                     color: ColorsManager.grey400,
                                     fontWeight: FontWeight.w400,
                                     fontSize: AppSize.s16,

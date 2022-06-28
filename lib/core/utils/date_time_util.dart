@@ -1,5 +1,11 @@
 import 'package:intl/intl.dart';
 
+String mmyyyyFormat = "MM/YYYY";
+String mmyyyyDashFormat = "MM-YYYY";
+
+String ddmmyyyyFormat = "DD/MM/YYYY";
+String ddmmyyyyDashFormat = "DD-MM-YYYY";
+
 extension DateExtensions on DateTime {
   String formatToPattern(String pattern) {
     final DateFormat formatter = DateFormat(pattern);

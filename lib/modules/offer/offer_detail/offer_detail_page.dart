@@ -114,6 +114,16 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                     color: ColorsManager.red,
                     marginLeft: AppSize.s20,
                     marginTop: AppSize.s10,
+                    // marginBottom: AppSize.s10,
+                  ),
+                  CustomTextWidget(
+                    text:
+                        "${'expiryDate'.tr}: ${jobOfferDetail.dateOfferEndFormat}",
+                    fontSize: AppSize.s12,
+                    fontWeight: FontWeight.w500,
+                    color: ColorsManager.red,
+                    marginLeft: AppSize.s20,
+                    marginTop: AppSize.s4,
                     marginBottom: AppSize.s10,
                   ),
                   Container(
@@ -214,14 +224,14 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Working Period Component =====//
 
                           ///===== Working Duration Component =====//
-                          if (jobOfferDetail.numberOfWorkPerWeek! != '')
+                          if (jobOfferDetail.numberOfWorking! != '')
                             OutlineContainerWidget(
-                              title: 'workDuraction'.tr,
+                              title: 'numberOfWorkingHour'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: CustomBoxWidget(
                                 child: CustomTextWidget(
                                   textAlign: TextAlign.center,
-                                  text: '${jobOfferDetail.numberOfWorkPerWeek}',
+                                  text: '${jobOfferDetail.numberOfWorking}',
                                   fontWeight: FontWeightManager.regular,
                                   fontSize: AppSize.s12,
                                   // marginBottom: AppSize.s10,

@@ -138,6 +138,7 @@ class OfferListComponent extends StatelessWidget {
                     : (jobOfferType == OfferStrings.savedState)
                         ? [
                             Expanded(
+                              flex: 30,
                               key: const ValueKey(OfferStrings.applyAction),
                               child: OutlineIconButtonWidget(
                                 buttonTitle: 'apply'.tr,
@@ -161,6 +162,7 @@ class OfferListComponent extends StatelessWidget {
                               ),
                             ),
                             Expanded(
+                              flex: 30,
                               key: const ValueKey(
                                 OfferStrings.informationAction,
                               ),
@@ -185,6 +187,7 @@ class OfferListComponent extends StatelessWidget {
                               ),
                             ),
                             Expanded(
+                              flex: 40,
                               key: const ValueKey(OfferStrings.unSaveAction),
                               child: OutlineIconButtonWidget(
                                 buttonTitle: 'unsave'.tr,

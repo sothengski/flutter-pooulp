@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../data/data.dart';
 
+import '../../data/data.dart';
 import '../core.dart';
 
 bool switchingBooleanValue({required bool? boolValue}) {

@@ -216,6 +216,35 @@ class OfferCard extends StatelessWidget {
                               ),
                             ),
                           ),
+                        if (jobOfferItem!.numberOfWorking! != '')
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              // horizontal: AppSize.s2,
+                              vertical: AppSize.s2,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(AppSize.s5),
+                              ),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: ColorsManager.grey200,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSize.s2,
+                                  vertical: AppSize.s4,
+                                ),
+                                child: CustomTextWidget(
+                                  textAlign: TextAlign.center,
+                                  text: '${jobOfferItem!.numberOfWorking}',
+                                  fontWeight: FontWeightManager.regular,
+                                  fontSize: AppSize.s10,
+                                  // marginBottom: AppSize.s10,
+                                ),
+                              ),
+                            ),
+                          ),
+                        Container()
                       ],
                     ),
                   ),

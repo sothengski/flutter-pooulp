@@ -82,7 +82,7 @@ class API {
     Endpoint.getPendingOffer: '/offers/pending',
     Endpoint.getMatchedOffer: '/offers/matched',
     Endpoint.getSavedOffer: '/offers/saved',
-    Endpoint.getRejectedOffer: '/offers/hidden',
+    Endpoint.getRejectedOffer: '/offers/refused',
     Endpoint.getJobOfferTypes: '/tags/offers',
     Endpoint.getFields: '/tags/fields',
     Endpoint.getLanguages: '/tags/languages',

@@ -252,7 +252,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                   child: CustomTextWidget(
                                     textAlign: TextAlign.center,
                                     text:
-                                        '${widget.feedItemDetail!.numberOfWorkPerWeek}',
+                                        '${widget.feedItemDetail!.numberOfWorking}',
                                     fontWeight: FontWeightManager.regular,
                                     fontSize: AppSize.s12,
                                     // marginBottom: AppSize.s10,

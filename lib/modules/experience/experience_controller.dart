@@ -48,6 +48,18 @@ class ExperienceController extends GetxController {
       final ExperienceModel expDataArg =
           (Get.arguments as List)[2] as ExperienceModel;
       expId = expDataArg.id!;
+      if (expType.value == AppStrings.personalKey) {
+        await getExperienceTypeListResponseProvider();
+        experienceTypeInt.value =
+            expDataArg.tags!.isNotEmpty ? expDataArg.tags!.first! as int : 0;
+        // if (title.toString() == Keys.editOperation) {
+        selectedExperienceType.value = experienceTypeInt.value == 0
+            ? FieldModel(label: '')
+            : experienceTypeList.firstWhere(
+                (element) => element.id == experienceTypeInt.value,
+              );
+        // }
+      }
       companyNameTextCtrl.text = expDataArg.company!;
       titleTextCtrl.text = expDataArg.name!;
       if (expDataArg.completed == 1) {
@@ -62,18 +74,15 @@ class ExperienceController extends GetxController {
       descriptionTextCtrl.text = expDataArg.description!;
       cityTextCtrl.text = expDataArg.addressCity!;
       countryTextCtrl.text = expDataArg.addressCountry!;
-      if (expType.value == AppStrings.personalKey) {
-        experienceTypeInt.value = expDataArg.tags!.first! as int;
-      }
     }
-    if (expType.value == AppStrings.personalKey) {
-      await getExperienceTypeListResponseProvider();
-      if (title == Keys.editOperation) {
-        selectedExperienceType.value = experienceTypeList.firstWhere(
-          (element) => element.id == experienceTypeInt.value,
-        );
-      }
-    }
+    // if (expType.value == AppStrings.personalKey) {
+    //   await getExperienceTypeListResponseProvider();
+    //   if (title == Keys.editOperation) {
+    //     selectedExperienceType.value = experienceTypeList.firstWhere(
+    //       (element) => element.id == experienceTypeInt.value,
+    //     );
+    //   }
+    // }
   }
 
   Future<List<FieldModel>> getExperienceTypeListResponseProvider({

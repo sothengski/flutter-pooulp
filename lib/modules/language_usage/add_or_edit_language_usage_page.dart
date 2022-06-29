@@ -228,18 +228,29 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                         ? CustomTextWidget(
                             text: 'noLanguagesFound'.tr,
                           )
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // mainAxisAlignment:MainAxisAlignment.start,
-                            children: controller.profileController
-                                .studentInfoRepsonse.value.spokenLanguages!
-                                .map(
-                                  (e) => Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: AppSize.s8,
-                                    ),
-                                    // width: double.infinity,
-                                    child: Row(
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            physics: const ScrollPhysics(),
+                            itemCount: controller
+                                .profileController
+                                .studentInfoRepsonse
+                                .value
+                                .spokenLanguages!
+                                .length,
+                            itemBuilder: (context, index) {
+                              final FieldModel languageItem = controller
+                                  .profileController
+                                  .studentInfoRepsonse
+                                  .value
+                                  .spokenLanguages![index];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: AppSize.s8,
+                                ),
+                                // width: double.infinity,
+                                child: Column(
+                                  children: [
+                                    Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment:
@@ -255,19 +266,20 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                               onClick: () {
                                                 controller
                                                     .makeRequestToSpokenLanguageAPI(
-                                                  spokenLanguageId: e.id,
+                                                  spokenLanguageId:
+                                                      languageItem.id,
                                                   operation:
                                                       Keys.deleteOperation,
                                                 );
                                               },
                                             ),
                                             CustomTextWidget(
-                                              text: '${e.label}',
+                                              text: '${languageItem.label}',
                                               fontSize: AppSize.s16,
                                               fontWeight: FontWeight.w500,
                                               marginLeft: AppSize.s10,
                                               marginTop: AppSize.s8,
-                                              marginBottom: AppSize.s24,
+                                              marginBottom: AppSize.s20,
                                             ),
                                           ],
                                         ),
@@ -296,7 +308,9 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                                 .proficiencyList[
                                                                     index]
                                                                 .level,
-                                                            object2: e.level,
+                                                            object2:
+                                                                languageItem
+                                                                    .level,
                                                           ),
                                                           text:
                                                               translateStateWords(
@@ -307,7 +321,8 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                             controller
                                                                 .makeRequestToSpokenLanguageAPI(
                                                               spokenLanguageId:
-                                                                  e.id,
+                                                                  languageItem
+                                                                      .id,
                                                               spokenLanguageData:
                                                                   FieldModel(
                                                                 level: controller
@@ -347,7 +362,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                   textAlign: TextAlign.center,
                                                   text: translateStateWords(
                                                     stateWord:
-                                                        '${e.getLabelProficiencyLevel}',
+                                                        '${languageItem.getLabelProficiencyLevel}',
                                                   ),
                                                   fontSize: AppSize.s16,
                                                   fontWeight: FontWeight.w400,
@@ -364,9 +379,23 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                         ),
                                       ],
                                     ),
-                                  ),
-                                )
-                                .toList(),
+                                    Obx(
+                                      () => Container(
+                                        padding:
+                                            controller.isUpdating.value == false
+                                                ? EdgeInsets.zero
+                                                : EdgeInsets.zero,
+                                        child: UrlLanguageInput(
+                                          controller: controller,
+                                          languageItem: languageItem,
+                                          index: index,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
                   ),
                 ),
@@ -405,6 +434,127 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
       //   ),
       // ),
       //===== Bottom of bottomNavigationBar Component =====//
+    );
+  }
+}
+
+class UrlLanguageInput extends StatelessWidget {
+  const UrlLanguageInput({
+    Key? key,
+    this.controller,
+    required this.languageItem,
+    this.index,
+  }) : super(key: key);
+
+  final LanguageUsageController? controller;
+  final FieldModel? languageItem;
+  final int? index;
+
+  @override
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: [
+        if (languageItem!.videoUrl != null && languageItem!.selected == false)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                flex: 90,
+                child: CustomTextWidget(
+                  textAlign: TextAlign.left,
+                  text: languageItem!.videoUrl ?? 'no link',
+                  maxLine: 2,
+                  fontSize: AppSize.s16,
+                  fontWeight: FontWeight.w400,
+                  textDecoration: TextDecoration.underline,
+                  marginLeft: AppSize.s48,
+                  // marginBottom: AppSize.s24,
+                ),
+              ),
+              const SizedBox(
+                width: AppSize.s8,
+              ),
+              Expanded(
+                flex: 5,
+                child: CustomIconButtonWidget(
+                  padding: 0.0,
+                  iconData: Icons.edit,
+                  iconSize: AppSize.s20,
+                  onClick: () {
+                    controller!.isUpdating.value = switchingBooleanValue(
+                      boolValue: controller!.isUpdating.value,
+                    );
+                    languageItem!.selected = true;
+                  },
+                ),
+              ),
+            ],
+          )
+        else
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              right: 8.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: languageItem!.videoUrl == null
+                      ? Container()
+                      : CustomIconButtonWidget(
+                          padding: 0.0,
+                          iconData: Icons.close,
+                          iconColor: ColorsManager.red,
+                          iconSize: AppSize.s20,
+                          onClick: () {
+                            languageItem!.selected = false;
+                            controller!.isUpdating.value =
+                                switchingBooleanValue(
+                              boolValue: controller!.isUpdating.value,
+                            );
+                          },
+                        ),
+                ),
+                const SizedBox(
+                  width: AppSize.s8,
+                ),
+                Flexible(
+                  flex: 90,
+                  child: CustomTextInput(
+                    controller: controller!.vdoUrlListTextCtrl[index!],
+                    // leftPadding: AppSize.s48,
+                    hintText: 'addLanguageVideoPresentationLink'.tr,
+                  ),
+                ),
+                const SizedBox(
+                  width: AppSize.s8,
+                ),
+                Expanded(
+                  flex: 5,
+                  child: CustomIconButtonWidget(
+                    padding: 0.0,
+                    iconData: Icons.check,
+                    iconColor: ColorsManager.green,
+                    iconSize: AppSize.s20,
+                    onClick: () {
+                      controller!.makeRequestToSpokenLanguageAPI(
+                        spokenLanguageId: languageItem!.id,
+                        spokenLanguageData: FieldModel(
+                          level: controller!.proficiencyList[index!].level,
+                          videoUrl: controller!.vdoUrlListTextCtrl[index!].text,
+                        ),
+                        operation: Keys.editOperation,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
     );
   }
 }

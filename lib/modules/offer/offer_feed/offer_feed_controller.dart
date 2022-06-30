@@ -288,6 +288,7 @@ class OfferFeedController extends GetxController
           null,
           status: RxStatus.error('Error'),
         );
+        isLoadingIndicator.value = false;
       },
     );
   }

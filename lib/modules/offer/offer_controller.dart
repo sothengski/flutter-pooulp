@@ -25,6 +25,8 @@ class OfferController extends GetxController
 
   RxList<JobOfferModel> savedOfferListFilter = <JobOfferModel>[].obs;
 
+  RxBool isLoadingIndicator = false.obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -48,6 +50,7 @@ class OfferController extends GetxController
 
   Future<void> onRefresh() async {
     // monitor network fetch
+    isLoadingIndicator.value = true;
     await getOffersDataState(refresh: true);
     await Future.delayed(const Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
@@ -198,6 +201,7 @@ class OfferController extends GetxController
           null,
           status: RxStatus.error('Error'),
         );
+        isLoadingIndicator.value = false;
       },
     );
   }

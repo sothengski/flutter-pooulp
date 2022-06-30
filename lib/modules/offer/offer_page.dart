@@ -103,13 +103,17 @@ class OfferListStateComponent extends StatelessWidget {
                   jobOfferType: jobOfferType,
                 )
               : Center(
-                  child: StateHandlerWidget(
-                    imgPath: AssetsManager.emptyDataIcon,
-                    headerText: noDataHeader,
-                    bodyText: noDataBody, //?? 'offer.contentMsg'.tr,
-                    buttonText: 'tryAgain'.tr,
-                    onPressedFunctionCall: controller.onRefresh,
-                  ),
+                  child: controller.isLoadingIndicator.value == true
+                      ? const ItemListShimmerLoadingWidget(
+                          isTopRowList: false,
+                        )
+                      : StateHandlerWidget(
+                          imgPath: AssetsManager.emptyDataIcon,
+                          headerText: noDataHeader,
+                          bodyText: noDataBody, //?? 'offer.contentMsg'.tr,
+                          buttonText: 'tryAgain'.tr,
+                          onPressedFunctionCall: controller.onRefresh,
+                        ),
                 ),
         ),
         onLoading: const Center(

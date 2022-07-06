@@ -29,6 +29,8 @@ class OnboardingController extends GetxController
       OnboardingPageModel(pageIndex: 2, selectionItems: []).obs;
   Rx<OnboardingPageModel> languageSelectionListPage3 =
       OnboardingPageModel(pageIndex: 3, selectionItems: []).obs;
+  Rx<OnboardingPageModel> knowFromSelectionListPage5 =
+      OnboardingPageModel(pageIndex: 5, selectionItems: []).obs;
 
   RxList<FieldModel>? goodAtfieldList = <FieldModel>[].obs;
   // RxList<FieldModel>? goodAtfieldListBasedOnCategory = <FieldModel>[].obs;
@@ -38,6 +40,7 @@ class OnboardingController extends GetxController
   RxList<CityModel> belgiumCitiesList = <CityModel>[].obs;
   RxList<FieldModel> belgiumCitiesToField = <FieldModel>[].obs;
   RxList<FieldModel> belgiumCitiesToFieldSelected = <FieldModel>[].obs;
+  RxList<FieldModel> knowFromFieldSelected = <FieldModel>[].obs;
 
   String? sessionToken = '';
   Rx<PlaceDetailModel>? placeDetail = PlaceDetailModel().obs;
@@ -290,6 +293,16 @@ class OnboardingController extends GetxController
         belgiumCitiesToFieldSelected.add(itemToBeAdd!);
       } else if (belgiumCitiesToFieldSelected.contains(itemToBeAdd)) {
         belgiumCitiesToFieldSelected
+            .removeWhere((element) => element.id == itemToBeAdd!.id);
+      }
+    }
+
+    if (pageIndex == 5) {
+      knowFromFieldSelected.clear();
+      if (!knowFromFieldSelected.contains(itemToBeAdd)) {
+        knowFromFieldSelected.add(itemToBeAdd!);
+      } else if (knowFromFieldSelected.contains(itemToBeAdd)) {
+        knowFromFieldSelected
             .removeWhere((element) => element.id == itemToBeAdd!.id);
       }
     }

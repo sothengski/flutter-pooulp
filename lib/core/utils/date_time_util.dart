@@ -6,6 +6,8 @@ String mmyyyyDashFormat = "MM-YYYY";
 String ddmmyyyyFormat = "DD/MM/YYYY";
 String ddmmyyyyDashFormat = "DD-MM-YYYY";
 
+DateTime now = DateTime.now();
+
 extension DateExtensions on DateTime {
   String formatToPattern(String pattern) {
     final DateFormat formatter = DateFormat(pattern);

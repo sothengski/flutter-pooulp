@@ -17,6 +17,7 @@ class OnboardingModel {
   final List<FieldModel>? fieldPreferences;
   final List<FieldModel>? skills;
   final List<FieldModel>? languages;
+  final FieldModel? source;
   final String? location;
   final String? locationStreet;
   final String? locationZipCode;
@@ -33,6 +34,7 @@ class OnboardingModel {
     this.fieldPreferences,
     this.skills,
     this.languages,
+    this.source,
     this.location,
     this.locationStreet,
     this.locationZipCode,
@@ -84,6 +86,8 @@ class OnboardingModel {
         'location_latitude': locationLat,
         'location_longitude': locationLng,
         'radius': locationRadius! * 1000,
+        'source': source?.toJsonForOnboarding(),
+        // List<dynamic>.from(source!.map((x) => x.toJsonForOnboarding())),
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -103,5 +107,6 @@ class OnboardingModel {
       locationLat: $locationLat,
       locationLng: $locationLng,
       locationRadius: $locationRadius,
+      source: $source,
     )''';
 }

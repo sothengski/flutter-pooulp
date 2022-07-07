@@ -345,6 +345,7 @@ class OnboardingController extends GetxController
       locationLng: placeDetail!.value.lng
           .toString(), //  belgiumCitiesToFieldSelected.first.category,
       locationRadius: radiusRxInt.value,
+      source: FieldModel(id: knowFromFieldSelected.first.id),
     );
 
     // debugPrint('placeDetail: $placeDetail');

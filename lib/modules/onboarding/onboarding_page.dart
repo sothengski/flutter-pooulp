@@ -406,7 +406,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                                     .radiusRxInt
                                                                     .value
                                                                     .toDouble(),
-                                                                min: 5.0,
+                                                                min: 10.0,
                                                                 max: 100.0,
                                                                 divisions: 100,
                                                                 activeColor:

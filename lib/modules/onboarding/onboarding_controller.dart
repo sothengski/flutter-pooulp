@@ -47,7 +47,7 @@ class OnboardingController extends GetxController
   GooglePlaceSearchModel? results;
 
   TextEditingController addressCtrl = TextEditingController();
-  RxInt radiusRxInt = 10.obs;
+  RxInt radiusRxInt = 100.obs;
 
   // Rx<FieldModel> belgiumCitySelected = FieldModel(label: '').obs;
 

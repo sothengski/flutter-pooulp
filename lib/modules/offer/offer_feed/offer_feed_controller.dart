@@ -177,7 +177,7 @@ class OfferFeedController extends GetxController
     availabilitiesTagListToBeSearch.value = [];
 
     placeDetail.value = PlaceDetailModel();
-    radiusRxInt.value = 5;
+    radiusRxInt.value = 10;
     countFilterField();
 
     // debugPrint(

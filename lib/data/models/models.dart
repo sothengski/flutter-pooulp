@@ -17,6 +17,7 @@ export 'messaging_model/latest_message_model.dart';
 export 'messaging_model/messaging_model.dart';
 export 'messaging_model/messaging_pagination_model.dart';
 export 'messaging_model/participant_model.dart';
+export 'notification_message_model/notification_message_model.dart';
 export 'onboarding_model/onboarding_model.dart';
 export 'onboarding_model/onboarding_page_model.dart';
 export 'pagination_model.dart';

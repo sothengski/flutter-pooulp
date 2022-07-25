@@ -11,6 +11,7 @@ class OfferFeedController extends GetxController
   final offerProvider = Get.find<OfferProvider>();
   final tagProvider = Get.find<TagProvider>();
   final placeApiProvider = Get.put(PlaceApiProvider());
+  final notificationMessageProvider = Get.put(NotificationMessagesProvider());
 
   final offerHelper = OfferHelper();
 
@@ -110,6 +111,7 @@ class OfferFeedController extends GetxController
         // .then((value) => isProcessingStudentInfoRepsonse.value = true)
         ;
     await addItemsIntoList();
+    await getNotificationMessagesProvider();
   }
 
   String updateKeyword({String? newKeyword = ''}) =>
@@ -516,4 +518,13 @@ class OfferFeedController extends GetxController
   //   typeSelected.value = tempType;
   //   onRefresh();
   // }
+
+  Future<List<NotificationMessageModel>> getNotificationMessagesProvider({
+    bool? refresh = false,
+  }) async {
+    final List<NotificationMessageModel> notificationMessageList =
+        await notificationMessageProvider.getNotificationMessages();
+    debugPrint('notificationMessageList: $notificationMessageList');
+    return notificationMessageList;
+  }
 }

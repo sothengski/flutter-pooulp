@@ -52,6 +52,7 @@ enum Endpoint {
   getStatus,
   getAllTranslationLangs,
   postVerifyEmail,
+  getNotificationMessages,
 }
 
 class API {
@@ -106,6 +107,7 @@ class API {
     Endpoint.getStatus: '/status',
     Endpoint.getAllTranslationLangs: '/translations',
     Endpoint.postVerifyEmail: '/users/email-verification',
+    Endpoint.getNotificationMessages: '/notificationmessages?perPage=50',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

@@ -8,6 +8,7 @@ class OfferController extends GetxController
     with StateMixin<RxList<JobOfferModel>> {
   // final profileController = Get.put(ProfileController());
   final offerProvider = Get.find<OfferProvider>();
+  final notificationMessageProvider = Get.put(NotificationMessagesProvider());
 
   final offerHelper = OfferHelper();
 
@@ -25,6 +26,8 @@ class OfferController extends GetxController
 
   RxList<JobOfferModel> savedOfferListFilter = <JobOfferModel>[].obs;
 
+  List<NotificationMessageModel> notificationMessageList = [];
+
   RxBool isLoadingIndicator = false.obs;
 
   @override
@@ -41,6 +44,7 @@ class OfferController extends GetxController
     await getOffersDataState(refresh: true)
         // .then((value) => isProcessingStudentInfoRepsonse.value = true)
         ;
+    await getNotificationMessagesProvider();
   }
 
   bool jobOfferOnClickBoolSwitching({bool? boolValue}) {
@@ -244,5 +248,20 @@ class OfferController extends GetxController
 
   void selectjobOfferState({FieldModel? state}) {
     jobOfferStateSelected.value = state!;
+  }
+
+  Future<List<NotificationMessageModel>> getNotificationMessagesProvider({
+    bool? refresh = false,
+  }) async {
+    return notificationMessageList =
+        await notificationMessageProvider.getNotificationMessages();
+    // debugPrint('temp: $temp');
+
+    // temp.map(
+    //   (e) => e.target == 2 ? notificationMessageList.add(e) : null,
+    // );
+    // debugPrint('notificationMessageList: $notificationMessageList');
+
+    // return notificationMessageList;
   }
 }

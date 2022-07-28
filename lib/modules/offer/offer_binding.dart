@@ -13,5 +13,9 @@ class OfferBinding implements Bindings {
     Get.lazyPut<OfferProvider>(
       () => OfferProvider(),
     );
+
+    Get.lazyPut<NotificationMessagesProvider>(
+      () => NotificationMessagesProvider(),
+    );
   }
 }

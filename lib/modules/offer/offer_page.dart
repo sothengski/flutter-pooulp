@@ -8,14 +8,132 @@ import '../modules.dart';
 class OfferPage extends GetView<OfferController> {
   const OfferPage({Key? key}) : super(key: key);
 
+  void notificationMessageAlert(BuildContext context) {
+    Get.dialog(
+      MaterialDialogWidget(
+        title: controller.notificationMessageList[0].title,
+        titleHorizontalMargin: AppSize.s12,
+        dialogMargin: AppSize.s28,
+        actionWidget: Row(
+          children: [
+            Expanded(
+              flex: 40,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  Navigator.pop(
+                    context,
+                    true,
+                  );
+                },
+                icon: const Icon(
+                  IconsManager.close,
+                  color: Colors.white,
+                ),
+                label: CustomTextWidget(
+                  marginRight: AppSize.s24,
+                  text: 'Close'.tr,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.s28,
+              child: VerticalDivider(
+                color: ColorsManager.grey,
+                thickness: 0.5,
+                width: 0.5,
+              ),
+            ),
+            // Expanded(
+            //   flex: 40,
+            //   child: OutlinedButton.icon(
+            //     onPressed: onPressed,
+            //     icon: const Icon(
+            //       IconsManager.check,
+            //       color: Colors.white,
+            //     ),
+            //     label: CustomTextWidget(
+            //       marginRight: AppSize.s24,
+            //       text: 'yes'.tr,
+            //       color: Colors.red,
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
+        // rightWidget: CustomIconButtonWidget(
+        //   iconData: Icons.close,
+        //   padding: 0.0,
+        //   isConstraints: true,
+        //   onClick: () => {
+        //     Get.back(),
+        //   },
+        // ),
+        contentWidget: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // if ('profileModel!.description' == '')
+            //   Container()
+            // else
+            CustomTextWidget(
+              text: '${controller.notificationMessageList[0].body}',
+              color: ColorsManager.grey850,
+              maxLine: 50,
+              marginTop: AppSize.s4,
+              marginLeft: AppSize.s16,
+              marginRight: AppSize.s16,
+              marginBottom: AppSize.s4,
+            ),
+            // CustomListTileWidget(
+            //   text1: 'email'.tr,
+            //   text2: 'userModel!.email',
+            //   // isLauching: true,
+            //   text2Color: ColorsManager.blue,
+            //   leftWidget: const CustomBoxWidget(
+            //     child: Icon(
+            //       Icons.email_outlined,
+            //       color: ColorsManager.grey,
+            //       size: AppSize.s20,
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future.delayed(
+      DurationConstant.d2000,
+      () => (controller.notificationMessageList.isNotEmpty)
+          ? notificationMessageAlert(context)
+          : null,
+    );
+
     return Scaffold(
       appBar: CustomAppBar(
         title: 'myOffers'.tr,
       ),
       body: Column(
         children: [
+          // pop dialog
+          // GetX<OfferController>(
+          //   init: OfferController(),
+          //   builder: (_) {
+          //     return _.popDialog != null
+          //         ? Dialog(
+          //             child: _.popDialog,
+          //             shape: RoundedRectangleBorder(
+          //               borderRadius: BorderRadius.circular(10),
+          //             ),
+          //           )
+          //         : Container();
+          //   },
+          // ),
+
           Expanded(
             flex: 9,
             child: Obx(

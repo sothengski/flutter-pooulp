@@ -26,9 +26,5 @@ class OfferFeedBinding implements Bindings {
     Get.lazyPut<TagProvider>(
       () => TagProvider(),
     );
-
-    Get.lazyPut<NotificationMessagesProvider>(
-      () => NotificationMessagesProvider(),
-    );
   }
 }

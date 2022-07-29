@@ -11,7 +11,7 @@ class OfferPage extends GetView<OfferController> {
   void notificationMessageAlert(BuildContext context) {
     Get.dialog(
       MaterialDialogWidget(
-        title: controller.notificationMessageList[0].title,
+        // title: controller.notificationMessageList[0].title,
         titleHorizontalMargin: AppSize.s12,
         dialogMargin: AppSize.s28,
         actionWidget: Row(
@@ -73,6 +73,17 @@ class OfferPage extends GetView<OfferController> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            CustomTextWidget(
+              text: '${controller.notificationMessageList[0].title}',
+              fontSize: AppSize.s16,
+              fontWeight: FontWeight.w600,
+              color: ColorsManager.black,
+              maxLine: 50,
+              marginTop: AppSize.s4,
+              marginLeft: AppSize.s16,
+              marginRight: AppSize.s16,
+              marginBottom: AppSize.s12,
+            ),
             // if ('profileModel!.description' == '')
             //   Container()
             // else

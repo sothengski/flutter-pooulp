@@ -253,15 +253,17 @@ class OfferController extends GetxController
   Future<List<NotificationMessageModel>> getNotificationMessagesProvider({
     bool? refresh = false,
   }) async {
-    return notificationMessageList =
-        await notificationMessageProvider.getNotificationMessages();
+    final temp = await notificationMessageProvider.getNotificationMessages();
     // debugPrint('temp: $temp');
+    for (final e in temp) {
+      if (e.target != 1) {
+        // print('e.target: ${e.target}');
+        notificationMessageList.add(e);
+      }
+    }
 
-    // temp.map(
-    //   (e) => e.target == 2 ? notificationMessageList.add(e) : null,
-    // );
     // debugPrint('notificationMessageList: $notificationMessageList');
 
-    // return notificationMessageList;
+    return notificationMessageList;
   }
 }

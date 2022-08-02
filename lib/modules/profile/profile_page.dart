@@ -171,7 +171,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Achievement Component =====//
                                           ProfileAchievementComponent(
-                                            title: 'achievement'.tr,
+                                            title: 'achievements'.tr,
                                             addOrEditAchievementRoute: Routes
                                                 .addOrEditAchievementRoute,
                                             achievementList: controller

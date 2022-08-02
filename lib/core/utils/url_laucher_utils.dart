@@ -59,9 +59,8 @@ Future urlLauncherUtils({
       final Uri emailLaunchUri = Uri(
         scheme: 'mailto',
         path: thingToLaunch,
-        query: encodeQueryParameters(<String, String>{
-          'subject': 'Example Subject & Symbols are allowed!'
-        }),
+        query:
+            encodeQueryParameters(<String, String>{'subject': '$emailSubject'}),
       );
       thingWillLaunch = emailLaunchUri.toString();
       // await _urlLauncher(url: emailLaunchUri.toString());

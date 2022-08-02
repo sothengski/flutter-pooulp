@@ -6,7 +6,9 @@ import '../modules.dart';
 
 class OfferController extends GetxController
     with StateMixin<RxList<JobOfferModel>> {
-  // final profileController = Get.put(ProfileController());
+  final profileController = Get.put(ProfileController());
+  final settingController = Get.put(SettingController());
+
   final offerProvider = Get.find<OfferProvider>();
   final notificationMessageProvider = Get.put(NotificationMessagesProvider());
 

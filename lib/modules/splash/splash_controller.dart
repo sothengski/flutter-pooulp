@@ -63,7 +63,8 @@ class SplashController extends GetxController {
                   bodyData: value.latestTranslationUpdate.toString(),
                 ),
                 await getAllTranslationLangsProvider(lang: 'en'),
-                await getAllTranslationLangsProvider(lang: 'fr')
+                await getAllTranslationLangsProvider(lang: 'fr'),
+                await getAllTranslationLangsProvider(lang: 'nl')
               }
             else
               {}

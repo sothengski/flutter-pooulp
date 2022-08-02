@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pooulp_flutter/routes/routes.dart';
 
 import '../../core/core.dart';
 import '../../data/data.dart';
@@ -121,46 +123,46 @@ class OfferPage extends GetView<OfferController> {
         // title: controller.notificationMessageList[0].title,
         titleHorizontalMargin: AppSize.s12,
         dialogMargin: AppSize.s28,
-        actionWidget: Row(
-          children: [
-            Expanded(
-              flex: 40,
-              child: OutlinedButton.icon(
-                onPressed: () async {
-                  controller.settingController.makeRequestToAuthVerifyEmailAPI(
-                    email: controller
-                        .profileController.userInfoRepsonse.value.email,
-                  );
-                  // urlLauncherUtils(
-                  //   thingToLaunch: '',
-                  //   laucherType: LauncherType.email,
-                  // );
-                  // Navigator.pop(
-                  //   context,
-                  //   true,
-                  // );
-                },
-                icon: const Icon(
-                  IconsManager.close,
-                  color: Colors.white,
-                ),
-                label: CustomTextWidget(
-                  marginRight: AppSize.s24,
-                  text: 'Send Verification link'.tr,
-                  color: Colors.red,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: AppSize.s28,
-              child: VerticalDivider(
-                color: ColorsManager.grey,
-                thickness: 0.5,
-                width: 0.5,
-              ),
-            ),
-          ],
-        ),
+        // actionWidget: Row(
+        //   children: [
+        //     Expanded(
+        //       flex: 40,
+        //       child: OutlinedButton.icon(
+        //         onPressed: () async {
+        //           controller.settingController.makeRequestToAuthVerifyEmailAPI(
+        //             email: controller
+        //                 .profileController.userInfoRepsonse.value.email,
+        //           );
+        //           // urlLauncherUtils(
+        //           //   thingToLaunch: '',
+        //           //   laucherType: LauncherType.email,
+        //           // );
+        //           // Navigator.pop(
+        //           //   context,
+        //           //   true,
+        //           // );
+        //         },
+        //         icon: const Icon(
+        //           IconsManager.close,
+        //           color: Colors.white,
+        //         ),
+        //         label: CustomTextWidget(
+        //           marginRight: AppSize.s24,
+        //           text: 'Send Verification link'.tr,
+        //           color: Colors.red,
+        //         ),
+        //       ),
+        //     ),
+        //     const SizedBox(
+        //       height: AppSize.s28,
+        //       child: VerticalDivider(
+        //         color: ColorsManager.grey,
+        //         thickness: 0.5,
+        //         width: 0.5,
+        //       ),
+        //     ),
+        //   ],
+        // ),
         contentWidget: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -188,6 +190,60 @@ class OfferPage extends GetView<OfferController> {
               marginLeft: AppSize.s16,
               marginRight: AppSize.s16,
               marginBottom: AppSize.s4,
+            ),
+            OutlinedButton.icon(
+              onPressed: () async {
+                controller.settingController.makeRequestToAuthVerifyEmailAPI(
+                  email:
+                      controller.profileController.userInfoRepsonse.value.email,
+                );
+              },
+              icon: const Icon(
+                Icons.label_important_outline,
+                color: Colors.white,
+              ),
+              label: CustomTextWidget(
+                marginRight: AppSize.s24,
+                text: 'Send Verification link'.tr,
+                color: Colors.red,
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.s12,
+              child: Divider(
+                color: ColorsManager.grey,
+                thickness: 0.5,
+                height: 0.5,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(
+                AppSize.s8,
+              ),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "${'verifyRegisterLabel'.tr} ",
+                      style: const TextStyle(
+                        color: ColorsManager.grey850,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'registerNow'.tr,
+                      style: const TextStyle(
+                        color: Colors.blue,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          await controller.settingController.homeController
+                              .signOut();
+                          await Get.toNamed(Routes.signUpRoute);
+                        },
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

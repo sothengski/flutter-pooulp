@@ -115,8 +115,98 @@ class OfferPage extends GetView<OfferController> {
     );
   }
 
+  void confirmEmailAlert(BuildContext context) {
+    Get.dialog(
+      MaterialDialogWidget(
+        // title: controller.notificationMessageList[0].title,
+        titleHorizontalMargin: AppSize.s12,
+        dialogMargin: AppSize.s28,
+        actionWidget: Row(
+          children: [
+            Expanded(
+              flex: 40,
+              child: OutlinedButton.icon(
+                onPressed: () async {
+                  controller.settingController.makeRequestToAuthVerifyEmailAPI(
+                    email: controller
+                        .profileController.userInfoRepsonse.value.email,
+                  );
+                  // urlLauncherUtils(
+                  //   thingToLaunch: '',
+                  //   laucherType: LauncherType.email,
+                  // );
+                  // Navigator.pop(
+                  //   context,
+                  //   true,
+                  // );
+                },
+                icon: const Icon(
+                  IconsManager.close,
+                  color: Colors.white,
+                ),
+                label: CustomTextWidget(
+                  marginRight: AppSize.s24,
+                  text: 'Send Verification link'.tr,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.s28,
+              child: VerticalDivider(
+                color: ColorsManager.grey,
+                thickness: 0.5,
+                width: 0.5,
+              ),
+            ),
+          ],
+        ),
+        contentWidget: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomTextWidget(
+              text: 'Please verify your account'.tr,
+              fontSize: AppSize.s16,
+              fontWeight: FontWeight.w600,
+              color: ColorsManager.black,
+              maxLine: 50,
+              marginTop: AppSize.s4,
+              marginLeft: AppSize.s16,
+              marginRight: AppSize.s16,
+              marginBottom: AppSize.s12,
+            ),
+            // if ('profileModel!.description' == '')
+            //   Container()
+            // else
+            CustomTextWidget(
+              text:
+                  'to start using Pooulp. We need to verify your email address: ${controller.profileController.userInfoRepsonse.value.email}',
+              color: ColorsManager.grey850,
+              maxLine: 50,
+              marginTop: AppSize.s4,
+              marginLeft: AppSize.s16,
+              marginRight: AppSize.s16,
+              marginBottom: AppSize.s4,
+            ),
+          ],
+        ),
+      ),
+      barrierDismissible: false,
+      barrierColor: ColorsManager.primaryBlue,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future.delayed(
+      DurationConstant.d1000,
+      () => (controller
+                  .profileController.userInfoRepsonse.value.emailConfirmedAt ==
+              null)
+          ? confirmEmailAlert(context)
+          : null,
+    );
     Future.delayed(
       DurationConstant.d2000,
       () => (controller.notificationMessageList.isNotEmpty)

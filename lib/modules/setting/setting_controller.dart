@@ -41,9 +41,9 @@ class SettingController extends GetxController {
             ? 5
             : profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
     languageRxString.value =
-        profileController.userProfileInfo.value.uiLanguage!;
+        profileController.userProfileInfo.value.uiLanguage ?? "en";
     emailNotificationRxBool.value =
-        profileController.userProfileInfo.value.emailNotification!;
+        profileController.userProfileInfo.value.emailNotification ?? false;
   }
 
   bool? updatingBoolValue({bool? newValue}) {

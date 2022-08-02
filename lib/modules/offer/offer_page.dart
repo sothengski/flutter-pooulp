@@ -256,7 +256,7 @@ class OfferPage extends GetView<OfferController> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(
-      DurationConstant.d1000,
+      DurationConstant.d1500,
       () => (controller
                   .profileController.userInfoRepsonse.value.emailConfirmedAt ==
               null)

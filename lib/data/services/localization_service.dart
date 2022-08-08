@@ -41,7 +41,7 @@ class LocalizationService extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': enLangFile, //enUS, // en_language.dart
-        'nl_NL': nlNL, // nl_language.dart
+        'nl_NL': nlLangFile, // nlNL, // nl_language.dart
         'fr_FR': frLangFile, //frFR, // fr_language.dart
 
         // 'en_US': enUS, // en_language.dart

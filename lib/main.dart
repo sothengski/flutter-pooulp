@@ -15,6 +15,7 @@ Future<void> main() async {
   // await getAllTranslationLangsProvider(lang: 'fr');
   await AppBasicServices().getLangsFromFile(lang: 'en');
   await AppBasicServices().getLangsFromFile(lang: 'fr');
+  await AppBasicServices().getLangsFromFile(lang: 'nl');
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,

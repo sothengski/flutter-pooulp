@@ -25,6 +25,9 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
 
   TextEditingController tokenCtrl = TextEditingController();
 
+  Rx<DateTime> selectedBirthday = DateTime.now().obs;
+  DateTime now = DateTime.now();
+
   late Rx<CountryModel> selectedCountry = const CountryModel().obs;
 
   RxBool showPassword = false.obs;
@@ -105,6 +108,10 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
   //     return 'Mismatched passwords.';
   //   }
   // }
+
+  DateTime selectedBirthdayOnClick({DateTime? selectedItem}) {
+    return selectedBirthday.value = selectedItem!;
+  }
 
   bool swithcingBoolValueRegisterBtn({bool? boolValue}) {
     return isSubmitBtnProcessing.value = boolValue!;

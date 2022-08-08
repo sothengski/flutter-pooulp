@@ -135,6 +135,53 @@ class SignUpForm extends GetView<SignUpController> {
                               validator: Validator().emailValidator,
                               keyboardType: TextInputType.emailAddress,
                             ),
+
+                            ///===== Top of Birthday Component =====//
+                            Obx(
+                              () => ContainerDialogWidget(
+                                inputTitle: 'birthdate'.tr,
+                                dialogType: DialogType.dateTimePickerDialog,
+                                // dateLocale: controller.profileController
+                                //     .userProfileInfo.value.uiLanguage,
+                                currentTime: controller.selectedBirthday.value,
+                                onConfirmDate: (date) {
+                                  controller.selectedBirthdayOnClick(
+                                    selectedItem: date,
+                                  );
+                                },
+                                containerWidget:
+                                    controller.selectedBirthday.value.year ==
+                                            controller.now.year
+                                        ? RowContentInputWidget(
+                                            centerWidget: CustomTextWidget(
+                                              text: ddmmyyyyFormat,
+                                              color: ColorsManager.grey400,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 16.0,
+                                            ),
+                                            suffixWidget: const Icon(
+                                              Icons.date_range_outlined,
+                                              color: ColorsManager.grey600,
+                                            ),
+                                          )
+                                        : RowContentInputWidget(
+                                            centerWidget: CustomTextWidget(
+                                              //marginLeft: 4.0,
+                                              text: dateFormatSlashDDMMYYYY(
+                                                date: controller
+                                                    .selectedBirthday.value,
+                                              ),
+                                              color: ColorsManager.black,
+                                              fontSize: 16.0,
+                                            ),
+                                            suffixWidget: const Icon(
+                                              Icons.date_range_outlined,
+                                              color: ColorsManager.grey600,
+                                            ),
+                                          ),
+                              ),
+                            ),
+                            //===== Bottom of Birthday Component =====//
                             Row(
                               children: [
                                 Expanded(

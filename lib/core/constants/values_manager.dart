@@ -7,6 +7,7 @@ double getHeight = Get.height;
 
 Map<String, String> enLangFile = {};
 Map<String, String> frLangFile = {};
+Map<String, String> nlLangFile = {};
 
 class AppSize {
   static const double s0 = 0;

@@ -45,6 +45,8 @@ class AppBasicServices extends GetxService {
       map = jsonDecode(jsonData) as Map<String, dynamic>;
       if (lang == 'en') {
         enLangFile = map.map((key, value) => MapEntry(key, value.toString()));
+      } else if (lang == 'nl') {
+        nlLangFile = map.map((key, value) => MapEntry(key, value.toString()));
       } else {
         frLangFile = map.map((key, value) => MapEntry(key, value.toString()));
       }
@@ -55,6 +57,10 @@ class AppBasicServices extends GetxService {
         final jsonBody = (jsonData.data as Map<String, dynamic>)['en'];
         map = jsonBody as Map<String, dynamic>;
         enLangFile = map.map((key, value) => MapEntry(key, value.toString()));
+      } else if (lang == 'nl') {
+        final jsonBody = (jsonData.data as Map<String, dynamic>)['nl'];
+        map = jsonBody as Map<String, dynamic>;
+        nlLangFile = map.map((key, value) => MapEntry(key, value.toString()));
       } else {
         map = (jsonData.data as Map<String, dynamic>)['fr']
             as Map<String, dynamic>;

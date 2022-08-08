@@ -52,6 +52,13 @@ class ProfileModel {
   // final List<int>? spokenLanguagesList;
   // final List<String>? fields;
 
+  final int? source;
+//source: 1 | 2 | 3 | 4
+// 1 = Web App
+// 2 = Mobile App - iOS
+// 3 = Mobile App - Android
+// 4 = Website
+
   const ProfileModel({
     this.firstName,
     this.lastName,
@@ -95,6 +102,7 @@ class ProfileModel {
     this.fields,
     this.logoUrl,
     this.managers,
+    this.source,
   });
 
   String get fullName => '$firstName $lastName';
@@ -247,6 +255,7 @@ class ProfileModel {
         'managers': managers == null || managers == []
             ? null
             : List<dynamic>.from(managers!.map((x) => x.toJson())),
+        'source': source,
       }..removeWhere((_, v) => v == null);
 
   @override

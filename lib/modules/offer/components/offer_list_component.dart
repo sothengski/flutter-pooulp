@@ -211,13 +211,15 @@ class OfferListComponent extends StatelessWidget {
                               ),
                             ),
                           ]
-                        : [
+                        :
+                        //  (jobOfferType == OfferStrings.rejectedState)
+                        [
                             Expanded(
                               key: const ValueKey(
                                 OfferStrings.informationAction,
                               ),
                               child: OutlineIconButtonWidget(
-                                buttonTitle: 'information'.tr,
+                                buttonTitle: 'reason'.tr,
                                 // iconColor: ColorsManager.grey600,
                                 iconColorOnClick: ColorsManager.primaryBlue,
                                 buttonState: offerList![index].informationState,

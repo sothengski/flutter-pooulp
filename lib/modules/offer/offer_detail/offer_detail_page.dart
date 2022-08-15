@@ -171,6 +171,50 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             height: AppSize.s10,
                           ),
 
+                          ///===== Rufusal Reason Component =====//
+
+                          if (jobOfferDetail.jobOfferStateModel!.stateId != 4)
+                            Container()
+                          else
+                            CustomBoxWidget(
+                              leftMargin: AppSize.s8,
+                              rightMargin: AppSize.s8,
+                              backgroundColor: Colors.red[100],
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: CustomTextWidget(
+                                      textAlign: TextAlign.left,
+                                      text: jobOfferDetail
+                                          .jobOfferStateModel!.reasonTagId
+                                          .toString(),
+                                      fontWeight: FontWeightManager.bold,
+                                      color: ColorsManager.red900,
+                                      marginTop: AppSize.s4,
+                                      marginBottom: AppSize.s4,
+                                    ),
+                                  ),
+                                  if (jobOfferDetail
+                                          .jobOfferStateModel!.reason ==
+                                      '')
+                                    Container()
+                                  else
+                                    CustomTextWidget(
+                                      textAlign: TextAlign.left,
+                                      text:
+                                          '${jobOfferDetail.jobOfferStateModel!.reason}',
+                                      fontWeight: FontWeightManager.regular,
+                                      fontSize: AppSize.s12,
+                                      color: ColorsManager.red900,
+                                      // marginBottom: AppSize.s10,
+                                      maxLine: 50,
+                                    ),
+                                ],
+                              ),
+                            ),
+                          //===== Rufusal Reason Component =====//
+
                           ///===== Working Period Component =====//
                           OutlineContainerWidget(
                             title: 'workingPeriod'.tr,

@@ -59,6 +59,7 @@ class CustomTextInput extends StatelessWidget {
   final bool? isReadOnly;
   final double? hintTexFontSize;
   final Color? enabledBorderColor;
+  final List<String>? autofillHintsList;
 
   const CustomTextInput({
     this.controller,
@@ -113,6 +114,7 @@ class CustomTextInput extends StatelessWidget {
     this.isReadOnly = false,
     this.hintTexFontSize = 16,
     this.enabledBorderColor = ColorsManager.grey100,
+    this.autofillHintsList,
   });
 
   @override
@@ -164,6 +166,7 @@ class CustomTextInput extends StatelessWidget {
                   autocorrect: autocorrect!,
                   enableSuggestions: enableSuggestions!,
                   readOnly: isReadOnly!,
+                  autofillHints: autofillHintsList,
                   style: TextStyle(
                     fontSize: fontSize,
                     color: fontColor,

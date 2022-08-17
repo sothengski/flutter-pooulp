@@ -472,7 +472,7 @@ class OfferFeedController extends GetxController
             ),
           );
       await offerController.onRefresh();
-      homeController.isBag.value =
+      homeController.isMyOfferBag.value =
           true; // for Bag status active in My Offer tab
     } else if (actionType == OfferStrings.saveAction) {
       await offerProvider.postSaveOffer(

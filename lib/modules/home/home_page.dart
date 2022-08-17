@@ -51,13 +51,15 @@ class HomePage extends GetView<HomeController> {
                 inActiveIcon: const Icon(Icons.description_outlined),
                 title: Text('myOffers'.tr),
                 activeColor: ColorsManager.primary,
-                isBag: controller.isBag.value,
+                isBag: controller.isMyOfferBag.value,
               ),
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.message_rounded),
                 inActiveIcon: const Icon(Icons.message_outlined),
                 title: Text('messaging'.tr),
                 activeColor: ColorsManager.primary,
+                isBag: controller.isMessagingBag.value,
+                bagLabel: controller.messagingBagLabel.value,
               ),
               BottomNavBarItem(
                 activeIcon: const Icon(Icons.person),

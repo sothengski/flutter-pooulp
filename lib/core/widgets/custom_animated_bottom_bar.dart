@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart';
+import '../core.dart';
 
 class CustomAnimatedBottomBar extends StatelessWidget {
   const CustomAnimatedBottomBar({
@@ -67,6 +67,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
                     itemCornerRadius: itemCornerRadius,
                     animationDuration: animationDuration,
                     curve: curve,
+                    bagLabel: items[index].bagLabel,
                   ),
                 ),
               );
@@ -87,6 +88,7 @@ class ItemWidget extends StatelessWidget {
   final Duration animationDuration;
   final bool isBag;
   final Curve curve;
+  final String? bagLabel;
 
   const ItemWidget({
     Key? key,
@@ -98,6 +100,7 @@ class ItemWidget extends StatelessWidget {
     required this.iconSize,
     this.isBag = false,
     this.curve = Curves.linear,
+    this.bagLabel = '',
   }) : super(key: key);
 
   @override
@@ -127,37 +130,67 @@ class ItemWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: AppSize.s16),
-                  child:
-                      // isBag == false
-                      //     ? Container()
-                      //     :
-                      IconTheme(
-                    data: IconThemeData(
-                      size: AppSize.s8,
-                      color: isBag == false
-                          ? ColorsManager.white
-                          : ColorsManager.red,
-                    ),
-                    child: const Icon(Icons.circle),
+                SizedBox(
+                  height: iconSize + 8,
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: AppSize.s8),
+                        child: IconTheme(
+                          data: IconThemeData(
+                            size: iconSize,
+                            color: isSelected
+                                ? item.activeColor.withOpacity(1)
+                                : item.inActiveColor ?? item.activeColor,
+                          ),
+                          child:
+                              isSelected ? item.activeIcon : item.inActiveIcon,
+                        ),
+                      ),
+                      if (isBag == false)
+                        Container()
+                      else
+                        Container(
+                          alignment: Alignment.topCenter,
+                          padding: const EdgeInsets.only(
+                            left: AppSize.s16,
+                          ),
+                          child: CustomBoxWidget(
+                            borderRadius: AppSize.s12,
+                            topPadding: AppSize.s1,
+                            bottomPadding: AppSize.s1,
+                            leftPadding: AppSize.s1,
+                            rightPadding: AppSize.s1,
+                            backgroundColor: ColorsManager.primary,
+                            child: bagLabel == '' || bagLabel == '0'
+                                ? const IconTheme(
+                                    data: IconThemeData(
+                                      size: AppSize.s6,
+                                      color: ColorsManager.red,
+                                    ),
+                                    child: Icon(Icons.circle),
+                                  )
+                                : CustomTextWidget(
+                                    text: bagLabel,
+                                    fontSize: AppSize.s10,
+                                    color: ColorsManager.white,
+                                    textAlign: TextAlign.center,
+                                    marginLeft: AppSize.s4,
+                                    marginRight: AppSize.s4,
+                                  ),
+                          ),
+                        ),
+                    ],
                   ),
-                ),
-                IconTheme(
-                  data: IconThemeData(
-                    size: iconSize,
-                    color: isSelected
-                        ? item.activeColor.withOpacity(1)
-                        : item.inActiveColor ?? item.activeColor,
-                  ),
-                  child: isSelected ? item.activeIcon : item.inActiveIcon,
                 ),
                 if (isSelected)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.only(right: AppSize.s8),
                     child: DefaultTextStyle.merge(
                       style: TextStyle(
                         color: item.activeColor,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
                       maxLines: 1,
@@ -170,43 +203,6 @@ class ItemWidget extends StatelessWidget {
           ),
         ),
       ),
-      //   child: SingleChildScrollView(
-      //     scrollDirection: Axis.horizontal,
-      //     physics: const NeverScrollableScrollPhysics(),
-      //     child: Container(
-      //       width: isSelected ? 130 : 50,
-      //       padding: const EdgeInsets.symmetric(horizontal: 8),
-      //       child: Row(
-      //         children: <Widget>[
-      //           IconTheme(
-      //             data: IconThemeData(
-      //               size: iconSize,
-      //               color: isSelected
-      //                   ? item.activeColor.withOpacity(1)
-      //                   : item.inActiveColor ?? item.activeColor,
-      //             ),
-      //             child: isSelected ? item.activeIcon : item.inActiveIcon,
-      //           ),
-      //           if (isSelected)
-      //             Expanded(
-      //               child: Container(
-      //                 padding: const EdgeInsets.symmetric(horizontal: 4),
-      //                 child: DefaultTextStyle.merge(
-      //                   style: TextStyle(
-      //                     color: item.activeColor,
-      //                     fontWeight: FontWeight.bold,
-      //                   ),
-      //                   maxLines: 1,
-      //                   textAlign: item.textAlign,
-      //                   child: item.title,
-      //                 ),
-      //               ),
-      //             ),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
@@ -219,6 +215,7 @@ class BottomNavBarItem {
   final Color? inActiveColor;
   final TextAlign? textAlign;
   final bool? isBag;
+  final String? bagLabel;
 
   BottomNavBarItem({
     required this.activeIcon,
@@ -228,5 +225,6 @@ class BottomNavBarItem {
     this.textAlign = TextAlign.center,
     this.inActiveColor = Colors.grey,
     this.isBag = false,
+    this.bagLabel = '',
   });
 }

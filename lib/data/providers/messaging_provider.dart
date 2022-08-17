@@ -25,6 +25,7 @@ abstract class IMessagingProvider {
   Future<JsonResponse> postSeenAllMessagesByRoomID({
     required String? roomId,
   });
+  Future<ConversationModel> getConversationStatus();
   //===== Bottom of Messaging Section =====//
 }
 
@@ -189,6 +190,26 @@ class MessagingProvider extends BaseProvider implements IMessagingProvider {
           data: dataResponse.body,
         );
         return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<ConversationModel> getConversationStatus() async {
+    try {
+      final dataResponse = await get(
+        API.paths[Endpoint.getRoomStatus].toString(),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse = json.decode(dataResponse.bodyString.toString());
+        // log(apiResponse.toString());
+        return ConversationModel.fromJson(
+          (apiResponse as Map<String, dynamic>)['data'] as Map<String, dynamic>,
+        );
       }
     } catch (e) {
       return Future.error(e.toString());

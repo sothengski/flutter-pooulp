@@ -62,6 +62,8 @@ class RoomListPage extends GetView<MessagingController> {
                                   .roomListRepsonse[index].lastestMessageDate,
                               unseenMessage: controller
                                   .roomListRepsonse[index].unseenMessages,
+                              unseenbadge: controller
+                                  .roomListRepsonse[index].newConversation,
                             ),
                           );
                         },

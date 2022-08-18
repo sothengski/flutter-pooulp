@@ -180,6 +180,11 @@ class MessagingController extends GetxController
         roomId: roomValue.uuid,
       );
     }
+    if (roomValue.newConversation! > 0) {
+      makeRequestToPOSTSeenAllMessagesAPI(
+        roomId: roomValue.uuid,
+      );
+    }
   }
 
   void onChangedTextCtrl(String? q) {
@@ -207,6 +212,20 @@ class MessagingController extends GetxController
     );
     if (tempResp.success!) {
       await getRoomListResponseProvider(refresh: true);
+      await getConversationStatusResponseProvider(refresh: true);
+      update();
+    }
+  }
+
+  Future<void> makeRequestToPOSTSeenConversationAPI({
+    required String? roomId,
+  }) async {
+    final tempResp = await messagingProvider.postSeenConversationByRoomID(
+      roomId: roomId,
+    );
+    if (tempResp.success!) {
+      await getRoomListResponseProvider(refresh: true);
+      await getConversationStatusResponseProvider(refresh: true);
       update();
     }
   }

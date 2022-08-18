@@ -7,6 +7,7 @@ class RoomCard extends StatelessWidget {
   final String? participantName;
   final String? lastestMessage;
   final int? unseenMessage;
+  final int? unseenbadge;
   final String? shortName;
 
   final String? date;
@@ -17,6 +18,7 @@ class RoomCard extends StatelessWidget {
     this.lastestMessage,
     this.date,
     this.unseenMessage = 0,
+    this.unseenbadge = 0,
     this.shortName = '',
   }) : super(key: key);
 
@@ -93,27 +95,35 @@ class RoomCard extends StatelessWidget {
                       ),
                       //===== Unseen Message Component =====//
 
-                      ///===== Date Component =====//
-                      if (unseenMessage == 0)
-                        Container()
-                      else
+                      ///===== UnseenMessage Component =====//
+                      if (unseenbadge != 0 || unseenMessage != 0)
                         CustomBoxWidget(
-                          borderRadius: AppSize.s16,
-                          topPadding: AppSize.s2,
-                          bottomPadding: AppSize.s2,
-                          leftPadding: AppSize.s0,
-                          rightPadding: AppSize.s0,
+                          borderRadius: AppSize.s12,
+                          topPadding: AppSize.s1,
+                          bottomPadding: AppSize.s1,
+                          leftPadding: AppSize.s1,
+                          rightPadding: AppSize.s1,
                           backgroundColor: ColorsManager.primary,
-                          child: CustomTextWidget(
-                            text: unseenMessage.toString(),
-                            fontSize: AppSize.s12,
-                            color: ColorsManager.white,
-                            textAlign: TextAlign.center,
-                            marginLeft: AppSize.s6,
-                            marginRight: AppSize.s6,
-                          ),
-                        ),
-                      //===== Date Component =====//
+                          child: unseenbadge != 0
+                              ? const IconTheme(
+                                  data: IconThemeData(
+                                    size: AppSize.s6,
+                                    color: ColorsManager.red,
+                                  ),
+                                  child: Icon(Icons.circle),
+                                )
+                              : CustomTextWidget(
+                                  text: unseenMessage.toString(),
+                                  fontSize: AppSize.s12,
+                                  color: ColorsManager.white,
+                                  textAlign: TextAlign.center,
+                                  marginLeft: AppSize.s4,
+                                  marginRight: AppSize.s4,
+                                ),
+                        )
+                      else
+                        Container(),
+                      //===== UnseenMessage Component =====//
                     ],
                   ),
                 ],

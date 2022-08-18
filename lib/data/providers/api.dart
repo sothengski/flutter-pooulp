@@ -54,6 +54,7 @@ enum Endpoint {
   postVerifyEmail,
   getNotificationMessages,
   getRoomStatus,
+  // postSeenConversaction,
 }
 
 class API {
@@ -173,4 +174,9 @@ class API {
     required String? roomId,
   }) =>
       '/rooms/$roomId/messages';
+
+  static String postSeenConversation({
+    required String? roomId,
+  }) =>
+      '/rooms/$roomId/openconversation';
 }

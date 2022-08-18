@@ -26,6 +26,9 @@ abstract class IMessagingProvider {
     required String? roomId,
   });
   Future<ConversationModel> getConversationStatus();
+  Future<JsonResponse> postSeenConversationByRoomID({
+    required String? roomId,
+  });
   //===== Bottom of Messaging Section =====//
 }
 
@@ -210,6 +213,34 @@ class MessagingProvider extends BaseProvider implements IMessagingProvider {
         return ConversationModel.fromJson(
           (apiResponse as Map<String, dynamic>)['data'] as Map<String, dynamic>,
         );
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<JsonResponse> postSeenConversationByRoomID({
+    required String? roomId,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.postSeenConversation(roomId: roomId),
+        {},
+      );
+      // debugPrint(
+      //   'API: ${API.postMessageByRoomID(roomId: roomId)}/seen}\nresponse::$dataResponse',
+      // );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return response;
       }
     } catch (e) {
       return Future.error(e.toString());

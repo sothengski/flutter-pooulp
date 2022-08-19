@@ -7,6 +7,7 @@ import '../../data.dart';
 
 class JobOfferModel {
   final int? id;
+  final String? uuid;
   final String? title;
   final String? studySubject;
   final String? description;
@@ -48,6 +49,7 @@ class JobOfferModel {
 
   JobOfferModel({
     this.id,
+    this.uuid,
     this.title,
     this.studySubject,
     this.description,
@@ -143,6 +145,7 @@ class JobOfferModel {
 
   factory JobOfferModel.fromJson(Map<String, dynamic> json) => JobOfferModel(
         id: json['id'] as int?,
+        uuid: json['uuid'] as String?,
         title: json['title'] as String? ?? '',
         studySubject: json['study_subject'] as String? ?? '',
         description: json['description'] as String? ?? '',
@@ -246,6 +249,7 @@ class JobOfferModel {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'uuid': uuid,
         'title': title,
         'study_subject': studySubject,
         'description': description,
@@ -347,7 +351,9 @@ class JobOfferModel {
   @override
   String toString() {
     return '''
-    JobOfferModel(id: $id,
+    JobOfferModel(
+      id: $id,
+      uuid: $uuid,
       title: $title,
       studySubject: $studySubject,
       description: $description,

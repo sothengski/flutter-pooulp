@@ -62,6 +62,8 @@ class API {
   final String? apiKey;
 
   // factory API.dev() => API(apiKey: APIKeys.pooulpDevKey);
+  // Front Web domains
+  static const String webDomain = 'http://app.dev-lamp-01.srv.pooulp.eu';
 
   /// Based API End Point URLs
   static const String host =

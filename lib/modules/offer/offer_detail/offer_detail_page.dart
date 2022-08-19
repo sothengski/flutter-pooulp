@@ -26,6 +26,20 @@ class OfferDetailPage extends GetView<OfferDetailController> {
       appBar: CustomAppBar(
         title: 'offerDetails'.tr,
         elevation: 0.0,
+        actions: [
+          CustomIconButtonWidget(
+            iconData: IconsManager.share,
+            iconColor: ColorsManager.white,
+            tooltip: AppStrings.removeText,
+            onClick: () async => {
+              await shareUtils(
+                context: context,
+                text: 'POOULP Job Offer',
+                urlPreview: '${API.webDomain}/offer/${jobOfferDetail.uuid}',
+              ),
+            },
+          )
+        ],
       ),
       body: Column(
         children: [

@@ -4,23 +4,28 @@
   <queries>
     <!-- If your app opens https URLs -->
     <intent>
-      <action android:name="android.intent.action.VIEW" />
-      <data android:scheme="https" />
-    </intent>
-    <!-- If your app makes calls -->
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https" />
+        </intent>
+    <!-- If your app sends emails -->
     <intent>
-      <action android:name="android.intent.action.DIAL" />
-      <data android:scheme="tel" />
+        <action android:name="android.intent.action.SEND" />
+        <data android:mimeType="*/*" />
+    </intent>
+    <!-- If your app checks for SMS support -->
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="sms" />
     </intent>
     <!-- If your sends SMS messages -->
     <intent>
       <action android:name="android.intent.action.SENDTO" />
       <data android:scheme="smsto" />
     </intent>
-    <!-- If your app sends emails -->
+    <!-- If your app checks for call support -->
     <intent>
-      <action android:name="android.intent.action.SEND" />
-      <data android:mimeType="*/*" />
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="tel" />
     </intent>
   </queries>
 

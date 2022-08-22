@@ -35,7 +35,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
               await shareUtils(
                 context: context,
                 text: 'POOULP Job Offer',
-                urlPreview: '${API.webDomain}/offer/${jobOfferDetail.uuid}',
+                urlPreview: '${API.webDomain}/joboffers/${jobOfferDetail.uuid}',
               ),
             },
           )

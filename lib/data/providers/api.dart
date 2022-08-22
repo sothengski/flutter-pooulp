@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
+
 // import 'api_keys.dart';
+enum Env { dev, uat, stage, prod }
 
 enum Endpoint {
   signIn,
@@ -64,6 +66,8 @@ class API {
   // factory API.dev() => API(apiKey: APIKeys.pooulpDevKey);
   // Front Web domains
   static const String webDomain = 'http://app.dev-lamp-01.srv.pooulp.eu';
+  // 'http://uat.pooulp.eu';
+  // 'https://app.pooulp.com';
 
   /// Based API End Point URLs
   static const String host =

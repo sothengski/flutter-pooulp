@@ -187,46 +187,46 @@ class OfferDetailPage extends GetView<OfferDetailController> {
 
                           ///===== Rufusal Reason Component =====//
 
-                          if (jobOfferDetail.jobOfferStateModel!.stateId != 4)
-                            Container()
-                          else
-                            CustomBoxWidget(
-                              leftMargin: AppSize.s8,
-                              rightMargin: AppSize.s8,
-                              backgroundColor: Colors.red[100],
-                              child: Column(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: CustomTextWidget(
-                                      textAlign: TextAlign.left,
-                                      text: jobOfferDetail
-                                          .jobOfferStateModel!.reasonTagId
-                                          .toString(),
-                                      fontWeight: FontWeightManager.bold,
-                                      color: ColorsManager.red900,
-                                      marginTop: AppSize.s4,
-                                      marginBottom: AppSize.s4,
-                                    ),
-                                  ),
-                                  if (jobOfferDetail
-                                          .jobOfferStateModel!.reason ==
-                                      '')
-                                    Container()
-                                  else
-                                    CustomTextWidget(
-                                      textAlign: TextAlign.left,
-                                      text:
-                                          '${jobOfferDetail.jobOfferStateModel!.reason}',
-                                      fontWeight: FontWeightManager.regular,
-                                      fontSize: AppSize.s12,
-                                      color: ColorsManager.red900,
-                                      // marginBottom: AppSize.s10,
-                                      maxLine: 50,
-                                    ),
-                                ],
-                              ),
-                            ),
+                          // if (jobOfferDetail.jobOfferStateModel!.stateId != 4)
+                          //   Container()
+                          // else
+                          //   CustomBoxWidget(
+                          //     leftMargin: AppSize.s8,
+                          //     rightMargin: AppSize.s8,
+                          //     backgroundColor: Colors.red[100],
+                          //     child: Column(
+                          //       children: [
+                          //         Align(
+                          //           alignment: Alignment.centerLeft,
+                          //           child: CustomTextWidget(
+                          //             textAlign: TextAlign.left,
+                          //             text: jobOfferDetail
+                          //                 .jobOfferStateModel!.reasonTagId
+                          //                 .toString(),
+                          //             fontWeight: FontWeightManager.bold,
+                          //             color: ColorsManager.red900,
+                          //             marginTop: AppSize.s4,
+                          //             marginBottom: AppSize.s4,
+                          //           ),
+                          //         ),
+                          //         if (jobOfferDetail
+                          //                 .jobOfferStateModel!.reason ==
+                          //             '')
+                          //           Container()
+                          //         else
+                          //           CustomTextWidget(
+                          //             textAlign: TextAlign.left,
+                          //             text:
+                          //                 '${jobOfferDetail.jobOfferStateModel!.reason}',
+                          //             fontWeight: FontWeightManager.regular,
+                          //             fontSize: AppSize.s12,
+                          //             color: ColorsManager.red900,
+                          //             // marginBottom: AppSize.s10,
+                          //             maxLine: 50,
+                          //           ),
+                          //       ],
+                          //     ),
+                          //   ),
                           //===== Rufusal Reason Component =====//
 
                           ///===== Working Period Component =====//
@@ -524,8 +524,8 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                               title: 'jobOfferAddress'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: CustomTextWidget(
-                                text:
-                                    '${jobOfferDetail.jobOfferFullOfficeAddress}',
+                                text: '${jobOfferDetail.addressStreet}',
+                                // '${jobOfferDetail.jobOfferFullOfficeAddress}',
                                 fontWeight: FontWeightManager.regular,
                                 maxLine: 3,
                               ),
@@ -715,7 +715,8 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomTextWidget(
                               text:
-                                  '${jobOfferDetail.enterprise!.companyAddress}${jobOfferDetail.companyLocation}',
+                                  '${jobOfferDetail.enterprise!.companyAddress}',
+                              // '${jobOfferDetail.enterprise!.companyAddress}${jobOfferDetail.companyLocation}',
                               fontWeight: FontWeightManager.regular,
                               maxLine: 3,
                             ),

@@ -223,6 +223,81 @@ class OfferListComponent extends StatelessWidget {
                                 // iconColor: ColorsManager.grey600,
                                 iconColorOnClick: ColorsManager.primaryBlue,
                                 buttonState: offerList![index].informationState,
+                                onPressed: () => Get.dialog(
+                                  MaterialDialogWidget(
+                                    title: 'reason'.tr,
+                                    titleHorizontalMargin: AppSize.s12,
+                                    dialogMargin: AppSize.s28,
+                                    rightWidget: CustomIconButtonWidget(
+                                      iconData: Icons.close,
+                                      padding: 0.0,
+                                      isConstraints: true,
+                                      onClick: () => {
+                                        Get.back(),
+                                      },
+                                    ),
+                                    contentWidget: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        ///===== Rufusal Reason Component =====//
+                                        if (offerList![index]
+                                                .jobOfferStateModel!
+                                                .stateId !=
+                                            4)
+                                          Container()
+                                        else
+                                          CustomBoxWidget(
+                                            leftMargin: AppSize.s8,
+                                            rightMargin: AppSize.s8,
+                                            bottomMargin: AppSize.s8,
+                                            backgroundColor: ColorsManager
+                                                .white, // Colors.red[100],
+                                            child: Column(
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: CustomTextWidget(
+                                                    textAlign: TextAlign.left,
+                                                    text: offerList![index]
+                                                        .jobOfferStateModel!
+                                                        .reasonTagId
+                                                        .toString(),
+                                                    fontWeight:
+                                                        FontWeightManager.bold,
+                                                    color: ColorsManager.red900,
+                                                    marginTop: AppSize.s4,
+                                                    marginBottom: AppSize.s4,
+                                                  ),
+                                                ),
+                                                if (offerList![index]
+                                                        .jobOfferStateModel!
+                                                        .reason ==
+                                                    '')
+                                                  Container()
+                                                else
+                                                  CustomTextWidget(
+                                                    textAlign: TextAlign.left,
+                                                    text:
+                                                        '${offerList![index].jobOfferStateModel!.reason}',
+                                                    fontWeight:
+                                                        FontWeightManager
+                                                            .regular,
+                                                    fontSize: AppSize.s12,
+                                                    color: ColorsManager.red900,
+                                                    // marginBottom: AppSize.s10,
+                                                    maxLine: 50,
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                        //===== Rufusal Reason Component =====//
+                                      ],
+                                    ),
+                                  ),
+                                ),
                                 // onPressed: () {
                                 // offerController!
                                 //     .onClickActionButtonJobOffer(

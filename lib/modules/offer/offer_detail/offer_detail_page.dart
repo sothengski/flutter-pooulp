@@ -36,6 +36,9 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                 context: context,
                 text: 'POOULP Job Offer',
                 urlPreview: '${API.webDomain}/joboffers/${jobOfferDetail.uuid}',
+                // urlPreview: controller.firebaseDynamicLinkService
+                //     .createDynamicLink()
+                //     .toString(),
               ),
             },
           )
@@ -140,7 +143,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                     marginTop: AppSize.s4,
                     marginBottom: AppSize.s10,
                   ),
-                  Container(
+                  DecoratedBox(
                     decoration: BoxDecoration(
                       // color: ColorsManager.green,
                       borderRadius: BorderRadius.circular(10),

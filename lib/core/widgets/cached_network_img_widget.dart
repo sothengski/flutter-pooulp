@@ -35,7 +35,7 @@ class CachedNetworkImgWidget extends StatelessWidget {
               context,
               imageProvider,
             ) =>
-                Container(
+                DecoratedBox(
               decoration: BoxDecoration(
                 shape: isCircle == true ? BoxShape.circle : BoxShape.rectangle,
                 border: Border.all(

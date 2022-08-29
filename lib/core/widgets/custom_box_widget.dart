@@ -90,7 +90,7 @@ class CustomBoxWidget extends StatelessWidget {
           right: rightMargin!,
         ),
         child: child ??
-            Container(
+            DecoratedBox(
               decoration: BoxDecoration(
                 shape: isCircle! ? BoxShape.circle : BoxShape.rectangle,
                 // border: Border.all(

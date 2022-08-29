@@ -17,6 +17,9 @@ class OfferDetailController extends GetxController
 
   late YoutubePlayerController youtubeController;
 
+  // final FirebaseDynamicLinkService firebaseDynamicLinkService =
+  //     FirebaseDynamicLinkService();
+
   @override
   void onInit() {
     super.onInit();

@@ -210,6 +210,23 @@ class AuthProvider extends BaseProvider {
       return Future.error(e.toString());
     }
   }
+
+  Future<LoginModel> refreshTokenAPI() async {
+    try {
+      final Response dataResponse = await post(
+        API.paths[Endpoint.postRefreshToken],
+        {},
+      );
+      if (dataResponse.hasError) {
+        throw responseBodyHandler(resp: dataResponse);
+      } else {
+        final data = json.decode(dataResponse.bodyString.toString());
+        return LoginModel.fromJson(data as Map<String, dynamic>);
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }
 
 

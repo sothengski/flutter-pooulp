@@ -57,6 +57,7 @@ enum Endpoint {
   getNotificationMessages,
   getRoomStatus,
   // postSeenConversaction,
+  postRefreshToken,
 }
 
 class API {
@@ -117,6 +118,7 @@ class API {
     Endpoint.postVerifyEmail: '/users/email-verification',
     Endpoint.getNotificationMessages: '/notificationmessages?perPage=50',
     Endpoint.getRoomStatus: '/rooms/status',
+    Endpoint.postRefreshToken: '/refreshtoken',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

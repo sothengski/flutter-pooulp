@@ -213,12 +213,13 @@ class AuthProvider extends BaseProvider {
 
   Future<LoginModel> refreshTokenAPI() async {
     try {
+      // log('refreshTokenAPI:: ${API.host}${API.paths[Endpoint.postRefreshToken].toString()}');
       final Response dataResponse = await post(
-        API.paths[Endpoint.postRefreshToken],
+        '${API.host}${API.paths[Endpoint.postRefreshToken]}',
         {},
       );
       if (dataResponse.hasError) {
-        throw responseBodyHandler(resp: dataResponse);
+        throw "(resp: ${dataResponse.bodyString})";
       } else {
         final data = json.decode(dataResponse.bodyString.toString());
         return LoginModel.fromJson(data as Map<String, dynamic>);

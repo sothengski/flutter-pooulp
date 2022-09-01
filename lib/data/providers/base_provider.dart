@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/core.dart';
 import '../../routes/routes.dart';
 
 import '../data.dart';
@@ -8,7 +7,7 @@ import '../data.dart';
 class BaseProvider extends GetConnect {
   // final authProvider = AuthProvider();
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
 
     // add your local storage here to load for every request
@@ -26,56 +25,58 @@ class BaseProvider extends GetConnect {
           '${request.url}' ==
               '${httpClient.baseUrl}${API.paths[Endpoint.registerNewUser]}') {
       } else {
-        if (response.statusCode == 401) {
-          AuthProvider().refreshTokenAPI().then((value) async {
-            final bool loginStatus = await AuthServices().saveUserToken(
-              bodyData: value,
-            );
-            if (loginStatus == true) {
-              customSnackbar(
-                msgTitle: "RefreshToken",
-                msgContent: "RefreshToken",
-                bgColor: ColorsManager.red,
-              );
-            } else {
-              // customSnackbar(
-              //   msgTitle: "Can't save RefreshToken",
-              //   msgContent: "Can't save RefreshToken",
-              //   bgColor: ColorsManager.red,
-              // );
-              Get.defaultDialog(
-                barrierDismissible: false,
-                radius: 10.0,
-                contentPadding: const EdgeInsets.all(20.0),
-                title: 'Session Expired',
-                middleText: 'Please log in again.',
-                textConfirm: 'OK',
-                confirm: OutlinedButton.icon(
-                  onPressed: () async => {
-                    await AuthServices().removeToken().then(
-                          (value) => Get.offAllNamed(Routes.splashRoute),
-                        )
-                  },
-                  icon: const Icon(
-                    Icons.check,
-                    color: Colors.blue,
-                  ),
-                  label: const Text(
-                    'Okay',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-                // cancel: OutlinedButton.icon(
-                //   onPressed: () {},
-                //   icon: const Icon(
-                //     Icons.check,
-                //     color: Colors.blue,
-                //   ),
-                //   label: const Text("cancel"),
-                // ),
-              );
-            }
-          });
+        if ('${request.url}' ==
+                '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}' &&
+            response.statusCode == 401) {
+          // await AuthProvider().refreshTokenAPI().then((value) async {
+          //   final bool loginStatus = await AuthServices().saveUserToken(
+          //     bodyData: value,
+          //   );
+          //   if (loginStatus == true) {
+          //     customSnackbar(
+          //       msgTitle: "RefreshToken",
+          //       msgContent: "RefreshToken",
+          //       bgColor: ColorsManager.red,
+          //     );
+          //   } else {
+          //     customSnackbar(
+          //       msgTitle: "Can't save RefreshToken",
+          //       msgContent: "Can't save RefreshToken",
+          //       bgColor: ColorsManager.red,
+          //     );
+          Get.defaultDialog(
+            barrierDismissible: false,
+            radius: 10.0,
+            contentPadding: const EdgeInsets.all(20.0),
+            title: 'Session Expired',
+            middleText: 'Please log in again.',
+            textConfirm: 'OK',
+            confirm: OutlinedButton.icon(
+              onPressed: () async => {
+                await AuthServices().removeToken().then(
+                      (value) => Get.offAllNamed(Routes.splashRoute),
+                    )
+              },
+              icon: const Icon(
+                Icons.check,
+                color: Colors.blue,
+              ),
+              label: const Text(
+                'Okay',
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
+            // cancel: OutlinedButton.icon(
+            //   onPressed: () {},
+            //   icon: const Icon(
+            //     Icons.check,
+            //     color: Colors.blue,
+            //   ),
+            //   label: const Text("cancel"),
+            // ),
+          );
+          // }
+          // });
 
           // Get.defaultDialog(
           //   barrierDismissible: false,

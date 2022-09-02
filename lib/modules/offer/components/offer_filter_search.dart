@@ -533,9 +533,9 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       suffixWidgetFlex: 50,
                       suffixWidget: Slider(
                         value: controller.radiusRxInt.value.toDouble(),
-                        min: 5.0,
-                        max: 100.0,
-                        divisions: 100,
+                        min: 10.0,
+                        max: 200.0,
+                        divisions: 200,
                         activeColor: ColorsManager.primary,
                         inactiveColor: ColorsManager.grey300,
                         thumbColor: ColorsManager.primary,

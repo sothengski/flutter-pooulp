@@ -407,8 +407,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                                     .value
                                                                     .toDouble(),
                                                                 min: 10.0,
-                                                                max: 100.0,
-                                                                divisions: 100,
+                                                                max: 200.0,
+                                                                divisions: 200,
                                                                 activeColor:
                                                                     ColorsManager
                                                                         .primary,

@@ -72,19 +72,19 @@ mixin ThemeManager {
         colorScheme: theme.colors.colorScheme,
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: TextButton.styleFrom(
-            primary: theme.colors.primaryColor,
+            foregroundColor: theme.colors.primaryColor,
             backgroundColor: theme.colors.buttonTextColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: TextButton.styleFrom(
-            primary: theme.colors.buttonTextColor,
+            foregroundColor: theme.colors.buttonTextColor,
             backgroundColor: theme.colors.primaryColor,
           ),
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: theme.colors.primaryColor,
+            foregroundColor: theme.colors.primaryColor,
           ),
         ),
         buttonTheme: ButtonThemeData(

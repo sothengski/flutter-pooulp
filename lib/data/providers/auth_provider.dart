@@ -217,12 +217,20 @@ class AuthProvider extends BaseProvider {
       final Response dataResponse = await post(
         '${API.host}${API.paths[Endpoint.postRefreshToken]}',
         {},
+        headers: {
+          'Authorization': 'Bearer ${getUserToken()}',
+        },
       );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
       } else {
         final data = json.decode(dataResponse.bodyString.toString());
-        return LoginModel.fromJson(data as Map<String, dynamic>);
+        final LoginModel loginData =
+            LoginModel.fromJson(data as Map<String, dynamic>);
+        await AuthServices().saveUserToken(
+          bodyData: loginData,
+        );
+        return loginData; //LoginModel.fromJson(data as Map<String, dynamic>);
       }
     } catch (e) {
       return Future.error(e.toString());

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../routes/routes.dart';
 
+import '../../core/core.dart';
+import '../../routes/routes.dart';
 import '../data.dart';
 
 class BaseProvider extends GetConnect {
@@ -11,7 +12,8 @@ class BaseProvider extends GetConnect {
     super.onInit();
 
     // add your local storage here to load for every request
-    final String userToken = getUserToken();
+    // userToken =
+    getUserToken();
 
     //1.base_url
     httpClient.baseUrl = API.host;
@@ -25,58 +27,65 @@ class BaseProvider extends GetConnect {
           '${request.url}' ==
               '${httpClient.baseUrl}${API.paths[Endpoint.registerNewUser]}') {
       } else {
-        if ('${request.url}' ==
-                '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}' &&
-            response.statusCode == 401) {
-          // await AuthProvider().refreshTokenAPI().then((value) async {
-          //   final bool loginStatus = await AuthServices().saveUserToken(
-          //     bodyData: value,
-          //   );
-          //   if (loginStatus == true) {
-          //     customSnackbar(
-          //       msgTitle: "RefreshToken",
-          //       msgContent: "RefreshToken",
-          //       bgColor: ColorsManager.red,
-          //     );
-          //   } else {
-          //     customSnackbar(
-          //       msgTitle: "Can't save RefreshToken",
-          //       msgContent: "Can't save RefreshToken",
-          //       bgColor: ColorsManager.red,
-          //     );
-          Get.defaultDialog(
-            barrierDismissible: false,
-            radius: 10.0,
-            contentPadding: const EdgeInsets.all(20.0),
-            title: 'Session Expired',
-            middleText: 'Please log in again.',
-            textConfirm: 'OK',
-            confirm: OutlinedButton.icon(
-              onPressed: () async => {
-                await AuthServices().removeToken().then(
-                      (value) => Get.offAllNamed(Routes.splashRoute),
-                    )
-              },
-              icon: const Icon(
-                Icons.check,
-                color: Colors.blue,
-              ),
-              label: const Text(
-                'Okay',
-                style: TextStyle(color: Colors.blue),
-              ),
-            ),
-            // cancel: OutlinedButton.icon(
-            //   onPressed: () {},
-            //   icon: const Icon(
-            //     Icons.check,
-            //     color: Colors.blue,
-            //   ),
-            //   label: const Text("cancel"),
-            // ),
-          );
-          // }
-          // });
+        if
+            //  ('${request.url}' ==
+            //         '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}' &&
+            //     response.statusCode != 401)
+            ('${request.url}' ==
+                    '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}' &&
+                AuthServices().getToken()!.tokenExpirationDate!.compareTo(now) <
+                    30) {
+          Future.delayed(DurationConstant.d1500, () async {
+            await AuthProvider().refreshTokenAPI().then((value) async {
+              final bool loginStatus = await AuthServices().saveUserToken(
+                bodyData: value,
+              );
+              if (loginStatus == true) {
+                // customSnackbar(
+                //   msgTitle: "RefreshToken",
+                //   msgContent: "RefreshToken",
+                //   bgColor: ColorsManager.red,
+                // );
+              } else {
+                customSnackbar(
+                  msgTitle: "Can't save RefreshToken",
+                  msgContent: "Can't save RefreshToken",
+                  bgColor: ColorsManager.red,
+                );
+                Get.defaultDialog(
+                  barrierDismissible: false,
+                  radius: 10.0,
+                  contentPadding: const EdgeInsets.all(20.0),
+                  title: 'Session Expired',
+                  middleText: 'Please log in again.',
+                  textConfirm: 'OK',
+                  confirm: OutlinedButton.icon(
+                    onPressed: () async => {
+                      await AuthServices().removeToken().then(
+                            (value) => Get.offAllNamed(Routes.splashRoute),
+                          )
+                    },
+                    icon: const Icon(
+                      Icons.check,
+                      color: Colors.blue,
+                    ),
+                    label: const Text(
+                      'Okay',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  // cancel: OutlinedButton.icon(
+                  //   onPressed: () {},
+                  //   icon: const Icon(
+                  //     Icons.check,
+                  //     color: Colors.blue,
+                  //   ),
+                  //   label: const Text("cancel"),
+                  // ),
+                );
+              }
+            });
+          });
 
           // Get.defaultDialog(
           //   barrierDismissible: false,
@@ -112,6 +121,33 @@ class BaseProvider extends GetConnect {
           // await AuthServices().removeToken().then(
           //       (value) => Get.offAllNamed(Routes.splashRoute),
           //     );
+        } else if (
+            // !('${request.url}' ==
+            //       '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}') &&
+            response.statusCode == 401) {
+          Get.defaultDialog(
+            barrierDismissible: false,
+            radius: 10.0,
+            contentPadding: const EdgeInsets.all(20.0),
+            title: 'Session Expired',
+            middleText: 'Please log in again.',
+            textConfirm: 'OK',
+            confirm: OutlinedButton.icon(
+              onPressed: () async => {
+                await AuthServices().removeToken().then(
+                      (value) => Get.offAllNamed(Routes.splashRoute),
+                    )
+              },
+              icon: const Icon(
+                Icons.check,
+                color: Colors.blue,
+              ),
+              label: const Text(
+                'Okay',
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
+          );
         }
       }
       return response;
@@ -120,7 +156,7 @@ class BaseProvider extends GetConnect {
 
     httpClient.addRequestModifier<void>((request) async {
       // request.headers['apikey'] = '12345678';
-      request.headers['Authorization'] = 'Bearer $userToken';
+      request.headers['Authorization'] = 'Bearer ${getUserToken()}';
       return request;
     });
 

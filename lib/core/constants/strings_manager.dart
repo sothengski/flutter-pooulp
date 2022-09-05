@@ -9,7 +9,7 @@ class Keys {
   static const String deleteOperation = 'Delete';
 }
 
-const String textAppVersion = "1.0.21 (21)";
+const String textAppVersion = "1.0.23 (23)";
 const String defaultDate = "2020-02-20T06:52:01.000000Z";
 
 class LocalStorage {

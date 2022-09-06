@@ -58,6 +58,7 @@ enum Endpoint {
   getRoomStatus,
   // postSeenConversaction,
   postRefreshToken,
+  // postJobOfferCount,
 }
 
 class API {
@@ -167,9 +168,7 @@ class API {
   static String putOrDeleteAvailabilities({required int? availabilityId}) =>
       '/users/me/student_profile/availabilities/$availabilityId';
 
-  static String getMessagingRoomList({
-    int? pageNumber = 1,
-  }) =>
+  static String getMessagingRoomList({int? pageNumber = 1}) =>
       '/rooms?page=$pageNumber';
 
   static String getMessagesByRoomID({
@@ -178,13 +177,12 @@ class API {
   }) =>
       '/rooms/$roomId/messages?page=$pageNumber';
 
-  static String postMessageByRoomID({
-    required String? roomId,
-  }) =>
+  static String postMessageByRoomID({required String? roomId}) =>
       '/rooms/$roomId/messages';
 
-  static String postSeenConversation({
-    required String? roomId,
-  }) =>
+  static String postSeenConversation({required String? roomId}) =>
       '/rooms/$roomId/openconversation';
+
+  static String postJobOfferViewCount({required String? jobOfferUUID}) =>
+      '/offers/$jobOfferUUID/view';
 }

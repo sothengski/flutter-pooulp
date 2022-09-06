@@ -20,7 +20,9 @@ class OfferDetailPage extends GetView<OfferDetailController> {
     controller.youtubeVideoId = jobOfferDetail.enterprise!.youtubeLink == null
         ? ''
         : jobOfferDetail.enterprise!.youtubeLink!.split('=').last;
-
+    controller.makeRequestToPOSTJobOfferViewCountAPI(
+      jobOfferUUID: jobOfferDetail.uuid,
+    );
     return Scaffold(
       // backgroundColor: ColorsManager.primary,
       appBar: CustomAppBar(

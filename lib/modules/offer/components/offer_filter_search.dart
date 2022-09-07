@@ -161,7 +161,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: controller.listJobOfferTypes
                             .map(
-                              (e) => RowDataSelectionWidget.checkBox(
+                              (e) => RowDataSelectionWidget.radioButton(
                                 isClickingValue: controller.typesListInFilter
                                     .where((item) => item.id == e.id)
                                     .isNotEmpty,
@@ -179,6 +179,33 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             .toList(),
                       ),
                     ),
+                    // CustomContainerWidget(
+                    //   isBoxShadow: false,
+                    //   leftTitle: 'jobTypes'.tr,
+                    //   titleTopPadding: AppSize.s5,
+                    //   titleFontSize: AppSize.s16,
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: controller.listJobOfferTypes
+                    //         .map(
+                    //           (e) => RowDataSelectionWidget.checkBox(
+                    //             isClickingValue: controller.typesListInFilter
+                    //                 .where((item) => item.id == e.id)
+                    //                 .isNotEmpty,
+                    //             // controller.typesListInFilter.contains(e),
+                    //             text: e.label,
+                    //             onPressed: () {
+                    //               controller
+                    //                   .addingOrRemovingFieldInFieldListToBeSearch(
+                    //                 list: controller.typesListInFilter,
+                    //                 fieldValue: e,
+                    //               );
+                    //             },
+                    //           ),
+                    //         )
+                    //         .toList(),
+                    //   ),
+                    // ),
                     //===== Bottom of Job Types Component =====//
                     const SizedBox(height: 8.0),
 

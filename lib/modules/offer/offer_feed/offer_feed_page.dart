@@ -172,16 +172,16 @@ class OfferFeedPage extends GetView<OfferFeedController> {
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Expanded(
-                  //   flex: 9,
-                  //   child: Obx(
-                  //     () => controller.listJobOfferTypes.isNotEmpty
-                  //         ? OfferFeedTypesListComponent()
-                  //         : const ItemListShimmerLoadingWidget(
-                  //             isBodyList: false,
-                  //           ),
-                  //   ),
-                  // ),
+                  Expanded(
+                    flex: 9,
+                    child: Obx(
+                      () => controller.listJobOfferTypes.isNotEmpty
+                          ? OfferFeedTypesListComponent()
+                          : const ItemListShimmerLoadingWidget(
+                              isBodyList: false,
+                            ),
+                    ),
+                  ),
                   const SizedBox(height: AppSize.s4),
                   Expanded(
                     flex: 90,

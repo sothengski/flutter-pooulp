@@ -56,20 +56,20 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                   fontWeight: FontWeightManager.light,
                   color: containerColorState(
                     object1: '${controller.listJobOfferTypes[index].label}',
-                    object2: controller.typeSelected.value.label,
+                    object2: controller.typesListToBeSearch[0].label,
                     unEqualStateColor: ColorsManager.primaryBlue,
                   ),
                 ),
                 backgroundColor: containerColorState(
                   object1: '${controller.listJobOfferTypes[index].label}',
-                  object2: controller.typeSelected.value.label,
+                  object2: controller.typesListToBeSearch[0].label,
                   isTextColor: false,
                 ),
                 //Noted:: Enable this for row list of jobOfferTypes in the feed Page
                 onSelected: (_) {
-                  // controller.selectType(
-                  //   type: controller.listJobOfferTypes[index],
-                  // );
+                  controller.selectType(
+                    type: controller.listJobOfferTypes[index],
+                  );
                 },
               ),
             ),

@@ -146,11 +146,16 @@ class OfferFeedController extends GetxController
     RxList<FieldModel>? list,
     FieldModel? fieldValue,
   }) {
-    if (list!.contains(fieldValue)) {
-      list.removeWhere((element) => element.id == fieldValue!.id);
-    } else {
-      list.add(fieldValue!);
-    }
+    list!.clear();
+    list.add(fieldValue!);
+
+    /// if it is a list
+    // if (list!.contains(fieldValue)) {
+    //   list.removeWhere((element) => element.id == fieldValue!.id);
+    // } else {
+    //   list.add(fieldValue!);
+    // }
+    /// if it is a list
   }
 
   void clearPlaceDetail() {
@@ -167,13 +172,15 @@ class OfferFeedController extends GetxController
     languageListInFilter.value = [];
     fieldListInFilter.value = [];
     typesListInFilter.value = [];
+    typesListInFilter.add(allType);
     availabilitiesTagListInFilter.value = [];
 
     countryToBeSearch.value = const CountryModel();
     workPlaceTypesToBeSearch.value = 2; // 2 == Hybrid(Default)
     languageListToBeSearch.value = [];
     fieldListToBeSearch.value = [];
-    typesListToBeSearch.value = [];
+    // typesListToBeSearch.value = [];
+    selectType(type: allType);
     availabilitiesTagListToBeSearch.value = [];
 
     placeDetail.value = PlaceDetailModel();
@@ -220,6 +227,7 @@ class OfferFeedController extends GetxController
     languageListToBeSearch.clear();
     fieldListToBeSearch.clear();
     typesListToBeSearch.clear();
+    selectType(type: typesListInFilter[0]);
     availabilitiesTagListToBeSearch.clear();
     languageListToBeSearch.addAll(languageListInFilter);
     fieldListToBeSearch.addAll(fieldListInFilter);
@@ -325,10 +333,9 @@ class OfferFeedController extends GetxController
   Future<List<FieldModel>> getjobOfferTypesListResponseProvider({
     bool? refresh = false,
   }) async {
-    // listJobOfferTypes.add(allType);
-
+    selectType(type: allType, isRefresh: false);
+    listJobOfferTypes.add(allType);
     listJobOfferTypes.addAll(await tagProvider.getJobOfferTypes());
-    // selectType(type: listJobOfferTypes[0]);
 
     return listJobOfferTypes;
   }
@@ -507,14 +514,20 @@ class OfferFeedController extends GetxController
       await offerController.onRefresh();
     } else {}
   }
-  //Noted:: this function for filter the job offer list in feed Page
-  // void selectType({FieldModel? type}) {
-  //   FieldModel tempType = allType;
-  //   if (typeSelected.value != type) {
-  //     tempType = type!;
-  //   }
-  //   typeSelected.value = tempType;
-  //   onRefresh();
-  // }
 
+  //Noted:: this function for filter the job offer list in feed Page
+  void selectType({FieldModel? type, bool? isRefresh = true}) {
+    FieldModel tempType = allType;
+    if (typeSelected.value != type) {
+      tempType = type!;
+    }
+    typesListInFilter.clear();
+    typesListToBeSearch.clear();
+    typesListInFilter.add(tempType);
+    typesListToBeSearch.add(tempType);
+    // typeSelected.value = tempType;
+    if (isRefresh == true) {
+      onRefresh();
+    }
+  }
 }

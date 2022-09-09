@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import '../data.dart';
 
 abstract class IOfferProvider {
@@ -367,9 +365,9 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
           message: dataResponse.statusText,
           data: dataResponse.body,
         );
-        debugPrint(
-          'API: ${API.postJobOfferViewCount(jobOfferUUID: jobOfferUUID)}\nresponse::${response.data}',
-        );
+        // debugPrint(
+        //   'API: ${API.postJobOfferViewCount(jobOfferUUID: jobOfferUUID)}\nresponse::${response.data}',
+        // );
         return response;
       }
     } catch (e) {

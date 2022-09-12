@@ -357,6 +357,8 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
       );
       // debugPrint('onboardingData: ${onboardingData.toRawJson()}');
       if (dataResponse.hasError) {
+        // debugPrint('resp: ${dataResponse.bodyString}');
+        // throw Exception(dataResponse.bodyString);
         throw "(resp: ${dataResponse.bodyString})";
       } else {
         final JsonResponse response = JsonResponse(

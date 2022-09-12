@@ -126,74 +126,77 @@ class SignInForm extends GetView<SignInController> {
                   ),
                 ),
                 // ),
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: ColorsManager.grey600,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    CustomTextWidget(
-                      text: 'or'.tr, //'auth.or'.tr,
-                      fontSize: 20.0,
-                      marginTop: AppSize.s16,
-                      marginBottom: AppSize.s16,
-                    ),
-                    const SizedBox(width: 10),
-                    const Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: ColorsManager.grey600,
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: AppSize.s48,
-                    right: AppSize.s48,
-                  ),
-                  child: GestureDetector(
-                    onTap: () => customSnackbar(
-                      msgTitle: 'This Page is under construction!',
-                      msgContent:
-                          'This Page is only view.\n Data will not save.',
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          // onTap: controller.googleSignInMethod,
-                          child: const CircleAvatar(
-                            radius: 20.0,
-                            backgroundColor: ColorsManager.white,
-                            child: Image(
-                              image: AssetImage(AssetsManager.googleLogo),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          // onTap: controller.linkedInSignInMethod,
-                          child: const CircleAvatar(
-                            radius: 20.0,
-                            backgroundColor: ColorsManager.white,
-                            child: Image(
-                              image: AssetImage(AssetsManager.linkedInLogo),
-                            ),
-                          ),
-                        ),
-                        // const CircleAvatar(
-                        //   radius: 20.0,
-                        //   backgroundColor: ColorsManager.white,
-                        //   child: Image(
-                        //     image: AssetImage(AssetsManager.facebookLogo),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
+                // Row(
+                //   children: [
+                //     const Expanded(
+                //       child: Divider(
+                //         thickness: 1,
+                //         color: ColorsManager.grey600,
+                //       ),
+                //     ),
+                //     const SizedBox(width: 10),
+                //     CustomTextWidget(
+                //       text: 'or'.tr, //'auth.or'.tr,
+                //       fontSize: 20.0,
+                //       marginTop: AppSize.s16,
+                //       marginBottom: AppSize.s16,
+                //     ),
+                //     const SizedBox(width: 10),
+                //     const Expanded(
+                //       child: Divider(
+                //         thickness: 1,
+                //         color: ColorsManager.grey600,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(
+                //     left: AppSize.s48,
+                //     right: AppSize.s48,
+                //   ),
+                //   child: GestureDetector(
+                //     onTap: () => customSnackbar(
+                //       msgTitle: 'This Page is under construction!',
+                //       msgContent:
+                //           'This Page is only view.\n Data will not save.',
+                //     ),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         GestureDetector(
+                //           // onTap: controller.googleSignInMethod,
+                //           child: const CircleAvatar(
+                //             radius: 20.0,
+                //             backgroundColor: ColorsManager.white,
+                //             child: Image(
+                //               image: AssetImage(AssetsManager.googleLogo),
+                //             ),
+                //           ),
+                //         ),
+                //         GestureDetector(
+                //           // onTap: controller.linkedInSignInMethod,
+                //           child: const CircleAvatar(
+                //             radius: 20.0,
+                //             backgroundColor: ColorsManager.white,
+                //             child: Image(
+                //               image: AssetImage(AssetsManager.linkedInLogo),
+                //             ),
+                //           ),
+                //         ),
+                //         // const CircleAvatar(
+                //         //   radius: 20.0,
+                //         //   backgroundColor: ColorsManager.white,
+                //         //   child: Image(
+                //         //     image: AssetImage(AssetsManager.facebookLogo),
+                //         //   ),
+                //         // ),
+                //       ],
+                //     ),
+                //   ),
+                // )
+                const SizedBox(
+                  height: 12.0,
                 )
               ],
             ),

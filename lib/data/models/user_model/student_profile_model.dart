@@ -526,14 +526,14 @@ class StudentProfileModel {
         {
             "id": 2,
             "title": "Vue Js",
-            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "description": "description",
             "received_date": "2021-12-01",
             "expiration_date": "2022-01-01"
         },
         {
             "id": 3,
             "title": "PHP",
-            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "description": "description",
             "received_date": "2020-01-01",
             "expiration_date": "2021-01-01"
         }

@@ -59,6 +59,8 @@ enum Endpoint {
   // postSeenConversaction,
   postRefreshToken,
   // postJobOfferCount,
+  getInternshipTypeTags,
+  getInternshipPeriodTags,
 }
 
 class API {
@@ -120,6 +122,8 @@ class API {
     Endpoint.getNotificationMessages: '/notificationmessages?perPage=50',
     Endpoint.getRoomStatus: '/rooms/status',
     Endpoint.postRefreshToken: '/refreshtoken',
+    Endpoint.getInternshipTypeTags: '/tags/internshiptype',
+    Endpoint.getInternshipPeriodTags: '/tags/internshipperiod',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

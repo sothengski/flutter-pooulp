@@ -36,6 +36,8 @@ class JobOfferModel {
   final List<FieldModel>? spokenLanguages;
   final List<SkillModel>? skills;
   final List<FieldModel>? availabilities;
+  final List<FieldModel>? internshipTypes;
+  final List<FieldModel>? internshipPeriods;
   final ProfileModel? enterprise;
   final JobOfferStateModel? jobOfferStateModel;
   bool? applyState;
@@ -78,6 +80,8 @@ class JobOfferModel {
     this.spokenLanguages,
     this.skills,
     this.availabilities,
+    this.internshipTypes,
+    this.internshipPeriods,
     this.enterprise,
     this.jobOfferStateModel,
     this.applyState = false,
@@ -235,6 +239,26 @@ class JobOfferModel {
                       ),
                     )
                     .toList(),
+        internshipTypes:
+            json['internship_types'] == null || json['internship_types'] == []
+                ? []
+                : (json['internship_types'] as List)
+                    .map(
+                      (i) => FieldModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList(),
+        internshipPeriods: json['internship_periods'] == null ||
+                json['internship_periods'] == []
+            ? []
+            : (json['internship_periods'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
         enterprise: json['enterprise'] == null
             ? null
             : ProfileModel.fromJson(
@@ -285,6 +309,13 @@ class JobOfferModel {
         'availabilities': availabilities != null || availabilities != []
             ? List<dynamic>.from(availabilities!.map((x) => x.toJson()))
             : null,
+        'internship_types': internshipTypes != null || internshipTypes != []
+            ? List<dynamic>.from(internshipTypes!.map((x) => x.toJson()))
+            : null,
+        'internship_periods':
+            internshipPeriods != null || internshipPeriods != []
+                ? List<dynamic>.from(internshipPeriods!.map((x) => x.toJson()))
+                : null,
         'enterprise': enterprise?.toJson(),
         'job_offer_state': jobOfferStateModel?.toJson(),
       }..removeWhere((_, v) => v == null);
@@ -343,6 +374,29 @@ class JobOfferModel {
                       (e) => e.id,
                     ),
               ),
+        'internship_types': internshipTypes == null || internshipTypes == []
+            ? []
+            : List<dynamic>.from(
+                internshipTypes!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'internship_periods':
+            internshipPeriods == null || internshipPeriods == []
+                ? []
+                : List<dynamic>.from(
+                    internshipPeriods!
+                        .skipWhile(
+                          (x) => x.id == null,
+                        )
+                        .map(
+                          (e) => e.id,
+                        ),
+                  ),
         'location': location ?? '',
         'is_range_search': isRangeSearch,
         'range': range! * 1000,
@@ -382,6 +436,8 @@ class JobOfferModel {
       spokenLanguages: $spokenLanguages,
       skills: $skills,
       availabilities: $availabilities,
+      internshipTypes: $internshipTypes,
+      internshipPeriods: $internshipPeriods,
       enterprise: $enterprise,
       jobOfferStateModel: $jobOfferStateModel,
       'location': $location,

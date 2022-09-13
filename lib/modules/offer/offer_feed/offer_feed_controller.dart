@@ -44,6 +44,8 @@ class OfferFeedController extends GetxController
   RxList<FieldModel> fieldListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> languageListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> availabilitiesTagListForSearch = <FieldModel>[].obs;
+  RxList<FieldModel> internshipTypeTagListForSearch = <FieldModel>[].obs;
+  RxList<FieldModel> internshipPeriodTagListForSearch = <FieldModel>[].obs;
 
   RxInt workPlaceTypesInFilter = 2.obs;
   Rx<CountryModel> selectedCountryInFilter = const CountryModel().obs;
@@ -51,6 +53,8 @@ class OfferFeedController extends GetxController
   RxList<FieldModel> fieldListInFilter = <FieldModel>[].obs;
   RxList<FieldModel> languageListInFilter = <FieldModel>[].obs;
   RxList<FieldModel> availabilitiesTagListInFilter = <FieldModel>[].obs;
+  RxList<FieldModel> internshipTypeTagListInFilter = <FieldModel>[].obs;
+  RxList<FieldModel> internshipPeriodTagListInFilter = <FieldModel>[].obs;
 
   RxString keywordToBeSearch = ''.obs;
   TextEditingController keywordToBeSearchTextCtrl = TextEditingController();
@@ -62,6 +66,8 @@ class OfferFeedController extends GetxController
   // RxList<int> fieldListToBeSearch = <int>[].obs;
   RxList<FieldModel> languageListToBeSearch = <FieldModel>[].obs;
   RxList<FieldModel> availabilitiesTagListToBeSearch = <FieldModel>[].obs;
+  RxList<FieldModel> internshipTypeTagListToBeSearch = <FieldModel>[].obs;
+  RxList<FieldModel> internshipPeriodTagListToBeSearch = <FieldModel>[].obs;
 
   Rx<PlaceDetailModel> placeDetail = PlaceDetailModel().obs;
   TextEditingController addressCtrl = TextEditingController();
@@ -106,6 +112,8 @@ class OfferFeedController extends GetxController
     await getFieldsListResponseProvider();
     await getLanguagesListResponseProvider();
     await getAvailabilitiesTagListResponseProvider();
+    await getInternshipTypeTagsListResponseProvider();
+    await getInternshipPeriodTagsListResponseProvider();
     await getFeedsDataState(refresh: true)
         // .then((value) => isProcessingStudentInfoRepsonse.value = true)
         ;
@@ -145,17 +153,21 @@ class OfferFeedController extends GetxController
   void addingOrRemovingFieldInFieldListToBeSearch({
     RxList<FieldModel>? list,
     FieldModel? fieldValue,
+    bool? isList = true,
   }) {
-    list!.clear();
-    list.add(fieldValue!);
-
-    /// if it is a list
-    // if (list!.contains(fieldValue)) {
-    //   list.removeWhere((element) => element.id == fieldValue!.id);
-    // } else {
-    //   list.add(fieldValue!);
-    // }
-    /// if it is a list
+    /// select/add multiple items to the list
+    if (isList == true) {
+      if (list!.contains(fieldValue)) {
+        list.removeWhere((element) => element.id == fieldValue!.id);
+      } else {
+        list.add(fieldValue!);
+      }
+    }
+    // else select only one item to the list
+    else {
+      list!.clear();
+      list.add(fieldValue!);
+    }
   }
 
   void clearPlaceDetail() {
@@ -174,6 +186,8 @@ class OfferFeedController extends GetxController
     typesListInFilter.value = [];
     typesListInFilter.add(allType);
     availabilitiesTagListInFilter.value = [];
+    internshipTypeTagListInFilter.value = [];
+    internshipPeriodTagListInFilter.value = [];
 
     countryToBeSearch.value = const CountryModel();
     workPlaceTypesToBeSearch.value = 2; // 2 == Hybrid(Default)
@@ -182,6 +196,8 @@ class OfferFeedController extends GetxController
     // typesListToBeSearch.value = [];
     selectType(type: allType);
     availabilitiesTagListToBeSearch.value = [];
+    internshipTypeTagListToBeSearch.value = [];
+    internshipPeriodTagListToBeSearch.value = [];
 
     placeDetail.value = PlaceDetailModel();
     radiusRxInt.value = 10;
@@ -206,10 +222,14 @@ class OfferFeedController extends GetxController
     fieldListInFilter.clear();
     typesListInFilter.clear();
     availabilitiesTagListInFilter.clear();
+    internshipTypeTagListInFilter.clear();
+    internshipPeriodTagListInFilter.clear();
     languageListInFilter.addAll(languageListToBeSearch);
     fieldListInFilter.addAll(fieldListToBeSearch);
     typesListInFilter.addAll(typesListToBeSearch);
     availabilitiesTagListInFilter.addAll(availabilitiesTagListToBeSearch);
+    internshipTypeTagListInFilter.addAll(internshipTypeTagListToBeSearch);
+    internshipPeriodTagListInFilter.addAll(internshipPeriodTagListToBeSearch);
     countFilterField();
     // debugPrint('dismissFilter');
     // debugPrint(
@@ -229,10 +249,20 @@ class OfferFeedController extends GetxController
     typesListToBeSearch.clear();
     selectType(type: typesListInFilter[0]);
     availabilitiesTagListToBeSearch.clear();
+    internshipTypeTagListToBeSearch.clear();
+    internshipPeriodTagListToBeSearch.clear();
     languageListToBeSearch.addAll(languageListInFilter);
     fieldListToBeSearch.addAll(fieldListInFilter);
     typesListToBeSearch.addAll(typesListInFilter);
-    availabilitiesTagListToBeSearch.addAll(availabilitiesTagListInFilter);
+    // select internship(id=1) == 1
+    if (typesListInFilter[0].id == 1) {
+      internshipTypeTagListToBeSearch.addAll(internshipTypeTagListInFilter);
+      internshipPeriodTagListToBeSearch.addAll(internshipPeriodTagListInFilter);
+    }
+    // select different from internship(id=1) != 1
+    else {
+      availabilitiesTagListToBeSearch.addAll(availabilitiesTagListInFilter);
+    }
     countFilterField();
     getFeedsDataState();
 
@@ -312,6 +342,12 @@ class OfferFeedController extends GetxController
     fieldListToBeSearch.addAll(searchPreferenceData.value.fieldPreferences!);
     availabilitiesTagListToBeSearch
         .addAll(searchPreferenceData.value.availabilityPreferences!);
+    //! Not Implement on the backend-side yet
+    // internshipTypeTagListToBeSearch
+    //     .addAll(searchPreferenceData.value.internshipTypePreferences!);
+    // availabilitiesTagListToBeSearch
+    //     .addAll(searchPreferenceData.value.internshipPeriodPreferences!);
+    //! Not Implement on the backend-side yet
     placeDetail.value = PlaceDetailModel(
       fullAddress: searchPreferenceData.value.locationPreference,
       streetNumber: searchPreferenceData.value.locationStreet,
@@ -371,6 +407,22 @@ class OfferFeedController extends GetxController
     return availabilitiesTagListForSearch;
   }
 
+  Future<List<FieldModel>> getInternshipTypeTagsListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    internshipTypeTagListForSearch
+        .addAll(await tagProvider.getInternshipTypeTags());
+    return internshipTypeTagListForSearch;
+  }
+
+  Future<List<FieldModel>> getInternshipPeriodTagsListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    internshipPeriodTagListForSearch
+        .addAll(await tagProvider.getInternshipPeriodTags());
+    return internshipPeriodTagListForSearch;
+  }
+
   Future<RxList<JobOfferModel>> getfeedListResponseProvider({
     bool? refresh = false,
   }) async {
@@ -388,6 +440,8 @@ class OfferFeedController extends GetxController
       spokenLanguages: languageListToBeSearch,
       fields: fieldListToBeSearch,
       availabilities: availabilitiesTagListToBeSearch,
+      internshipTypes: internshipTypeTagListToBeSearch,
+      internshipPeriods: internshipPeriodTagListToBeSearch,
       // location: countryToBeSearch.value.name,
       location: placeDetail.value.fullAddress,
       addressStreet: placeDetail.value.fullAddress,

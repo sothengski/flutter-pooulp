@@ -172,6 +172,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                       .addingOrRemovingFieldInFieldListToBeSearch(
                                     list: controller.typesListInFilter,
                                     fieldValue: e,
+                                    isList: false,
                                   );
                                 },
                               ),
@@ -208,6 +209,196 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     // ),
                     //===== Bottom of Job Types Component =====//
                     const SizedBox(height: 8.0),
+                    //if jobType is Internship(id = 1)
+                    if (controller.typesListInFilter[0].id == 1)
+                      Wrap(
+                        children: [
+                          ///===== Top of Internship Periods Component =====//
+                          ContainerDialogWidget(
+                            leftPadding: AppSize.s10,
+                            rightPadding: AppSize.s10,
+                            inputTitle: 'internshipPeriod'.tr,
+                            fontSizeTitle: AppSize.s16,
+                            fontWeightTitle: FontWeight.w600,
+                            inputTitleMarginBottom: AppSize.s6,
+                            // validatorFunction: (_) => Validator().notEmptyValidator(
+                            //   controller.selectedLanguage.value.label ?? '',
+                            // ),
+                            dialogType: DialogType.bottomSheetDialog,
+                            dialogWidget: Container(
+                              height: getHeight,
+                              decoration: const ShapeDecoration(
+                                color: ColorsManager.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(
+                                      AppSize.s16,
+                                    ),
+                                    topRight: Radius.circular(
+                                      AppSize.s16,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              child: Obx(
+                                () => controller
+                                        .internshipPeriodTagListForSearch
+                                        .isNotEmpty
+                                    ? FieldListMultipleSelector(
+                                        inputHintText: 'search'.tr,
+                                        dataListforSelected: controller
+                                            .internshipPeriodTagListForSearch,
+                                        selectedItems: controller
+                                            .internshipPeriodTagListInFilter,
+                                        onTap: (field) {
+                                          controller
+                                              .addingOrRemovingFieldInFieldListToBeSearch(
+                                            list: controller
+                                                .internshipPeriodTagListInFilter,
+                                            fieldValue: field,
+                                          );
+                                        },
+                                      )
+                                    : const LoadingWidget(),
+                              ),
+                            ),
+                            containerWidget: RowContentInputWidget(
+                              centerWidget: CustomTextWidget(
+                                text: 'internshipPeriod'.tr,
+                                color: ColorsManager.grey400,
+                                fontWeight: FontWeight.w400,
+                                fontSize: AppSize.s16,
+                              ),
+                              suffixWidget: const Icon(
+                                IconsManager.arrowDropDown,
+                                color: ColorsManager.grey600,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(
+                              left: AppSize.s10,
+                              right: AppSize.s10,
+                            ),
+                            child: Wrap(
+                              children: [
+                                for (var i = 0;
+                                    i <
+                                        controller
+                                            .internshipPeriodTagListInFilter
+                                            .length;
+                                    i++)
+                                  RemovableTextCardWidget(
+                                    text:
+                                        '${controller.internshipPeriodTagListInFilter[i].label}',
+                                    onRemove: () => controller
+                                        .addingOrRemovingFieldInFieldListToBeSearch(
+                                      list: controller
+                                          .internshipPeriodTagListInFilter,
+                                      fieldValue: controller
+                                          .internshipPeriodTagListInFilter[i],
+                                    ),
+                                  )
+                              ],
+                            ),
+                          ),
+                          //===== Bottom of Internship Periods Component =====//
+                          // const SizedBox(height: 8.0),
+
+                          ///===== Top of Internship Types Component =====//
+                          ContainerDialogWidget(
+                            leftPadding: AppSize.s10,
+                            rightPadding: AppSize.s10,
+                            inputTitle: 'internshipType'.tr,
+                            fontSizeTitle: AppSize.s16,
+                            fontWeightTitle: FontWeight.w600,
+                            inputTitleMarginBottom: AppSize.s6,
+                            // validatorFunction: (_) => Validator().notEmptyValidator(
+                            //   controller.selectedLanguage.value.label ?? '',
+                            // ),
+                            dialogType: DialogType.bottomSheetDialog,
+                            dialogWidget: Container(
+                              height: getHeight,
+                              decoration: const ShapeDecoration(
+                                color: ColorsManager.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(
+                                      AppSize.s16,
+                                    ),
+                                    topRight: Radius.circular(
+                                      AppSize.s16,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              child: Obx(
+                                () => controller.internshipTypeTagListForSearch
+                                        .isNotEmpty
+                                    ? FieldListMultipleSelector(
+                                        inputHintText: 'search'.tr,
+                                        dataListforSelected: controller
+                                            .internshipTypeTagListForSearch,
+                                        selectedItems: controller
+                                            .internshipTypeTagListInFilter,
+                                        onTap: (field) {
+                                          controller
+                                              .addingOrRemovingFieldInFieldListToBeSearch(
+                                            list: controller
+                                                .internshipTypeTagListInFilter,
+                                            fieldValue: field,
+                                          );
+                                        },
+                                      )
+                                    : const LoadingWidget(),
+                              ),
+                            ),
+                            containerWidget: RowContentInputWidget(
+                              centerWidget: CustomTextWidget(
+                                text: 'internshipType'.tr,
+                                color: ColorsManager.grey400,
+                                fontWeight: FontWeight.w400,
+                                fontSize: AppSize.s16,
+                              ),
+                              suffixWidget: const Icon(
+                                IconsManager.arrowDropDown,
+                                color: ColorsManager.grey600,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(
+                              left: AppSize.s10,
+                              right: AppSize.s10,
+                            ),
+                            child: Wrap(
+                              children: [
+                                for (var i = 0;
+                                    i <
+                                        controller.internshipTypeTagListInFilter
+                                            .length;
+                                    i++)
+                                  RemovableTextCardWidget(
+                                    text:
+                                        '${controller.internshipTypeTagListInFilter[i].label}',
+                                    onRemove: () => controller
+                                        .addingOrRemovingFieldInFieldListToBeSearch(
+                                      list: controller
+                                          .internshipTypeTagListInFilter,
+                                      fieldValue: controller
+                                          .internshipTypeTagListInFilter[i],
+                                    ),
+                                  )
+                              ],
+                            ),
+                          ),
+                          //===== Bottom of Internship Types Component =====//
+                        ],
+                      )
+                    else
+                      Container(),
+
+                    // const SizedBox(height: 8.0),
 
                     ///===== Top of Fields Component =====//
                     ContainerDialogWidget(
@@ -376,66 +567,70 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     // const SizedBox(height: 8.0),
 
                     ///===== Top of Availabilities Tags Component =====//
-                    ContainerDialogWidget(
-                      leftPadding: AppSize.s10,
-                      rightPadding: AppSize.s10,
-                      inputTitle: 'workAvailability'.tr, //'timeSlots'.tr,
-                      fontSizeTitle: AppSize.s16,
-                      fontWeightTitle: FontWeight.w600,
-                      inputTitleMarginBottom: AppSize.s6,
-                      // validatorFunction: (_) => Validator().notEmptyValidator(
-                      //   controller.selectedLanguage.value.label ?? '',
-                      // ),
-                      dialogType: DialogType.bottomSheetDialog,
-                      dialogWidget: Container(
-                        height: getHeight,
-                        decoration: const ShapeDecoration(
-                          color: ColorsManager.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(
-                                AppSize.s16,
-                              ),
-                              topRight: Radius.circular(
-                                AppSize.s16,
+                    //if jobType is Internship(id = 1)
+                    if (controller.typesListInFilter[0].id == 1)
+                      Container()
+                    else
+                      ContainerDialogWidget(
+                        leftPadding: AppSize.s10,
+                        rightPadding: AppSize.s10,
+                        inputTitle: 'workAvailability'.tr, //'timeSlots'.tr,
+                        fontSizeTitle: AppSize.s16,
+                        fontWeightTitle: FontWeight.w600,
+                        inputTitleMarginBottom: AppSize.s6,
+                        // validatorFunction: (_) => Validator().notEmptyValidator(
+                        //   controller.selectedLanguage.value.label ?? '',
+                        // ),
+                        dialogType: DialogType.bottomSheetDialog,
+                        dialogWidget: Container(
+                          height: getHeight,
+                          decoration: const ShapeDecoration(
+                            color: ColorsManager.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(
+                                  AppSize.s16,
+                                ),
+                                topRight: Radius.circular(
+                                  AppSize.s16,
+                                ),
                               ),
                             ),
                           ),
+                          child: Obx(
+                            () => controller
+                                    .availabilitiesTagListForSearch.isNotEmpty
+                                ? FieldListMultipleSelector(
+                                    inputHintText: 'search'.tr,
+                                    dataListforSelected: controller
+                                        .availabilitiesTagListForSearch,
+                                    selectedItems: controller
+                                        .availabilitiesTagListInFilter,
+                                    onTap: (field) {
+                                      controller
+                                          .addingOrRemovingFieldInFieldListToBeSearch(
+                                        list: controller
+                                            .availabilitiesTagListInFilter,
+                                        fieldValue: field,
+                                      );
+                                    },
+                                  )
+                                : const LoadingWidget(),
+                          ),
                         ),
-                        child: Obx(
-                          () => controller
-                                  .availabilitiesTagListForSearch.isNotEmpty
-                              ? FieldListMultipleSelector(
-                                  inputHintText: 'search'.tr,
-                                  dataListforSelected:
-                                      controller.availabilitiesTagListForSearch,
-                                  selectedItems:
-                                      controller.availabilitiesTagListInFilter,
-                                  onTap: (field) {
-                                    controller
-                                        .addingOrRemovingFieldInFieldListToBeSearch(
-                                      list: controller
-                                          .availabilitiesTagListInFilter,
-                                      fieldValue: field,
-                                    );
-                                  },
-                                )
-                              : const LoadingWidget(),
+                        containerWidget: RowContentInputWidget(
+                          centerWidget: CustomTextWidget(
+                            text: 'workAvailability'.tr,
+                            color: ColorsManager.grey400,
+                            fontWeight: FontWeight.w400,
+                            fontSize: AppSize.s16,
+                          ),
+                          suffixWidget: const Icon(
+                            IconsManager.arrowDropDown,
+                            color: ColorsManager.grey600,
+                          ),
                         ),
                       ),
-                      containerWidget: RowContentInputWidget(
-                        centerWidget: CustomTextWidget(
-                          text: 'workAvailability'.tr,
-                          color: ColorsManager.grey400,
-                          fontWeight: FontWeight.w400,
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidget: const Icon(
-                          IconsManager.arrowDropDown,
-                          color: ColorsManager.grey600,
-                        ),
-                      ),
-                    ),
                     Container(
                       padding: const EdgeInsets.only(
                         left: AppSize.s10,

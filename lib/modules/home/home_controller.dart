@@ -25,8 +25,8 @@ class HomeController extends GetxController {
   }
 
   Future<void> signOut() async {
+    authProvider.logOutAPI(token: userToken!.token);
     await AuthServices().removeToken();
-    await authProvider.logOutAPI();
     Get.offAllNamed(Routes.signInRoute);
   }
 

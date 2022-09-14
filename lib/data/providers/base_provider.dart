@@ -12,7 +12,7 @@ class BaseProvider extends GetConnect {
     super.onInit();
 
     // add your local storage here to load for every request
-    // userToken =
+    // final String userToken =
     getUserToken();
 
     //1.base_url

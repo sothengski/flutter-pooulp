@@ -27,21 +27,29 @@ class AuthProvider extends BaseProvider {
     }
   }
 
-  Future<String> logOutAPI() async {
+  Future<JsonResponse> logOutAPI({required String? token}) async {
     try {
       final Response dataResponse = await post(
-        API.paths[Endpoint.signOut],
+        API.paths[Endpoint.signOut].toString(),
         {},
+        headers: {'Authorization': 'Bearer $token}'},
       );
-      if (dataResponse.hasError) {
-        throw responseBodyHandler(resp: dataResponse);
-      } else {
-        // customSnackbar(
-        //   msgTitle: 'Log Out Successfully!',
-        //   msgContent: '${dataResponse.bodyString}',
-        // );
-        return dataResponse.bodyString.toString();
-      }
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      return response;
+      // if (dataResponse.hasError) {
+      //   throw "(resp: ${dataResponse.bodyString})";
+      // } else {
+      //   // customSnackbar(
+      //   //   msgTitle: 'Log Out Successfully!',
+      //   //   msgContent: '${dataResponse.bodyString}',
+      //   // );
+      //   return dataResponse.bodyString.toString();
+      // }
     } catch (e) {
       return Future.error(e.toString());
     }

@@ -2,7 +2,7 @@ name: pooulp_flutter
 description: A new Flutter project.
 
 publish_to: "none"
-version: 1.0.0+3
+version: 1.0.0+4
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  get: ^4.6.1
+  get: ^4.6.5
   get_storage: ^2.0.3
   flutter_spinkit: ^5.1.0
   intl: ^0.17.0
@@ -35,7 +35,7 @@ dependencies:
   pdf: ^3.8.0
   printing: ^5.9.0
   # save file
-  path_provider: ^2.0.10
+  path_provider: ^2.0.11
 
   # open pdf document
   open_file: ^3.2.1

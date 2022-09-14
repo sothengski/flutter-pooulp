@@ -397,6 +397,8 @@ class JobOfferModel {
                           (e) => e.id,
                         ),
                   ),
+        'date_job_start': dateJobStart?.toIso8601String(),
+        'date_job_end': dateJobEnd?.toIso8601String(),
         'location': location ?? '',
         'is_range_search': isRangeSearch,
         'range': range! * 1000,

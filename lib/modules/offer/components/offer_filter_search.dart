@@ -209,6 +209,155 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     // ),
                     //===== Bottom of Job Types Component =====//
                     const SizedBox(height: 8.0),
+
+                    ///===== Top of From Date & To Date Component =====//
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: Row(
+                        children: [
+                          ///===== Top of From Date Component =====//
+                          Expanded(
+                            flex: 40,
+                            child: ContainerDialogWidget(
+                              inputTitle:
+                                  controller.typesListInFilter[0].id == 1
+                                      ? 'internshipStartDate'.tr
+                                      : 'jobStart'.tr,
+                              // fontSizeTitle: AppSize.s16,
+                              fontWeightTitle: FontWeight.w600,
+                              inputTitleMarginTop: AppSize.s5,
+                              validatorFunction: (_) =>
+                                  Validator().notEmptyValidator(
+                                controller
+                                    .selectedStartDateStringInFilter.value,
+                              ),
+                              dialogType: DialogType.dateTimePickerDialog,
+                              dateLocale: controller.profileController
+                                  .userProfileInfo.value.uiLanguage,
+                              currentTime: DateTime.tryParse(
+                                    controller
+                                        .selectedStartDateStringInFilter.value,
+                                  ) ??
+                                  DateTime.now(),
+                              onConfirmDate: (date) {
+                                controller
+                                        .selectedStartDateStringInFilter.value =
+                                    dateTimeToString(selectedItem: date);
+                              },
+                              containerWidget: Obx(
+                                () => controller.selectedStartDateStringInFilter
+                                            .value ==
+                                        ''
+                                    ? RowContentInputWidget(
+                                        centerWidget: CustomTextWidget(
+                                          text: ddmmyyyyFormat,
+                                          color: ColorsManager.grey400,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: AppSize.s16,
+                                        ),
+                                        suffixWidgetFlex: 20,
+                                        suffixWidget: const Icon(
+                                          IconsManager.dateRangeOutlined,
+                                          color: ColorsManager.grey600,
+                                        ),
+                                      )
+                                    : RowContentInputWidget(
+                                        centerWidget: CustomTextWidget(
+                                          text: dateFormatSlashDDMMYYYY(
+                                            date: DateTime.tryParse(
+                                              controller
+                                                  .selectedStartDateStringInFilter
+                                                  .value,
+                                            ),
+                                          ),
+                                          color: ColorsManager.black,
+                                          fontSize: AppSize.s16,
+                                        ),
+                                        suffixWidgetFlex: 20,
+                                        suffixWidget: const Icon(
+                                          IconsManager.dateRangeOutlined,
+                                          color: ColorsManager.grey600,
+                                        ),
+                                      ),
+                              ),
+                            ),
+                          ),
+                          //===== Bottom of From Date Component =====//
+                          const SizedBox(
+                            width: AppSize.s12,
+                          ),
+
+                          ///===== Top of To Date Component =====//
+                          Expanded(
+                            flex: 40,
+                            child: ContainerDialogWidget(
+                              inputTitle:
+                                  controller.typesListInFilter[0].id == 1
+                                      ? 'internshipEndDate'.tr
+                                      : 'jobEnd'.tr,
+                              // fontSizeTitle: AppSize.s16,
+                              fontWeightTitle: FontWeight.w600,
+                              inputTitleMarginTop: AppSize.s5,
+                              validatorFunction: (_) =>
+                                  Validator().notEmptyValidator(
+                                controller.selectedEndDateStringInFilter.value,
+                              ),
+                              dialogType: DialogType.dateTimePickerDialog,
+                              dateLocale: controller.profileController
+                                  .userProfileInfo.value.uiLanguage,
+                              currentTime: DateTime.tryParse(
+                                    controller
+                                        .selectedEndDateStringInFilter.value,
+                                  ) ??
+                                  DateTime.now(),
+                              onConfirmDate: (date) {
+                                controller.selectedEndDateStringInFilter.value =
+                                    dateTimeToString(selectedItem: date);
+                              },
+                              containerWidget: Obx(
+                                () => controller.selectedEndDateStringInFilter
+                                            .value ==
+                                        ''
+                                    ? RowContentInputWidget(
+                                        centerWidget: CustomTextWidget(
+                                          text: ddmmyyyyFormat,
+                                          color: ColorsManager.grey400,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: AppSize.s16,
+                                        ),
+                                        suffixWidgetFlex: 20,
+                                        suffixWidget: const Icon(
+                                          Icons.date_range_outlined,
+                                          color: ColorsManager.grey600,
+                                        ),
+                                      )
+                                    : RowContentInputWidget(
+                                        centerWidget: CustomTextWidget(
+                                          text: dateFormatSlashDDMMYYYY(
+                                            date: DateTime.tryParse(
+                                              controller
+                                                  .selectedEndDateStringInFilter
+                                                  .value,
+                                            ),
+                                          ),
+                                          color: ColorsManager.black,
+                                          fontSize: AppSize.s16,
+                                        ),
+                                        suffixWidgetFlex: 20,
+                                        suffixWidget: const Icon(
+                                          Icons.date_range_outlined,
+                                          color: ColorsManager.grey600,
+                                        ),
+                                      ),
+                              ),
+                            ),
+                          ),
+                          //===== Bottom of To Date Component =====//
+                        ],
+                      ),
+                    ),
+                    //===== Bottom of From Date & To Date Component =====//
+
                     //if jobType is Internship(id = 1)
                     if (controller.typesListInFilter[0].id == 1)
                       Wrap(

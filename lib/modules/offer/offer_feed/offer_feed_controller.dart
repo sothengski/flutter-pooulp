@@ -46,6 +46,8 @@ class OfferFeedController extends GetxController
   RxList<FieldModel> availabilitiesTagListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> internshipTypeTagListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> internshipPeriodTagListForSearch = <FieldModel>[].obs;
+  Rx<String> selectedStartDateStringForSearch = ''.obs;
+  Rx<String> selectedEndDateStringForSearch = ''.obs;
 
   RxInt workPlaceTypesInFilter = 2.obs;
   Rx<CountryModel> selectedCountryInFilter = const CountryModel().obs;
@@ -55,6 +57,8 @@ class OfferFeedController extends GetxController
   RxList<FieldModel> availabilitiesTagListInFilter = <FieldModel>[].obs;
   RxList<FieldModel> internshipTypeTagListInFilter = <FieldModel>[].obs;
   RxList<FieldModel> internshipPeriodTagListInFilter = <FieldModel>[].obs;
+  Rx<String> selectedStartDateStringInFilter = ''.obs;
+  Rx<String> selectedEndDateStringInFilter = ''.obs;
 
   RxString keywordToBeSearch = ''.obs;
   TextEditingController keywordToBeSearchTextCtrl = TextEditingController();
@@ -68,6 +72,8 @@ class OfferFeedController extends GetxController
   RxList<FieldModel> availabilitiesTagListToBeSearch = <FieldModel>[].obs;
   RxList<FieldModel> internshipTypeTagListToBeSearch = <FieldModel>[].obs;
   RxList<FieldModel> internshipPeriodTagListToBeSearch = <FieldModel>[].obs;
+  Rx<String> selectedStartDateStringToBeSearch = ''.obs;
+  Rx<String> selectedEndDateStringToBeSearch = ''.obs;
 
   Rx<PlaceDetailModel> placeDetail = PlaceDetailModel().obs;
   TextEditingController addressCtrl = TextEditingController();
@@ -188,6 +194,8 @@ class OfferFeedController extends GetxController
     availabilitiesTagListInFilter.value = [];
     internshipTypeTagListInFilter.value = [];
     internshipPeriodTagListInFilter.value = [];
+    selectedStartDateStringInFilter.value = '';
+    selectedEndDateStringInFilter.value = '';
 
     countryToBeSearch.value = const CountryModel();
     workPlaceTypesToBeSearch.value = 2; // 2 == Hybrid(Default)
@@ -198,6 +206,8 @@ class OfferFeedController extends GetxController
     availabilitiesTagListToBeSearch.value = [];
     internshipTypeTagListToBeSearch.value = [];
     internshipPeriodTagListToBeSearch.value = [];
+    selectedStartDateStringToBeSearch.value = '';
+    selectedEndDateStringToBeSearch.value = '';
 
     placeDetail.value = PlaceDetailModel();
     radiusRxInt.value = 10;
@@ -224,12 +234,18 @@ class OfferFeedController extends GetxController
     availabilitiesTagListInFilter.clear();
     internshipTypeTagListInFilter.clear();
     internshipPeriodTagListInFilter.clear();
+    selectedStartDateStringInFilter.value = '';
+    selectedEndDateStringInFilter.value = '';
+
     languageListInFilter.addAll(languageListToBeSearch);
     fieldListInFilter.addAll(fieldListToBeSearch);
     typesListInFilter.addAll(typesListToBeSearch);
     availabilitiesTagListInFilter.addAll(availabilitiesTagListToBeSearch);
     internshipTypeTagListInFilter.addAll(internshipTypeTagListToBeSearch);
     internshipPeriodTagListInFilter.addAll(internshipPeriodTagListToBeSearch);
+    selectedStartDateStringInFilter.value =
+        selectedStartDateStringToBeSearch.value;
+    selectedEndDateStringInFilter.value = selectedEndDateStringToBeSearch.value;
     countFilterField();
     // debugPrint('dismissFilter');
     // debugPrint(
@@ -254,14 +270,24 @@ class OfferFeedController extends GetxController
     languageListToBeSearch.addAll(languageListInFilter);
     fieldListToBeSearch.addAll(fieldListInFilter);
     typesListToBeSearch.addAll(typesListInFilter);
+    selectedStartDateStringToBeSearch.value =
+        selectedStartDateStringInFilter.value;
+    selectedEndDateStringToBeSearch.value = selectedEndDateStringInFilter.value;
     // select internship(id=1) == 1
     if (typesListInFilter[0].id == 1) {
       internshipTypeTagListToBeSearch.addAll(internshipTypeTagListInFilter);
       internshipPeriodTagListToBeSearch.addAll(internshipPeriodTagListInFilter);
+      // clear availabilitiesTagListInFilter
+      //if user select it earier and change their mind
+      availabilitiesTagListInFilter.clear();
     }
     // select different from internship(id=1) != 1
     else {
       availabilitiesTagListToBeSearch.addAll(availabilitiesTagListInFilter);
+      // clear internshipTypeTagListInFilter&internshipPeriodTagListInFilter
+      // if user select it earier and change their mind
+      internshipTypeTagListInFilter.clear();
+      internshipPeriodTagListInFilter.clear();
     }
     countFilterField();
     getFeedsDataState();
@@ -300,7 +326,18 @@ class OfferFeedController extends GetxController
     if (placeDetail.value.country != '' && placeDetail.value.country != null) {
       tempCount += 1;
     }
-
+    if (internshipTypeTagListInFilter.isNotEmpty) {
+      tempCount += 1;
+    }
+    if (internshipPeriodTagListInFilter.isNotEmpty) {
+      tempCount += 1;
+    }
+    if (selectedStartDateStringInFilter.value != '') {
+      tempCount += 1;
+    }
+    if (selectedEndDateStringInFilter.value != '') {
+      tempCount += 1;
+    }
     filterCountRxInt.value = tempCount;
   }
 
@@ -453,7 +490,20 @@ class OfferFeedController extends GetxController
       addressCountry: placeDetail.value.country,
       addressZip: placeDetail.value.postalCode,
       range: radiusRxInt.value,
+      dateJobStart: selectedStartDateStringToBeSearch.value == ''
+          ? null
+          : DateTime.tryParse(
+              selectedStartDateStringToBeSearch.value,
+            ),
+      dateJobEnd: selectedEndDateStringToBeSearch.value == ''
+          ? null
+          : DateTime.tryParse(
+              selectedEndDateStringToBeSearch.value,
+            ),
     );
+    // debugPrint(
+    //   'jobOfferToBeSearch.value:: ${jobOfferToBeSearch.value}',
+    // );
     // debugPrint(
     //   'feedListPagination current page:: ${feedListPagination.value.meta!.currentPage!}',
     // );

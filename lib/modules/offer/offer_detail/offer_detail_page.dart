@@ -415,6 +415,81 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             Container(),
                           //===== Types Component =====//
 
+                          ///===== Internship Period Component =====//
+                          if (jobOfferDetail.internshipPeriods!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'internshipPeriod'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.internshipPeriods !=
+                                      []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i <
+                                                jobOfferDetail
+                                                    .internshipPeriods!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.internshipPeriods![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Internship Periods Component =====//
+
+                          ///===== Internship Types Component =====//
+                          if (jobOfferDetail.types!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'internshipType'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.internshipTypes != []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i <
+                                                jobOfferDetail
+                                                    .internshipTypes!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.internshipTypes![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Types Component =====//
+
                           ///===== Fields Component =====//
                           if (jobOfferDetail.fields!.isNotEmpty)
                             OutlineContainerWidget(

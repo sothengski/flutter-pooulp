@@ -10,6 +10,8 @@ class OnboardingPageModel {
   final bool? isSkippable;
   final List<FieldModel>? selectionItems;
   final List<FieldModel>? allSkills;
+  final List<FieldModel>? internshipTypeItems;
+  final List<FieldModel>? internshipPeriodItems;
 
   OnboardingPageModel({
     this.pageIndex,
@@ -19,6 +21,8 @@ class OnboardingPageModel {
     this.isSkippable,
     this.selectionItems,
     this.allSkills,
+    this.internshipTypeItems,
+    this.internshipPeriodItems,
   });
 
   factory OnboardingPageModel.fromRawJson(String str) =>
@@ -51,6 +55,26 @@ class OnboardingPageModel {
                   ),
                 )
                 .toList(),
+        internshipTypeItems:
+            json['internship_items'] == null || json['internship_items'] == []
+                ? []
+                : (json['internship_items'] as List)
+                    .map(
+                      (i) => FieldModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList(),
+        internshipPeriodItems: json['internship_period_items'] == null ||
+                json['internship_period_items'] == []
+            ? []
+            : (json['internship_period_items'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -72,5 +96,7 @@ class OnboardingPageModel {
       isSkippable: $isSkippable, 
       selectionItems: $selectionItems, 
       allSkills: $allSkills,
+      internshipTypeItems: $internshipTypeItems,
+      internshipPeriodItems: $internshipPeriodItems,
     )''';
 }

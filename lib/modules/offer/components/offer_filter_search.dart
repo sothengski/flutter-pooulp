@@ -255,7 +255,11 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                           fontWeight: FontWeight.w400,
                                           fontSize: AppSize.s16,
                                         ),
-                                        suffixWidgetFlex: 20,
+                                        suffixWidgetFlex: controller
+                                                    .typesListInFilter[0].id ==
+                                                1
+                                            ? 20
+                                            : 10,
                                         suffixWidget: const Icon(
                                           IconsManager.dateRangeOutlined,
                                           color: ColorsManager.grey600,
@@ -283,75 +287,79 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             ),
                           ),
                           //===== Bottom of From Date Component =====//
-                          const SizedBox(
-                            width: AppSize.s12,
-                          ),
 
                           ///===== Top of To Date Component =====//
-                          Expanded(
-                            flex: 40,
-                            child: ContainerDialogWidget(
-                              inputTitle:
-                                  controller.typesListInFilter[0].id == 1
-                                      ? 'internshipEndDate'.tr
-                                      : 'jobEnd'.tr,
-                              // fontSizeTitle: AppSize.s16,
-                              fontWeightTitle: FontWeight.w600,
-                              inputTitleMarginTop: AppSize.s5,
-                              validatorFunction: (_) =>
-                                  Validator().notEmptyValidator(
-                                controller.selectedEndDateStringInFilter.value,
-                              ),
-                              dialogType: DialogType.dateTimePickerDialog,
-                              dateLocale: controller.profileController
-                                  .userProfileInfo.value.uiLanguage,
-                              currentTime: DateTime.tryParse(
-                                    controller
-                                        .selectedEndDateStringInFilter.value,
-                                  ) ??
-                                  DateTime.now(),
-                              onConfirmDate: (date) {
-                                controller.selectedEndDateStringInFilter.value =
-                                    dateTimeToString(selectedItem: date);
-                              },
-                              containerWidget: Obx(
-                                () => controller.selectedEndDateStringInFilter
-                                            .value ==
-                                        ''
-                                    ? RowContentInputWidget(
-                                        centerWidget: CustomTextWidget(
-                                          text: ddmmyyyyFormat,
-                                          color: ColorsManager.grey400,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: AppSize.s16,
-                                        ),
-                                        suffixWidgetFlex: 20,
-                                        suffixWidget: const Icon(
-                                          Icons.date_range_outlined,
-                                          color: ColorsManager.grey600,
-                                        ),
-                                      )
-                                    : RowContentInputWidget(
-                                        centerWidget: CustomTextWidget(
-                                          text: dateFormatSlashDDMMYYYY(
-                                            date: DateTime.tryParse(
-                                              controller
-                                                  .selectedEndDateStringInFilter
-                                                  .value,
-                                            ),
+                          if (controller.typesListInFilter[0].id == 1)
+                            const SizedBox(
+                              width: AppSize.s12,
+                            ),
+                          if (controller.typesListInFilter[0].id == 1)
+                            Expanded(
+                              flex: 40,
+                              child: ContainerDialogWidget(
+                                inputTitle:
+                                    controller.typesListInFilter[0].id == 1
+                                        ? 'internshipEndDate'.tr
+                                        : 'jobEnd'.tr,
+                                // fontSizeTitle: AppSize.s16,
+                                fontWeightTitle: FontWeight.w600,
+                                inputTitleMarginTop: AppSize.s5,
+                                validatorFunction: (_) =>
+                                    Validator().notEmptyValidator(
+                                  controller
+                                      .selectedEndDateStringInFilter.value,
+                                ),
+                                dialogType: DialogType.dateTimePickerDialog,
+                                dateLocale: controller.profileController
+                                    .userProfileInfo.value.uiLanguage,
+                                currentTime: DateTime.tryParse(
+                                      controller
+                                          .selectedEndDateStringInFilter.value,
+                                    ) ??
+                                    DateTime.now(),
+                                onConfirmDate: (date) {
+                                  controller
+                                          .selectedEndDateStringInFilter.value =
+                                      dateTimeToString(selectedItem: date);
+                                },
+                                containerWidget: Obx(
+                                  () => controller.selectedEndDateStringInFilter
+                                              .value ==
+                                          ''
+                                      ? RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: ddmmyyyyFormat,
+                                            color: ColorsManager.grey400,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: AppSize.s16,
                                           ),
-                                          color: ColorsManager.black,
-                                          fontSize: AppSize.s16,
+                                          suffixWidgetFlex: 20,
+                                          suffixWidget: const Icon(
+                                            Icons.date_range_outlined,
+                                            color: ColorsManager.grey600,
+                                          ),
+                                        )
+                                      : RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: dateFormatSlashDDMMYYYY(
+                                              date: DateTime.tryParse(
+                                                controller
+                                                    .selectedEndDateStringInFilter
+                                                    .value,
+                                              ),
+                                            ),
+                                            color: ColorsManager.black,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          suffixWidgetFlex: 20,
+                                          suffixWidget: const Icon(
+                                            Icons.date_range_outlined,
+                                            color: ColorsManager.grey600,
+                                          ),
                                         ),
-                                        suffixWidgetFlex: 20,
-                                        suffixWidget: const Icon(
-                                          Icons.date_range_outlined,
-                                          color: ColorsManager.grey600,
-                                        ),
-                                      ),
+                                ),
                               ),
                             ),
-                          ),
                           //===== Bottom of To Date Component =====//
                         ],
                       ),
@@ -363,94 +371,94 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       Wrap(
                         children: [
                           ///===== Top of Internship Periods Component =====//
-                          ContainerDialogWidget(
-                            leftPadding: AppSize.s10,
-                            rightPadding: AppSize.s10,
-                            inputTitle: 'internshipPeriod'.tr,
-                            fontSizeTitle: AppSize.s16,
-                            fontWeightTitle: FontWeight.w600,
-                            inputTitleMarginBottom: AppSize.s6,
-                            // validatorFunction: (_) => Validator().notEmptyValidator(
-                            //   controller.selectedLanguage.value.label ?? '',
-                            // ),
-                            dialogType: DialogType.bottomSheetDialog,
-                            dialogWidget: Container(
-                              height: getHeight,
-                              decoration: const ShapeDecoration(
-                                color: ColorsManager.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(
-                                      AppSize.s16,
-                                    ),
-                                    topRight: Radius.circular(
-                                      AppSize.s16,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              child: Obx(
-                                () => controller
-                                        .internshipPeriodTagListForSearch
-                                        .isNotEmpty
-                                    ? FieldListMultipleSelector(
-                                        inputHintText: 'search'.tr,
-                                        dataListforSelected: controller
-                                            .internshipPeriodTagListForSearch,
-                                        selectedItems: controller
-                                            .internshipPeriodTagListInFilter,
-                                        onTap: (field) {
-                                          controller
-                                              .addingOrRemovingFieldInFieldListToBeSearch(
-                                            list: controller
-                                                .internshipPeriodTagListInFilter,
-                                            fieldValue: field,
-                                          );
-                                        },
-                                      )
-                                    : const LoadingWidget(),
-                              ),
-                            ),
-                            containerWidget: RowContentInputWidget(
-                              centerWidget: CustomTextWidget(
-                                text: 'internshipPeriod'.tr,
-                                color: ColorsManager.grey400,
-                                fontWeight: FontWeight.w400,
-                                fontSize: AppSize.s16,
-                              ),
-                              suffixWidget: const Icon(
-                                IconsManager.arrowDropDown,
-                                color: ColorsManager.grey600,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                              left: AppSize.s10,
-                              right: AppSize.s10,
-                            ),
-                            child: Wrap(
-                              children: [
-                                for (var i = 0;
-                                    i <
-                                        controller
-                                            .internshipPeriodTagListInFilter
-                                            .length;
-                                    i++)
-                                  RemovableTextCardWidget(
-                                    text:
-                                        '${controller.internshipPeriodTagListInFilter[i].label}',
-                                    onRemove: () => controller
-                                        .addingOrRemovingFieldInFieldListToBeSearch(
-                                      list: controller
-                                          .internshipPeriodTagListInFilter,
-                                      fieldValue: controller
-                                          .internshipPeriodTagListInFilter[i],
-                                    ),
-                                  )
-                              ],
-                            ),
-                          ),
+                          // ContainerDialogWidget(
+                          //   leftPadding: AppSize.s10,
+                          //   rightPadding: AppSize.s10,
+                          //   inputTitle: 'internshipPeriod'.tr,
+                          //   fontSizeTitle: AppSize.s16,
+                          //   fontWeightTitle: FontWeight.w600,
+                          //   inputTitleMarginBottom: AppSize.s6,
+                          //   // validatorFunction: (_) => Validator().notEmptyValidator(
+                          //   //   controller.selectedLanguage.value.label ?? '',
+                          //   // ),
+                          //   dialogType: DialogType.bottomSheetDialog,
+                          //   dialogWidget: Container(
+                          //     height: getHeight,
+                          //     decoration: const ShapeDecoration(
+                          //       color: ColorsManager.white,
+                          //       shape: RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.only(
+                          //           topLeft: Radius.circular(
+                          //             AppSize.s16,
+                          //           ),
+                          //           topRight: Radius.circular(
+                          //             AppSize.s16,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     child: Obx(
+                          //       () => controller
+                          //               .internshipPeriodTagListForSearch
+                          //               .isNotEmpty
+                          //           ? FieldListMultipleSelector(
+                          //               inputHintText: 'search'.tr,
+                          //               dataListforSelected: controller
+                          //                   .internshipPeriodTagListForSearch,
+                          //               selectedItems: controller
+                          //                   .internshipPeriodTagListInFilter,
+                          //               onTap: (field) {
+                          //                 controller
+                          //                     .addingOrRemovingFieldInFieldListToBeSearch(
+                          //                   list: controller
+                          //                       .internshipPeriodTagListInFilter,
+                          //                   fieldValue: field,
+                          //                 );
+                          //               },
+                          //             )
+                          //           : const LoadingWidget(),
+                          //     ),
+                          //   ),
+                          //   containerWidget: RowContentInputWidget(
+                          //     centerWidget: CustomTextWidget(
+                          //       text: 'internshipPeriod'.tr,
+                          //       color: ColorsManager.grey400,
+                          //       fontWeight: FontWeight.w400,
+                          //       fontSize: AppSize.s16,
+                          //     ),
+                          //     suffixWidget: const Icon(
+                          //       IconsManager.arrowDropDown,
+                          //       color: ColorsManager.grey600,
+                          //     ),
+                          //   ),
+                          // ),
+                          // Container(
+                          //   padding: const EdgeInsets.only(
+                          //     left: AppSize.s10,
+                          //     right: AppSize.s10,
+                          //   ),
+                          //   child: Wrap(
+                          //     children: [
+                          //       for (var i = 0;
+                          //           i <
+                          //               controller
+                          //                   .internshipPeriodTagListInFilter
+                          //                   .length;
+                          //           i++)
+                          //         RemovableTextCardWidget(
+                          //           text:
+                          //               '${controller.internshipPeriodTagListInFilter[i].label}',
+                          //           onRemove: () => controller
+                          //               .addingOrRemovingFieldInFieldListToBeSearch(
+                          //             list: controller
+                          //                 .internshipPeriodTagListInFilter,
+                          //             fieldValue: controller
+                          //                 .internshipPeriodTagListInFilter[i],
+                          //           ),
+                          //         )
+                          //     ],
+                          //   ),
+                          // ),
                           //===== Bottom of Internship Periods Component =====//
                           // const SizedBox(height: 8.0),
 

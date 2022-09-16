@@ -40,64 +40,265 @@ class OnboardingPage extends GetView<OnboardingController> {
                                 text: '${pageData.title}',
                                 fontSize: AppSize.s28,
                                 fontWeight: FontWeight.w800,
-                                maxLine: 3,
                                 color: ColorsManager.white,
                                 textAlign: TextAlign.center,
                                 marginLeft: AppSize.s8,
                                 marginRight: AppSize.s8,
+                                maxLine:
+                                    controller.isUpdate.value == true ? 3 : 3,
                               ),
                             ),
                             Expanded(
                               flex: 90,
                               child: Container(
                                 padding:
-                                    const EdgeInsets.only(top: AppSize.s32),
+                                    const EdgeInsets.only(top: AppSize.s12),
                                 child: pageData.pageIndex == 0
-                                    ? ListView.builder(
-                                        shrinkWrap: true,
-                                        // physics:
-                                        //     const NeverScrollableScrollPhysics(),
-                                        itemCount: controller
-                                            .onboardingPages[pageIndex]
-                                            .selectionItems!
-                                            .length,
-                                        itemBuilder: (_, itemIndex) {
-                                          final item = controller
-                                              .onboardingPages[pageIndex]
-                                              .selectionItems![itemIndex];
-                                          return Obx(
-                                            () => TextCardClickableWidget(
-                                              size: 50.0,
-                                              bottomMargin: AppSize.s40,
-                                              topPadding: 0.0,
-                                              bottomPadding: 0.0,
-                                              rightPadding: 0.0,
-                                              text: item.label,
-                                              // rightTopText: 'profile.soon'.tr,
-                                              maxLine:
-                                                  controller.isUpdate.value ==
-                                                          true
-                                                      ? 3
-                                                      : 3,
-                                              fontSize: AppSize.s24,
-                                              itemList: controller
-                                                  .lookingForSelectionListPage0
-                                                  .value
-                                                  .selectionItems,
-                                              item: item,
-                                              onClick: () {
-                                                controller
-                                                    .addOrRemoveDataInList(
-                                                  pageIndex: pageIndex,
-                                                  itemToBeAdd: item,
+                                    ? Obx(
+                                        () => Column(
+                                          children: [
+                                            ListView.builder(
+                                              shrinkWrap: true,
+                                              // physics:
+                                              //     const NeverScrollableScrollPhysics(),
+                                              itemCount: controller
+                                                  .onboardingPages[pageIndex]
+                                                  .selectionItems!
+                                                  .length,
+                                              itemBuilder: (_, itemIndex) {
+                                                final item = controller
+                                                    .onboardingPages[pageIndex]
+                                                    .selectionItems![itemIndex];
+                                                return Obx(
+                                                  () => TextCardClickableWidget(
+                                                    size: 50.0,
+                                                    bottomMargin: AppSize.s32,
+                                                    topPadding: 0.0,
+                                                    bottomPadding: 0.0,
+                                                    rightPadding: 0.0,
+                                                    text: item.label,
+                                                    // rightTopText: 'profile.soon'.tr,
+                                                    maxLine: controller.isUpdate
+                                                                .value ==
+                                                            true
+                                                        ? 3
+                                                        : 3,
+                                                    fontSize: AppSize.s24,
+                                                    itemList: controller
+                                                        .lookingForSelectionListPage0
+                                                        .value
+                                                        .selectionItems,
+                                                    item: item,
+                                                    onClick: () {
+                                                      controller
+                                                          .addOrRemoveDataInList(
+                                                        pageIndex: pageIndex,
+                                                        itemToBeAdd: item,
+                                                      );
+                                                      // print('on Page:: $pageIndex');
+                                                      // print('on Click:: ${item.label}');
+                                                      // print('on Click tempItem:: $tempItem');
+                                                    },
+                                                  ),
                                                 );
-                                                // print('on Page:: $pageIndex');
-                                                // print('on Click:: ${item.label}');
-                                                // print('on Click tempItem:: $tempItem');
                                               },
                                             ),
-                                          );
-                                        },
+                                            Obx(
+                                              () => Visibility(
+                                                visible: controller
+                                                        .isInternshipSelect
+                                                        .value ==
+                                                    true,
+                                                child: Wrap(
+                                                  children: [
+                                                    CustomTextWidget(
+                                                      text:
+                                                          'internshipTypes'.tr,
+                                                      fontSize: AppSize.s28,
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      maxLine: 3,
+                                                      color:
+                                                          ColorsManager.white,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      marginLeft: AppSize.s8,
+                                                      marginRight: AppSize.s8,
+                                                      marginBottom: AppSize.s16,
+                                                    ),
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Wrap(
+                                                        children: [
+                                                          for (var i = 0;
+                                                              i <
+                                                                  controller
+                                                                      .onboardingPages[
+                                                                          pageIndex]
+                                                                      .internshipTypeItems!
+                                                                      .length;
+                                                              i++)
+                                                            Obx(
+                                                              () => Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                  right: AppSize
+                                                                      .s8,
+                                                                  bottom:
+                                                                      AppSize
+                                                                          .s12,
+                                                                ),
+                                                                child:
+                                                                    TextCardClickableWidget(
+                                                                  isCenterText:
+                                                                      false,
+                                                                  text: controller
+                                                                      .onboardingPages[
+                                                                          pageIndex]
+                                                                      .internshipTypeItems![
+                                                                          i]
+                                                                      .label,
+                                                                  maxLine: controller
+                                                                              .isUpdate
+                                                                              .value ==
+                                                                          true
+                                                                      ? 3
+                                                                      : 3,
+                                                                  fontSize:
+                                                                      AppSize
+                                                                          .s24,
+                                                                  itemList: controller
+                                                                      .internshipTypeSelectionListPage0
+                                                                      .value
+                                                                      .internshipTypeItems,
+                                                                  item: controller
+                                                                      .onboardingPages[
+                                                                          pageIndex]
+                                                                      .internshipTypeItems![i],
+                                                                  onClick: () {
+                                                                    controller
+                                                                        .addOrRemoveDataInList(
+                                                                      pageIndex:
+                                                                          pageIndex,
+                                                                      itemToBeAdd: controller
+                                                                          .onboardingPages[
+                                                                              pageIndex]
+                                                                          .internshipTypeItems![i],
+                                                                      listTypeId:
+                                                                          2,
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Obx(
+                                              () => Visibility(
+                                                visible: controller
+                                                        .isInternshipSelect
+                                                        .value ==
+                                                    true,
+                                                child: Wrap(
+                                                  children: [
+                                                    CustomTextWidget(
+                                                      text: 'internshipPeriods'
+                                                          .tr,
+                                                      fontSize: AppSize.s28,
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      maxLine: 3,
+                                                      color:
+                                                          ColorsManager.white,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      marginLeft: AppSize.s8,
+                                                      marginRight: AppSize.s8,
+                                                      marginBottom: AppSize.s16,
+                                                    ),
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Wrap(
+                                                        children: [
+                                                          for (var i = 0;
+                                                              i <
+                                                                  controller
+                                                                      .onboardingPages[
+                                                                          pageIndex]
+                                                                      .internshipPeriodItems!
+                                                                      .length;
+                                                              i++)
+                                                            Obx(
+                                                              () => Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                  right: AppSize
+                                                                      .s8,
+                                                                  bottom:
+                                                                      AppSize
+                                                                          .s12,
+                                                                ),
+                                                                child:
+                                                                    TextCardClickableWidget(
+                                                                  isCenterText:
+                                                                      false,
+                                                                  text: controller
+                                                                      .onboardingPages[
+                                                                          pageIndex]
+                                                                      .internshipPeriodItems![
+                                                                          i]
+                                                                      .label,
+                                                                  maxLine: controller
+                                                                              .isUpdate
+                                                                              .value ==
+                                                                          true
+                                                                      ? 3
+                                                                      : 3,
+                                                                  fontSize:
+                                                                      AppSize
+                                                                          .s24,
+                                                                  itemList: controller
+                                                                      .internshipPeriodSelectionListPage0
+                                                                      .value
+                                                                      .internshipPeriodItems,
+                                                                  item: controller
+                                                                      .onboardingPages[
+                                                                          pageIndex]
+                                                                      .internshipPeriodItems![i],
+                                                                  onClick: () {
+                                                                    controller
+                                                                        .addOrRemoveDataInList(
+                                                                      pageIndex:
+                                                                          pageIndex,
+                                                                      itemToBeAdd: controller
+                                                                          .onboardingPages[
+                                                                              pageIndex]
+                                                                          .internshipPeriodItems![i],
+                                                                      listTypeId:
+                                                                          3,
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       )
                                     : pageData.pageIndex == 1
                                         ? GridView.builder(

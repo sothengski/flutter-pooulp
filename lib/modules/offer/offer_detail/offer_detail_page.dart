@@ -454,7 +454,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Internship Periods Component =====//
 
                           ///===== Internship Types Component =====//
-                          if (jobOfferDetail.types!.isNotEmpty)
+                          if (jobOfferDetail.internshipTypes!.isNotEmpty)
                             OutlineContainerWidget(
                               title: 'internshipType'.tr,
                               titleColor: ColorsManager.primaryBlue,
@@ -488,7 +488,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             )
                           else
                             Container(),
-                          //===== Types Component =====//
+                          //===== Internship Types Component =====//
 
                           ///===== Fields Component =====//
                           if (jobOfferDetail.fields!.isNotEmpty)

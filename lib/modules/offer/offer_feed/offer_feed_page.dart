@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/core.dart';
+import '../../../routes/routes.dart';
 import '../offer.dart';
 
 class OfferFeedPage extends GetView<OfferFeedController> {
@@ -183,6 +185,72 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                     ),
                   ),
                   const SizedBox(height: AppSize.s4),
+                  Obx(
+                    () => controller.profileController.userProfileInfo.value
+                                    .pictureUrl !=
+                                null ||
+                            controller.profileController.userProfileInfo.value
+                                    .pictureUrl !=
+                                ''
+                        ? Container()
+                        : SizedBox(
+                            width: double.infinity,
+                            child: CustomBoxWidget(
+                              leftPadding: AppSize.s20,
+                              rightPadding: AppSize.s20,
+                              topPadding: AppSize.s12,
+                              bottomPadding: AppSize.s12,
+                              leftMargin: AppSize.s12,
+                              rightMargin: AppSize.s12,
+                              bottomMargin: AppSize.s12,
+                              backgroundColor: ColorsManager.amber[100],
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              "- ${'profilePictureCompletionNotice'.tr} ",
+                                          style: const TextStyle(
+                                            color: ColorsManager.primaryBlue75,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              "- ${'feedProfileCompletionNotice'.tr} ",
+                                          style: const TextStyle(
+                                            color: ColorsManager.primaryBlue75,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              "${'feedProfileCompletionNoticeAction'.tr} ",
+                                          style: const TextStyle(
+                                            color: ColorsManager.lightBlue,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () async {
+                                              Get.toNamed(
+                                                Routes.editUserInfoRoute,
+                                              );
+                                            },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                  ),
                   Expanded(
                     flex: 90,
                     child: controller.obx(

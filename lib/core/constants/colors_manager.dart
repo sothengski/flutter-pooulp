@@ -80,6 +80,18 @@ class ColorsManager {
   static const blueAccent = Colors.blueAccent;
   static const lightBlue = Colors.lightBlue;
   static const lightBlueAccent = Colors.lightBlueAccent;
+
+  static const dangerColor = Color(0xFFFF4444);
+  static const dangerDarkColor = Color(0xFFCC0000);
+
+  static const warningColor = Color(0xFFFFBB33);
+  static const warningDarkColor = Color(0xFFFF8800);
+
+  static const successColor = Color(0xFF00C851);
+  static const successDarkColor = Color(0xFF007E33);
+
+  static const infoColor = Color(0xFF33B5E5);
+  static const infoDarkColor = Color(0xFF0099CC);
 }
 
 extension HexColor on Color {

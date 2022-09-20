@@ -7,10 +7,7 @@ import '../../../data/data.dart';
 import '../../modules.dart';
 
 class EditUserInformationPage extends GetView<EditUserInformationController> {
-  final String? profileImg;
-
   const EditUserInformationPage({
-    this.profileImg = AssetsManager.coverImg,
     Key? key,
   }) : super(key: key);
 
@@ -36,11 +33,20 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                 children: [
                   Obx(
                     () => Center(
-                      child: CachedNetworkImgWidget(
-                        imgUrl: controller
-                            .profileController.userProfileInfo.value.pictureUrl,
-                        borderRadius: 75,
-                        defaultImg: AssetsManager.logoStudentDefault,
+                      child: CustomBoxWidget(
+                        size: 150,
+                        // backgroundColor: ColorsManager.grey100,
+                        isCircle: true,
+                        topPadding: 1.0,
+                        bottomPadding: 1.0,
+                        leftPadding: 1.0,
+                        rightPadding: 1.0,
+                        child: CachedNetworkImgWidget(
+                          imgUrl: controller.profileController.userProfileInfo
+                              .value.pictureUrl,
+                          borderRadius: 75,
+                          defaultImg: AssetsManager.logoStudentDefault,
+                        ),
                       ),
                     ),
                   ),

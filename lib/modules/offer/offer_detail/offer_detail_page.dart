@@ -638,6 +638,29 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             ),
                           //===== Additional Information Component =====//
 
+                          ///===== Youtube Link Component =====//
+                          if (jobOfferDetail.youtubeLink!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'youtubeLink'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: GestureDetector(
+                                onTap: () async {
+                                  urlLauncherUtils(
+                                    thingToLaunch: jobOfferDetail.youtubeLink,
+                                    inApp: true,
+                                  );
+                                },
+                                child: CustomTextWidget(
+                                  text: '${jobOfferDetail.youtubeLink}',
+                                  color: ColorsManager.blue,
+                                  fontWeight: FontWeightManager.regular,
+                                  maxLine: 200,
+                                  textDecoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          //===== Youtube Link Component =====//
+
                           ///===== Languages Component =====//
                           // if (jobOfferDetail.spokenLanguages!.isNotEmpty)
                           //   OutlineContainerWidget(

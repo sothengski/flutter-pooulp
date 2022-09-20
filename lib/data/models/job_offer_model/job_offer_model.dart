@@ -48,6 +48,7 @@ class JobOfferModel {
   final String? location;
   final bool? isRangeSearch;
   final int? range;
+  final String? youtubeLink;
 
   JobOfferModel({
     this.id,
@@ -92,6 +93,7 @@ class JobOfferModel {
     this.location = "",
     this.isRangeSearch = false,
     this.range = -1,
+    this.youtubeLink,
   });
 
   String? get numberOfWorking => numberOfWorkingHour == null
@@ -190,6 +192,7 @@ class JobOfferModel {
         addressCity: json['address_city'] as String? ?? '',
         addressZip: json['address_zip'] as String? ?? '',
         addressCountry: json['address_country'] as String? ?? '',
+        youtubeLink: json['youtube_link'] as String? ?? '',
         // addressLatitude: json['address_latitude'] as String?,
         // addressLongitude: json['address_longitude'] as String?,
         types: json['types'] == null || json['types'] == []
@@ -294,6 +297,7 @@ class JobOfferModel {
         'address_country': addressCountry,
         'address_latitude': addressLatitude,
         'address_longitude': addressLongitude,
+        'youtube_link': youtubeLink,
         'types': types != null || types != []
             ? List<dynamic>.from(types!.map((x) => x.toJson()))
             : null,
@@ -433,6 +437,7 @@ class JobOfferModel {
       addressCountry: $addressCountry,
       addressLatitude: $addressLatitude,
       addressLongitude: $addressLongitude,
+      youtubeLink: $youtubeLink,
       types: $types,
       fields: $fields,
       spokenLanguages: $spokenLanguages,

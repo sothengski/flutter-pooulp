@@ -177,7 +177,8 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                   Expanded(
                     flex: 9,
                     child: Obx(
-                      () => controller.listJobOfferTypes.isNotEmpty
+                      () => controller.searchedListAsFieldModel.isNotEmpty
+                          // controller.listJobOfferTypes.isNotEmpty // V1
                           ? OfferFeedTypesListComponent()
                           : const ItemListShimmerLoadingWidget(
                               isBodyList: false,

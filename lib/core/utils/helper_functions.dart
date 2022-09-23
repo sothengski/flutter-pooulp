@@ -59,6 +59,21 @@ void addingOrRemovingFieldInFieldList({
   }
 }
 
+List<FieldModel> matchingObjBw2Lists({
+  required List<FieldModel> list1,
+  required List<FieldModel> list2,
+}) {
+  final List<FieldModel> matchObjList = [];
+  for (var i = 0; i < list1.length; i++) {
+    for (var j = 0; j < list2.length; j++) {
+      if (list1[i].id == list2[j].id) {
+        matchObjList.add(list2[j]);
+      }
+    }
+  }
+  return matchObjList;
+}
+
 extension IterableDistinctExt<T> on Iterable<T> {
   Iterable<T> distinct() sync* {
     final visited = <T>{};

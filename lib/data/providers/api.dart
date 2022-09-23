@@ -61,6 +61,7 @@ enum Endpoint {
   // postJobOfferCount,
   getInternshipTypeTags,
   getInternshipPeriodTags,
+  getSavedSearch,
 }
 
 class API {
@@ -124,6 +125,7 @@ class API {
     Endpoint.postRefreshToken: '/refreshtoken',
     Endpoint.getInternshipTypeTags: '/tags/internshiptype',
     Endpoint.getInternshipPeriodTags: '/tags/internshipperiod',
+    Endpoint.getSavedSearch: '/search/saved',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

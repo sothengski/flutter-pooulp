@@ -29,10 +29,9 @@ class OfferFeedController extends GetxController
 
   int pageNum = 1;
 
-  final FieldModel allType = FieldModel(label: 'All');
+  final FieldModel allType = FieldModel(id: 0, label: 'All');
 
-  Rx<FieldModel> typeSelected = FieldModel(label: 'All').obs;
-  // FieldModel? typeSelected;
+  Rx<FieldModel> typeSelected = FieldModel(id: 0, label: 'All').obs;
 
   // List<FieldModel> listFilterTypes = [];
   RxList<FieldModel> listJobOfferTypes = <FieldModel>[].obs;
@@ -83,6 +82,9 @@ class OfferFeedController extends GetxController
   Rx<JobOfferModel> jobOfferToBeSearch = JobOfferModel().obs;
   Rx<SearchPreferencesModel> searchPreferenceData =
       SearchPreferencesModel().obs;
+
+  RxList<SearchModel> searchedList = <SearchModel>[].obs;
+  RxList<FieldModel> searchedListAsFieldModel = <FieldModel>[].obs;
 
   RxInt filterCountRxInt = 0.obs;
 
@@ -201,8 +203,9 @@ class OfferFeedController extends GetxController
     workPlaceTypesToBeSearch.value = 2; // 2 == Hybrid(Default)
     languageListToBeSearch.value = [];
     fieldListToBeSearch.value = [];
-    // typesListToBeSearch.value = [];
-    selectType(type: allType);
+    typesListToBeSearch.value = [];
+    typesListToBeSearch.add(allType);
+    // selectType(type: allType);
     availabilitiesTagListToBeSearch.value = [];
     internshipTypeTagListToBeSearch.value = [];
     internshipPeriodTagListToBeSearch.value = [];
@@ -263,7 +266,7 @@ class OfferFeedController extends GetxController
     languageListToBeSearch.clear();
     fieldListToBeSearch.clear();
     typesListToBeSearch.clear();
-    selectType(type: typesListInFilter[0]);
+    // selectType(type: typesListInFilter[0]); // V1
     availabilitiesTagListToBeSearch.clear();
     internshipTypeTagListToBeSearch.clear();
     internshipPeriodTagListToBeSearch.clear();
@@ -274,7 +277,7 @@ class OfferFeedController extends GetxController
         selectedStartDateStringInFilter.value;
     selectedEndDateStringToBeSearch.value = selectedEndDateStringInFilter.value;
     // select internship(id=1) == 1
-    if (typesListInFilter[0].id == 1) {
+    if (typeSelected.value.id == 1) {
       internshipTypeTagListToBeSearch.addAll(internshipTypeTagListInFilter);
       internshipPeriodTagListToBeSearch.addAll(internshipPeriodTagListInFilter);
       // clear availabilitiesTagListInFilter
@@ -371,6 +374,50 @@ class OfferFeedController extends GetxController
   Future<SearchPreferencesModel> getSearchPreferenceResponseProvider({
     bool? refresh = false,
   }) async {
+    // searchPreferenceData.value = await offerProvider.getSearchPreferences();
+    searchedList.value = await offerProvider.getSavedSearchList();
+    if (searchedList != []) {
+      searchedListAsFieldModel.clear();
+      searchedListAsFieldModel.add(allType);
+      for (int i = 0; i < searchedList.length; i++) {
+        searchedListAsFieldModel.add(
+          FieldModel(
+            id: searchedList[i].id,
+            label: searchedList[i].searchName ?? 'null',
+          ),
+        );
+      }
+    }
+    // typesListToBeSearch.addAll(searchPreferenceData.value.types!);
+    // languageListToBeSearch.addAll(searchPreferenceData.value.languages!);
+    // fieldListToBeSearch.addAll(searchPreferenceData.value.fields!);
+    // availabilitiesTagListToBeSearch
+    //     .addAll(searchPreferenceData.value.availabilities!);
+    // internshipTypeTagListToBeSearch
+    //     .addAll(searchPreferenceData.value.internshipTypes!);
+    // availabilitiesTagListToBeSearch
+    //     .addAll(searchPreferenceData.value.internshipPeriods!);
+    // placeDetail.value = PlaceDetailModel(
+    //   fullAddress: searchPreferenceData.value.location,
+    //   streetNumber: searchPreferenceData.value.street,
+    //   lat: double.tryParse(
+    //     searchPreferenceData.value.latitude.toString(),
+    //   ),
+    //   lng: double.tryParse(
+    //     searchPreferenceData.value.longitude.toString(),
+    //   ),
+    //   areaLevel1: searchPreferenceData.value.city,
+    //   country: searchPreferenceData.value.country,
+    //   postalCode: searchPreferenceData.value.zipcode,
+    // );
+    // radiusRxInt.value = (searchPreferenceData.value.range! / 1000).round();
+    dismissFilter();
+    return searchPreferenceData.value;
+  }
+  /* V1
+  Future<SearchPreferencesModel> getSearchPreferenceResponseProvider({
+    bool? refresh = false,
+  }) async {
     searchPreferenceData.value = await offerProvider.getSearchPreferences();
     typesListToBeSearch
         .addAll(searchPreferenceData.value.offerTypePreferences!);
@@ -402,6 +449,7 @@ class OfferFeedController extends GetxController
     dismissFilter();
     return searchPreferenceData.value;
   }
+  */
 
   Future<List<FieldModel>> getjobOfferTypesListResponseProvider({
     bool? refresh = false,
@@ -465,12 +513,19 @@ class OfferFeedController extends GetxController
   }) async {
     final List<JobOfferModel> feedTempListResponse =
         []; // feedListRepsonse.clear();
+    final List<FieldModel> typeListFinal = [];
+    for (var i = 0; i < typesListToBeSearch.length; i++) {
+      typeListFinal.addIf(
+        typesListToBeSearch[i].id != 0,
+        typesListToBeSearch[i],
+      );
+    }
     PaginationModel feedListPaginationRepsonse = PaginationModel();
     jobOfferToBeSearch.value = JobOfferModel(
       // title: 'commercial',
       title: keywordToBeSearch.value,
       telecommuting: workPlaceTypesToBeSearch.value,
-      types: typesListToBeSearch,
+      types: typeListFinal, //typesListToBeSearch,
       // types: [
       //   typeSelected.value,
       // ],
@@ -538,9 +593,6 @@ class OfferFeedController extends GetxController
       feedListRepsonse.value = feedTempListResponse;
     }
     isLoadingIndicator.value = false;
-    // debugPrint(
-    //   'isLoadingIndicator After:: ${isLoadingIndicator.value}',
-    // );
 
     return feedListRepsonse;
   }
@@ -622,16 +674,114 @@ class OfferFeedController extends GetxController
   //Noted:: this function for filter the job offer list in feed Page
   void selectType({FieldModel? type, bool? isRefresh = true}) {
     FieldModel tempType = allType;
-    if (typeSelected.value != type) {
-      tempType = type!;
+
+    if (typeSelected.value.id != type!.id) {
+      tempType = type;
     }
-    typesListInFilter.clear();
-    typesListToBeSearch.clear();
-    typesListInFilter.add(tempType);
-    typesListToBeSearch.add(tempType);
-    // typeSelected.value = tempType;
+    // print('${type.id}');
+
+    if (type.id != 0) {
+      late SearchModel tempSearch;
+
+      for (var i = 0; i < searchedList.length; i++) {
+        if (searchedList[i].id == type.id) {
+          tempSearch = searchedList[i];
+          // print('tempSearch: $tempSearch');
+          keywordToBeSearch.value = tempSearch.searchName!;
+          // typeSelected.value = tempSearch.type!;
+
+          typesListToBeSearch.clear();
+          typesListToBeSearch.add(tempSearch.type!);
+
+          languageListToBeSearch.clear();
+          // languageListToBeSearch.addAll(tempSearch.search!.languages!);
+          languageListToBeSearch.value = matchingObjBw2Lists(
+            list1: tempSearch.search!.languages!,
+            list2: languageListForSearch,
+          );
+          fieldListToBeSearch.clear();
+          // fieldListToBeSearch.addAll(tempSearch.search!.fields!);
+          fieldListToBeSearch.value = matchingObjBw2Lists(
+            list1: tempSearch.search!.fields!,
+            list2: fieldListForSearch,
+          );
+          availabilitiesTagListToBeSearch.clear();
+          // availabilitiesTagListToBeSearch
+          //     .addAll(tempSearch.search!.availabilities!);
+          availabilitiesTagListToBeSearch.value = matchingObjBw2Lists(
+            list1: tempSearch.search!.availabilities!,
+            list2: availabilitiesTagListForSearch,
+          );
+          internshipTypeTagListToBeSearch.clear();
+          internshipTypeTagListToBeSearch.value = matchingObjBw2Lists(
+            list1: tempSearch.search!.internshipTypes!,
+            list2: internshipTypeTagListForSearch,
+          );
+
+          // for (var i = 0; i < tempSearch.search!.internshipTypes!.length; i++) {
+          //   for (var j = 0; j < internshipTypeTagListForSearch.length; j++) {
+          //     if (tempSearch.search!.internshipTypes![i].id ==
+          //         internshipTypeTagListForSearch[j].id) {
+          //       internshipTypeTagListToBeSearch
+          //           .add(internshipTypeTagListForSearch[j]);
+          //       print(
+          //         'internshipTypeTagListForSearch: $internshipPeriodTagListToBeSearch',
+          //       );
+          //     }
+          //   }
+          // }
+
+          internshipPeriodTagListToBeSearch.clear();
+          internshipPeriodTagListToBeSearch.value = matchingObjBw2Lists(
+            list1: tempSearch.search!.internshipPeriods!,
+            list2: internshipPeriodTagListForSearch,
+          );
+
+          workPlaceTypesToBeSearch.value = tempSearch.search!.telecommuting!;
+
+          placeDetail.value = PlaceDetailModel(
+            fullAddress: tempSearch.search!.location,
+            streetNumber: tempSearch.search!.street,
+            lat: double.tryParse(
+              tempSearch.search!.latitude.toString(),
+            ),
+            lng: double.tryParse(
+              tempSearch.search!.longitude.toString(),
+            ),
+            areaLevel1: tempSearch.search!.city,
+            country: tempSearch.search!.country,
+            postalCode: tempSearch.search!.zipcode,
+          );
+          radiusRxInt.value = (tempSearch.search!.range! / 1000).round();
+        }
+      }
+    } else {
+      // print('else ');
+      clearAllFilterToBeSearch();
+    }
+    dismissFilter();
+    // typesListInFilter.clear();
+    // typesListToBeSearch.clear();
+    // typesListInFilter.add(tempType);
+    // typesListToBeSearch.add(tempType);
+    typeSelected.value = tempType;
     if (isRefresh == true) {
       onRefresh();
     }
   }
+  //V1
+  // void selectType({FieldModel? type, bool? isRefresh = true}) {
+  //   FieldModel tempType = allType;
+  //   if (typeSelected.value != type) {
+  //     tempType = type!;
+  //   }
+  //   typesListInFilter.clear();
+  //   typesListToBeSearch.clear();
+  //   typesListInFilter.add(tempType);
+  //   typesListToBeSearch.add(tempType);
+  //   // typeSelected.value = tempType;
+  //   if (isRefresh == true) {
+  //     onRefresh();
+  //   }
+  // }
 }

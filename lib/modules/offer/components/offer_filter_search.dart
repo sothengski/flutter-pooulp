@@ -84,10 +84,10 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       leftPadding: AppSize.s8,
                       rightPadding: AppSize.s8,
                       controller: controller.keywordToBeSearchTextCtrl,
-                      inputTitle: 'jobTitle'.tr,
+                      inputTitle: 'SearchName'.tr, //'jobTitle'.tr,
                       fontSizeTitle: AppSize.s16,
                       fontWeightTitle: FontWeight.w600,
-                      hintText: 'searchJobTitle'.tr,
+                      hintText: 'searchName'.tr, //'searchJobTitle'.tr,
                       isFilled: true,
                       // validator: Validator().notEmptyValidator,
                     ),
@@ -255,11 +255,11 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                           fontWeight: FontWeight.w400,
                                           fontSize: AppSize.s16,
                                         ),
-                                        suffixWidgetFlex: controller
-                                                    .typesListInFilter[0].id ==
-                                                1
-                                            ? 20
-                                            : 10,
+                                        suffixWidgetFlex:
+                                            controller.typeSelected.value.id ==
+                                                    1
+                                                ? 20
+                                                : 10,
                                         suffixWidget: const Icon(
                                           IconsManager.dateRangeOutlined,
                                           color: ColorsManager.grey600,

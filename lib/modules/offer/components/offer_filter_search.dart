@@ -216,84 +216,149 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       child: Row(
                         children: [
                           ///===== Top of From Date Component =====//
-                          Expanded(
-                            flex: 40,
-                            child: ContainerDialogWidget(
-                              inputTitle:
-                                  controller.typesListInFilter[0].id == 1
-                                      ? 'internshipStartDate'.tr
-                                      : 'jobStart'.tr,
-                              // fontSizeTitle: AppSize.s16,
-                              fontWeightTitle: FontWeight.w600,
-                              inputTitleMarginTop: AppSize.s5,
-                              validatorFunction: (_) =>
-                                  Validator().notEmptyValidator(
-                                controller
-                                    .selectedStartDateStringInFilter.value,
-                              ),
-                              dialogType: DialogType.dateTimePickerDialog,
-                              dateLocale: controller.profileController
-                                  .userProfileInfo.value.uiLanguage,
-                              currentTime: DateTime.tryParse(
-                                    controller
-                                        .selectedStartDateStringInFilter.value,
-                                  ) ??
-                                  DateTime.now(),
-                              onConfirmDate: (date) {
-                                controller
-                                        .selectedStartDateStringInFilter.value =
-                                    dateTimeToString(selectedItem: date);
-                              },
-                              containerWidget: Obx(
-                                () => controller.selectedStartDateStringInFilter
-                                            .value ==
-                                        ''
-                                    ? RowContentInputWidget(
-                                        centerWidget: CustomTextWidget(
-                                          text: ddmmyyyyFormat,
-                                          color: ColorsManager.grey400,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: AppSize.s16,
-                                        ),
-                                        suffixWidgetFlex:
-                                            controller.typeSelected.value.id ==
-                                                    1
-                                                ? 20
-                                                : 10,
-                                        suffixWidget: const Icon(
-                                          IconsManager.dateRangeOutlined,
-                                          color: ColorsManager.grey600,
-                                        ),
-                                      )
-                                    : RowContentInputWidget(
-                                        centerWidget: CustomTextWidget(
-                                          text: dateFormatSlashDDMMYYYY(
-                                            date: DateTime.tryParse(
-                                              controller
-                                                  .selectedStartDateStringInFilter
-                                                  .value,
-                                            ),
+                          if (controller.typesListInFilter[0].id == 1)
+                            Expanded(
+                              flex: 40,
+                              child: ContainerDialogWidget(
+                                inputTitle: 'internshipStartDate'.tr,
+                                // fontSizeTitle: AppSize.s16,
+                                fontWeightTitle: FontWeight.w600,
+                                inputTitleMarginTop: AppSize.s5,
+                                validatorFunction: (_) =>
+                                    Validator().notEmptyValidator(
+                                  controller
+                                      .selectedStartDateStringInFilter.value,
+                                ),
+                                dialogType:
+                                    DialogType.dateWithoutDayPickerDialog,
+                                dateLocale: controller.profileController
+                                    .userProfileInfo.value.uiLanguage,
+                                currentTime: DateTime.tryParse(
+                                      controller.selectedStartDateStringInFilter
+                                          .value,
+                                    ) ??
+                                    DateTime.now(),
+                                onConfirmDate: (date) {
+                                  controller.selectedStartDateStringInFilter
+                                          .value =
+                                      dateTimeToString(selectedItem: date);
+                                },
+                                containerWidget: Obx(
+                                  () => controller
+                                              .selectedStartDateStringInFilter
+                                              .value ==
+                                          ''
+                                      ? RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: mmyyyyFormat,
+                                            color: ColorsManager.grey400,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: AppSize.s16,
                                           ),
-                                          color: ColorsManager.black,
-                                          fontSize: AppSize.s16,
+                                          suffixWidgetFlex: controller
+                                                      .typeSelected.value.id ==
+                                                  1
+                                              ? 20
+                                              : 10,
+                                          suffixWidget: const Icon(
+                                            IconsManager.dateRangeOutlined,
+                                            color: ColorsManager.grey600,
+                                          ),
+                                        )
+                                      : RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: dateFormatSlashMMYYYY(
+                                              date: DateTime.tryParse(
+                                                controller
+                                                    .selectedStartDateStringInFilter
+                                                    .value,
+                                              ),
+                                            ),
+                                            color: ColorsManager.black,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          // suffixWidgetFlex: 10,
+                                          suffixWidget: const Icon(
+                                            IconsManager.dateRangeOutlined,
+                                            color: ColorsManager.grey600,
+                                          ),
                                         ),
-                                        suffixWidgetFlex: 20,
-                                        suffixWidget: const Icon(
-                                          IconsManager.dateRangeOutlined,
-                                          color: ColorsManager.grey600,
+                                ),
+                              ),
+                            )
+                          else
+                            Expanded(
+                              flex: 40,
+                              child: ContainerDialogWidget(
+                                inputTitle: 'jobStart'.tr,
+                                // fontSizeTitle: AppSize.s16,
+                                fontWeightTitle: FontWeight.w600,
+                                inputTitleMarginTop: AppSize.s5,
+                                validatorFunction: (_) =>
+                                    Validator().notEmptyValidator(
+                                  controller
+                                      .selectedStartDateStringInFilter.value,
+                                ),
+                                dialogType: DialogType.dateTimePickerDialog,
+                                dateLocale: controller.profileController
+                                    .userProfileInfo.value.uiLanguage,
+                                currentTime: DateTime.tryParse(
+                                      controller.selectedStartDateStringInFilter
+                                          .value,
+                                    ) ??
+                                    DateTime.now(),
+                                onConfirmDate: (date) {
+                                  controller.selectedStartDateStringInFilter
+                                          .value =
+                                      dateTimeToString(selectedItem: date);
+                                },
+                                containerWidget: Obx(
+                                  () => controller
+                                              .selectedStartDateStringInFilter
+                                              .value ==
+                                          ''
+                                      ? RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: ddmmyyyyFormat,
+                                            color: ColorsManager.grey400,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          suffixWidgetFlex: 20,
+                                          suffixWidget: const Icon(
+                                            IconsManager.dateRangeOutlined,
+                                            color: ColorsManager.grey600,
+                                          ),
+                                        )
+                                      : RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: dateFormatSlashDDMMYYYY(
+                                              date: DateTime.tryParse(
+                                                controller
+                                                    .selectedStartDateStringInFilter
+                                                    .value,
+                                              ),
+                                            ),
+                                            color: ColorsManager.black,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          suffixWidgetFlex: 20,
+                                          suffixWidget: const Icon(
+                                            IconsManager.dateRangeOutlined,
+                                            color: ColorsManager.grey600,
+                                          ),
                                         ),
-                                      ),
+                                ),
                               ),
                             ),
-                          ),
                           //===== Bottom of From Date Component =====//
 
                           ///===== Top of To Date Component =====//
-                          if (controller.typesListInFilter[0].id == 1)
+                          if (controller.typesListInFilter[0].id != 1)
                             const SizedBox(
                               width: AppSize.s12,
                             ),
-                          if (controller.typesListInFilter[0].id == 1)
+                          if (controller.typesListInFilter[0].id != 1)
                             Expanded(
                               flex: 40,
                               child: ContainerDialogWidget(
@@ -359,7 +424,9 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                         ),
                                 ),
                               ),
-                            ),
+                            )
+                          else
+                            Container(),
                           //===== Bottom of To Date Component =====//
                         ],
                       ),

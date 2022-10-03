@@ -49,6 +49,8 @@ class JobOfferModel {
   final bool? isRangeSearch;
   final int? range;
   final String? youtubeLink;
+  final int? searchId;
+  final String? searchName;
 
   JobOfferModel({
     this.id,
@@ -94,6 +96,8 @@ class JobOfferModel {
     this.isRangeSearch = false,
     this.range = -1,
     this.youtubeLink,
+    this.searchId,
+    this.searchName,
   });
 
   String? get numberOfWorking => numberOfWorkingHour == null
@@ -298,30 +302,92 @@ class JobOfferModel {
         'address_latitude': addressLatitude,
         'address_longitude': addressLongitude,
         'youtube_link': youtubeLink,
-        'types': types != null || types != []
-            ? List<dynamic>.from(types!.map((x) => x.toJson()))
-            : null,
-        'fields': fields != null || fields != []
-            ? List<dynamic>.from(fields!.map((x) => x.toJson()))
-            : null,
-        'skills': skills != null || skills != []
-            ? List<dynamic>.from(skills!.map((x) => x.toJson()))
-            : null,
-        'spoken_languages': spokenLanguages != null || spokenLanguages != []
-            ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
-            : null,
-        'availabilities': availabilities != null || availabilities != []
-            ? List<dynamic>.from(availabilities!.map((x) => x.toJson()))
-            : null,
-        'internship_types': internshipTypes != null || internshipTypes != []
-            ? List<dynamic>.from(internshipTypes!.map((x) => x.toJson()))
-            : null,
+        'types': types == null || types == []
+            ? []
+            : List<dynamic>.from(
+                // types!.map((x) => x.id),
+                types!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ), //use only type ID
+        'fields': fields == null || fields == []
+            ? []
+            : List<dynamic>.from(
+                fields!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'languages': spokenLanguages == null || spokenLanguages == []
+            ? []
+            : List<dynamic>.from(
+                spokenLanguages!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'availabilities': availabilities == null || availabilities == []
+            ? []
+            : List<dynamic>.from(
+                availabilities!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'internship_types': internshipTypes == null || internshipTypes == []
+            ? []
+            : List<dynamic>.from(
+                internshipTypes!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
         'internship_periods':
-            internshipPeriods != null || internshipPeriods != []
-                ? List<dynamic>.from(internshipPeriods!.map((x) => x.toJson()))
-                : null,
+            internshipPeriods == null || internshipPeriods == []
+                ? []
+                : List<dynamic>.from(
+                    internshipPeriods!
+                        .skipWhile(
+                          (x) => x.id == null,
+                        )
+                        .map(
+                          (e) => e.id,
+                        ),
+                  ),
+        // 'skills': skills != null || skills != []
+        //     ? List<dynamic>.from(skills!.map((x) => x.toJson()))
+        //     : null,
+        // 'spoken_languages': spokenLanguages != null || spokenLanguages != []
+        //     ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
+        //     : null,
         'enterprise': enterprise?.toJson(),
         'job_offer_state': jobOfferStateModel?.toJson(),
+        'search_id': searchId,
+        'search_name': searchName,
+        'keywords': title, //'title': title,
+        'street': addressStreet ?? '',
+        'city': addressCity ?? '',
+        'zipcode': addressZip ?? '',
+        'country': addressCountry ?? '',
+        'latitude': addressLatitude ?? '',
+        'longitude': addressLongitude ?? '',
+        'range': range! * 1000,
       }..removeWhere((_, v) => v == null);
 
   Map<String, dynamic> toSearchJson() => {
@@ -401,11 +467,13 @@ class JobOfferModel {
                           (e) => e.id,
                         ),
                   ),
-        'date_job_start': dateJobStart?.toIso8601String(),
-        'date_job_end': dateJobEnd?.toIso8601String(),
+        'date_job_start': dateJobStart?.toIso8601String() ?? '',
+        'date_job_end': dateJobEnd?.toIso8601String() ?? '',
         'location': location ?? '',
         'is_range_search': isRangeSearch,
         'range': range! * 1000,
+        'search_id': searchId,
+        'search_name': searchName,
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -450,6 +518,8 @@ class JobOfferModel {
       'location': $location,
       'isRangeSearch': $isRangeSearch,
       'range': $range,
+      'searchId':$searchId,
+      'searchName': $searchName,
     )''';
   }
 }

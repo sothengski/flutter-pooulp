@@ -104,6 +104,33 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                           ),
                           Expanded(
                             flex: 15,
+                            child: IconButton(
+                              alignment: Alignment.topCenter,
+                              icon: const Icon(Icons.add),
+                              color: ColorsManager.white,
+                              onPressed: () {
+                                // controller.updateKeyword();
+                                controller.selectType(
+                                  type: controller.searchedListAsFieldModel[0],
+                                );
+                                customGeneralDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  widget: OfferFeedFilterSearch(
+                                    title: 'filter'.tr,
+                                    searchOptType: 1,
+                                  ),
+                                  // Get.dialog(
+                                  //   OfferFeedFilterSearch(
+                                  //     title: 'offer.filterTitle'.tr,
+                                  //   ),
+                                  //   // barrierDismissible: false,
+                                );
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            flex: 15,
                             child: Stack(
                               children: [
                                 IconButton(
@@ -117,6 +144,11 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                       barrierDismissible: true,
                                       widget: OfferFeedFilterSearch(
                                         title: 'filter'.tr,
+                                        searchOptType:
+                                            controller.typeSelected.value.id ==
+                                                    0
+                                                ? 1
+                                                : 2,
                                       ),
                                       // Get.dialog(
                                       //   OfferFeedFilterSearch(

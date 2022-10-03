@@ -91,7 +91,7 @@ class SignUpForm extends GetView<SignUpController> {
                                       .tr // 'auth.createStudentAccount'.tr
                                   : 'createEnterpriseAccount'
                                       .tr, //'auth.createEnterpriseAccount'.tr,
-                              fontSize: 24.0,
+                              fontSize: 20.0,
                               fontWeight: FontWeight.w700,
                               color: ColorsManager.primary,
                               marginBottom: AppSize.s24,

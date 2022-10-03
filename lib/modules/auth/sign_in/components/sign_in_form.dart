@@ -25,7 +25,7 @@ class SignInForm extends GetView<SignInController> {
               children: [
                 CustomTextWidget(
                   text: 'signInToYourAccount'.tr, //'auth.signInToUrAcc'.tr,
-                  fontSize: 24.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.w700,
                   color: ColorsManager.primary,
                   marginBottom: AppSize.s24,
@@ -116,7 +116,7 @@ class SignInForm extends GetView<SignInController> {
                 Visibility(
                   visible: !controller.isSubmitBtnProcessing.value,
                   child: CustomMaterialButton(
-                    text: 'signIn'.tr, //'auth.loginButton'.tr,
+                    text: 'login'.tr, //'auth.loginButton'.tr,
                     fontSize: 20.0,
                     buttonWidth: getWidth,
                     onPressed: () {

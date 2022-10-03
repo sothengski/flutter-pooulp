@@ -62,6 +62,9 @@ class OfferFeedController extends GetxController
   RxString keywordToBeSearch = ''.obs;
   TextEditingController keywordToBeSearchTextCtrl = TextEditingController();
 
+  RxString searchNameToBeSearch = ''.obs;
+  TextEditingController searchNameToBeSearchTextCtrl = TextEditingController();
+
   RxInt workPlaceTypesToBeSearch = 2.obs;
   Rx<CountryModel> countryToBeSearch = const CountryModel().obs;
   RxList<FieldModel> typesListToBeSearch = <FieldModel>[].obs;
@@ -136,6 +139,14 @@ class OfferFeedController extends GetxController
         keywordToBeSearchTextCtrl.text = newKeyword.toString(),
       };
 
+  String updateSearchName({String? newSearchName = ''}) =>
+      searchNameToBeSearch.value = newSearchName.toString();
+
+  void syncSearchName({String? newSearchName = ''}) => {
+        searchNameToBeSearch.value = newSearchName.toString(),
+        searchNameToBeSearchTextCtrl.text = newSearchName.toString(),
+      };
+
   CountryModel selectedCountryOnClick(CountryModel selectedItem) {
     return selectedCountryInFilter.value = selectedItem;
   }
@@ -183,9 +194,11 @@ class OfferFeedController extends GetxController
     placeDetail.value = PlaceDetailModel();
   }
 
-  void clearAllFilterToBeSearch() {
+  void clearAllFilterToBeSearch({bool? deleteSavedSearch = false}) {
     keywordToBeSearch.value = '';
     keywordToBeSearchTextCtrl.text = '';
+    searchNameToBeSearch.value = '';
+    searchNameToBeSearchTextCtrl.text = '';
     selectedCountryInFilter.value = const CountryModel();
 
     workPlaceTypesInFilter.value = 2; // 2 == Hybrid(Default)
@@ -215,6 +228,11 @@ class OfferFeedController extends GetxController
     placeDetail.value = PlaceDetailModel();
     radiusRxInt.value = 10;
     countFilterField();
+    if (deleteSavedSearch == true) {
+      offerProvider.deleteSavedSearch(
+        savedSearchId: typeSelected.value.id,
+      );
+    }
 
     // debugPrint(
     //   'clearAllFilterToBeSearch',
@@ -229,6 +247,7 @@ class OfferFeedController extends GetxController
 
   void dismissFilter() {
     keywordToBeSearchTextCtrl.text = keywordToBeSearch.value;
+    searchNameToBeSearchTextCtrl.text = searchNameToBeSearch.value;
     workPlaceTypesInFilter.value = workPlaceTypesToBeSearch.value;
     selectedCountryInFilter.value = countryToBeSearch.value;
     languageListInFilter.clear();
@@ -259,8 +278,11 @@ class OfferFeedController extends GetxController
     // );
   }
 
-  void applyFilterToBeSearch() {
+  void applyFilterToBeSearch({
+    int? newOrEditsearchOpt = 0, //1 == new, // 2 == edit
+  }) {
     keywordToBeSearch.value = keywordToBeSearchTextCtrl.text;
+    searchNameToBeSearch.value = searchNameToBeSearchTextCtrl.text;
     workPlaceTypesToBeSearch.value = workPlaceTypesInFilter.value;
     countryToBeSearch.value = selectedCountryInFilter.value;
     languageListToBeSearch.clear();
@@ -277,7 +299,8 @@ class OfferFeedController extends GetxController
         selectedStartDateStringInFilter.value;
     selectedEndDateStringToBeSearch.value = selectedEndDateStringInFilter.value;
     // select internship(id=1) == 1
-    if (typeSelected.value.id == 1) {
+    if (typesListToBeSearch.isNotEmpty && typesListToBeSearch[0].id == 1) {
+      // debugPrint('typesListToBeSearch: ${typesListToBeSearch[0].id}');
       internshipTypeTagListToBeSearch.addAll(internshipTypeTagListInFilter);
       internshipPeriodTagListToBeSearch.addAll(internshipPeriodTagListInFilter);
       // clear availabilitiesTagListInFilter
@@ -293,7 +316,7 @@ class OfferFeedController extends GetxController
       internshipPeriodTagListInFilter.clear();
     }
     countFilterField();
-    getFeedsDataState();
+    getFeedsDataState(searchOpt: newOrEditsearchOpt);
 
     // debugPrint(
     //   'applyFilterToBeSearch',
@@ -306,9 +329,14 @@ class OfferFeedController extends GetxController
     // );
   }
 
+  void createOrEditSaveSearch() {}
+
   void countFilterField() {
     int tempCount = 0;
-    if (keywordToBeSearchTextCtrl.text.isNotEmpty) {
+    // if (keywordToBeSearchTextCtrl.text.isNotEmpty) {
+    //   tempCount += 1;
+    // }
+    if (searchNameToBeSearchTextCtrl.text.isNotEmpty) {
       tempCount += 1;
     }
     if (workPlaceTypesInFilter.value != 2) {
@@ -355,9 +383,15 @@ class OfferFeedController extends GetxController
     // if failed,use refreshFailed()
   }
 
-  Future<void> getFeedsDataState({bool? refresh}) async {
+  Future<void> getFeedsDataState({
+    bool? refresh,
+    int? searchOpt = 0,
+  }) async {
     change(null, status: RxStatus.loading());
-    getfeedListResponseProvider(refresh: refresh).then(
+    getfeedListResponseProvider(
+      refresh: refresh,
+      searchOpt: searchOpt,
+    ).then(
       (resp) {
         change(resp, status: RxStatus.success());
       },
@@ -510,6 +544,9 @@ class OfferFeedController extends GetxController
 
   Future<RxList<JobOfferModel>> getfeedListResponseProvider({
     bool? refresh = false,
+    int? searchOpt = 0,
+    // 0 == nothing, // 1 == createSavedSearch,
+    // 2 == editSavedSearch, //3 == deleteSavedSearch
   }) async {
     final List<JobOfferModel> feedTempListResponse =
         []; // feedListRepsonse.clear();
@@ -555,6 +592,8 @@ class OfferFeedController extends GetxController
           : DateTime.tryParse(
               selectedEndDateStringToBeSearch.value,
             ),
+      searchName: searchNameToBeSearch.value,
+      searchId: typeSelected.value.id == 0 ? null : typeSelected.value.id,
     );
     // debugPrint(
     //   'jobOfferToBeSearch.value:: ${jobOfferToBeSearch.value}',
@@ -583,6 +622,32 @@ class OfferFeedController extends GetxController
         feedListRepsonse.addAll(feedTempListResponse);
       }
     } else {
+      if (searchOpt == 1) {
+        debugPrint(
+          "$searchOpt jobOfferToBeSearch create: ${jobOfferToBeSearch.value}",
+        );
+        // await offerProvider.postCreateSavedSearch(
+        //   jobOfferForSearch: jobOfferToBeSearch.value,
+        // );
+      } else if (searchOpt == 2) {
+        debugPrint(
+          "$searchOpt jobOfferToBeSearch edit: ${jobOfferToBeSearch.value}",
+        );
+        await offerProvider.putEditSavedSearch(
+          jobOfferForSearch: jobOfferToBeSearch.value,
+        );
+      } else if (searchOpt == 3) {
+        debugPrint(
+          "$searchOpt jobOfferToBeSearch delete: ${jobOfferToBeSearch.value}",
+        );
+
+        await offerProvider.deleteSavedSearch(
+          savedSearchId: 1,
+        );
+      }
+
+      await getSearchPreferenceResponseProvider();
+
       feedListPaginationRepsonse =
           await offerProvider.postSearchOfferWithPagination(
         pageNumber: 1,
@@ -687,9 +752,19 @@ class OfferFeedController extends GetxController
         if (searchedList[i].id == type.id) {
           tempSearch = searchedList[i];
           // print('tempSearch: $tempSearch');
-          keywordToBeSearch.value = tempSearch.searchName!;
+          searchNameToBeSearch.value = tempSearch.searchName!;
+          // keywordToBeSearch.value = tempSearch.search!.keywords!;
+
           // typeSelected.value = tempSearch.type!;
 
+          selectedStartDateStringToBeSearch.value =
+              tempSearch.search!.dateJobStart != null
+                  ? tempSearch.search!.dateJobStart!.toIso8601String()
+                  : '';
+          selectedEndDateStringToBeSearch.value =
+              tempSearch.search!.dateJobEnd != null
+                  ? tempSearch.search!.dateJobEnd!.toIso8601String()
+                  : '';
           typesListToBeSearch.clear();
           typesListToBeSearch.add(tempSearch.type!);
 

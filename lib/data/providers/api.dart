@@ -62,6 +62,9 @@ enum Endpoint {
   getInternshipTypeTags,
   getInternshipPeriodTags,
   getSavedSearch,
+  postCreateSavedSearch,
+  putEditSavedSearch,
+  // deleteSavedSearch,
 }
 
 class API {
@@ -126,6 +129,8 @@ class API {
     Endpoint.getInternshipTypeTags: '/tags/internshiptype',
     Endpoint.getInternshipPeriodTags: '/tags/internshipperiod',
     Endpoint.getSavedSearch: '/search/saved',
+    Endpoint.postCreateSavedSearch: '/search/create',
+    Endpoint.putEditSavedSearch: '/search/edit',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';
@@ -191,4 +196,7 @@ class API {
 
   static String postJobOfferViewCount({required String? jobOfferUUID}) =>
       '/offers/$jobOfferUUID/view';
+
+  static String deleteSavedSearch({required int? savedSearchId}) =>
+      '/search/delete/$savedSearchId';
 }

@@ -10,6 +10,13 @@ abstract class IOfferProvider {
   Future<List<JobOfferModel>> getRejectedOffers();
   Future<SearchPreferencesModel> getSearchPreferences();
   Future<List<SearchModel>> getSavedSearchList();
+  Future<SearchModel> postCreateSavedSearch({
+    JobOfferModel jobOfferForSearch,
+  });
+  Future<SearchModel> putEditSavedSearch({
+    JobOfferModel jobOfferForSearch,
+  });
+  Future<JsonResponse> deleteSavedSearch({required int? savedSearchId});
   Future<List<JobOfferModel>> postSearchOffer({
     int? pageNumber = 1,
     JobOfferModel jobOfferForSearch,
@@ -395,6 +402,78 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
         // debugPrint(
         //   'API: ${API.postJobOfferViewCount(jobOfferUUID: jobOfferUUID)}\nresponse::${response.data}',
         // );
+        return response;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<SearchModel> postCreateSavedSearch({
+    JobOfferModel? jobOfferForSearch,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.paths[Endpoint.postCreateSavedSearch].toString(),
+        jobOfferForSearch!.toSearchJson(),
+      );
+      // debugPrint("jobOfferForSearch: ${jobOfferForSearch.toSearchJson()}");
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse = json.decode(dataResponse.bodyString.toString());
+
+        return SearchModel.fromJson(
+          apiResponse as Map<String, dynamic>,
+        );
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<SearchModel> putEditSavedSearch({
+    JobOfferModel? jobOfferForSearch,
+  }) async {
+    try {
+      final dataResponse = await put(
+        API.paths[Endpoint.putEditSavedSearch].toString(),
+        jobOfferForSearch!.toSearchJson(),
+      );
+      // debugPrint("jobOfferForSearch: ${jobOfferForSearch.toSearchJson()}");
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse = json.decode(dataResponse.bodyString.toString());
+
+        return SearchModel.fromJson(
+          apiResponse as Map<String, dynamic>,
+        );
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<JsonResponse> deleteSavedSearch({
+    required int? savedSearchId,
+  }) async {
+    try {
+      final dataResponse = await delete(
+        API.deleteSavedSearch(savedSearchId: savedSearchId),
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
         return response;
       }
     } catch (e) {

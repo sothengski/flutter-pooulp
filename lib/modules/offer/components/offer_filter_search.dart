@@ -16,6 +16,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
   final VoidCallback? onPressed1;
   final VoidCallback? onPressed2;
   final VoidCallback? onPressed3;
+  final int? searchOptType; //1 == save new form, //2 == edit current form
 
   const OfferFeedFilterSearch({
     Key? key,
@@ -29,6 +30,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
     this.onPressed1,
     this.onPressed2,
     this.onPressed3,
+    this.searchOptType = 2,
   }) : super(key: key);
 
   Future<PlaceDetailModel?> showSearchFunc(BuildContext context) async {
@@ -83,7 +85,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     CustomTextInput(
                       leftPadding: AppSize.s8,
                       rightPadding: AppSize.s8,
-                      controller: controller.keywordToBeSearchTextCtrl,
+                      controller: controller.searchNameToBeSearchTextCtrl,
                       inputTitle: 'SearchName'.tr, //'jobTitle'.tr,
                       fontSizeTitle: AppSize.s16,
                       fontWeightTitle: FontWeight.w600,
@@ -1012,20 +1014,49 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                   ///===== Top of Clear All Button Component =====//
                   Expanded(
                     flex: 40,
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: CustomMaterialButton(
-                        buttonColor: ColorsManager.white,
-                        elevation: 0.0,
-                        text: buttonLabel1 ?? 'clearAll'.tr,
-                        textColor: ColorsManager.redAccent700,
-                        fontSize: 14,
-                        onPressed: () {
-                          controller.clearAllFilterToBeSearch();
-                        },
-                      ),
-                    ),
+                    child: searchOptType == 1
+                        ? Container()
+                        : Container(
+                            alignment: Alignment.centerLeft,
+                            child: CustomMaterialButton(
+                              buttonColor: ColorsManager.white,
+                              elevation: 0.0,
+                              text: buttonLabel1 ?? 'delete'.tr,
+                              textColor: ColorsManager.redAccent700,
+                              fontSize: 14,
+                              onPressed: () async {
+                                controller.clearAllFilterToBeSearch(
+                                  deleteSavedSearch: true,
+                                );
+                                controller.selectType(
+                                  type: controller.searchedListAsFieldModel[0],
+                                );
+                                await Future.delayed(DurationConstant.d500, () {
+                                  Get.back();
+                                });
+                              },
+                            ),
+                          ),
                   ),
+                  //===== Bottom of Clear All Button Component =====//
+                  ///===== Top of Clear All Button Component =====//
+                  // Expanded(
+                  //   flex: 40,
+                  //   child: Container(),
+                  //   // Container(
+                  //   //   alignment: Alignment.centerLeft,
+                  //   //   child: CustomMaterialButton(
+                  //   //     buttonColor: ColorsManager.white,
+                  //   //     elevation: 0.0,
+                  //   //     text: buttonLabel1 ?? 'clearAll'.tr,
+                  //   //     textColor: ColorsManager.redAccent700,
+                  //   //     fontSize: 14,
+                  //   //     onPressed: () {
+                  //   //       controller.clearAllFilterToBeSearch();
+                  //   //     },
+                  //   //   ),
+                  //   // ),
+                  // ),
                   //===== Bottom of Clear All Button Component =====//
 
                   ///===== Top of Dismiss Button Component =====//
@@ -1051,13 +1082,19 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     child: CustomMaterialButton(
                       childWidget: CustomTextWidget(
                         textAlign: TextAlign.left,
-                        text: buttonLabel3 ?? 'applyFilter'.tr,
+                        text: buttonLabel3 ?? 'save'.tr, //'applyFilter'.tr,
                         color: ColorsManager.white,
                       ),
                       // buttonColor: ColorsManager.primary,
                       elevation: 1.0,
                       onPressed: () {
-                        controller.applyFilterToBeSearch();
+                        searchOptType == 1
+                            ? controller.applyFilterToBeSearch(
+                                newOrEditsearchOpt: 1,
+                              ) // create new saveSearch
+                            : controller.applyFilterToBeSearch(
+                                newOrEditsearchOpt: 2,
+                              ); // edit current saveSearch
                         Get.back();
                       },
                     ),

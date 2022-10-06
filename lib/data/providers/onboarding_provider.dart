@@ -44,8 +44,8 @@ class OnboardingProvider extends BaseProvider implements IOnboardingProvider {
       //   );
 
       final dataResponse = await post(
-        "${API.paths[Endpoint.postOrGetOnBoardingData]}/v2",
-        onboardingData!.toRawJson(),
+        "${API.paths[Endpoint.postOrGetOnBoardingData]}/v3",
+        onboardingData!.toJson(),
       );
       // debugPrint('onboardingData: ${onboardingData.toRawJson()}');
       if (dataResponse.hasError) {

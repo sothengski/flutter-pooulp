@@ -158,21 +158,25 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                 //===== Bottom of Title Component =====//
 
                 ///===== Top of Current Working CheckBox Component =====//
-                Obx(
-                  () => RowDataSelectionWidget.checkBox(
-                    verticalPadding: AppSize.s16,
-                    horizontalPadding: AppSize.s0,
-                    isClickingValue: controller.isCheckStillWorking.value,
-                    text: 'iAmCurrentlyWorkingInThisRole'.tr,
-                    isLeftSideText: false,
-                    onPressed: () {
-                      controller.isCheckStillWorking.value =
-                          switchingBooleanValue(
-                        boolValue: controller.isCheckStillWorking.value,
-                      );
-                    },
-                  ),
-                ),
+                if (controller.expType.value == AppStrings.professionalKey)
+                  Obx(
+                    () => RowDataSelectionWidget.checkBox(
+                      verticalPadding: AppSize.s16,
+                      horizontalPadding: AppSize.s0,
+                      isClickingValue: controller.isCheckStillWorking.value,
+                      text: 'iAmCurrentlyWorkingInThisRole'.tr,
+                      isLeftSideText: false,
+                      onPressed: () {
+                        controller.isCheckStillWorking.value =
+                            switchingBooleanValue(
+                          boolValue: controller.isCheckStillWorking.value,
+                        );
+                      },
+                    ),
+                  )
+                else
+                  const SizedBox(height: AppSize.s16),
+
                 //===== Bottom of Current Working CheckBox Component =====//
 
                 ///===== Top of Start Date & End Date Component =====//

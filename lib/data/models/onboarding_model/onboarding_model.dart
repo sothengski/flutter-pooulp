@@ -28,6 +28,7 @@ class OnboardingModel {
   final String? locationLat;
   final String? locationLng;
   final int? locationRadius;
+  final List<SearchPreferencesModel>? searches;
 
   const OnboardingModel({
     this.totalPage,
@@ -47,6 +48,7 @@ class OnboardingModel {
     this.locationLat,
     this.locationLng,
     this.locationRadius,
+    this.searches,
   });
 
   factory OnboardingModel.fromRawJson(String str) =>
@@ -93,8 +95,54 @@ class OnboardingModel {
   //       'source': source?.toJsonForOnboarding(),
   //       // List<dynamic>.from(source!.map((x) => x.toJsonForOnboarding())),
   //     }..removeWhere((_, v) => v == null);
-
   Map<String, dynamic> toJson() => {
+        'source': source?.toJsonForOnboarding(),
+        'skills': skills != null && skills != []
+            ? List<dynamic>.from(
+                skills!.map((x) => x.id),
+              )
+            : [],
+        'searches': searches != null && searches != []
+            ? List<dynamic>.from(searches!.map((x) => x.toJson()))
+            : [],
+        // 'types': offerTypePreferences != null && offerTypePreferences != []
+        //     ? List<dynamic>.from(offerTypePreferences!.map((x) => x.id))
+        //     : [],
+        // 'internship_types':
+        //     internshipTypePreferences != null && internshipTypePreferences != []
+        //         ? List<dynamic>.from(
+        //             internshipTypePreferences!.map((x) => x.id),
+        //           )
+        //         : [],
+        // 'internship_periods': internshipPeriodPreferences != null &&
+        //         internshipPeriodPreferences != []
+        //     ? List<dynamic>.from(
+        //         internshipPeriodPreferences!.map((x) => x.id),
+        //       )
+        //     : [],
+        // 'fields': fieldPreferences != null && fieldPreferences != []
+        //     ? List<dynamic>.from(
+        //         fieldPreferences!.map((x) => x.id),
+        //       )
+        //     : [],
+
+        // 'languages': languages != null && languages != []
+        //     ? List<dynamic>.from(
+        //         languages!.map((x) => x.id),
+        //       )
+        //     : [],
+        // 'location_preference': location,
+        // 'location_street': locationStreet,
+        // 'location_zip': locationZipCode,
+        // 'location_city': locationCity,
+        // 'location_country': locationCountry,
+        // 'location_latitude': locationLat,
+        // 'location_longitude': locationLng,
+        // 'radius': locationRadius! * 1000,
+        // List<dynamic>.from(source!.map((x) => x.toJsonForOnboarding())),
+      }..removeWhere((_, v) => v == null);
+
+  Map<String, dynamic> v1toJson() => {
         'types': offerTypePreferences != null && offerTypePreferences != []
             ? List<dynamic>.from(offerTypePreferences!.map((x) => x.id))
             : [],

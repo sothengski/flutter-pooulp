@@ -19,42 +19,30 @@ class OnboardingController extends GetxController
   Rx<OnboardingModel> onboardingPagesAPIData =
       const OnboardingModel(totalPage: 0).obs;
 
-  Rx<OnboardingPageModel> lookingForSelectionListPage0 =
-      OnboardingPageModel(pageIndex: 0, selectionItems: []).obs;
-  Rx<OnboardingPageModel> internshipTypeSelectionListPage0 =
-      OnboardingPageModel(pageIndex: 0, internshipTypeItems: []).obs;
-  Rx<OnboardingPageModel> internshipPeriodSelectionListPage0 =
-      OnboardingPageModel(pageIndex: 0, internshipPeriodItems: []).obs;
-  Rx<OnboardingPageModel> interestedInSelectionListPage1 =
-      OnboardingPageModel(pageIndex: 1, selectionItems: []).obs;
-  Rx<OnboardingPageModel> goodAtListSelectionPage2 =
-      OnboardingPageModel(pageIndex: 2, selectionItems: []).obs;
-  Rx<OnboardingPageModel> goodAtListSelectionPage2BasedonPage1 =
-      OnboardingPageModel(pageIndex: 2, selectionItems: []).obs;
-  Rx<OnboardingPageModel> languageSelectionListPage3 =
-      OnboardingPageModel(pageIndex: 3, selectionItems: []).obs;
-  Rx<OnboardingPageModel> knowFromSelectionListPage5 =
-      OnboardingPageModel(pageIndex: 5, selectionItems: []).obs;
+  RxList<FieldModel> lookingForSelectedList = <FieldModel>[].obs;
 
-  RxList<FieldModel>? goodAtfieldList = <FieldModel>[].obs;
-  // RxList<FieldModel>? goodAtfieldListBasedOnCategory = <FieldModel>[].obs;
+  RxList<FieldModel> internshipTypeSelectedList = <FieldModel>[].obs;
+  RxList<FieldModel> internshipPeriodSelectedList = <FieldModel>[].obs;
+  RxList<FieldModel> internshipInterestedInSelectedList = <FieldModel>[].obs;
+  RxList<FieldModel> internshipLanguageSelectedList = <FieldModel>[].obs;
+  Rx<PlaceDetailModel>? internshipPlaceDetail = PlaceDetailModel().obs;
+  RxInt internshipRadiusRxInt = 100.obs;
+  TextEditingController internshipAddressCtrl = TextEditingController();
+
+  RxList<FieldModel> studentJobInterestedInSelectedList = <FieldModel>[].obs;
+  RxList<FieldModel> studentJobLanguageSelectedList = <FieldModel>[].obs;
+  Rx<PlaceDetailModel>? studentJobPlaceDetail = PlaceDetailModel().obs;
+  RxInt studentJobRadiusRxInt = 100.obs;
+  TextEditingController studentJobAddressCtrl = TextEditingController();
+
+  RxList<FieldModel>? goodAtfieldSelectedList = <FieldModel>[].obs;
+  RxList<FieldModel>? knowFromSourceSelectedList = <FieldModel>[].obs;
 
   RxBool isUpdate = false.obs;
-  RxBool isInternshipSelect = false.obs;
-
-  RxList<CityModel> belgiumCitiesList = <CityModel>[].obs;
-  RxList<FieldModel> belgiumCitiesToField = <FieldModel>[].obs;
-  RxList<FieldModel> belgiumCitiesToFieldSelected = <FieldModel>[].obs;
-  RxList<FieldModel> knowFromFieldSelected = <FieldModel>[].obs;
+  RxInt numPage = 0.obs;
 
   String? sessionToken = '';
-  Rx<PlaceDetailModel>? placeDetail = PlaceDetailModel().obs;
   GooglePlaceSearchModel? results;
-
-  TextEditingController addressCtrl = TextEditingController();
-  RxInt radiusRxInt = 100.obs;
-
-  // Rx<FieldModel> belgiumCitySelected = FieldModel(label: '').obs;
 
   @override
   Future<void> onInit() async {
@@ -66,7 +54,6 @@ class OnboardingController extends GetxController
     //   OnboardingPageModel(pageIndex: 3, selectionItems: []),
     // ]);
     await getOffersDataState();
-    getBelgiumCities();
   }
 
   void uuidTokenGenerator() => sessionToken = UuidGenerator().uuidV4();
@@ -74,12 +61,13 @@ class OnboardingController extends GetxController
   Future<Rx<PlaceDetailModel>> getPlaceDetail({
     String? placeId,
     String? sessionToken,
+    Rx<PlaceDetailModel>? placeDetail,
   }) async {
     placeDetail!.value = await placeApiProvider.getGooglePlaceFilterDetail(
       placeId: placeId,
       sessionToken: sessionToken,
     );
-    return placeDetail!;
+    return placeDetail;
   }
 
   Future<void> getOffersDataState({bool? refresh}) async {
@@ -105,61 +93,146 @@ class OnboardingController extends GetxController
     // debugPrint(
     //   'onboardingPagesAPIData: $onboardingPagesAPIData',
     // );
-    for (final item in onboardingPagesAPIData.value.pages!) {
-      /// need some modifies to start the pageIndex from 0 instead of 1
-      final OnboardingPageModel temp = OnboardingPageModel(
-        pageIndex: item.pageIndex! - 1,
-        title: item.title,
-        isSkippable: item.isSkippable,
-        selectionItems: item.selectionItems,
-        allSkills: item.allSkills,
-        internshipTypeItems: item.internshipTypeItems,
-        internshipPeriodItems: item.internshipPeriodItems,
-      );
+    for (var page = 0; page < 11; page++) {
+      final List<OnboardingPageModel> onboardingData =
+          onboardingPagesAPIData.value.pages!;
 
-      onboardingPages.add(temp);
-      if (item.pageIndex == 3) {
-        final tempGoodAtfieldList = <FieldModel>{};
-        for (final subField in item.selectionItems!) {
-          tempGoodAtfieldList.addAll(subField.subFieldList!);
-        }
+      /// page 0 = looking for
+      /// page 1 = specific internship
+      if (page == 0 || page == 1) {
+        final OnboardingPageModel temp = OnboardingPageModel(
+          pageIndex: page == 0 ? 0 : 1,
+          title: page == 0
+              ? onboardingData[0].title
+              : 'Any specifics for your internship?',
+          isSkippable: onboardingData[0].isSkippable,
+          selectionItems: onboardingData[0].selectionItems,
+          allSkills: onboardingData[0].allSkills,
+          internshipTypeItems: onboardingData[0].internshipTypeItems,
+          internshipPeriodItems: onboardingData[0].internshipPeriodItems,
+        );
+        onboardingPages.add(temp);
+      }
 
-        /// remove duplicate fieldItem based on ID
-        for (final item in tempGoodAtfieldList) {
-          final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
-          if (i <= -1) {
-            goodAtfieldList!.add(item);
-          }
-        }
+      /// page 2 & 5 = interested in ? Event, Horeca, ...
+      if (page == 2 || page == 5) {
+        final OnboardingPageModel temp = OnboardingPageModel(
+          pageIndex: page == 2 ? 2 : 5,
+          title: onboardingData[1].title,
+          subtitle: page == 2 ? 'stage' : 'student job',
+          isSkippable: onboardingData[1].isSkippable,
+          selectionItems: onboardingData[1].selectionItems,
+          allSkills: onboardingData[1].allSkills,
+          // internshipTypeItems: onboardingData[1].internshipTypeItems,
+          // internshipPeriodItems: onboardingData[1].internshipPeriodItems,
+        );
+        onboardingPages.add(temp);
+      }
+
+      /// page 3 & 6 want to work => city & radius
+      if (page == 3 || page == 6) {
+        final OnboardingPageModel temp = OnboardingPageModel(
+          pageIndex: page == 3 ? 3 : 6,
+          title: onboardingData[4].title,
+          subtitle: page == 3 ? 'stage' : 'student job',
+          // isSkippable: onboardingData[1].isSkippable,
+          // selectionItems: onboardingData[1].selectionItems,
+          // allSkills: onboardingData[1].allSkills,
+          // internshipTypeItems: onboardingData[1].internshipTypeItems,
+          // internshipPeriodItems: onboardingData[1].internshipPeriodItems,
+        );
+        onboardingPages.add(temp);
+      }
+
+      /// page 4 & 7 which language => english, french
+      if (page == 4 || page == 7) {
+        final OnboardingPageModel temp = OnboardingPageModel(
+          pageIndex: page == 4 ? 4 : 7,
+          title: onboardingData[3].title,
+          subtitle: page == 4 ? 'stage' : 'student job',
+          isSkippable: onboardingData[3].isSkippable,
+          selectionItems: onboardingData[3].selectionItems,
+          allSkills: onboardingData[3].allSkills,
+          // internshipTypeItems: onboardingData[1].internshipTypeItems,
+          // internshipPeriodItems: onboardingData[1].internshipPeriodItems,
+        );
+        onboardingPages.add(temp);
+      }
+
+      /// page 8 = good at list: data analysis
+      /// page 9 = hear about Pooulp list
+      if (page == 8 || page == 9) {
+        final OnboardingPageModel temp = OnboardingPageModel(
+          pageIndex: page == 8 ? 8 : 9,
+          title: onboardingData[page == 8 ? 2 : 5].title,
+          // subtitle: page == 4 ? 'stage' : 'student job',
+          isSkippable: onboardingData[page == 8 ? 2 : 5].isSkippable,
+          selectionItems: onboardingData[page == 8 ? 2 : 5].selectionItems,
+          allSkills: onboardingData[page == 8 ? 2 : 5].allSkills,
+          // internshipTypeItems: onboardingData[1].internshipTypeItems,
+          // internshipPeriodItems: onboardingData[1].internshipPeriodItems,
+        );
+        onboardingPages.add(temp);
+      }
+
+      /// page 10 = Thank you page
+      if (page == 10) {
+        final OnboardingPageModel temp = OnboardingPageModel(
+          pageIndex: 10,
+          title: 'Be the one!',
+          subtitle:
+              'Did you know that you have 80% chance to have a match if you complete most of your profile information? Try to detail as much as possible so that recruiter can have a better opinion on your profile!',
+        );
+        onboardingPages.add(temp);
       }
     }
-    // onboardingPages.add(
-    //   OnboardingPageModel(
-    //     pageIndex: 4,
-    //     title: 'Where do you want to work?',
-    //     isSkippable: false,
-    //     selectionItems: [],
-    //   ),
-    // );
-
+    updateNumberPage(newValue: onboardingPages.length - 1);
     return onboardingPagesAPIData;
   }
 
-  void getBelgiumCities() {
-    belgiumCitiesList.value = belgiumCities;
-    for (final item in belgiumCitiesList) {
-      final temp = FieldModel(
-        label: item.city, //convert city name to label in FieldModel
-        type: item.lat, //convert lat of the city to type in FieldModel
-        category: item.lng, //convert lng of the city  to category in FieldModel
-      );
-      belgiumCitiesToField.add(temp);
+  bool haveitemInList(
+    List<FieldModel>? list,
+    FieldModel? item,
+  ) {
+    for (final element in list!) {
+      if (item!.id == element.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void updateNumberPage({int? newValue}) {
+    if (haveitemInList(
+          lookingForSelectedList,
+          FieldModel(id: 1),
+        ) &&
+        haveitemInList(
+              lookingForSelectedList,
+              FieldModel(id: 3),
+            ) ==
+            true) {
+      numPage.value = 11;
+    } else if (haveitemInList(
+          lookingForSelectedList,
+          FieldModel(id: 1),
+        ) ==
+        true) {
+      numPage.value = 8;
+    } else if (haveitemInList(
+          lookingForSelectedList,
+          FieldModel(id: 3),
+        ) ==
+        true) {
+      numPage.value = 7;
+    } else {
+      numPage.value = 11;
     }
   }
 
   bool get isFirstPage => selectedPageIndex.value == 0;
 
-  bool get isLastPage => selectedPageIndex.value == onboardingPages.length - 1;
+  bool get isLastPage => selectedPageIndex.value == numPage.value - 1;
 
   void movingAction({bool? forward = true}) {
     forward == false
@@ -177,195 +250,76 @@ class OnboardingController extends GetxController
 
   void addOrRemoveDataInList({
     required int? pageIndex,
+    required RxList<FieldModel>? addToList,
     required FieldModel? itemToBeAdd,
-    int? listTypeId = 1,
+    bool? isList = true,
     // 1 = selectionItems, 2 = iternshipType, 3 = internshipPeriod
   }) {
-    if (pageIndex == 0) {
-      if (listTypeId == 2) {
-        if (!internshipTypeSelectionListPage0.value.internshipTypeItems!
-            .contains(itemToBeAdd)) {
-          internshipTypeSelectionListPage0.value.internshipTypeItems!
-              .add(itemToBeAdd!);
-        } else if (internshipTypeSelectionListPage0.value.internshipTypeItems!
-            .contains(itemToBeAdd)) {
-          internshipTypeSelectionListPage0.value.internshipTypeItems!
-              .removeWhere((element) => element.id == itemToBeAdd!.id);
-        }
-      } else if (listTypeId == 3) {
-        if (!internshipPeriodSelectionListPage0.value.internshipPeriodItems!
-            .contains(itemToBeAdd)) {
-          internshipPeriodSelectionListPage0.value.internshipPeriodItems!
-              .add(itemToBeAdd!);
-        } else if (internshipPeriodSelectionListPage0
-            .value.internshipPeriodItems!
-            .contains(itemToBeAdd)) {
-          internshipPeriodSelectionListPage0.value.internshipPeriodItems!
-              .removeWhere((element) => element.id == itemToBeAdd!.id);
-        }
-      }
-      // listTypeId = 1 == selectionItems
-      else {
-        //* for one select only
-        internshipPeriodSelectionListPage0.value.internshipPeriodItems!.clear();
-        internshipTypeSelectionListPage0.value.internshipTypeItems!.clear();
-        lookingForSelectionListPage0.value.selectionItems!.clear();
-
-        lookingForSelectionListPage0.value.selectionItems!.add(itemToBeAdd!);
-        // select internship will show internship Period and Type
-        if (itemToBeAdd.id == 1) {
-          isInternshipSelect.value = true;
-        } else {
-          isInternshipSelect.value = false;
-        }
-        //* for multiple selected
-        // if (!lookingForSelectionListPage0.value.selectionItems!
-        //     .contains(itemToBeAdd)) {
-        //   lookingForSelectionListPage0.value.selectionItems!.add(itemToBeAdd!);
-        //   // print('add:');
-        //   // print('lookingForSelectionListPage0:::: $lookingForSelectionListPage0');
-        // } else if (lookingForSelectionListPage0.value.selectionItems!
-        //     .contains(itemToBeAdd)) {
-        //   lookingForSelectionListPage0.value.selectionItems!
-        //       .removeWhere((element) => element.id == itemToBeAdd!.id);
-        //   // print('remove:');
-        //   // print('lookingForSelectionListPage0:::: $lookingForSelectionListPage0');
-        // }
+    /// select/add multiple items to the list
+    if (isList == true) {
+      if (addToList!.contains(itemToBeAdd)) {
+        addToList.removeWhere((element) => element.id == itemToBeAdd!.id);
+      } else {
+        addToList.add(itemToBeAdd!);
       }
     }
-    if (pageIndex == 1) {
-      if (!interestedInSelectionListPage1.value.selectionItems!
-          .contains(itemToBeAdd)) {
-        interestedInSelectionListPage1.value.selectionItems!.add(itemToBeAdd!);
-        // for (final fieldItem in onboardingPages) {
-        // if (fieldItem.pageIndex == pageIndex! + 1) {
-        //   goodAtListSelectionPage2BasedonPage1.value.selectionItems!.add(
-        //     fieldItem.selectionItems!
-        //         .firstWhere((element) => element.id == itemToBeAdd.id),
-        //   );
-        //   final tempGoodAtfieldList = <FieldModel>{};
-        //   for (final subField
-        //       in goodAtListSelectionPage2BasedonPage1.value.selectionItems!) {
-        //     tempGoodAtfieldList.addAll(subField.subFieldList!);
-        //   }
-        //   goodAtfieldList!.clear();
-
-        //   /// remove duplicate fieldItem based on ID
-        //   for (final item in tempGoodAtfieldList) {
-        //     final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
-        //     if (i <= -1) {
-        //       goodAtfieldList!.add(item);
-        //     }
-        //   }
-        //   // debugPrint(
-        //   //   'goodAtListSelectionPage2BasedonPage1:: $goodAtListSelectionPage2BasedonPage1',
-        //   // );
-        //   // print(
-        //   //   'add:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.length}',
-        //   // );
-        //   // print(
-        //   //   'add:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.map(
-        //   //     (e) => e.subFieldList!.length,
-        //   //   )}',
-        //   // );
-        // }
-        // }
-
-        // print('add:');
-      } else if (interestedInSelectionListPage1.value.selectionItems!
-          .contains(itemToBeAdd)) {
-        interestedInSelectionListPage1.value.selectionItems!
-            .removeWhere((element) => element.id == itemToBeAdd!.id);
-        // print('remove:');
-
-        //   for (final fieldItem in onboardingPages) {
-        //     if (fieldItem.pageIndex == pageIndex! + 1) {
-        //       goodAtListSelectionPage2BasedonPage1.value.selectionItems!
-        //           .removeWhere(
-        //         (element) => element.id == itemToBeAdd!.id,
-        //       );
-        //       final tempGoodAtfieldList = <FieldModel>{};
-        //       for (final subField
-        //           in goodAtListSelectionPage2BasedonPage1.value.selectionItems!) {
-        //         tempGoodAtfieldList.addAll(subField.subFieldList!);
-        //       }
-        //       goodAtListSelectionPage2.value.selectionItems!.clear();
-        //       goodAtfieldList!.clear();
-
-        //       /// remove duplicate fieldItem based on ID
-        //       for (final item in tempGoodAtfieldList) {
-        //         final i = goodAtfieldList!.indexWhere((x) => x.id == item.id);
-        //         if (i <= -1) {
-        //           goodAtfieldList!.add(item);
-        //         }
-        //       }
-        //       // debugPrint(
-        //       //   'goodAtListSelectionPage2BasedonPage1:: $goodAtListSelectionPage2BasedonPage1',
-        //       // );
-        //       // print(
-        //       //   'remove:: ${goodAtListSelectionPage2BasedonPage1.value.selectionItems!.length}',
-        //       // );
-        //     }
-        //   }
-      }
+    // else select only one item to the list
+    else {
+      addToList!.clear();
+      addToList.add(itemToBeAdd!);
     }
-    if (pageIndex == 2) {
-      if (!goodAtListSelectionPage2.value.selectionItems!
-          .contains(itemToBeAdd)) {
-        goodAtListSelectionPage2.value.selectionItems!.add(itemToBeAdd!);
-        // print('add:');
-      } else if (goodAtListSelectionPage2.value.selectionItems!
-          .contains(itemToBeAdd)) {
-        goodAtListSelectionPage2.value.selectionItems!
-            .removeWhere((element) => element.id == itemToBeAdd!.id);
-        // print('remove:');
-      }
-    }
-    if (pageIndex == 3) {
-      if (!languageSelectionListPage3.value.selectionItems!
-          .contains(itemToBeAdd)) {
-        languageSelectionListPage3.value.selectionItems!.add(itemToBeAdd!);
-        // print('add:');
-      } else if (languageSelectionListPage3.value.selectionItems!
-          .contains(itemToBeAdd)) {
-        languageSelectionListPage3.value.selectionItems!
-            .removeWhere((element) => element.id == itemToBeAdd!.id);
-        // print('remove:');
-      }
-    }
-
-    if (pageIndex == 4) {
-      belgiumCitiesToFieldSelected.clear();
-      if (!belgiumCitiesToFieldSelected.contains(itemToBeAdd)) {
-        belgiumCitiesToFieldSelected.add(itemToBeAdd!);
-      } else if (belgiumCitiesToFieldSelected.contains(itemToBeAdd)) {
-        belgiumCitiesToFieldSelected
-            .removeWhere((element) => element.id == itemToBeAdd!.id);
-      }
-    }
-
-    if (pageIndex == 5) {
-      knowFromFieldSelected.clear();
-      if (!knowFromFieldSelected.contains(itemToBeAdd)) {
-        knowFromFieldSelected.add(itemToBeAdd!);
-      } else if (knowFromFieldSelected.contains(itemToBeAdd)) {
-        knowFromFieldSelected
-            .removeWhere((element) => element.id == itemToBeAdd!.id);
-      }
-    }
-
-    /// isUpdate is used for trigger the update into the UI
-    isUpdate.value = switchingBooleanValue(boolValue: isUpdate.value);
+    isUpdate.value = !isUpdate.value;
   }
 
   void validateData() {
-    // debugPrint('lookingForSelectionListPage0: $lookingForSelectionListPage0');
-    // debugPrint(
-    //   'interestedInSelectionListPage1: $interestedInSelectionListPage1',
-    // );
-    // debugPrint('goodAtListSelectionPage2: $goodAtListSelectionPage2');
-    // debugPrint('languageSelectionListPage3: $languageSelectionListPage3');
-    // debugPrint('belgiumCitiesToFieldSelected: $belgiumCitiesToFieldSelected');
+    final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
+      source: knowFromSourceSelectedList![0],
+      skills: goodAtfieldSelectedList,
+      searches: [
+        if (haveitemInList(
+              lookingForSelectedList,
+              FieldModel(id: 1),
+            ) ==
+            true)
+          SearchPreferencesModel(
+            types: [FieldModel(id: 1)],
+            internshipTypes: internshipTypeSelectedList,
+            internshipPeriods: internshipPeriodSelectedList,
+            fields: internshipInterestedInSelectedList,
+            languages: internshipLanguageSelectedList,
+            location: internshipPlaceDetail!.value.fullAddress,
+            street: internshipPlaceDetail!.value.streetNumber,
+            city: internshipPlaceDetail!.value.areaLevel1,
+            zipcode: internshipPlaceDetail!.value.postalCode,
+            country: internshipPlaceDetail!.value.country,
+            latitude: internshipPlaceDetail!.value.lat.toString(),
+            longitude: internshipPlaceDetail!.value.lng.toString(),
+            range: internshipRadiusRxInt.value,
+            telecommuting: 2,
+          ),
+        if (haveitemInList(
+              lookingForSelectedList,
+              FieldModel(id: 3),
+            ) ==
+            true)
+          SearchPreferencesModel(
+            types: [FieldModel(id: 3)],
+            internshipTypes: [],
+            internshipPeriods: [],
+            fields: studentJobInterestedInSelectedList,
+            languages: studentJobLanguageSelectedList,
+            location: studentJobPlaceDetail!.value.fullAddress,
+            street: studentJobPlaceDetail!.value.streetNumber,
+            city: studentJobPlaceDetail!.value.areaLevel1,
+            zipcode: studentJobPlaceDetail!.value.postalCode,
+            country: studentJobPlaceDetail!.value.country,
+            latitude: studentJobPlaceDetail!.value.lat.toString(),
+            longitude: studentJobPlaceDetail!.value.lng.toString(),
+            range: studentJobRadiusRxInt.value,
+            telecommuting: 2,
+          ),
+      ],
+    );
     // if (belgiumCitiesToFieldSelected == [] ||
     //     belgiumCitiesToFieldSelected.isEmpty) {
     //   customSnackbar(
@@ -375,29 +329,29 @@ class OnboardingController extends GetxController
     //     duration: DurationConstant.d1500,
     //   );
     // } else {
-    final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
-      offerTypePreferences: lookingForSelectionListPage0.value.selectionItems,
-      internshipTypePreferences:
-          internshipTypeSelectionListPage0.value.internshipTypeItems,
-      internshipPeriodPreferences:
-          internshipPeriodSelectionListPage0.value.internshipPeriodItems,
-      fieldPreferences: interestedInSelectionListPage1.value.selectionItems,
-      skills: goodAtListSelectionPage2.value.selectionItems,
-      languages: languageSelectionListPage3.value.selectionItems,
-      location: placeDetail!
-          .value.fullAddress, //belgiumCitiesToFieldSelected.first.label,
-      locationStreet:
-          placeDetail!.value.streetNumber ?? placeDetail!.value.route,
-      locationZipCode: placeDetail!.value.postalCode,
-      locationCity: placeDetail!.value.areaLevel1,
-      locationCountry: placeDetail!.value.country,
-      locationLat: placeDetail!.value.lat
-          .toString(), // belgiumCitiesToFieldSelected.first.type,
-      locationLng: placeDetail!.value.lng
-          .toString(), //  belgiumCitiesToFieldSelected.first.category,
-      locationRadius: radiusRxInt.value,
-      source: FieldModel(id: knowFromFieldSelected.first.id),
-    );
+    // final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
+    //   offerTypePreferences: lookingForSelectedList,
+    //   internshipTypePreferences:
+    //       internshipTypeSelectedList,
+    //   internshipPeriodPreferences:
+    //       internshipPeriodSelectedList,
+    //   fieldPreferences: interestedInSelectionListPage1.value.selectionItems,
+    //   skills: goodAtListSelectionPage2.value.selectionItems,
+    //   languages: languageSelectionListPage3.value.selectionItems,
+    //   location: placeDetail!
+    //       .value.fullAddress, //belgiumCitiesToFieldSelected.first.label,
+    //   locationStreet:
+    //       placeDetail!.value.streetNumber ?? placeDetail!.value.route,
+    //   locationZipCode: placeDetail!.value.postalCode,
+    //   locationCity: placeDetail!.value.areaLevel1,
+    //   locationCountry: placeDetail!.value.country,
+    //   locationLat: placeDetail!.value.lat
+    //       .toString(), // belgiumCitiesToFieldSelected.first.type,
+    //   locationLng: placeDetail!.value.lng
+    //       .toString(), //  belgiumCitiesToFieldSelected.first.category,
+    //   locationRadius: radiusRxInt.value,
+    //   source: FieldModel(id: knowFromFieldSelected.first.id),
+    // );
 
     // debugPrint('placeDetail: $placeDetail');
 

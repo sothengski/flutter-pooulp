@@ -93,18 +93,32 @@ class OnboardingController extends GetxController
     // debugPrint(
     //   'onboardingPagesAPIData: $onboardingPagesAPIData',
     // );
-    for (var page = 0; page < 11; page++) {
+    for (var page = 0; page < 10; page++) {
       final List<OnboardingPageModel> onboardingData =
           onboardingPagesAPIData.value.pages!;
 
-      /// page 0 = looking for
-      /// page 1 = specific internship
-      if (page == 0 || page == 1) {
+      /// page 0 = Introduction Page
+      /// page 9 = Thank you page
+      if (page == 0 || page == 9) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 0 ? 0 : 1,
+          pageIndex: page == 0 ? 0 : 9,
           title: page == 0
+              ? 'onboardingIntroTitle'.tr
+              : 'onboarding_advice_text_title'.tr,
+          subtitle: page == 0 ? '' : 'onboarding_advice_text_body'.tr,
+        );
+        onboardingPages.add(temp);
+      }
+
+      /// page 1 = looking for
+      /// page 2 = specific internship
+      if (page == 1 || page == 2) {
+        final OnboardingPageModel temp = OnboardingPageModel(
+          pageIndex: page == 1 ? 1 : 2,
+          title: page == 1
               ? onboardingData[0].title
-              : 'Any specifics for your internship?',
+              : 'onboardingInternshipTitle'.tr,
+          subtitle: page == 2 ? 'Internship'.tr : '',
           isSkippable: onboardingData[0].isSkippable,
           selectionItems: onboardingData[0].selectionItems,
           allSkills: onboardingData[0].allSkills,
@@ -114,12 +128,12 @@ class OnboardingController extends GetxController
         onboardingPages.add(temp);
       }
 
-      /// page 2 & 5 = interested in ? Event, Horeca, ...
-      if (page == 2 || page == 5) {
+      /// page 3 & 5 = interested in ? Event, Horeca, ...
+      if (page == 3 || page == 5) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 2 ? 2 : 5,
+          pageIndex: page == 3 ? 3 : 5,
           title: onboardingData[1].title,
-          subtitle: page == 2 ? 'stage' : 'student job',
+          subtitle: page == 3 ? 'Internship'.tr : 'Student job'.tr,
           isSkippable: onboardingData[1].isSkippable,
           selectionItems: onboardingData[1].selectionItems,
           allSkills: onboardingData[1].allSkills,
@@ -130,11 +144,11 @@ class OnboardingController extends GetxController
       }
 
       /// page 3 & 6 want to work => city & radius
-      if (page == 3 || page == 6) {
+      if (page == 4 || page == 6) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 3 ? 3 : 6,
+          pageIndex: page == 4 ? 4 : 6,
           title: onboardingData[4].title,
-          subtitle: page == 3 ? 'stage' : 'student job',
+          subtitle: page == 4 ? 'Internship'.tr : 'Student job'.tr,
           // isSkippable: onboardingData[1].isSkippable,
           // selectionItems: onboardingData[1].selectionItems,
           // allSkills: onboardingData[1].allSkills,
@@ -145,30 +159,30 @@ class OnboardingController extends GetxController
       }
 
       /// page 4 & 7 which language => english, french
-      if (page == 4 || page == 7) {
-        final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 4 ? 4 : 7,
-          title: onboardingData[3].title,
-          subtitle: page == 4 ? 'stage' : 'student job',
-          isSkippable: onboardingData[3].isSkippable,
-          selectionItems: onboardingData[3].selectionItems,
-          allSkills: onboardingData[3].allSkills,
-          // internshipTypeItems: onboardingData[1].internshipTypeItems,
-          // internshipPeriodItems: onboardingData[1].internshipPeriodItems,
-        );
-        onboardingPages.add(temp);
-      }
+      // if (page == 4 || page == 7) {
+      //   final OnboardingPageModel temp = OnboardingPageModel(
+      //     pageIndex: page == 4 ? 4 : 7,
+      //     title: onboardingData[3].title,
+      //     subtitle: page == 4 ? 'stage' : 'student job',
+      //     isSkippable: onboardingData[3].isSkippable,
+      //     selectionItems: onboardingData[3].selectionItems,
+      //     allSkills: onboardingData[3].allSkills,
+      //     // internshipTypeItems: onboardingData[1].internshipTypeItems,
+      //     // internshipPeriodItems: onboardingData[1].internshipPeriodItems,
+      //   );
+      //   onboardingPages.add(temp);
+      // }
 
-      /// page 8 = good at list: data analysis
-      /// page 9 = hear about Pooulp list
-      if (page == 8 || page == 9) {
+      /// page 7 = good at list: data analysis
+      /// page 8 = hear about Pooulp list
+      if (page == 7 || page == 8) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 8 ? 8 : 9,
-          title: onboardingData[page == 8 ? 2 : 5].title,
+          pageIndex: page == 7 ? 7 : 9,
+          title: onboardingData[page == 7 ? 2 : 5].title,
           // subtitle: page == 4 ? 'stage' : 'student job',
-          isSkippable: onboardingData[page == 8 ? 2 : 5].isSkippable,
-          selectionItems: onboardingData[page == 8 ? 2 : 5].selectionItems,
-          allSkills: onboardingData[page == 8 ? 2 : 5].allSkills,
+          isSkippable: onboardingData[page == 7 ? 2 : 5].isSkippable,
+          selectionItems: onboardingData[page == 7 ? 2 : 5].selectionItems,
+          allSkills: onboardingData[page == 7 ? 2 : 5].allSkills,
           // internshipTypeItems: onboardingData[1].internshipTypeItems,
           // internshipPeriodItems: onboardingData[1].internshipPeriodItems,
         );
@@ -176,15 +190,15 @@ class OnboardingController extends GetxController
       }
 
       /// page 10 = Thank you page
-      if (page == 10) {
-        final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: 10,
-          title: 'Be the one!',
-          subtitle:
-              'Did you know that you have 80% chance to have a match if you complete most of your profile information? Try to detail as much as possible so that recruiter can have a better opinion on your profile!',
-        );
-        onboardingPages.add(temp);
-      }
+      // if (page == 10) {
+      //   final OnboardingPageModel temp = OnboardingPageModel(
+      //     pageIndex: 10,
+      //     title: 'Be the one!',
+      //     subtitle:
+      //         'Did you know that you have 80% chance to have a match if you complete most of your profile information? Try to detail as much as possible so that recruiter can have a better opinion on your profile!',
+      //   );
+      //   onboardingPages.add(temp);
+      // }
     }
     updateNumberPage(newValue: onboardingPages.length - 1);
     return onboardingPagesAPIData;
@@ -212,7 +226,7 @@ class OnboardingController extends GetxController
               FieldModel(id: 3),
             ) ==
             true) {
-      numPage.value = 11;
+      numPage.value = 10;
     } else if (haveitemInList(
           lookingForSelectedList,
           FieldModel(id: 1),
@@ -226,7 +240,7 @@ class OnboardingController extends GetxController
         true) {
       numPage.value = 7;
     } else {
-      numPage.value = 11;
+      numPage.value = 10;
     }
   }
 

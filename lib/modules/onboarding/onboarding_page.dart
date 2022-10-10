@@ -30,17 +30,35 @@ class OnboardingPage extends GetView<OnboardingController> {
                       onPageChanged: controller.selectedPageIndex,
                       children: [
                         PageTemplateWidget(
-                          title: pageData[0].title,
-                          subTitle: pageData[0].subtitle,
+                          bodyPageWidget: Column(
+                            children: [
+                              Center(
+                                child: CustomTextWidget(
+                                  text: pageData[0].title,
+                                  color: ColorsManager.white,
+                                  fontSize: AppSize.s28,
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.75,
+                                  marginTop: AppSize.s48,
+                                  textAlign: TextAlign.center,
+                                  maxLine: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        PageTemplateWidget(
+                          title: pageData[1].title,
+                          subTitle: pageData[1].subtitle,
                           bodyPageWidget: ListView.builder(
                             shrinkWrap: true,
                             // physics:
                             //     const NeverScrollableScrollPhysics(),
                             itemCount: controller
-                                .onboardingPages[0].selectionItems!.length,
+                                .onboardingPages[1].selectionItems!.length,
                             itemBuilder: (_, itemIndex) {
-                              final item = controller.onboardingPages[0]
-                                  .selectionItems![itemIndex];
+                              final item =
+                                  pageData[1].selectionItems![itemIndex];
                               return Obx(
                                 () => TextCardClickableWidget(
                                   size: 50.0,
@@ -63,10 +81,6 @@ class OnboardingPage extends GetView<OnboardingController> {
                                       itemToBeAdd: item,
                                     );
                                     controller.updateNumberPage();
-                                    // print('on Click:: ${item.label}');
-                                    // print(
-                                    //   'on Click addToList:: ${controller.lookingForSelectedList}',
-                                    // );
                                   },
                                 ),
                               );
@@ -80,8 +94,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                             ) ==
                             true)
                           PageTemplateWidget(
-                            title: pageData[1].title,
-                            subTitle: pageData[1].subtitle,
+                            title: pageData[2].title,
+                            subTitle: pageData[2].subtitle,
                             bodyPageWidget: Obx(
                               () => Column(
                                 children: [
@@ -108,8 +122,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           children: [
                                             for (var i = 0;
                                                 i <
-                                                    controller
-                                                        .onboardingPages[1]
+                                                    pageData[2]
                                                         .internshipTypeItems!
                                                         .length;
                                                 i++)
@@ -123,8 +136,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                   child:
                                                       TextCardClickableWidget(
                                                     isCenterText: false,
-                                                    text: controller
-                                                        .onboardingPages[1]
+                                                    text: pageData[2]
                                                         .internshipTypeItems![i]
                                                         .label,
                                                     maxLine: controller.isUpdate
@@ -135,8 +147,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                     fontSize: AppSize.s24,
                                                     itemList: controller
                                                         .internshipTypeSelectedList,
-                                                    item: controller
-                                                        .onboardingPages[1]
+                                                    item: pageData[2]
                                                         .internshipTypeItems![i],
                                                     onClick: () {
                                                       controller
@@ -144,8 +155,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                         pageIndex: 1,
                                                         addToList: controller
                                                             .internshipTypeSelectedList,
-                                                        itemToBeAdd: controller
-                                                            .onboardingPages[1]
+                                                        itemToBeAdd: pageData[2]
                                                             .internshipTypeItems![i],
                                                       );
                                                     },
@@ -180,8 +190,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           children: [
                                             for (var i = 0;
                                                 i <
-                                                    controller
-                                                        .onboardingPages[1]
+                                                    pageData[2]
                                                         .internshipPeriodItems!
                                                         .length;
                                                 i++)
@@ -195,8 +204,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                   child:
                                                       TextCardClickableWidget(
                                                     isCenterText: false,
-                                                    text: controller
-                                                        .onboardingPages[1]
+                                                    text: pageData[2]
                                                         .internshipPeriodItems![
                                                             i]
                                                         .label,
@@ -208,8 +216,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                     fontSize: AppSize.s24,
                                                     itemList: controller
                                                         .internshipPeriodSelectedList,
-                                                    item: controller
-                                                        .onboardingPages[1]
+                                                    item: pageData[2]
                                                         .internshipPeriodItems![i],
                                                     onClick: () {
                                                       controller
@@ -217,8 +224,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                         pageIndex: 1,
                                                         addToList: controller
                                                             .internshipPeriodSelectedList,
-                                                        itemToBeAdd: controller
-                                                            .onboardingPages[1]
+                                                        itemToBeAdd: pageData[2]
                                                             .internshipPeriodItems![i],
                                                       );
                                                     },
@@ -241,12 +247,10 @@ class OnboardingPage extends GetView<OnboardingController> {
                             ) ==
                             true)
                           PageTemplateWidget(
-                            title: pageData[2].title,
-                            subTitle: pageData[2].subtitle,
+                            title: pageData[3].title,
+                            subTitle: pageData[3].subtitle,
                             bodyPageWidget: GridView.builder(
                               shrinkWrap: true,
-                              // physics:
-                              //     const NeverScrollableScrollPhysics(),
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -258,11 +262,10 @@ class OnboardingPage extends GetView<OnboardingController> {
                               //   top: AppSize.s16,
                               //   bottom: AppSize.s16,
                               // ),
-                              itemCount: controller
-                                  .onboardingPages[2].selectionItems!.length,
+                              itemCount: pageData[3].selectionItems!.length,
                               itemBuilder: (_, itemIndex) {
-                                final item = controller.onboardingPages[2]
-                                    .selectionItems![itemIndex];
+                                final item =
+                                    pageData[3].selectionItems![itemIndex];
                                 return Obx(
                                   () => TextCardClickableWidget(
                                     text: item.label,
@@ -292,8 +295,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                             ) ==
                             true)
                           PageTemplateWidget(
-                            title: pageData[3].title,
-                            subTitle: pageData[3].subtitle,
+                            title: pageData[4].title,
+                            subTitle: pageData[4].subtitle,
                             bodyPageWidget: SingleChildScrollView(
                               child: Obx(
                                 () => Column(
@@ -377,56 +380,56 @@ class OnboardingPage extends GetView<OnboardingController> {
                             ),
                           ),
                         // id:1 == internship selected in looking for list
-                        if (controller.haveitemInList(
-                              controller.lookingForSelectedList,
-                              FieldModel(id: 1),
-                            ) ==
-                            true)
-                          PageTemplateWidget(
-                            title: pageData[4].title,
-                            subTitle: pageData[4].subtitle,
-                            bodyPageWidget: Wrap(
-                              children: [
-                                for (var i = 0;
-                                    i <
-                                        controller.onboardingPages[4]
-                                            .selectionItems!.length;
-                                    i++)
-                                  Obx(
-                                    () => Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: AppSize.s8,
-                                        bottom: AppSize.s12,
-                                      ),
-                                      child: TextCardClickableWidget(
-                                        isCenterText: false,
-                                        text: controller.onboardingPages[4]
-                                            .selectionItems![i].label,
-                                        maxLine:
-                                            controller.isUpdate.value == true
-                                                ? 3
-                                                : 3,
-                                        fontSize: AppSize.s24,
-                                        itemList: controller
-                                            .internshipLanguageSelectedList,
-                                        item: controller.onboardingPages[4]
-                                            .selectionItems![i],
-                                        onClick: () {
-                                          controller.addOrRemoveDataInList(
-                                            pageIndex: 4,
-                                            addToList: controller
-                                                .internshipLanguageSelectedList,
-                                            itemToBeAdd: controller
-                                                .onboardingPages[4]
-                                                .selectionItems![i],
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
+                        // if (controller.haveitemInList(
+                        //       controller.lookingForSelectedList,
+                        //       FieldModel(id: 1),
+                        //     ) ==
+                        //     true)
+                        //   PageTemplateWidget(
+                        //     title: pageData[4].title,
+                        //     subTitle: pageData[4].subtitle,
+                        //     bodyPageWidget: Wrap(
+                        //       children: [
+                        //         for (var i = 0;
+                        //             i <
+                        //                 controller.onboardingPages[4]
+                        //                     .selectionItems!.length;
+                        //             i++)
+                        //           Obx(
+                        //             () => Padding(
+                        //               padding: const EdgeInsets.only(
+                        //                 right: AppSize.s8,
+                        //                 bottom: AppSize.s12,
+                        //               ),
+                        //               child: TextCardClickableWidget(
+                        //                 isCenterText: false,
+                        //                 text: controller.onboardingPages[4]
+                        //                     .selectionItems![i].label,
+                        //                 maxLine:
+                        //                     controller.isUpdate.value == true
+                        //                         ? 3
+                        //                         : 3,
+                        //                 fontSize: AppSize.s24,
+                        //                 itemList: controller
+                        //                     .internshipLanguageSelectedList,
+                        //                 item: controller.onboardingPages[4]
+                        //                     .selectionItems![i],
+                        //                 onClick: () {
+                        //                   controller.addOrRemoveDataInList(
+                        //                     pageIndex: 4,
+                        //                     addToList: controller
+                        //                         .internshipLanguageSelectedList,
+                        //                     itemToBeAdd: controller
+                        //                         .onboardingPages[4]
+                        //                         .selectionItems![i],
+                        //                   );
+                        //                 },
+                        //               ),
+                        //             ),
+                        //           ),
+                        //       ],
+                        //     ),
+                        //   ),
                         // id:3 == student job selected in looking for list
                         if (controller.haveitemInList(
                               controller.lookingForSelectedList,
@@ -438,8 +441,6 @@ class OnboardingPage extends GetView<OnboardingController> {
                             subTitle: pageData[5].subtitle,
                             bodyPageWidget: GridView.builder(
                               shrinkWrap: true,
-                              // physics:
-                              //     const NeverScrollableScrollPhysics(),
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -447,15 +448,10 @@ class OnboardingPage extends GetView<OnboardingController> {
                                 mainAxisSpacing: AppSize.s16,
                                 childAspectRatio: 3,
                               ),
-                              // padding: const EdgeInsets.only(
-                              //   top: AppSize.s16,
-                              //   bottom: AppSize.s16,
-                              // ),
-                              itemCount: controller
-                                  .onboardingPages[2].selectionItems!.length,
+                              itemCount: pageData[3].selectionItems!.length,
                               itemBuilder: (_, itemIndex) {
-                                final item = controller.onboardingPages[5]
-                                    .selectionItems![itemIndex];
+                                final item =
+                                    pageData[5].selectionItems![itemIndex];
                                 return Obx(
                                   () => TextCardClickableWidget(
                                     text: item.label,
@@ -569,63 +565,64 @@ class OnboardingPage extends GetView<OnboardingController> {
                               ),
                             ),
                           ),
-                        // id:3 == student job selected in looking for list
-                        if (controller.haveitemInList(
-                              controller.lookingForSelectedList,
-                              FieldModel(id: 3),
-                            ) ==
-                            true)
-                          PageTemplateWidget(
-                            title: pageData[7].title,
-                            subTitle: pageData[7].subtitle,
-                            bodyPageWidget: Wrap(
-                              children: [
-                                for (var i = 0;
-                                    i <
-                                        controller.onboardingPages[4]
-                                            .selectionItems!.length;
-                                    i++)
-                                  Obx(
-                                    () => Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: AppSize.s8,
-                                        bottom: AppSize.s12,
-                                      ),
-                                      child: TextCardClickableWidget(
-                                        isCenterText: false,
-                                        text: controller.onboardingPages[4]
-                                            .selectionItems![i].label,
-                                        maxLine:
-                                            controller.isUpdate.value == true
-                                                ? 3
-                                                : 3,
-                                        fontSize: AppSize.s24,
-                                        itemList: controller
-                                            .studentJobLanguageSelectedList,
-                                        item: controller.onboardingPages[4]
-                                            .selectionItems![i],
-                                        onClick: () {
-                                          controller.addOrRemoveDataInList(
-                                            pageIndex: 7,
-                                            addToList: controller
-                                                .studentJobLanguageSelectedList,
-                                            itemToBeAdd: controller
-                                                .onboardingPages[4]
-                                                .selectionItems![i],
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
+                        // // id:3 == student job selected in looking for list
+                        // if (controller.haveitemInList(
+                        //       controller.lookingForSelectedList,
+                        //       FieldModel(id: 3),
+                        //     ) ==
+                        //     true)
+                        //   PageTemplateWidget(
+                        //     title: pageData[7].title,
+                        //     subTitle: pageData[7].subtitle,
+                        //     bodyPageWidget: Wrap(
+                        //       children: [
+                        //         for (var i = 0;
+                        //             i <
+                        //                 controller.onboardingPages[4]
+                        //                     .selectionItems!.length;
+                        //             i++)
+                        //           Obx(
+                        //             () => Padding(
+                        //               padding: const EdgeInsets.only(
+                        //                 right: AppSize.s8,
+                        //                 bottom: AppSize.s12,
+                        //               ),
+                        //               child: TextCardClickableWidget(
+                        //                 isCenterText: false,
+                        //                 text: controller.onboardingPages[4]
+                        //                     .selectionItems![i].label,
+                        //                 maxLine:
+                        //                     controller.isUpdate.value == true
+                        //                         ? 3
+                        //                         : 3,
+                        //                 fontSize: AppSize.s24,
+                        //                 itemList: controller
+                        //                     .studentJobLanguageSelectedList,
+                        //                 item: controller.onboardingPages[4]
+                        //                     .selectionItems![i],
+                        //                 onClick: () {
+                        //                   controller.addOrRemoveDataInList(
+                        //                     pageIndex: 7,
+                        //                     addToList: controller
+                        //                         .studentJobLanguageSelectedList,
+                        //                     itemToBeAdd: controller
+                        //                         .onboardingPages[4]
+                        //                         .selectionItems![i],
+                        //                   );
+                        //                 },
+                        //               ),
+                        //             ),
+                        //           ),
+                        //       ],
+                        //     ),
+                        //   ),
                         PageTemplateWidget(
-                          title: pageData[8].title,
-                          subTitle: pageData[8].subtitle,
+                          title: pageData[7].title,
+                          subTitle: pageData[7].subtitle,
                           bodyPageWidget: SingleChildScrollView(
                             child: Wrap(
-                              children: controller.onboardingPages[8].allSkills!
+                              children: pageData[7]
+                                  .allSkills!
                                   .map(
                                     (element) => Obx(
                                       () => Padding(
@@ -647,7 +644,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           item: element,
                                           onClick: () {
                                             controller.addOrRemoveDataInList(
-                                              pageIndex: 8,
+                                              pageIndex: 7,
                                               addToList: controller
                                                   .goodAtfieldSelectedList,
                                               itemToBeAdd: element,
@@ -663,12 +660,12 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          title: pageData[9].title,
-                          subTitle: pageData[9].subtitle,
+                          title: pageData[8].title,
+                          subTitle: pageData[8].subtitle,
                           bodyPageWidget: SingleChildScrollView(
                             child: Wrap(
-                              children: controller
-                                  .onboardingPages[9].selectionItems!
+                              children: pageData[8]
+                                  .selectionItems!
                                   .map(
                                     (element) => Obx(
                                       () => Padding(
@@ -689,7 +686,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           item: element,
                                           onClick: () {
                                             controller.addOrRemoveDataInList(
-                                              pageIndex: 9,
+                                              pageIndex: 8,
                                               addToList: controller
                                                   .knowFromSourceSelectedList,
                                               itemToBeAdd: element,
@@ -706,7 +703,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          title: pageData[10].title,
+                          title: pageData[9].title,
                           // subTitle: pageData[10].subtitle,
                           bodyPageWidget: Column(
                             children: [
@@ -715,6 +712,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   text: 'onboarding_advice_text_body'.tr,
                                   color: ColorsManager.white,
                                   marginTop: AppSize.s32,
+                                  fontSize: AppSize.s18,
+                                  height: 1.75,
                                   textAlign: TextAlign.center,
                                   maxLine: 10,
                                 ),
@@ -802,17 +801,40 @@ class OnboardingPage extends GetView<OnboardingController> {
                         ),
                         Expanded(
                           flex: 25,
-                          child: (controller.haveitemInList(
-                                        controller.lookingForSelectedList,
-                                        FieldModel(id: 1),
-                                      ) ==
-                                      true) ||
-                                  (controller.haveitemInList(
-                                        controller.lookingForSelectedList,
-                                        FieldModel(id: 3),
-                                      ) ==
-                                      true)
+                          // condition on matching selection in page 1
+                          // and condition on selection in page 8
+                          child: ((controller.haveitemInList(
+                                            controller.lookingForSelectedList,
+                                            FieldModel(id: 1),
+                                          ) ==
+                                          false) &&
+                                      (controller.haveitemInList(
+                                            controller.lookingForSelectedList,
+                                            FieldModel(id: 3),
+                                          ) ==
+                                          false) &&
+                                      controller.selectedPageIndex.value ==
+                                          1) ||
+                                  ((controller.knowFromSourceSelectedList!
+                                          .isEmpty) &&
+                                      controller.selectedPageIndex.value == 8)
                               ? TextButton(
+                                  onPressed: null,
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      const Color(0x00ffffff),
+                                    ),
+                                  ),
+                                  child: CustomTextWidget(
+                                    text: ''.tr, //'core.next'.tr,
+                                    color: ColorsManager.white,
+                                    fontSize: AppSize.s16,
+                                    fontWeight: FontWeight.bold,
+                                    // textAlign: TextAlign.right,
+                                  ),
+                                )
+                              : TextButton(
                                   onPressed: controller.movingAction,
                                   style: ButtonStyle(
                                     backgroundColor:
@@ -828,26 +850,6 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     text: controller.isLastPage
                                         ? 'finish'.tr //'core.finish'.tr
                                         : 'next'.tr, //'core.next'.tr,
-                                    color: ColorsManager.white,
-                                    fontSize: AppSize.s16,
-                                    fontWeight: FontWeight.bold,
-                                    // textAlign: TextAlign.right,
-                                  ),
-                                )
-                              : TextButton(
-                                  onPressed: null,
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                      const Color(0x00ffffff),
-                                    ),
-                                    // alignment: Alignment.centerRight,
-                                    // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                    //   const EdgeInsets.only(left: AppSize.s24),
-                                    // ),
-                                  ),
-                                  child: CustomTextWidget(
-                                    text: ''.tr, //'core.next'.tr,
                                     color: ColorsManager.white,
                                     fontSize: AppSize.s16,
                                     fontWeight: FontWeight.bold,

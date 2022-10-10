@@ -25,10 +25,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                       left: AppSize.s16,
                       right: AppSize.s16,
                     ),
-                    child:
-                        // controller.isInternshipSelect.value != true
-                        //     ?
-                        PageView(
+                    child: PageView(
                       controller: controller.pageController,
                       onPageChanged: controller.selectedPageIndex,
                       children: [

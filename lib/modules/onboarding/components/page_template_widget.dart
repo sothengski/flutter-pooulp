@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/core.dart';
 
 class PageTemplateWidget extends StatelessWidget {
@@ -54,7 +55,7 @@ class PageTemplateWidget extends StatelessWidget {
           flex: 90,
           child: Container(
             padding: const EdgeInsets.only(
-              top: AppSize.s12,
+              top: AppSize.s16,
             ),
             child: bodyPageWidget,
           ),

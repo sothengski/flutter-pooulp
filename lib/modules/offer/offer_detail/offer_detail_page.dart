@@ -812,6 +812,21 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           // ),
                           //===== Contact Email Component =====//
 
+                          ///===== established In Component =====//
+                          if (jobOfferDetail.enterprise!.establishedIn != null)
+                            OutlineContainerWidget(
+                              title: 'establishedIn'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    '${jobOfferDetail.enterprise!.establishedIn}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== established In Component =====//
+
                           ///===== Enterprise HQ Office Address Component =====//
                           OutlineContainerWidget(
                             title: 'officeAddress'.tr,
@@ -863,6 +878,21 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           else
                             Container(),
                           //===== Fields Component =====//
+
+                          ///===== Instagram Link Component =====//
+                          if (jobOfferDetail.enterprise!.instagramLink! != '')
+                            OutlineContainerWidget(
+                              title: 'instagramLink'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    '${jobOfferDetail.enterprise!.instagramLink}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== Instagram Link Component =====//
 
                           ///===== Description Component =====//
                           OutlineContainerWidget(

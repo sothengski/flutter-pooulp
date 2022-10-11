@@ -37,7 +37,9 @@ class ProfileModel {
   final String? logoUrn; //enterprise
   final DateTime? createdAt; //enterprise
   final DateTime? updatedAt; //enterprise
+  final DateTime? establishedIn; //enterprise
   final String? facebookLink; //enterprise
+  final String? instagramLink; //enterprise
   final String? linkedinLink; //enterprise
   final String? whatsAppLink; //enterprise
   final String? youtubeLink; //enterprise
@@ -91,7 +93,9 @@ class ProfileModel {
     this.logoUrn,
     this.createdAt,
     this.updatedAt,
+    this.establishedIn,
     this.facebookLink,
+    this.instagramLink,
     this.linkedinLink,
     this.whatsAppLink,
     this.youtubeLink,
@@ -165,7 +169,11 @@ class ProfileModel {
         updatedAt: json['updated_at'] != null
             ? DateTime.parse(json['updated_at'].toString())
             : null,
+        establishedIn: json['established_in'] != null
+            ? DateTime.parse(json['established_in'].toString())
+            : null,
         facebookLink: json['facebook_link'] as String?,
+        instagramLink: json['instagram_link'] as String? ?? '',
         linkedinLink: json['linkedin_link'] as String?,
         whatsAppLink: json['whatsapp_link'] as String?,
         youtubeLink: json['youtube_link'] as String?,
@@ -238,7 +246,9 @@ class ProfileModel {
         'logo_urn': logoUrn,
         'created_at': createdAt?.toString(),
         'updated_at': updatedAt?.toString(),
+        'established_in': establishedIn?.toString(),
         'facebook_link': facebookLink,
+        'instagram_link': instagramLink,
         'linkedin_link': linkedinLink,
         'whatsapp_link': whatsAppLink,
         'youtube_link': youtubeLink,
@@ -293,7 +303,9 @@ class ProfileModel {
       logoUrn: $logoUrn, 
       createdAt: $createdAt, 
       updatedAt: $updatedAt, 
-      facebookLink: $facebookLink, 
+      establishedIn: $establishedIn, 
+      facebookLink: $facebookLink,       
+      instagramLink: $instagramLink, 
       linkedinLink: $linkedinLink, 
       whatsAppLink: $whatsAppLink,
       youtubeLink: $youtubeLink,

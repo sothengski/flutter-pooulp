@@ -13,5 +13,8 @@ class OnboardingBinding implements Bindings {
     Get.lazyPut<OnboardingProvider>(
       () => OnboardingProvider(),
     );
+    Get.lazyPut<TagProvider>(
+      () => TagProvider(),
+    );
   }
 }

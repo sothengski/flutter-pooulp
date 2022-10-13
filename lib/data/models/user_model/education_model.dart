@@ -12,9 +12,9 @@ class EducationModel {
   final int? studyingYear;
   final DateTime? dateStart;
   final DateTime? dateEnd;
-  final bool? completed;
-  final SchoolModel? school;
-  final List<FieldModel>? fields;
+  bool? completed;
+  SchoolModel? school;
+  List<FieldModel>? fields;
 
   EducationModel({
     this.id,
@@ -92,6 +92,28 @@ class EducationModel {
         'fields': fields == null //|| fields == []
             ? null
             : List<dynamic>.from(fields!.map((x) => x.toJson())),
+      }..removeWhere((_, v) => v == null);
+
+  Map<String, dynamic> toJsonForOnboarding() => {
+        // 'id': id,
+        'school_id': schoolId,
+        'name': name ?? '',
+        'description': description ?? '',
+        'degree': degree ?? '',
+        'studying_year': studyingYear,
+        'date_start': '',
+        // 'date_start': dateStart == null
+        //     ? null
+        //     : "${dateStart!.year.toString().padLeft(4, '0')}-${dateStart!.month.toString().padLeft(2, '0')}-${dateStart!.day.toString().padLeft(2, '0')}",
+        'date_end': '',
+        // 'date_end': dateEnd == null
+        //     ? null
+        //     : "${dateEnd!.year.toString().padLeft(4, '0')}-${dateEnd!.month.toString().padLeft(2, '0')}-${dateEnd!.day.toString().padLeft(2, '0')}",
+        'completed': completed,
+        // 'school': school?.toJson(),
+        'fields': fields == null //|| fields == []
+            ? null
+            : List<dynamic>.from(fields!.map((x) => x.id)),
       }..removeWhere((_, v) => v == null);
 
   @override

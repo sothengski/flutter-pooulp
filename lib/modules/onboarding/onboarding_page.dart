@@ -661,10 +661,66 @@ class OnboardingPage extends GetView<OnboardingController> {
                         ),
                         PageTemplateWidget(
                           title: pageData[8].title,
-                          subTitle: pageData[8].subtitle,
+                          // subTitle: pageData[10].subtitle,
+                          bodyPageWidget: Padding(
+                            padding: const EdgeInsets.all(AppSize.s8),
+                            child: SingleChildScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              child: Column(
+                                children: [
+                                  ...controller.educationList
+                                      .asMap()
+                                      .map(
+                                        (i, element) => MapEntry(
+                                          i,
+                                          EducationForm(
+                                            eduIndex: i,
+                                            isCurrentStudy: element.completed,
+                                            school: element.school,
+                                            fieldList: element.fields,
+                                            degreeTextCtrl: controller
+                                                .degreeListTextCtrl[i],
+                                            currentStudyYearTextCtrl: controller
+                                                .currentStudyYearTextCtrl[i],
+                                            isUpdateTrigger:
+                                                controller.isUpdate.value,
+                                          ),
+                                        ),
+                                      )
+                                      .values
+                                      .toList(),
+                                  CustomMaterialButton(
+                                    topPadding: AppSize.s12,
+                                    leftPadding: AppSize.s12,
+                                    rightPadding: AppSize.s12,
+                                    bottomPadding: AppSize.s20,
+                                    text: 'addMore'.tr,
+                                    fontSize: AppSize.s20,
+                                    // buttonHeight: 45,
+                                    buttonWidth: getWidth,
+                                    onPressed: () {
+                                      unFocusKeyBoard(context);
+                                      controller.addOrRemoveEduSlot(
+                                          // isRemove: slotList!.indexOf(e) != 0,
+                                          // eduIndex: controller,
+                                          // removeIndex: slotList!.indexOf(e) != 0
+                                          //     ? slotList!.indexOf(e)
+                                          //     : -1,
+                                          // eduSlotToBeAdd: EducationModel(),
+                                          );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        PageTemplateWidget(
+                          title: pageData[9].title,
+                          subTitle: pageData[9].subtitle,
                           bodyPageWidget: SingleChildScrollView(
                             child: Wrap(
-                              children: pageData[8]
+                              children: pageData[9]
                                   .selectionItems!
                                   .map(
                                     (element) => Obx(
@@ -686,7 +742,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           item: element,
                                           onClick: () {
                                             controller.addOrRemoveDataInList(
-                                              pageIndex: 8,
+                                              pageIndex: 9,
                                               addToList: controller
                                                   .knowFromSourceSelectedList,
                                               itemToBeAdd: element,
@@ -703,7 +759,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          title: pageData[9].title,
+                          title: pageData[10].title,
                           // subTitle: pageData[10].subtitle,
                           bodyPageWidget: Column(
                             children: [
@@ -817,7 +873,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           1) ||
                                   ((controller.knowFromSourceSelectedList!
                                           .isEmpty) &&
-                                      controller.selectedPageIndex.value == 8)
+                                      controller.selectedPageIndex.value == 9)
                               ? TextButton(
                                   onPressed: null,
                                   style: ButtonStyle(

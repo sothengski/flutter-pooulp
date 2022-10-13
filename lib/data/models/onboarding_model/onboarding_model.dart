@@ -19,6 +19,7 @@ class OnboardingModel {
   final List<FieldModel>? fieldPreferences;
   final List<FieldModel>? skills;
   final List<FieldModel>? languages;
+  final List<EducationModel>? educations;
   final FieldModel? source;
   final String? location;
   final String? locationStreet;
@@ -39,6 +40,7 @@ class OnboardingModel {
     this.fieldPreferences,
     this.skills,
     this.languages,
+    this.educations,
     this.source,
     this.location,
     this.locationStreet,
@@ -100,6 +102,11 @@ class OnboardingModel {
         'skills': skills != null && skills != []
             ? List<dynamic>.from(
                 skills!.map((x) => x.id),
+              )
+            : [],
+        'educations': educations != null && educations != []
+            ? List<dynamic>.from(
+                educations!.map((x) => x.toJsonForOnboarding()),
               )
             : [],
         'searches': searches != null && searches != []

@@ -9,11 +9,15 @@ class OnboardingController extends GetxController
     with StateMixin<Rx<OnboardingModel>> {
   final onboardingProvider = Get.find<OnboardingProvider>();
   final placeApiProvider = Get.put(PlaceApiProvider());
+  final tagProvider = Get.find<TagProvider>();
 
   PageController pageController = PageController();
   RxInt selectedPageIndex = 0.obs;
   // RxList<OnboardingPageModel> onboardingDataToBeAdded =
   //     <OnboardingPageModel>[].obs;
+
+  RxList<SchoolModel> schoolList = <SchoolModel>[].obs;
+  RxList<FieldModel> fieldListForSelect = <FieldModel>[].obs;
 
   RxList<OnboardingPageModel> onboardingPages = <OnboardingPageModel>[].obs;
   Rx<OnboardingModel> onboardingPagesAPIData =
@@ -38,6 +42,28 @@ class OnboardingController extends GetxController
   RxList<FieldModel>? goodAtfieldSelectedList = <FieldModel>[].obs;
   RxList<FieldModel>? knowFromSourceSelectedList = <FieldModel>[].obs;
 
+  RxBool isCheckGraduated = false.obs;
+  // Rx<SchoolModel> selectedSchool = SchoolModel().obs;
+  // RxList<RxList<FieldModel>> fieldListSelected = <RxList<FieldModel>>[].obs;
+  // TextEditingController degreeTextCtrl = TextEditingController();
+  // TextEditingController currentStudyYearTextCtrl = TextEditingController();
+
+  List<TextEditingController> degreeListTextCtrl = [
+    TextEditingController(),
+  ];
+  List<TextEditingController> currentStudyYearTextCtrl = [
+    TextEditingController(),
+  ];
+  RxList<EducationModel> educationList = <EducationModel>[
+    EducationModel(
+      id: 999,
+      school: SchoolModel(),
+      fields: [],
+      // // degree: '',
+      completed: false,
+    )
+  ].obs;
+
   RxBool isUpdate = false.obs;
   RxInt numPage = 0.obs;
 
@@ -54,6 +80,8 @@ class OnboardingController extends GetxController
     //   OnboardingPageModel(pageIndex: 3, selectionItems: []),
     // ]);
     await getOffersDataState();
+    await getSchoolListResponseProvider();
+    await getFieldsListResponseProvider();
   }
 
   void uuidTokenGenerator() => sessionToken = UuidGenerator().uuidV4();
@@ -93,15 +121,15 @@ class OnboardingController extends GetxController
     // debugPrint(
     //   'onboardingPagesAPIData: $onboardingPagesAPIData',
     // );
-    for (var page = 0; page < 10; page++) {
+    for (var page = 0; page < 11; page++) {
       final List<OnboardingPageModel> onboardingData =
           onboardingPagesAPIData.value.pages!;
 
       /// page 0 = Introduction Page
-      /// page 9 = Thank you page
-      if (page == 0 || page == 9) {
+      /// page 10 = Thank you page
+      if (page == 0 || page == 10) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 0 ? 0 : 9,
+          pageIndex: page == 0 ? 0 : 10,
           title: page == 0
               ? 'onboardingIntroTitle'.tr
               : 'onboarding_advice_text_title'.tr,
@@ -173,11 +201,21 @@ class OnboardingController extends GetxController
       //   onboardingPages.add(temp);
       // }
 
-      /// page 7 = good at list: data analysis
-      /// page 8 = hear about Pooulp list
-      if (page == 7 || page == 8) {
+      /// page 8 = Education Page
+      if (page == 8) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 7 ? 7 : 9,
+          pageIndex: 8,
+          title: 'onboardingEducationTitle'.tr,
+          subtitle: 'onboardingEducationTitle'.tr,
+        );
+        onboardingPages.add(temp);
+      }
+
+      /// page 7 = good at list: data analysis
+      /// page 9 = hear about Pooulp list
+      if (page == 7 || page == 9) {
+        final OnboardingPageModel temp = OnboardingPageModel(
+          pageIndex: page == 7 ? 7 : 10,
           title: onboardingData[page == 7 ? 2 : 5].title,
           // subtitle: page == 4 ? 'stage' : 'student job',
           isSkippable: onboardingData[page == 7 ? 2 : 5].isSkippable,
@@ -226,7 +264,7 @@ class OnboardingController extends GetxController
               FieldModel(id: 3),
             ) ==
             true) {
-      numPage.value = 10;
+      numPage.value = 11;
     } else if (haveitemInList(
           lookingForSelectedList,
           FieldModel(id: 1),
@@ -240,7 +278,7 @@ class OnboardingController extends GetxController
         true) {
       numPage.value = 7;
     } else {
-      numPage.value = 10;
+      numPage.value = 11;
     }
   }
 
@@ -285,10 +323,69 @@ class OnboardingController extends GetxController
     isUpdate.value = !isUpdate.value;
   }
 
+  /// Education Page
+
+  void getUpdate() => isUpdate.value = switchingBooleanValue(
+        boolValue: isUpdate.value,
+      );
+  // update();
+
+  SchoolModel selectedSchoolOnClick({SchoolModel? selectedItem}) {
+    getUpdate();
+    return selectedItem!;
+  }
+
+  void addOrRemoveEduSlot({
+    bool? isRemove = false, // False == Add // True == Remove
+    int? eduIndex,
+    // required EducationModel? eduSlotToBeAdd,
+  }) {
+    // [Remove]
+    if (isRemove!) {
+      // print('[Remove]');
+      degreeListTextCtrl.removeAt(eduIndex!);
+      currentStudyYearTextCtrl.removeAt(eduIndex);
+      educationList.removeAt(eduIndex);
+    }
+    // [Add]
+    else {
+      // print('[Add]');
+      degreeListTextCtrl.add(TextEditingController());
+      currentStudyYearTextCtrl.add(TextEditingController());
+      educationList.add(
+        EducationModel(
+          school: SchoolModel(),
+          fields: [],
+          // degree: '',
+          completed: false,
+        ),
+      );
+    }
+    getUpdate();
+  }
+  // Education Page
+
   void validateData() {
+    final List<EducationModel> eduToBeAdd = [];
+    for (var i = 0; i < educationList.length; i++) {
+      if (educationList[i].school!.id != null) {
+        eduToBeAdd.add(
+          EducationModel(
+            schoolId: educationList[i].school!.id,
+            name: '',
+            fields: educationList[i].fields,
+            description: '',
+            degree: degreeListTextCtrl[i].text,
+            studyingYear: int.tryParse(currentStudyYearTextCtrl[i].text),
+            completed: educationList[i].completed,
+          ),
+        );
+      }
+    }
     final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
       source: knowFromSourceSelectedList![0],
       skills: goodAtfieldSelectedList,
+      educations: eduToBeAdd,
       searches: [
         if (haveitemInList(
               lookingForSelectedList,
@@ -387,5 +484,22 @@ class OnboardingController extends GetxController
       );
       Get.offNamed(Routes.homeRoute);
     }
+  }
+
+  Future<List<SchoolModel>> getSchoolListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    schoolList.addAll(await tagProvider.getSchools());
+    return schoolList;
+  }
+
+  Future<List<FieldModel>> getFieldsListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    fieldListForSelect.addAll(await tagProvider.getAllFields());
+    // debugPrint(
+    //   'fieldListForSelect:: ${fieldListForSelect.map((element) => '${element.label}\n')}',
+    // );
+    return fieldListForSelect;
   }
 }

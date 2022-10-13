@@ -70,6 +70,7 @@ class RowDataSelectionWidget extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             if (isLeftSideText == false)
               Wrap(

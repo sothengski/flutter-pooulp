@@ -812,6 +812,37 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           // ),
                           //===== Contact Email Component =====//
 
+                          ///===== EnterpriseCategory Component =====//
+                          if (jobOfferDetail.enterprise!.legalStatusLabel !=
+                              null)
+                            OutlineContainerWidget(
+                              title: 'enterpriseType'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    jobOfferDetail.enterprise!.legalStatusLabel,
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== EnterpriseCategory Component =====//
+
+                          ///===== established In Component =====//
+                          if (jobOfferDetail.enterprise!.enterpriseType != null)
+                            OutlineContainerWidget(
+                              title: 'enterpriseCategory'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text: jobOfferDetail
+                                    .enterprise!.enterpriseType!.label,
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== established In Component =====//
+
                           ///===== established In Component =====//
                           if (jobOfferDetail.enterprise!.establishedIn != null)
                             OutlineContainerWidget(
@@ -819,8 +850,10 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                               titleColor: ColorsManager.primaryBlue,
                               // isDivider: false,
                               childWidget: CustomTextWidget(
-                                text:
-                                    '${jobOfferDetail.enterprise!.establishedIn}',
+                                text: dateFormatYYYY(
+                                  date:
+                                      jobOfferDetail.enterprise!.establishedIn,
+                                ),
                                 fontWeight: FontWeightManager.regular,
                                 maxLine: 200,
                               ),
@@ -879,10 +912,40 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             Container(),
                           //===== Fields Component =====//
 
+                          ///===== Facebook Link Component =====//
+                          if (jobOfferDetail.enterprise!.facebookLink! != '')
+                            OutlineContainerWidget(
+                              title: 'facebookPage'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    '${jobOfferDetail.enterprise!.facebookLink}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== Facebook Link Component =====//
+
+                          ///===== LinkedIn Link Component =====//
+                          if (jobOfferDetail.enterprise!.linkedinLink! != '')
+                            OutlineContainerWidget(
+                              title: 'linkedinPage'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    '${jobOfferDetail.enterprise!.linkedinLink}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== LinkedIn Link Component =====//
+
                           ///===== Instagram Link Component =====//
                           if (jobOfferDetail.enterprise!.instagramLink! != '')
                             OutlineContainerWidget(
-                              title: 'instagramLink'.tr,
+                              title: 'instagramPage'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               // isDivider: false,
                               childWidget: CustomTextWidget(

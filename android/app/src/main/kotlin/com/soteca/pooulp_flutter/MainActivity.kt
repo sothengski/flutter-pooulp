@@ -1,4 +1,4 @@
-package com.idcrmltd.pooulp
+package com.pooulp.prod
 
 import io.flutter.embedding.android.FlutterActivity
 

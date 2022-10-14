@@ -4,7 +4,7 @@
     ],
     "target": {
         "namespace": "android_app",
-        "package_name": "com.idcrmltd.pooulp",
+        "package_name": "com.pooulp.prod",
         "sha256_cert_fingerprints": [
             "bb:b3:10:41:0c:eb:20:bf:d4:23:52:02:56:0c:79:42:09:77:50:bc:48:a9:ed:7c:31:4e:9f:59:10:d3:b5:df"
         ]

@@ -57,6 +57,10 @@ String dateFormatSlashYYYYMMDD({DateTime? date}) {
   return date == null ? "" : DateFormat('yyyy/MM/dd').format(date);
 }
 
+String dateFormatYYYY({DateTime? date}) {
+  return date == null ? "" : DateFormat('yyyy').format(date);
+}
+
 String dateFormatSlashDDMMYYYY({DateTime? date}) {
   return date == null ? "" : DateFormat('dd/MM/yyyy').format(date);
 }

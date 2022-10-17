@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/data.dart';
+import '../home/home.dart';
 
 class MessagingController extends GetxController
     with StateMixin<RxList<MessagingModel>> {
   final messagingProvider = Get.find<MessagingProvider>();
+
+  final homeController = Get.put(HomeController());
 
   final ScrollController roomScrollController = ScrollController();
   Rx<MessagingPaginationModel> roomsAsPageRepsonse =
@@ -23,11 +26,14 @@ class MessagingController extends GetxController
   TextEditingController sendingTextCtrl = TextEditingController(text: '');
   RxBool isLoadingIndicator = false.obs;
 
+  Rx<ConversationModel> conversationStatusRepsonse = ConversationModel().obs;
+
   @override
   void onInit() {
     getRoomListDataState(refresh: true);
     addRoomToChatRooms();
     addMessagesToChat();
+    getConversationStatusResponseProvider();
     super.onInit();
   }
 
@@ -109,6 +115,25 @@ class MessagingController extends GetxController
     return roomMessagingDetailsRepsonse;
   }
 
+  Future<Rx<ConversationModel>> getConversationStatusResponseProvider({
+    bool? refresh = false,
+  }) async {
+    conversationStatusRepsonse.value =
+        await messagingProvider.getConversationStatus();
+
+    /// For Messaging Bags
+    if (conversationStatusRepsonse.value.nbrNewConversation! > 0 ||
+        conversationStatusRepsonse.value.nbrNewMsg! > 0) {
+      homeController.isMessagingBag.value = true;
+    } else {
+      homeController.isMessagingBag.value = false;
+    }
+    homeController.messagingBagLabel.value =
+        conversationStatusRepsonse.value.nbrNewMsg!.toString();
+    // For Messaging Bags
+    return conversationStatusRepsonse;
+  }
+
   Future<void> onRefreshForRoomChat() async {
     // monitor network fetch
     await getRoomListDataState(refresh: true);
@@ -155,6 +180,11 @@ class MessagingController extends GetxController
         roomId: roomValue.uuid,
       );
     }
+    if (roomValue.newConversation! > 0) {
+      makeRequestToPOSTSeenAllMessagesAPI(
+        roomId: roomValue.uuid,
+      );
+    }
   }
 
   void onChangedTextCtrl(String? q) {
@@ -182,6 +212,20 @@ class MessagingController extends GetxController
     );
     if (tempResp.success!) {
       await getRoomListResponseProvider(refresh: true);
+      await getConversationStatusResponseProvider(refresh: true);
+      update();
+    }
+  }
+
+  Future<void> makeRequestToPOSTSeenConversationAPI({
+    required String? roomId,
+  }) async {
+    final tempResp = await messagingProvider.postSeenConversationByRoomID(
+      roomId: roomId,
+    );
+    if (tempResp.success!) {
+      await getRoomListResponseProvider(refresh: true);
+      await getConversationStatusResponseProvider(refresh: true);
       update();
     }
   }

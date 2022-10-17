@@ -1,5 +1,13 @@
 import 'package:intl/intl.dart';
 
+String mmyyyyFormat = "MM/YYYY";
+String mmyyyyDashFormat = "MM-YYYY";
+
+String ddmmyyyyFormat = "DD/MM/YYYY";
+String ddmmyyyyDashFormat = "DD-MM-YYYY";
+
+DateTime now = DateTime.now();
+
 extension DateExtensions on DateTime {
   String formatToPattern(String pattern) {
     final DateFormat formatter = DateFormat(pattern);
@@ -47,6 +55,10 @@ String dateFormatDashYYYYMMDD({DateTime? date}) {
 
 String dateFormatSlashYYYYMMDD({DateTime? date}) {
   return date == null ? "" : DateFormat('yyyy/MM/dd').format(date);
+}
+
+String dateFormatYYYY({DateTime? date}) {
+  return date == null ? "" : DateFormat('yyyy').format(date);
 }
 
 String dateFormatSlashDDMMYYYY({DateTime? date}) {

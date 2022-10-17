@@ -26,7 +26,7 @@ class FeedPage extends GetView<FeedController> {
                 ),
               ),
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Container(
+              child: DecoratedBox(
                 decoration: const BoxDecoration(
                   // color: ColorsManager.primary,
                   color: ColorsManager.primary,

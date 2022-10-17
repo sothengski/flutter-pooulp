@@ -9,6 +9,7 @@ class OfferDetailController extends GetxController
     with GetTickerProviderStateMixin {
   late final TabController? tabController;
   final ScrollController scrollController = ScrollController();
+  final offerProvider = Get.find<OfferProvider>();
   RxInt currentIndexRx = 0.obs;
 
   late JobOfferModel? feedItemDetail;
@@ -16,6 +17,9 @@ class OfferDetailController extends GetxController
   String? youtubeVideoId = '';
 
   late YoutubePlayerController youtubeController;
+
+  // final FirebaseDynamicLinkService firebaseDynamicLinkService =
+  //     FirebaseDynamicLinkService();
 
   @override
   void onInit() {
@@ -81,6 +85,19 @@ class OfferDetailController extends GetxController
           privacyEnhanced: true,
         ),
       );
+    }
+  }
+
+  Future<void> makeRequestToPOSTJobOfferViewCountAPI({
+    required String? jobOfferUUID,
+  }) async {
+    final tempResp = await offerProvider.postJobOfferViewCount(
+      jobOfferUUID: jobOfferUUID,
+    );
+    if (tempResp.success!) {
+      // debugPrint(
+      //   "makeRequestToPOSTJobOfferViewCountAPI: ${tempResp.data}",
+      // );
     }
   }
 }

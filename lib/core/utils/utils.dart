@@ -3,6 +3,7 @@ export 'helper_functions.dart';
 export 'offer_helpers.dart';
 export 'pretty_print_json.dart';
 export 'read_json_file.dart';
+export 'share_utils.dart';
 export 'translate_word.dart';
 export 'unfocus_keyboard.dart';
 export 'url_laucher_utils.dart';

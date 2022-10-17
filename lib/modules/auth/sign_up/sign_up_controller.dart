@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +26,9 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
   TextEditingController enterpriseIDCtrl = TextEditingController();
 
   TextEditingController tokenCtrl = TextEditingController();
+
+  Rx<DateTime> selectedBirthday = DateTime.now().obs;
+  DateTime now = DateTime.now();
 
   late Rx<CountryModel> selectedCountry = const CountryModel().obs;
 
@@ -106,6 +111,10 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
   //   }
   // }
 
+  DateTime selectedBirthdayOnClick({DateTime? selectedItem}) {
+    return selectedBirthday.value = selectedItem!;
+  }
+
   bool swithcingBoolValueRegisterBtn({bool? boolValue}) {
     return isSubmitBtnProcessing.value = boolValue!;
   }
@@ -159,6 +168,9 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
       final ProfileModel registrationInputData = ProfileModel(
         firstName: firstNameCtrl.text.trim(),
         lastName: lastNameCtrl.text.trim(),
+        birthDate: selectedBirthday.value.year == now.year
+            ? null
+            : selectedBirthday.value,
         email: emailCtrl.text.trim(),
         phone1CountryCode: selectedCountry.value.phoneCode,
         phone1: phoneNumberCtrl.text.trim(),
@@ -169,6 +181,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
         invitationToken: tokenCtrl.text.trim(),
         enterpriseName: enterpriseNameCtrl.text.trim(),
         enterpriseID: enterpriseIDCtrl.text.trim(),
+        source: Platform.isAndroid ? 3 : 2,
       );
       authProvider
           .registerNewUserAPI(

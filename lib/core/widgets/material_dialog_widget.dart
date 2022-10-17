@@ -15,7 +15,7 @@ class MaterialDialogWidget extends StatelessWidget {
   const MaterialDialogWidget({
     Key? key,
     this.title = '',
-    this.titleFontSize = 20.0,
+    this.titleFontSize = 16.0,
     this.titleHorizontalMargin = 16.0,
     this.titleVerticalMargin = 16.0,
     this.rightWidget,

@@ -15,6 +15,9 @@ Future<void> main() async {
   // await getAllTranslationLangsProvider(lang: 'fr');
   await AppBasicServices().getLangsFromFile(lang: 'en');
   await AppBasicServices().getLangsFromFile(lang: 'fr');
+  await AppBasicServices().getLangsFromFile(lang: 'nl');
+  // await Firebase.initializeApp();
+  // await FirebaseDynamicLinkService().initLinks();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,
@@ -31,6 +34,23 @@ Future<void> main() async {
     //       Brightness.dark, // color of navigation controls
     // ),
   );
+  // await Firebase.initializeApp(options: DefaultFirebaseConfig.platformOptions);
+  // const String link = 'https://dynamic-link-domain/ke2Qa';
+
+  // final PendingDynamicLinkData? initialLink =
+  //     await FirebaseDynamicLinks.instance.getDynamicLink(Uri.parse(link));
+
+  // FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+  //   // Navigator.pushNamed(context, dynamicLinkData.link.path);
+  // }).onError((error) {
+  //   // Handle errors
+  // });
+  // final dynamicLinkService = FirebaseDynamicLinkService();
+  // await dynamicLinkService.initLinks();
+  // await FirebaseDynamicLinks.instance.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+
   await initialConfig();
   final storage = Get.find<StorageServices>();
 

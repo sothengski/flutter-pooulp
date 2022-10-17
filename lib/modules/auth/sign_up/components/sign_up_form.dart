@@ -91,7 +91,7 @@ class SignUpForm extends GetView<SignUpController> {
                                       .tr // 'auth.createStudentAccount'.tr
                                   : 'createEnterpriseAccount'
                                       .tr, //'auth.createEnterpriseAccount'.tr,
-                              fontSize: 24.0,
+                              fontSize: 20.0,
                               fontWeight: FontWeight.w700,
                               color: ColorsManager.primary,
                               marginBottom: AppSize.s24,
@@ -135,6 +135,57 @@ class SignUpForm extends GetView<SignUpController> {
                               validator: Validator().emailValidator,
                               keyboardType: TextInputType.emailAddress,
                             ),
+
+                            ///===== Top of Birthday Component =====//
+                            if (isStudent != true)
+                              Container()
+                            else
+                              Obx(
+                                () => ContainerDialogWidget(
+                                  inputTitle: 'birthdate'.tr,
+                                  dialogType: DialogType.dateTimePickerDialog,
+                                  // dateLocale: controller.profileController
+                                  //     .userProfileInfo.value.uiLanguage,
+                                  currentTime:
+                                      controller.selectedBirthday.value,
+                                  onConfirmDate: (date) {
+                                    controller.selectedBirthdayOnClick(
+                                      selectedItem: date,
+                                    );
+                                  },
+                                  containerWidget:
+                                      controller.selectedBirthday.value.year ==
+                                              controller.now.year
+                                          ? RowContentInputWidget(
+                                              centerWidget: CustomTextWidget(
+                                                text: ddmmyyyyFormat,
+                                                color: ColorsManager.grey400,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16.0,
+                                              ),
+                                              suffixWidget: const Icon(
+                                                Icons.date_range_outlined,
+                                                color: ColorsManager.grey600,
+                                              ),
+                                            )
+                                          : RowContentInputWidget(
+                                              centerWidget: CustomTextWidget(
+                                                //marginLeft: 4.0,
+                                                text: dateFormatSlashDDMMYYYY(
+                                                  date: controller
+                                                      .selectedBirthday.value,
+                                                ),
+                                                color: ColorsManager.black,
+                                                fontSize: 16.0,
+                                              ),
+                                              suffixWidget: const Icon(
+                                                Icons.date_range_outlined,
+                                                color: ColorsManager.grey600,
+                                              ),
+                                            ),
+                                ),
+                              ),
+                            //===== Bottom of Birthday Component =====//
                             Row(
                               children: [
                                 Expanded(
@@ -587,76 +638,79 @@ class SignUpForm extends GetView<SignUpController> {
                                       ),
                               ),
                             ),
-                            Row(
-                              children: [
-                                const Expanded(
-                                  child: Divider(
-                                    thickness: 1,
-                                    color: ColorsManager.grey600,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                CustomTextWidget(
-                                  text: 'or'.tr, //'auth.or'.tr,
-                                  fontSize: 20.0,
-                                  marginTop: AppSize.s16,
-                                  marginBottom: AppSize.s16,
-                                ),
-                                const SizedBox(width: 10),
-                                const Expanded(
-                                  child: Divider(
-                                    thickness: 1,
-                                    color: ColorsManager.grey600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: AppSize.s48,
-                                right: AppSize.s48,
-                              ),
-                              child: GestureDetector(
-                                onTap: () => customSnackbar(
-                                  msgTitle: 'This Page is under construction!',
-                                  msgContent:
-                                      'This Page is only view.\n Data will not save.',
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: const [
-                                    CircleAvatar(
-                                      radius: 20.0,
-                                      backgroundColor: ColorsManager.white,
-                                      child: Image(
-                                        image: AssetImage(
-                                          AssetsManager.googleLogo,
-                                        ),
-                                      ),
-                                    ),
-                                    CircleAvatar(
-                                      radius: 20.0,
-                                      backgroundColor: ColorsManager.white,
-                                      child: Image(
-                                        image: AssetImage(
-                                          AssetsManager.linkedInLogo,
-                                        ),
-                                      ),
-                                    ),
-                                    // CircleAvatar(
-                                    //   radius: 20.0,
-                                    //   backgroundColor: ColorsManager.white,
-                                    //   child: Image(
-                                    //     image: AssetImage(
-                                    //       AssetsManager.facebookLogo,
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // Row(
+                            //   children: [
+                            //     const Expanded(
+                            //       child: Divider(
+                            //         thickness: 1,
+                            //         color: ColorsManager.grey600,
+                            //       ),
+                            //     ),
+                            //     const SizedBox(width: 10),
+                            //     CustomTextWidget(
+                            //       text: 'or'.tr, //'auth.or'.tr,
+                            //       fontSize: 20.0,
+                            //       marginTop: AppSize.s16,
+                            //       marginBottom: AppSize.s16,
+                            //     ),
+                            //     const SizedBox(width: 10),
+                            //     const Expanded(
+                            //       child: Divider(
+                            //         thickness: 1,
+                            //         color: ColorsManager.grey600,
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(
+                            //     left: AppSize.s48,
+                            //     right: AppSize.s48,
+                            //   ),
+                            //   child: GestureDetector(
+                            //     onTap: () => customSnackbar(
+                            //       msgTitle: 'This Page is under construction!',
+                            //       msgContent:
+                            //           'This Page is only view.\n Data will not save.',
+                            //     ),
+                            //     child: Row(
+                            //       mainAxisAlignment:
+                            //           MainAxisAlignment.spaceBetween,
+                            //       children: const [
+                            //         CircleAvatar(
+                            //           radius: 20.0,
+                            //           backgroundColor: ColorsManager.white,
+                            //           child: Image(
+                            //             image: AssetImage(
+                            //               AssetsManager.googleLogo,
+                            //             ),
+                            //           ),
+                            //         ),
+                            //         CircleAvatar(
+                            //           radius: 20.0,
+                            //           backgroundColor: ColorsManager.white,
+                            //           child: Image(
+                            //             image: AssetImage(
+                            //               AssetsManager.linkedInLogo,
+                            //             ),
+                            //           ),
+                            //         ),
+                            //         // CircleAvatar(
+                            //         //   radius: 20.0,
+                            //         //   backgroundColor: ColorsManager.white,
+                            //         //   child: Image(
+                            //         //     image: AssetImage(
+                            //         //       AssetsManager.facebookLogo,
+                            //         //     ),
+                            //         //   ),
+                            //         // ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
+                            const SizedBox(
+                              height: 12.0,
+                            )
                           ],
                         ),
                       ),

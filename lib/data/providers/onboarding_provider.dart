@@ -44,8 +44,8 @@ class OnboardingProvider extends BaseProvider implements IOnboardingProvider {
       //   );
 
       final dataResponse = await post(
-        API.paths[Endpoint.postOrGetOnBoardingData].toString(),
-        onboardingData!.toRawJson(),
+        "${API.paths[Endpoint.postOrGetOnBoardingData]}/v3",
+        onboardingData!.toJson(),
       );
       // debugPrint('onboardingData: ${onboardingData.toRawJson()}');
       if (dataResponse.hasError) {
@@ -58,7 +58,7 @@ class OnboardingProvider extends BaseProvider implements IOnboardingProvider {
           data: dataResponse.body,
         );
         // debugPrint(
-        //   'API: ${API.paths[Endpoint.postOrGetOnBoardingData]}\nresponse::${response.data}',
+        //   'Response: ${API.paths[Endpoint.postOrGetOnBoardingData]}\nresponse::${response.data}',
         // );
         return response;
       }

@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/core.dart';
+import '../../../routes/routes.dart';
 import '../offer.dart';
 
 class OfferFeedPage extends GetView<OfferFeedController> {
@@ -102,6 +104,33 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                           ),
                           Expanded(
                             flex: 15,
+                            child: IconButton(
+                              alignment: Alignment.topCenter,
+                              icon: const Icon(Icons.add),
+                              color: ColorsManager.white,
+                              onPressed: () {
+                                // controller.updateKeyword();
+                                controller.selectType(
+                                  type: controller.searchedListAsFieldModel[0],
+                                );
+                                customGeneralDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  widget: OfferFeedFilterSearch(
+                                    title: 'filter'.tr,
+                                    searchOptType: 1,
+                                  ),
+                                  // Get.dialog(
+                                  //   OfferFeedFilterSearch(
+                                  //     title: 'offer.filterTitle'.tr,
+                                  //   ),
+                                  //   // barrierDismissible: false,
+                                );
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            flex: 15,
                             child: Stack(
                               children: [
                                 IconButton(
@@ -115,6 +144,11 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                       barrierDismissible: true,
                                       widget: OfferFeedFilterSearch(
                                         title: 'filter'.tr,
+                                        searchOptType:
+                                            controller.typeSelected.value.id ==
+                                                    0
+                                                ? 1
+                                                : 2,
                                       ),
                                       // Get.dialog(
                                       //   OfferFeedFilterSearch(
@@ -172,17 +206,84 @@ class OfferFeedPage extends GetView<OfferFeedController> {
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Expanded(
-                  //   flex: 9,
-                  //   child: Obx(
-                  //     () => controller.listJobOfferTypes.isNotEmpty
-                  //         ? OfferFeedTypesListComponent()
-                  //         : const ItemListShimmerLoadingWidget(
-                  //             isBodyList: false,
-                  //           ),
-                  //   ),
-                  // ),
+                  Expanded(
+                    flex: 9,
+                    child: Obx(
+                      () => controller.searchedListAsFieldModel.isNotEmpty
+                          // controller.listJobOfferTypes.isNotEmpty // V1
+                          ? OfferFeedTypesListComponent()
+                          : const ItemListShimmerLoadingWidget(
+                              isBodyList: false,
+                            ),
+                    ),
+                  ),
                   const SizedBox(height: AppSize.s4),
+                  Obx(
+                    () => controller.profileController.userProfileInfo.value
+                                    .pictureUrl !=
+                                null ||
+                            controller.profileController.userProfileInfo.value
+                                    .pictureUrl !=
+                                ''
+                        ? Container()
+                        : SizedBox(
+                            width: double.infinity,
+                            child: CustomBoxWidget(
+                              leftPadding: AppSize.s20,
+                              rightPadding: AppSize.s20,
+                              topPadding: AppSize.s12,
+                              bottomPadding: AppSize.s12,
+                              leftMargin: AppSize.s12,
+                              rightMargin: AppSize.s12,
+                              bottomMargin: AppSize.s12,
+                              backgroundColor: ColorsManager.amber[100],
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              "- ${'profilePictureCompletionNotice'.tr} ",
+                                          style: const TextStyle(
+                                            color: ColorsManager.primaryBlue75,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              "- ${'feedProfileCompletionNotice'.tr} ",
+                                          style: const TextStyle(
+                                            color: ColorsManager.primaryBlue75,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              "${'feedProfileCompletionNoticeAction'.tr} ",
+                                          style: const TextStyle(
+                                            color: ColorsManager.lightBlue,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () async {
+                                              Get.toNamed(
+                                                Routes.editUserInfoRoute,
+                                              );
+                                            },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                  ),
                   Expanded(
                     flex: 90,
                     child: controller.obx(

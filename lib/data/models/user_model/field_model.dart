@@ -93,7 +93,7 @@ class FieldModel {
       );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
+        'id': id, // == 0 ? null : id,
         'tag_id': tagId,
         'type': type,
         'label': label,

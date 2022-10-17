@@ -125,7 +125,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                     marginTop: AppSize.s10,
                     marginBottom: AppSize.s10,
                   ),
-                  Container(
+                  DecoratedBox(
                     decoration: BoxDecoration(
                       // color: ColorsManager.green,
                       borderRadius: BorderRadius.circular(10),
@@ -252,7 +252,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                   child: CustomTextWidget(
                                     textAlign: TextAlign.center,
                                     text:
-                                        '${widget.feedItemDetail!.numberOfWorkPerWeek}',
+                                        '${widget.feedItemDetail!.numberOfWorking}',
                                     fontWeight: FontWeightManager.regular,
                                     fontSize: AppSize.s12,
                                     // marginBottom: AppSize.s10,

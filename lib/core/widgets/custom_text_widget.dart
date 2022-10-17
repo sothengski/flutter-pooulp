@@ -13,6 +13,7 @@ class CustomTextWidget extends StatelessWidget {
   final double? marginLeft;
   final double? marginRight;
   final double? letterSpacing;
+  final double? height;
   final int? maxLine;
   final Widget? inputIcon;
   final TextAlign? textAlign;
@@ -31,6 +32,7 @@ class CustomTextWidget extends StatelessWidget {
     this.marginBottom = 0.0,
     this.marginRight = 0.0,
     this.letterSpacing = 0.0,
+    this.height = 0.0,
     this.maxLine,
     this.inputIcon,
     this.textAlign = TextAlign.start,
@@ -58,6 +60,7 @@ class CustomTextWidget extends StatelessWidget {
               fontSize: fontSize,
               fontFamily: fontFamily,
               letterSpacing: letterSpacing,
+              height: height,
               decoration: textDecoration,
               fontFamilyFallback: const [
                 // typoRoundFont,

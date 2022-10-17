@@ -29,8 +29,8 @@ class StateHandlerWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image(
-            height: getWidth * .65,
-            width: getWidth * .65,
+            height: getWidth * .55,
+            width: getWidth * .55,
             image: AssetImage(imgPath!),
             fit: BoxFit.fill,
           ),
@@ -41,13 +41,13 @@ class StateHandlerWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             maxLine: 3,
           ),
-          const SizedBox(height: 10),
+          // const SizedBox(height: 10),
           CustomTextWidget(
             text: bodyText,
             textAlign: TextAlign.center,
             maxLine: 5,
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
           if (buttonText != null)
             CustomMaterialButton(
               horizonalPadding: AppSize.s8,
@@ -55,10 +55,11 @@ class StateHandlerWidget extends StatelessWidget {
               fontSize: 20.0,
               // primaryColor: primaryColor,
               onPressed: onPressedFunctionCall,
+              bottomPadding: 30.0,
             )
           else
             Container(),
-          const SizedBox(height: 75),
+          // const SizedBox(height: 75),
         ],
       ),
     );

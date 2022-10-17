@@ -16,17 +16,20 @@ class ForgotPasswordInfoComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextWidget(
-          text: 'auth.emailSent'.tr,
-          fontSize: 24.0,
-          fontWeight: FontWeight.w700,
-          color: ColorsManager.primary,
-          marginBottom: AppSize.s24,
+        Center(
+          child: CustomTextWidget(
+            text: 'emailSent'.tr,
+            fontSize: 24.0,
+            fontWeight: FontWeight.w700,
+            color: ColorsManager.primary,
+            marginBottom: AppSize.s24,
+          ),
         ),
         CustomTextWidget(
-          text: 'auth.sentToEmail'.trParams({'email': '$email'}),
+          text: 'emailHasBeenSentToYourEmailAddress'
+              .tr, //'auth.sentToEmail'.trParams({'email': '$email'}),
           maxLine: 5,
           color: ColorsManager.black,
           fontWeight: FontWeight.w300,
@@ -35,7 +38,7 @@ class ForgotPasswordInfoComponent extends StatelessWidget {
           marginBottom: AppSize.s16,
         ),
         CustomTextWidget(
-          text: 'auth.resetPasswordGuide'.tr,
+          text: 'ClickOnTheLinkFromEmail'.tr,
           maxLine: 5,
           color: ColorsManager.black,
           fontWeight: FontWeight.w300,
@@ -44,7 +47,7 @@ class ForgotPasswordInfoComponent extends StatelessWidget {
           marginBottom: AppSize.s16,
         ),
         CustomTextWidget(
-          text: 'auth.ForgotPasswordTryAgain'.tr,
+          text: 'ifNoEmailReceivedGoBack'.tr,
           maxLine: 5,
           color: ColorsManager.black,
           fontWeight: FontWeight.w300,
@@ -53,7 +56,7 @@ class ForgotPasswordInfoComponent extends StatelessWidget {
           marginBottom: AppSize.s16,
         ),
         CustomMaterialButton(
-          text: 'auth.tryAgain'.tr,
+          text: 'tryAgain'.tr,
           fontSize: 20.0,
           buttonWidth: getWidth,
           onPressed: switchingForm,

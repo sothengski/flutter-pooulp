@@ -7,9 +7,11 @@ import '../../data.dart';
 
 class JobOfferModel {
   final int? id;
+  final String? uuid;
   final String? title;
   final String? studySubject;
   final String? description;
+  final String? additionalInfo;
   final bool? isDraft;
   final DateTime? dateOfferStart;
   final DateTime? dateOfferEnd;
@@ -17,7 +19,9 @@ class JobOfferModel {
   final DateTime? dateJobEnd;
   final int? telecommuting;
   final int? shifting;
-  final int? numberOfWorkingHourPerWeek;
+  final int? numberOfWorkingHour;
+  final int? workingHourType;
+  final int? drivingLicence;
   final String? remunerationMax;
   final String? remunerationMin;
   final String? currencySymbol;
@@ -32,6 +36,8 @@ class JobOfferModel {
   final List<FieldModel>? spokenLanguages;
   final List<SkillModel>? skills;
   final List<FieldModel>? availabilities;
+  final List<FieldModel>? internshipTypes;
+  final List<FieldModel>? internshipPeriods;
   final ProfileModel? enterprise;
   final JobOfferStateModel? jobOfferStateModel;
   bool? applyState;
@@ -42,12 +48,17 @@ class JobOfferModel {
   final String? location;
   final bool? isRangeSearch;
   final int? range;
+  final String? youtubeLink;
+  final int? searchId;
+  final String? searchName;
 
   JobOfferModel({
     this.id,
+    this.uuid,
     this.title,
     this.studySubject,
     this.description,
+    this.additionalInfo,
     this.isDraft,
     this.dateOfferStart,
     this.dateOfferEnd,
@@ -55,7 +66,9 @@ class JobOfferModel {
     this.dateJobEnd,
     this.telecommuting = 2,
     this.shifting,
-    this.numberOfWorkingHourPerWeek,
+    this.numberOfWorkingHour,
+    this.workingHourType,
+    this.drivingLicence,
     this.remunerationMax,
     this.remunerationMin,
     this.currencySymbol,
@@ -70,6 +83,8 @@ class JobOfferModel {
     this.spokenLanguages,
     this.skills,
     this.availabilities,
+    this.internshipTypes,
+    this.internshipPeriods,
     this.enterprise,
     this.jobOfferStateModel,
     this.applyState = false,
@@ -80,16 +95,33 @@ class JobOfferModel {
     this.location = "",
     this.isRangeSearch = false,
     this.range = -1,
+    this.youtubeLink,
+    this.searchId,
+    this.searchName,
   });
 
-  String? get numberOfWorkPerWeek => numberOfWorkingHourPerWeek == null
-      ? 'N/A'
-      : "$numberOfWorkingHourPerWeek ${'offer.hrsWeek'.tr}";
+  String? get numberOfWorking => numberOfWorkingHour == null
+      ? ''
+      : "$numberOfWorkingHour ${'hrs'.tr}$getWorkingHourType";
 
-  String? get remunerationMaxMin => remunerationMax == null &&
-          remunerationMin == null
-      ? 'N/A'
-      : "${remunerationMin == null ? '' : '$remunerationMin${currencySymbol ?? ''}'} - ${remunerationMax == null ? '' : '$remunerationMax${currencySymbol ?? ''}'}/${'offer.hour'.tr}";
+  String? get getWorkingHourType {
+    if (workingHourType == 1) {
+      return "/${'day'.tr}";
+    } else if (workingHourType == 2) {
+      return "/${'week'.tr}";
+    } else if (workingHourType == 3) {
+      return "/${'month'.tr}";
+    } else if (workingHourType == 4) {
+      return "/${'year'.tr}";
+    } else {
+      return '';
+    }
+  }
+
+  String? get remunerationMaxMin => remunerationMax == '' &&
+          remunerationMin == ''
+      ? ''
+      : "${remunerationMin == null ? '' : '$remunerationMin${currencySymbol ?? ''}'} - ${remunerationMax == null ? '' : '$remunerationMax${currencySymbol ?? ''}'}/${'perHour'.tr}";
 
   String? get companyNameAndLocation =>
       '${enterprise!.name} ($companyLocation)';
@@ -123,9 +155,11 @@ class JobOfferModel {
 
   factory JobOfferModel.fromJson(Map<String, dynamic> json) => JobOfferModel(
         id: json['id'] as int?,
-        title: json['title'] as String?,
-        studySubject: json['study_subject'] as String?,
-        description: json['description'] as String?,
+        uuid: json['uuid'] as String?,
+        title: json['title'] as String? ?? '',
+        studySubject: json['study_subject'] as String? ?? '',
+        description: json['description'] as String? ?? '',
+        additionalInfo: json['additional_information'] as String? ?? '',
         isDraft: json['is_draft'] as bool?,
         dateOfferStart:
             json['date_offer_start'] != null && json['date_offer_start'] != ''
@@ -152,14 +186,17 @@ class JobOfferModel {
             : null,
         telecommuting: json['telecommuting'] as int?,
         shifting: json['shifting'] as int?,
-        numberOfWorkingHourPerWeek: json['number_of_working_hour'] as int?,
-        remunerationMax: json['remuneration_max'] as String?,
-        remunerationMin: json['remuneration_min'] as String?,
-        currencySymbol: json['currency_symbol'] as String?,
-        addressStreet: json['address_street'] as String?,
-        addressCity: json['address_city'] as String?,
-        addressZip: json['address_zip'] as String?,
-        addressCountry: json['address_country'] as String?,
+        numberOfWorkingHour: json['number_of_working_hour'] as int?,
+        workingHourType: json['time_type'] as int?,
+        drivingLicence: json['driving_license_required'] as int?,
+        remunerationMax: json['remuneration_max'] as String? ?? '',
+        remunerationMin: json['remuneration_min'] as String? ?? '',
+        currencySymbol: json['currency_symbol'] as String? ?? '',
+        addressStreet: json['address_street'] as String? ?? '',
+        addressCity: json['address_city'] as String? ?? '',
+        addressZip: json['address_zip'] as String? ?? '',
+        addressCountry: json['address_country'] as String? ?? '',
+        youtubeLink: json['youtube_link'] as String? ?? '',
         // addressLatitude: json['address_latitude'] as String?,
         // addressLongitude: json['address_longitude'] as String?,
         types: json['types'] == null || json['types'] == []
@@ -209,6 +246,26 @@ class JobOfferModel {
                       ),
                     )
                     .toList(),
+        internshipTypes:
+            json['internship_types'] == null || json['internship_types'] == []
+                ? []
+                : (json['internship_types'] as List)
+                    .map(
+                      (i) => FieldModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList(),
+        internshipPeriods: json['internship_periods'] == null ||
+                json['internship_periods'] == []
+            ? []
+            : (json['internship_periods'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
         enterprise: json['enterprise'] == null
             ? null
             : ProfileModel.fromJson(
@@ -223,9 +280,11 @@ class JobOfferModel {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'uuid': uuid,
         'title': title,
         'study_subject': studySubject,
         'description': description,
+        'additional_information': additionalInfo,
         'is_draft': isDraft,
         'date_offer_start': dateOfferStart?.toIso8601String(),
         'date_offer_end': dateOfferEnd?.toIso8601String(),
@@ -233,30 +292,102 @@ class JobOfferModel {
         'date_job_end': dateJobEnd?.toIso8601String(),
         'telecommuting': telecommuting,
         'shifting': shifting,
-        'number_of_working_hour': numberOfWorkingHourPerWeek,
+        'number_of_working_hour': numberOfWorkingHour,
+        'time_type': workingHourType,
+        'driving_license_required': drivingLicence,
         'address_street': addressStreet,
         'address_city': addressCity,
         'address_zip': addressZip,
         'address_country': addressCountry,
         'address_latitude': addressLatitude,
         'address_longitude': addressLongitude,
-        'types': types != null || types != []
-            ? List<dynamic>.from(types!.map((x) => x.toJson()))
-            : null,
-        'fields': fields != null || fields != []
-            ? List<dynamic>.from(fields!.map((x) => x.toJson()))
-            : null,
-        'skills': skills != null || skills != []
-            ? List<dynamic>.from(skills!.map((x) => x.toJson()))
-            : null,
-        'spoken_languages': spokenLanguages != null || spokenLanguages != []
-            ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
-            : null,
-        'availabilities': availabilities != null || availabilities != []
-            ? List<dynamic>.from(availabilities!.map((x) => x.toJson()))
-            : null,
+        'youtube_link': youtubeLink,
+        'types': types == null || types == []
+            ? []
+            : List<dynamic>.from(
+                // types!.map((x) => x.id),
+                types!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ), //use only type ID
+        'fields': fields == null || fields == []
+            ? []
+            : List<dynamic>.from(
+                fields!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'languages': spokenLanguages == null || spokenLanguages == []
+            ? []
+            : List<dynamic>.from(
+                spokenLanguages!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'availabilities': availabilities == null || availabilities == []
+            ? []
+            : List<dynamic>.from(
+                availabilities!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'internship_types': internshipTypes == null || internshipTypes == []
+            ? []
+            : List<dynamic>.from(
+                internshipTypes!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'internship_periods':
+            internshipPeriods == null || internshipPeriods == []
+                ? []
+                : List<dynamic>.from(
+                    internshipPeriods!
+                        .skipWhile(
+                          (x) => x.id == null,
+                        )
+                        .map(
+                          (e) => e.id,
+                        ),
+                  ),
+        // 'skills': skills != null || skills != []
+        //     ? List<dynamic>.from(skills!.map((x) => x.toJson()))
+        //     : null,
+        // 'spoken_languages': spokenLanguages != null || spokenLanguages != []
+        //     ? List<dynamic>.from(spokenLanguages!.map((x) => x.toJson()))
+        //     : null,
         'enterprise': enterprise?.toJson(),
         'job_offer_state': jobOfferStateModel?.toJson(),
+        'search_id': searchId,
+        'search_name': searchName,
+        'keywords': title, //'title': title,
+        'street': addressStreet ?? '',
+        'city': addressCity ?? '',
+        'zipcode': addressZip ?? '',
+        'country': addressCountry ?? '',
+        'latitude': addressLatitude ?? '',
+        'longitude': addressLongitude ?? '',
+        'range': range! * 1000,
       }..removeWhere((_, v) => v == null);
 
   Map<String, dynamic> toSearchJson() => {
@@ -313,18 +444,48 @@ class JobOfferModel {
                       (e) => e.id,
                     ),
               ),
+        'internship_types': internshipTypes == null || internshipTypes == []
+            ? []
+            : List<dynamic>.from(
+                internshipTypes!
+                    .skipWhile(
+                      (x) => x.id == null,
+                    )
+                    .map(
+                      (e) => e.id,
+                    ),
+              ),
+        'internship_periods':
+            internshipPeriods == null || internshipPeriods == []
+                ? []
+                : List<dynamic>.from(
+                    internshipPeriods!
+                        .skipWhile(
+                          (x) => x.id == null,
+                        )
+                        .map(
+                          (e) => e.id,
+                        ),
+                  ),
+        'date_job_start': dateJobStart?.toIso8601String() ?? '',
+        'date_job_end': dateJobEnd?.toIso8601String() ?? '',
         'location': location ?? '',
         'is_range_search': isRangeSearch,
         'range': range! * 1000,
+        'search_id': searchId,
+        'search_name': searchName,
       }..removeWhere((_, v) => v == null);
 
   @override
   String toString() {
     return '''
-    JobOfferModel(id: $id,
+    JobOfferModel(
+      id: $id,
+      uuid: $uuid,
       title: $title,
       studySubject: $studySubject,
       description: $description,
+      additionalInfo: $additionalInfo,
       isDraft: $isDraft,
       dateOfferStart: $dateOfferStart,
       dateOfferEnd: $dateOfferEnd,
@@ -332,7 +493,9 @@ class JobOfferModel {
       dateJobEnd: $dateJobEnd,
       telecommuting: $telecommuting,
       shifting: $shifting,
-      numberOfWorkingHourPerWeek: $numberOfWorkingHourPerWeek,
+      numberOfWorkingHour: $numberOfWorkingHour,
+      workingHourType: $workingHourType,
+      drivingLicence: $drivingLicence,
       remunerationMax: $remunerationMax,
       remunerationMin: $remunerationMin,
       currencySymbol: $currencySymbol,
@@ -342,16 +505,21 @@ class JobOfferModel {
       addressCountry: $addressCountry,
       addressLatitude: $addressLatitude,
       addressLongitude: $addressLongitude,
+      youtubeLink: $youtubeLink,
       types: $types,
       fields: $fields,
       spokenLanguages: $spokenLanguages,
       skills: $skills,
       availabilities: $availabilities,
+      internshipTypes: $internshipTypes,
+      internshipPeriods: $internshipPeriods,
       enterprise: $enterprise,
       jobOfferStateModel: $jobOfferStateModel,
       'location': $location,
       'isRangeSearch': $isRangeSearch,
       'range': $range,
+      'searchId':$searchId,
+      'searchName': $searchName,
     )''';
   }
 }

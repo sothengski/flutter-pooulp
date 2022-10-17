@@ -17,6 +17,7 @@ class MessagingModel {
 
   final LatestMessageModel? latestMessage;
   final int? unseenMessages;
+  final int? newConversation;
   final List<ParticipantModel>? participants;
 
   final DateTime? createdAt;
@@ -34,6 +35,7 @@ class MessagingModel {
     this.pictureUrl,
     this.latestMessage,
     this.unseenMessages = 0,
+    this.newConversation = 0,
     this.participants,
     this.createdAt,
     this.updatedAt,
@@ -71,6 +73,7 @@ class MessagingModel {
               )
             : null,
         unseenMessages: json["unseen_messages"] as int?,
+        newConversation: json["new_conversation"] as int?,
         participants: json['participants'] == null || json['participants'] == []
             ? []
             : (json['participants'] as List)
@@ -104,6 +107,7 @@ class MessagingModel {
         "picture_url": pictureUrl,
         "latest_message": latestMessage!.toJson(),
         "unseen_messages": unseenMessages,
+        "new_conversation": newConversation,
         "participants":
             List<dynamic>.from(participants!.map((x) => x.toJson())),
         "created_at": createdAt!.toIso8601String(),
@@ -123,6 +127,7 @@ class MessagingModel {
       pictureUrl: $pictureUrl,
       latestMessage: $latestMessage,
       unseenMessages: $unseenMessages,
+      newConversation: $newConversation,
       participants: $participants,
       createdAt: $createdAt,
       updatedAt: $updatedAt,

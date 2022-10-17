@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
+
 // import 'api_keys.dart';
+enum Env { dev, uat, stage, prod }
 
 enum Endpoint {
   signIn,
@@ -52,6 +54,17 @@ enum Endpoint {
   getStatus,
   getAllTranslationLangs,
   postVerifyEmail,
+  getNotificationMessages,
+  getRoomStatus,
+  // postSeenConversaction,
+  postRefreshToken,
+  // postJobOfferCount,
+  getInternshipTypeTags,
+  getInternshipPeriodTags,
+  getSavedSearch,
+  postCreateSavedSearch,
+  putEditSavedSearch,
+  // deleteSavedSearch,
 }
 
 class API {
@@ -59,6 +72,10 @@ class API {
   final String? apiKey;
 
   // factory API.dev() => API(apiKey: APIKeys.pooulpDevKey);
+  // Front Web domains
+  static const String webDomain = 'http://app.dev-lamp-01.srv.pooulp.eu';
+  // 'http://uat.pooulp.eu';
+  // 'https://app.pooulp.com';
 
   /// Based API End Point URLs
   static const String host =
@@ -82,7 +99,7 @@ class API {
     Endpoint.getPendingOffer: '/offers/pending',
     Endpoint.getMatchedOffer: '/offers/matched',
     Endpoint.getSavedOffer: '/offers/saved',
-    Endpoint.getRejectedOffer: '/offers/hidden',
+    Endpoint.getRejectedOffer: '/offers/refused',
     Endpoint.getJobOfferTypes: '/tags/offers',
     Endpoint.getFields: '/tags/fields',
     Endpoint.getLanguages: '/tags/languages',
@@ -106,6 +123,14 @@ class API {
     Endpoint.getStatus: '/status',
     Endpoint.getAllTranslationLangs: '/translations',
     Endpoint.postVerifyEmail: '/users/email-verification',
+    Endpoint.getNotificationMessages: '/notificationmessages?perPage=50',
+    Endpoint.getRoomStatus: '/rooms/status',
+    Endpoint.postRefreshToken: '/refreshtoken',
+    Endpoint.getInternshipTypeTags: '/tags/internshiptype',
+    Endpoint.getInternshipPeriodTags: '/tags/internshipperiod',
+    Endpoint.getSavedSearch: '/search/saved',
+    Endpoint.postCreateSavedSearch: '/search/create',
+    Endpoint.putEditSavedSearch: '/search/edit',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';
@@ -154,9 +179,7 @@ class API {
   static String putOrDeleteAvailabilities({required int? availabilityId}) =>
       '/users/me/student_profile/availabilities/$availabilityId';
 
-  static String getMessagingRoomList({
-    int? pageNumber = 1,
-  }) =>
+  static String getMessagingRoomList({int? pageNumber = 1}) =>
       '/rooms?page=$pageNumber';
 
   static String getMessagesByRoomID({
@@ -165,8 +188,15 @@ class API {
   }) =>
       '/rooms/$roomId/messages?page=$pageNumber';
 
-  static String postMessageByRoomID({
-    required String? roomId,
-  }) =>
+  static String postMessageByRoomID({required String? roomId}) =>
       '/rooms/$roomId/messages';
+
+  static String postSeenConversation({required String? roomId}) =>
+      '/rooms/$roomId/openconversation';
+
+  static String postJobOfferViewCount({required String? jobOfferUUID}) =>
+      '/offers/$jobOfferUUID/view';
+
+  static String deleteSavedSearch({required int? savedSearchId}) =>
+      '/search/delete/$savedSearchId';
 }

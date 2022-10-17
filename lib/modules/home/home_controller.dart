@@ -11,7 +11,12 @@ class HomeController extends GetxController {
 
   RxInt currentIndex = 0.obs;
 
-  RxBool isBag = false.obs;
+  //onClickActionButtonJobOfferFeed() - OfferFeedController
+  RxBool isMyOfferBag = false.obs;
+
+  //getConversationStatusResponseProvider() - MessagingController
+  RxBool isMessagingBag = false.obs;
+  RxString messagingBagLabel = ''.obs;
 
   @override
   Future<void> onInit() async {
@@ -20,8 +25,8 @@ class HomeController extends GetxController {
   }
 
   Future<void> signOut() async {
+    authProvider.logOutAPI(token: userToken!.token);
     await AuthServices().removeToken();
-    await authProvider.logOutAPI();
     Get.offAllNamed(Routes.signInRoute);
   }
 
@@ -41,7 +46,7 @@ class HomeController extends GetxController {
 
   void pageNavigate({int? index = 0}) {
     if (index == 1) {
-      isBag.value = false;
+      isMyOfferBag.value = false;
     }
     currentIndex.value = index!;
   }

@@ -1,26 +1,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.idcrmltd.pooulp">
+    package="com.pooulp.prod">
 
   <queries>
     <!-- If your app opens https URLs -->
     <intent>
-      <action android:name="android.intent.action.VIEW" />
-      <data android:scheme="https" />
-    </intent>
-    <!-- If your app makes calls -->
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https" />
+        </intent>
+    <!-- If your app sends emails -->
     <intent>
-      <action android:name="android.intent.action.DIAL" />
-      <data android:scheme="tel" />
+        <action android:name="android.intent.action.SEND" />
+        <data android:mimeType="*/*" />
+    </intent>
+    <!-- If your app checks for SMS support -->
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="sms" />
     </intent>
     <!-- If your sends SMS messages -->
     <intent>
       <action android:name="android.intent.action.SENDTO" />
       <data android:scheme="smsto" />
     </intent>
-    <!-- If your app sends emails -->
+    <!-- If your app checks for call support -->
     <intent>
-      <action android:name="android.intent.action.SEND" />
-      <data android:mimeType="*/*" />
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="tel" />
     </intent>
   </queries>
 
@@ -64,6 +69,16 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <!-- Deep linking -->
+            <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="app.pooulp.com" />
+                <data android:scheme="https" />
             </intent-filter>
         </activity>
         <activity

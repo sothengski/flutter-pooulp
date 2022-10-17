@@ -28,6 +28,7 @@ class FieldModel {
   final int? tagId;
   final String? type;
   final String? label;
+  final String? keyLabel;
   final int? level;
   final int? categoryId;
   final String? category;
@@ -41,6 +42,7 @@ class FieldModel {
     this.tagId,
     this.type,
     this.label,
+    this.keyLabel,
     this.level,
     this.categoryId,
     this.category,
@@ -77,6 +79,7 @@ class FieldModel {
         tagId: json['tag_id'] as int?,
         type: json['type'] as String?,
         label: json['label'] as String?,
+        keyLabel: json['key_label'] as String?,
         level: json['level'] as int?,
         categoryId: json['category_id'] as int?,
         category: json['category'] as String?,
@@ -97,6 +100,7 @@ class FieldModel {
         'tag_id': tagId,
         'type': type,
         'label': label,
+        'key_label': keyLabel,
         'level': level,
         'category_id': categoryId,
         'category': category,
@@ -120,6 +124,7 @@ class FieldModel {
       tagId: $tagId,
       type: $type,
       label: $label,
+      keyLabel: $keyLabel,
       level: $level,
       categoryId: $categoryId,
       category: $category,

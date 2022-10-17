@@ -27,6 +27,7 @@ class SearchPreferencesModel {
   final List<FieldModel>? availabilities;
   final List<FieldModel>? internshipTypes;
   final List<FieldModel>? internshipPeriods;
+  final String? internshipTypeText;
 
   SearchPreferencesModel({
     this.keywords,
@@ -52,6 +53,7 @@ class SearchPreferencesModel {
     this.availabilities,
     this.internshipTypes,
     this.internshipPeriods,
+    this.internshipTypeText,
   });
 
   factory SearchPreferencesModel.fromRawJson(String str) =>
@@ -105,6 +107,7 @@ class SearchPreferencesModel {
                       (i) => FieldModel(id: i as int),
                     )
                     .toList(),
+        internshipTypeText: json['internship_type_text'] as String?,
         internshipPeriods: json['internship_periods'] == null ||
                 json['internship_periods'] == []
             ? []
@@ -155,6 +158,7 @@ class SearchPreferencesModel {
         'date_job_end': dateJobEnd?.toIso8601String(),
         'search_name': searchName,
         'search_id': searchId,
+        'internship_type_text': internshipTypeText,
         'types': types == null || types == []
             ? []
             : List<dynamic>.from(
@@ -250,6 +254,7 @@ class SearchPreferencesModel {
         availabilities: $availabilities, 
         internshipTypes: $internshipTypes, 
         internshipPeriods: $internshipPeriods,
+        internshipTypeText: $internshipTypeText,
       )''';
 }
 

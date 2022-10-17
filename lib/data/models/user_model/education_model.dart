@@ -100,7 +100,7 @@ class EducationModel {
         'name': name ?? '',
         'description': description ?? '',
         'degree': degree ?? '',
-        'studying_year': studyingYear,
+        'studying_year': studyingYear ?? 0,
         'date_start': '',
         // 'date_start': dateStart == null
         //     ? null

@@ -138,7 +138,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                     isCenterText: false,
                                                     text: pageData[2]
                                                         .internshipTypeItems![i]
-                                                        .label,
+                                                        .keyLabel,
                                                     maxLine: controller.isUpdate
                                                                 .value ==
                                                             true
@@ -167,6 +167,27 @@ class OnboardingPage extends GetView<OnboardingController> {
                                       ),
                                     ],
                                   ),
+                                  if (controller.internshipTypeSelectedList
+                                          .isNotEmpty &&
+                                      controller.internshipTypeSelectedList
+                                          .map(
+                                            (element) =>
+                                                element.keyLabel == 'other',
+                                          )
+                                          .first)
+                                    CustomTextInput(
+                                      controller:
+                                          controller.internshipOtherTextCtrl,
+                                      // inputTitle: "",
+                                      titleColor: ColorsManager.white,
+                                      hintText: 'otherInternshipPlaceholder'.tr,
+                                      isFilled: true,
+                                      topContentPadding: AppSize.s12,
+                                      bottomContentPadding: AppSize.s12,
+                                      topPadding: AppSize.s12,
+                                      maxLength: 100,
+                                      keyboardType: TextInputType.multiline,
+                                    ),
                                   Wrap(
                                     children: [
                                       CustomTextWidget(

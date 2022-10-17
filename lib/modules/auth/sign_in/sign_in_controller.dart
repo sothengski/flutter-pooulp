@@ -69,9 +69,9 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
   }
 
   Future linkedInSignInMethod({
-    String? redirectUrl,
-    String? clientId,
-    String? clientSecret,
+    String? redirectUrl = APIKeys.linkedInRedirectUrl,
+    String? clientId = APIKeys.linkedInClientId,
+    String? clientSecret = APIKeys.linkedInClientSecret,
   }) async {
     Get.dialog(
       LinkedInUserWidget(
@@ -79,9 +79,12 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
           title: const Text('widget.title'),
         ),
 
-        redirectUrl: redirectUrl ?? APIKeys.linkedInRedirectUrl,
-        clientId: clientId ?? APIKeys.linkedInClientId,
-        clientSecret: clientSecret ?? APIKeys.linkedInClientSecret,
+        // redirectUrl: redirectUrl ?? APIKeys.linkedInRedirectUrl,
+        // clientId: clientId ?? APIKeys.linkedInClientId,
+        // clientSecret: clientSecret ?? APIKeys.linkedInClientSecret,
+        redirectUrl: redirectUrl,
+        clientId: clientId,
+        clientSecret: clientSecret,
         onGetUserProfile: (linkedInUser) async {
           if (linkedInUser.user.userId != null) {
             debugPrint(

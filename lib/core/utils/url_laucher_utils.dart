@@ -21,7 +21,7 @@ Future urlLauncherUtils({
       // 'https://google.com/',
     );
     if (await canLaunchUrl(web)) {
-      launchUrl(web);
+      await launchUrl(web);
     } else {
       customSnackbar(
         msgTitle: 'Unable to launch',
@@ -113,7 +113,7 @@ Future urlLauncherUtils({
     }
     try {
       if (await canLaunchUrl(thingWillLaunch)) {
-        launchUrl(thingWillLaunch);
+        await launchUrl(thingWillLaunch);
       } else {
         customSnackbar(
           msgTitle: 'Unable to launch',

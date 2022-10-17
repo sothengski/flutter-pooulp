@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'dart:convert';
 
 import 'package:flutter/rendering.dart';
@@ -86,8 +84,8 @@ class AuthProvider extends BaseProvider {
   // }
 
   Object responseBodyHandler({Response? resp}) {
-    return resp!.body['message'] != null
-            ? "\n- ${resp.body!['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}"
+    return (resp!.body as Map<String, dynamic>)['message'] != null
+            ? "\n- ${(resp.body as Map<String, dynamic>)['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}"
             : ""
         // ''' "${resp.body['code'] != null ? "\n- ${resp.body!['code']}" : ""}"'''
         ;

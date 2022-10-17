@@ -33,12 +33,33 @@ class LanguageUsageController extends GetxController {
     FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
   ].obs;
 
+  List<TextEditingController> vdoUrlListTextCtrl = [];
+
+  RxBool isUpdating = false.obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
+    initVdoUrlItemListTextCtrl();
     title = (Get.arguments as List)[0].toString();
     await getLanguagesListResponseProvider();
     languageListFilter();
+  }
+
+  void initVdoUrlItemListTextCtrl() {
+    vdoUrlListTextCtrl.clear();
+    for (final item
+        in profileController.studentInfoRepsonse.value.spokenLanguages!) {
+      vdoUrlListTextCtrl.add(TextEditingController(text: item.videoUrl));
+      // inputDeliveryQtyValueList.add({
+      //   'itemCode': item.itemId,
+      //   'itemName': item.description,
+      //   'itemUnit': item.shortText,
+      //   'unitPrice': item.unitPrice,
+      //   'itemCat': 11,
+      //   'qty': 0,
+      // });
+    }
   }
 
   Future<List<FieldModel>> getLanguagesListResponseProvider({
@@ -127,6 +148,7 @@ class LanguageUsageController extends GetxController {
       // debugPrint('=====success=====');
       clearDataFromForm();
       await profileController.getStudentInfoResponseProvider();
+      initVdoUrlItemListTextCtrl();
       languageListFilter();
       // Get.back();
       customSnackbar(

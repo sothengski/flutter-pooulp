@@ -14,14 +14,9 @@ class SplashController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    await checkAuth();
     await checkAppBasicTime();
     // await getAppBasicStatusProvider();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-    checkAuth();
   }
 
   Future<void> checkAuth() async {
@@ -63,7 +58,8 @@ class SplashController extends GetxController {
                   bodyData: value.latestTranslationUpdate.toString(),
                 ),
                 await getAllTranslationLangsProvider(lang: 'en'),
-                await getAllTranslationLangsProvider(lang: 'fr')
+                await getAllTranslationLangsProvider(lang: 'fr'),
+                await getAllTranslationLangsProvider(lang: 'nl')
               }
             else
               {}

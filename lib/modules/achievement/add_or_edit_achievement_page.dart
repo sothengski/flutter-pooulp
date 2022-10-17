@@ -83,7 +83,7 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                     () => controller.selectedCompletionDateString.value == ''
                         ? RowContentInputWidget(
                             centerWidget: CustomTextWidget(
-                              text: 'completionDate'.tr,
+                              text: ddmmyyyyFormat,
                               color: ColorsManager.grey400,
                               fontWeight: FontWeight.w400,
                               fontSize: AppSize.s16,

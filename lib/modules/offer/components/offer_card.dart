@@ -44,6 +44,7 @@ class OfferCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            ///===== Work Place Types Component =====//
             ClipRRect(
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(AppSize.s8),
@@ -67,10 +68,12 @@ class OfferCard extends StatelessWidget {
                 ),
               ),
             ),
+            //===== Work Place Types Component =====//
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                ///===== Enterprise Logo Component =====//
                 Flexible(
                   flex: 15,
                   child: Padding(
@@ -93,6 +96,7 @@ class OfferCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                //===== Enterprise Logo Component =====//
                 Flexible(
                   flex: 65,
                   child: Padding(
@@ -103,6 +107,7 @@ class OfferCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        ///===== Job Offer Title Component =====//
                         CustomTextWidget(
                           text: '${jobOfferItem!.title}',
                           fontWeight: FontWeightManager.semiBold,
@@ -110,6 +115,9 @@ class OfferCard extends StatelessWidget {
                           // marginTop: 20.0,
                           marginBottom: AppSize.s16,
                         ),
+                        //===== Job Offer Title Component =====//
+
+                        ///===== Location Icon & Enterprise Name Component =====//
                         Padding(
                           padding: const EdgeInsets.only(
                             left: AppSize.s4,
@@ -137,6 +145,9 @@ class OfferCard extends StatelessWidget {
                             ],
                           ),
                         ),
+                        //===== Location Icon & Enterprise Name Component =====//
+
+                        ///===== Start Date Card Component =====//
                         ClipRRect(
                           borderRadius: const BorderRadius.all(
                             Radius.circular(AppSize.s4),
@@ -173,6 +184,7 @@ class OfferCard extends StatelessWidget {
                             ),
                           ),
                         ),
+                        //===== Start Date Card Component =====//
                       ],
                     ),
                   ),
@@ -188,6 +200,7 @@ class OfferCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        ///===== List of Job Offer Type Component =====//
                         for (var i = 0; i < jobOfferItem!.types!.length; i++)
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -216,6 +229,71 @@ class OfferCard extends StatelessWidget {
                               ),
                             ),
                           ),
+                        //===== List of Job Offer Type Component =====//
+
+                        ///===== Number Of WorkingHour or Internship Period List Component =====//
+                        if (jobOfferItem!.numberOfWorking! != '' &&
+                            jobOfferItem!.internshipPeriods!.isEmpty)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              // horizontal: AppSize.s2,
+                              vertical: AppSize.s2,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(AppSize.s5),
+                              ),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: ColorsManager.grey200,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSize.s2,
+                                  vertical: AppSize.s4,
+                                ),
+                                child: CustomTextWidget(
+                                  textAlign: TextAlign.center,
+                                  text: '${jobOfferItem!.numberOfWorking}',
+                                  fontWeight: FontWeightManager.regular,
+                                  fontSize: AppSize.s10,
+                                  // marginBottom: AppSize.s10,
+                                ),
+                              ),
+                            ),
+                          )
+                        else if (jobOfferItem!.internshipPeriods != [])
+                          for (var i = 0;
+                              i < jobOfferItem!.internshipPeriods!.length;
+                              i++)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                // horizontal: AppSize.s2,
+                                vertical: AppSize.s2,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(AppSize.s5),
+                                ),
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: ColorsManager.grey200,
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: AppSize.s2,
+                                    vertical: AppSize.s4,
+                                  ),
+                                  child: CustomTextWidget(
+                                    textAlign: TextAlign.center,
+                                    text:
+                                        '${jobOfferItem!.internshipPeriods![i].label}',
+                                    fontWeight: FontWeightManager.regular,
+                                    fontSize: AppSize.s10,
+                                    // marginBottom: AppSize.s10,
+                                  ),
+                                ),
+                              ),
+                            ),
+                        //===== Number Of WorkingHour or Internship Period List Component =====//
                       ],
                     ),
                   ),
@@ -227,10 +305,12 @@ class OfferCard extends StatelessWidget {
               thickness: AppSize.s1,
             ),
             // bottomActionWidget ?? Container(),
+            ///===== Job Offer Action Buttons Component =====//
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: bottomActionWidgetList!,
             )
+            //===== Job Offer Action Buttons Component =====//
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceAround,
             //   children: [

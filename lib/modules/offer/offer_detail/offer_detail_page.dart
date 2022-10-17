@@ -20,12 +20,31 @@ class OfferDetailPage extends GetView<OfferDetailController> {
     controller.youtubeVideoId = jobOfferDetail.enterprise!.youtubeLink == null
         ? ''
         : jobOfferDetail.enterprise!.youtubeLink!.split('=').last;
-
+    controller.makeRequestToPOSTJobOfferViewCountAPI(
+      jobOfferUUID: jobOfferDetail.uuid,
+    );
     return Scaffold(
       // backgroundColor: ColorsManager.primary,
       appBar: CustomAppBar(
         title: 'offerDetails'.tr,
         elevation: 0.0,
+        actions: [
+          CustomIconButtonWidget(
+            iconData: IconsManager.share,
+            iconColor: ColorsManager.white,
+            tooltip: AppStrings.removeText,
+            onClick: () async => {
+              await shareUtils(
+                context: context,
+                text: 'POOULP Job Offer',
+                urlPreview: '${API.webDomain}/joboffers/${jobOfferDetail.uuid}',
+                // urlPreview: controller.firebaseDynamicLinkService
+                //     .createDynamicLink()
+                //     .toString(),
+              ),
+            },
+          )
+        ],
       ),
       body: Column(
         children: [
@@ -114,9 +133,19 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                     color: ColorsManager.red,
                     marginLeft: AppSize.s20,
                     marginTop: AppSize.s10,
+                    // marginBottom: AppSize.s10,
+                  ),
+                  CustomTextWidget(
+                    text:
+                        "${'expiryDate'.tr}: ${jobOfferDetail.dateOfferEndFormat}",
+                    fontSize: AppSize.s12,
+                    fontWeight: FontWeight.w500,
+                    color: ColorsManager.red,
+                    marginLeft: AppSize.s20,
+                    marginTop: AppSize.s4,
                     marginBottom: AppSize.s10,
                   ),
-                  Container(
+                  DecoratedBox(
                     decoration: BoxDecoration(
                       // color: ColorsManager.green,
                       borderRadius: BorderRadius.circular(10),
@@ -160,6 +189,50 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           const SizedBox(
                             height: AppSize.s10,
                           ),
+
+                          ///===== Rufusal Reason Component =====//
+
+                          // if (jobOfferDetail.jobOfferStateModel!.stateId != 4)
+                          //   Container()
+                          // else
+                          //   CustomBoxWidget(
+                          //     leftMargin: AppSize.s8,
+                          //     rightMargin: AppSize.s8,
+                          //     backgroundColor: Colors.red[100],
+                          //     child: Column(
+                          //       children: [
+                          //         Align(
+                          //           alignment: Alignment.centerLeft,
+                          //           child: CustomTextWidget(
+                          //             textAlign: TextAlign.left,
+                          //             text: jobOfferDetail
+                          //                 .jobOfferStateModel!.reasonTagId
+                          //                 .toString(),
+                          //             fontWeight: FontWeightManager.bold,
+                          //             color: ColorsManager.red900,
+                          //             marginTop: AppSize.s4,
+                          //             marginBottom: AppSize.s4,
+                          //           ),
+                          //         ),
+                          //         if (jobOfferDetail
+                          //                 .jobOfferStateModel!.reason ==
+                          //             '')
+                          //           Container()
+                          //         else
+                          //           CustomTextWidget(
+                          //             textAlign: TextAlign.left,
+                          //             text:
+                          //                 '${jobOfferDetail.jobOfferStateModel!.reason}',
+                          //             fontWeight: FontWeightManager.regular,
+                          //             fontSize: AppSize.s12,
+                          //             color: ColorsManager.red900,
+                          //             // marginBottom: AppSize.s10,
+                          //             maxLine: 50,
+                          //           ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          //===== Rufusal Reason Component =====//
 
                           ///===== Working Period Component =====//
                           OutlineContainerWidget(
@@ -214,14 +287,14 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Working Period Component =====//
 
                           ///===== Working Duration Component =====//
-                          if (jobOfferDetail.numberOfWorkPerWeek! == '')
+                          if (jobOfferDetail.numberOfWorking! != '')
                             OutlineContainerWidget(
-                              title: 'workDuraction'.tr,
+                              title: 'numberOfWorkingHour'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: CustomBoxWidget(
                                 child: CustomTextWidget(
                                   textAlign: TextAlign.center,
-                                  text: '${jobOfferDetail.numberOfWorkPerWeek}',
+                                  text: '${jobOfferDetail.numberOfWorking}',
                                   fontWeight: FontWeightManager.regular,
                                   fontSize: AppSize.s12,
                                   // marginBottom: AppSize.s10,
@@ -233,7 +306,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           //===== Working Duration Component =====//
 
                           ///===== Remuneration Component =====//
-                          if (jobOfferDetail.remunerationMaxMin! == '')
+                          if (jobOfferDetail.remunerationMaxMin! != '')
                             OutlineContainerWidget(
                               title: 'remuneration'.tr,
                               titleColor: ColorsManager.primaryBlue,
@@ -241,6 +314,25 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                 child: CustomTextWidget(
                                   textAlign: TextAlign.center,
                                   text: '${jobOfferDetail.remunerationMaxMin}',
+                                  fontWeight: FontWeightManager.regular,
+                                  fontSize: AppSize.s12,
+                                  // marginBottom: AppSize.s10,
+                                ),
+                              ),
+                            )
+                          else
+                            Container(),
+                          //===== Remuneration Component =====//
+
+                          ///===== Remuneration Component =====//
+                          if (jobOfferDetail.drivingLicence! == 1)
+                            OutlineContainerWidget(
+                              title: 'required'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: CustomBoxWidget(
+                                child: CustomTextWidget(
+                                  textAlign: TextAlign.center,
+                                  text: 'drivingLicense'.tr,
                                   fontWeight: FontWeightManager.regular,
                                   fontSize: AppSize.s12,
                                   // marginBottom: AppSize.s10,
@@ -323,6 +415,81 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             Container(),
                           //===== Types Component =====//
 
+                          ///===== Internship Period Component =====//
+                          if (jobOfferDetail.internshipPeriods!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'internshipPeriod'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.internshipPeriods !=
+                                      []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i <
+                                                jobOfferDetail
+                                                    .internshipPeriods!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.internshipPeriods![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Internship Periods Component =====//
+
+                          ///===== Internship Types Component =====//
+                          if (jobOfferDetail.internshipTypes!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'internshipType'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.internshipTypes != []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i <
+                                                jobOfferDetail
+                                                    .internshipTypes!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.internshipTypes![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Internship Types Component =====//
+
                           ///===== Fields Component =====//
                           if (jobOfferDetail.fields!.isNotEmpty)
                             OutlineContainerWidget(
@@ -358,6 +525,78 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             Container(),
                           //===== Fields Component =====//
 
+                          ///===== Skills Component =====//
+                          if (jobOfferDetail.skills!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'skills'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.skills != []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i < jobOfferDetail.skills!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.skills![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Skills Component =====//
+
+                          ///===== Spoken Languages Component =====//
+                          if (jobOfferDetail.spokenLanguages!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'spokenLanguages'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: jobOfferDetail.spokenLanguages != []
+                                  ? Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i <
+                                                jobOfferDetail
+                                                    .spokenLanguages!.length;
+                                            i++)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: AppSize.s8,
+                                              bottom: AppSize.s4,
+                                            ),
+                                            child: CustomBoxWidget(
+                                              child: CustomTextWidget(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    '${jobOfferDetail.spokenLanguages![i].label}',
+                                                fontWeight:
+                                                    FontWeightManager.regular,
+                                                fontSize: AppSize.s12,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    )
+                                  : Container(),
+                            )
+                          else
+                            Container(),
+                          //===== Spoken Languages Component =====//
+
                           ///===== Office Address Component =====//
                           if (jobOfferDetail
                               .jobOfferFullOfficeAddress!.isNotEmpty)
@@ -365,8 +604,8 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                               title: 'jobOfferAddress'.tr,
                               titleColor: ColorsManager.primaryBlue,
                               childWidget: CustomTextWidget(
-                                text:
-                                    '${jobOfferDetail.jobOfferFullOfficeAddress}',
+                                text: '${jobOfferDetail.addressStreet}',
+                                // '${jobOfferDetail.jobOfferFullOfficeAddress}',
                                 fontWeight: FontWeightManager.regular,
                                 maxLine: 3,
                               ),
@@ -386,74 +625,110 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             ),
                           //===== Job Description Component =====//
 
-                          ///===== Languages Component =====//
-                          if (jobOfferDetail.spokenLanguages!.isNotEmpty)
+                          ///===== Additional Information Component =====//
+                          if (jobOfferDetail.additionalInfo!.isNotEmpty)
                             OutlineContainerWidget(
-                              title: 'languages'.tr,
+                              title: 'additional_information'.tr,
                               titleColor: ColorsManager.primaryBlue,
-                              childWidget: jobOfferDetail.spokenLanguages != []
-                                  ? Wrap(
-                                      direction: Axis.vertical,
-                                      children: [
-                                        for (var i = 0;
-                                            i <
-                                                jobOfferDetail
-                                                    .spokenLanguages!.length;
-                                            i++)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              right: AppSize.s4,
-                                              bottom: AppSize.s4,
-                                            ),
-                                            child: CustomTextWidget(
-                                              textAlign: TextAlign.center,
-                                              text:
-                                                  '${jobOfferDetail.spokenLanguages![i].displayLabelAndLevel}',
-                                              fontWeight:
-                                                  FontWeightManager.regular,
-                                              // fontSize: AppSize.s12,
-                                            ),
-                                          ),
-                                      ],
-                                    )
-                                  : Container(),
-                            )
-                          else
-                            Container(),
+                              childWidget: CustomTextWidget(
+                                text: '${jobOfferDetail.additionalInfo}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== Additional Information Component =====//
+
+                          ///===== Youtube Link Component =====//
+                          if (jobOfferDetail.youtubeLink!.isNotEmpty)
+                            OutlineContainerWidget(
+                              title: 'youtubeLink'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              childWidget: GestureDetector(
+                                onTap: () async {
+                                  urlLauncherUtils(
+                                    thingToLaunch: jobOfferDetail.youtubeLink,
+                                    inApp: true,
+                                  );
+                                },
+                                child: CustomTextWidget(
+                                  text: '${jobOfferDetail.youtubeLink}',
+                                  color: ColorsManager.blue,
+                                  fontWeight: FontWeightManager.regular,
+                                  maxLine: 200,
+                                  textDecoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          //===== Youtube Link Component =====//
+
+                          ///===== Languages Component =====//
+                          // if (jobOfferDetail.spokenLanguages!.isNotEmpty)
+                          //   OutlineContainerWidget(
+                          //     title: 'languages'.tr,
+                          //     titleColor: ColorsManager.primaryBlue,
+                          //     childWidget: jobOfferDetail.spokenLanguages != []
+                          //         ? Wrap(
+                          //             direction: Axis.vertical,
+                          //             children: [
+                          //               for (var i = 0;
+                          //                   i <
+                          //                       jobOfferDetail
+                          //                           .spokenLanguages!.length;
+                          //                   i++)
+                          //                 Padding(
+                          //                   padding: const EdgeInsets.only(
+                          //                     right: AppSize.s4,
+                          //                     bottom: AppSize.s4,
+                          //                   ),
+                          //                   child: CustomTextWidget(
+                          //                     textAlign: TextAlign.center,
+                          //                     text:
+                          //                         '${jobOfferDetail.spokenLanguages![i].displayLabelAndLevel}',
+                          //                     fontWeight:
+                          //                         FontWeightManager.regular,
+                          //                     // fontSize: AppSize.s12,
+                          //                   ),
+                          //                 ),
+                          //             ],
+                          //           )
+                          //         : Container(),
+                          //   )
+                          // else
+                          //   Container(),
                           //===== Languages Component =====//
 
                           ///===== Skills Component =====//
-                          if (jobOfferDetail.skills!.isNotEmpty)
-                            OutlineContainerWidget(
-                              title: 'skills'.tr,
-                              titleColor: ColorsManager.primaryBlue,
-                              childWidget: jobOfferDetail.skills != []
-                                  ? Wrap(
-                                      direction: Axis.vertical,
-                                      children: [
-                                        for (var i = 0;
-                                            i < jobOfferDetail.skills!.length;
-                                            i++)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              right: AppSize.s4,
-                                              bottom: AppSize.s4,
-                                            ),
-                                            child: CustomTextWidget(
-                                              textAlign: TextAlign.center,
-                                              text:
-                                                  '${jobOfferDetail.skills![i].displayLabelAndLevel}',
-                                              fontWeight:
-                                                  FontWeightManager.regular,
-                                              // fontSize: AppSize.s12,
-                                            ),
-                                          ),
-                                      ],
-                                    )
-                                  : Container(),
-                            )
-                          else
-                            Container(),
+                          // if (jobOfferDetail.skills!.isNotEmpty)
+                          //   OutlineContainerWidget(
+                          //     title: 'skills'.tr,
+                          //     titleColor: ColorsManager.primaryBlue,
+                          //     childWidget: jobOfferDetail.skills != []
+                          //         ? Wrap(
+                          //             direction: Axis.vertical,
+                          //             children: [
+                          //               for (var i = 0;
+                          //                   i < jobOfferDetail.skills!.length;
+                          //                   i++)
+                          //                 Padding(
+                          //                   padding: const EdgeInsets.only(
+                          //                     right: AppSize.s4,
+                          //                     bottom: AppSize.s4,
+                          //                   ),
+                          //                   child: CustomTextWidget(
+                          //                     textAlign: TextAlign.center,
+                          //                     text:
+                          //                         '${jobOfferDetail.skills![i].displayLabelAndLevel}',
+                          //                     fontWeight:
+                          //                         FontWeightManager.regular,
+                          //                     // fontSize: AppSize.s12,
+                          //                   ),
+                          //                 ),
+                          //             ],
+                          //           )
+                          //         : Container(),
+                          //   )
+                          // else
+                          //   Container(),
                           //===== Skills Component =====//
                         ],
                       ),
@@ -537,13 +812,62 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           // ),
                           //===== Contact Email Component =====//
 
+                          ///===== EnterpriseCategory Component =====//
+                          if (jobOfferDetail.enterprise!.legalStatusLabel !=
+                              null)
+                            OutlineContainerWidget(
+                              title: 'enterpriseType'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    jobOfferDetail.enterprise!.legalStatusLabel,
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== EnterpriseCategory Component =====//
+
+                          ///===== established In Component =====//
+                          if (jobOfferDetail.enterprise!.enterpriseType != null)
+                            OutlineContainerWidget(
+                              title: 'enterpriseCategory'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text: jobOfferDetail
+                                    .enterprise!.enterpriseType!.label,
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== established In Component =====//
+
+                          ///===== established In Component =====//
+                          if (jobOfferDetail.enterprise!.establishedIn != null)
+                            OutlineContainerWidget(
+                              title: 'establishedIn'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text: dateFormatYYYY(
+                                  date:
+                                      jobOfferDetail.enterprise!.establishedIn,
+                                ),
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== established In Component =====//
+
                           ///===== Enterprise HQ Office Address Component =====//
                           OutlineContainerWidget(
                             title: 'officeAddress'.tr,
                             titleColor: ColorsManager.primaryBlue,
                             childWidget: CustomTextWidget(
                               text:
-                                  '${jobOfferDetail.enterprise!.companyAddress}${jobOfferDetail.companyLocation}',
+                                  '${jobOfferDetail.enterprise!.companyAddress}',
+                              // '${jobOfferDetail.enterprise!.companyAddress}${jobOfferDetail.companyLocation}',
                               fontWeight: FontWeightManager.regular,
                               maxLine: 3,
                             ),
@@ -587,6 +911,51 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                           else
                             Container(),
                           //===== Fields Component =====//
+
+                          ///===== Facebook Link Component =====//
+                          if (jobOfferDetail.enterprise!.facebookLink! != '')
+                            OutlineContainerWidget(
+                              title: 'facebookPage'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    '${jobOfferDetail.enterprise!.facebookLink}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== Facebook Link Component =====//
+
+                          ///===== LinkedIn Link Component =====//
+                          if (jobOfferDetail.enterprise!.linkedinLink! != '')
+                            OutlineContainerWidget(
+                              title: 'linkedinPage'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    '${jobOfferDetail.enterprise!.linkedinLink}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== LinkedIn Link Component =====//
+
+                          ///===== Instagram Link Component =====//
+                          if (jobOfferDetail.enterprise!.instagramLink! != '')
+                            OutlineContainerWidget(
+                              title: 'instagramPage'.tr,
+                              titleColor: ColorsManager.primaryBlue,
+                              // isDivider: false,
+                              childWidget: CustomTextWidget(
+                                text:
+                                    '${jobOfferDetail.enterprise!.instagramLink}',
+                                fontWeight: FontWeightManager.regular,
+                                maxLine: 200,
+                              ),
+                            ),
+                          //===== Instagram Link Component =====//
 
                           ///===== Description Component =====//
                           OutlineContainerWidget(

@@ -16,6 +16,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
   final VoidCallback? onPressed1;
   final VoidCallback? onPressed2;
   final VoidCallback? onPressed3;
+  final int? searchOptType; //1 == save new form, //2 == edit current form
 
   const OfferFeedFilterSearch({
     Key? key,
@@ -29,6 +30,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
     this.onPressed1,
     this.onPressed2,
     this.onPressed3,
+    this.searchOptType = 2,
   }) : super(key: key);
 
   Future<PlaceDetailModel?> showSearchFunc(BuildContext context) async {
@@ -83,11 +85,11 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     CustomTextInput(
                       leftPadding: AppSize.s8,
                       rightPadding: AppSize.s8,
-                      controller: controller.keywordToBeSearchTextCtrl,
-                      inputTitle: 'jobTitle'.tr,
+                      controller: controller.searchNameToBeSearchTextCtrl,
+                      inputTitle: 'SearchName'.tr, //'jobTitle'.tr,
                       fontSizeTitle: AppSize.s16,
                       fontWeightTitle: FontWeight.w600,
-                      hintText: 'searchJobTitle'.tr,
+                      hintText: 'searchName'.tr, //'searchJobTitle'.tr,
                       isFilled: true,
                       // validator: Validator().notEmptyValidator,
                     ),
@@ -161,7 +163,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: controller.listJobOfferTypes
                             .map(
-                              (e) => RowDataSelectionWidget.checkBox(
+                              (e) => RowDataSelectionWidget.radioButton(
                                 isClickingValue: controller.typesListInFilter
                                     .where((item) => item.id == e.id)
                                     .isNotEmpty,
@@ -172,6 +174,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                       .addingOrRemovingFieldInFieldListToBeSearch(
                                     list: controller.typesListInFilter,
                                     fieldValue: e,
+                                    isList: false,
                                   );
                                 },
                               ),
@@ -179,8 +182,449 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             .toList(),
                       ),
                     ),
+                    // CustomContainerWidget(
+                    //   isBoxShadow: false,
+                    //   leftTitle: 'jobTypes'.tr,
+                    //   titleTopPadding: AppSize.s5,
+                    //   titleFontSize: AppSize.s16,
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: controller.listJobOfferTypes
+                    //         .map(
+                    //           (e) => RowDataSelectionWidget.checkBox(
+                    //             isClickingValue: controller.typesListInFilter
+                    //                 .where((item) => item.id == e.id)
+                    //                 .isNotEmpty,
+                    //             // controller.typesListInFilter.contains(e),
+                    //             text: e.label,
+                    //             onPressed: () {
+                    //               controller
+                    //                   .addingOrRemovingFieldInFieldListToBeSearch(
+                    //                 list: controller.typesListInFilter,
+                    //                 fieldValue: e,
+                    //               );
+                    //             },
+                    //           ),
+                    //         )
+                    //         .toList(),
+                    //   ),
+                    // ),
                     //===== Bottom of Job Types Component =====//
                     const SizedBox(height: 8.0),
+
+                    ///===== Top of From Date & To Date Component =====//
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: Row(
+                        children: [
+                          ///===== Top of From Date Component =====//
+                          if (controller.typesListInFilter[0].id == 1)
+                            Expanded(
+                              flex: 40,
+                              child: ContainerDialogWidget(
+                                inputTitle: 'internshipStartDate'.tr,
+                                // fontSizeTitle: AppSize.s16,
+                                fontWeightTitle: FontWeight.w600,
+                                inputTitleMarginTop: AppSize.s5,
+                                validatorFunction: (_) =>
+                                    Validator().notEmptyValidator(
+                                  controller
+                                      .selectedStartDateStringInFilter.value,
+                                ),
+                                dialogType:
+                                    DialogType.dateWithoutDayPickerDialog,
+                                dateLocale: controller.profileController
+                                    .userProfileInfo.value.uiLanguage,
+                                currentTime: DateTime.tryParse(
+                                      controller.selectedStartDateStringInFilter
+                                          .value,
+                                    ) ??
+                                    DateTime.now(),
+                                onConfirmDate: (date) {
+                                  controller.selectedStartDateStringInFilter
+                                          .value =
+                                      dateTimeToString(selectedItem: date);
+                                },
+                                containerWidget: Obx(
+                                  () => controller
+                                              .selectedStartDateStringInFilter
+                                              .value ==
+                                          ''
+                                      ? RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: mmyyyyFormat,
+                                            color: ColorsManager.grey400,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          suffixWidgetFlex: controller
+                                                      .typeSelected.value.id ==
+                                                  1
+                                              ? 20
+                                              : 10,
+                                          suffixWidget: const Icon(
+                                            IconsManager.dateRangeOutlined,
+                                            color: ColorsManager.grey600,
+                                          ),
+                                        )
+                                      : RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: dateFormatSlashMMYYYY(
+                                              date: DateTime.tryParse(
+                                                controller
+                                                    .selectedStartDateStringInFilter
+                                                    .value,
+                                              ),
+                                            ),
+                                            color: ColorsManager.black,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          // suffixWidgetFlex: 10,
+                                          suffixWidget: const Icon(
+                                            IconsManager.dateRangeOutlined,
+                                            color: ColorsManager.grey600,
+                                          ),
+                                        ),
+                                ),
+                              ),
+                            )
+                          else
+                            Expanded(
+                              flex: 40,
+                              child: ContainerDialogWidget(
+                                inputTitle: 'jobStart'.tr,
+                                // fontSizeTitle: AppSize.s16,
+                                fontWeightTitle: FontWeight.w600,
+                                inputTitleMarginTop: AppSize.s5,
+                                validatorFunction: (_) =>
+                                    Validator().notEmptyValidator(
+                                  controller
+                                      .selectedStartDateStringInFilter.value,
+                                ),
+                                dialogType: DialogType.dateTimePickerDialog,
+                                dateLocale: controller.profileController
+                                    .userProfileInfo.value.uiLanguage,
+                                currentTime: DateTime.tryParse(
+                                      controller.selectedStartDateStringInFilter
+                                          .value,
+                                    ) ??
+                                    DateTime.now(),
+                                onConfirmDate: (date) {
+                                  controller.selectedStartDateStringInFilter
+                                          .value =
+                                      dateTimeToString(selectedItem: date);
+                                },
+                                containerWidget: Obx(
+                                  () => controller
+                                              .selectedStartDateStringInFilter
+                                              .value ==
+                                          ''
+                                      ? RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: ddmmyyyyFormat,
+                                            color: ColorsManager.grey400,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          suffixWidgetFlex: 20,
+                                          suffixWidget: const Icon(
+                                            IconsManager.dateRangeOutlined,
+                                            color: ColorsManager.grey600,
+                                          ),
+                                        )
+                                      : RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: dateFormatSlashDDMMYYYY(
+                                              date: DateTime.tryParse(
+                                                controller
+                                                    .selectedStartDateStringInFilter
+                                                    .value,
+                                              ),
+                                            ),
+                                            color: ColorsManager.black,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          suffixWidgetFlex: 20,
+                                          suffixWidget: const Icon(
+                                            IconsManager.dateRangeOutlined,
+                                            color: ColorsManager.grey600,
+                                          ),
+                                        ),
+                                ),
+                              ),
+                            ),
+                          //===== Bottom of From Date Component =====//
+
+                          ///===== Top of To Date Component =====//
+                          if (controller.typesListInFilter[0].id != 1)
+                            const SizedBox(
+                              width: AppSize.s12,
+                            ),
+                          if (controller.typesListInFilter[0].id != 1)
+                            Expanded(
+                              flex: 40,
+                              child: ContainerDialogWidget(
+                                inputTitle:
+                                    controller.typesListInFilter[0].id == 1
+                                        ? 'internshipEndDate'.tr
+                                        : 'jobEnd'.tr,
+                                // fontSizeTitle: AppSize.s16,
+                                fontWeightTitle: FontWeight.w600,
+                                inputTitleMarginTop: AppSize.s5,
+                                validatorFunction: (_) =>
+                                    Validator().notEmptyValidator(
+                                  controller
+                                      .selectedEndDateStringInFilter.value,
+                                ),
+                                dialogType: DialogType.dateTimePickerDialog,
+                                dateLocale: controller.profileController
+                                    .userProfileInfo.value.uiLanguage,
+                                currentTime: DateTime.tryParse(
+                                      controller
+                                          .selectedEndDateStringInFilter.value,
+                                    ) ??
+                                    DateTime.now(),
+                                onConfirmDate: (date) {
+                                  controller
+                                          .selectedEndDateStringInFilter.value =
+                                      dateTimeToString(selectedItem: date);
+                                },
+                                containerWidget: Obx(
+                                  () => controller.selectedEndDateStringInFilter
+                                              .value ==
+                                          ''
+                                      ? RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: ddmmyyyyFormat,
+                                            color: ColorsManager.grey400,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          suffixWidgetFlex: 20,
+                                          suffixWidget: const Icon(
+                                            Icons.date_range_outlined,
+                                            color: ColorsManager.grey600,
+                                          ),
+                                        )
+                                      : RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: dateFormatSlashDDMMYYYY(
+                                              date: DateTime.tryParse(
+                                                controller
+                                                    .selectedEndDateStringInFilter
+                                                    .value,
+                                              ),
+                                            ),
+                                            color: ColorsManager.black,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                          suffixWidgetFlex: 20,
+                                          suffixWidget: const Icon(
+                                            Icons.date_range_outlined,
+                                            color: ColorsManager.grey600,
+                                          ),
+                                        ),
+                                ),
+                              ),
+                            )
+                          else
+                            Container(),
+                          //===== Bottom of To Date Component =====//
+                        ],
+                      ),
+                    ),
+                    //===== Bottom of From Date & To Date Component =====//
+
+                    //if jobType is Internship(id = 1)
+                    if (controller.typesListInFilter[0].id == 1)
+                      Wrap(
+                        children: [
+                          ///===== Top of Internship Periods Component =====//
+                          // ContainerDialogWidget(
+                          //   leftPadding: AppSize.s10,
+                          //   rightPadding: AppSize.s10,
+                          //   inputTitle: 'internshipPeriod'.tr,
+                          //   fontSizeTitle: AppSize.s16,
+                          //   fontWeightTitle: FontWeight.w600,
+                          //   inputTitleMarginBottom: AppSize.s6,
+                          //   // validatorFunction: (_) => Validator().notEmptyValidator(
+                          //   //   controller.selectedLanguage.value.label ?? '',
+                          //   // ),
+                          //   dialogType: DialogType.bottomSheetDialog,
+                          //   dialogWidget: Container(
+                          //     height: getHeight,
+                          //     decoration: const ShapeDecoration(
+                          //       color: ColorsManager.white,
+                          //       shape: RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.only(
+                          //           topLeft: Radius.circular(
+                          //             AppSize.s16,
+                          //           ),
+                          //           topRight: Radius.circular(
+                          //             AppSize.s16,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     child: Obx(
+                          //       () => controller
+                          //               .internshipPeriodTagListForSearch
+                          //               .isNotEmpty
+                          //           ? FieldListMultipleSelector(
+                          //               inputHintText: 'search'.tr,
+                          //               dataListforSelected: controller
+                          //                   .internshipPeriodTagListForSearch,
+                          //               selectedItems: controller
+                          //                   .internshipPeriodTagListInFilter,
+                          //               onTap: (field) {
+                          //                 controller
+                          //                     .addingOrRemovingFieldInFieldListToBeSearch(
+                          //                   list: controller
+                          //                       .internshipPeriodTagListInFilter,
+                          //                   fieldValue: field,
+                          //                 );
+                          //               },
+                          //             )
+                          //           : const LoadingWidget(),
+                          //     ),
+                          //   ),
+                          //   containerWidget: RowContentInputWidget(
+                          //     centerWidget: CustomTextWidget(
+                          //       text: 'internshipPeriod'.tr,
+                          //       color: ColorsManager.grey400,
+                          //       fontWeight: FontWeight.w400,
+                          //       fontSize: AppSize.s16,
+                          //     ),
+                          //     suffixWidget: const Icon(
+                          //       IconsManager.arrowDropDown,
+                          //       color: ColorsManager.grey600,
+                          //     ),
+                          //   ),
+                          // ),
+                          // Container(
+                          //   padding: const EdgeInsets.only(
+                          //     left: AppSize.s10,
+                          //     right: AppSize.s10,
+                          //   ),
+                          //   child: Wrap(
+                          //     children: [
+                          //       for (var i = 0;
+                          //           i <
+                          //               controller
+                          //                   .internshipPeriodTagListInFilter
+                          //                   .length;
+                          //           i++)
+                          //         RemovableTextCardWidget(
+                          //           text:
+                          //               '${controller.internshipPeriodTagListInFilter[i].label}',
+                          //           onRemove: () => controller
+                          //               .addingOrRemovingFieldInFieldListToBeSearch(
+                          //             list: controller
+                          //                 .internshipPeriodTagListInFilter,
+                          //             fieldValue: controller
+                          //                 .internshipPeriodTagListInFilter[i],
+                          //           ),
+                          //         )
+                          //     ],
+                          //   ),
+                          // ),
+                          //===== Bottom of Internship Periods Component =====//
+                          // const SizedBox(height: 8.0),
+
+                          ///===== Top of Internship Types Component =====//
+                          ContainerDialogWidget(
+                            leftPadding: AppSize.s10,
+                            rightPadding: AppSize.s10,
+                            inputTitle: 'internshipType'.tr,
+                            fontSizeTitle: AppSize.s16,
+                            fontWeightTitle: FontWeight.w600,
+                            inputTitleMarginBottom: AppSize.s6,
+                            // validatorFunction: (_) => Validator().notEmptyValidator(
+                            //   controller.selectedLanguage.value.label ?? '',
+                            // ),
+                            dialogType: DialogType.bottomSheetDialog,
+                            dialogWidget: Container(
+                              height: getHeight,
+                              decoration: const ShapeDecoration(
+                                color: ColorsManager.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(
+                                      AppSize.s16,
+                                    ),
+                                    topRight: Radius.circular(
+                                      AppSize.s16,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              child: Obx(
+                                () => controller.internshipTypeTagListForSearch
+                                        .isNotEmpty
+                                    ? FieldListMultipleSelector(
+                                        inputHintText: 'search'.tr,
+                                        dataListforSelected: controller
+                                            .internshipTypeTagListForSearch,
+                                        selectedItems: controller
+                                            .internshipTypeTagListInFilter,
+                                        onTap: (field) {
+                                          controller
+                                              .addingOrRemovingFieldInFieldListToBeSearch(
+                                            list: controller
+                                                .internshipTypeTagListInFilter,
+                                            fieldValue: field,
+                                          );
+                                        },
+                                      )
+                                    : const LoadingWidget(),
+                              ),
+                            ),
+                            containerWidget: RowContentInputWidget(
+                              centerWidget: CustomTextWidget(
+                                text: 'internshipType'.tr,
+                                color: ColorsManager.grey400,
+                                fontWeight: FontWeight.w400,
+                                fontSize: AppSize.s16,
+                              ),
+                              suffixWidget: const Icon(
+                                IconsManager.arrowDropDown,
+                                color: ColorsManager.grey600,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(
+                              left: AppSize.s10,
+                              right: AppSize.s10,
+                            ),
+                            child: Wrap(
+                              children: [
+                                for (var i = 0;
+                                    i <
+                                        controller.internshipTypeTagListInFilter
+                                            .length;
+                                    i++)
+                                  RemovableTextCardWidget(
+                                    text:
+                                        '${controller.internshipTypeTagListInFilter[i].label}',
+                                    onRemove: () => controller
+                                        .addingOrRemovingFieldInFieldListToBeSearch(
+                                      list: controller
+                                          .internshipTypeTagListInFilter,
+                                      fieldValue: controller
+                                          .internshipTypeTagListInFilter[i],
+                                    ),
+                                  )
+                              ],
+                            ),
+                          ),
+                          //===== Bottom of Internship Types Component =====//
+                        ],
+                      )
+                    else
+                      Container(),
+
+                    // const SizedBox(height: 8.0),
 
                     ///===== Top of Fields Component =====//
                     ContainerDialogWidget(
@@ -349,66 +793,70 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     // const SizedBox(height: 8.0),
 
                     ///===== Top of Availabilities Tags Component =====//
-                    ContainerDialogWidget(
-                      leftPadding: AppSize.s10,
-                      rightPadding: AppSize.s10,
-                      inputTitle: 'workAvailability'.tr, //'timeSlots'.tr,
-                      fontSizeTitle: AppSize.s16,
-                      fontWeightTitle: FontWeight.w600,
-                      inputTitleMarginBottom: AppSize.s6,
-                      // validatorFunction: (_) => Validator().notEmptyValidator(
-                      //   controller.selectedLanguage.value.label ?? '',
-                      // ),
-                      dialogType: DialogType.bottomSheetDialog,
-                      dialogWidget: Container(
-                        height: getHeight,
-                        decoration: const ShapeDecoration(
-                          color: ColorsManager.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(
-                                AppSize.s16,
-                              ),
-                              topRight: Radius.circular(
-                                AppSize.s16,
+                    //if jobType is Internship(id = 1)
+                    if (controller.typesListInFilter[0].id == 1)
+                      Container()
+                    else
+                      ContainerDialogWidget(
+                        leftPadding: AppSize.s10,
+                        rightPadding: AppSize.s10,
+                        inputTitle: 'workAvailability'.tr, //'timeSlots'.tr,
+                        fontSizeTitle: AppSize.s16,
+                        fontWeightTitle: FontWeight.w600,
+                        inputTitleMarginBottom: AppSize.s6,
+                        // validatorFunction: (_) => Validator().notEmptyValidator(
+                        //   controller.selectedLanguage.value.label ?? '',
+                        // ),
+                        dialogType: DialogType.bottomSheetDialog,
+                        dialogWidget: Container(
+                          height: getHeight,
+                          decoration: const ShapeDecoration(
+                            color: ColorsManager.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(
+                                  AppSize.s16,
+                                ),
+                                topRight: Radius.circular(
+                                  AppSize.s16,
+                                ),
                               ),
                             ),
                           ),
+                          child: Obx(
+                            () => controller
+                                    .availabilitiesTagListForSearch.isNotEmpty
+                                ? FieldListMultipleSelector(
+                                    inputHintText: 'search'.tr,
+                                    dataListforSelected: controller
+                                        .availabilitiesTagListForSearch,
+                                    selectedItems: controller
+                                        .availabilitiesTagListInFilter,
+                                    onTap: (field) {
+                                      controller
+                                          .addingOrRemovingFieldInFieldListToBeSearch(
+                                        list: controller
+                                            .availabilitiesTagListInFilter,
+                                        fieldValue: field,
+                                      );
+                                    },
+                                  )
+                                : const LoadingWidget(),
+                          ),
                         ),
-                        child: Obx(
-                          () => controller
-                                  .availabilitiesTagListForSearch.isNotEmpty
-                              ? FieldListMultipleSelector(
-                                  inputHintText: 'search'.tr,
-                                  dataListforSelected:
-                                      controller.availabilitiesTagListForSearch,
-                                  selectedItems:
-                                      controller.availabilitiesTagListInFilter,
-                                  onTap: (field) {
-                                    controller
-                                        .addingOrRemovingFieldInFieldListToBeSearch(
-                                      list: controller
-                                          .availabilitiesTagListInFilter,
-                                      fieldValue: field,
-                                    );
-                                  },
-                                )
-                              : const LoadingWidget(),
+                        containerWidget: RowContentInputWidget(
+                          centerWidget: CustomTextWidget(
+                            text: 'workAvailability'.tr,
+                            color: ColorsManager.grey400,
+                            fontWeight: FontWeight.w400,
+                            fontSize: AppSize.s16,
+                          ),
+                          suffixWidget: const Icon(
+                            IconsManager.arrowDropDown,
+                            color: ColorsManager.grey600,
+                          ),
                         ),
                       ),
-                      containerWidget: RowContentInputWidget(
-                        centerWidget: CustomTextWidget(
-                          text: 'workAvailability'.tr,
-                          color: ColorsManager.grey400,
-                          fontWeight: FontWeight.w400,
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidget: const Icon(
-                          IconsManager.arrowDropDown,
-                          color: ColorsManager.grey600,
-                        ),
-                      ),
-                    ),
                     Container(
                       padding: const EdgeInsets.only(
                         left: AppSize.s10,
@@ -533,9 +981,9 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       suffixWidgetFlex: 50,
                       suffixWidget: Slider(
                         value: controller.radiusRxInt.value.toDouble(),
-                        min: 5.0,
-                        max: 100.0,
-                        divisions: 100,
+                        min: 10.0,
+                        max: 200.0,
+                        divisions: 200,
                         activeColor: ColorsManager.primary,
                         inactiveColor: ColorsManager.grey300,
                         thumbColor: ColorsManager.primary,
@@ -566,20 +1014,49 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                   ///===== Top of Clear All Button Component =====//
                   Expanded(
                     flex: 40,
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: CustomMaterialButton(
-                        buttonColor: ColorsManager.white,
-                        elevation: 0.0,
-                        text: buttonLabel1 ?? 'clearAll'.tr,
-                        textColor: ColorsManager.redAccent700,
-                        fontSize: 14,
-                        onPressed: () {
-                          controller.clearAllFilterToBeSearch();
-                        },
-                      ),
-                    ),
+                    child: searchOptType == 1
+                        ? Container()
+                        : Container(
+                            alignment: Alignment.centerLeft,
+                            child: CustomMaterialButton(
+                              buttonColor: ColorsManager.white,
+                              elevation: 0.0,
+                              text: buttonLabel1 ?? 'delete'.tr,
+                              textColor: ColorsManager.redAccent700,
+                              fontSize: 14,
+                              onPressed: () async {
+                                controller.clearAllFilterToBeSearch(
+                                  deleteSavedSearch: true,
+                                );
+                                controller.selectType(
+                                  type: controller.searchedListAsFieldModel[0],
+                                );
+                                await Future.delayed(DurationConstant.d500, () {
+                                  Get.back();
+                                });
+                              },
+                            ),
+                          ),
                   ),
+                  //===== Bottom of Clear All Button Component =====//
+                  ///===== Top of Clear All Button Component =====//
+                  // Expanded(
+                  //   flex: 40,
+                  //   child: Container(),
+                  //   // Container(
+                  //   //   alignment: Alignment.centerLeft,
+                  //   //   child: CustomMaterialButton(
+                  //   //     buttonColor: ColorsManager.white,
+                  //   //     elevation: 0.0,
+                  //   //     text: buttonLabel1 ?? 'clearAll'.tr,
+                  //   //     textColor: ColorsManager.redAccent700,
+                  //   //     fontSize: 14,
+                  //   //     onPressed: () {
+                  //   //       controller.clearAllFilterToBeSearch();
+                  //   //     },
+                  //   //   ),
+                  //   // ),
+                  // ),
                   //===== Bottom of Clear All Button Component =====//
 
                   ///===== Top of Dismiss Button Component =====//
@@ -605,13 +1082,19 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                     child: CustomMaterialButton(
                       childWidget: CustomTextWidget(
                         textAlign: TextAlign.left,
-                        text: buttonLabel3 ?? 'applyFilter'.tr,
+                        text: buttonLabel3 ?? 'save'.tr, //'applyFilter'.tr,
                         color: ColorsManager.white,
                       ),
                       // buttonColor: ColorsManager.primary,
                       elevation: 1.0,
                       onPressed: () {
-                        controller.applyFilterToBeSearch();
+                        searchOptType == 1
+                            ? controller.applyFilterToBeSearch(
+                                newOrEditsearchOpt: 1,
+                              ) // create new saveSearch
+                            : controller.applyFilterToBeSearch(
+                                newOrEditsearchOpt: 2,
+                              ); // edit current saveSearch
                         Get.back();
                       },
                     ),

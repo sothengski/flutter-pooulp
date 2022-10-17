@@ -76,7 +76,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                             ///===== Profile Completion Component =====//
                             ProfileCompletionComponent(
-                              title: 'profileCompletion'.tr,
+                              title: 'profileCompleteness'.tr,
                               completionPercentage: controller
                                   .studentInfoRepsonse
                                   .value
@@ -171,7 +171,7 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Achievement Component =====//
                                           ProfileAchievementComponent(
-                                            title: 'achievement'.tr,
+                                            title: 'achievements'.tr,
                                             addOrEditAchievementRoute: Routes
                                                 .addOrEditAchievementRoute,
                                             achievementList: controller

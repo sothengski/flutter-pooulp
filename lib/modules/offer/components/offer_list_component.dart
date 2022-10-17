@@ -136,88 +136,203 @@ class OfferListComponent extends StatelessWidget {
                         ),
                       ]
                     : (jobOfferType == OfferStrings.savedState)
-                        ? [
-                            Expanded(
-                              key: const ValueKey(OfferStrings.applyAction),
-                              child: OutlineIconButtonWidget(
-                                buttonTitle: 'apply'.tr,
-                                iconData: Icons.thumb_up_outlined,
-                                iconDataOnClick: Icons.thumb_up,
-                                // iconColor: ColorsManager.grey600,
-                                iconColorOnClick: ColorsManager.green,
-                                buttonState: offerList![index].applyState,
-                                oneTimePress: offerList![index].applyState,
-                                onPressed: () {
-                                  offerController!.onClickActionButtonJobOffer(
-                                    actionType: OfferStrings.applyAction,
-                                    jobOfferId: offerList![index].id,
-                                  );
-                                  offerList![index].applyState =
+                        ? offerList![index].dateOfferEnd!.isBefore(now)
+                            ? [
+                                Expanded(
+                                  flex: 40,
+                                  key:
+                                      const ValueKey(OfferStrings.unSaveAction),
+                                  child: OutlineIconButtonWidget(
+                                    buttonTitle: 'unsave'.tr,
+                                    iconData: Icons.bookmark_remove_outlined,
+                                    iconDataOnClick: Icons.bookmark_remove,
+                                    // iconColor: ColorsManager.grey600,
+                                    iconColorOnClick:
+                                        ColorsManager.lightBlueAccent,
+                                    buttonState: offerList![index].savedState,
+                                    oneTimePress: offerList![index].savedState,
+                                    onPressed: () {
                                       offerController!
-                                          .jobOfferOnClickBoolSwitching(
-                                    boolValue: offerList![index].applyState,
-                                  );
-                                },
-                              ),
-                            ),
+                                          .onClickActionButtonJobOffer(
+                                        actionType: OfferStrings.unSaveAction,
+                                        jobOfferId: offerList![index].id,
+                                      );
+                                      offerList![index].savedState =
+                                          offerController!
+                                              .jobOfferOnClickBoolSwitching(
+                                        boolValue: offerList![index].savedState,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ]
+                            : [
+                                Expanded(
+                                  flex: 30,
+                                  key: const ValueKey(OfferStrings.applyAction),
+                                  child: OutlineIconButtonWidget(
+                                    buttonTitle: 'apply'.tr,
+                                    iconData: Icons.thumb_up_outlined,
+                                    iconDataOnClick: Icons.thumb_up,
+                                    // iconColor: ColorsManager.grey600,
+                                    iconColorOnClick: ColorsManager.green,
+                                    buttonState: offerList![index].applyState,
+                                    oneTimePress: offerList![index].applyState,
+                                    onPressed: () {
+                                      offerController!
+                                          .onClickActionButtonJobOffer(
+                                        actionType: OfferStrings.applyAction,
+                                        jobOfferId: offerList![index].id,
+                                      );
+                                      offerList![index].applyState =
+                                          offerController!
+                                              .jobOfferOnClickBoolSwitching(
+                                        boolValue: offerList![index].applyState,
+                                      );
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 30,
+                                  key: const ValueKey(
+                                    OfferStrings.informationAction,
+                                  ),
+                                  child: OutlineIconButtonWidget(
+                                    buttonTitle: 'information'.tr,
+                                    // iconColor: ColorsManager.grey600,
+                                    iconColorOnClick: ColorsManager.primaryBlue,
+                                    buttonState:
+                                        offerList![index].informationState,
+                                    // onPressed: () {
+                                    //   offerController!
+                                    //       .onClickActionButtonJobOffer(
+                                    //     actionType: OfferStrings.information,
+                                    //     jobOfferId: offerList![index].id,
+                                    //   );
+                                    //   offerList![index].informationState =
+                                    //       offerController!
+                                    //           .jobOfferOnClickBoolSwitching(
+                                    //     boolValue:
+                                    //         offerList![index].informationState,
+                                    //   );
+                                    // },
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 40,
+                                  key:
+                                      const ValueKey(OfferStrings.unSaveAction),
+                                  child: OutlineIconButtonWidget(
+                                    buttonTitle: 'unsave'.tr,
+                                    iconData: Icons.bookmark_remove_outlined,
+                                    iconDataOnClick: Icons.bookmark_remove,
+                                    // iconColor: ColorsManager.grey600,
+                                    iconColorOnClick:
+                                        ColorsManager.lightBlueAccent,
+                                    buttonState: offerList![index].savedState,
+                                    oneTimePress: offerList![index].savedState,
+                                    onPressed: () {
+                                      offerController!
+                                          .onClickActionButtonJobOffer(
+                                        actionType: OfferStrings.unSaveAction,
+                                        jobOfferId: offerList![index].id,
+                                      );
+                                      offerList![index].savedState =
+                                          offerController!
+                                              .jobOfferOnClickBoolSwitching(
+                                        boolValue: offerList![index].savedState,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ]
+                        :
+                        //  (jobOfferType == OfferStrings.rejectedState)
+                        [
                             Expanded(
                               key: const ValueKey(
                                 OfferStrings.informationAction,
                               ),
                               child: OutlineIconButtonWidget(
-                                buttonTitle: 'information'.tr,
+                                buttonTitle: 'reason'.tr,
                                 // iconColor: ColorsManager.grey600,
                                 iconColorOnClick: ColorsManager.primaryBlue,
                                 buttonState: offerList![index].informationState,
-                                // onPressed: () {
-                                //   offerController!
-                                //       .onClickActionButtonJobOffer(
-                                //     actionType: OfferStrings.information,
-                                //     jobOfferId: offerList![index].id,
-                                //   );
-                                //   offerList![index].informationState =
-                                //       offerController!
-                                //           .jobOfferOnClickBoolSwitching(
-                                //     boolValue:
-                                //         offerList![index].informationState,
-                                //   );
-                                // },
-                              ),
-                            ),
-                            Expanded(
-                              key: const ValueKey(OfferStrings.unSaveAction),
-                              child: OutlineIconButtonWidget(
-                                buttonTitle: 'unsave'.tr,
-                                iconData: Icons.bookmark_remove_outlined,
-                                iconDataOnClick: Icons.bookmark_remove,
-                                // iconColor: ColorsManager.grey600,
-                                iconColorOnClick: ColorsManager.lightBlueAccent,
-                                buttonState: offerList![index].savedState,
-                                oneTimePress: offerList![index].savedState,
-                                onPressed: () {
-                                  offerController!.onClickActionButtonJobOffer(
-                                    actionType: OfferStrings.unSaveAction,
-                                    jobOfferId: offerList![index].id,
-                                  );
-                                  offerList![index].savedState =
-                                      offerController!
-                                          .jobOfferOnClickBoolSwitching(
-                                    boolValue: offerList![index].savedState,
-                                  );
-                                },
-                              ),
-                            ),
-                          ]
-                        : [
-                            Expanded(
-                              key: const ValueKey(
-                                OfferStrings.informationAction,
-                              ),
-                              child: OutlineIconButtonWidget(
-                                buttonTitle: 'information'.tr,
-                                // iconColor: ColorsManager.grey600,
-                                iconColorOnClick: ColorsManager.primaryBlue,
-                                buttonState: offerList![index].informationState,
+                                onPressed: () => Get.dialog(
+                                  MaterialDialogWidget(
+                                    title: 'reason'.tr,
+                                    titleHorizontalMargin: AppSize.s12,
+                                    dialogMargin: AppSize.s28,
+                                    rightWidget: CustomIconButtonWidget(
+                                      iconData: Icons.close,
+                                      padding: 0.0,
+                                      isConstraints: true,
+                                      onClick: () => {
+                                        Get.back(),
+                                      },
+                                    ),
+                                    contentWidget: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        ///===== Rufusal Reason Component =====//
+                                        if (offerList![index]
+                                                .jobOfferStateModel!
+                                                .stateId !=
+                                            4)
+                                          Container()
+                                        else
+                                          CustomBoxWidget(
+                                            leftMargin: AppSize.s8,
+                                            rightMargin: AppSize.s8,
+                                            bottomMargin: AppSize.s8,
+                                            backgroundColor: ColorsManager
+                                                .white, // Colors.red[100],
+                                            child: Column(
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: CustomTextWidget(
+                                                    textAlign: TextAlign.left,
+                                                    text: offerList![index]
+                                                        .jobOfferStateModel!
+                                                        .reasonTagId
+                                                        .toString(),
+                                                    fontWeight:
+                                                        FontWeightManager.bold,
+                                                    color: ColorsManager.red900,
+                                                    marginTop: AppSize.s4,
+                                                    marginBottom: AppSize.s4,
+                                                  ),
+                                                ),
+                                                if (offerList![index]
+                                                        .jobOfferStateModel!
+                                                        .reason ==
+                                                    '')
+                                                  Container()
+                                                else
+                                                  CustomTextWidget(
+                                                    textAlign: TextAlign.left,
+                                                    text:
+                                                        '${offerList![index].jobOfferStateModel!.reason}',
+                                                    fontWeight:
+                                                        FontWeightManager
+                                                            .regular,
+                                                    fontSize: AppSize.s12,
+                                                    color: ColorsManager.red900,
+                                                    // marginBottom: AppSize.s10,
+                                                    maxLine: 50,
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                        //===== Rufusal Reason Component =====//
+                                      ],
+                                    ),
+                                  ),
+                                ),
                                 // onPressed: () {
                                 // offerController!
                                 //     .onClickActionButtonJobOffer(

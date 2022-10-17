@@ -10,9 +10,11 @@ class OnBoardingAddressSearchBarWidget
     extends SearchDelegate<GooglePlaceSearchModel> {
   final onboardingController = Get.find<OnboardingController>();
   final String? sessionToken;
+  final Rx<PlaceDetailModel>? placeDetail;
 
   OnBoardingAddressSearchBarWidget({
     this.sessionToken,
+    this.placeDetail,
   });
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -79,6 +81,7 @@ class OnBoardingAddressSearchBarWidget
                     onboardingController.getPlaceDetail(
                       placeId: place.placeId,
                       sessionToken: sessionToken,
+                      placeDetail: placeDetail,
                     );
                     Get.back();
                     // close(context, listOfPlace[index]);

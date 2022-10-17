@@ -45,7 +45,7 @@ class ProfileController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    getUserInfoResponseProvider()
+    await getUserInfoResponseProvider()
         .then((value) => isProcessingUserInfoRepsonse.value = true);
     await getStudentInfoResponseProvider()
         .then((value) => isProcessingStudentInfoRepsonse.value = true);

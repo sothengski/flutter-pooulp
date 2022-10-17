@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'dart:convert';
 
 import 'package:flutter/rendering.dart';
@@ -27,21 +25,29 @@ class AuthProvider extends BaseProvider {
     }
   }
 
-  Future<String> logOutAPI() async {
+  Future<JsonResponse> logOutAPI({required String? token}) async {
     try {
       final Response dataResponse = await post(
-        API.paths[Endpoint.signOut],
+        API.paths[Endpoint.signOut].toString(),
         {},
+        headers: {'Authorization': 'Bearer $token}'},
       );
-      if (dataResponse.hasError) {
-        throw responseBodyHandler(resp: dataResponse);
-      } else {
-        // customSnackbar(
-        //   msgTitle: 'Log Out Successfully!',
-        //   msgContent: '${dataResponse.bodyString}',
-        // );
-        return dataResponse.bodyString.toString();
-      }
+      final JsonResponse response = JsonResponse(
+        success: dataResponse.status.isOk,
+        status: dataResponse.statusCode,
+        message: dataResponse.statusText,
+        data: dataResponse.body,
+      );
+      return response;
+      // if (dataResponse.hasError) {
+      //   throw "(resp: ${dataResponse.bodyString})";
+      // } else {
+      //   // customSnackbar(
+      //   //   msgTitle: 'Log Out Successfully!',
+      //   //   msgContent: '${dataResponse.bodyString}',
+      //   // );
+      //   return dataResponse.bodyString.toString();
+      // }
     } catch (e) {
       return Future.error(e.toString());
     }
@@ -78,8 +84,8 @@ class AuthProvider extends BaseProvider {
   // }
 
   Object responseBodyHandler({Response? resp}) {
-    return resp!.body['message'] != null
-            ? "\n- ${resp.body!['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}"
+    return (resp!.body as Map<String, dynamic>)['message'] != null
+            ? "\n- ${(resp.body as Map<String, dynamic>)['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}"
             : ""
         // ''' "${resp.body['code'] != null ? "\n- ${resp.body!['code']}" : ""}"'''
         ;
@@ -206,6 +212,32 @@ class AuthProvider extends BaseProvider {
       );
       debugPrint('response: $response');
       return response;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future<LoginModel> refreshTokenAPI() async {
+    try {
+      // log('refreshTokenAPI:: ${API.host}${API.paths[Endpoint.postRefreshToken].toString()}');
+      final Response dataResponse = await post(
+        '${API.host}${API.paths[Endpoint.postRefreshToken]}',
+        {},
+        headers: {
+          'Authorization': 'Bearer ${getUserToken()}',
+        },
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final data = json.decode(dataResponse.bodyString.toString());
+        final LoginModel loginData =
+            LoginModel.fromJson(data as Map<String, dynamic>);
+        await AuthServices().saveUserToken(
+          bodyData: loginData,
+        );
+        return loginData; //LoginModel.fromJson(data as Map<String, dynamic>);
+      }
     } catch (e) {
       return Future.error(e.toString());
     }

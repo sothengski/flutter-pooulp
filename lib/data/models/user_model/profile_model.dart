@@ -37,13 +37,16 @@ class ProfileModel {
   final String? logoUrn; //enterprise
   final DateTime? createdAt; //enterprise
   final DateTime? updatedAt; //enterprise
+  final DateTime? establishedIn; //enterprise
+  final String? legalStatusLabel; //enterprise
   final String? facebookLink; //enterprise
+  final String? instagramLink; //enterprise
   final String? linkedinLink; //enterprise
   final String? whatsAppLink; //enterprise
   final String? youtubeLink; //enterprise
   final int? statusCode; //enterprise
   final String? uuid; //enterprise
-
+  final FieldModel? enterpriseType; //enterprise
   // final Shool school; //offer in feed endpoint
   final List<FieldModel>? spokenLanguages; //offer in feed endpoint
   final List<FieldModel>? fields;
@@ -51,6 +54,13 @@ class ProfileModel {
   final List<UserModel>? managers; //offer in feed endpoint
   // final List<int>? spokenLanguagesList;
   // final List<String>? fields;
+
+  final int? source;
+//source: 1 | 2 | 3 | 4
+// 1 = Web App
+// 2 = Mobile App - iOS
+// 3 = Mobile App - Android
+// 4 = Website
 
   const ProfileModel({
     this.firstName,
@@ -84,17 +94,22 @@ class ProfileModel {
     this.logoUrn,
     this.createdAt,
     this.updatedAt,
+    this.establishedIn,
+    this.legalStatusLabel,
     this.facebookLink,
+    this.instagramLink,
     this.linkedinLink,
     this.whatsAppLink,
     this.youtubeLink,
     this.statusCode,
     this.uuid,
+    this.enterpriseType,
     // this.school,
     this.spokenLanguages,
     this.fields,
     this.logoUrl,
     this.managers,
+    this.source,
   });
 
   String get fullName => '$firstName $lastName';
@@ -157,12 +172,23 @@ class ProfileModel {
         updatedAt: json['updated_at'] != null
             ? DateTime.parse(json['updated_at'].toString())
             : null,
+        establishedIn:
+            json['established_in'] != null && json['established_in'] != ''
+                ? DateTime.parse(json['established_in'].toString())
+                : null,
+        legalStatusLabel: json['legal_status_label'] as String?,
         facebookLink: json['facebook_link'] as String?,
+        instagramLink: json['instagram_link'] as String? ?? '',
         linkedinLink: json['linkedin_link'] as String?,
         whatsAppLink: json['whatsapp_link'] as String?,
         youtubeLink: json['youtube_link'] as String?,
         statusCode: json['statecode'] as int?,
         uuid: json['uuid'] as String?,
+        enterpriseType: json['enterprise_type'] != null
+            ? FieldModel.fromJson(
+                json['enterprise_type'] as Map<String, dynamic>,
+              )
+            : null,
         // school: School.fromJson(json['school']),
         spokenLanguages:
             json['spoken_languages'] == null || json['spoken_languages'] == []
@@ -230,12 +256,16 @@ class ProfileModel {
         'logo_urn': logoUrn,
         'created_at': createdAt?.toString(),
         'updated_at': updatedAt?.toString(),
+        'established_in': establishedIn?.toString(),
+        'legal_status_label': legalStatusLabel,
         'facebook_link': facebookLink,
+        'instagram_link': instagramLink,
         'linkedin_link': linkedinLink,
         'whatsapp_link': whatsAppLink,
         'youtube_link': youtubeLink,
         'statecode': statusCode,
         'uuid': uuid,
+        'enterprise_type': enterpriseType,
         // 'school': school.toJson(),
         'spoken_languages': spokenLanguages == null || spokenLanguages == []
             ? null
@@ -247,6 +277,7 @@ class ProfileModel {
         'managers': managers == null || managers == []
             ? null
             : List<dynamic>.from(managers!.map((x) => x.toJson())),
+        'source': source,
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -284,14 +315,18 @@ class ProfileModel {
       logoUrn: $logoUrn, 
       createdAt: $createdAt, 
       updatedAt: $updatedAt, 
-      facebookLink: $facebookLink, 
+      establishedIn: $establishedIn,
+      legalStatusLabel: $legalStatusLabel,
+      facebookLink: $facebookLink,       
+      instagramLink: $instagramLink, 
       linkedinLink: $linkedinLink, 
       whatsAppLink: $whatsAppLink,
       youtubeLink: $youtubeLink,
       statusCode: $statusCode, 
       uuid: $uuid,
+      enterpriseType: $enterpriseType,
       spokenLanguages: $spokenLanguages,
-       fields: $fields,
+      fields: $fields,
       logoUrl: $logoUrl,
       managers: $managers,
     )''';

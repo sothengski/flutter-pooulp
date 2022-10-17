@@ -124,7 +124,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                               object1: controller.workPlaceTypesInFilter.value,
                               object2: 1,
                             ),
-                            text: 'remote'.tr,
+                            text: 'telecommuting'.tr,
                             onPressed: () {
                               controller.workPlaceTypesInFilter.value = 1;
                               // controller.workPlaceTypesForSearch.value = 1;
@@ -138,7 +138,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                               object1: controller.workPlaceTypesInFilter.value,
                               object2: 2,
                             ),
-                            text: 'both'.tr,
+                            text: 'hybrid'.tr,
                             onPressed: () {
                               controller.workPlaceTypesInFilter.value = 2;
                               // controller.workPlaceTypesForSearch.value = 2;

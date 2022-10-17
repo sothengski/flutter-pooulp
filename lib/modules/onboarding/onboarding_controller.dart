@@ -32,6 +32,8 @@ class OnboardingController extends GetxController
   Rx<PlaceDetailModel>? internshipPlaceDetail = PlaceDetailModel().obs;
   RxInt internshipRadiusRxInt = 100.obs;
   TextEditingController internshipAddressCtrl = TextEditingController();
+  TextEditingController internshipOtherTextCtrl =
+      TextEditingController(text: '');
 
   RxList<FieldModel> studentJobInterestedInSelectedList = <FieldModel>[].obs;
   RxList<FieldModel> studentJobLanguageSelectedList = <FieldModel>[].obs;
@@ -396,6 +398,7 @@ class OnboardingController extends GetxController
             types: [FieldModel(id: 1)],
             internshipTypes: internshipTypeSelectedList,
             internshipPeriods: internshipPeriodSelectedList,
+            internshipTypeText: internshipOtherTextCtrl.text,
             fields: internshipInterestedInSelectedList,
             languages: internshipLanguageSelectedList,
             location: internshipPlaceDetail!.value.fullAddress,
@@ -466,7 +469,7 @@ class OnboardingController extends GetxController
 
     // debugPrint('placeDetail: $placeDetail');
 
-    // debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
+    debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
     submitDataToAPI(onboardingData: onboardingDataToBeAdd);
   }
 

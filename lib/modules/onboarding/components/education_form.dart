@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../core/core.dart';
@@ -248,6 +249,17 @@ class EducationForm extends GetView<OnboardingController> {
                 inputTitle: 'currentStudyLabel'.tr,
                 hintText: 'currentStudyLabel'.tr,
                 isFilled: true,
+                // validator: Validator().notEmptyValidator,
+                keyboardType: TextInputType.number,
+                maxLength: 12,
+                inputFormatterList: [
+                  FilteringTextInputFormatter.deny(
+                    RegExp(Validator.avoidSpaceRegExpPattern),
+                  ),
+                  FilteringTextInputFormatter.allow(
+                    RegExp(Validator.numberRegExpPattern),
+                  ),
+                ],
               ),
             ),
             //===== Bottom of Current Year of Study Component =====//

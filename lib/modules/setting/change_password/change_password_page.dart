@@ -54,7 +54,9 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                     bottomPadding: AppSize.s16,
                     validator: Validator().passwordValidatorWithMin6Chars,
                     inputFormatterList: [
-                      Validator().avoidSpaceInputFormatter(),
+                      FilterTextInputFormat().deny(
+                        regExpString: Validator.avoidSpaceRegExpPattern,
+                      ),
                     ],
                     onChanged: (_) =>
                         controller.passwordFormKey.currentState!.validate(),
@@ -89,7 +91,9 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                     bottomPadding: AppSize.s16,
                     validator: Validator().passwordValidatorWithMin6Chars,
                     inputFormatterList: [
-                      Validator().avoidSpaceInputFormatter(),
+                      FilterTextInputFormat().deny(
+                        regExpString: Validator.avoidSpaceRegExpPattern,
+                      ),
                     ],
                     onChanged: (_) =>
                         controller.passwordFormKey.currentState!.validate(),
@@ -124,7 +128,9 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                     bottomPadding: AppSize.s16,
                     validator: (_) => controller.matchingPasswords(),
                     inputFormatterList: [
-                      Validator().avoidSpaceInputFormatter(),
+                      FilterTextInputFormat().deny(
+                        regExpString: Validator.avoidSpaceRegExpPattern,
+                      ),
                     ],
                     onChanged: (_) =>
                         controller.passwordFormKey.currentState!.validate(),

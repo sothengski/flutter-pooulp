@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../core/core.dart';
@@ -253,12 +252,7 @@ class EducationForm extends GetView<OnboardingController> {
                 keyboardType: TextInputType.number,
                 maxLength: 12,
                 inputFormatterList: [
-                  FilteringTextInputFormatter.deny(
-                    RegExp(Validator.avoidSpaceRegExpPattern),
-                  ),
-                  FilteringTextInputFormatter.allow(
-                    RegExp(Validator.numberRegExpPattern),
-                  ),
+                  FilterTextInputFormat().digitsOnly(),
                 ],
               ),
             ),

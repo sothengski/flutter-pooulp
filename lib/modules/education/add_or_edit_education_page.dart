@@ -46,6 +46,23 @@ class AddOrEditEducationPage extends GetView<EducationController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                ///===== Top of Graduated Component =====//
+                Obx(
+                  () => RowDataSelectionWidget.checkBox(
+                    verticalPadding: AppSize.s4,
+                    horizontalPadding: AppSize.s0,
+                    isClickingValue: controller.isCurrentStudy.value,
+                    text: 'iAmCurrentlyStudying'.tr,
+                    isLeftSideText: false,
+                    onPressed: () {
+                      controller.isCurrentStudy.value = switchingBooleanValue(
+                        boolValue: controller.isCurrentStudy.value,
+                      );
+                    },
+                  ),
+                ),
+                //===== Bottom of Graduated Component =====//
+
                 ///===== Top of School Component =====//
                 ContainerDialogWidget(
                   inputTitle: 'school'.tr,
@@ -104,9 +121,10 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                           )
                         : RowContentInputWidget(
                             centerWidget: CustomTextWidget(
-                              text: controller.selectedSchool.value.name,
+                              text: '${controller.selectedSchool.value.name}',
                               color: ColorsManager.black,
                               fontSize: AppSize.s16,
+                              maxLine: 2,
                             ),
                             suffixWidget: const Icon(
                               IconsManager.arrowDropDown,
@@ -118,14 +136,14 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 //===== Bottom of School Component =====//
 
                 ///===== Top of Field of Study Component =====//
-                CustomTextInput(
-                  topPadding: AppSize.s16,
-                  controller: controller.fieldOfStudyTextCtrl,
-                  inputTitle: 'major'.tr,
-                  hintText: 'majorHint'.tr,
-                  isFilled: true,
-                  validator: Validator().notEmptyValidator,
-                ),
+                // CustomTextInput(
+                //   topPadding: AppSize.s16,
+                //   controller: controller.fieldOfStudyTextCtrl,
+                //   inputTitle: 'major'.tr,
+                //   hintText: 'majorHint'.tr,
+                //   isFilled: true,
+                //   validator: Validator().notEmptyValidator,
+                // ),
                 //===== Bottom of Field of Study Component =====//
 
                 ///===== Top of Fields Component =====//
@@ -202,14 +220,112 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 ),
                 //===== Bottom of Fields Component =====//
 
+                ///===== Top of School Degree Component =====//
+                ContainerDialogWidget(
+                  inputTitle: 'eduDegreeLabel'.tr,
+                  fontSizeTitle: AppSize.s16,
+                  // validatorFunction: (_) => Validator().notEmptyValidator(
+                  //   controller.selectedLanguage.value.label ?? '',
+                  // ),
+                  dialogType: DialogType.bottomSheetDialog,
+                  dialogWidget: Container(
+                    height: getHeight,
+                    decoration: const ShapeDecoration(
+                      color: ColorsManager.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(
+                            AppSize.s16,
+                          ),
+                          topRight: Radius.circular(
+                            AppSize.s16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    child: Obx(
+                      () => controller.schoolDegreeList.isNotEmpty
+                          ? FieldListSelector(
+                              inputHintText: 'search'.tr,
+                              dataListforSelected: controller.schoolDegreeList,
+                              selectedItem:
+                                  controller.schoolDegreeSelected.value,
+                              onTap: (field) {
+                                controller.schoolDegreeSelected.value = field;
+                                Navigator.pop(
+                                  context,
+                                  true,
+                                );
+                              },
+                            )
+                          : const LoadingWidget(),
+                    ),
+                  ),
+                  containerWidget: Obx(
+                    () => controller.schoolDegreeSelected.value.id == null
+                        ? RowContentInputWidget(
+                            centerWidget: CustomTextWidget(
+                              text: 'eduDegreeLabel'.tr,
+                              color: ColorsManager.grey400,
+                              fontWeight: FontWeight.w400,
+                              fontSize: AppSize.s16,
+                            ),
+                            suffixWidget: const Icon(
+                              IconsManager.arrowDropDown,
+                              color: ColorsManager.grey600,
+                            ),
+                          )
+                        : RowContentInputWidget(
+                            centerWidget: CustomTextWidget(
+                              text: controller.schoolDegreeSelected.value.label,
+                              color: ColorsManager.black,
+                              fontSize: AppSize.s16,
+                            ),
+                            suffixWidget: const Icon(
+                              IconsManager.arrowDropDown,
+                              color: ColorsManager.grey600,
+                            ),
+                          ),
+                  ),
+                ),
+                //===== Bottom of School Degree Component =====//
+
                 ///===== Top of Degree Component =====//
-                CustomTextInput(
-                  topPadding: AppSize.s16,
-                  controller: controller.degreeTextCtrl,
-                  inputTitle: 'degree'.tr,
-                  hintText: 'degreeHint'.tr,
-                  isFilled: true,
-                  validator: Validator().notEmptyValidator,
+                // CustomTextInput(
+                //   topPadding: AppSize.s16,
+                //   controller: controller.degreeTextCtrl,
+                //   inputTitle: 'degree'.tr,
+                //   hintText: 'degreeHint'.tr,
+                //   isFilled: true,
+                //   validator: Validator().notEmptyValidator,
+                // ),
+                //===== Bottom of Degree Component =====//
+
+                ///===== Top of Degree Component =====//
+                Obx(
+                  () => Visibility(
+                    visible: controller.isCurrentStudy.value == false,
+                    child: CustomTextInput(
+                      topPadding: AppSize.s16,
+                      controller: controller.currentStudyYrTextCtrl,
+                      inputTitle: 'currentStudyLabel'.tr,
+                      hintText: 'currentStudyLabel'.tr,
+                      isFilled: true,
+                      // validator: Validator().notEmptyValidator,
+                      keyboardType: TextInputType.number,
+                      maxLength: 3,
+                      inputFormatterList: [
+                        FilterTextInputFormat().digitsOnly(),
+                        // FilterTextInputFormat().allow(
+                        //   filterPattern:
+                        //       RegExp(Validator.avoidSpaceRegExpPattern),
+                        // )
+                        // FilterTextInputFormat().allow(
+                        //   regExpString: Validator.avoidSpaceRegExpPattern,
+                        // )
+                      ],
+                    ),
+                  ),
                 ),
                 //===== Bottom of Degree Component =====//
 
@@ -220,7 +336,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                     Expanded(
                       flex: 40,
                       child: ContainerDialogWidget(
-                        inputTitle: 'startFrom'.tr,
+                        inputTitle: 'startDate'.tr,
                         inputTitleMarginTop: AppSize.s16,
                         validatorFunction: (_) => Validator().notEmptyValidator(
                           controller.selectedStartedDateString.value,
@@ -333,32 +449,15 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 ),
                 //===== Bottom of Start Date & End Date Component =====//
 
-                ///===== Top of Graduated Component =====//
-                Obx(
-                  () => RowDataSelectionWidget.checkBox(
-                    verticalPadding: AppSize.s16,
-                    horizontalPadding: AppSize.s0,
-                    isClickingValue: controller.isCheckGraduated.value,
-                    text: 'iAmCurrentlyStudying'.tr,
-                    isLeftSideText: false,
-                    onPressed: () {
-                      controller.isCheckGraduated.value = switchingBooleanValue(
-                        boolValue: controller.isCheckGraduated.value,
-                      );
-                    },
-                  ),
-                ),
-                //===== Bottom of Graduated Component =====//
-
                 ///===== Top of Description Component =====//
                 CustomTextInput(
+                  topPadding: AppSize.s16,
                   controller: controller.descriptionTextCtrl,
                   inputTitle: 'description'.tr,
                   hintText: "${'description'.tr}...",
                   isFilled: true,
                   topContentPadding: AppSize.s12,
                   bottomContentPadding: AppSize.s12,
-                  // topPadding: AppSize.s12,
                   counter: true,
                   maxLines: 10,
                   minLines: 5,

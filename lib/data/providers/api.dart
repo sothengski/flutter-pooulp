@@ -65,6 +65,7 @@ enum Endpoint {
   postCreateSavedSearch,
   putEditSavedSearch,
   // deleteSavedSearch,
+  getSchoolDegreeTags,
 }
 
 class API {
@@ -131,6 +132,7 @@ class API {
     Endpoint.getSavedSearch: '/search/saved',
     Endpoint.postCreateSavedSearch: '/search/create',
     Endpoint.putEditSavedSearch: '/search/edit',
+    Endpoint.getSchoolDegreeTags: '/tags/schooldegree',
   };
   static String postSearchOffer({int? pageNumber = 1}) =>
       '/search/offers?page=$pageNumber';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/core.dart';
@@ -74,9 +73,11 @@ class SignInForm extends GetView<SignInController> {
                   topPadding: AppSize.s12,
                   validator: Validator().passwordValidatorWithMin6Chars,
                   inputFormatterList: [
-                    FilteringTextInputFormatter.deny(
-                      RegExp(Validator.avoidSpaceRegExpPattern),
-                    ),
+                    FilterTextInputFormat()
+                        .deny(regExpString: Validator.avoidSpaceRegExpPattern),
+                    // FilteringTextInputFormatter.deny(
+                    //   RegExp(Validator.avoidSpaceRegExpPattern),
+                    // ),
                   ],
                   // changeShowPassword: () => controller.showPasswordBoolSwitching(
                   //   boolValue: controller.showPassword.value,

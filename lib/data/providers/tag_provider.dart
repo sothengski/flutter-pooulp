@@ -14,6 +14,7 @@ abstract class ITagProvider {
   Future<List<FieldModel>> getAvailabilitiesTags();
   Future<List<FieldModel>> getInternshipTypeTags();
   Future<List<FieldModel>> getInternshipPeriodTags();
+  Future<List<FieldModel>> getSchoolDegreeTags();
 }
 
 class TagProvider extends BaseProvider implements ITagProvider {
@@ -245,6 +246,29 @@ class TagProvider extends BaseProvider implements ITagProvider {
     try {
       final dataResponse = await get(
         API.paths[Endpoint.getInternshipPeriodTags].toString(),
+      );
+      final List<FieldModel> internshipPeriodTags = <FieldModel>[];
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final apiResponse =
+            json.decode(dataResponse.bodyString.toString()) as List;
+        for (final e in apiResponse) {
+          internshipPeriodTags
+              .add(FieldModel.fromJson(e as Map<String, dynamic>));
+        }
+        return internshipPeriodTags;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<List<FieldModel>> getSchoolDegreeTags() async {
+    try {
+      final dataResponse = await get(
+        API.paths[Endpoint.getSchoolDegreeTags].toString(),
       );
       final List<FieldModel> internshipPeriodTags = <FieldModel>[];
       if (dataResponse.hasError) {

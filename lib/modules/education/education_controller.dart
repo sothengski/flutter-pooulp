@@ -18,13 +18,15 @@ class EducationController extends GetxController {
 
   int eduId = 0;
 
-  TextEditingController fieldOfStudyTextCtrl = TextEditingController();
-  TextEditingController degreeTextCtrl = TextEditingController();
+  // TextEditingController fieldOfStudyTextCtrl = TextEditingController();
+  // TextEditingController degreeTextCtrl = TextEditingController();
+  TextEditingController currentStudyYrTextCtrl = TextEditingController();
   TextEditingController descriptionTextCtrl = TextEditingController();
   RxList<FieldModel> fieldListForSelect = <FieldModel>[].obs;
 
   Rx<SchoolModel> selectedSchool = SchoolModel().obs;
   RxList<FieldModel> fieldListSelected = <FieldModel>[].obs;
+  Rx<FieldModel> schoolDegreeSelected = FieldModel().obs;
 
   // Rx<DateTime> selectedStartedDate = DateTime.now().obs;
   Rx<String> selectedStartedDateString = ''.obs;
@@ -32,28 +34,38 @@ class EducationController extends GetxController {
   // Rx<DateTime> selectedEndDate = DateTime.now().obs;
   RxString selectedEndDateString = ''.obs;
 
-  RxBool isCheckGraduated = false.obs;
+  RxBool isCurrentStudy = false.obs;
 
   Rx<bool> isSubmitBtnProcessing = false.obs;
 
   RxList<SchoolModel> schoolList = <SchoolModel>[].obs;
+  RxList<FieldModel> schoolDegreeList = <FieldModel>[].obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     title = (Get.arguments as List)[0].toString();
+    await getSchoolDegreeListResponseProvider();
+
     if (title == Keys.editOperation) {
       final EducationModel eduDataArg =
           (Get.arguments as List)[1] as EducationModel;
       eduId = eduDataArg.id!;
       selectedSchool.value = eduDataArg.school!;
-      fieldOfStudyTextCtrl.text = eduDataArg.name!;
-      degreeTextCtrl.text = eduDataArg.degree!;
+      // fieldOfStudyTextCtrl.text = eduDataArg.name!;
+      // degreeTextCtrl.text = eduDataArg.degree!;
+      // schoolDegreeSelected.value = FieldModel(id: eduDataArg.degreeId);
+      if (eduDataArg.degreeId != null) {
+        matchDegreeFieldBydegreeId(degreeID: eduDataArg.degreeId);
+      }
       selectedStartedDateString.value =
           eduDataArg.dateStart == null ? '' : eduDataArg.dateStart.toString();
       selectedEndDateString.value =
           eduDataArg.dateEnd == null ? '' : eduDataArg.dateEnd.toString();
-      isCheckGraduated.value = eduDataArg.completed!;
+      isCurrentStudy.value = eduDataArg.completed!;
+      currentStudyYrTextCtrl.text = eduDataArg.studyingYear != null
+          ? eduDataArg.studyingYear.toString()
+          : '';
       descriptionTextCtrl.text = eduDataArg.description!;
       fieldListSelected.value = eduDataArg.fields!;
       // debugPrint('eduDataArg:: $eduDataArg');
@@ -80,6 +92,22 @@ class EducationController extends GetxController {
     return fieldListForSelect;
   }
 
+  Future<List<FieldModel>> getSchoolDegreeListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    schoolDegreeList.addAll(await tagProvider.getSchoolDegreeTags());
+    // debugPrint(
+    //   'fieldListForSelect:: ${fieldListForSelect.map((element) => '${element.label}\n')}',
+    // );
+    return schoolDegreeList;
+  }
+
+  void matchDegreeFieldBydegreeId({int? degreeID}) {
+    final FieldModel degreeTemp =
+        schoolDegreeList.where((e) => e.id == degreeID).first;
+    schoolDegreeSelected.value = degreeTemp;
+  }
+
   SchoolModel selectedSchoolOnClick({SchoolModel? selectedItem}) {
     return selectedItem!;
   }
@@ -98,8 +126,10 @@ class EducationController extends GetxController {
           switchingBooleanValue(boolValue: isSubmitBtnProcessing.value);
       final EducationModel educationToBeAddOrEdit = EducationModel(
         schoolId: selectedSchool.value.id,
-        name: fieldOfStudyTextCtrl.text.trim(),
-        degree: degreeTextCtrl.text.trim(),
+        // name: fieldOfStudyTextCtrl.text.trim(),
+        // degree: degreeTextCtrl.text.trim(),
+        degreeId: schoolDegreeSelected.value.id,
+        studyingYear: int.tryParse(currentStudyYrTextCtrl.text),
         dateStart: selectedStartedDateString.value == ''
             ? null
             : DateTime.tryParse(
@@ -110,10 +140,13 @@ class EducationController extends GetxController {
             : DateTime.tryParse(
                 selectedEndDateString.value,
               ),
-        completed: isCheckGraduated.value,
+        completed: isCurrentStudy.value,
         description: descriptionTextCtrl.text.trim(),
         fields: [...fieldListSelected],
       );
+      // debugPrint(
+      //   'educationToBeAddOrEdit:: $educationToBeAddOrEdit',
+      // );
       makeRequestToEducationAPI(
         eduId: eduId,
         eduData: educationToBeAddOrEdit,
@@ -147,8 +180,6 @@ class EducationController extends GetxController {
     if (responseData.success!) {
       // debugPrint('=====success=====');
       profileController.getStudentInfoResponseProvider();
-      isSubmitBtnProcessing.value =
-          switchingBooleanValue(boolValue: isSubmitBtnProcessing.value);
       Get.back();
       customSnackbar(
         msgTitle: 'success'.tr,
@@ -162,5 +193,7 @@ class EducationController extends GetxController {
         duration: DurationConstant.d1500,
       );
     }
+    isSubmitBtnProcessing.value =
+        switchingBooleanValue(boolValue: isSubmitBtnProcessing.value);
   }
 }

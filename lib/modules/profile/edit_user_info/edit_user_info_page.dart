@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../core/core.dart';
@@ -402,16 +401,17 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                   // ),
                                   maxLength: 13,
                                   inputFormatterList: [
-                                    FilteringTextInputFormatter.deny(
-                                      RegExp(
-                                        Validator.avoidSpaceRegExpPattern,
-                                      ),
-                                    ),
-                                    FilteringTextInputFormatter.allow(
-                                      RegExp(
-                                        Validator.numberRegExpPattern,
-                                      ),
-                                    ),
+                                    FilterTextInputFormat().digitsOnly(),
+                                    // FilteringTextInputFormatter.deny(
+                                    //   RegExp(
+                                    //     Validator.avoidSpaceRegExpPattern,
+                                    //   ),
+                                    // ),
+                                    // FilteringTextInputFormatter.allow(
+                                    //   RegExp(
+                                    //     Validator.numberRegExpPattern,
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),

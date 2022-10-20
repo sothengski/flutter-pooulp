@@ -9,6 +9,7 @@ class EducationModel {
   final String? name;
   final String? description;
   final String? degree;
+  final int? degreeId;
   final int? studyingYear;
   final DateTime? dateStart;
   final DateTime? dateEnd;
@@ -22,6 +23,7 @@ class EducationModel {
     this.name,
     this.description,
     this.degree,
+    this.degreeId,
     this.studyingYear,
     this.dateStart,
     this.dateEnd,
@@ -50,6 +52,7 @@ class EducationModel {
         name: json['name'] as String?,
         description: json['description'] as String?,
         degree: json['degree'] as String?,
+        degreeId: json['degree_id'] as int?,
         studyingYear: json['studying_year'] as int?,
         dateStart: json['date_start'] != null
             ? DateTime.parse(json['date_start'].toString())
@@ -77,9 +80,10 @@ class EducationModel {
   Map<String, dynamic> toJson() => {
         'id': id,
         'school_id': schoolId,
-        'name': name,
+        'name': name ?? '',
         'description': description,
         'degree': degree,
+        'degree_id': degreeId,
         'studying_year': studyingYear,
         'date_start': dateStart == null
             ? null
@@ -100,6 +104,7 @@ class EducationModel {
         'name': name ?? '',
         'description': description ?? '',
         'degree': degree ?? '',
+        'degree_id': degreeId,
         'studying_year': studyingYear ?? 0,
         'date_start': '',
         // 'date_start': dateStart == null
@@ -125,6 +130,7 @@ class EducationModel {
       name: $name,
       description: $description,
       degree: $degree,
+      degreeId: $degreeId,
       studyingYear: $studyingYear,
       dateStart: $dateStart,
       dateEnd: $dateEnd,

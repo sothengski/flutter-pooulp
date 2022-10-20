@@ -25,10 +25,10 @@ class Validator {
 
   static const enterAValidField = "Please enter a valid";
 
-  TextInputFormatter avoidSpaceInputFormatter() =>
-      FilteringTextInputFormatter.deny(
-        RegExp(Validator.avoidSpaceRegExpPattern),
-      );
+  // TextInputFormatter avoidSpaceInputFormatter() =>
+  //     FilteringTextInputFormatter.deny(
+  //       RegExp(Validator.avoidSpaceRegExpPattern),
+  //     );
 
   String? emailValidator(String? value) {
     final RegExp regex = RegExp(emailRegExpPattern);
@@ -134,6 +134,28 @@ class Validator {
       return null;
     }
   }
+}
+
+class FilterTextInputFormat {
+  FilterTextInputFormat();
+  TextInputFormatter digitsOnly() => FilteringTextInputFormatter.digitsOnly;
+
+  TextInputFormatter allow({required String? regExpString}) =>
+      FilteringTextInputFormatter.allow(RegExp(regExpString!));
+
+  TextInputFormatter deny({required String? regExpString}) =>
+      FilteringTextInputFormatter.deny(RegExp(regExpString!));
+
+  // TextInputFormatter allow({required Pattern? filterPattern}) {
+  //   return FilteringTextInputFormatter.allow(filterPattern!);
+  // }
+  // RegExp(
+  //   Validator.avoidSpaceRegExpPattern,
+  // ),
+  // RegExp(
+  //   Validator.numberRegExpPattern,
+  // ),
+
 }
 
 class NumericalRangeFormatter extends TextInputFormatter {

@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/core.dart';
@@ -373,16 +372,17 @@ class SignUpForm extends GetView<SignUpController> {
                                     ),
                                     maxLength: 13,
                                     inputFormatterList: [
-                                      FilteringTextInputFormatter.deny(
-                                        RegExp(
-                                          Validator.avoidSpaceRegExpPattern,
-                                        ),
-                                      ),
-                                      FilteringTextInputFormatter.allow(
-                                        RegExp(
-                                          Validator.numberRegExpPattern,
-                                        ),
-                                      ),
+                                      FilterTextInputFormat().digitsOnly(),
+                                      // FilteringTextInputFormatter.deny(
+                                      //   RegExp(
+                                      //     Validator.avoidSpaceRegExpPattern,
+                                      //   ),
+                                      // ),
+                                      // FilteringTextInputFormatter.allow(
+                                      //   RegExp(
+                                      //     Validator.numberRegExpPattern,
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                 ),
@@ -418,9 +418,13 @@ class SignUpForm extends GetView<SignUpController> {
                               validator:
                                   Validator().passwordValidatorWithMin6Chars,
                               inputFormatterList: [
-                                FilteringTextInputFormatter.deny(
-                                  RegExp(Validator.avoidSpaceRegExpPattern),
+                                FilterTextInputFormat().deny(
+                                  regExpString:
+                                      Validator.avoidSpaceRegExpPattern,
                                 ),
+                                // FilteringTextInputFormatter.deny(
+                                //   RegExp(Validator.avoidSpaceRegExpPattern),
+                                // ),
                               ],
                             ),
                             // CustomTextInput(

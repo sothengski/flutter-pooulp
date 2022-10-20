@@ -16,6 +16,7 @@ class EducationModel {
   bool? completed;
   SchoolModel? school;
   List<FieldModel>? fields;
+  final FieldModel? degreeTag;
 
   EducationModel({
     this.id,
@@ -30,6 +31,7 @@ class EducationModel {
     this.completed,
     this.school,
     this.fields,
+    this.degreeTag,
   });
 
   String? get attendedFrom => dateFormatSlashMMYYYY(date: dateStart);
@@ -75,6 +77,11 @@ class EducationModel {
                 )
                 .toList()
             : [],
+        degreeTag: json['degree_tag'] != null
+            ? FieldModel.fromJson(
+                json['degree_tag'] as Map<String, dynamic>,
+              )
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -96,6 +103,7 @@ class EducationModel {
         'fields': fields == null //|| fields == []
             ? null
             : List<dynamic>.from(fields!.map((x) => x.toJson())),
+        'degree_tag': degreeTag?.toJson(),
       }..removeWhere((_, v) => v == null);
 
   Map<String, dynamic> toJsonForOnboarding() => {
@@ -119,6 +127,7 @@ class EducationModel {
         'fields': fields == null //|| fields == []
             ? null
             : List<dynamic>.from(fields!.map((x) => x.id)),
+        'degree_tag': degreeTag?.toJson(),
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -137,6 +146,7 @@ class EducationModel {
       completed: $completed,
       school: $school,
       fields: $fields,
+      degreeTag: $degreeTag,
     )''';
   }
 }

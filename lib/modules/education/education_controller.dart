@@ -55,8 +55,11 @@ class EducationController extends GetxController {
       // fieldOfStudyTextCtrl.text = eduDataArg.name!;
       // degreeTextCtrl.text = eduDataArg.degree!;
       // schoolDegreeSelected.value = FieldModel(id: eduDataArg.degreeId);
-      if (eduDataArg.degreeId != null) {
-        matchDegreeFieldBydegreeId(degreeID: eduDataArg.degreeId);
+      // if (eduDataArg.degreeId != null) {
+      //   matchDegreeFieldBydegreeId(degreeID: eduDataArg.degreeId);
+      // }
+      if (eduDataArg.degreeTag != null) {
+        schoolDegreeSelected.value = eduDataArg.degreeTag!;
       }
       selectedStartedDateString.value =
           eduDataArg.dateStart == null ? '' : eduDataArg.dateStart.toString();
@@ -102,11 +105,11 @@ class EducationController extends GetxController {
     return schoolDegreeList;
   }
 
-  void matchDegreeFieldBydegreeId({int? degreeID}) {
-    final FieldModel degreeTemp =
-        schoolDegreeList.where((e) => e.id == degreeID).first;
-    schoolDegreeSelected.value = degreeTemp;
-  }
+  // void matchDegreeFieldBydegreeId({int? degreeID}) {
+  //   final FieldModel degreeTemp =
+  //       schoolDegreeList.where((e) => e.id == degreeID).first;
+  //   schoolDegreeSelected.value = degreeTemp;
+  // }
 
   SchoolModel selectedSchoolOnClick({SchoolModel? selectedItem}) {
     return selectedItem!;

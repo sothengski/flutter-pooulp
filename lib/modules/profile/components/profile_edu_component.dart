@@ -41,7 +41,8 @@ class ProfileEduComponent extends StatelessWidget {
                     text1Color: ColorsManager.grey850,
                     text1FontWeight: FontWeightManager.medium,
                     text1FontSize: AppSize.s16,
-                    text2: '${e.degree}, ${e.name}',
+                    // text2: '${e.degree}, ${e.name}',
+                    text2: e.degreeTag != null ? '${e.degreeTag!.label}' : '',
                     text2Color: ColorsManager.grey800,
                     text3:
                         '${e.attendedFromTo} ${'at'.tr} ${e.schoolCityAndCountry}',

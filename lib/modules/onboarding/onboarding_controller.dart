@@ -18,6 +18,7 @@ class OnboardingController extends GetxController
 
   RxList<SchoolModel> schoolList = <SchoolModel>[].obs;
   RxList<FieldModel> fieldListForSelect = <FieldModel>[].obs;
+  RxList<FieldModel> schoolDegreeList = <FieldModel>[].obs;
 
   RxList<OnboardingPageModel> onboardingPages = <OnboardingPageModel>[].obs;
   Rx<OnboardingModel> onboardingPagesAPIData =
@@ -50,18 +51,21 @@ class OnboardingController extends GetxController
   // TextEditingController degreeTextCtrl = TextEditingController();
   // TextEditingController currentStudyYearTextCtrl = TextEditingController();
 
-  List<TextEditingController> degreeListTextCtrl = [
-    TextEditingController(),
-  ];
-  List<TextEditingController> currentStudyYearTextCtrl = [
-    TextEditingController(),
-  ];
+  // List<TextEditingController> degreeListTextCtrl = [
+  //   TextEditingController(),
+  // ];
+  // List<TextEditingController> currentStudyYearTextCtrl = [
+  //   TextEditingController(),
+  // ];
+  RxList<String> selectedStartedDateString = <String>[''].obs;
+
   RxList<EducationModel> educationList = <EducationModel>[
     EducationModel(
       id: 999,
       school: SchoolModel(),
       fields: [],
       // // degree: '',
+      degreeTag: FieldModel(),
       completed: false,
     )
   ].obs;
@@ -84,6 +88,7 @@ class OnboardingController extends GetxController
     await getOffersDataState();
     await getSchoolListResponseProvider();
     await getFieldsListResponseProvider();
+    await getSchoolDegreeListResponseProvider();
   }
 
   void uuidTokenGenerator() => sessionToken = UuidGenerator().uuidV4();
@@ -147,8 +152,8 @@ class OnboardingController extends GetxController
           pageIndex: page == 1 ? 1 : 2,
           title: page == 1
               ? onboardingData[0].title
-              : 'onboardingInternshipTitle'.tr,
-          subtitle: page == 2 ? 'Internship'.tr : '',
+              : 'Internship'.tr, //'onboardingInternshipTitle'.tr,
+          subtitle: page == 2 ? 'onboardingInternshipTitle'.tr : '',
           isSkippable: onboardingData[0].isSkippable,
           selectionItems: onboardingData[0].selectionItems,
           allSkills: onboardingData[0].allSkills,
@@ -162,8 +167,14 @@ class OnboardingController extends GetxController
       if (page == 3 || page == 5) {
         final OnboardingPageModel temp = OnboardingPageModel(
           pageIndex: page == 3 ? 3 : 5,
-          title: onboardingData[1].title,
-          subtitle: page == 3 ? 'Internship'.tr : 'Student job'.tr,
+          title: page == 3
+              ? 'onboardingInternshipTitle'.tr
+              : 'onboardingYourStudentJob'.tr,
+          subtitle: 'onboardingFieldTitle'.tr, //onboardingData[1].title,
+          // title: onboardingData[1].title,
+          // subtitle: page == 3
+          //     ? 'onboardingInternshipTitle'.tr
+          //     : 'onboardingYourStudentJob'.tr,
           isSkippable: onboardingData[1].isSkippable,
           selectionItems: onboardingData[1].selectionItems,
           allSkills: onboardingData[1].allSkills,
@@ -177,8 +188,14 @@ class OnboardingController extends GetxController
       if (page == 4 || page == 6) {
         final OnboardingPageModel temp = OnboardingPageModel(
           pageIndex: page == 4 ? 4 : 6,
-          title: onboardingData[4].title,
-          subtitle: page == 4 ? 'Internship'.tr : 'Student job'.tr,
+          title: page == 4
+              ? 'onboardingInternshipTitle'.tr
+              : 'onboardingYourStudentJob'.tr,
+          subtitle: 'onboardingLocationTitle'.tr, //onboardingData[4].title,
+          // title: onboardingData[4].title,
+          // subtitle: page == 4
+          //     ? 'onboardingInternshipTitle'.tr
+          //     : 'onboardingYourStudentJob'.tr,
           // isSkippable: onboardingData[1].isSkippable,
           // selectionItems: onboardingData[1].selectionItems,
           // allSkills: onboardingData[1].allSkills,
@@ -345,19 +362,22 @@ class OnboardingController extends GetxController
     // [Remove]
     if (isRemove!) {
       // print('[Remove]');
-      degreeListTextCtrl.removeAt(eduIndex!);
-      currentStudyYearTextCtrl.removeAt(eduIndex);
+      // degreeListTextCtrl.removeAt(eduIndex!);
+      // currentStudyYearTextCtrl.removeAt(eduIndex);
+      selectedStartedDateString.removeAt(eduIndex!);
       educationList.removeAt(eduIndex);
     }
     // [Add]
     else {
       // print('[Add]');
-      degreeListTextCtrl.add(TextEditingController());
-      currentStudyYearTextCtrl.add(TextEditingController());
+      // degreeListTextCtrl.add(TextEditingController());
+      // currentStudyYearTextCtrl.add(TextEditingController());
+      selectedStartedDateString.add('');
       educationList.add(
         EducationModel(
           school: SchoolModel(),
           fields: [],
+          degreeTag: FieldModel(),
           // degree: '',
           completed: false,
         ),
@@ -377,8 +397,14 @@ class OnboardingController extends GetxController
             name: '',
             fields: educationList[i].fields,
             description: '',
-            degree: degreeListTextCtrl[i].text,
-            studyingYear: int.tryParse(currentStudyYearTextCtrl[i].text),
+            // degree: degreeListTextCtrl[i].text,
+            degreeId: educationList[i].degreeTag!.id ?? 0,
+            dateStart: selectedStartedDateString[i] == ''
+                ? null
+                : DateTime.tryParse(
+                    selectedStartedDateString[i],
+                  ),
+            studyingYear: 0, //int.tryParse(currentStudyYearTextCtrl[i].text),
             completed: educationList[i].completed,
           ),
         );
@@ -504,5 +530,15 @@ class OnboardingController extends GetxController
     //   'fieldListForSelect:: ${fieldListForSelect.map((element) => '${element.label}\n')}',
     // );
     return fieldListForSelect;
+  }
+
+  Future<List<FieldModel>> getSchoolDegreeListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    schoolDegreeList.addAll(await tagProvider.getSchoolDegreeTags());
+    // debugPrint(
+    //   'fieldListForSelect:: ${fieldListForSelect.map((element) => '${element.label}\n')}',
+    // );
+    return schoolDegreeList;
   }
 }

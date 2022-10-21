@@ -11,8 +11,8 @@ class EducationForm extends GetView<OnboardingController> {
   // final Function(bool)? swichingFunction;
   final SchoolModel? school;
   final List<FieldModel>? fieldList;
-  final TextEditingController? currentStudyYearTextCtrl;
-  final TextEditingController? degreeTextCtrl;
+  // final TextEditingController? currentStudyYearTextCtrl;
+  // final TextEditingController? degreeTextCtrl;
 
   final bool? isUpdateTrigger;
 
@@ -22,8 +22,8 @@ class EducationForm extends GetView<OnboardingController> {
     this.isCurrentStudy,
     this.school,
     this.fieldList,
-    this.currentStudyYearTextCtrl,
-    this.degreeTextCtrl,
+    // this.currentStudyYearTextCtrl,
+    // this.degreeTextCtrl,
     this.isUpdateTrigger,
   }) : super(key: key);
 
@@ -32,7 +32,8 @@ class EducationForm extends GetView<OnboardingController> {
     return Obx(
       () => CustomContainerWidget(
         elevation: controller.isUpdate.value == true ? 0.0 : 0.0,
-        bottomMargin: AppSize.s12,
+        topMargin: AppSize.s8,
+        bottomMargin: AppSize.s8,
         childPadding: AppSize.s16,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -42,21 +43,22 @@ class EducationForm extends GetView<OnboardingController> {
               children: [
                 Flexible(
                   flex: 75,
-                  child: RowDataSelectionWidget.checkBox(
-                    // verticalPadding: AppSize.s8,
-                    horizontalPadding: AppSize.s0,
-                    isClickingValue: isCurrentStudy,
-                    text: 'iAmCurrentlyStudying'.tr,
-                    isLeftSideText: false,
-                    onPressed: () {
-                      controller.educationList[eduIndex!].completed =
-                          switchingBooleanValue(
-                        boolValue:
-                            controller.educationList[eduIndex!].completed,
-                      );
-                      controller.getUpdate();
-                    },
-                  ),
+                  child: Container(),
+                  // RowDataSelectionWidget.checkBox(
+                  //   // verticalPadding: AppSize.s8,
+                  //   horizontalPadding: AppSize.s0,
+                  //   isClickingValue: isCurrentStudy,
+                  //   text: 'iAmCurrentlyStudying'.tr,
+                  //   isLeftSideText: false,
+                  //   onPressed: () {
+                  //     controller.educationList[eduIndex!].completed =
+                  //         switchingBooleanValue(
+                  //       boolValue:
+                  //           controller.educationList[eduIndex!].completed,
+                  //     );
+                  //     controller.getUpdate();
+                  //   },
+                  // ),
                 ),
                 Visibility(
                   visible: controller.educationList[eduIndex!].id !=
@@ -64,7 +66,7 @@ class EducationForm extends GetView<OnboardingController> {
                   child: CustomIconButtonWidget(
                     iconData: Icons.close,
                     iconColor: ColorsManager.red,
-                    iconSize: AppSize.s32,
+                    iconSize: AppSize.s28,
                     padding: 0.0,
                     isConstraints: true,
                     onClick: () => {
@@ -77,8 +79,8 @@ class EducationForm extends GetView<OnboardingController> {
                 ),
               ],
             ),
-
             //===== Bottom of Graduated Component =====//
+
             ///===== Top of School Component =====//
             ContainerDialogWidget(
               inputTitle: 'school'.tr,
@@ -225,38 +227,157 @@ class EducationForm extends GetView<OnboardingController> {
                 ),
               ),
             ),
-
             //===== Bottom of Fields Component =====//
 
-            ///===== Top of Degree Component =====//
-            CustomTextInput(
-              topPadding: AppSize.s16,
-              controller: degreeTextCtrl,
-              inputTitle: 'degree'.tr,
-              hintText: 'degreeHint'.tr,
-              isFilled: true,
+            ///===== Top of School Degree Component =====//
+            ContainerDialogWidget(
+              inputTitle: 'eduDegreeLabel'.tr,
+              fontSizeTitle: AppSize.s16,
+              // validatorFunction: (_) => Validator().notEmptyValidator(
+              //   controller.selectedLanguage.value.label ?? '',
+              // ),
+              dialogType: DialogType.bottomSheetDialog,
+              dialogWidget: Container(
+                height: getHeight,
+                decoration: const ShapeDecoration(
+                  color: ColorsManager.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        AppSize.s16,
+                      ),
+                      topRight: Radius.circular(
+                        AppSize.s16,
+                      ),
+                    ),
+                  ),
+                ),
+                child: Obx(
+                  () => controller.schoolDegreeList.isNotEmpty
+                      ? FieldListSelector(
+                          inputHintText: 'search'.tr,
+                          dataListforSelected: controller.schoolDegreeList,
+                          selectedItem:
+                              controller.educationList[eduIndex!].degreeTag,
+                          onTap: (field) {
+                            controller.educationList[eduIndex!].degreeTag =
+                                field;
+                            controller.getUpdate();
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      : const LoadingWidget(),
+                ),
+              ),
+              containerWidget: Obx(
+                () => controller.educationList[eduIndex!].degreeTag!.id == null
+                    ? RowContentInputWidget(
+                        centerWidget: CustomTextWidget(
+                          text: 'eduDegreeLabel'.tr,
+                          color: ColorsManager.grey400,
+                          fontWeight: FontWeight.w400,
+                          fontSize: AppSize.s16,
+                        ),
+                        suffixWidget: const Icon(
+                          IconsManager.arrowDropDown,
+                          color: ColorsManager.grey600,
+                        ),
+                      )
+                    : RowContentInputWidget(
+                        centerWidget: CustomTextWidget(
+                          text: controller
+                              .educationList[eduIndex!].degreeTag!.label,
+                          color: ColorsManager.black,
+                          fontSize: AppSize.s16,
+                        ),
+                        suffixWidget: const Icon(
+                          IconsManager.arrowDropDown,
+                          color: ColorsManager.grey600,
+                        ),
+                      ),
+              ),
             ),
+            //===== Bottom of School Degree Component =====//
+
+            ///===== Top of Degree Component =====//
+            // CustomTextInput(
+            //   topPadding: AppSize.s16,
+            //   controller: degreeTextCtrl,
+            //   inputTitle: 'degree'.tr,
+            //   hintText: 'degreeHint'.tr,
+            //   isFilled: true,
+            // ),
             //===== Bottom of Degree Component =====//
 
             ///===== Top of Current Year of Study Component =====//
-            Visibility(
-              visible: isCurrentStudy == false,
-              child: CustomTextInput(
-                topPadding: AppSize.s16,
-                bottomPadding: AppSize.s12,
-                controller: currentStudyYearTextCtrl,
-                inputTitle: 'currentStudyLabel'.tr,
-                hintText: 'currentStudyLabel'.tr,
-                isFilled: true,
-                // validator: Validator().notEmptyValidator,
-                keyboardType: TextInputType.number,
-                maxLength: 12,
-                inputFormatterList: [
-                  FilterTextInputFormat().digitsOnly(),
-                ],
+            // Visibility(
+            //   visible: isCurrentStudy == false,
+            //   child: CustomTextInput(
+            //     topPadding: AppSize.s16,
+            //     bottomPadding: AppSize.s12,
+            //     controller: currentStudyYearTextCtrl,
+            //     inputTitle: 'currentStudyLabel'.tr,
+            //     hintText: 'currentStudyLabel'.tr,
+            //     isFilled: true,
+            //     // validator: Validator().notEmptyValidator,
+            //     keyboardType: TextInputType.number,
+            //     maxLength: 12,
+            //     inputFormatterList: [
+            //       FilterTextInputFormat().digitsOnly(),
+            //     ],
+            //   ),
+            // ),
+            //===== Bottom of Current Year of Study Component =====//
+
+            ///===== Top of Start Date Component =====//
+            ContainerDialogWidget(
+              inputTitle: 'startDate'.tr,
+              inputTitleMarginTop: AppSize.s16,
+              validatorFunction: (_) => Validator().notEmptyValidator(
+                controller.selectedStartedDateString[eduIndex!],
+              ),
+              dialogType: DialogType.dateWithoutDayPickerDialog,
+              // dateLocale: controller
+              //     .profileController.userProfileInfo.value.uiLanguage,
+              currentTime: DateTime.tryParse(
+                    controller.selectedStartedDateString[eduIndex!],
+                  ) ??
+                  DateTime.now(),
+              onConfirmDate: (date) {
+                controller.selectedStartedDateString[eduIndex!] =
+                    dateTimeToString(selectedItem: date);
+              },
+              containerWidget: Obx(
+                () => controller.selectedStartedDateString[eduIndex!] == ''
+                    ? RowContentInputWidget(
+                        centerWidget: CustomTextWidget(
+                          text: mmyyyyFormat,
+                          color: ColorsManager.grey400,
+                          fontWeight: FontWeight.w400,
+                          fontSize: AppSize.s16,
+                        ),
+                        suffixWidget: const Icon(
+                          IconsManager.dateRangeOutlined,
+                          color: ColorsManager.grey600,
+                        ),
+                      )
+                    : RowContentInputWidget(
+                        centerWidget: CustomTextWidget(
+                          text: dateFormatSlashMMYYYY(
+                            date: DateTime.tryParse(
+                              controller.selectedStartedDateString[eduIndex!],
+                            ),
+                          ),
+                          color: ColorsManager.black,
+                          fontSize: AppSize.s16,
+                        ),
+                        suffixWidget: const Icon(
+                          IconsManager.dateRangeOutlined,
+                          color: ColorsManager.grey600,
+                        ),
+                      ),
               ),
             ),
-            //===== Bottom of Current Year of Study Component =====//
           ],
         ),
       ),

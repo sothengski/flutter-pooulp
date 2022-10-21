@@ -489,7 +489,7 @@ class SettingPage extends GetView<SettingController> {
                               await Future.delayed(DurationConstant.d750, () {
                                 controller.makeRequestToAuthDeleteAccountAPI();
                               }),
-                              AuthServices().removeToken().then(
+                              await AuthServices().removeToken().then(
                                     (value) =>
                                         Get.offAllNamed(Routes.splashRoute),
                                   ),

@@ -16,7 +16,7 @@ class EducationModel {
   bool? completed;
   SchoolModel? school;
   List<FieldModel>? fields;
-  final FieldModel? degreeTag;
+  FieldModel? degreeTag;
 
   EducationModel({
     this.id,
@@ -90,7 +90,7 @@ class EducationModel {
         'name': name ?? '',
         'description': description,
         'degree': degree,
-        'degree_id': degreeId,
+        'degree_id': degreeId != 0 ? degreeId : null,
         'studying_year': studyingYear,
         'date_start': dateStart == null
             ? null

@@ -48,8 +48,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          title: pageData[1].title,
-                          subTitle: pageData[1].subtitle,
+                          // title: pageData[1].title,
+                          subTitle: pageData[1].title,
+                          subTitleFontSize: AppSize.s24,
                           bodyPageWidget: ListView.builder(
                             shrinkWrap: true,
                             // physics:
@@ -94,8 +95,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                             ) ==
                             true)
                           PageTemplateWidget(
-                            title: pageData[2].title,
+                            // title: pageData[2].title,
                             subTitle: pageData[2].subtitle,
+                            subTitleFontSize: AppSize.s24,
                             bodyPageWidget: Obx(
                               () => Column(
                                 children: [
@@ -138,7 +140,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                     isCenterText: false,
                                                     text: pageData[2]
                                                         .internshipTypeItems![i]
-                                                        .keyLabel,
+                                                        .label,
                                                     maxLine: controller.isUpdate
                                                                 .value ==
                                                             true
@@ -638,8 +640,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                         //     ),
                         //   ),
                         PageTemplateWidget(
-                          title: pageData[7].title,
-                          subTitle: pageData[7].subtitle,
+                          // title: pageData[7].title,
+                          subTitle: pageData[7].title,
                           bodyPageWidget: SingleChildScrollView(
                             child: Wrap(
                               children: pageData[7]
@@ -681,8 +683,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          title: pageData[8].title,
-                          // subTitle: pageData[10].subtitle,
+                          // title: pageData[8].title,
+                          subTitle: pageData[8].title,
                           bodyPageWidget: Padding(
                             padding: const EdgeInsets.all(AppSize.s8),
                             child: SingleChildScrollView(
@@ -699,10 +701,10 @@ class OnboardingPage extends GetView<OnboardingController> {
                                             isCurrentStudy: element.completed,
                                             school: element.school,
                                             fieldList: element.fields,
-                                            degreeTextCtrl: controller
-                                                .degreeListTextCtrl[i],
-                                            currentStudyYearTextCtrl: controller
-                                                .currentStudyYearTextCtrl[i],
+                                            // degreeTextCtrl: controller
+                                            //     .degreeListTextCtrl[i],
+                                            // currentStudyYearTextCtrl: controller
+                                            //     .currentStudyYearTextCtrl[i],
                                             isUpdateTrigger:
                                                 controller.isUpdate.value,
                                           ),
@@ -737,8 +739,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          title: pageData[9].title,
-                          subTitle: pageData[9].subtitle,
+                          // title: pageData[9].title,
+                          subTitle: pageData[9].title,
                           bodyPageWidget: SingleChildScrollView(
                             child: Wrap(
                               children: pageData[9]

@@ -140,6 +140,32 @@ class OfferListComponent extends StatelessWidget {
                             ? [
                                 Expanded(
                                   flex: 40,
+                                  key: const ValueKey(
+                                    OfferStrings.informationAction,
+                                  ),
+                                  child: OutlineIconButtonWidget(
+                                    buttonTitle: 'information'.tr,
+                                    // iconColor: ColorsManager.grey600,
+                                    iconColorOnClick: ColorsManager.primaryBlue,
+                                    buttonState:
+                                        offerList![index].informationState,
+                                    // onPressed: () {
+                                    //   offerController!
+                                    //       .onClickActionButtonJobOffer(
+                                    //     actionType: OfferStrings.information,
+                                    //     jobOfferId: offerList![index].id,
+                                    //   );
+                                    //   offerList![index].informationState =
+                                    //       offerController!
+                                    //           .jobOfferOnClickBoolSwitching(
+                                    //     boolValue:
+                                    //         offerList![index].informationState,
+                                    //   );
+                                    // },
+                                  ),
+                                ),
+                                Expanded(
+                                  // flex: 40,
                                   key:
                                       const ValueKey(OfferStrings.unSaveAction),
                                   child: OutlineIconButtonWidget(
@@ -168,7 +194,7 @@ class OfferListComponent extends StatelessWidget {
                               ]
                             : [
                                 Expanded(
-                                  flex: 30,
+                                  flex: 32,
                                   key: const ValueKey(OfferStrings.applyAction),
                                   child: OutlineIconButtonWidget(
                                     buttonTitle: 'apply'.tr,
@@ -193,7 +219,7 @@ class OfferListComponent extends StatelessWidget {
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 30,
+                                  flex: 33,
                                   key: const ValueKey(
                                     OfferStrings.informationAction,
                                   ),
@@ -219,9 +245,10 @@ class OfferListComponent extends StatelessWidget {
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 40,
-                                  key:
-                                      const ValueKey(OfferStrings.unSaveAction),
+                                  // flex: 40,
+                                  key: const ValueKey(
+                                    OfferStrings.unSaveAction,
+                                  ),
                                   child: OutlineIconButtonWidget(
                                     buttonTitle: 'unsave'.tr,
                                     iconData: Icons.bookmark_remove_outlined,

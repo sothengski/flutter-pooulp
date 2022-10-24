@@ -33,6 +33,7 @@ class OfferFeedListComponent extends StatelessWidget {
                 ? []
                 : <Widget>[
                     Expanded(
+                      flex: 32,
                       key: const ValueKey(OfferStrings.applyAction),
                       child: OutlineIconButtonWidget(
                         buttonTitle: 'apply'.tr,
@@ -58,6 +59,7 @@ class OfferFeedListComponent extends StatelessWidget {
                       ),
                     ),
                     Expanded(
+                      flex: 33,
                       key: const ValueKey(OfferStrings.saveAction),
                       child: OutlineIconButtonWidget(
                         buttonTitle: 'save'.tr,
@@ -83,9 +85,10 @@ class OfferFeedListComponent extends StatelessWidget {
                       ),
                     ),
                     Expanded(
+                      flex: 35,
                       key: const ValueKey(OfferStrings.hideAction),
                       child: OutlineIconButtonWidget(
-                        buttonTitle: 'hide'.tr,
+                        buttonTitle: 'notInterested'.tr,
                         iconData: Icons.visibility_off_outlined,
                         iconDataOnClick: Icons.visibility_outlined,
                         iconColorOnClick: ColorsManager.red,

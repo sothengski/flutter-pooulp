@@ -495,7 +495,7 @@ class OnboardingController extends GetxController
 
     // debugPrint('placeDetail: $placeDetail');
 
-    debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
+    // debugPrint('onboardingDataToBeAdd: ${onboardingDataToBeAdd.toJson()}');
     submitDataToAPI(onboardingData: onboardingDataToBeAdd);
   }
 

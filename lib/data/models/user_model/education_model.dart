@@ -114,10 +114,10 @@ class EducationModel {
         'degree': degree ?? '',
         'degree_id': degreeId,
         'studying_year': studyingYear ?? 0,
-        'date_start': '',
-        // 'date_start': dateStart == null
-        //     ? null
-        //     : "${dateStart!.year.toString().padLeft(4, '0')}-${dateStart!.month.toString().padLeft(2, '0')}-${dateStart!.day.toString().padLeft(2, '0')}",
+        // 'date_start': '',
+        'date_start': dateStart == null
+            ? ''
+            : "${dateStart!.year.toString().padLeft(4, '0')}-${dateStart!.month.toString().padLeft(2, '0')}-${dateStart!.day.toString().padLeft(2, '0')}",
         'date_end': '',
         // 'date_end': dateEnd == null
         //     ? null

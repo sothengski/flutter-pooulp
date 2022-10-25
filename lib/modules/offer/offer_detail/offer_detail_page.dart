@@ -1369,15 +1369,24 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             // iconColor: ColorsManager.grey600,
                             iconColorOnClick: ColorsManager.lightBlueAccent,
                             // buttonState: offerList![index].savedState,
-                            oneTimePress: jobOfferDetail
-                                .savedState, //offerList![index].savedState,
+                            oneTimePress: jobOfferDetail.savedState,
+                            //oneTimePress: offerList![index].savedState,
                             onPressed: () async {
-                              await controller.offerController
-                                  .onClickActionButtonJobOffer(
-                                actionType: OfferStrings.unSaveAction,
-                                jobOfferId: jobOfferDetail.id,
+                              Get.dialog(
+                                ConfirmationDialogWidget(
+                                  dialogBody: 'unSaveAlert'.tr,
+                                  onPressed: () async {
+                                    await controller.offerController
+                                        .onClickActionButtonJobOffer(
+                                      actionType: OfferStrings.unSaveAction,
+                                      jobOfferId: jobOfferDetail.id,
+                                    );
+                                    Get.back();
+                                    Get.back();
+                                  },
+                                ),
                               );
-                              Get.back();
+
                               // offerController!
                               //     .onClickActionButtonJobOffer(
                               //   actionType: OfferStrings.unSaveAction,

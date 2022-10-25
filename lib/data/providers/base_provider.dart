@@ -14,6 +14,7 @@ class BaseProvider extends GetConnect {
     // add your local storage here to load for every request
     // final String userToken =
     getUserToken();
+    debugPrint('BaseProvider token: ${getUserToken()}');
 
     //1.base_url
     httpClient.baseUrl = API.host;
@@ -60,10 +61,13 @@ class BaseProvider extends GetConnect {
                   middleText: 'Please log in again.',
                   textConfirm: 'OK',
                   confirm: OutlinedButton.icon(
-                    onPressed: () async => {
+                    onPressed: () async {
                       await AuthServices().removeToken().then(
                             (value) => Get.offAllNamed(Routes.splashRoute),
-                          )
+                          );
+                      debugPrint(
+                        "Can't save RefreshToken token: ${getUserToken()}",
+                      );
                     },
                     icon: const Icon(
                       Icons.check,
@@ -133,10 +137,13 @@ class BaseProvider extends GetConnect {
             middleText: 'Please log in again.',
             textConfirm: 'OK',
             confirm: OutlinedButton.icon(
-              onPressed: () async => {
+              onPressed: () async {
                 await AuthServices().removeToken().then(
                       (value) => Get.offAllNamed(Routes.splashRoute),
-                    )
+                    );
+                debugPrint(
+                  "Not getPendingOffer RefreshToken token: ${getUserToken()}",
+                );
               },
               icon: const Icon(
                 Icons.check,

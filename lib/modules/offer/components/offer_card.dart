@@ -9,12 +9,14 @@ class OfferCard extends StatelessWidget {
   final JobOfferModel? jobOfferItem;
   // final Widget? bottomActionWidget;
   final List<Widget>? bottomActionWidgetList;
+  final bool? isCustomActBtn;
 
   const OfferCard({
     Key? key,
     this.jobOfferItem,
     // this.bottomActionWidget,
     this.bottomActionWidgetList = const [],
+    this.isCustomActBtn = false,
   }) : super(key: key);
 
   @override
@@ -35,10 +37,7 @@ class OfferCard extends StatelessWidget {
         onPressed: () {
           Get.toNamed(
             Routes.offerdetailRoute,
-            arguments: [
-              jobOfferItem,
-              bottomActionWidgetList,
-            ],
+            arguments: [jobOfferItem, bottomActionWidgetList, isCustomActBtn],
           );
         },
         child: Column(

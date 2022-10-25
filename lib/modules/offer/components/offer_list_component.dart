@@ -32,6 +32,8 @@ class OfferListComponent extends StatelessWidget {
         return Obx(
           () => OfferCard(
             jobOfferItem: offerList![index],
+            isCustomActBtn: jobOfferType == OfferStrings.savedState &&
+                !offerList![index].dateOfferEnd!.isBefore(now),
             bottomActionWidgetList: (jobOfferType == OfferStrings.pendingState)
                 ? [
                     Expanded(

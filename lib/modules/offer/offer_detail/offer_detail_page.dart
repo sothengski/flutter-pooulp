@@ -11,6 +11,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
       (Get.arguments as List)[0] as JobOfferModel;
   final List<Widget>? actionButtons =
       (Get.arguments as List)[1] as List<Widget>;
+  final bool? isCustomActBtn = (Get.arguments as List)[2] as bool?;
 
   // const OfferDetailPage({Key? key}) : super(key: key);
 
@@ -1321,18 +1322,89 @@ class OfferDetailPage extends GetView<OfferDetailController> {
               //     ),
               //   ],
               // ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: actionButtons!
-                    .where(
-                      (element) =>
-                          element.key! !=
-                          const ValueKey(
-                            OfferStrings.informationAction,
+              child: isCustomActBtn == true
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          // flex: 32,
+                          key: const ValueKey(OfferStrings.applyAction),
+                          child: OutlineIconButtonWidget(
+                            buttonTitle: 'apply'.tr,
+                            iconData: Icons.thumb_up_outlined,
+                            iconDataOnClick: Icons.thumb_up,
+                            // iconColor: ColorsManager.grey600,
+                            iconColorOnClick: ColorsManager.green,
+                            // buttonState: false,//offerList![index].applyState,
+                            oneTimePress: jobOfferDetail
+                                .applyState, //offerList![index].applyState,
+                            onPressed: () {
+                              controller.offerController
+                                  .onClickActionButtonJobOffer(
+                                actionType: OfferStrings.applyAction,
+                                jobOfferId: jobOfferDetail.id,
+                              );
+                              // offerController!
+                              //     .onClickActionButtonJobOffer(
+                              //   actionType: OfferStrings.applyAction,
+                              //   jobOfferId: offerList![index].id,
+                              // );
+                              // offerList![index].applyState =
+                              //     offerController!
+                              //         .jobOfferOnClickBoolSwitching(
+                              //   boolValue: offerList![index].applyState,
+                              // );
+                            },
                           ),
+                        ),
+                        Expanded(
+                          // flex: 40,
+                          key: const ValueKey(
+                            OfferStrings.unSaveAction,
+                          ),
+                          child: OutlineIconButtonWidget(
+                            buttonTitle: 'unsave'.tr,
+                            iconData: Icons.bookmark_remove_outlined,
+                            iconDataOnClick: Icons.bookmark_remove,
+                            // iconColor: ColorsManager.grey600,
+                            iconColorOnClick: ColorsManager.lightBlueAccent,
+                            // buttonState: offerList![index].savedState,
+                            oneTimePress: jobOfferDetail
+                                .savedState, //offerList![index].savedState,
+                            onPressed: () async {
+                              await controller.offerController
+                                  .onClickActionButtonJobOffer(
+                                actionType: OfferStrings.unSaveAction,
+                                jobOfferId: jobOfferDetail.id,
+                              );
+                              Get.back();
+                              // offerController!
+                              //     .onClickActionButtonJobOffer(
+                              //   actionType: OfferStrings.unSaveAction,
+                              //   jobOfferId: offerList![index].id,
+                              // );
+                              // offerList![index].savedState =
+                              //     offerController!
+                              //         .jobOfferOnClickBoolSwitching(
+                              //   boolValue: offerList![index].savedState,
+                              // );
+                            },
+                          ),
+                        ),
+                      ],
                     )
-                    .toList(),
-              ),
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: actionButtons!
+                          .where(
+                            (element) =>
+                                element.key! !=
+                                const ValueKey(
+                                  OfferStrings.informationAction,
+                                ),
+                          )
+                          .toList(),
+                    ),
             ),
           )
         ],

@@ -18,7 +18,12 @@ class OfferController extends GetxController
 
   Rx<FieldModel> jobOfferStateSelected = FieldModel().obs;
 
-  RxList<FieldModel> jobOfferStateFilterList = <FieldModel>[].obs;
+  RxList<FieldModel> jobOfferStateFilterList = <FieldModel>[
+    FieldModel(id: 0, label: OfferStrings.pendingState, total: 0),
+    FieldModel(id: 1, label: OfferStrings.matchedState, total: 0),
+    FieldModel(id: 2, label: OfferStrings.savedState, total: 0),
+    FieldModel(id: 3, label: OfferStrings.rejectedState, total: 0),
+  ].obs;
 
   RxList<JobOfferModel> allOfferListRepsonse = <JobOfferModel>[].obs;
   RxList<JobOfferModel> pendingOfferListRepsonse = <JobOfferModel>[].obs;
@@ -35,12 +40,12 @@ class OfferController extends GetxController
   @override
   Future<void> onInit() async {
     super.onInit();
-    jobOfferStateFilterList.value = [
-      FieldModel(id: 0, label: OfferStrings.pendingState, total: 0),
-      FieldModel(id: 1, label: OfferStrings.matchedState, total: 0),
-      FieldModel(id: 2, label: OfferStrings.savedState, total: 0),
-      FieldModel(id: 3, label: OfferStrings.rejectedState, total: 0),
-    ];
+    // jobOfferStateFilterList.value = [
+    //   FieldModel(id: 0, label: OfferStrings.pendingState, total: 0),
+    //   FieldModel(id: 1, label: OfferStrings.matchedState, total: 0),
+    //   FieldModel(id: 2, label: OfferStrings.savedState, total: 0),
+    //   FieldModel(id: 3, label: OfferStrings.rejectedState, total: 0),
+    // ];
     jobOfferStateSelected.value = jobOfferStateFilterList[0];
 
     await getOffersDataState(refresh: true)
@@ -184,6 +189,12 @@ class OfferController extends GetxController
               jobOfferStateList: jobOfferStateFilterList,
             ),
           );
+      await stateOnRefresh(
+        actionStateName: OfferStrings.savedState,
+        jobOfferList: savedOfferListRepsonse,
+        jobOfferListFilter: savedOfferListFilter,
+        getListFomProvider: offerProvider.getSavedOffers(),
+      );
       await feedController.onRefresh();
     } else if (actionType == OfferStrings.hideAction) {
       await offerProvider.postHideOffer(
@@ -236,7 +247,6 @@ class OfferController extends GetxController
       jobOfferList: rejectedOfferListRepsonse,
       getListFomProvider: offerProvider.getRejectedOffers(),
     );
-
     return pendingOfferListRepsonse;
   }
 

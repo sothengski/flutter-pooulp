@@ -735,7 +735,7 @@ const List<CountryModel> countryList = <CountryModel>[
   ),
   CountryModel(
     isoCode: 'LA',
-    phoneCode: '+',
+    phoneCode: '+856',
     name: "Lao People's Democratic Republic",
     iso3Code: 'LAO',
   ),

@@ -359,7 +359,7 @@ class SignUpForm extends GetView<SignUpController> {
                                   flex: 60,
                                   child: CustomTextInput(
                                     controller: controller.phoneNumberCtrl,
-                                    inputTitle: "",
+                                    inputTitle: " ",
                                     hintText:
                                         'phone'.tr, //'auth.phoneNumberHint'.tr,
                                     keyboardType: TextInputType.phone,
@@ -473,6 +473,20 @@ class SignUpForm extends GetView<SignUpController> {
                                     'enterpriseId'.tr, //'auth.enterpriseID'.tr,
                                 hintText:
                                     'xxxx xxx xxx', //'auth.enterpriseIDHint'.tr,
+                                isFilled: true,
+                                topPadding: AppSize.s12,
+                                // bottomPadding: AppSize.s16,
+                                // validator: Validator().password,
+                              ),
+                            if (isStudent == true)
+                              Container()
+                            else
+                              CustomTextInput(
+                                controller: controller.jobTitleTextCtrl,
+                                inputTitle: 'jobTitleLabel'
+                                    .tr, //'auth.enterpriseID'.tr,
+                                hintText:
+                                    'jobTitleLabel', //'auth.enterpriseIDHint'.tr,
                                 isFilled: true,
                                 topPadding: AppSize.s12,
                                 bottomPadding: AppSize.s16,

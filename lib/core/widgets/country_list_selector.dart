@@ -87,6 +87,7 @@ class _CountryListSelectorState extends State<CountryListSelector> {
                               ? CustomTextWidget(
                                   text: "${country.name}",
                                   fontSize: 16.0,
+                                  maxLine: 2,
                                   fontWeight: FontWeightManager.medium,
                                   color: widget.selectedCountry!.iso3Code ==
                                           country.iso3Code.toString()

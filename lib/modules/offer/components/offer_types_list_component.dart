@@ -50,8 +50,8 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                 ),
                 label: CustomTextWidget(
                   text: controller.searchedListAsFieldModel[index].label ==
-                          'All'
-                      ? 'all'.tr
+                          'See all'
+                      ? 'seeAll'.tr
                       : '${controller.searchedListAsFieldModel[index].label}',
                   // fontSize: AppSize.s14,
                   fontWeight: FontWeightManager.light,

@@ -196,7 +196,8 @@ class ProfilePage extends GetView<ProfileController> {
 
                                           ///===== Availabilities Component =====//
                                           ProfileAvailabilityComponent(
-                                            title: 'availabilities'.tr,
+                                            title:
+                                                'studentJobAvailabilities'.tr,
                                             addOrEditAvailabilityRoute: Routes
                                                 .addOrEditAvailabilityRoute,
                                             availabilityList: controller

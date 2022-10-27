@@ -48,9 +48,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          // title: pageData[1].title,
-                          subTitle: pageData[1].title,
-                          subTitleFontSize: AppSize.s24,
+                          title: pageData[1].title,
+                          subTitle2: "(${'multipleSelectLabel'.tr})",
                           bodyPageWidget: ListView.builder(
                             shrinkWrap: true,
                             // physics:
@@ -95,9 +94,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                             ) ==
                             true)
                           PageTemplateWidget(
-                            // title: pageData[2].title,
-                            subTitle: pageData[2].subtitle,
-                            subTitleFontSize: AppSize.s24,
+                            title: pageData[2].subtitle,
+                            subTitle2: "(${'multipleSelectLabel'.tr})",
                             bodyPageWidget: Obx(
                               () => Column(
                                 children: [
@@ -272,44 +270,85 @@ class OnboardingPage extends GetView<OnboardingController> {
                           PageTemplateWidget(
                             title: pageData[3].title,
                             subTitle: pageData[3].subtitle,
-                            bodyPageWidget: GridView.builder(
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: AppSize.s16,
-                                mainAxisSpacing: AppSize.s16,
-                                childAspectRatio: 3,
+                            subTitle2: "(${'multipleSelectLabel'.tr})",
+                            bodyPageWidget: SingleChildScrollView(
+                              child: Wrap(
+                                children: pageData[3]
+                                    .selectionItems!
+                                    .map(
+                                      (element) => Obx(
+                                        () => Padding(
+                                          padding: const EdgeInsets.only(
+                                            right: AppSize.s8,
+                                            bottom: AppSize.s12,
+                                          ),
+                                          child: TextCardClickableWidget(
+                                            isCenterText: false,
+                                            text: element.label ??
+                                                element.category.toString(),
+                                            maxLine:
+                                                controller.isUpdate.value ==
+                                                        true
+                                                    ? 3
+                                                    : 3,
+                                            fontSize: AppSize.s24,
+                                            itemList: controller
+                                                .internshipInterestedInSelectedList,
+                                            item: element,
+                                            onClick: () {
+                                              controller.addOrRemoveDataInList(
+                                                pageIndex: 2,
+                                                addToList: controller
+                                                    .internshipInterestedInSelectedList,
+                                                itemToBeAdd: element,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toSet()
+                                    .toList(),
                               ),
-                              // padding: const EdgeInsets.only(
-                              //   top: AppSize.s16,
-                              //   bottom: AppSize.s16,
-                              // ),
-                              itemCount: pageData[3].selectionItems!.length,
-                              itemBuilder: (_, itemIndex) {
-                                final item =
-                                    pageData[3].selectionItems![itemIndex];
-                                return Obx(
-                                  () => TextCardClickableWidget(
-                                    text: item.label,
-                                    maxLine: controller.isUpdate.value == true
-                                        ? 3
-                                        : 3,
-                                    itemList: controller
-                                        .internshipInterestedInSelectedList,
-                                    item: item,
-                                    onClick: () {
-                                      controller.addOrRemoveDataInList(
-                                        pageIndex: 2,
-                                        addToList: controller
-                                            .internshipInterestedInSelectedList,
-                                        itemToBeAdd: item,
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
                             ),
+                            // bodyPageWidget: GridView.builder(
+                            //   shrinkWrap: true,
+                            //   gridDelegate:
+                            //       const SliverGridDelegateWithFixedCrossAxisCount(
+                            //     crossAxisCount: 2,
+                            //     crossAxisSpacing: AppSize.s16,
+                            //     mainAxisSpacing: AppSize.s16,
+                            //     childAspectRatio: 3,
+                            //   ),
+                            //   // padding: const EdgeInsets.only(
+                            //   //   top: AppSize.s16,
+                            //   //   bottom: AppSize.s16,
+                            //   // ),
+                            //   itemCount: pageData[3].selectionItems!.length,
+                            //   itemBuilder: (_, itemIndex) {
+                            //     final item =
+                            //         pageData[3].selectionItems![itemIndex];
+                            //     return Obx(
+                            //       () => TextCardClickableWidget(
+                            //         text: item.label,
+                            //         maxLine: controller.isUpdate.value == true
+                            //             ? 3
+                            //             : 3,
+                            //         itemList: controller
+                            //             .internshipInterestedInSelectedList,
+                            //         item: item,
+                            //         onClick: () {
+                            //           controller.addOrRemoveDataInList(
+                            //             pageIndex: 2,
+                            //             addToList: controller
+                            //                 .internshipInterestedInSelectedList,
+                            //             itemToBeAdd: item,
+                            //           );
+                            //         },
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
                           ),
                         // id:1 == internship selected in looking for list
                         if (controller.haveitemInList(
@@ -462,40 +501,81 @@ class OnboardingPage extends GetView<OnboardingController> {
                           PageTemplateWidget(
                             title: pageData[5].title,
                             subTitle: pageData[5].subtitle,
-                            bodyPageWidget: GridView.builder(
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: AppSize.s16,
-                                mainAxisSpacing: AppSize.s16,
-                                childAspectRatio: 3,
+                            subTitle2: "(${'multipleSelectLabel'.tr})",
+                            bodyPageWidget: SingleChildScrollView(
+                              child: Wrap(
+                                children: pageData[3]
+                                    .selectionItems!
+                                    .map(
+                                      (element) => Obx(
+                                        () => Padding(
+                                          padding: const EdgeInsets.only(
+                                            right: AppSize.s8,
+                                            bottom: AppSize.s12,
+                                          ),
+                                          child: TextCardClickableWidget(
+                                            isCenterText: false,
+                                            text: element.label ??
+                                                element.category.toString(),
+                                            maxLine:
+                                                controller.isUpdate.value ==
+                                                        true
+                                                    ? 3
+                                                    : 3,
+                                            fontSize: AppSize.s24,
+                                            itemList: controller
+                                                .studentJobInterestedInSelectedList,
+                                            item: element,
+                                            onClick: () {
+                                              controller.addOrRemoveDataInList(
+                                                pageIndex: 5,
+                                                addToList: controller
+                                                    .studentJobInterestedInSelectedList,
+                                                itemToBeAdd: element,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toSet()
+                                    .toList(),
                               ),
-                              itemCount: pageData[3].selectionItems!.length,
-                              itemBuilder: (_, itemIndex) {
-                                final item =
-                                    pageData[5].selectionItems![itemIndex];
-                                return Obx(
-                                  () => TextCardClickableWidget(
-                                    text: item.label,
-                                    maxLine: controller.isUpdate.value == true
-                                        ? 3
-                                        : 3,
-                                    itemList: controller
-                                        .studentJobInterestedInSelectedList,
-                                    item: item,
-                                    onClick: () {
-                                      controller.addOrRemoveDataInList(
-                                        pageIndex: 5,
-                                        addToList: controller
-                                            .studentJobInterestedInSelectedList,
-                                        itemToBeAdd: item,
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
                             ),
+                            // bodyPageWidget: GridView.builder(
+                            //   shrinkWrap: true,
+                            //   gridDelegate:
+                            //       const SliverGridDelegateWithFixedCrossAxisCount(
+                            //     crossAxisCount: 2,
+                            //     crossAxisSpacing: AppSize.s16,
+                            //     mainAxisSpacing: AppSize.s16,
+                            //     childAspectRatio: 3,
+                            //   ),
+                            //   itemCount: pageData[3].selectionItems!.length,
+                            //   itemBuilder: (_, itemIndex) {
+                            //     final item =
+                            //         pageData[5].selectionItems![itemIndex];
+                            //     return Obx(
+                            //       () => TextCardClickableWidget(
+                            //         text: item.label,
+                            //         maxLine: controller.isUpdate.value == true
+                            //             ? 3
+                            //             : 3,
+                            //         itemList: controller
+                            //             .studentJobInterestedInSelectedList,
+                            //         item: item,
+                            //         onClick: () {
+                            //           controller.addOrRemoveDataInList(
+                            //             pageIndex: 5,
+                            //             addToList: controller
+                            //                 .studentJobInterestedInSelectedList,
+                            //             itemToBeAdd: item,
+                            //           );
+                            //         },
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
                           ),
                         // id:3 == student job selected in looking for list
                         if (controller.haveitemInList(
@@ -640,8 +720,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                         //     ),
                         //   ),
                         PageTemplateWidget(
-                          // title: pageData[7].title,
-                          subTitle: pageData[7].title,
+                          title: pageData[7].title,
+                          // subTitle: pageData[7].title,
+                          subTitle2: "(${'multipleSelectLabel'.tr})",
                           bodyPageWidget: SingleChildScrollView(
                             child: Wrap(
                               children: pageData[7]
@@ -683,8 +764,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          // title: pageData[8].title,
-                          subTitle: pageData[8].title,
+                          title: pageData[8].title,
+                          // subTitle: pageData[8].title,
                           bodyPageWidget: Padding(
                             padding: const EdgeInsets.all(AppSize.s8),
                             child: SingleChildScrollView(
@@ -739,8 +820,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          // title: pageData[9].title,
-                          subTitle: pageData[9].title,
+                          title: pageData[9].title,
+                          // subTitle: pageData[9].title,
                           bodyPageWidget: SingleChildScrollView(
                             child: Wrap(
                               children: pageData[9]

@@ -31,7 +31,7 @@ class OnboardingController extends GetxController
   RxList<FieldModel> internshipInterestedInSelectedList = <FieldModel>[].obs;
   RxList<FieldModel> internshipLanguageSelectedList = <FieldModel>[].obs;
   Rx<PlaceDetailModel>? internshipPlaceDetail = PlaceDetailModel().obs;
-  RxInt internshipRadiusRxInt = 100.obs;
+  RxInt internshipRadiusRxInt = 50.obs;
   TextEditingController internshipAddressCtrl = TextEditingController();
   TextEditingController internshipOtherTextCtrl =
       TextEditingController(text: '');
@@ -39,7 +39,7 @@ class OnboardingController extends GetxController
   RxList<FieldModel> studentJobInterestedInSelectedList = <FieldModel>[].obs;
   RxList<FieldModel> studentJobLanguageSelectedList = <FieldModel>[].obs;
   Rx<PlaceDetailModel>? studentJobPlaceDetail = PlaceDetailModel().obs;
-  RxInt studentJobRadiusRxInt = 100.obs;
+  RxInt studentJobRadiusRxInt = 50.obs;
   TextEditingController studentJobAddressCtrl = TextEditingController();
 
   RxList<FieldModel>? goodAtfieldSelectedList = <FieldModel>[].obs;

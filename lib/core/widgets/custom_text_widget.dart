@@ -6,6 +6,7 @@ class CustomTextWidget extends StatelessWidget {
   final String? text;
   final Color? color;
   final String? fontFamily;
+  final FontStyle? fontStyle;
   final FontWeight? fontWeight;
   final double? fontSize;
   final double? marginBottom;
@@ -18,6 +19,7 @@ class CustomTextWidget extends StatelessWidget {
   final Widget? inputIcon;
   final TextAlign? textAlign;
   final TextStyle? textStyle;
+
   final TextDecoration? textDecoration;
 
   const CustomTextWidget({
@@ -25,6 +27,7 @@ class CustomTextWidget extends StatelessWidget {
     this.text = '',
     this.color = ColorsManager.primaryBlue,
     this.fontFamily,
+    this.fontStyle = FontStyle.normal,
     this.fontWeight,
     this.fontSize = 14.0,
     this.marginLeft = 0.0,
@@ -62,6 +65,7 @@ class CustomTextWidget extends StatelessWidget {
               letterSpacing: letterSpacing,
               height: height,
               decoration: textDecoration,
+              fontStyle: fontStyle,
               fontFamilyFallback: const [
                 // typoRoundFont,
               ],

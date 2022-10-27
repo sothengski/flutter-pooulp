@@ -7,13 +7,17 @@ class PageTemplateWidget extends StatelessWidget {
   final double? titleFontSize;
   final String? subTitle;
   final double? subTitleFontSize;
+  final String? subTitle2;
+  final double? subTitleFontSize2;
   final Widget? bodyPageWidget;
 
   const PageTemplateWidget({
     this.title = '',
     this.titleFontSize = AppSize.s24,
     this.subTitle = '',
-    this.subTitleFontSize = AppSize.s20,
+    this.subTitleFontSize = AppSize.s18,
+    this.subTitle2 = '',
+    this.subTitleFontSize2 = AppSize.s14,
     this.bodyPageWidget,
     Key? key,
   }) : super(key: key);
@@ -27,7 +31,7 @@ class PageTemplateWidget extends StatelessWidget {
         //   Container()
         // else
         Expanded(
-          flex: 5,
+          flex: 8,
           child: Center(
             child: CustomTextWidget(
               text: '$title',
@@ -37,30 +41,49 @@ class PageTemplateWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               marginLeft: AppSize.s8,
               marginRight: AppSize.s8,
-              // maxLine: controller.isUpdate.value == true ? 3 : 3,
-            ),
-          ),
-        ),
-        // if (subTitle == '')
-        //   Container()
-        // else
-        Expanded(
-          flex: 10,
-          child: Center(
-            child: CustomTextWidget(
-              text: '$subTitle',
-              fontSize: subTitleFontSize,
-              fontWeight: FontWeight.w700,
-              color: ColorsManager.white,
-              textAlign: TextAlign.center,
-              marginLeft: AppSize.s8,
-              marginRight: AppSize.s8,
               maxLine: 3,
             ),
           ),
         ),
+        if (subTitle == '')
+          Container()
+        else
+          Expanded(
+            flex: 5,
+            child: Center(
+              child: CustomTextWidget(
+                text: '$subTitle',
+                fontSize: subTitleFontSize,
+                fontWeight: FontWeight.w700,
+                color: ColorsManager.white,
+                textAlign: TextAlign.center,
+                marginLeft: AppSize.s8,
+                marginRight: AppSize.s8,
+                maxLine: 3,
+              ),
+            ),
+          ),
+        if (subTitle2 == '')
+          Container()
+        else
+          Expanded(
+            flex: 4,
+            child: Center(
+              child: CustomTextWidget(
+                text: '$subTitle2',
+                fontStyle: FontStyle.italic,
+                fontSize: subTitleFontSize2,
+                fontWeight: FontWeight.w400,
+                color: ColorsManager.white,
+                textAlign: TextAlign.center,
+                marginLeft: AppSize.s8,
+                marginRight: AppSize.s8,
+                maxLine: 2,
+              ),
+            ),
+          ),
         Expanded(
-          flex: 90,
+          flex: 85,
           child: Container(
             padding: const EdgeInsets.only(
               top: AppSize.s16,

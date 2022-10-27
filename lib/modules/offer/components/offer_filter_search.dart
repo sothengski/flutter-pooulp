@@ -168,7 +168,9 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                     .where((item) => item.id == e.id)
                                     .isNotEmpty,
                                 // controller.typesListInFilter.contains(e),
-                                text: e.label,
+                                text: e.label == 'See all'
+                                    ? 'seeAll'.tr
+                                    : e.label,
                                 onPressed: () {
                                   controller
                                       .addingOrRemovingFieldInFieldListToBeSearch(

@@ -19,6 +19,7 @@ class ProfileModel {
   final String? invitationToken;
   final String? enterpriseName;
   final String? enterpriseID;
+  final String? jobTitle;
   final DateTime? birthDate;
   final String? pictureUrl;
   final bool? emailNotification;
@@ -75,6 +76,7 @@ class ProfileModel {
     this.invitationToken,
     this.enterpriseName,
     this.enterpriseID,
+    this.jobTitle,
     this.description,
     this.phone2CountryCode,
     this.phone2,
@@ -147,6 +149,7 @@ class ProfileModel {
         invitationToken: json['invitation_token'] as String?,
         enterpriseName: json['enterprise_name'] as String?,
         enterpriseID: json['enterprise_id'] as String?,
+        jobTitle: json['job_title'] as String?,
         description: json['description'] as String? ?? '',
         phone2CountryCode: json['phone2_country_code'] as String?,
         phone2: json['phone2'] as String?,
@@ -234,6 +237,7 @@ class ProfileModel {
         'invitation_token': invitationToken,
         'enterprise_name': enterpriseName,
         'enterprise_id': enterpriseID,
+        'job_title': jobTitle,
         'description': description,
         'phone2_country_code': phone2CountryCode,
         'phone2': phone2,
@@ -299,6 +303,7 @@ class ProfileModel {
       invitationToken: $invitationToken,
       enterpriseName: $enterpriseName,
       enterpriseID: $enterpriseID,
+      jobTitle: $jobTitle,
       birthDate: $birthDate,
       pictureUrl: $pictureUrl,
       emailNotification: $emailNotification,

@@ -29,9 +29,9 @@ class OfferFeedController extends GetxController
 
   int pageNum = 1;
 
-  final FieldModel allType = FieldModel(id: 0, label: 'All');
+  final FieldModel allType = FieldModel(id: 0, label: 'See all');
 
-  Rx<FieldModel> typeSelected = FieldModel(id: 0, label: 'All').obs;
+  Rx<FieldModel> typeSelected = FieldModel(id: 0, label: 'See all').obs;
 
   // List<FieldModel> listFilterTypes = [];
   RxList<FieldModel> listJobOfferTypes = <FieldModel>[].obs;

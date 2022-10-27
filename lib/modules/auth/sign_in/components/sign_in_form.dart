@@ -44,14 +44,13 @@ class SignInForm extends GetView<SignInController> {
                   topPadding: AppSize.s12,
                   validator: Validator().emailValidator,
                   keyboardType: TextInputType.emailAddress,
+                  autofillHintsList: const <String>[AutofillHints.email],
                 ),
                 CustomTextInput(
                   controller: controller.passwordCtrl,
                   inputTitle: 'password'.tr, //'auth.password'.tr,
                   hintText: 'passwordHint'.tr, //'auth.passwordHint'.tr,
-                  autofillHintsList: const <String>[
-                    AutofillHints.streetAddressLine1
-                  ],
+                  autofillHintsList: const <String>[AutofillHints.password],
                   suffixIcon: IconButton(
                     icon: !controller.showPassword.value
                         ? const Icon(

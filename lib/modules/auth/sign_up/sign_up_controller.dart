@@ -24,6 +24,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
 
   TextEditingController enterpriseNameCtrl = TextEditingController();
   TextEditingController enterpriseIDCtrl = TextEditingController();
+  TextEditingController jobTitleTextCtrl = TextEditingController();
 
   TextEditingController tokenCtrl = TextEditingController();
 
@@ -62,6 +63,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
     // passwordConfirmationCtrl.dispose();
     enterpriseNameCtrl.dispose();
     enterpriseIDCtrl.dispose();
+    jobTitleTextCtrl.dispose();
     tokenCtrl.dispose();
   }
 
@@ -92,6 +94,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
     // passwordConfirmationCtrl.clear();
     enterpriseNameCtrl.clear();
     enterpriseIDCtrl.clear();
+    jobTitleTextCtrl.clear();
     tokenCtrl.clear();
     isSubmitBtnProcessing.value = false;
   }
@@ -181,6 +184,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
         invitationToken: tokenCtrl.text.trim(),
         enterpriseName: enterpriseNameCtrl.text.trim(),
         enterpriseID: enterpriseIDCtrl.text.trim(),
+        jobTitle: jobTitleTextCtrl.text.trim(),
         source: Platform.isAndroid ? 3 : 2,
       );
       authProvider

@@ -14,7 +14,7 @@ class BaseProvider extends GetConnect {
     // add your local storage here to load for every request
     // final String userToken =
     getUserToken();
-    debugPrint('BaseProvider token: ${getUserToken()}');
+    // debugPrint('BaseProvider token: ${getUserToken()}');
 
     //1.base_url
     httpClient.baseUrl = API.host;
@@ -36,11 +36,17 @@ class BaseProvider extends GetConnect {
                     '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}' &&
                 AuthServices().getToken()!.tokenExpirationDate!.compareTo(now) <
                     30) {
-          Future.delayed(DurationConstant.d1500, () async {
+          // debugPrint(
+          //   "expire: ${AuthServices().getToken()!.tokenExpirationDate!} ${AuthServices().getToken()!.tokenExpirationDate!.compareTo(now) < 30}",
+          // );
+          Future.delayed(DurationConstant.d4000, () async {
             await AuthProvider().refreshTokenAPI().then((value) async {
               final bool loginStatus = await AuthServices().saveUserToken(
                 bodyData: value,
               );
+              // debugPrint(
+              //   "refreshTokenAPI: ${getUserToken()}",
+              // );
               if (loginStatus == true) {
                 // customSnackbar(
                 //   msgTitle: "RefreshToken",
@@ -48,6 +54,9 @@ class BaseProvider extends GetConnect {
                 //   bgColor: ColorsManager.red,
                 // );
               } else {
+                // debugPrint(
+                //   "${request.url}:${response.statusCode}: ${getUserToken()}",
+                // );
                 customSnackbar(
                   msgTitle: "Can't save RefreshToken",
                   msgContent: "Can't save RefreshToken",
@@ -62,12 +71,12 @@ class BaseProvider extends GetConnect {
                   textConfirm: 'OK',
                   confirm: OutlinedButton.icon(
                     onPressed: () async {
+                      // debugPrint(
+                      //   "Can't save RefreshToken token: ${getUserToken()}",
+                      // );
                       await AuthServices().removeToken().then(
                             (value) => Get.offAllNamed(Routes.splashRoute),
                           );
-                      debugPrint(
-                        "Can't save RefreshToken token: ${getUserToken()}",
-                      );
                     },
                     icon: const Icon(
                       Icons.check,
@@ -129,6 +138,9 @@ class BaseProvider extends GetConnect {
             // !('${request.url}' ==
             //       '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}') &&
             response.statusCode == 401) {
+          // debugPrint(
+          //   "${request.url}:${response.statusCode}: ${getUserToken()}",
+          // );
           Get.defaultDialog(
             barrierDismissible: false,
             radius: 10.0,
@@ -138,12 +150,12 @@ class BaseProvider extends GetConnect {
             textConfirm: 'OK',
             confirm: OutlinedButton.icon(
               onPressed: () async {
+                // debugPrint(
+                //   "Not getPendingOffer RefreshToken token: ${getUserToken()}",
+                // );
                 await AuthServices().removeToken().then(
                       (value) => Get.offAllNamed(Routes.splashRoute),
                     );
-                debugPrint(
-                  "Not getPendingOffer RefreshToken token: ${getUserToken()}",
-                );
               },
               icon: const Icon(
                 Icons.check,

@@ -30,6 +30,7 @@ class OfferFeedController extends GetxController
   int pageNum = 1;
 
   final FieldModel allType = FieldModel(id: 0, label: 'See all');
+  final FieldModel plusType = FieldModel(id: 9999, label: '+');
 
   Rx<FieldModel> typeSelected = FieldModel(id: 0, label: 'See all').obs;
 
@@ -421,6 +422,7 @@ class OfferFeedController extends GetxController
           ),
         );
       }
+      searchedListAsFieldModel.add(plusType);
     }
     // typesListToBeSearch.addAll(searchPreferenceData.value.types!);
     // languageListToBeSearch.addAll(searchPreferenceData.value.languages!);

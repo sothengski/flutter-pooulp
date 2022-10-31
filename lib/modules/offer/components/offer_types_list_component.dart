@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pooulp_flutter/modules/offer/offer.dart';
 
 import '../../../core/core.dart';
-import '../offer_feed/offer_feed_controller.dart';
 
 class OfferFeedTypesListComponent extends StatelessWidget {
   final controller = Get.find<OfferFeedController>();
@@ -70,9 +70,25 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                 ),
                 //Noted:: Enable this for row list of jobOfferTypes in the feed Page
                 onSelected: (_) {
-                  controller.selectType(
-                    type: controller.searchedListAsFieldModel[index],
-                  );
+                  if (controller.searchedListAsFieldModel[index].id == 9999) {
+                    customGeneralDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      widget: OfferFeedFilterSearch(
+                        title: 'filter'.tr,
+                        searchOptType: 1,
+                      ),
+                      // Get.dialog(
+                      //   OfferFeedFilterSearch(
+                      //     title: 'offer.filterTitle'.tr,
+                      //   ),
+                      //   // barrierDismissible: false,
+                    );
+                  } else {
+                    controller.selectType(
+                      type: controller.searchedListAsFieldModel[index],
+                    );
+                  }
                 },
               ),
             ),

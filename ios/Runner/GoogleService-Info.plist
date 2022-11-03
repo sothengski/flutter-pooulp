@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>555779830620-1a2jec49l0bhm3tph857g8saptcrvc7s.apps.googleusercontent.com</string>
+	<string>332636841754-a5on1htsjpg8p5eatmq65dbncmv4085q.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.555779830620-1a2jec49l0bhm3tph857g8saptcrvc7s</string>
+	<string>com.googleusercontent.apps.332636841754-a5on1htsjpg8p5eatmq65dbncmv4085q</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>332636841754-dl8frfkk0p43jboldv71dlhsdb3qg53p.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAfziJ4ptuZpCLbY-NJZY7O1NGLEPVVMns</string>
+	<string>AIzaSyDxv_SdcoPi6IjBv6fgKc4dqjZNfPv4rFo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>555779830620</string>
+	<string>332636841754</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.idcrmltd.pooulp</string>
+	<string>com.pooulp.prod</string>
 	<key>PROJECT_ID</key>
-	<string>pooulp-flutter</string>
+	<string>pooulp-prod-flutter</string>
 	<key>STORAGE_BUCKET</key>
-	<string>pooulp-flutter.appspot.com</string>
+	<string>pooulp-prod-flutter.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:555779830620:ios:c1f375dc712b91d8cec799</string>
+	<string>1:332636841754:ios:6fe54249518467fea92ea3</string>
 </dict>
 </plist>

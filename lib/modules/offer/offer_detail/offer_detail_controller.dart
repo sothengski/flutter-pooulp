@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../data/data.dart';
-import '../offer_controller.dart';
 
 class OfferDetailController extends GetxController
     with GetTickerProviderStateMixin {
@@ -12,7 +11,7 @@ class OfferDetailController extends GetxController
   final ScrollController scrollController = ScrollController();
   final offerProvider = Get.find<OfferProvider>();
 
-  final offerController = Get.put(OfferController());
+  // final offerController = Get.put(OfferController());
 
   RxInt currentIndexRx = 0.obs;
 

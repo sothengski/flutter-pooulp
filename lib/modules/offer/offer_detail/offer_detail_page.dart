@@ -6,17 +6,25 @@ import '../../../core/core.dart';
 import '../../../data/data.dart';
 import '../offer.dart';
 
+// ignore: must_be_immutable
 class OfferDetailPage extends GetView<OfferDetailController> {
   final JobOfferModel jobOfferDetail =
       (Get.arguments as List)[0] as JobOfferModel;
-  final List<Widget>? actionButtons =
-      (Get.arguments as List)[1] as List<Widget>;
-  final bool? isCustomActBtn = (Get.arguments as List)[2] as bool?;
+  List<Widget>? actionButtons = [];
+  //     (Get.arguments as List)[1] as List<Widget>;
+  bool? isCustomActBtn;
+  //=  (Get.arguments as List)[2] as bool?;
 
-  // const OfferDetailPage({Key? key}) : super(key: key);
+  OfferDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    actionButtons = (Get.arguments as List).isNotEmpty
+        ? (Get.arguments as List)[1] as List<Widget>
+        : [];
+    isCustomActBtn = (Get.arguments as List).isNotEmpty
+        ? (Get.arguments as List)[2] as bool?
+        : false;
     const player = YoutubePlayerIFrame();
     controller.youtubeVideoId = jobOfferDetail.enterprise!.youtubeLink == null
         ? ''
@@ -1339,11 +1347,11 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             oneTimePress: jobOfferDetail
                                 .applyState, //offerList![index].applyState,
                             onPressed: () {
-                              controller.offerController
-                                  .onClickActionButtonJobOffer(
-                                actionType: OfferStrings.applyAction,
-                                jobOfferId: jobOfferDetail.id,
-                              );
+                              // controller.offerController
+                              //     .onClickActionButtonJobOffer(
+                              //   actionType: OfferStrings.applyAction,
+                              //   jobOfferId: jobOfferDetail.id,
+                              // );
                               // offerController!
                               //     .onClickActionButtonJobOffer(
                               //   actionType: OfferStrings.applyAction,
@@ -1376,11 +1384,11 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                 ConfirmationDialogWidget(
                                   dialogBody: 'unSaveAlert'.tr,
                                   onPressed: () async {
-                                    await controller.offerController
-                                        .onClickActionButtonJobOffer(
-                                      actionType: OfferStrings.unSaveAction,
-                                      jobOfferId: jobOfferDetail.id,
-                                    );
+                                    // await controller.offerController
+                                    //     .onClickActionButtonJobOffer(
+                                    //   actionType: OfferStrings.unSaveAction,
+                                    //   jobOfferId: jobOfferDetail.id,
+                                    // );
                                     Get.back();
                                     Get.back();
                                   },

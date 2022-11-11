@@ -15,7 +15,9 @@ class OfferDetailController extends GetxController
 
   RxInt currentIndexRx = 0.obs;
 
-  late JobOfferModel? feedItemDetail;
+  Rx<JobOfferModel>? jobOfferDetail = JobOfferModel(uuid: '1').obs;
+
+  Rx<String?> jobOfferUUID = ''.obs;
 
   String? youtubeVideoId = '';
 
@@ -25,7 +27,7 @@ class OfferDetailController extends GetxController
   //     FirebaseDynamicLinkService();
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     tabController = TabController(
       length: 2,
@@ -65,6 +67,12 @@ class OfferDetailController extends GetxController
     youtubeController.onExitFullscreen = () {
       // debugPrint('Exited Fullscreen');
     };
+    Future.delayed(const Duration(milliseconds: 300), () async {
+      // print('controller: jobOfferDetail UUID ${jobOfferUUID.value}');
+      if (jobOfferUUID.value == '') {
+        await getJobOfferDetail(jobOfferUUID: jobOfferUUID.value);
+      }
+    });
   }
 
   @override
@@ -89,6 +97,19 @@ class OfferDetailController extends GetxController
         ),
       );
     }
+  }
+
+  Future<void> getJobOfferDetail({
+    required String? jobOfferUUID,
+  }) async {
+    final tempResp = await offerProvider.getJobOfferDetailByUUID(
+      jobOfferUUID: jobOfferUUID,
+    );
+    // if (tempResp.uuid!.isNotEmpty) {
+    debugPrint(
+      "getJobOfferDetail: $tempResp",
+    );
+    // }
   }
 
   Future<void> makeRequestToPOSTJobOfferViewCountAPI({

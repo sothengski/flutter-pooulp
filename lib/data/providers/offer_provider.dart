@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 import '../data.dart';
 
 abstract class IOfferProvider {
@@ -32,6 +34,9 @@ abstract class IOfferProvider {
   Future<JobOfferModel> postHideOffer({required int? jobOfferId});
   Future<JobOfferModel> postUnHideOffer({required int? jobOfferId});
   Future<JsonResponse> postJobOfferViewCount({required String? jobOfferUUID});
+  Future<JobOfferModel> getJobOfferDetailByUUID({
+    required String? jobOfferUUID,
+  });
 }
 
 class OfferProvider extends BaseProvider implements IOfferProvider {
@@ -372,6 +377,38 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
         // print('postUnHideOffer:: ${dataResponse.bodyString.toString()}');
         final apiResponse = json.decode(dataResponse.bodyString.toString());
         return JobOfferModel.fromJson(apiResponse as Map<String, dynamic>);
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<JobOfferModel> getJobOfferDetailByUUID({
+    required String? jobOfferUUID,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.getJobOfferDetailByUUID(jobOfferUUID: jobOfferUUID),
+        {},
+      );
+      // debugPrint('onboardingData: ${onboardingData.toRawJson()}');
+      if (dataResponse.hasError) {
+        // debugPrint('resp: ${dataResponse.bodyString}');
+        // throw Exception(dataResponse.bodyString);
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        debugPrint(
+          'API: ${API.getJobOfferDetailByUUID(jobOfferUUID: jobOfferUUID)}\nresponse::${response.data}',
+        );
+        // return response;
+        return JobOfferModel.fromJson(response.data as Map<String, dynamic>);
       }
     } catch (e) {
       return Future.error(e.toString());

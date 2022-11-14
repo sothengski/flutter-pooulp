@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import '../data.dart';
 
 abstract class IOfferProvider {
@@ -388,9 +386,8 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
     required String? jobOfferUUID,
   }) async {
     try {
-      final dataResponse = await post(
+      final dataResponse = await get(
         API.getJobOfferDetailByUUID(jobOfferUUID: jobOfferUUID),
-        {},
       );
       // debugPrint('onboardingData: ${onboardingData.toRawJson()}');
       if (dataResponse.hasError) {
@@ -404,9 +401,9 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
           message: dataResponse.statusText,
           data: dataResponse.body,
         );
-        debugPrint(
-          'API: ${API.getJobOfferDetailByUUID(jobOfferUUID: jobOfferUUID)}\nresponse::${response.data}',
-        );
+        // debugPrint(
+        //   'API: ${API.getJobOfferDetailByUUID(jobOfferUUID: jobOfferUUID)}\nresponse::${response.data}',
+        // );
         // return response;
         return JobOfferModel.fromJson(response.data as Map<String, dynamic>);
       }

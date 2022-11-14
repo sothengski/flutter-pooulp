@@ -8,37 +8,45 @@ import '../offer.dart';
 
 // ignore: must_be_immutable
 class OfferDetailPage extends GetView<OfferDetailController> {
-  final JobOfferModel jobOfferDetail =
-      (Get.arguments as List)[0] as JobOfferModel;
-
+  // final JobOfferModel jobOfferDetail = (Get.arguments) == null
+  //     ? JobOfferModel(uuid: '')
+  //     : (Get.arguments as List)[0] as JobOfferModel;
+  late String? jobOfferUUID =
+      (Get.arguments) == null ? '' : (Get.arguments as List)[0] as String;
   List<Widget>? actionButtons = [];
   //     (Get.arguments as List)[1] as List<Widget>;
   bool? isCustomActBtn;
   //=  (Get.arguments as List)[2] as bool?;
-
   OfferDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    controller.jobOfferUUID.value = jobOfferDetail.uuid;
-    // print('page: jobOfferDetail UUID ${jobOfferDetail.uuid}');
-    controller.jobOfferDetail!.value = jobOfferDetail;
-    actionButtons = (Get.arguments as List).isNotEmpty
+    // print('build jobOffer Detail: $jobOfferUUID');
+    // print('build jobOffer Detail: ${Get.arguments}');
+
+    controller.jobOfferUUID.value = jobOfferUUID;
+    // print(
+    //   'page: controller.jobOfferUUID UUID ${controller.jobOfferUUID.value}',
+    // );
+    // controller.jobOfferDetail!.value = jobOfferDetail;
+    actionButtons = (Get.arguments) != null
         ? (Get.arguments as List)[1] as List<Widget>
         : [];
-    isCustomActBtn = (Get.arguments as List).isNotEmpty
-        ? (Get.arguments as List)[2] as bool?
-        : false;
+    isCustomActBtn =
+        (Get.arguments) != null ? (Get.arguments as List)[2] as bool? : false;
     const player = YoutubePlayerIFrame();
-    controller.youtubeVideoId =
-        controller.jobOfferDetail!.value.enterprise!.youtubeLink == null
-            ? ''
-            : controller.jobOfferDetail!.value.enterprise!.youtubeLink!
-                .split('=')
-                .last;
-    controller.makeRequestToPOSTJobOfferViewCountAPI(
-      jobOfferUUID: controller.jobOfferDetail!.value.uuid,
-    );
+    // if (controller.jobOfferDetail!.value.uuid!.isNotEmpty) {
+    //   controller.youtubeVideoId =
+    //       controller.jobOfferDetail!.value.enterprise!.youtubeLink == null
+    //           ? ''
+    //           : controller.jobOfferDetail!.value.enterprise!.youtubeLink!
+    //               .split('=')
+    //               .last;
+    //   controller.makeRequestToPOSTJobOfferViewCountAPI(
+    //     jobOfferUUID: controller.jobOfferDetail!.value.uuid,
+    //   );
+    // }
+
     return Scaffold(
       // backgroundColor: ColorsManager.primary,
       appBar: CustomAppBar(

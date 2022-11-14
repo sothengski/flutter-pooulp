@@ -15,7 +15,7 @@ class OfferDetailController extends GetxController
 
   RxInt currentIndexRx = 0.obs;
 
-  Rx<JobOfferModel>? jobOfferDetail = JobOfferModel(uuid: '1').obs;
+  Rx<JobOfferModel>? jobOfferDetail = JobOfferModel(uuid: '').obs;
 
   Rx<String?> jobOfferUUID = ''.obs;
 
@@ -29,6 +29,13 @@ class OfferDetailController extends GetxController
   @override
   Future<void> onInit() async {
     super.onInit();
+    // print('onInit jobOffer Detail: ${jobOfferDetail!.value.uuid}');
+    Future.delayed(const Duration(milliseconds: 300), () async {
+      // print('controller: jobOfferDetail UUID ${jobOfferUUID.value}');
+      // if (jobOfferUUID.value == '') {
+      await getJobOfferDetail(jobOfferUUID: jobOfferUUID.value);
+      // }
+    });
     tabController = TabController(
       length: 2,
       vsync: this,
@@ -67,12 +74,6 @@ class OfferDetailController extends GetxController
     youtubeController.onExitFullscreen = () {
       // debugPrint('Exited Fullscreen');
     };
-    Future.delayed(const Duration(milliseconds: 300), () async {
-      // print('controller: jobOfferDetail UUID ${jobOfferUUID.value}');
-      if (jobOfferUUID.value == '') {
-        await getJobOfferDetail(jobOfferUUID: jobOfferUUID.value);
-      }
-    });
   }
 
   @override
@@ -106,9 +107,10 @@ class OfferDetailController extends GetxController
       jobOfferUUID: jobOfferUUID,
     );
     // if (tempResp.uuid!.isNotEmpty) {
-    debugPrint(
-      "getJobOfferDetail: $tempResp",
-    );
+    // debugPrint(
+    //   "getJobOfferDetail: $tempResp",
+    // );
+    jobOfferDetail!.value = tempResp;
     // }
   }
 

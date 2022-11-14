@@ -32,10 +32,9 @@ class OfferDetailController extends GetxController
     // print('onInit jobOffer Detail: ${jobOfferDetail!.value.uuid}');
     Future.delayed(const Duration(milliseconds: 300), () async {
       // print('controller: jobOfferDetail UUID ${jobOfferUUID.value}');
-      // if (jobOfferUUID.value == '') {
       await getJobOfferDetail(jobOfferUUID: jobOfferUUID.value);
-      // }
     });
+
     tabController = TabController(
       length: 2,
       vsync: this,
@@ -111,6 +110,14 @@ class OfferDetailController extends GetxController
     //   "getJobOfferDetail: $tempResp",
     // );
     jobOfferDetail!.value = tempResp;
+    if (jobOfferDetail!.value.uuid!.isNotEmpty) {
+      youtubeVideoId = jobOfferDetail!.value.enterprise!.youtubeLink == null
+          ? ''
+          : jobOfferDetail!.value.enterprise!.youtubeLink!.split('=').last;
+      makeRequestToPOSTJobOfferViewCountAPI(
+        jobOfferUUID: jobOfferDetail!.value.uuid,
+      );
+    }
     // }
   }
 

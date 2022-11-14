@@ -13,9 +13,10 @@ class OfferDetailPage extends GetView<OfferDetailController> {
   //     : (Get.arguments as List)[0] as JobOfferModel;
   late String? jobOfferUUID =
       (Get.arguments) == null ? '' : (Get.arguments as List)[0] as String;
-  List<Widget>? actionButtons = [];
-  //     (Get.arguments as List)[1] as List<Widget>;
-  bool? isCustomActBtn;
+  List<Widget>? actionButtons =
+      (Get.arguments) != null ? (Get.arguments as List)[1] as List<Widget> : [];
+  bool? isCustomActBtn =
+      (Get.arguments) != null ? (Get.arguments as List)[2] as bool? : false;
   //=  (Get.arguments as List)[2] as bool?;
   OfferDetailPage({Key? key}) : super(key: key);
 
@@ -29,11 +30,11 @@ class OfferDetailPage extends GetView<OfferDetailController> {
     //   'page: controller.jobOfferUUID UUID ${controller.jobOfferUUID.value}',
     // );
     // controller.jobOfferDetail!.value = jobOfferDetail;
-    actionButtons = (Get.arguments) != null
-        ? (Get.arguments as List)[1] as List<Widget>
-        : [];
-    isCustomActBtn =
-        (Get.arguments) != null ? (Get.arguments as List)[2] as bool? : false;
+    // actionButtons = (Get.arguments) != null
+    //     ? (Get.arguments as List)[1] as List<Widget>
+    //     : [];
+    // isCustomActBtn =
+    //     (Get.arguments) != null ? (Get.arguments as List)[2] as bool? : false;
     const player = YoutubePlayerIFrame();
     // if (controller.jobOfferDetail!.value.uuid!.isNotEmpty) {
     //   controller.youtubeVideoId =
@@ -73,7 +74,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
       ),
       body: Obx(
         () => controller.jobOfferDetail!.value.uuid == ''
-            ? const LoadingWidget()
+            ? const LoadingWidget(isTreeBounceLoading: true)
             : Column(
                 children: [
                   Expanded(

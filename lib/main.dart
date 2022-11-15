@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -11,13 +10,13 @@ import 'routes/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   await GetStorage.init(LocalStorage.credentialName);
   // await getAllTranslationLangsProvider(lang: 'en');
   // await getAllTranslationLangsProvider(lang: 'fr');
-  await AppBasicServices().getLangsFromFile(lang: 'en');
-  await AppBasicServices().getLangsFromFile(lang: 'fr');
-  await AppBasicServices().getLangsFromFile(lang: 'nl');
+  // await AppBasicServices().getLangsFromFile(lang: 'en');
+  // await AppBasicServices().getLangsFromFile(lang: 'fr');
+  // await AppBasicServices().getLangsFromFile(lang: 'nl');
   // await Firebase.initializeApp();
   // await FirebaseDynamicLinkService().initLinks();
   SystemChrome.setPreferredOrientations([

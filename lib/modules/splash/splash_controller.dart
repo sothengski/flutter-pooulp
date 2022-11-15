@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:uni_links/uni_links.dart';
 
 import '../../core/core.dart';
 import '../../data/data.dart';
@@ -10,12 +13,15 @@ import '../../routes/routes.dart';
 
 class SplashController extends GetxController {
   final appBasicProvider = Get.find<AppBasicProvider>();
+  // ignore: cancel_subscriptions
+  StreamSubscription? sub;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await checkAuth();
     await checkAppBasicTime();
+    await handleDeepLinks();
     // await getAppBasicStatusProvider();
   }
 
@@ -84,4 +90,72 @@ class SplashController extends GetxController {
       );
     }
   }
+
+  Future<void> handleDeepLinks() async {
+    // debugPrint('handleDeepLinks');
+    sub = linkStream.listen(
+      (String? link) {
+        if (link != null) {
+          // print('listener is working');
+          // print("link :: $link");
+
+          final uri = Uri.parse(link);
+
+          // if (uri.queryParameters['id'] != null) {
+
+          if (uri.path.contains('joboffers')) {
+            // print(uri.queryParameters['id'].toString());
+            // print("uri.path :: ${uri.path}");
+            // print("uri.pathSegments :: ${uri.pathSegments.last}");
+
+            Get.toNamed(
+              "${Routes.offerdetailRoute}?id=${uri.pathSegments.last}",
+              arguments: [
+                // jobOfferItem
+                uri.pathSegments.last,
+                <Widget>[],
+                false,
+                // bottomActionWidgetList,
+                // isCustomActBtn,
+              ],
+            );
+          }
+        }
+      },
+      onError: (err) {
+        // print('err');
+      },
+    );
+  }
+
+  // Future<void> handleDeepLinks() async {
+  //   final PendingDynamicLinkData? initialLink =
+  //       await FirebaseDynamicLinks.instance.getInitialLink();
+  //   if (initialLink != null) {
+  //     final Uri deepLink = initialLink.link;
+  //     print('Deeplinks uri:${deepLink.path}');
+  //     if (deepLink.path == '/ShowApiDataScreen') {
+  //       AppRoute.nextPage(
+  //         context,
+  //         ShowApiDataScreen(
+  //           deepLinkPath: '${deepLink.path}:Deep Link',
+  //         ),
+  //       );
+  //     } else if (deepLink.path == '/GoogleMapScreen') {
+  //       AppRoute.nextPage(
+  //         context,
+  //         GoogleMapScreen(
+  //           deepLinkPath: '${deepLink.path}:Deep Link',
+  //         ),
+  //       );
+  //     } else if (deepLink.path == '/UserSignUpScreen') {
+  //       AppRoute.nextPage(
+  //         context,
+  //         UserSignUpScreen(
+  //           deeplinkPath: '${deepLink.path}:Deep Link',
+  //         ),
+  //       );
+  //     }
+  //   }
+  // }
 }

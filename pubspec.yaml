@@ -46,6 +46,7 @@ dependencies:
   share_plus: ^4.0.10+1
   firebase_core: ^2.1.1
   # firebase_dynamic_links: ^4.3.6
+  uni_links: ^0.5.1
 
 dev_dependencies:
   flutter_test:

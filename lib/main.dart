@@ -14,9 +14,9 @@ Future<void> main() async {
   await GetStorage.init(LocalStorage.credentialName);
   // await getAllTranslationLangsProvider(lang: 'en');
   // await getAllTranslationLangsProvider(lang: 'fr');
-  // await AppBasicServices().getLangsFromFile(lang: 'en');
-  // await AppBasicServices().getLangsFromFile(lang: 'fr');
-  // await AppBasicServices().getLangsFromFile(lang: 'nl');
+  await AppBasicServices().getLangsFromFile(lang: 'en');
+  await AppBasicServices().getLangsFromFile(lang: 'fr');
+  await AppBasicServices().getLangsFromFile(lang: 'nl');
   // await Firebase.initializeApp();
   // await FirebaseDynamicLinkService().initLinks();
   SystemChrome.setPreferredOrientations([

@@ -11,8 +11,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
   // final JobOfferModel jobOfferDetail = (Get.arguments) == null
   //     ? JobOfferModel(uuid: '')
   //     : (Get.arguments as List)[0] as JobOfferModel;
-  late String? jobOfferUUID =
-      (Get.arguments) == null ? '' : (Get.arguments as List)[0] as String;
+  late String? jobOfferUUID = (Get.parameters['id']) ?? '';
   List<Widget>? actionButtons =
       (Get.arguments) != null ? (Get.arguments as List)[1] as List<Widget> : [];
   bool? isCustomActBtn =
@@ -23,7 +22,8 @@ class OfferDetailPage extends GetView<OfferDetailController> {
   @override
   Widget build(BuildContext context) {
     // print('build jobOffer Detail: $jobOfferUUID');
-    // print('build jobOffer Detail: ${Get.arguments}');
+    // print('build jobOffer Detail Get.arguments: ${Get.arguments}');
+    // print('build jobOffer Detail Get.parameter: ${Get.parameters['id']}');
 
     controller.jobOfferUUID.value = jobOfferUUID;
     // print(
@@ -1544,8 +1544,10 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                             //   actionType: OfferStrings.unSaveAction,
                                             //   jobOfferId: controller.jobOfferDetail!.value.id,
                                             // );
-                                            Get.back();
-                                            Get.back();
+                                            Get.back(
+                                              closeOverlays: true,
+                                            );
+                                            // Get.back();
                                           },
                                         ),
                                       );

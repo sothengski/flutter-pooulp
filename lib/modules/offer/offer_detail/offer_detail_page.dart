@@ -1503,8 +1503,13 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                       // controller.offerController
                                       //     .onClickActionButtonJobOffer(
                                       //   actionType: OfferStrings.applyAction,
-                                      //   jobOfferId: controller.jobOfferDetail!.value.id,
+                                      //   jobOfferId:
+                                      //       controller.jobOfferDetail!.value.id,
                                       // );
+                                      controller.offerProvider.postApplyOffer(
+                                        jobOfferId:
+                                            controller.jobOfferDetail!.value.id,
+                                      );
                                       // offerController!
                                       //     .onClickActionButtonJobOffer(
                                       //   actionType: OfferStrings.applyAction,
@@ -1541,9 +1546,16 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                           onPressed: () async {
                                             // await controller.offerController
                                             //     .onClickActionButtonJobOffer(
-                                            //   actionType: OfferStrings.unSaveAction,
-                                            //   jobOfferId: controller.jobOfferDetail!.value.id,
+                                            //   actionType:
+                                            //       OfferStrings.unSaveAction,
+                                            //   jobOfferId: controller
+                                            //       .jobOfferDetail!.value.id,
                                             // );
+                                            controller.offerProvider
+                                                .postApplyOffer(
+                                              jobOfferId: controller
+                                                  .jobOfferDetail!.value.id,
+                                            );
                                             Get.back(
                                               closeOverlays: true,
                                             );

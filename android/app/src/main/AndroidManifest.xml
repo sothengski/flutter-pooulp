@@ -77,11 +77,32 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data 
-                android:scheme="https" 
-                android:pathPrefix= "/jobOffers/"
-                android:host="app.pooulp.com" />
+                <data android:scheme="https" android:host="app.pooulp.com" />
+                <data android:scheme="http" />
             </intent-filter>
+            <!-- Deep Links -->
+            <!-- <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="https"
+                    android:host="app.pooulp.com"
+                    android:pathPrefix="/jobOffers" />
+            </intent-filter> -->
+
+      <!-- App Links -->
+            <!-- <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+        
+                <data
+                    android:scheme="https"
+                    android:host="app.pooulp.com"
+                    android:pathPrefix="/jobOffers" />
+            </intent-filter> -->
+
         </activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

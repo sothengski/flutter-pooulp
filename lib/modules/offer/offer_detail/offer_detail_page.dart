@@ -1552,7 +1552,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                             //       .jobOfferDetail!.value.id,
                                             // );
                                             controller.offerProvider
-                                                .postApplyOffer(
+                                                .postUnSaveOffer(
                                               jobOfferId: controller
                                                   .jobOfferDetail!.value.id,
                                             );

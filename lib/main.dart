@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,8 +12,10 @@ import 'routes/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
   await GetStorage.init(LocalStorage.credentialName);
+  final PendingDynamicLinkData? data =
+      await FirebaseDynamicLinks.instance.getInitialLink();
   // await getAllTranslationLangsProvider(lang: 'en');
   // await getAllTranslationLangsProvider(lang: 'fr');
   await AppBasicServices().getLangsFromFile(lang: 'en');
@@ -58,12 +62,49 @@ Future<void> main() async {
   runApp(MyApp(storageServices: storage));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final StorageServices? storageServices;
   const MyApp({
     Key? key,
     this.storageServices,
   }) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String url = "";
+
+  @override
+  void initState() {
+    // initDynamicLinks();
+    super.initState();
+  }
+
+  ///Retrieve dynamic Link firebase
+  // Future<void> initDynamicLinks() async {
+  //   // print('initDynamicLinks');
+
+  //   final PendingDynamicLinkData? data =
+  //       await FirebaseDynamicLinks.instance.getInitialLink();
+  //   if (data != null) {
+  //     final Uri deepLink = data.link;
+  //     // handleDynamicLink(url: deepLink);
+  //     print('Deeplinks uri:${deepLink.path}');
+  //   }
+  //   // FirebaseDynamicLinks.instance.onLink(
+  //   //   onSuccess: (PendingDynamicLinkData? dynamicLink) async {
+  //   //     final Uri? deepLink = dynamicLink?.link;
+  //   //     if (deepLink != null) {
+  //   //       print('Deeplinks uri:${deepLink.path}');
+  //   //     }
+  //   //   },
+  //   //   onError: (OnLink e) async {
+  //   //     print(e.message);
+  //   //   },
+  //   // );
+  // }
 
   @override
   Widget build(BuildContext context) {

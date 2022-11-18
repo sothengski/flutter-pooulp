@@ -1,11 +1,15 @@
-// import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:get/get.dart';
+import 'package:pooulp_flutter/core/core.dart';
+import 'package:pooulp_flutter/data/providers/providers.dart';
+import 'package:pooulp_flutter/routes/routes.dart';
 // import 'package:get/get.dart';
 // import 'package:pooulp_flutter/routes/app_routes.dart';
 
 // // FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-// class FirebaseDynamicLinkService {
-//   final FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+class FirebaseDynamicLinkService {
+  final FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
 //   Future<void> initLinks() async {
 //     final PendingDynamicLinkData? initialLink =
@@ -46,49 +50,69 @@
 //       // }
 //     }
 //   }
+  Future<void> handleDeepLinks() async {
+    // debugPrint('handleDeepLinks');
+    dynamicLinks.onLink.listen(
+      (dynamicLinkData) {
+        // print('deeplink data: ${dynamicLinkData.link.pathSegments.last}');
 
-//   Future<Uri> createDynamicLink({bool? short = true}) async {
-//     // setState(() {
-//     //   _isCreatingLink = true;
-//     // });
+        Future.delayed(
+          DurationConstant.d2000,
+          () async => {
+            Get.toNamed(
+              "${Routes.offerdetailRoute}?id=${dynamicLinkData.link.pathSegments.last}",
+            )
+          },
+        );
+      },
+    ).onError((error) {
+      // Handle errors
+    });
+  }
 
-//     final DynamicLinkParameters parameters = DynamicLinkParameters(
-//       uriPrefix: 'https://reactnativefirebase.page.link',
-//       longDynamicLink: Uri.parse(
-//         'https://reactnativefirebase.page.link/?efr=0&ibi=io.invertase.testing&apn=io.flutter.plugins.firebase.dynamiclinksexample&imv=0&amv=0&link=https%3A%2F%2Ftest-app%2Fhelloworld&ofl=https://ofl-example.com',
-//       ),
-//       link: Uri.parse('https://test-app/helloworld'),
-//       androidParameters: const AndroidParameters(
-//         packageName: 'io.flutter.plugins.firebase.dynamiclinksexample',
-//         minimumVersion: 0,
-//       ),
-//       iosParameters: const IOSParameters(
-//         bundleId: 'io.invertase.testing',
-//         minimumVersion: '0',
-//       ),
-//     );
-
-//     Uri url;
-//     if (short!) {
-//       final ShortDynamicLink shortLink =
-//           await FirebaseDynamicLinks.instance.buildShortLink(parameters);
-//       url = shortLink.shortUrl;
-//     } else {
-//       url = await FirebaseDynamicLinks.instance.buildLink(parameters);
-//     }
-//     // print('url: $url');
-//     return url;
-
-//     // setState(() {
-//     //   _linkMessage = url.toString();
-//     //   _isCreatingLink = false;
-//     // });
-//   }
-// }
+  Future<String> createDynamicLink({
+    bool? short = true,
+    String? jobOfferUUID,
+  }) async {
+    // setState(() {
+    //   _isCreatingLink = true;
+    // });
+    // print('createDynamicLink jobOfferUUID : $jobOfferUUID');
+    const String url = 'https://apppooulp.page.link';
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: url,
+      // longDynamicLink: Uri.parse(
+      //   '$url/jobOffers/$jobOfferUUID',
+      // ),
+      // link: Uri.parse('https://app.pooulp.com/jobOffers/$jobOfferUUID'),
+      link: Uri.parse('${API.webDomain}/jobOffers/$jobOfferUUID'),
+      androidParameters: const AndroidParameters(
+        packageName: 'com.pooulp.prod',
+        minimumVersion: 1,
+      ),
+      iosParameters: const IOSParameters(
+        bundleId: 'com.pooulp.prod',
+        minimumVersion: '1',
+        appStoreId: 'com.pooulp.prod',
+      ),
+    );
+    if (short == true) {
+      final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(
+        parameters,
+        shortLinkType: ShortDynamicLinkType.unguessable,
+      );
+      return shortLink.shortUrl.toString();
+    } else {
+      final dynamicUrl = await dynamicLinks.buildLink(parameters);
+      // print('aa : ${dynamicUrl.shortUrl}');
+      return dynamicUrl.toString();
+    }
+  }
+}
 
 // //   Future<void> fetchLinkData() async {
 // //   // FirebaseDynamicLinks.getInitialLInk does a call to firebase to get us the real link because we have shortened it.
-// //   final link = await FirebaseDynamicLinks.instance.getInitialLink();
+// //   final link = await dynamicLinks.getInitialLink();
 
 // //   // This link may exist if the app was opened fresh so we'll want to handle it the same way onLink will.
 // //   handleLinkData(link!);

@@ -2,10 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:uni_links/uni_links.dart';
 
 import '../../core/core.dart';
 import '../../data/data.dart';
@@ -19,9 +17,9 @@ class SplashController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    // await handleDeepLinks();
     await checkAuth();
     await checkAppBasicTime();
-    await handleDeepLinks();
     // await getAppBasicStatusProvider();
   }
 
@@ -91,42 +89,61 @@ class SplashController extends GetxController {
     }
   }
 
-  Future<void> handleDeepLinks() async {
-    // debugPrint('handleDeepLinks');
-    sub = linkStream.listen(
-      (String? link) {
-        if (link != null) {
-          // print('listener is working');
-          // print("link :: $link");
+  // Future<void> handleDeepLinks() async {
+  //   debugPrint('handleDeepLinks');
+  //   FirebaseDynamicLinks.instance.onLink.listen(
+  //     (dynamicLinkData) {
+  //       print('deeplink data: ${dynamicLinkData.link.pathSegments.last}');
 
-          final uri = Uri.parse(link);
+  //       Get.toNamed(
+  //         "${Routes.offerdetailRoute}?id=${dynamicLinkData.link.pathSegments.last}",
+  //       );
+  //     },
+  //   ).onError((error) {
+  //     // Handle errors
+  //   });
 
-          // if (uri.queryParameters['id'] != null) {
+  // final PendingDynamicLinkData? data =
+  //     await FirebaseDynamicLinks.instance.getInitialLink();
+  // if (data != null) {
+  //   final Uri deepLink = data.link;
+  //   // handleDynamicLink(url: deepLink);
+  //   print('Deeplinks uri:${deepLink.path}');
+  // }
+  // sub = linkStream.listen(
+  //   (String? link) {
+  //     if (link != null) {
+  //       // print('listener is working');
+  //       // print("link :: $link");
 
-          if (uri.path.contains('joboffers')) {
-            // print(uri.queryParameters['id'].toString());
-            // print("uri.path :: ${uri.path}");
-            // print("uri.pathSegments :: ${uri.pathSegments.last}");
+  //       final uri = Uri.parse(link);
 
-            Get.toNamed(
-              "${Routes.offerdetailRoute}?id=${uri.pathSegments.last}",
-              arguments: [
-                // jobOfferItem
-                uri.pathSegments.last,
-                <Widget>[],
-                false,
-                // bottomActionWidgetList,
-                // isCustomActBtn,
-              ],
-            );
-          }
-        }
-      },
-      onError: (err) {
-        // print('err');
-      },
-    );
-  }
+  //       // if (uri.queryParameters['id'] != null) {
+
+  //       if (uri.path.contains('joboffers')) {
+  //         // print(uri.queryParameters['id'].toString());
+  //         // print("uri.path :: ${uri.path}");
+  //         // print("uri.pathSegments :: ${uri.pathSegments.last}");
+
+  //         Get.toNamed(
+  //           "${Routes.offerdetailRoute}?id=${uri.pathSegments.last}",
+  //           arguments: [
+  //             // jobOfferItem
+  //             uri.pathSegments.last,
+  //             <Widget>[],
+  //             false,
+  //             // bottomActionWidgetList,
+  //             // isCustomActBtn,
+  //           ],
+  //         );
+  //       }
+  //     }
+  //   },
+  //   onError: (err) {
+  //     // print('err');
+  //   },
+  // );
+}
 
   // Future<void> handleDeepLinks() async {
   //   final PendingDynamicLinkData? initialLink =
@@ -158,4 +175,4 @@ class SplashController extends GetxController {
   //     }
   //   }
   // }
-}
+// }

@@ -29,12 +29,27 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
   String? socialMediaLastName;
   String? socialMediaToken;
 
+  FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
+
   // @override
   // void onInit() {
   //   final String lang = StorageServices().readData('language') as String;
   //   print('lang: $lang');
   //   super.onInit();
   // }
+
+  @override
+  Future<void> onReady() async {
+    await deepLink();
+    super.onReady();
+  }
+
+  Future<void> deepLink() async {
+    await Future.delayed(
+      DurationConstant.d2000,
+      () async => {await firebase.handleDeepLinks()},
+    );
+  }
 
   @override
   void dispose() {

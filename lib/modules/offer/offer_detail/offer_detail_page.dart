@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../core/core.dart';
-import '../../../data/data.dart';
 import '../offer.dart';
 
 // ignore: must_be_immutable
@@ -59,11 +58,14 @@ class OfferDetailPage extends GetView<OfferDetailController> {
             iconColor: ColorsManager.white,
             tooltip: AppStrings.removeText,
             onClick: () async => {
+              // print(
+              //   'link: ${controller.deepLink}',
+              // ),
               await shareUtils(
                 context: context,
                 text: 'POOULP Job Offer',
-                urlPreview:
-                    '${API.webDomain}/joboffers/${controller.jobOfferDetail!.value.uuid}',
+                urlPreview: controller.deepLink,
+                // '${API.webDomain}/joboffers/${controller.jobOfferDetail!.value.uuid}',
                 // urlPreview: controller.firebaseDynamicLinkService
                 //     .createDynamicLink()
                 //     .toString(),

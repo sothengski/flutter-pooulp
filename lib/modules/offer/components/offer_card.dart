@@ -36,8 +36,13 @@ class OfferCard extends StatelessWidget {
         ),
         onPressed: () {
           Get.toNamed(
-            Routes.offerdetailRoute,
-            arguments: [jobOfferItem, bottomActionWidgetList, isCustomActBtn],
+            "${Routes.offerdetailRoute}?id=${jobOfferItem!.uuid}",
+            arguments: [
+              // jobOfferItem
+              jobOfferItem!.uuid,
+              bottomActionWidgetList,
+              isCustomActBtn,
+            ],
           );
         },
         child: Column(

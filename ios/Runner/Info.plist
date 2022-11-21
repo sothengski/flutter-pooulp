@@ -71,7 +71,7 @@
 		<key>CFBundleTypeRole</key>
 		<string>Editor</string>
 		<key>CFBundleURLName</key>
-		<string>app.pooulp.com</string>
+		<string>apppooulp.page.link</string>
 		<key>CFBundleURLSchemes</key>
 		<array>
 		<string>customscheme</string>

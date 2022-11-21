@@ -196,6 +196,9 @@ class API {
   static String postSeenConversation({required String? roomId}) =>
       '/rooms/$roomId/openconversation';
 
+  static String getJobOfferDetailByUUID({required String? jobOfferUUID}) =>
+      '/joboffers/$jobOfferUUID';
+
   static String postJobOfferViewCount({required String? jobOfferUUID}) =>
       '/offers/$jobOfferUUID/view';
 

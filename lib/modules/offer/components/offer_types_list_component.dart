@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pooulp_flutter/modules/offer/offer.dart';
 
 import '../../../core/core.dart';
+import '../offer.dart';
 
 class OfferFeedTypesListComponent extends StatelessWidget {
   final controller = Get.find<OfferFeedController>();

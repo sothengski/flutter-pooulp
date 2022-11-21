@@ -17,5 +17,12 @@ class OfferDetailBinding implements Bindings {
     Get.lazyPut<OfferProvider>(
       () => OfferProvider(),
     );
+
+    // Get.lazyPut<UserInfoProvider>(
+    //   () => UserInfoProvider(),
+    // );
+    // Get.lazyPut<TagProvider>(
+    //   () => TagProvider(),
+    // );
   }
 }

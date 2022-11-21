@@ -144,35 +144,3 @@ class SplashController extends GetxController {
   //   },
   // );
 }
-
-  // Future<void> handleDeepLinks() async {
-  //   final PendingDynamicLinkData? initialLink =
-  //       await FirebaseDynamicLinks.instance.getInitialLink();
-  //   if (initialLink != null) {
-  //     final Uri deepLink = initialLink.link;
-  //     print('Deeplinks uri:${deepLink.path}');
-  //     if (deepLink.path == '/ShowApiDataScreen') {
-  //       AppRoute.nextPage(
-  //         context,
-  //         ShowApiDataScreen(
-  //           deepLinkPath: '${deepLink.path}:Deep Link',
-  //         ),
-  //       );
-  //     } else if (deepLink.path == '/GoogleMapScreen') {
-  //       AppRoute.nextPage(
-  //         context,
-  //         GoogleMapScreen(
-  //           deepLinkPath: '${deepLink.path}:Deep Link',
-  //         ),
-  //       );
-  //     } else if (deepLink.path == '/UserSignUpScreen') {
-  //       AppRoute.nextPage(
-  //         context,
-  //         UserSignUpScreen(
-  //           deeplinkPath: '${deepLink.path}:Deep Link',
-  //         ),
-  //       );
-  //     }
-  //   }
-  // }
-// }

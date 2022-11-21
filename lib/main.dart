@@ -1,5 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+// import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -14,8 +14,13 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init(LocalStorage.credentialName);
-  final PendingDynamicLinkData? data =
-      await FirebaseDynamicLinks.instance.getInitialLink();
+  // final PendingDynamicLinkData? data =
+  //     await FirebaseDynamicLinks.instance.getInitialLink();
+  // if (data != null) {
+  //   final Uri deepLink = data.link;
+  //   // handleDynamicLink(url: deepLink);
+  //   print('Deeplinks uri:${deepLink.path}');
+  // }
   // await getAllTranslationLangsProvider(lang: 'en');
   // await getAllTranslationLangsProvider(lang: 'fr');
   await AppBasicServices().getLangsFromFile(lang: 'en');

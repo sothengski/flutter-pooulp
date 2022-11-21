@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../data/data.dart';
-import '../offer_controller.dart';
 
 class OfferDetailController extends GetxController
     with GetTickerProviderStateMixin {
@@ -12,22 +11,36 @@ class OfferDetailController extends GetxController
   final ScrollController scrollController = ScrollController();
   final offerProvider = Get.find<OfferProvider>();
 
-  final offerController = Get.put(OfferController());
+  // final offerController = Get.put(OfferController());
 
   RxInt currentIndexRx = 0.obs;
 
-  late JobOfferModel? feedItemDetail;
+  Rx<JobOfferModel>? jobOfferDetail = JobOfferModel(uuid: '').obs;
+
+  Rx<String?> jobOfferUUID = ''.obs;
 
   String? youtubeVideoId = '';
 
   late YoutubePlayerController youtubeController;
 
+  late String deepLink;
+
+  final FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
+
   // final FirebaseDynamicLinkService firebaseDynamicLinkService =
   //     FirebaseDynamicLinkService();
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
+    // print('onInit jobOffer Detail: ${jobOfferDetail!.value.uuid}');
+    Future.delayed(const Duration(milliseconds: 300), () async {
+      // print('controller: jobOfferDetail UUID ${jobOfferUUID.value}');
+      await getJobOfferDetail(jobOfferUUID: jobOfferUUID.value);
+      deepLink =
+          await firebase.createDynamicLink(jobOfferUUID: jobOfferUUID.value);
+    });
+
     tabController = TabController(
       length: 2,
       vsync: this,
@@ -90,6 +103,28 @@ class OfferDetailController extends GetxController
         ),
       );
     }
+  }
+
+  Future<void> getJobOfferDetail({
+    required String? jobOfferUUID,
+  }) async {
+    final tempResp = await offerProvider.getJobOfferDetailByUUID(
+      jobOfferUUID: jobOfferUUID,
+    );
+    // if (tempResp.uuid!.isNotEmpty) {
+    // debugPrint(
+    //   "getJobOfferDetail: $tempResp",
+    // );
+    jobOfferDetail!.value = tempResp;
+    if (jobOfferDetail!.value.uuid!.isNotEmpty) {
+      youtubeVideoId = jobOfferDetail!.value.enterprise!.youtubeLink == null
+          ? ''
+          : jobOfferDetail!.value.enterprise!.youtubeLink!.split('=').last;
+      makeRequestToPOSTJobOfferViewCountAPI(
+        jobOfferUUID: jobOfferDetail!.value.uuid,
+      );
+    }
+    // }
   }
 
   Future<void> makeRequestToPOSTJobOfferViewCountAPI({

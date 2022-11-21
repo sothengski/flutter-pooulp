@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -10,10 +11,13 @@ import '../../routes/routes.dart';
 
 class SplashController extends GetxController {
   final appBasicProvider = Get.find<AppBasicProvider>();
+  // ignore: cancel_subscriptions
+  StreamSubscription? sub;
 
   @override
   Future<void> onInit() async {
     super.onInit();
+    // await handleDeepLinks();
     await checkAuth();
     await checkAppBasicTime();
     // await getAppBasicStatusProvider();
@@ -84,4 +88,59 @@ class SplashController extends GetxController {
       );
     }
   }
+
+  // Future<void> handleDeepLinks() async {
+  //   debugPrint('handleDeepLinks');
+  //   FirebaseDynamicLinks.instance.onLink.listen(
+  //     (dynamicLinkData) {
+  //       print('deeplink data: ${dynamicLinkData.link.pathSegments.last}');
+
+  //       Get.toNamed(
+  //         "${Routes.offerdetailRoute}?id=${dynamicLinkData.link.pathSegments.last}",
+  //       );
+  //     },
+  //   ).onError((error) {
+  //     // Handle errors
+  //   });
+
+  // final PendingDynamicLinkData? data =
+  //     await FirebaseDynamicLinks.instance.getInitialLink();
+  // if (data != null) {
+  //   final Uri deepLink = data.link;
+  //   // handleDynamicLink(url: deepLink);
+  //   print('Deeplinks uri:${deepLink.path}');
+  // }
+  // sub = linkStream.listen(
+  //   (String? link) {
+  //     if (link != null) {
+  //       // print('listener is working');
+  //       // print("link :: $link");
+
+  //       final uri = Uri.parse(link);
+
+  //       // if (uri.queryParameters['id'] != null) {
+
+  //       if (uri.path.contains('joboffers')) {
+  //         // print(uri.queryParameters['id'].toString());
+  //         // print("uri.path :: ${uri.path}");
+  //         // print("uri.pathSegments :: ${uri.pathSegments.last}");
+
+  //         Get.toNamed(
+  //           "${Routes.offerdetailRoute}?id=${uri.pathSegments.last}",
+  //           arguments: [
+  //             // jobOfferItem
+  //             uri.pathSegments.last,
+  //             <Widget>[],
+  //             false,
+  //             // bottomActionWidgetList,
+  //             // isCustomActBtn,
+  //           ],
+  //         );
+  //       }
+  //     }
+  //   },
+  //   onError: (err) {
+  //     // print('err');
+  //   },
+  // );
 }

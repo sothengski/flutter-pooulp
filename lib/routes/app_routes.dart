@@ -8,7 +8,7 @@ class Routes {
   static const editUserInfoRoute = '/edituserinfo';
   static const feedRoute = '/feed';
   static const myOffersRoute = '/offer';
-  static const offerdetailRoute = '/offer_detail';
+  static const offerdetailRoute = '/joboffers/';
   static const settingsRoute = '/settings';
   static const changePasswordRoute = '/change_password';
   static const forgotPasswordRoute = '/forgot_password';

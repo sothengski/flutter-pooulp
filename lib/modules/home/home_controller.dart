@@ -17,11 +17,25 @@ class HomeController extends GetxController {
   //getConversationStatusResponseProvider() - MessagingController
   RxBool isMessagingBag = false.obs;
   RxString messagingBagLabel = ''.obs;
+  FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await getToken();
+  }
+
+  @override
+  Future<void> onReady() async {
+    await deepLink();
+    super.onReady();
+  }
+
+  Future<void> deepLink() async {
+    await Future.delayed(
+      DurationConstant.d2000,
+      () async => {await firebase.handleDeepLinks()},
+    );
   }
 
   Future<void> signOut() async {
@@ -50,4 +64,19 @@ class HomeController extends GetxController {
     }
     currentIndex.value = index!;
   }
+
+  // Future<void> handleDeepLinks() async {
+  //   debugPrint('handleDeepLinks');
+  //   FirebaseDynamicLinks.instance.onLink.listen(
+  //     (dynamicLinkData) {
+  //       print('deeplink data: ${dynamicLinkData.link.pathSegments.last}');
+
+  //       Get.toNamed(
+  //         "${Routes.offerdetailRoute}?id=${dynamicLinkData.link.pathSegments.last}",
+  //       );
+  //     },
+  //   ).onError((error) {
+  //     // Handle errors
+  //   });
+  // }
 }

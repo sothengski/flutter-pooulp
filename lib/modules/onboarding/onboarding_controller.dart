@@ -305,6 +305,34 @@ class OnboardingController extends GetxController
 
   bool get isLastPage => selectedPageIndex.value == numPage.value - 1;
 
+  bool isDisableOnNextButton() {
+    // condition on matching selection in page 1
+    // condition on selection in page 8
+    // condition on empty internshipInterestedInSelectedList in page 3
+    // condition on empty studentJobInterestedInSelectedList in page 5
+    if (((haveitemInList(
+                  lookingForSelectedList,
+                  FieldModel(id: 1),
+                ) ==
+                false) &&
+            (haveitemInList(
+                  lookingForSelectedList,
+                  FieldModel(id: 3),
+                ) ==
+                false) &&
+            selectedPageIndex.value == 1) ||
+        ((knowFromSourceSelectedList!.isEmpty) &&
+            selectedPageIndex.value == 9) ||
+        ((selectedPageIndex.value == 3) &&
+            internshipInterestedInSelectedList.isEmpty) ||
+        ((selectedPageIndex.value == 5) &&
+            studentJobInterestedInSelectedList.isEmpty)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void movingAction({bool? forward = true}) {
     forward == false
         ? pageController.previousPage(

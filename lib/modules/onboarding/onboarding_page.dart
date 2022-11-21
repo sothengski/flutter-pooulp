@@ -962,22 +962,34 @@ class OnboardingPage extends GetView<OnboardingController> {
                         Expanded(
                           flex: 25,
                           // condition on matching selection in page 1
-                          // and condition on selection in page 8
-                          child: ((controller.haveitemInList(
-                                            controller.lookingForSelectedList,
-                                            FieldModel(id: 1),
-                                          ) ==
-                                          false) &&
-                                      (controller.haveitemInList(
-                                            controller.lookingForSelectedList,
-                                            FieldModel(id: 3),
-                                          ) ==
-                                          false) &&
-                                      controller.selectedPageIndex.value ==
-                                          1) ||
-                                  ((controller.knowFromSourceSelectedList!
-                                          .isEmpty) &&
-                                      controller.selectedPageIndex.value == 9)
+                          // condition on selection in page 8
+                          // condition on empty internshipInterestedInSelectedList in page 3
+                          // condition on empty studentJobInterestedInSelectedList in page 5
+                          child: controller.isDisableOnNextButton()
+                              // ((controller.haveitemInList(
+                              //                   controller.lookingForSelectedList,
+                              //                   FieldModel(id: 1),
+                              //                 ) ==
+                              //                 false) &&
+                              //             (controller.haveitemInList(
+                              //                   controller.lookingForSelectedList,
+                              //                   FieldModel(id: 3),
+                              //                 ) ==
+                              //                 false) &&
+                              //             controller.selectedPageIndex.value ==
+                              //                 1) ||
+                              //         ((controller.knowFromSourceSelectedList!
+                              //                 .isEmpty) &&
+                              //             controller.selectedPageIndex.value ==
+                              //                 9) ||
+                              //         ((controller.selectedPageIndex.value == 3) &&
+                              //             controller
+                              //                 .internshipInterestedInSelectedList
+                              //                 .isEmpty) ||
+                              //         ((controller.selectedPageIndex.value == 5) &&
+                              //             controller
+                              //                 .studentJobInterestedInSelectedList
+                              //                 .isEmpty)
                               ? TextButton(
                                   onPressed: null,
                                   style: ButtonStyle(

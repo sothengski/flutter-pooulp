@@ -902,115 +902,127 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       //===== Bottom of Availabilities Tags Component =====//
                       // const SizedBox(height: 8.0),
 
-                      ///===== Top of Location Component =====//
-                      Container(
-                        padding: const EdgeInsets.only(
-                          left: AppSize.s10,
-                          right: AppSize.s10,
-                        ),
-                        child: Stack(
+                      if (controller.workPlaceTypesInFilter.value == 1)
+                        Container()
+                      else
+                        Wrap(
                           children: [
-                            GestureDetector(
-                              onTap: () async {
-                                controller.placeDetail.value =
-                                    (await showSearchFunc(context))!;
-                              },
-                              child: AbsorbPointer(
-                                child: Stack(
-                                  children: [
-                                    // Container(
-                                    //   alignment: Alignment.centerRight,
-                                    //   padding:
-                                    //       const EdgeInsets.only(top: AppSize.s16),
-                                    //   child: const Icon(
-                                    //     Icons.cancel,
-                                    //     color: ColorsManager.red,
-                                    //     size: AppSize.s16,
-                                    //   ),
-                                    // ),
-                                    CustomTextInput(
-                                      controller: controller.addressCtrl,
-                                      inputTitle: 'location'.tr,
-                                      fontSizeTitle: AppSize.s16,
-                                      fontWeightTitle: FontWeight.w600,
-                                      hintText: controller
-                                              .placeDetail.value.fullAddress ??
-                                          '',
-                                      hintTextColor: ColorsManager.black,
-                                      isFilled: true,
-                                      isReadOnly: true,
-                                      topContentPadding: 12.0,
-                                      bottomContentPadding: 12.0,
-                                      topPadding: AppSize.s12,
-                                      // counter: true,
-                                      maxLines: 5,
-                                      maxLength: 150,
-                                      keyboardType: TextInputType.multiline,
-                                      // suffixIcon: const Icon(
-                                      //   Icons.cancel,
-                                      //   color: ColorsManager.red,
-                                      //   size: AppSize.s16,
-                                      // ),
-                                    ),
-                                  ],
-                                ),
+                            ///===== Top of Location Component =====//
+                            Container(
+                              padding: const EdgeInsets.only(
+                                left: AppSize.s10,
+                                right: AppSize.s10,
                               ),
-                            ),
-                            if (controller.placeDetail.value.fullAddress ==
-                                    null ||
-                                controller.placeDetail.value.fullAddress == '')
-                              Container()
-                            else
-                              Positioned(
-                                top: 50,
-                                left: 0,
-                                right: 10,
-                                child: Container(
-                                  alignment: Alignment.centerRight,
-                                  child: GestureDetector(
+                              child: Stack(
+                                children: [
+                                  GestureDetector(
                                     onTap: () async {
-                                      controller.clearPlaceDetail();
+                                      controller.placeDetail.value =
+                                          (await showSearchFunc(context))!;
                                     },
-                                    child: const Icon(
-                                      Icons.cancel,
-                                      color: ColorsManager.red,
-                                      size: AppSize.s20,
+                                    child: AbsorbPointer(
+                                      child: Stack(
+                                        children: [
+                                          // Container(
+                                          //   alignment: Alignment.centerRight,
+                                          //   padding:
+                                          //       const EdgeInsets.only(top: AppSize.s16),
+                                          //   child: const Icon(
+                                          //     Icons.cancel,
+                                          //     color: ColorsManager.red,
+                                          //     size: AppSize.s16,
+                                          //   ),
+                                          // ),
+                                          CustomTextInput(
+                                            controller: controller.addressCtrl,
+                                            inputTitle: 'location'.tr,
+                                            fontSizeTitle: AppSize.s16,
+                                            fontWeightTitle: FontWeight.w600,
+                                            hintText: controller.placeDetail
+                                                    .value.fullAddress ??
+                                                '',
+                                            hintTextColor: ColorsManager.black,
+                                            isFilled: true,
+                                            isReadOnly: true,
+                                            topContentPadding: 12.0,
+                                            bottomContentPadding: 12.0,
+                                            topPadding: AppSize.s12,
+                                            // counter: true,
+                                            maxLines: 5,
+                                            maxLength: 150,
+                                            keyboardType:
+                                                TextInputType.multiline,
+                                            // suffixIcon: const Icon(
+                                            //   Icons.cancel,
+                                            //   color: ColorsManager.red,
+                                            //   size: AppSize.s16,
+                                            // ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  if (controller
+                                              .placeDetail.value.fullAddress ==
+                                          null ||
+                                      controller
+                                              .placeDetail.value.fullAddress ==
+                                          '')
+                                    Container()
+                                  else
+                                    Positioned(
+                                      top: 50,
+                                      left: 0,
+                                      right: 10,
+                                      child: Container(
+                                        alignment: Alignment.centerRight,
+                                        child: GestureDetector(
+                                          onTap: () async {
+                                            controller.clearPlaceDetail();
+                                          },
+                                          child: const Icon(
+                                            Icons.cancel,
+                                            color: ColorsManager.red,
+                                            size: AppSize.s20,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
                               ),
+                            ),
+                            //===== Bottom of Location Component =====//
+                            const SizedBox(height: 8.0),
+
+                            ///===== Top of Radius Component =====//
+                            RowContentInputWidget(
+                              centerWidgetFlex: 50,
+                              centerWidget: CustomTextWidget(
+                                marginLeft: AppSize.s12,
+                                textAlign: TextAlign.center,
+                                text:
+                                    '${'radius'.tr}(Km): ${controller.radiusRxInt.value}',
+                                fontSize: AppSize.s16,
+                              ),
+                              suffixWidgetFlex: 50,
+                              suffixWidget: Slider(
+                                value: controller.radiusRxInt.value.toDouble(),
+                                min: 10.0,
+                                max: 200.0,
+                                divisions: 200,
+                                activeColor: ColorsManager.primary,
+                                inactiveColor: ColorsManager.grey300,
+                                thumbColor: ColorsManager.primary,
+                                label: '${controller.radiusRxInt.value}',
+                                onChanged: (double newValue) {
+                                  controller.radiusRxInt.value =
+                                      newValue.toInt();
+                                },
+                              ),
+                            ),
+                            //===== Bottom of Radius Component =====//
                           ],
                         ),
-                      ),
-                      //===== Bottom of Location Component =====//
-                      const SizedBox(height: 8.0),
-
-                      ///===== Top of Radius Component =====//
-                      RowContentInputWidget(
-                        centerWidgetFlex: 50,
-                        centerWidget: CustomTextWidget(
-                          marginLeft: AppSize.s12,
-                          textAlign: TextAlign.center,
-                          text:
-                              '${'radius'.tr}(Km): ${controller.radiusRxInt.value}',
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidgetFlex: 50,
-                        suffixWidget: Slider(
-                          value: controller.radiusRxInt.value.toDouble(),
-                          min: 10.0,
-                          max: 200.0,
-                          divisions: 200,
-                          activeColor: ColorsManager.primary,
-                          inactiveColor: ColorsManager.grey300,
-                          thumbColor: ColorsManager.primary,
-                          label: '${controller.radiusRxInt.value}',
-                          onChanged: (double newValue) {
-                            controller.radiusRxInt.value = newValue.toInt();
-                          },
-                        ),
-                      ),
-                      //===== Bottom of Radius Component =====//
                     ],
                   ),
                 ),

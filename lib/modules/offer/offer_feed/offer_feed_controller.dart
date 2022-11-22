@@ -21,6 +21,8 @@ class OfferFeedController extends GetxController
   // final RefreshController refreshController =
   //     RefreshController(initialRefresh: true);
 
+  final searchFilterFormKey = GlobalKey<FormState>();
+
   RxList<JobOfferModel> feedListRepsonse = <JobOfferModel>[].obs;
   RxList<JobOfferModel> feedFilterList = <JobOfferModel>[].obs;
 

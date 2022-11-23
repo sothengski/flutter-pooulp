@@ -30,6 +30,7 @@ class ContainerDialogWidget extends StatelessWidget {
   final double? bottomPadding;
   final Widget? dialogWidget;
   final DateTime? currentTime;
+  final DateTime? minTime;
   final String? dateLocale;
   final Function(DateTime)? onConfirmDate;
   final Widget? containerWidget;
@@ -47,6 +48,7 @@ class ContainerDialogWidget extends StatelessWidget {
     this.fontWeightTitle = FontWeight.w400,
     this.dialogWidget,
     this.currentTime,
+    this.minTime,
     this.dateLocale = 'en',
     this.onConfirmDate,
     this.containerWidget,
@@ -96,7 +98,7 @@ class ContainerDialogWidget extends StatelessWidget {
                         DatePicker.showDatePicker(
                           context,
                           locale: localeTypeFunc(dateLocale: dateLocale),
-                          minTime: DateTime(1970),
+                          minTime: minTime ?? DateTime(1970),
                           // maxTime: DateTime(2009, 12, 31),
                           currentTime: currentTime,
                           // locale: LocaleType.kh,
@@ -138,7 +140,7 @@ class ContainerDialogWidget extends StatelessWidget {
                           pickerModel: CustomMonthPicker(
                             currentTime: currentTime,
                             locale: localeTypeFunc(dateLocale: dateLocale),
-                            minTime: DateTime(1970),
+                            minTime: minTime ?? DateTime(1970),
                             // maxTime: DateTime(2009, 12, 31),
                             // locale: LocaleType.kh,
                           ),

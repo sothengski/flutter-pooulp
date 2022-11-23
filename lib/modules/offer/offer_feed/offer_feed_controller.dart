@@ -33,6 +33,7 @@ class OfferFeedController extends GetxController
 
   final FieldModel allType = FieldModel(id: 0, label: 'See all');
   final FieldModel plusType = FieldModel(id: 9999, label: '+');
+  final FieldModel editType = FieldModel(id: 8888, label: 'edit');
 
   Rx<FieldModel> typeSelected = FieldModel(id: 0, label: 'See all').obs;
 
@@ -425,6 +426,7 @@ class OfferFeedController extends GetxController
         );
       }
       searchedListAsFieldModel.add(plusType);
+      searchedListAsFieldModel.add(editType);
     }
     // typesListToBeSearch.addAll(searchPreferenceData.value.types!);
     // languageListToBeSearch.addAll(searchPreferenceData.value.languages!);

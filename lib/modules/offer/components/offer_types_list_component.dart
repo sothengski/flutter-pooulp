@@ -76,6 +76,21 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                       barrierDismissible: true,
                       widget: OfferFeedFilterSearch(
                         title: 'filter'.tr,
+                        // searchOptType: 2,
+                      ),
+                      // Get.dialog(
+                      //   OfferFeedFilterSearch(
+                      //     title: 'offer.filterTitle'.tr,
+                      //   ),
+                      //   // barrierDismissible: false,
+                    );
+                  } else if (controller.searchedListAsFieldModel[index].id ==
+                      8888) {
+                    customGeneralDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      widget: OfferFeedFilterSearch(
+                        title: 'filter'.tr,
                         searchOptType: 1,
                       ),
                       // Get.dialog(

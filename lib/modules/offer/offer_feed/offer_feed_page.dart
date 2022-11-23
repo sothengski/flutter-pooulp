@@ -296,7 +296,8 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                 : Center(
                                     child: StateHandlerWidget(
                                       imgPath: AssetsManager.emptyDataIcon,
-                                      headerText: 'noResult'.tr,
+                                      headerText:
+                                          "${'noJobOffer'.tr}\n${'searchFilterNotice'.tr}", //'noResult'.tr,
                                       // bodyText: 'offer.contentMsg'.tr,
                                       buttonText: 'tryAgain'.tr,
                                       onPressedFunctionCall:

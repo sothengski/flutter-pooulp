@@ -242,6 +242,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                       DialogType.dateWithoutDayPickerDialog,
                                   dateLocale: controller.profileController
                                       .userProfileInfo.value.uiLanguage,
+                                  minTime: DateTime.now()
+                                      .subtract(const Duration(days: 1)),
                                   currentTime: DateTime.tryParse(
                                         controller
                                             .selectedStartDateStringInFilter
@@ -314,6 +316,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   dialogType: DialogType.dateTimePickerDialog,
                                   dateLocale: controller.profileController
                                       .userProfileInfo.value.uiLanguage,
+                                  minTime: DateTime.now()
+                                      .subtract(const Duration(days: 1)),
                                   currentTime: DateTime.tryParse(
                                         controller
                                             .selectedStartDateStringInFilter
@@ -390,6 +394,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   dialogType: DialogType.dateTimePickerDialog,
                                   dateLocale: controller.profileController
                                       .userProfileInfo.value.uiLanguage,
+                                  minTime: DateTime.now()
+                                      .subtract(const Duration(days: 1)),
                                   currentTime: DateTime.tryParse(
                                         controller.selectedEndDateStringInFilter
                                             .value,

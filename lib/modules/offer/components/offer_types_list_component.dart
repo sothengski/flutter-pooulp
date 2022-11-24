@@ -72,22 +72,28 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                             )
                           : Row(
                               children: [
-                                CustomTextWidget(
-                                  text: controller
-                                      .searchedListAsFieldModel[index].label,
-                                  // fontSize: AppSize.s14,
-                                  fontWeight: FontWeightManager.medium,
-                                  color: containerColorState(
-                                    object1: controller
-                                        .searchedListAsFieldModel[index].id
-                                        .toString(),
-                                    object2: controller.typeSelected.value.id
-                                        .toString(),
-                                    unEqualStateColor:
-                                        ColorsManager.primaryBlue,
-                                  ),
-                                  marginRight: AppSize.s4,
+                                const CustomIconButtonWidget(
+                                  iconData: Icons.edit_outlined,
+                                  iconSize: 20.0,
+                                  padding: 0.0,
+                                  isConstraints: true,
                                 ),
+                                // CustomTextWidget(
+                                //   text: controller
+                                //       .searchedListAsFieldModel[index].label,
+                                //   // fontSize: AppSize.s14,
+                                //   fontWeight: FontWeightManager.medium,
+                                //   color: containerColorState(
+                                //     object1: controller
+                                //         .searchedListAsFieldModel[index].id
+                                //         .toString(),
+                                //     object2: controller.typeSelected.value.id
+                                //         .toString(),
+                                //     unEqualStateColor:
+                                //         ColorsManager.primaryBlue,
+                                //   ),
+                                //   marginRight: AppSize.s4,
+                                // ),
                                 CustomBoxWidget(
                                   borderRadius: AppSize.s16,
                                   topPadding: AppSize.s2,

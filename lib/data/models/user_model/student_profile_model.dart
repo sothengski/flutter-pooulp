@@ -20,6 +20,7 @@ class StudentProfileModel {
   final List<AchievementModel>? achievements;
   final List<CertificateModel>? certificates;
   final List<PeriodModel>? periods;
+  final List<FieldModel>? internshipPeriods;
 
   StudentProfileModel({
     this.telecommuting = false,
@@ -39,6 +40,7 @@ class StudentProfileModel {
     this.achievements,
     this.certificates,
     this.periods,
+    this.internshipPeriods,
   });
 
   double? get calculatingProfileCompleteness {
@@ -173,6 +175,16 @@ class StudentProfileModel {
                 )
                 .toList()
             : [],
+        internshipPeriods: json['internship_periods'] != null ||
+                json['internship_periods'] != []
+            ? (json['internship_periods'] as List)
+                .map(
+                  (i) => FieldModel.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
+                .toList()
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -207,6 +219,10 @@ class StudentProfileModel {
         'periods': periods == null || periods == []
             ? null
             : List<dynamic>.from(periods!.map((x) => x.toJson())),
+        'internship_periods':
+            internshipPeriods == null || internshipPeriods == []
+                ? null
+                : List<dynamic>.from(internshipPeriods!.map((x) => x.id)),
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -230,6 +246,7 @@ class StudentProfileModel {
       achievements: $achievements,
       certificates: $certificates,
       periods: $periods,
+      internshipPeriods: $internshipPeriods,
     )''';
   }
 }

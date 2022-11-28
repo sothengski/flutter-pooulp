@@ -45,6 +45,10 @@ class SettingController extends GetxController {
             : profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
     emailNotificationRxBool.value =
         profileController.userProfileInfo.value.emailNotification ?? false;
+    internshipPeriod.value = profileController
+            .studentInfoRepsonse.value.internshipPeriods!.isNotEmpty
+        ? profileController.studentInfoRepsonse.value.internshipPeriods!.first
+        : FieldModel(id: 9999, label: '');
     internshipPeriodList.addAll(await tagProvider.getInternshipPeriodTags());
     super.onInit();
   }

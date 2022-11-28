@@ -86,6 +86,9 @@ class SettingController extends GetxController {
       whatsappLink: profileController.studentInfoRepsonse.value.whatsappLink,
       youtubeLink: profileController.studentInfoRepsonse.value.youtubeLink,
       gender: profileController.studentInfoRepsonse.value.gender,
+      internshipPeriods: internshipPeriodSelected.value.id == 9999
+          ? []
+          : [internshipPeriodSelected.value],
     );
 
     final ProfileModel profileInfoToBeUpdate = ProfileModel(

@@ -176,6 +176,7 @@ class SettingPage extends GetView<SettingController> {
                                   onPressed: () {
                                     controller.internshipPeriodSelected.value =
                                         controller.internshipPeriodList[index];
+                                    controller.isUpdating.value = true;
                                     Get.back();
                                   },
                                 );

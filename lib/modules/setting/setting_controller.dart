@@ -7,6 +7,7 @@ import '../modules.dart';
 class SettingController extends GetxController {
   final userInfoProvider = Get.find<UserInfoProvider>();
   final authProvider = Get.find<AuthProvider>();
+  final tagProvider = Get.find<TagProvider>();
 
   final languageController = Get.put(LanguageController());
 

@@ -23,6 +23,7 @@ class SettingController extends GetxController {
   RxInt radiusRxInt = 10.obs;
   RxString languageRxString = 'en'.obs;
   RxBool isVerifyEmailSent = false.obs;
+  Rx<FieldModel> internshipPeriod = FieldModel(id: 9999, label: '').obs;
 
   List<FieldModel> internshipPeriodList = [];
 

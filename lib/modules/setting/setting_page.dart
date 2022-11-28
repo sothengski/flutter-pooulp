@@ -149,10 +149,143 @@ class SettingPage extends GetView<SettingController> {
                         ),
                       ),
                       //===== Bottom of Has AutomobileComponent =====//
-                      // const Divider(
-                      //   height: 10,
-                      //   thickness: 1,
-                      // ),
+                      const Divider(
+                        height: 10,
+                        thickness: 1,
+                      ),
+
+                      ///===== Top of Internship Period Component =====//
+                      InkWell(
+                        onTap: () => Get.dialog(
+                          // MaterialDialogWidget(
+                          //   title: 'selectALanguage'.tr,
+                          //   titleHorizontalMargin: AppSize.s12,
+                          //   contentWidget: Center(
+                          //     child: ListView.separated(
+                          //       shrinkWrap: true,
+                          //       itemCount: controller
+                          //           .languageController.languageOptions.length,
+                          //       separatorBuilder: (context, index) {
+                          //         return const Divider(
+                          //           color: ColorsManager.grey600,
+                          //         );
+                          //       },
+                          //       itemBuilder: (context, index) {
+                          //         return InkWell(
+                          //           onTap: () => {
+                          //             controller.changeLanguage(
+                          //               languageKey: controller
+                          //                   .languageController
+                          //                   .languageOptions[index]
+                          //                   .key,
+                          //             ),
+                          //             Get.back(),
+                          //           },
+                          //           child: RowContentInputWidget(
+                          //             centerWidget: CustomTextWidget(
+                          //               // marginTop: AppSize.s4,
+                          //               // marginBottom: AppSize.s4,
+                          //               text: controller.languageController
+                          //                   .languageOptions[index].value,
+                          //               fontWeight: FontWeightManager.medium,
+                          //               fontSize: AppSize.s16,
+                          //             ),
+                          //             prefixWidgetFlex: 25,
+                          //             prefixWidget: Padding(
+                          //               padding: const EdgeInsets.only(
+                          //                 right: AppSize.s8,
+                          //               ),
+                          //               child: CircleFlag(
+                          //                 controller.languageController
+                          //                     .languageOptions[index].flagPath!,
+                          //                 padding: AppSize.s16,
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         );
+                          //       },
+                          //     ),
+                          //   ),
+                          // ),
+                          MaterialDialogWidget(
+                            title: 'selectOption'.tr,
+                            contentWidget: ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: controller.internshipPeriodList.length,
+                              itemBuilder: (context, index) {
+                                return
+                                    // Obx(
+                                    //   () =>
+                                    RowDataSelectionWidget.radioButton(
+                                  isLeftSideText: false,
+                                  // isClickingValue: stringsComparation(
+                                  //   object1: controller.genderList[index]
+                                  //       .toLowerCase(),
+                                  //   object2: controller.selectedGender.value,
+                                  // ),
+                                  text: controller
+                                      .internshipPeriodList[index].label,
+                                  // ),
+                                  // onPressed: () {
+                                  //   // controller.selectedGenderOnClick(
+                                  //   //   selectedItem:
+                                  //   //       controller.genderList[index],
+                                  //   // );
+                                  //   Navigator.pop(
+                                  //     context,
+                                  //     true,
+                                  //   ); // Issue:: It's not working properly on first click with Get.back();
+                                  // },
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const Divider(
+                                  height: 1.0,
+                                  color: ColorsManager.grey300,
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: AppSize.s12),
+                          child: RowContentInputWidget(
+                            centerWidgetFlex: 50,
+                            centerWidget: CustomTextWidget(
+                              marginLeft: AppSize.s12,
+                              textAlign: TextAlign.center,
+                              text: 'internshipPeriod'.tr,
+                              fontSize: AppSize.s16,
+                            ),
+                            suffixWidgetFlex: 50,
+                            suffixWidget: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: AppSize.s12),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  CustomTextWidget(
+                                    textAlign: TextAlign.center,
+                                    text:
+                                        controller.internshipPeriod.value.label,
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: AppSize.s4,
+                                    ),
+                                    child: Icon(
+                                      Icons.keyboard_arrow_right_outlined,
+                                      color: ColorsManager.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      //===== Bottom of Internship Period Component =====//
 
                       ///===== Top of Radius Component =====//
                       // RowContentInputWidget(

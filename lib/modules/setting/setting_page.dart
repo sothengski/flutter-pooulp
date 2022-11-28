@@ -157,85 +157,27 @@ class SettingPage extends GetView<SettingController> {
                       ///===== Top of Internship Period Component =====//
                       InkWell(
                         onTap: () => Get.dialog(
-                          // MaterialDialogWidget(
-                          //   title: 'selectALanguage'.tr,
-                          //   titleHorizontalMargin: AppSize.s12,
-                          //   contentWidget: Center(
-                          //     child: ListView.separated(
-                          //       shrinkWrap: true,
-                          //       itemCount: controller
-                          //           .languageController.languageOptions.length,
-                          //       separatorBuilder: (context, index) {
-                          //         return const Divider(
-                          //           color: ColorsManager.grey600,
-                          //         );
-                          //       },
-                          //       itemBuilder: (context, index) {
-                          //         return InkWell(
-                          //           onTap: () => {
-                          //             controller.changeLanguage(
-                          //               languageKey: controller
-                          //                   .languageController
-                          //                   .languageOptions[index]
-                          //                   .key,
-                          //             ),
-                          //             Get.back(),
-                          //           },
-                          //           child: RowContentInputWidget(
-                          //             centerWidget: CustomTextWidget(
-                          //               // marginTop: AppSize.s4,
-                          //               // marginBottom: AppSize.s4,
-                          //               text: controller.languageController
-                          //                   .languageOptions[index].value,
-                          //               fontWeight: FontWeightManager.medium,
-                          //               fontSize: AppSize.s16,
-                          //             ),
-                          //             prefixWidgetFlex: 25,
-                          //             prefixWidget: Padding(
-                          //               padding: const EdgeInsets.only(
-                          //                 right: AppSize.s8,
-                          //               ),
-                          //               child: CircleFlag(
-                          //                 controller.languageController
-                          //                     .languageOptions[index].flagPath!,
-                          //                 padding: AppSize.s16,
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         );
-                          //       },
-                          //     ),
-                          //   ),
-                          // ),
                           MaterialDialogWidget(
                             title: 'selectOption'.tr,
                             contentWidget: ListView.separated(
                               shrinkWrap: true,
                               itemCount: controller.internshipPeriodList.length,
                               itemBuilder: (context, index) {
-                                return
-                                    // Obx(
-                                    //   () =>
-                                    RowDataSelectionWidget.radioButton(
+                                return RowDataSelectionWidget.radioButton(
                                   isLeftSideText: false,
-                                  // isClickingValue: stringsComparation(
-                                  //   object1: controller.genderList[index]
-                                  //       .toLowerCase(),
-                                  //   object2: controller.selectedGender.value,
-                                  // ),
+                                  isClickingValue: intComparation(
+                                    object1: controller
+                                        .internshipPeriodList[index].id,
+                                    object2: controller
+                                        .internshipPeriodSelected.value.id,
+                                  ),
                                   text: controller
                                       .internshipPeriodList[index].label,
-                                  // ),
-                                  // onPressed: () {
-                                  //   // controller.selectedGenderOnClick(
-                                  //   //   selectedItem:
-                                  //   //       controller.genderList[index],
-                                  //   // );
-                                  //   Navigator.pop(
-                                  //     context,
-                                  //     true,
-                                  //   ); // Issue:: It's not working properly on first click with Get.back();
-                                  // },
+                                  onPressed: () {
+                                    controller.internshipPeriodSelected.value =
+                                        controller.internshipPeriodList[index];
+                                    Get.back();
+                                  },
                                 );
                               },
                               separatorBuilder: (context, index) {
@@ -267,8 +209,8 @@ class SettingPage extends GetView<SettingController> {
                                 children: [
                                   CustomTextWidget(
                                     textAlign: TextAlign.center,
-                                    text:
-                                        controller.internshipPeriod.value.label,
+                                    text: controller
+                                        .internshipPeriodSelected.value.label,
                                   ),
                                   const Padding(
                                     padding: EdgeInsets.symmetric(

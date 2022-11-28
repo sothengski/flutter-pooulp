@@ -23,7 +23,7 @@ class SettingController extends GetxController {
   RxInt radiusRxInt = 10.obs;
   RxString languageRxString = 'en'.obs;
   RxBool isVerifyEmailSent = false.obs;
-  Rx<FieldModel> internshipPeriod = FieldModel(id: 9999, label: '').obs;
+  Rx<FieldModel> internshipPeriodSelected = FieldModel(id: 9999, label: '').obs;
 
   List<FieldModel> internshipPeriodList = [];
 
@@ -45,7 +45,7 @@ class SettingController extends GetxController {
             : profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
     emailNotificationRxBool.value =
         profileController.userProfileInfo.value.emailNotification ?? false;
-    internshipPeriod.value = profileController
+    internshipPeriodSelected.value = profileController
             .studentInfoRepsonse.value.internshipPeriods!.isNotEmpty
         ? profileController.studentInfoRepsonse.value.internshipPeriods!.first
         : FieldModel(id: 9999, label: '');

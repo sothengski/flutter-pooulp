@@ -24,11 +24,12 @@ class SettingController extends GetxController {
   RxString languageRxString = 'en'.obs;
   RxBool isVerifyEmailSent = false.obs;
 
+  List<FieldModel> internshipPeriodList = [];
+
   RxBool isUpdating = false.obs;
 
   @override
   Future<void> onInit() async {
-    super.onInit();
     telecommutingRxBool.value =
         profileController.studentInfoRepsonse.value.telecommuting!;
     drivingLicenseRxBool.value =
@@ -43,6 +44,8 @@ class SettingController extends GetxController {
             : profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
     emailNotificationRxBool.value =
         profileController.userProfileInfo.value.emailNotification ?? false;
+    internshipPeriodList.addAll(await tagProvider.getInternshipPeriodTags());
+    super.onInit();
   }
 
   @override

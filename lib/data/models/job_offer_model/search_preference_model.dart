@@ -75,7 +75,9 @@ class SearchPreferencesModel {
         longitude: json['longitude'].toString(),
         translationCity: json['translation_city'] as String?,
         translationCountry: json['translation_country'] as String?,
-        range: int.tryParse(json['range'].toString()),
+        range: json['range'] != null
+            ? int.tryParse(json['range'].toString())
+            : 50000,
         dateJobStart:
             json['date_job_start'] != null && json['date_job_start'] != ''
                 ? DateTime.parse(

@@ -908,7 +908,11 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       //===== Bottom of Availabilities Tags Component =====//
                       // const SizedBox(height: 8.0),
 
-                      if (controller.workPlaceTypesInFilter.value == 1)
+                      if (controller.workPlaceTypesInFilter.value == 1 &&
+                          (controller.typesListInFilter.isNotEmpty &&
+                              controller.typesListInFilter
+                                  .map((element) => element.id != 1)
+                                  .first))
                         Container()
                       else
                         Wrap(

@@ -19,6 +19,15 @@ class MessagingPage extends GetView<MessagingController> {
             itemBuilder: (_) => [
               PopupMenuItem(
                 child: CustomTextWidget(text: 'jobOffer'.tr),
+                // onTap: () => Get.toNamed(
+                //   "${Routes.offerdetailRoute}?id=${controller.selectedRoom.value.uuid}",
+                //   arguments: [
+                //     // jobOfferItem
+                //     jobOfferItem!.uuid,
+                //     bottomActionWidgetList,
+                //     isCustomActBtn,
+                //   ],
+                // ),
               )
             ],
           ),

@@ -14,12 +14,14 @@ class MessagingPage extends GetView<MessagingController> {
         title: controller.selectedRoom.value.participants!.first.fullName!,
         elevation: 0.0,
         actions: [
-          CustomIconButtonWidget(
-            iconData: Icons.more_vert,
-            iconColor: ColorsManager.white,
-            tooltip: AppStrings.removeText,
-            onClick: () => {},
-          )
+          PopupMenuButton<MenuItem>(
+            // icon: const Icon(Icons.more_vert),
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                child: CustomTextWidget(text: 'jobOffer'.tr),
+              )
+            ],
+          ),
         ],
       ),
       body: WillPopScope(

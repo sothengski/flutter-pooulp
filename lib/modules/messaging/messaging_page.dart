@@ -13,6 +13,14 @@ class MessagingPage extends GetView<MessagingController> {
       appBar: CustomAppBar(
         title: controller.selectedRoom.value.participants!.first.fullName!,
         elevation: 0.0,
+        actions: [
+          CustomIconButtonWidget(
+            iconData: Icons.more_vert,
+            iconColor: ColorsManager.white,
+            tooltip: AppStrings.removeText,
+            onClick: () => {},
+          )
+        ],
       ),
       body: WillPopScope(
         child: LayoutBuilder(

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:pooulp_flutter/data/models/messaging_model/job_offer_matching_model.dart';
+
 import '../../../core/core.dart';
 import '../../data.dart';
 
@@ -19,6 +21,7 @@ class MessagingModel {
   final int? unseenMessages;
   final int? newConversation;
   final List<ParticipantModel>? participants;
+  final JobOfferMatchingModel? jobOfferMatching;
 
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -37,6 +40,7 @@ class MessagingModel {
     this.unseenMessages = 0,
     this.newConversation = 0,
     this.participants,
+    this.jobOfferMatching,
     this.createdAt,
     this.updatedAt,
     this.enableDateTime = false,
@@ -83,6 +87,11 @@ class MessagingModel {
                   ),
                 )
                 .toList(),
+        jobOfferMatching: json['job_offer_matching'] != null
+            ? JobOfferMatchingModel.fromJson(
+                json['job_offer_matching'] as Map<String, dynamic>,
+              )
+            : null,
         createdAt: json['created_at'] != null && json['created_at'] != ''
             ? DateTime.parse(
                 json['created_at'].toString(),

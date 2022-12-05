@@ -108,9 +108,17 @@ class OfferDetailController extends GetxController
   Future<void> getJobOfferDetail({
     required String? jobOfferUUID,
   }) async {
-    final tempResp = await offerProvider.getJobOfferDetailByUUID(
-      jobOfferUUID: jobOfferUUID,
-    );
+    JobOfferModel tempResp;
+
+    if (jobOfferUUID!.contains('-')) {
+      tempResp = await offerProvider.getJobOfferDetailByUUID(
+        jobOfferUUID: jobOfferUUID,
+      );
+    } else {
+      tempResp = await offerProvider.getJobOfferDetailByID(
+        jobOfferID: jobOfferUUID,
+      );
+    }
     // if (tempResp.uuid!.isNotEmpty) {
     // debugPrint(
     //   "getJobOfferDetail: $tempResp",

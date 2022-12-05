@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pooulp_flutter/routes/routes.dart';
 
 import '../../core/core.dart';
 import '../modules.dart';
@@ -14,27 +15,46 @@ class MessagingPage extends GetView<MessagingController> {
         title: controller.selectedRoom.value.participants!.first.fullName!,
         elevation: 0.0,
         actions: [
-          PopupMenuButton<MenuItem>(
-            // icon: const Icon(Icons.more_vert),
-            itemBuilder: (_) => [
-              PopupMenuItem(
-                child: CustomTextWidget(text: 'jobOffer'.tr),
-                // onTap: () =>
-                // print(
-                //   'job offer id: ${controller.selectedRoom.value.jobOfferMatching!.jobOfferId}',
-                // ),
-                // Get.toNamed(
-                //   "${Routes.offerdetailRoute}?id=${controller.selectedRoom.value.uuid}",
-                //   arguments: [
-                //     // jobOfferItem
-                //     jobOfferItem!.uuid,
-                //     bottomActionWidgetList,
-                //     isCustomActBtn,
-                //   ],
-                // ),
-              )
-            ],
-          ),
+          IconButton(
+            onPressed: () {
+              Get.toNamed(
+                "${Routes.offerdetailRoute}?id=${controller.selectedRoom.value.jobOfferMatching!.jobOfferId}",
+                // arguments: [
+                //   // jobOfferItem
+                //   controller.selectedRoom.value.uuid,
+                //   // jobOfferItem!.uuid,
+                //   null,
+                //   false,
+                // ],
+              );
+            },
+            icon: const Icon(Icons.more_vert_rounded),
+          )
+          // PopupMenuButton<MenuItem>(
+          //   // icon: const Icon(Icons.more_vert),
+          //   itemBuilder: (_) => [
+          //     PopupMenuItem(
+          //       child: CustomTextWidget(text: 'jobOffer'.tr),
+          //       onTap: () async
+          //           // => print(
+          //           //   'job offer id: ${controller.selectedRoom.value.jobOfferMatching!.jobOfferId}',
+          //           // ),
+
+          //           {
+          //         Get.toNamed(
+          //           Routes.offerdetailRoute,
+          //           arguments: [
+          //             // jobOfferItem
+          //             controller.selectedRoom.value.uuid,
+          //             // jobOfferItem!.uuid,
+          //             const [],
+          //             false,
+          //           ],
+          //         );
+          //       },
+          //     )
+          //   ],
+          // ),
         ],
       ),
       body: WillPopScope(

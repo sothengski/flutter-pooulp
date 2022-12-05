@@ -421,7 +421,7 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
   }) async {
     try {
       final dataResponse = await get(
-        API.getJobOfferDetailByUUID(jobOfferUUID: jobOfferID),
+        API.getJobOfferDetailByID(jobOfferID: jobOfferID),
       );
       // debugPrint('onboardingData: ${onboardingData.toRawJson()}');
       if (dataResponse.hasError) {

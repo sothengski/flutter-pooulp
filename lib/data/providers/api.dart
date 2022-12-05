@@ -199,6 +199,9 @@ class API {
   static String getJobOfferDetailByUUID({required String? jobOfferUUID}) =>
       '/joboffers/$jobOfferUUID';
 
+  static String getJobOfferDetailByID({required String? jobOfferID}) =>
+      '/offers/$jobOfferID';
+
   static String postJobOfferViewCount({required String? jobOfferUUID}) =>
       '/offers/$jobOfferUUID/view';
 

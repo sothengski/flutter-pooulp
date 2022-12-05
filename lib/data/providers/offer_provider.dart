@@ -35,6 +35,9 @@ abstract class IOfferProvider {
   Future<JobOfferModel> getJobOfferDetailByUUID({
     required String? jobOfferUUID,
   });
+  Future<JobOfferModel> getJobOfferDetailByID({
+    required String? jobOfferID,
+  });
 }
 
 class OfferProvider extends BaseProvider implements IOfferProvider {
@@ -388,6 +391,37 @@ class OfferProvider extends BaseProvider implements IOfferProvider {
     try {
       final dataResponse = await get(
         API.getJobOfferDetailByUUID(jobOfferUUID: jobOfferUUID),
+      );
+      // debugPrint('onboardingData: ${onboardingData.toRawJson()}');
+      if (dataResponse.hasError) {
+        // debugPrint('resp: ${dataResponse.bodyString}');
+        // throw Exception(dataResponse.bodyString);
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse response = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        // debugPrint(
+        //   'API: ${API.getJobOfferDetailByUUID(jobOfferUUID: jobOfferUUID)}\nresponse::${response.data}',
+        // );
+        // return response;
+        return JobOfferModel.fromJson(response.data as Map<String, dynamic>);
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<JobOfferModel> getJobOfferDetailByID({
+    required String? jobOfferID,
+  }) async {
+    try {
+      final dataResponse = await get(
+        API.getJobOfferDetailByUUID(jobOfferUUID: jobOfferID),
       );
       // debugPrint('onboardingData: ${onboardingData.toRawJson()}');
       if (dataResponse.hasError) {

@@ -215,7 +215,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
                 }
               },
             ),
-            // barrierDismissible: true,
+            barrierDismissible: false,
           );
           clearData();
           change(value, status: RxStatus.success());

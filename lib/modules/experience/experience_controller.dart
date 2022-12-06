@@ -44,12 +44,12 @@ class ExperienceController extends GetxController {
     super.onInit();
     title = (Get.arguments as List)[0].toString();
     expType.value = (Get.arguments as List)[1].toString();
+    await getExperienceTypeListResponseProvider();
     if (title == Keys.editOperation) {
       final ExperienceModel expDataArg =
           (Get.arguments as List)[2] as ExperienceModel;
       expId = expDataArg.id!;
       if (expType.value == AppStrings.personalKey) {
-        await getExperienceTypeListResponseProvider();
         experienceTypeInt.value =
             expDataArg.tags!.isNotEmpty ? expDataArg.tags!.first! as int : 0;
         // if (title.toString() == Keys.editOperation) {

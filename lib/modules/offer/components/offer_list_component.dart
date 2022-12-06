@@ -33,7 +33,8 @@ class OfferListComponent extends StatelessWidget {
           () => OfferCard(
             jobOfferItem: offerList![index],
             isCustomActBtn: jobOfferType == OfferStrings.savedState &&
-                !offerList![index].dateOfferEnd!.isBefore(now),
+                (offerList![index].dateOfferEnd != null &&
+                    !offerList![index].dateOfferEnd!.isBefore(now)),
             bottomActionWidgetList: (jobOfferType == OfferStrings.pendingState)
                 ? [
                     Expanded(
@@ -138,7 +139,8 @@ class OfferListComponent extends StatelessWidget {
                         ),
                       ]
                     : (jobOfferType == OfferStrings.savedState)
-                        ? offerList![index].dateOfferEnd!.isBefore(now)
+                        ? offerList![index].dateOfferEnd != null &&
+                                offerList![index].dateOfferEnd!.isBefore(now)
                             ? [
                                 Expanded(
                                   flex: 40,

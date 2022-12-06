@@ -329,7 +329,10 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                                     .proficiencyList[
                                                                         index]
                                                                     .level,
-                                                                videoUrl: '',
+                                                                videoUrl:
+                                                                    languageItem
+                                                                            .videoUrl ??
+                                                                        '',
                                                               ),
                                                               operation: Keys
                                                                   .editOperation,

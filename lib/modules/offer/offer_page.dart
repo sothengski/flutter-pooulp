@@ -147,15 +147,13 @@ class OfferPage extends GetView<OfferController> {
 
           Expanded(
             flex: 9,
-            child:
-                // Obx(
-                //   () =>
-                OfferStateListComponent(
-              jobOfferStateList: controller.jobOfferStateFilterList,
-              offerController: controller,
+            child: Obx(
+              () => OfferStateListComponent(
+                jobOfferStateList: controller.jobOfferStateFilterList,
+                offerController: controller,
+              ),
             ),
           ),
-          // ),
           Expanded(
             flex: 91,
             child: Obx(

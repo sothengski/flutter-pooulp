@@ -170,11 +170,11 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   if (controller.internshipTypeSelectedList
                                           .isNotEmpty &&
                                       controller.internshipTypeSelectedList
-                                          .map(
+                                          .where(
                                             (element) =>
                                                 element.keyLabel == 'other',
                                           )
-                                          .first)
+                                          .isNotEmpty)
                                     CustomTextInput(
                                       controller:
                                           controller.internshipOtherTextCtrl,

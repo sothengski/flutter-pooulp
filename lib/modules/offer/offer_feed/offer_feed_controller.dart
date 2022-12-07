@@ -495,7 +495,7 @@ class OfferFeedController extends GetxController
     bool? refresh = false,
   }) async {
     selectType(type: allType, isRefresh: false);
-    listJobOfferTypes.add(allType);
+    // listJobOfferTypes.add(allType);
     listJobOfferTypes.addAll(await tagProvider.getJobOfferTypes());
 
     return listJobOfferTypes;

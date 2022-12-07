@@ -147,6 +147,9 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                       onSelected: (_) {
                         if (controller.searchedListAsFieldModel[index].id ==
                             9999) {
+                          controller.selectType(
+                            type: controller.searchedListAsFieldModel[0],
+                          );
                           customGeneralDialog(
                             context: context,
                             barrierDismissible: true,

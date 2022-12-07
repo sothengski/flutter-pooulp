@@ -629,23 +629,23 @@ class OfferFeedController extends GetxController
       }
     } else {
       if (searchOpt == 1) {
-        debugPrint(
-          "$searchOpt jobOfferToBeSearch create: ${jobOfferToBeSearch.value}",
-        );
-        // await offerProvider.postCreateSavedSearch(
-        //   jobOfferForSearch: jobOfferToBeSearch.value,
+        // debugPrint(
+        //   "$searchOpt jobOfferToBeSearch create: ${jobOfferToBeSearch.value}",
         // );
-      } else if (searchOpt == 2) {
-        debugPrint(
-          "$searchOpt jobOfferToBeSearch edit: ${jobOfferToBeSearch.value}",
+        await offerProvider.postCreateSavedSearch(
+          jobOfferForSearch: jobOfferToBeSearch.value,
         );
+      } else if (searchOpt == 2) {
+        // debugPrint(
+        //   "$searchOpt jobOfferToBeSearch edit: ${jobOfferToBeSearch.value}",
+        // );
         await offerProvider.putEditSavedSearch(
           jobOfferForSearch: jobOfferToBeSearch.value,
         );
       } else if (searchOpt == 3) {
-        debugPrint(
-          "$searchOpt jobOfferToBeSearch delete: ${jobOfferToBeSearch.value}",
-        );
+        // debugPrint(
+        //   "$searchOpt jobOfferToBeSearch delete: ${jobOfferToBeSearch.value}",
+        // );
 
         await offerProvider.deleteSavedSearch(
           savedSearchId: 1,

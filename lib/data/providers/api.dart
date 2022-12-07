@@ -207,4 +207,7 @@ class API {
 
   static String deleteSavedSearch({required int? savedSearchId}) =>
       '/search/delete/$savedSearchId';
+
+  static String postSeenNotificationMsg({required int? notificationMsgId}) =>
+      '/notificationmessages/$notificationMsgId/seen';
 }

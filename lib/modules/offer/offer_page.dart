@@ -20,6 +20,7 @@ class OfferPage extends GetView<OfferController> {
               flex: 40,
               child: OutlinedButton.icon(
                 onPressed: () {
+                  print('add seen message');
                   Navigator.pop(
                     context,
                     true,
@@ -112,6 +113,7 @@ class OfferPage extends GetView<OfferController> {
           ],
         ),
       ),
+      barrierDismissible: false,
     );
   }
 
@@ -119,7 +121,8 @@ class OfferPage extends GetView<OfferController> {
   Widget build(BuildContext context) {
     Future.delayed(
       DurationConstant.d2000,
-      () => (controller.notificationMessageList.isNotEmpty)
+      () => (controller.notificationMessageList.isNotEmpty &&
+              controller.notificationMessageList[0].status == 1)
           ? notificationMessageAlert(context)
           : null,
     );

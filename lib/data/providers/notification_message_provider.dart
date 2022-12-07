@@ -2,6 +2,7 @@ import '../data.dart';
 
 abstract class INotificationMessagesProvider {
   Future<List<NotificationMessageModel>> getNotificationMessages();
+  Future<JsonResponse> postSeenNotificationMessage({int? notificationMsgID});
 }
 
 class NotificationMessagesProvider extends BaseProvider
@@ -28,6 +29,31 @@ class NotificationMessagesProvider extends BaseProvider
                   NotificationMessageModel.fromJson(e as Map<String, dynamic>),
             )
             .toList();
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<JsonResponse> postSeenNotificationMessage({
+    int? notificationMsgID,
+  }) async {
+    try {
+      final dataResponse = await post(
+        API.postSeenNotificationMsg(notificationMsgId: notificationMsgID),
+        {},
+      );
+      if (dataResponse.hasError) {
+        throw "(resp: ${dataResponse.bodyString})";
+      } else {
+        final JsonResponse apiResponse = JsonResponse(
+          success: dataResponse.status.isOk,
+          status: dataResponse.statusCode,
+          message: dataResponse.statusText,
+          data: dataResponse.body,
+        );
+        return apiResponse;
       }
     } catch (e) {
       return Future.error(e.toString());

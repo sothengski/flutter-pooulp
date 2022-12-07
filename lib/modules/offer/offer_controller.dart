@@ -265,6 +265,7 @@ class OfferController extends GetxController
   Future<List<NotificationMessageModel>> getNotificationMessagesProvider({
     bool? refresh = false,
   }) async {
+    notificationMessageList = [];
     final temp = await notificationMessageProvider.getNotificationMessages();
     // debugPrint('temp: $temp');
     for (final e in temp) {
@@ -273,9 +274,15 @@ class OfferController extends GetxController
         notificationMessageList.add(e);
       }
     }
-
     // debugPrint('notificationMessageList: $notificationMessageList');
-
     return notificationMessageList;
+  }
+
+  Future<void> postSeenNotificationMessagesProvider({
+    int? notificationMsgId,
+  }) async {
+    await notificationMessageProvider.postSeenNotificationMessage(
+      notificationMsgID: notificationMsgId,
+    );
   }
 }

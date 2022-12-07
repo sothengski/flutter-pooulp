@@ -20,7 +20,10 @@ class OfferPage extends GetView<OfferController> {
               flex: 40,
               child: OutlinedButton.icon(
                 onPressed: () {
-                  print('add seen message');
+                  controller.postSeenNotificationMessagesProvider(
+                    notificationMsgId: controller.notificationMessageList[0].id,
+                  );
+                  controller.getNotificationMessagesProvider();
                   Navigator.pop(
                     context,
                     true,

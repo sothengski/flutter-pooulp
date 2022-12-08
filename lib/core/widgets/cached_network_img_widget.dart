@@ -28,7 +28,7 @@ class CachedNetworkImgWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imgUrl != null && imgUrl != ''
+    return imgUrl != null && imgUrl != '' && imgUrl != 'null'
         ? CachedNetworkImage(
             imageUrl: isHost == true ? '${API.host}$imgUrl' : imgUrl!,
             imageBuilder: (

@@ -181,7 +181,7 @@ class MessagingController extends GetxController
       );
     }
     if (roomValue.newConversation! > 0) {
-      makeRequestToPOSTSeenAllMessagesAPI(
+      makeRequestToPOSTSeenConversationAPI(
         roomId: roomValue.uuid,
       );
     }

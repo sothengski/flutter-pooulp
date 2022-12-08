@@ -47,7 +47,7 @@ class ForgotPasswordForm extends GetView<ForgotPasswordController> {
           Obx(
             () => Visibility(
               child: CustomMaterialButton(
-                text: 'sendEmail'.tr, //'auth.sendEmail'.tr,
+                text: 'SendEmail'.tr, //'auth.sendEmail'.tr,
                 fontSize: 20.0,
                 buttonWidth: getWidth,
                 childWidget: controller.isSubmitBtnProcessing.value == true

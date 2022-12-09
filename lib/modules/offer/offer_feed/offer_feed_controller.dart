@@ -646,7 +646,6 @@ class OfferFeedController extends GetxController
         // debugPrint(
         //   "$searchOpt jobOfferToBeSearch delete: ${jobOfferToBeSearch.value}",
         // );
-
         await offerProvider.deleteSavedSearch(
           savedSearchId: 1,
         );

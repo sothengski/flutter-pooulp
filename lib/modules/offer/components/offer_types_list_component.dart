@@ -155,7 +155,7 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                             barrierDismissible: true,
                             widget: OfferFeedFilterSearch(
                               title: 'filter'.tr,
-                              // searchOptType: 2,
+                              searchOptType: 1,
                             ),
                             // Get.dialog(
                             //   OfferFeedFilterSearch(
@@ -171,7 +171,7 @@ class OfferFeedTypesListComponent extends StatelessWidget {
                             barrierDismissible: true,
                             widget: OfferFeedFilterSearch(
                               title: 'filter'.tr,
-                              searchOptType: 1,
+                              // searchOptType: 2,
                             ),
                             // Get.dialog(
                             //   OfferFeedFilterSearch(

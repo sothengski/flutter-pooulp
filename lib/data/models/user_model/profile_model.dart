@@ -212,7 +212,7 @@ class ProfileModel {
                   ),
                 )
                 .toList(),
-        logoUrl: json['logo_url'] as String?,
+        logoUrl: json['logo_url'] as String? ?? '',
         managers: json['managers'] == [] || json['managers'] == null
             ? []
             : (json['managers'] as List)

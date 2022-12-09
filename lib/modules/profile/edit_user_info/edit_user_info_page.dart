@@ -446,7 +446,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Description Component =====//
                       CustomTextInput(
                         controller: controller.descriptionCtrl,
-                        inputTitle: 'description'.tr,
+                        inputTitle: 'aboutMe'.tr,
                         hintText: "${'description'.tr}...",
                         isFilled: true,
                         topContentPadding: 12.0,

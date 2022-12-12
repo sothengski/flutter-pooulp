@@ -1613,27 +1613,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                           .value
                                           .applyState, //offerList![index].applyState,
                                       onPressed: () {
-                                        // controller.offerController
-                                        //     .onClickActionButtonJobOffer(
-                                        //   actionType: OfferStrings.applyAction,
-                                        //   jobOfferId:
-                                        //       controller.jobOfferDetail!.value.id,
-                                        // );
                                         // Get.toNamed(Routes.roomDetailsRoute);
-                                        // controller.offerProvider.postApplyOffer(
-                                        //   jobOfferId: controller
-                                        //       .jobOfferDetail!.value.id,
-                                        // );
-                                        // offerController!
-                                        //     .onClickActionButtonJobOffer(
-                                        //   actionType: OfferStrings.applyAction,
-                                        //   jobOfferId: offerList![index].id,
-                                        // );
-                                        // offerList![index].applyState =
-                                        //     offerController!
-                                        //         .jobOfferOnClickBoolSwitching(
-                                        //   boolValue: offerList![index].applyState,
-                                        // );
                                       },
                                     ),
                                   ),

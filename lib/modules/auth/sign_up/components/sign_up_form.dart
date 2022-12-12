@@ -143,9 +143,9 @@ class SignUpForm extends GetView<SignUpController> {
                                 () => ContainerDialogWidget(
                                   inputTitle: 'birthdate'.tr,
                                   dialogType: DialogType.dateTimePickerDialog,
-                                  // dateLocale: LanguageController()
-                                  //     .currentLanguageStore
-                                  //     .value,
+                                  dateLocale: LanguageController()
+                                      .currentLanguageStore
+                                      .value,
                                   currentTime:
                                       controller.selectedBirthday.value,
                                   onConfirmDate: (date) {

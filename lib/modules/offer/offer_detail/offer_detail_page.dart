@@ -15,6 +15,8 @@ class OfferDetailPage extends GetView<OfferDetailController> {
       (Get.arguments) != null ? (Get.arguments as List)[1] as List<Widget> : [];
   bool? isCustomActBtn =
       (Get.arguments) != null ? (Get.arguments as List)[2] as bool? : false;
+  bool? showMsgActBtn =
+      (Get.arguments) != null ? (Get.arguments as List)[3] as bool? : false;
   //=  (Get.arguments as List)[2] as bool?;
   OfferDetailPage({Key? key}) : super(key: key);
 
@@ -1583,15 +1585,59 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             )
                           : Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: actionButtons!
-                                  .where(
-                                    (element) =>
-                                        element.key! !=
-                                        const ValueKey(
-                                          OfferStrings.informationAction,
-                                        ),
-                                  )
-                                  .toList(),
+                              children: [
+                                ...actionButtons!
+                                    .where(
+                                      (element) =>
+                                          element.key! !=
+                                          const ValueKey(
+                                            OfferStrings.informationAction,
+                                          ),
+                                    )
+                                    .toList(),
+                                if (showMsgActBtn == true)
+                                  Expanded(
+                                    // flex: 32,
+                                    key: const ValueKey(
+                                      OfferStrings.messagingAction,
+                                    ),
+                                    child: OutlineIconButtonWidget(
+                                      buttonTitle: 'messaging'.tr,
+                                      iconData: Icons.message_outlined,
+                                      iconDataOnClick: Icons.message_rounded,
+                                      // iconColor: ColorsManager.grey600,
+                                      iconColorOnClick: ColorsManager.green,
+                                      // buttonState: false,//offerList![index].applyState,
+                                      oneTimePress: controller
+                                          .jobOfferDetail!
+                                          .value
+                                          .applyState, //offerList![index].applyState,
+                                      onPressed: () {
+                                        // controller.offerController
+                                        //     .onClickActionButtonJobOffer(
+                                        //   actionType: OfferStrings.applyAction,
+                                        //   jobOfferId:
+                                        //       controller.jobOfferDetail!.value.id,
+                                        // );
+                                        // Get.toNamed(Routes.roomDetailsRoute);
+                                        // controller.offerProvider.postApplyOffer(
+                                        //   jobOfferId: controller
+                                        //       .jobOfferDetail!.value.id,
+                                        // );
+                                        // offerController!
+                                        //     .onClickActionButtonJobOffer(
+                                        //   actionType: OfferStrings.applyAction,
+                                        //   jobOfferId: offerList![index].id,
+                                        // );
+                                        // offerList![index].applyState =
+                                        //     offerController!
+                                        //         .jobOfferOnClickBoolSwitching(
+                                        //   boolValue: offerList![index].applyState,
+                                        // );
+                                      },
+                                    ),
+                                  ),
+                              ],
                             ),
                     ),
                   )

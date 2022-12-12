@@ -33,6 +33,7 @@ class OfferListComponent extends StatelessWidget {
           () => OfferCard(
             jobOfferItem: offerList![index],
             isCustomActBtn: jobOfferType == OfferStrings.savedState,
+            jobOfferState: jobOfferType,
             // &&
             //     (offerList![index].dateOfferEnd != null &&
             //         !offerList![index].dateOfferEnd!.isBefore(now)

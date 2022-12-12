@@ -10,6 +10,7 @@ class OfferCard extends StatelessWidget {
   // final Widget? bottomActionWidget;
   final List<Widget>? bottomActionWidgetList;
   final bool? isCustomActBtn;
+  final String? jobOfferState;
 
   const OfferCard({
     Key? key,
@@ -17,6 +18,7 @@ class OfferCard extends StatelessWidget {
     // this.bottomActionWidget,
     this.bottomActionWidgetList = const [],
     this.isCustomActBtn = false,
+    this.jobOfferState = '',
   }) : super(key: key);
 
   @override
@@ -42,6 +44,7 @@ class OfferCard extends StatelessWidget {
               jobOfferItem!.uuid,
               bottomActionWidgetList,
               isCustomActBtn,
+              jobOfferState == OfferStrings.matchedState
             ],
           );
         },

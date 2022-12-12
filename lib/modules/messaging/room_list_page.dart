@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pooulp_flutter/data/data.dart';
 
 import '../../core/core.dart';
 import '../../routes/app_routes.dart';
@@ -7,14 +8,23 @@ import '../modules.dart';
 
 // ignore: must_be_immutable
 class RoomListPage extends GetView<MessagingController> {
-  String? roomUUID = (Get.parameters['id']) ?? '';
+  late String? roomUUID = (Get.parameters['id']) ?? '';
 
-  RoomListPage({Key? key, this.roomUUID = ''}) : super(key: key);
+  RoomListPage({
+    Key? key,
+  }) : super(key: key);
+
+  void btnOnClick({MessagingModel? roomValue}) {
+    controller.roomOnClick(
+      roomValue: roomValue,
+    );
+    Get.toNamed(Routes.roomDetailsRoute);
+  }
 
   @override
   Widget build(BuildContext context) {
-    // controller.selectedRoom.value = MessagingModel(uuid: roomUUID);
-    print('roomUUID: $roomUUID');
+    controller.selectedRoom.value = MessagingModel(uuid: roomUUID);
+
     return Scaffold(
       appBar: CustomAppBar(
         title: 'messaging'.tr,
@@ -44,13 +54,19 @@ class RoomListPage extends GetView<MessagingController> {
                         itemCount: controller.roomListRepsonse.length,
                         // scrollDirection: Axis.vertical,
                         itemBuilder: (_, index) {
-                          return GestureDetector(
+                          final GestureDetector a = GestureDetector(
                             onTap: () => {
-                              controller.roomOnClick(
+                              btnOnClick(
                                 roomValue: controller.roomListRepsonse[index],
                               ),
-                              Get.toNamed(Routes.roomDetailsRoute),
                             },
+                            // () => {
+                            //           controller.roomOnClick(
+                            //             roomValue:
+                            //                 controller.roomListRepsonse[index],
+                            //           ),
+                            //           Get.toNamed(Routes.roomDetailsRoute),
+                            //         },
                             child: RoomCard(
                               imgUrl: controller.roomListRepsonse[index]
                                   .participants!.first.pictureUrl,
@@ -71,6 +87,12 @@ class RoomListPage extends GetView<MessagingController> {
                                   .roomListRepsonse[index].newConversation,
                             ),
                           );
+                          // if (roomUUID!.isNotEmpty &&
+                          //     roomUUID ==
+                          //         controller.roomListRepsonse[index].uuid) {
+                          //   a.onTap?.call();
+                          // }
+                          return a;
                         },
                       ),
                     ),

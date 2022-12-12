@@ -230,7 +230,7 @@ class OfferFeedController extends GetxController
     selectedEndDateStringToBeSearch.value = '';
 
     placeDetail.value = PlaceDetailModel();
-    radiusRxInt.value = 10;
+    radiusRxInt.value = 50;
     countFilterField();
     if (deleteSavedSearch == true) {
       offerProvider.deleteSavedSearch(

@@ -151,7 +151,7 @@ class CustomTextInput extends StatelessWidget {
                   controller: controller,
                   textAlign: textAlign ?? TextAlign.start,
                   textCapitalization:
-                      textCapitalization ?? TextCapitalization.none,
+                      textCapitalization ?? TextCapitalization.words,
                   // maxLines: obscureText ? 1 : null,
                   initialValue: initialText,
                   enabled: enabled,

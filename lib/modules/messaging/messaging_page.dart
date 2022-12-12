@@ -5,11 +5,16 @@ import 'package:pooulp_flutter/routes/routes.dart';
 import '../../core/core.dart';
 import '../modules.dart';
 
+// ignore: must_be_immutable
 class MessagingPage extends GetView<MessagingController> {
+  // late String? roomUUID = (Get.parameters['id']) ?? '';
+
   const MessagingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // controller.selectedRoom.value = MessagingModel(uuid: roomUUID);
+
     return Scaffold(
       appBar: CustomAppBar(
         title: controller.selectedRoom.value.participants!.first.fullName!,

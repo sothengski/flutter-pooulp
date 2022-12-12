@@ -12,6 +12,7 @@ class JobOfferStateModel {
       datetimeEnterpriseMatched; //Job Offer Accepted from Enterprise
   final DateTime?
       datetimeEnterpriseRefused; //Job Offer Rejected from Enterprise
+  final String? roomUUID;
 
   JobOfferStateModel({
     this.id,
@@ -23,6 +24,7 @@ class JobOfferStateModel {
     this.datetimeMatched,
     this.datetimeEnterpriseMatched,
     this.datetimeEnterpriseRefused,
+    this.roomUUID,
   });
 
   ///1 == true // 0 ==false
@@ -119,6 +121,7 @@ class JobOfferStateModel {
                 : DateTime.parse(
                     json['datetime_enterprise_refused'].toString(),
                   ),
+        roomUUID: json['room_uuid'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -131,6 +134,7 @@ class JobOfferStateModel {
         "datetime_matched": datetimeMatched?.toIso8601String(),
         "datetime_enterprise_matched": datetimeEnterpriseMatched,
         "datetime_enterprise_refused": datetimeEnterpriseRefused,
+        "room_uuid": roomUUID,
       }..removeWhere((_, v) => v == null);
 
   @override
@@ -145,6 +149,7 @@ class JobOfferStateModel {
       datetimeMatched: $datetimeMatched,
       datetimeEnterpriseMatched: $datetimeEnterpriseMatched,
       datetimeEnterpriseRefused: $datetimeEnterpriseRefused,
+      roomUUID: $roomUUID,
     )''';
   }
 }

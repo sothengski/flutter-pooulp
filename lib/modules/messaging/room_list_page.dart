@@ -5,11 +5,16 @@ import '../../core/core.dart';
 import '../../routes/app_routes.dart';
 import '../modules.dart';
 
+// ignore: must_be_immutable
 class RoomListPage extends GetView<MessagingController> {
-  const RoomListPage({Key? key}) : super(key: key);
+  String? roomUUID = (Get.parameters['id']) ?? '';
+
+  RoomListPage({Key? key, this.roomUUID = ''}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // controller.selectedRoom.value = MessagingModel(uuid: roomUUID);
+    print('roomUUID: $roomUUID');
     return Scaffold(
       appBar: CustomAppBar(
         title: 'messaging'.tr,

@@ -105,7 +105,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.messagingRoomsRoute,
-      page: () => const RoomListPage(),
+      page: () => RoomListPage(),
       binding: MessagingBinding(),
     ),
     GetPage(

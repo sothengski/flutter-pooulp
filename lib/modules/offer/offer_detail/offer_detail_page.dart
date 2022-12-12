@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pooulp_flutter/routes/routes.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../core/core.dart';
@@ -1613,6 +1614,10 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                           .value
                                           .applyState, //offerList![index].applyState,
                                       onPressed: () {
+                                        Get.toNamed(
+                                          "${Routes.messagingRoomsRoute}?id=${controller.jobOfferDetail!.value.jobOfferStateModel!.roomUUID}",
+                                        );
+
                                         // Get.toNamed(Routes.roomDetailsRoute);
                                       },
                                     ),

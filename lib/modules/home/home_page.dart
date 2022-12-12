@@ -16,12 +16,12 @@ class HomePage extends GetView<HomeController> {
         body: SafeArea(
           child: IndexedStack(
             index: controller.currentIndex.value,
-            children: const [
-              OfferFeedPage(),
+            children: [
+              const OfferFeedPage(),
               // FeedPage(),
-              OfferPage(),
+              const OfferPage(),
               RoomListPage(),
-              ProfilePage(),
+              const ProfilePage(),
             ],
           ),
         ),

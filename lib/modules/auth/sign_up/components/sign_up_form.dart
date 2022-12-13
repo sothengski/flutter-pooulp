@@ -200,8 +200,8 @@ class SignUpForm extends GetView<SignUpController> {
                                   !controller.showPasswordConfirmation.value,
                               isFilled: true,
                               topPadding: AppSize.s12,
-                              bottomPadding:
-                                  isStudent == true ? AppSize.s16 : 0.0,
+                              // bottomPadding:
+                              //     isStudent == true ? AppSize.s16 : 0.0,
                               validator: (_) =>
                                   controller.validator.matchingPasswords(
                                 password: controller.passwordCtrl.text,
@@ -246,7 +246,7 @@ class SignUpForm extends GetView<SignUpController> {
                                               ),
                                               suffixWidget: const Icon(
                                                 Icons.date_range_outlined,
-                                                color: ColorsManager.grey600,
+                                                color: ColorsManager.grey400,
                                               ),
                                             )
                                           : RowContentInputWidget(
@@ -261,219 +261,231 @@ class SignUpForm extends GetView<SignUpController> {
                                               ),
                                               suffixWidget: const Icon(
                                                 Icons.date_range_outlined,
-                                                color: ColorsManager.grey600,
+                                                color: ColorsManager.grey400,
                                               ),
                                             ),
                                 ),
                               ),
                             //===== Bottom of Birthday Component =====//
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 40,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomTextWidget(
-                                        text: 'phone'
-                                            .tr, // 'auth.phoneNumber'.tr,
-                                        marginTop: AppSize.s12,
-                                        textAlign: TextAlign.left,
-                                        // marginBottom: AppSize.s4,
-                                      ),
-                                      const SizedBox(
-                                        height: 3.0,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () => Get.bottomSheet(
-                                          Container(
-                                            height: getHeight * 0.8,
-                                            decoration: const ShapeDecoration(
-                                              color: ColorsManager.white,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(
-                                                    16,
-                                                  ),
-                                                  topRight: Radius.circular(
-                                                    16,
+                            Padding(
+                              padding: EdgeInsets.only(
+                                bottom: isStudent == true ? AppSize.s16 : 0.0,
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 40,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomTextWidget(
+                                          text: 'phone'
+                                              .tr, // 'auth.phoneNumber'.tr,
+                                          marginTop: AppSize.s12,
+                                          textAlign: TextAlign.left,
+                                          // marginBottom: AppSize.s4,
+                                        ),
+                                        const SizedBox(
+                                          height: 3.0,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () => Get.bottomSheet(
+                                            Container(
+                                              height: getHeight * 0.8,
+                                              decoration: const ShapeDecoration(
+                                                color: ColorsManager.white,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft: Radius.circular(
+                                                      16,
+                                                    ),
+                                                    topRight: Radius.circular(
+                                                      16,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
+                                              child: CountryListSelector(
+                                                countrylist: countryList,
+                                                selectedCountry: controller
+                                                    .selectedCountry.value,
+                                                onTap: (country) {
+                                                  controller
+                                                      .selectedCountryOnClick(
+                                                    country,
+                                                  );
+                                                  Get.back();
+                                                },
+                                              ),
                                             ),
-                                            child: CountryListSelector(
-                                              countrylist: countryList,
-                                              selectedCountry: controller
-                                                  .selectedCountry.value,
-                                              onTap: (country) {
-                                                controller
-                                                    .selectedCountryOnClick(
-                                                  country,
+                                          ),
+                                          child: Container(
+                                            alignment: Alignment.centerLeft,
+                                            padding: EdgeInsets.zero,
+                                            child: FormField(
+                                              validator: (_) => controller
+                                                  .isPhoneNumberValidate(),
+                                              builder: (
+                                                FormFieldState<String> state,
+                                              ) {
+                                                return InputDecorator(
+                                                  // alignedDropdown: true,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                            .fromLTRB(
+                                                      12,
+                                                      0,
+                                                      4,
+                                                      0,
+                                                    ),
+                                                    fillColor:
+                                                        ColorsManager.grey100,
+                                                    filled: true,
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        AppSize.s8,
+                                                      ),
+                                                    ),
+                                                    errorText: state.hasError
+                                                        ? state.errorText
+                                                        : null,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        AppSize.s8,
+                                                      ),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                        color: ColorsManager
+                                                            .grey100,
+                                                      ),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        AppSize.s8,
+                                                      ),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                        color: ColorsManager
+                                                            .red900,
+                                                      ),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        AppSize.s8,
+                                                      ),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                        color: ColorsManager
+                                                            .grey300,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child: Obx(
+                                                    () => controller
+                                                                .selectedCountry
+                                                                .value
+                                                                .phoneCode ==
+                                                            null
+                                                        ? RowContentInputWidget(
+                                                            centerWidget:
+                                                                CustomTextWidget(
+                                                              text:
+                                                                  'auth.countryCode'
+                                                                      .tr,
+                                                              color:
+                                                                  ColorsManager
+                                                                      .grey400,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 16.0,
+                                                            ),
+                                                          )
+                                                        : RowContentInputWidget(
+                                                            prefixWidgetFlex:
+                                                                25,
+                                                            prefixWidget:
+                                                                CircleFlag(
+                                                              controller
+                                                                  .selectedCountry
+                                                                  .value
+                                                                  .isoCode
+                                                                  .toString(),
+                                                            ),
+                                                            prefixWidgetRightPadding:
+                                                                AppSize.s12,
+                                                            centerWidgetFlex:
+                                                                75,
+                                                            centerWidget:
+                                                                CustomTextWidget(
+                                                              //marginLeft: 4.0,
+                                                              text: controller
+                                                                  .selectedCountry
+                                                                  .value
+                                                                  .phoneCode,
+                                                              color:
+                                                                  ColorsManager
+                                                                      .black,
+                                                              fontSize: 16.0,
+                                                            ),
+                                                          ),
+                                                  ),
                                                 );
-                                                Get.back();
                                               },
                                             ),
                                           ),
                                         ),
-                                        child: Container(
-                                          alignment: Alignment.centerLeft,
-                                          padding: EdgeInsets.zero,
-                                          child: FormField(
-                                            validator: (_) => controller
-                                                .isPhoneNumberValidate(),
-                                            builder: (
-                                              FormFieldState<String> state,
-                                            ) {
-                                              return InputDecorator(
-                                                // alignedDropdown: true,
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      const EdgeInsets.fromLTRB(
-                                                    12,
-                                                    0,
-                                                    4,
-                                                    0,
-                                                  ),
-                                                  fillColor:
-                                                      ColorsManager.grey100,
-                                                  filled: true,
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      AppSize.s8,
-                                                    ),
-                                                  ),
-                                                  errorText: state.hasError
-                                                      ? state.errorText
-                                                      : null,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      AppSize.s8,
-                                                    ),
-                                                    borderSide:
-                                                        const BorderSide(
-                                                      color:
-                                                          ColorsManager.grey100,
-                                                    ),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      AppSize.s8,
-                                                    ),
-                                                    borderSide:
-                                                        const BorderSide(
-                                                      color:
-                                                          ColorsManager.red900,
-                                                    ),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      AppSize.s8,
-                                                    ),
-                                                    borderSide:
-                                                        const BorderSide(
-                                                      color:
-                                                          ColorsManager.grey300,
-                                                    ),
-                                                  ),
-                                                ),
-                                                child: Obx(
-                                                  () => controller
-                                                              .selectedCountry
-                                                              .value
-                                                              .phoneCode ==
-                                                          null
-                                                      ? RowContentInputWidget(
-                                                          centerWidget:
-                                                              CustomTextWidget(
-                                                            text:
-                                                                'auth.countryCode'
-                                                                    .tr,
-                                                            color: ColorsManager
-                                                                .grey400,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 16.0,
-                                                          ),
-                                                        )
-                                                      : RowContentInputWidget(
-                                                          prefixWidgetFlex: 25,
-                                                          prefixWidget:
-                                                              CircleFlag(
-                                                            controller
-                                                                .selectedCountry
-                                                                .value
-                                                                .isoCode
-                                                                .toString(),
-                                                          ),
-                                                          prefixWidgetRightPadding:
-                                                              AppSize.s12,
-                                                          centerWidgetFlex: 75,
-                                                          centerWidget:
-                                                              CustomTextWidget(
-                                                            //marginLeft: 4.0,
-                                                            text: controller
-                                                                .selectedCountry
-                                                                .value
-                                                                .phoneCode,
-                                                            color: ColorsManager
-                                                                .black,
-                                                            fontSize: 16.0,
-                                                          ),
-                                                        ),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 60,
+                                    child: CustomTextInput(
+                                      controller: controller.phoneNumberCtrl,
+                                      inputTitle: " ",
+                                      hintText: 'phone'
+                                          .tr, //'auth.phoneNumberHint'.tr,
+                                      keyboardType: //TextInputType.phone,
+                                          const TextInputType.numberWithOptions(
+                                        signed: true,
+                                        decimal: true,
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 60,
-                                  child: CustomTextInput(
-                                    controller: controller.phoneNumberCtrl,
-                                    inputTitle: " ",
-                                    hintText:
-                                        'phone'.tr, //'auth.phoneNumberHint'.tr,
-                                    keyboardType: //TextInputType.phone,
-                                        const TextInputType.numberWithOptions(
-                                      signed: true,
-                                      decimal: true,
+                                      // inputAction: TextInputAction.next,
+                                      isFilled: true,
+                                      topPadding: AppSize.s12,
+                                      leftPadding: AppSize.s4,
+                                      validator: (_) =>
+                                          controller.isPhoneNumberValidate(
+                                        isPhoneNumberField: true,
+                                      ),
+                                      maxLength: 13,
+                                      inputFormatterList: [
+                                        FilterTextInputFormat().digitsOnly(),
+                                        // FilteringTextInputFormatter.deny(
+                                        //   RegExp(
+                                        //     Validator.avoidSpaceRegExpPattern,
+                                        //   ),
+                                        // ),
+                                        // FilteringTextInputFormatter.allow(
+                                        //   RegExp(
+                                        //     Validator.numberRegExpPattern,
+                                        //   ),
+                                        // ),
+                                      ],
                                     ),
-                                    // inputAction: TextInputAction.next,
-                                    isFilled: true,
-                                    topPadding: AppSize.s12,
-                                    leftPadding: AppSize.s4,
-                                    validator: (_) =>
-                                        controller.isPhoneNumberValidate(
-                                      isPhoneNumberField: true,
-                                    ),
-                                    maxLength: 13,
-                                    inputFormatterList: [
-                                      FilterTextInputFormat().digitsOnly(),
-                                      // FilteringTextInputFormatter.deny(
-                                      //   RegExp(
-                                      //     Validator.avoidSpaceRegExpPattern,
-                                      //   ),
-                                      // ),
-                                      // FilteringTextInputFormatter.allow(
-                                      //   RegExp(
-                                      //     Validator.numberRegExpPattern,
-                                      //   ),
-                                      // ),
-                                    ],
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
 
                             if (isStudent == true)

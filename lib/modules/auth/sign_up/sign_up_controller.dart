@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../core/core.dart';
 import '../../../data/data.dart';
 import '../../../routes/routes.dart';
+import '../../modules.dart';
 
 class SignUpController extends GetxController with StateMixin<dynamic> {
   final AuthProvider authProvider = Get.find<AuthProvider>();
@@ -62,7 +63,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
     emailCtrl.dispose();
     phoneNumberCtrl.dispose();
     passwordCtrl.dispose();
-    // passwordConfirmationCtrl.dispose();
+    passwordConfirmationCtrl.dispose();
     enterpriseNameCtrl.dispose();
     enterpriseIDCtrl.dispose();
     jobTitleTextCtrl.dispose();
@@ -175,7 +176,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
         phone1: phoneNumberCtrl.text.trim(),
         password: passwordCtrl.text.trim(),
         // passwordConfirmation: passwordConfirmationCtrl.text.trim(),
-        uiLanguage: 'en',
+        uiLanguage: LanguageController().currentLanguageStore.value,
         accountType: userType!.toLowerCase(),
         invitationToken: tokenCtrl.text.trim(),
         enterpriseName: enterpriseNameCtrl.text.trim(),
@@ -191,7 +192,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
         (LoginModel value) {
           Get.dialog(
             CustomAlertDialog(
-              title: 'success'.tr, //'core.success'.tr,
+              title: 'Welcome'.tr, //'core.success'.tr,
               content: 'pooulpMember'.tr, //'auth.memberPooulp'.tr,
               routePath: Routes.homeRoute,
               type: AlertDialogType.success,

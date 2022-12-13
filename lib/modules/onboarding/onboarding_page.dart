@@ -719,6 +719,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                         //       ],
                         //     ),
                         //   ),
+                        // Good At
                         PageTemplateWidget(
                           title: pageData[7].title,
                           // subTitle: pageData[7].title,

@@ -50,14 +50,9 @@ class SettingController extends GetxController {
         ? profileController.studentInfoRepsonse.value.internshipPeriods!.first
         : FieldModel(id: 9999, label: '');
     internshipPeriodList.addAll(await tagProvider.getInternshipPeriodTags());
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
     languageRxString.value =
         profileController.userProfileInfo.value.uiLanguage!;
-    super.onReady();
+    super.onInit();
   }
 
   bool? updatingBoolValue({bool? newValue}) {

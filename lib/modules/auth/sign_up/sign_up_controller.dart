@@ -13,6 +13,8 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
   final GlobalKey<FormState> registrationFormKey = GlobalKey<FormState>();
   final GlobalKey<FormFieldState> formFieldKey = GlobalKey<FormFieldState>();
 
+  final validator = Validator();
+
   TextEditingController firstNameCtrl = TextEditingController();
   TextEditingController lastNameCtrl = TextEditingController();
 
@@ -20,7 +22,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
   TextEditingController phoneNumberCtrl = TextEditingController();
 
   TextEditingController passwordCtrl = TextEditingController();
-  // TextEditingController passwordConfirmationCtrl = TextEditingController();
+  TextEditingController passwordConfirmationCtrl = TextEditingController();
 
   TextEditingController enterpriseNameCtrl = TextEditingController();
   TextEditingController enterpriseIDCtrl = TextEditingController();
@@ -34,7 +36,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
   late Rx<CountryModel> selectedCountry = const CountryModel().obs;
 
   RxBool showPassword = false.obs;
-  // RxBool showPasswordConfirmation = false.obs;
+  RxBool showPasswordConfirmation = false.obs;
   RxBool isCheckTermCondition = false.obs;
 
   RxBool isCheckMarketing = true.obs;
@@ -66,12 +68,6 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
     jobTitleTextCtrl.dispose();
     tokenCtrl.dispose();
   }
-
-  bool showPasswordBoolSwitching({bool? boolValue}) =>
-      showPassword.value = !boolValue!;
-
-  // bool showPasswordConfirmationBoolSwitching({bool? boolValue}) =>
-  //     showPasswordConfirmation.value = !boolValue!;
 
   bool checkingBoolSwitching({bool? boolValue}) =>
       isCheckTermCondition.value = !boolValue!;

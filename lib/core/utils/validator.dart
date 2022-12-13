@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../../core/core.dart';
+
 // matching various patterns for kinds of data
 class Validator {
   Validator();
@@ -132,6 +134,20 @@ class Validator {
       return requiredFieldMsg;
     } else {
       return null;
+    }
+  }
+
+  String? matchingPasswords({
+    required String? password,
+    required String? matchPassword,
+  }) {
+    if (stringsComparation(
+      object1: password,
+      object2: matchPassword,
+    )) {
+      return Validator().passwordValidatorWithMin6Chars(matchPassword);
+    } else {
+      return 'passwordsDontMatch'.tr;
     }
   }
 }

@@ -9,6 +9,8 @@ class ChangePasswordController extends GetxController {
 
   final passwordFormKey = GlobalKey<FormState>();
 
+  final validator = Validator();
+
   TextEditingController currentPasswordCtrl = TextEditingController();
   TextEditingController newPasswordCtrl = TextEditingController();
   TextEditingController newPasswordConfirmationCtrl = TextEditingController();
@@ -18,18 +20,6 @@ class ChangePasswordController extends GetxController {
   Rx<bool> showNewPasswordConfirmation = false.obs;
 
   Rx<bool> isSubmitBtnProcessing = false.obs;
-
-  String? matchingPasswords() {
-    if (stringsComparation(
-      object1: newPasswordCtrl.text,
-      object2: newPasswordConfirmationCtrl.text,
-    )) {
-      return Validator()
-          .passwordValidatorWithMin6Chars(newPasswordConfirmationCtrl.text);
-    } else {
-      return 'passwordsDontMatch'.tr;
-    }
-  }
 
   void cleanUpFormData() {
     currentPasswordCtrl.text = '';

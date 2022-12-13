@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pooulp_flutter/modules/modules.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
-import '../onboarding.dart';
 
 class EducationForm extends GetView<OnboardingController> {
   final int? eduIndex;
@@ -337,8 +337,7 @@ class EducationForm extends GetView<OnboardingController> {
                 controller.selectedStartedDateString[eduIndex!],
               ),
               dialogType: DialogType.dateWithoutDayPickerDialog,
-              // dateLocale: controller
-              //     .profileController.userProfileInfo.value.uiLanguage,
+              dateLocale: LanguageController().currentLanguageStore.value,
               currentTime: DateTime.tryParse(
                     controller.selectedStartedDateString[eduIndex!],
                   ) ??

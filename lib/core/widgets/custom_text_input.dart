@@ -247,9 +247,10 @@ class CustomTextInput extends StatelessWidget {
                     //   right: 8.0,
                     // ),
                   ),
-                  textInputAction: isLastField!
-                      ? TextInputAction.done
-                      : TextInputAction.next,
+                  textInputAction: inputAction,
+                  //  isLastField!
+                  //     ? TextInputAction.done
+                  //     : TextInputAction.next,
                   // onEditingComplete: () {
                   //   if (!focusNodeName.hasPrimaryFocus) {
                   //     focusNodeName.unfocus();

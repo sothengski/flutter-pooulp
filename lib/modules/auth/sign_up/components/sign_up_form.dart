@@ -135,6 +135,87 @@ class SignUpForm extends GetView<SignUpController> {
                               keyboardType: TextInputType.emailAddress,
                             ),
 
+                            CustomTextInput(
+                              controller: controller.passwordCtrl,
+                              inputTitle: 'password'.tr, //'auth.password'.tr,
+                              hintText:
+                                  'passwordHint'.tr, //'auth.passwordHint'.tr,
+                              suffixIcon: IconButton(
+                                icon: !controller.showPassword.value
+                                    ? const Icon(
+                                        Icons.visibility_outlined,
+                                        color: ColorsManager.grey400,
+                                        size: 20.0,
+                                      )
+                                    : const Icon(
+                                        Icons.visibility_off_outlined,
+                                        color: ColorsManager.grey400,
+                                        size: 20.0,
+                                      ),
+                                onPressed: () => controller.showPassword.value =
+                                    switchingBooleanValue(
+                                  boolValue: controller.showPassword.value,
+                                ),
+                              ),
+                              obscureText: !controller.showPassword.value,
+                              isFilled: true,
+                              topPadding: AppSize.s12,
+                              // bottomPadding: AppSize.s12,
+                              validator:
+                                  Validator().passwordValidatorWithMin6Chars,
+                              inputFormatterList: [
+                                FilterTextInputFormat().deny(
+                                  regExpString:
+                                      Validator.avoidSpaceRegExpPattern,
+                                ),
+                                // FilteringTextInputFormatter.deny(
+                                //   RegExp(Validator.avoidSpaceRegExpPattern),
+                                // ),
+                              ],
+                            ),
+                            CustomTextInput(
+                              controller: controller.passwordConfirmationCtrl,
+                              inputTitle: "Password Confirmation",
+                              hintText: "Enter your password confirmation",
+                              suffixIcon: IconButton(
+                                icon: !controller.showPasswordConfirmation.value
+                                    ? const Icon(
+                                        Icons.visibility_outlined,
+                                        color: ColorsManager.grey400,
+                                        size: 20.0,
+                                      )
+                                    : const Icon(
+                                        Icons.visibility_off_outlined,
+                                        color: ColorsManager.grey400,
+                                        size: 20.0,
+                                      ),
+                                onPressed: () => controller
+                                    .showPasswordConfirmation
+                                    .value = switchingBooleanValue(
+                                  boolValue:
+                                      controller.showPasswordConfirmation.value,
+                                ),
+                              ),
+                              obscureText:
+                                  !controller.showPasswordConfirmation.value,
+                              isFilled: true,
+                              topPadding: AppSize.s12,
+                              bottomPadding:
+                                  isStudent == true ? AppSize.s16 : 0.0,
+                              validator: (_) =>
+                                  controller.validator.matchingPasswords(
+                                password: controller.passwordCtrl.text,
+                                matchPassword:
+                                    controller.passwordConfirmationCtrl.text,
+                              ),
+                              inputFormatterList: [
+                                FilterTextInputFormat().deny(
+                                  regExpString:
+                                      Validator.avoidSpaceRegExpPattern,
+                                ),
+                              ],
+                            ),
+
                             ///===== Top of Birthday Component =====//
                             if (isStudent != true)
                               Container()
@@ -363,7 +444,12 @@ class SignUpForm extends GetView<SignUpController> {
                                     inputTitle: " ",
                                     hintText:
                                         'phone'.tr, //'auth.phoneNumberHint'.tr,
-                                    keyboardType: TextInputType.phone,
+                                    keyboardType: //TextInputType.phone,
+                                        const TextInputType.numberWithOptions(
+                                      signed: true,
+                                      decimal: true,
+                                    ),
+                                    // inputAction: TextInputAction.next,
                                     isFilled: true,
                                     topPadding: AppSize.s12,
                                     leftPadding: AppSize.s4,
@@ -389,69 +475,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 ),
                               ],
                             ),
-                            CustomTextInput(
-                              controller: controller.passwordCtrl,
-                              inputTitle: 'password'.tr, //'auth.password'.tr,
-                              hintText:
-                                  'passwordHint'.tr, //'auth.passwordHint'.tr,
-                              suffixIcon: IconButton(
-                                icon: !controller.showPassword.value
-                                    ? const Icon(
-                                        Icons.visibility_outlined,
-                                        color: ColorsManager.grey400,
-                                        size: 20.0,
-                                      )
-                                    : const Icon(
-                                        Icons.visibility_off_outlined,
-                                        color: ColorsManager.grey400,
-                                        size: 20.0,
-                                      ),
-                                onPressed: () =>
-                                    controller.showPasswordBoolSwitching(
-                                  boolValue: controller.showPassword.value,
-                                ),
-                              ),
-                              obscureText: !controller.showPassword.value,
-                              isFilled: true,
-                              topPadding: AppSize.s12,
-                              bottomPadding:
-                                  isStudent == true ? AppSize.s16 : 0.0,
-                              validator:
-                                  Validator().passwordValidatorWithMin6Chars,
-                              inputFormatterList: [
-                                FilterTextInputFormat().deny(
-                                  regExpString:
-                                      Validator.avoidSpaceRegExpPattern,
-                                ),
-                                // FilteringTextInputFormatter.deny(
-                                //   RegExp(Validator.avoidSpaceRegExpPattern),
-                                // ),
-                              ],
-                            ),
-                            // CustomTextInput(
-                            //   controller: controller.passwordConfirmationCtrl,
-                            //   inputTitle: "Password Confirmation",
-                            //   hintText: "Enter your password confirmation",
-                            //   suffixIcon: true,
-                            //   obscureText:
-                            // /      !controller.showPasswordConfirmation.value,
-                            //   isFilled: true,
-                            //   topPadding: AppSize.s12,
-                            //   bottomPadding:
-                            //       isStudent == true ? AppSize.s32 : 0.0,
-                            //   validator: (_) =>
-                            //       controller.matchingPasswords(),
-                            //   inputFormatterList: [
-                            //     FilteringTextInputFormatter.deny(
-                            //       RegExp(Validator.avoidSpaceRegExpPattern),
-                            //     ),
-                            //   ],
-                            //   changeShowPassword: () => controller
-                            //       .showPasswordConfirmationBoolSwitching(
-                            //     boolValue:
-                            //         controller.showPasswordConfirmation.value,
-                            //   ),
-                            // ),
+
                             if (isStudent == true)
                               Container()
                             else

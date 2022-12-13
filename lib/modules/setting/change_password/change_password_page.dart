@@ -126,7 +126,11 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                     isFilled: true,
                     topPadding: AppSize.s12,
                     bottomPadding: AppSize.s16,
-                    validator: (_) => controller.matchingPasswords(),
+                    validator: (_) => controller.validator.matchingPasswords(
+                      password: controller.newPasswordCtrl.text,
+                      matchPassword:
+                          controller.newPasswordConfirmationCtrl.text,
+                    ),
                     inputFormatterList: [
                       FilterTextInputFormat().deny(
                         regExpString: Validator.avoidSpaceRegExpPattern,

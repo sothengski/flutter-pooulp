@@ -9,7 +9,7 @@ class Validator {
   static const String emptySpaceRegExpPattern = r'^\S+$';
   static const String avoidSpaceRegExpPattern = r'\s';
   static const String emailRegExpPattern =
-      r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+      r'^[a-zA-Z0-9.-]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
   static const String phoneNumberRegExpPattern = r'(^(?:[+0]9)?[0-9]{7,13}$)';
   static const String lengthMin6RegExppattern = r'^.{6,}$';
   static const String noNumberRegExpPattern =

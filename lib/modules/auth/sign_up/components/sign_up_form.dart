@@ -138,8 +138,7 @@ class SignUpForm extends GetView<SignUpController> {
                             CustomTextInput(
                               controller: controller.passwordCtrl,
                               inputTitle: 'password'.tr, //'auth.password'.tr,
-                              hintText:
-                                  'passwordHint'.tr, //'auth.passwordHint'.tr,
+                              hintText: 'password'.tr, //'auth.passwordHint'.tr,
                               suffixIcon: IconButton(
                                 icon: !controller.showPassword.value
                                     ? const Icon(
@@ -175,8 +174,8 @@ class SignUpForm extends GetView<SignUpController> {
                             ),
                             CustomTextInput(
                               controller: controller.passwordConfirmationCtrl,
-                              inputTitle: "Password Confirmation",
-                              hintText: "Enter your password confirmation",
+                              inputTitle: 'passwordConfirmation'.tr,
+                              hintText: 'passwordConfirmation'.tr,
                               suffixIcon: IconButton(
                                 icon: !controller.showPasswordConfirmation.value
                                     ? const Icon(

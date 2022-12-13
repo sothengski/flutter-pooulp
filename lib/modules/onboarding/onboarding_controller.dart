@@ -289,13 +289,13 @@ class OnboardingController extends GetxController
           FieldModel(id: 1),
         ) ==
         true) {
-      numPage.value = 8;
+      numPage.value = 9;
     } else if (haveitemInList(
           lookingForSelectedList,
           FieldModel(id: 3),
         ) ==
         true) {
-      numPage.value = 7;
+      numPage.value = 8;
     } else {
       numPage.value = 11;
     }
@@ -306,27 +306,59 @@ class OnboardingController extends GetxController
   bool get isLastPage => selectedPageIndex.value == numPage.value - 1;
 
   bool isDisableOnNextButton() {
+    final bool isSelectInternshipInLookingFor = haveitemInList(
+          lookingForSelectedList,
+          FieldModel(id: 1),
+        ) ==
+        true;
+    final bool isSelectStudentJobInLookingFor = haveitemInList(
+          lookingForSelectedList,
+          FieldModel(id: 3),
+        ) ==
+        true;
     // condition on matching selection in page 1
     // condition on selection in page 8
     // condition on empty internshipInterestedInSelectedList in page 3
     // condition on empty studentJobInterestedInSelectedList in page 5
-    if (((haveitemInList(
-                  lookingForSelectedList,
-                  FieldModel(id: 1),
-                ) ==
-                false) &&
-            (haveitemInList(
-                  lookingForSelectedList,
-                  FieldModel(id: 3),
-                ) ==
-                false) &&
-            selectedPageIndex.value == 1) ||
-        ((knowFromSourceSelectedList!.isEmpty) &&
-            selectedPageIndex.value == 9) ||
-        ((selectedPageIndex.value == 3) &&
-            internshipInterestedInSelectedList.isEmpty) ||
-        ((selectedPageIndex.value == 5) &&
-            studentJobInterestedInSelectedList.isEmpty)) {
+    if (
+        // if we didn't found or selected internship and StudentJob in page 1
+        (!isSelectInternshipInLookingFor &&
+                !isSelectStudentJobInLookingFor &&
+                selectedPageIndex.value == 1) ||
+            // if we didn't found or selected internship and internshipInterested in page 3
+            ((selectedPageIndex.value == 3) &&
+                isSelectInternshipInLookingFor &&
+                internshipInterestedInSelectedList.isEmpty) ||
+            // if we didn't found or selected internship and internshipAddress in page 4
+            ((selectedPageIndex.value == 4) &&
+                isSelectInternshipInLookingFor &&
+                internshipPlaceDetail!.value.fullAddress == null) ||
+            // if we didn't found or selected StudentJob and StudentJobInterested in page 5
+            ((selectedPageIndex.value == 5) &&
+                isSelectStudentJobInLookingFor &&
+                studentJobInterestedInSelectedList.isEmpty) ||
+            // if we didn't found or selected only StudentJob and StudentJobInterested in page 2
+            (((selectedPageIndex.value == 2) &&
+                    isSelectStudentJobInLookingFor &&
+                    !isSelectInternshipInLookingFor) &&
+                studentJobInterestedInSelectedList.isEmpty) ||
+            // if we didn't found or selected only StudentJob and StudentJobAddress in page 2
+            ((selectedPageIndex.value == 3) &&
+                isSelectStudentJobInLookingFor &&
+                !isSelectInternshipInLookingFor &&
+                studentJobPlaceDetail!.value.fullAddress == null) ||
+            // if we didn't found or selected knowFromSourceSelectedList in page 6(only studentJob)
+            // page 7(only Internship) // page 9 for select both
+            (((selectedPageIndex.value == 6 &&
+                        isSelectStudentJobInLookingFor &&
+                        !isSelectInternshipInLookingFor) ||
+                    (selectedPageIndex.value == 7 &&
+                        isSelectInternshipInLookingFor &&
+                        !isSelectStudentJobInLookingFor) ||
+                    (selectedPageIndex.value == 9 &&
+                        isSelectInternshipInLookingFor &&
+                        isSelectStudentJobInLookingFor)) &&
+                knowFromSourceSelectedList!.isEmpty)) {
       return true;
     } else {
       return false;

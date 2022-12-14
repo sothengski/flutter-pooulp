@@ -45,6 +45,7 @@ class OfferFeedController extends GetxController
   RxInt workPlaceTypesForSearch = 2.obs;
   // RxList<FieldModel> typesListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> fieldListForSearch = <FieldModel>[].obs;
+  RxList<FieldModel> filterFieldListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> languageListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> availabilitiesTagListForSearch = <FieldModel>[].obs;
   RxList<FieldModel> internshipTypeTagListForSearch = <FieldModel>[].obs;
@@ -172,6 +173,37 @@ class OfferFeedController extends GetxController
   //     fieldListToBeSearch.add(fieldValue!);
   //   }
   // }
+
+  void jobTypeRadioBtnSelected({required int? jobTypeId}) {
+    filterFieldListForSearch.value = [];
+    fieldListInFilter.value = [];
+    fieldListToBeSearch.value = [];
+
+    // 1 is internship jobtype
+    if (jobTypeId == 1) {
+      for (final element in fieldListForSearch) {
+        //tagCategories contain internship type
+        if (element.tagCategories!.isNotEmpty &&
+            element.tagCategories!
+                .where((element) => element.id == 46)
+                .isNotEmpty) {
+          filterFieldListForSearch.add(element);
+        }
+      }
+    }
+    // 3 is studentjob jobtype
+    else if (jobTypeId == 3) {
+      for (final element in fieldListForSearch) {
+        //tagCategories contain studentjob type
+        if (element.tagCategories!.isNotEmpty &&
+            element.tagCategories!
+                .where((element) => element.id == 47)
+                .isNotEmpty) {
+          filterFieldListForSearch.add(element);
+        }
+      }
+    }
+  }
 
   void addingOrRemovingFieldInFieldListToBeSearch({
     RxList<FieldModel>? list,

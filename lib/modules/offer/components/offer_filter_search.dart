@@ -168,23 +168,29 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: controller.listJobOfferTypes
                               .map(
-                                (e) => RowDataSelectionWidget.radioButton(
-                                  isClickingValue: controller.typesListInFilter
-                                      .where((item) => item.id == e.id)
-                                      .isNotEmpty,
-                                  // controller.typesListInFilter.contains(e),
-                                  text: e.label == 'See all'
-                                      ? 'seeAll'.tr
-                                      : e.label,
-                                  onPressed: () {
-                                    controller
-                                        .addingOrRemovingFieldInFieldListToBeSearch(
-                                      list: controller.typesListInFilter,
-                                      fieldValue: e,
-                                      isList: false,
-                                    );
-                                  },
-                                ),
+                                (e) => e.id == 1 || e.id == 3
+                                    ? RowDataSelectionWidget.radioButton(
+                                        isClickingValue: controller
+                                            .typesListInFilter
+                                            .where((item) => item.id == e.id)
+                                            .isNotEmpty,
+                                        // controller.typesListInFilter.contains(e),
+                                        text: e.label == 'See all'
+                                            ? 'seeAll'.tr
+                                            : e.label,
+                                        onPressed: () {
+                                          controller.jobTypeRadioBtnSelected(
+                                            jobTypeId: e.id,
+                                          );
+                                          controller
+                                              .addingOrRemovingFieldInFieldListToBeSearch(
+                                            list: controller.typesListInFilter,
+                                            fieldValue: e,
+                                            isList: false,
+                                          );
+                                        },
+                                      )
+                                    : Container(),
                               )
                               .toList(),
                         ),
@@ -674,11 +680,11 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             ),
                           ),
                           child: Obx(
-                            () => controller.fieldListForSearch.isNotEmpty
+                            () => controller.filterFieldListForSearch.isNotEmpty
                                 ? FieldListMultipleSelector(
                                     inputHintText: 'search'.tr,
                                     dataListforSelected:
-                                        controller.fieldListForSearch,
+                                        controller.filterFieldListForSearch,
                                     selectedItems: controller.fieldListInFilter,
                                     onTap: (field) {
                                       controller

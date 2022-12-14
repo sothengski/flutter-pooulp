@@ -18,6 +18,9 @@ class OnboardingController extends GetxController
 
   RxList<SchoolModel> schoolList = <SchoolModel>[].obs;
   RxList<FieldModel> fieldListForSelect = <FieldModel>[].obs;
+  RxList<FieldModel> internshipFieldListForSelect = <FieldModel>[].obs;
+  RxList<FieldModel> studentJobFieldListForSelect = <FieldModel>[].obs;
+
   RxList<FieldModel> schoolDegreeList = <FieldModel>[].obs;
 
   RxList<OnboardingPageModel> onboardingPages = <OnboardingPageModel>[].obs;
@@ -582,6 +585,22 @@ class OnboardingController extends GetxController
     bool? refresh = false,
   }) async {
     fieldListForSelect.addAll(await tagProvider.getAllFields());
+    for (final element in fieldListForSelect) {
+      //tagCategories contain internship type
+      if (element.tagCategories!.isNotEmpty &&
+          element.tagCategories!
+              .where((element) => element.id == 46)
+              .isNotEmpty) {
+        internshipFieldListForSelect.add(element);
+      }
+      //tagCategories contain studentjob type
+      if (element.tagCategories!.isNotEmpty &&
+          element.tagCategories!
+              .where((element) => element.id == 47)
+              .isNotEmpty) {
+        studentJobFieldListForSelect.add(element);
+      }
+    }
     // debugPrint(
     //   'fieldListForSelect:: ${fieldListForSelect.map((element) => '${element.label}\n')}',
     // );

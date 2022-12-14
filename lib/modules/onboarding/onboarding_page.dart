@@ -928,6 +928,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                         Expanded(
                           flex: 25,
                           child: !controller.isFirstPage
+                              // && !controller.isLastPage
                               ? TextButton(
                                   onPressed: () =>
                                       controller.movingAction(forward: false),
@@ -953,44 +954,36 @@ class OnboardingPage extends GetView<OnboardingController> {
                         ),
                         Expanded(
                           flex: 50,
-                          child: CustomIndicator(
-                            length: controller.numPage.value,
-                            location: controller.selectedPageIndex.value,
-                            size: 8.0,
-                            spaceBtwIndicator: 3.0,
-                          ),
+                          child: controller.isFirstPage
+                              // || controller.isLastPage
+                              ? TextButton(
+                                  onPressed: controller.movingAction,
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      ColorsManager.primary,
+                                    ),
+                                  ),
+                                  child: CustomTextWidget(
+                                    text: controller.isLastPage
+                                        ? 'onBoardingFinishBtn'.tr
+                                        : 'onBoardingStartBtn'.tr,
+                                    color: ColorsManager.white,
+                                    fontSize: AppSize.s16,
+                                    fontWeight: FontWeight.bold,
+                                    // textAlign: TextAlign.right,
+                                  ),
+                                )
+                              : CustomIndicator(
+                                  length: controller.numPage.value,
+                                  location: controller.selectedPageIndex.value,
+                                  size: 8.0,
+                                  spaceBtwIndicator: 3.0,
+                                ),
                         ),
                         Expanded(
                           flex: 25,
-                          // condition on matching selection in page 1
-                          // condition on selection in page 8
-                          // condition on empty internshipInterestedInSelectedList in page 3
-                          // condition on empty studentJobInterestedInSelectedList in page 5
                           child: controller.isDisableOnNextButton()
-                              // ((controller.haveitemInList(
-                              //                   controller.lookingForSelectedList,
-                              //                   FieldModel(id: 1),
-                              //                 ) ==
-                              //                 false) &&
-                              //             (controller.haveitemInList(
-                              //                   controller.lookingForSelectedList,
-                              //                   FieldModel(id: 3),
-                              //                 ) ==
-                              //                 false) &&
-                              //             controller.selectedPageIndex.value ==
-                              //                 1) ||
-                              //         ((controller.knowFromSourceSelectedList!
-                              //                 .isEmpty) &&
-                              //             controller.selectedPageIndex.value ==
-                              //                 9) ||
-                              //         ((controller.selectedPageIndex.value == 3) &&
-                              //             controller
-                              //                 .internshipInterestedInSelectedList
-                              //                 .isEmpty) ||
-                              //         ((controller.selectedPageIndex.value == 5) &&
-                              //             controller
-                              //                 .studentJobInterestedInSelectedList
-                              //                 .isEmpty)
                               ? TextButton(
                                   onPressed: null,
                                   style: ButtonStyle(
@@ -1020,7 +1013,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     // ),
                                   ),
                                   child: CustomTextWidget(
-                                    text: controller.isLastPage
+                                    text: (controller.numPage.value - 2 ==
+                                            controller.selectedPageIndex.value)
                                         ? 'finish'.tr //'core.finish'.tr
                                         : 'next'.tr, //'core.next'.tr,
                                     color: ColorsManager.white,

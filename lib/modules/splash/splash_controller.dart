@@ -30,8 +30,8 @@ class SplashController extends GetxController {
       () async => {
         if (isHomeNavigate == true)
           {
-            Get.offNamed(Routes.onBoardingRoute),
-            // Get.offNamed(Routes.homeRoute),
+            // Get.offNamed(Routes.onBoardingRoute),
+            Get.offNamed(Routes.homeRoute),
           }
         else
           {

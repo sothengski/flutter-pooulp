@@ -927,8 +927,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                       children: [
                         Expanded(
                           flex: 25,
-                          child: !controller.isFirstPage
-                              // && !controller.isLastPage
+                          child: !controller.isFirstPage &&
+                                  !controller.isLastPage
                               ? TextButton(
                                   onPressed: () =>
                                       controller.movingAction(forward: false),
@@ -954,8 +954,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                         ),
                         Expanded(
                           flex: 50,
-                          child: controller.isFirstPage
-                              // || controller.isLastPage
+                          child: controller.isFirstPage || controller.isLastPage
                               ? TextButton(
                                   onPressed: controller.movingAction,
                                   style: ButtonStyle(

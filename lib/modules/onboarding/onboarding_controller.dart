@@ -274,27 +274,21 @@ class OnboardingController extends GetxController
   }
 
   void updateNumberPage({int? newValue}) {
-    if (haveitemInList(
-          lookingForSelectedList,
-          FieldModel(id: 1),
-        ) &&
-        haveitemInList(
-              lookingForSelectedList,
-              FieldModel(id: 3),
-            ) ==
-            true) {
-      numPage.value = 11;
-    } else if (haveitemInList(
+    final bool isSelectInternshipInLookingFor = haveitemInList(
           lookingForSelectedList,
           FieldModel(id: 1),
         ) ==
-        true) {
-      numPage.value = 9;
-    } else if (haveitemInList(
+        true;
+    final bool isSelectStudentJobInLookingFor = haveitemInList(
           lookingForSelectedList,
           FieldModel(id: 3),
         ) ==
-        true) {
+        true;
+    if (isSelectInternshipInLookingFor && isSelectStudentJobInLookingFor) {
+      numPage.value = 11;
+    } else if (isSelectInternshipInLookingFor) {
+      numPage.value = 9;
+    } else if (isSelectStudentJobInLookingFor) {
       numPage.value = 8;
     } else {
       numPage.value = 11;

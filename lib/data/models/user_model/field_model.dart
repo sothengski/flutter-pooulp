@@ -36,6 +36,7 @@ class FieldModel {
   int? total;
   bool? selected;
   final List<FieldModel>? subFieldList;
+  final List<FieldModel>? tagCategories;
 
   FieldModel({
     this.id,
@@ -50,6 +51,7 @@ class FieldModel {
     this.total,
     this.selected = false,
     this.subFieldList,
+    this.tagCategories,
   });
 
   // FieldModel? get getProficiencyLevel =>
@@ -93,6 +95,16 @@ class FieldModel {
                   ),
                 )
                 .toList(),
+        tagCategories:
+            json['tag_categories'] == null || json['tag_categories'] == []
+                ? []
+                : (json['tag_categories'] as List)
+                    .map(
+                      (i) => FieldModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -108,6 +120,9 @@ class FieldModel {
         'skills': subFieldList == null || subFieldList == []
             ? null
             : List<dynamic>.from(subFieldList!.map((x) => x.toJson())),
+        'tag_categories': tagCategories == null || tagCategories == []
+            ? null
+            : List<dynamic>.from(tagCategories!.map((x) => x.toJson())),
       }..removeWhere((_, v) => v == null);
 
   Map<String, dynamic> toJsonForOnboarding({bool? usedTagId = false}) => {
@@ -131,6 +146,7 @@ class FieldModel {
       video_url: $videoUrl,
       total: $total,
       subFieldList: $subFieldList
+      tagCategories: $tagCategories
     )''';
   }
 }

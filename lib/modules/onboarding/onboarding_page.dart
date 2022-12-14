@@ -59,31 +59,36 @@ class OnboardingPage extends GetView<OnboardingController> {
                             itemBuilder: (_, itemIndex) {
                               final item =
                                   pageData[1].selectionItems![itemIndex];
-                              return Obx(
-                                () => TextCardClickableWidget(
-                                  size: 50.0,
-                                  bottomMargin: AppSize.s32,
-                                  topPadding: 0.0,
-                                  bottomPadding: 0.0,
-                                  rightPadding: 0.0,
-                                  text: item.label,
-                                  // rightTopText: 'profile.soon'.tr,
-                                  maxLine:
-                                      controller.isUpdate.value == true ? 3 : 3,
-                                  fontSize: AppSize.s24,
-                                  itemList: controller.lookingForSelectedList,
-                                  item: item,
-                                  onClick: () {
-                                    controller.addOrRemoveDataInList(
-                                      pageIndex: 0,
-                                      addToList:
-                                          controller.lookingForSelectedList,
-                                      itemToBeAdd: item,
-                                    );
-                                    controller.updateNumberPage();
-                                  },
-                                ),
-                              );
+                              return item.id == 1 || item.id == 3
+                                  ? Obx(
+                                      () => TextCardClickableWidget(
+                                        size: 50.0,
+                                        bottomMargin: AppSize.s32,
+                                        topPadding: 0.0,
+                                        bottomPadding: 0.0,
+                                        rightPadding: 0.0,
+                                        text: item.label,
+                                        // rightTopText: 'profile.soon'.tr,
+                                        maxLine:
+                                            controller.isUpdate.value == true
+                                                ? 3
+                                                : 3,
+                                        fontSize: AppSize.s24,
+                                        itemList:
+                                            controller.lookingForSelectedList,
+                                        item: item,
+                                        onClick: () {
+                                          controller.addOrRemoveDataInList(
+                                            pageIndex: 0,
+                                            addToList: controller
+                                                .lookingForSelectedList,
+                                            itemToBeAdd: item,
+                                          );
+                                          controller.updateNumberPage();
+                                        },
+                                      ),
+                                    )
+                                  : Container();
                             },
                           ),
                         ),

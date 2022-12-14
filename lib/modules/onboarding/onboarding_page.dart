@@ -278,8 +278,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                             subTitle2: "(${'multipleSelectLabel'.tr})",
                             bodyPageWidget: SingleChildScrollView(
                               child: Wrap(
-                                children: pageData[3]
-                                    .selectionItems!
+                                children: controller.fieldListForSelect
                                     .map(
                                       (element) => Obx(
                                         () => Padding(
@@ -509,8 +508,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                             subTitle2: "(${'multipleSelectLabel'.tr})",
                             bodyPageWidget: SingleChildScrollView(
                               child: Wrap(
-                                children: pageData[3]
-                                    .selectionItems!
+                                children: controller.fieldListForSelect
                                     .map(
                                       (element) => Obx(
                                         () => Padding(

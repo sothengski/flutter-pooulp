@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keychain/flutter_keychain.dart';
 import 'package:get/get.dart';
 import 'package:linkedin_login/linkedin_login.dart';
 
@@ -29,6 +30,8 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
   String? socialMediaLastName;
   String? socialMediaToken;
 
+  RxString firstStart = ''.obs;
+
   FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
 
   // @override
@@ -41,6 +44,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
   @override
   Future<void> onReady() async {
     await deepLink();
+    await initPlatformState();
     super.onReady();
   }
 
@@ -167,6 +171,39 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
         // },
       ),
     );
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initPlatformState() async {
+    String platformVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      final firstStartFromKey = await FlutterKeychain.get(key: "firstStart");
+      print("try: initPlatformState");
+      if (firstStartFromKey == null) {
+        await FlutterKeychain.put(
+          key: "firstStart",
+          value: DateTime.now().toIso8601String(),
+        );
+      }
+
+      // If the widget was removed from the tree while the asynchronous platform
+      // message was in flight, we want to discard the reply rather than calling
+      // setState to update our non-existent appearance.
+      // if (!mounted) return;
+
+      // setState(() {
+      if (firstStartFromKey!.isNotEmpty) {
+        firstStart.value = "Was never started before. Restart and see .";
+        // print('if ${firstStart.value}');
+      } else {
+        firstStart.value = firstStartFromKey;
+        // print('else ${firstStart.value}');
+      }
+      // });
+    } on Exception catch (ae) {
+      print("Exception: $ae");
+    }
   }
 
   bool showPasswordBoolSwitching({bool? boolValue}) =>

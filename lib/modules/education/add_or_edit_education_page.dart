@@ -147,77 +147,100 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                 //===== Bottom of Field of Study Component =====//
 
                 ///===== Top of Fields Component =====//
-                ContainerDialogWidget(
-                  inputTitle: 'fields'.tr,
-                  fontSizeTitle: AppSize.s16,
-                  // validatorFunction: (_) => Validator().notEmptyValidator(
-                  //   controller.selectedLanguage.value.label ?? '',
-                  // ),
-                  dialogType: DialogType.bottomSheetDialog,
-                  dialogWidget: Container(
-                    height: getHeight,
-                    decoration: const ShapeDecoration(
-                      color: ColorsManager.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                            AppSize.s16,
-                          ),
-                          topRight: Radius.circular(
-                            AppSize.s16,
+                Obx(
+                  () => ContainerDialogWidget(
+                    inputTitle: 'fields'.tr,
+                    fontSizeTitle: AppSize.s16,
+                    // validatorFunction: (_) => Validator().notEmptyValidator(
+                    //   controller.selectedLanguage.value.label ?? '',
+                    // ),
+                    dialogType: DialogType.bottomSheetDialog,
+                    dialogWidget: Container(
+                      height: getHeight,
+                      decoration: const ShapeDecoration(
+                        color: ColorsManager.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(
+                              AppSize.s16,
+                            ),
+                            topRight: Radius.circular(
+                              AppSize.s16,
+                            ),
                           ),
                         ),
                       ),
+                      child: Obx(
+                        () => controller.fieldListForSelect.isNotEmpty
+                            ? FieldListMultipleSelector(
+                                inputHintText: 'search'.tr,
+                                dataListforSelected:
+                                    controller.fieldListForSelect,
+                                selectedItems: controller.fieldListSelected,
+                                onTap: (field) {
+                                  addingOrRemovingFieldInFieldList(
+                                    list: controller.fieldListSelected,
+                                    fieldValue: field,
+                                  );
+                                },
+                              )
+                            : const LoadingWidget(),
+                      ),
                     ),
-                    child: Obx(
-                      () => controller.fieldListForSelect.isNotEmpty
-                          ? FieldListMultipleSelector(
-                              inputHintText: 'search'.tr,
-                              dataListforSelected:
-                                  controller.fieldListForSelect,
-                              selectedItems: controller.fieldListSelected,
-                              onTap: (field) {
-                                addingOrRemovingFieldInFieldList(
-                                  list: controller.fieldListSelected,
-                                  fieldValue: field,
-                                );
-                              },
+                    containerWidget: RowContentInputWidget(
+                      centerWidget: controller.fieldListSelected.isNotEmpty
+                          ? Container(
+                              alignment: AlignmentDirectional.centerStart,
+                              child: Wrap(
+                                children: [
+                                  for (var i = 0;
+                                      i < controller.fieldListSelected.length;
+                                      i++)
+                                    RemovableTextCardWidget(
+                                      text:
+                                          '${controller.fieldListSelected[i].label}',
+                                      onRemove: () =>
+                                          addingOrRemovingFieldInFieldList(
+                                        list: controller.fieldListSelected,
+                                        fieldValue:
+                                            controller.fieldListSelected[i],
+                                      ),
+                                    )
+                                ],
+                              ),
                             )
-                          : const LoadingWidget(),
-                    ),
-                  ),
-                  containerWidget: RowContentInputWidget(
-                    centerWidget: CustomTextWidget(
-                      text: 'fieldsHint'.tr,
-                      color: ColorsManager.grey400,
-                      fontWeight: FontWeight.w400,
-                      fontSize: AppSize.s16,
-                    ),
-                    suffixWidget: const Icon(
-                      IconsManager.arrowDropDown,
-                      color: ColorsManager.grey600,
-                    ),
-                  ),
-                ),
-                Obx(
-                  () => Container(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Wrap(
-                      children: [
-                        for (var i = 0;
-                            i < controller.fieldListSelected.length;
-                            i++)
-                          RemovableTextCardWidget(
-                            text: '${controller.fieldListSelected[i].label}',
-                            onRemove: () => addingOrRemovingFieldInFieldList(
-                              list: controller.fieldListSelected,
-                              fieldValue: controller.fieldListSelected[i],
+                          : CustomTextWidget(
+                              text: 'fieldsHint'.tr,
+                              color: ColorsManager.grey400,
+                              fontWeight: FontWeight.w400,
+                              fontSize: AppSize.s16,
                             ),
-                          )
-                      ],
+                      suffixWidget: const Icon(
+                        IconsManager.arrowDropDown,
+                        color: ColorsManager.grey600,
+                      ),
                     ),
                   ),
                 ),
+                // Obx(
+                //   () => Container(
+                //     alignment: AlignmentDirectional.centerStart,
+                //     child: Wrap(
+                //       children: [
+                //         for (var i = 0;
+                //             i < controller.fieldListSelected.length;
+                //             i++)
+                //           RemovableTextCardWidget(
+                //             text: '${controller.fieldListSelected[i].label}',
+                //             onRemove: () => addingOrRemovingFieldInFieldList(
+                //               list: controller.fieldListSelected,
+                //               fieldValue: controller.fieldListSelected[i],
+                //             ),
+                //           )
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 //===== Bottom of Fields Component =====//
 
                 ///===== Top of School Degree Component =====//

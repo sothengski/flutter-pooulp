@@ -694,7 +694,22 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                       );
                                     },
                                   )
-                                : const LoadingWidget(),
+                                : controller.fieldListForSearch.isNotEmpty
+                                    ? FieldListMultipleSelector(
+                                        inputHintText: 'search'.tr,
+                                        dataListforSelected:
+                                            controller.fieldListForSearch,
+                                        selectedItems:
+                                            controller.fieldListInFilter,
+                                        onTap: (field) {
+                                          controller
+                                              .addingOrRemovingFieldInFieldListToBeSearch(
+                                            list: controller.fieldListInFilter,
+                                            fieldValue: field,
+                                          );
+                                        },
+                                      )
+                                    : const LoadingWidget(),
                           ),
                         ),
                         containerWidget: RowContentInputWidget(

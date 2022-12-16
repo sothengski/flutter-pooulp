@@ -605,45 +605,75 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                 ),
                               ),
                               containerWidget: RowContentInputWidget(
-                                centerWidget: CustomTextWidget(
-                                  text: 'internshipType'.tr,
-                                  color: ColorsManager.grey400,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: AppSize.s16,
-                                ),
+                                centerWidget: controller
+                                        .internshipTypeTagListInFilter
+                                        .isNotEmpty
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: AppSize.s4,
+                                          bottom: AppSize.s4,
+                                        ),
+                                        child: Wrap(
+                                          children: [
+                                            for (var i = 0;
+                                                i <
+                                                    controller
+                                                        .internshipTypeTagListInFilter
+                                                        .length;
+                                                i++)
+                                              RemovableTextCardWidget(
+                                                text:
+                                                    '${controller.internshipTypeTagListInFilter[i].label}',
+                                                onRemove: () => controller
+                                                    .addingOrRemovingFieldInFieldListToBeSearch(
+                                                  list: controller
+                                                      .internshipTypeTagListInFilter,
+                                                  fieldValue: controller
+                                                      .internshipTypeTagListInFilter[i],
+                                                ),
+                                              )
+                                          ],
+                                        ),
+                                      )
+                                    : CustomTextWidget(
+                                        text: 'internshipType'.tr,
+                                        color: ColorsManager.grey400,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: AppSize.s16,
+                                      ),
                                 suffixWidget: const Icon(
                                   IconsManager.arrowDropDown,
                                   color: ColorsManager.grey600,
                                 ),
                               ),
                             ),
-                            Container(
-                              padding: const EdgeInsets.only(
-                                left: AppSize.s10,
-                                right: AppSize.s10,
-                              ),
-                              child: Wrap(
-                                children: [
-                                  for (var i = 0;
-                                      i <
-                                          controller
-                                              .internshipTypeTagListInFilter
-                                              .length;
-                                      i++)
-                                    RemovableTextCardWidget(
-                                      text:
-                                          '${controller.internshipTypeTagListInFilter[i].label}',
-                                      onRemove: () => controller
-                                          .addingOrRemovingFieldInFieldListToBeSearch(
-                                        list: controller
-                                            .internshipTypeTagListInFilter,
-                                        fieldValue: controller
-                                            .internshipTypeTagListInFilter[i],
-                                      ),
-                                    )
-                                ],
-                              ),
-                            ),
+                            // Container(
+                            //   padding: const EdgeInsets.only(
+                            //     left: AppSize.s10,
+                            //     right: AppSize.s10,
+                            //   ),
+                            //   child: Wrap(
+                            //     children: [
+                            //       for (var i = 0;
+                            //           i <
+                            //               controller
+                            //                   .internshipTypeTagListInFilter
+                            //                   .length;
+                            //           i++)
+                            //         RemovableTextCardWidget(
+                            //           text:
+                            //               '${controller.internshipTypeTagListInFilter[i].label}',
+                            //           onRemove: () => controller
+                            //               .addingOrRemovingFieldInFieldListToBeSearch(
+                            //             list: controller
+                            //                 .internshipTypeTagListInFilter,
+                            //             fieldValue: controller
+                            //                 .internshipTypeTagListInFilter[i],
+                            //           ),
+                            //         )
+                            //     ],
+                            //   ),
+                            // ),
                             //===== Bottom of Internship Types Component =====//
                           ],
                         )
@@ -717,7 +747,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                               ? Padding(
                                   padding: const EdgeInsets.only(
                                     top: AppSize.s4,
-                                    bottom: 4.0,
+                                    bottom: AppSize.s4,
                                   ),
                                   child: Wrap(
                                     children: [

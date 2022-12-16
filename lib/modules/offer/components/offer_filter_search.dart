@@ -713,40 +713,66 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                           ),
                         ),
                         containerWidget: RowContentInputWidget(
-                          centerWidget: CustomTextWidget(
-                            text: 'fields'.tr,
-                            color: ColorsManager.grey400,
-                            fontWeight: FontWeight.w400,
-                            fontSize: AppSize.s16,
-                          ),
+                          centerWidget: controller.fieldListInFilter.isNotEmpty
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: AppSize.s4,
+                                    bottom: 4.0,
+                                  ),
+                                  child: Wrap(
+                                    children: [
+                                      for (var i = 0;
+                                          i <
+                                              controller
+                                                  .fieldListInFilter.length;
+                                          i++)
+                                        RemovableTextCardWidget(
+                                          text:
+                                              '${controller.fieldListInFilter[i].label}',
+                                          onRemove: () => controller
+                                              .addingOrRemovingFieldInFieldListToBeSearch(
+                                            list: controller.fieldListInFilter,
+                                            fieldValue:
+                                                controller.fieldListInFilter[i],
+                                          ),
+                                        )
+                                    ],
+                                  ),
+                                )
+                              : CustomTextWidget(
+                                  text: 'fields'.tr,
+                                  color: ColorsManager.grey400,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: AppSize.s16,
+                                ),
                           suffixWidget: const Icon(
                             IconsManager.arrowDropDown,
                             color: ColorsManager.grey600,
                           ),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                          left: AppSize.s10,
-                          right: AppSize.s10,
-                        ),
-                        child: Wrap(
-                          children: [
-                            for (var i = 0;
-                                i < controller.fieldListInFilter.length;
-                                i++)
-                              RemovableTextCardWidget(
-                                text:
-                                    '${controller.fieldListInFilter[i].label}',
-                                onRemove: () => controller
-                                    .addingOrRemovingFieldInFieldListToBeSearch(
-                                  list: controller.fieldListInFilter,
-                                  fieldValue: controller.fieldListInFilter[i],
-                                ),
-                              )
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   padding: const EdgeInsets.only(
+                      //     left: AppSize.s10,
+                      //     right: AppSize.s10,
+                      //   ),
+                      //   child: Wrap(
+                      //     children: [
+                      //       for (var i = 0;
+                      //           i < controller.fieldListInFilter.length;
+                      //           i++)
+                      //         RemovableTextCardWidget(
+                      //           text:
+                      //               '${controller.fieldListInFilter[i].label}',
+                      //           onRemove: () => controller
+                      //               .addingOrRemovingFieldInFieldListToBeSearch(
+                      //             list: controller.fieldListInFilter,
+                      //             fieldValue: controller.fieldListInFilter[i],
+                      //           ),
+                      //         )
+                      //     ],
+                      //   ),
+                      // ),
                       //===== Bottom of Fields Component =====//
                       // const SizedBox(height: 8.0),
 

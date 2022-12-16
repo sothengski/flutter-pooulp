@@ -16,10 +16,10 @@ class RemovableTextCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: AppSize.s8,
+        top: AppSize.s4,
         left: AppSize.s2,
         right: AppSize.s2,
-        bottom: AppSize.s2,
+        bottom: AppSize.s4,
       ),
       child: CustomBoxWidget(
         backgroundColor: ColorsManager.grey200,

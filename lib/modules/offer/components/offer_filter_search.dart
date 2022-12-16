@@ -853,41 +853,69 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                           ),
                         ),
                         containerWidget: RowContentInputWidget(
-                          centerWidget: CustomTextWidget(
-                            text: 'languages'.tr,
-                            color: ColorsManager.grey400,
-                            fontWeight: FontWeight.w400,
-                            fontSize: AppSize.s16,
-                          ),
+                          centerWidget: controller
+                                  .languageListInFilter.isNotEmpty
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: AppSize.s4,
+                                    right: AppSize.s4,
+                                  ),
+                                  child: Wrap(
+                                    children: [
+                                      for (var i = 0;
+                                          i <
+                                              controller
+                                                  .languageListInFilter.length;
+                                          i++)
+                                        RemovableTextCardWidget(
+                                          text:
+                                              '${controller.languageListInFilter[i].label}',
+                                          onRemove: () => controller
+                                              .addingOrRemovingFieldInFieldListToBeSearch(
+                                            list:
+                                                controller.languageListInFilter,
+                                            fieldValue: controller
+                                                .languageListInFilter[i],
+                                          ),
+                                        )
+                                    ],
+                                  ),
+                                )
+                              : CustomTextWidget(
+                                  text: 'languages'.tr,
+                                  color: ColorsManager.grey400,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: AppSize.s16,
+                                ),
                           suffixWidget: const Icon(
                             IconsManager.arrowDropDown,
                             color: ColorsManager.grey600,
                           ),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                          left: AppSize.s10,
-                          right: AppSize.s10,
-                        ),
-                        child: Wrap(
-                          children: [
-                            for (var i = 0;
-                                i < controller.languageListInFilter.length;
-                                i++)
-                              RemovableTextCardWidget(
-                                text:
-                                    '${controller.languageListInFilter[i].label}',
-                                onRemove: () => controller
-                                    .addingOrRemovingFieldInFieldListToBeSearch(
-                                  list: controller.languageListInFilter,
-                                  fieldValue:
-                                      controller.languageListInFilter[i],
-                                ),
-                              )
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   padding: const EdgeInsets.only(
+                      //     left: AppSize.s10,
+                      //     right: AppSize.s10,
+                      //   ),
+                      //   child: Wrap(
+                      //     children: [
+                      //       for (var i = 0;
+                      //           i < controller.languageListInFilter.length;
+                      //           i++)
+                      //         RemovableTextCardWidget(
+                      //           text:
+                      //               '${controller.languageListInFilter[i].label}',
+                      //           onRemove: () => controller
+                      //               .addingOrRemovingFieldInFieldListToBeSearch(
+                      //             list: controller.languageListInFilter,
+                      //             fieldValue:
+                      //                 controller.languageListInFilter[i],
+                      //           ),
+                      //         )
+                      //     ],
+                      //   ),
+                      // ),
                       //===== Bottom of Languages Component =====//
                       // const SizedBox(height: 8.0),
 

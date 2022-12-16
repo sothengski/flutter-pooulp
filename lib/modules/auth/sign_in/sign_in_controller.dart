@@ -44,7 +44,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
   @override
   Future<void> onReady() async {
     await deepLink();
-    await initPlatformState();
+    // await initPlatformState();
     super.onReady();
   }
 
@@ -175,11 +175,11 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
+    // String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       final firstStartFromKey = await FlutterKeychain.get(key: "firstStart");
-      print("try: initPlatformState");
+      // print("try: initPlatformState");
       if (firstStartFromKey == null) {
         await FlutterKeychain.put(
           key: "firstStart",
@@ -202,7 +202,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
       }
       // });
     } on Exception catch (ae) {
-      print("Exception: $ae");
+      debugPrint("Exception: $ae");
     }
   }
 

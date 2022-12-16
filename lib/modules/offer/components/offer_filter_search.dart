@@ -857,8 +857,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   .languageListInFilter.isNotEmpty
                               ? Padding(
                                   padding: const EdgeInsets.only(
-                                    left: AppSize.s4,
-                                    right: AppSize.s4,
+                                    top: AppSize.s4,
+                                    bottom: AppSize.s4,
                                   ),
                                   child: Wrap(
                                     children: [
@@ -972,44 +972,73 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             ),
                           ),
                           containerWidget: RowContentInputWidget(
-                            centerWidget: CustomTextWidget(
-                              text: 'workAvailability'.tr,
-                              color: ColorsManager.grey400,
-                              fontWeight: FontWeight.w400,
-                              fontSize: AppSize.s16,
-                            ),
+                            centerWidget: controller
+                                    .availabilitiesTagListInFilter.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: AppSize.s4,
+                                      bottom: AppSize.s4,
+                                    ),
+                                    child: Wrap(
+                                      children: [
+                                        for (var i = 0;
+                                            i <
+                                                controller
+                                                    .availabilitiesTagListInFilter
+                                                    .length;
+                                            i++)
+                                          RemovableTextCardWidget(
+                                            text:
+                                                '${controller.availabilitiesTagListInFilter[i].label}',
+                                            onRemove: () => controller
+                                                .addingOrRemovingFieldInFieldListToBeSearch(
+                                              list: controller
+                                                  .availabilitiesTagListInFilter,
+                                              fieldValue: controller
+                                                  .availabilitiesTagListInFilter[i],
+                                            ),
+                                          )
+                                      ],
+                                    ),
+                                  )
+                                : CustomTextWidget(
+                                    text: 'workAvailability'.tr,
+                                    color: ColorsManager.grey400,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: AppSize.s16,
+                                  ),
                             suffixWidget: const Icon(
                               IconsManager.arrowDropDown,
                               color: ColorsManager.grey600,
                             ),
                           ),
                         ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                          left: AppSize.s10,
-                          right: AppSize.s10,
-                        ),
-                        child: Wrap(
-                          children: [
-                            for (var i = 0;
-                                i <
-                                    controller
-                                        .availabilitiesTagListInFilter.length;
-                                i++)
-                              RemovableTextCardWidget(
-                                text:
-                                    '${controller.availabilitiesTagListInFilter[i].label}',
-                                onRemove: () => controller
-                                    .addingOrRemovingFieldInFieldListToBeSearch(
-                                  list:
-                                      controller.availabilitiesTagListInFilter,
-                                  fieldValue: controller
-                                      .availabilitiesTagListInFilter[i],
-                                ),
-                              )
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   padding: const EdgeInsets.only(
+                      //     left: AppSize.s10,
+                      //     right: AppSize.s10,
+                      //   ),
+                      //   child: Wrap(
+                      //     children: [
+                      //       for (var i = 0;
+                      //           i <
+                      //               controller
+                      //                   .availabilitiesTagListInFilter.length;
+                      //           i++)
+                      //         RemovableTextCardWidget(
+                      //           text:
+                      //               '${controller.availabilitiesTagListInFilter[i].label}',
+                      //           onRemove: () => controller
+                      //               .addingOrRemovingFieldInFieldListToBeSearch(
+                      //             list:
+                      //                 controller.availabilitiesTagListInFilter,
+                      //             fieldValue: controller
+                      //                 .availabilitiesTagListInFilter[i],
+                      //           ),
+                      //         )
+                      //     ],
+                      //   ),
+                      // ),
                       //===== Bottom of Availabilities Tags Component =====//
                       // const SizedBox(height: 8.0),
 

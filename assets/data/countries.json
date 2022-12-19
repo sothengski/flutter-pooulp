@@ -3,6 +3,7 @@
         "alpha_2_code": "AF",
         "alpha_3_code": "AFG",
         "en_short_name": "Afghanistan",
+        "fr_short_name": "Afghanistan",
         "nationality": "Afghan",
         "dial_code": "+93"
     },
@@ -11,6 +12,7 @@
         "alpha_2_code": "AX",
         "alpha_3_code": "ALA",
         "en_short_name": "Åland Islands",
+        "fr_short_name": "Iles Aland",
         "nationality": "Åland Island",
         "dial_code": "+358"
     },
@@ -19,6 +21,7 @@
         "alpha_2_code": "AL",
         "alpha_3_code": "ALB",
         "en_short_name": "Albania",
+        "fr_short_name": "Albanie",
         "nationality": "Albanian",
         "dial_code": "+355"
     },
@@ -27,6 +30,7 @@
         "alpha_2_code": "DZ",
         "alpha_3_code": "DZA",
         "en_short_name": "Algeria",
+        "fr_short_name": "Algérie",
         "nationality": "Algerian",
         "dial_code": "+213"
     },
@@ -35,6 +39,7 @@
         "alpha_2_code": "AS",
         "alpha_3_code": "ASM",
         "en_short_name": "American Samoa",
+        "fr_short_name": "Samoa américaines",
         "nationality": "American Samoan",
         "dial_code": "+1684"
     },
@@ -43,6 +48,7 @@
         "alpha_2_code": "AD",
         "alpha_3_code": "AND",
         "en_short_name": "Andorra",
+        "fr_short_name": "Andorre",
         "nationality": "Andorran",
         "dial_code": "+376"
     },
@@ -51,6 +57,7 @@
         "alpha_2_code": "AO",
         "alpha_3_code": "AGO",
         "en_short_name": "Angola",
+        "fr_short_name": "Angola",
         "nationality": "Angolan",
         "dial_code": "+244"
     },
@@ -59,6 +66,7 @@
         "alpha_2_code": "AI",
         "alpha_3_code": "AIA",
         "en_short_name": "Anguilla",
+        "fr_short_name": "Anguilla",
         "nationality": "Anguillan",
         "dial_code": "+1264"
     },
@@ -67,6 +75,7 @@
         "alpha_2_code": "AQ",
         "alpha_3_code": "ATA",
         "en_short_name": "Antarctica",
+        "fr_short_name": "Antarctique",
         "nationality": "Antarctic",
         "dial_code": "+672"
     },
@@ -75,6 +84,7 @@
         "alpha_2_code": "AG",
         "alpha_3_code": "ATG",
         "en_short_name": "Antigua and Barbuda",
+        "fr_short_name": "Antigua-et-Barbuda",
         "nationality": "Antiguan or Barbudan",
         "dial_code": "+1268"
     },
@@ -83,6 +93,7 @@
         "alpha_2_code": "AR",
         "alpha_3_code": "ARG",
         "en_short_name": "Argentina",
+        "fr_short_name": "Argentine",
         "nationality": "Argentine",
         "dial_code": "+54"
     },
@@ -91,6 +102,7 @@
         "alpha_2_code": "AM",
         "alpha_3_code": "ARM",
         "en_short_name": "Armenia",
+        "fr_short_name": "Arménie",
         "nationality": "Armenian",
         "dial_code": "+374"
     },
@@ -99,6 +111,7 @@
         "alpha_2_code": "AW",
         "alpha_3_code": "ABW",
         "en_short_name": "Aruba",
+        "fr_short_name": "Aruba",
         "nationality": "Aruban",
         "dial_code": "+297"
     },
@@ -107,6 +120,7 @@
         "alpha_2_code": "AU",
         "alpha_3_code": "AUS",
         "en_short_name": "Australia",
+        "fr_short_name": "Australie",
         "nationality": "Australian",
         "dial_code": "+61"
     },
@@ -115,6 +129,7 @@
         "alpha_2_code": "AT",
         "alpha_3_code": "AUT",
         "en_short_name": "Austria",
+        "fr_short_name": "Autriche",
         "nationality": "Austrian",
         "dial_code": "+43"
     },
@@ -123,6 +138,7 @@
         "alpha_2_code": "AZ",
         "alpha_3_code": "AZE",
         "en_short_name": "Azerbaijan",
+        "fr_short_name": "Azerbaïdjan",
         "nationality": "Azerbaijani, Azeri",
         "dial_code": "+994"
     },
@@ -131,6 +147,7 @@
         "alpha_2_code": "BS",
         "alpha_3_code": "BHS",
         "en_short_name": "Bahamas",
+        "fr_short_name": "Bahamas",
         "nationality": "Bahamian",
         "dial_code": "+1242"
     },
@@ -139,6 +156,7 @@
         "alpha_2_code": "BH",
         "alpha_3_code": "BHR",
         "en_short_name": "Bahrain",
+        "fr_short_name": "Bahreïn",
         "nationality": "Bahraini",
         "dial_code": "+973"
     },
@@ -147,6 +165,7 @@
         "alpha_2_code": "BD",
         "alpha_3_code": "BGD",
         "en_short_name": "Bangladesh",
+        "fr_short_name": "Bangladesh",
         "nationality": "Bangladeshi",
         "dial_code": "+880"
     },
@@ -155,6 +174,7 @@
         "alpha_2_code": "BB",
         "alpha_3_code": "BRB",
         "en_short_name": "Barbados",
+        "fr_short_name": "Barbade",
         "nationality": "Barbadian",
         "dial_code": "+1246"
     },
@@ -163,6 +183,7 @@
         "alpha_2_code": "BY",
         "alpha_3_code": "BLR",
         "en_short_name": "Belarus",
+        "fr_short_name": "Biélorussie",
         "nationality": "Belarusian",
         "dial_code": "+375"
     },
@@ -171,6 +192,7 @@
         "alpha_2_code": "BE",
         "alpha_3_code": "BEL",
         "en_short_name": "Belgium",
+        "fr_short_name": "Belgique",
         "nationality": "Belgian",
         "dial_code": "+32"
     },
@@ -179,6 +201,7 @@
         "alpha_2_code": "BZ",
         "alpha_3_code": "BLZ",
         "en_short_name": "Belize",
+        "fr_short_name": "Belize",
         "nationality": "Belizean",
         "dial_code": "+501"
     },
@@ -187,6 +210,7 @@
         "alpha_2_code": "BJ",
         "alpha_3_code": "BEN",
         "en_short_name": "Benin",
+        "fr_short_name": "Bénin",
         "nationality": "Beninese, Beninois",
         "dial_code": "+229"
     },
@@ -195,6 +219,7 @@
         "alpha_2_code": "BM",
         "alpha_3_code": "BMU",
         "en_short_name": "Bermuda",
+        "fr_short_name": "Bermuda",
         "nationality": "Bermudian, Bermudan",
         "dial_code": "+1441"
     },
@@ -203,6 +228,7 @@
         "alpha_2_code": "BT",
         "alpha_3_code": "BTN",
         "en_short_name": "Bhutan",
+        "fr_short_name": "Bhoutan",
         "nationality": "Bhutanese",
         "dial_code": "+975"
     },
@@ -211,6 +237,7 @@
         "alpha_2_code": "BO",
         "alpha_3_code": "BOL",
         "en_short_name": "Bolivia (Plurinational State of)",
+        "fr_short_name": "Bolivie",
         "nationality": "Bolivian",
         "dial_code": "+591"
     },
@@ -219,6 +246,7 @@
         "alpha_2_code": "BA",
         "alpha_3_code": "BIH",
         "en_short_name": "Bosnia and Herzegovina",
+        "fr_short_name": "Bosnie-Herzégovine",
         "nationality": "Bosnian or Herzegovinian",
         "dial_code": "+387"
     },
@@ -227,6 +255,7 @@
         "alpha_2_code": "BW",
         "alpha_3_code": "BWA",
         "en_short_name": "Botswana",
+        "fr_short_name": "Botswana",
         "nationality": "Motswana, Botswanan",
         "dial_code": "+267"
     },
@@ -235,6 +264,7 @@
         "alpha_2_code": "BV",
         "alpha_3_code": "BVT",
         "en_short_name": "Bouvet Island",
+        "fr_short_name": "Île Bouvet",
         "nationality": "Bouvet Island",
         "dial_code": "+47"
     },
@@ -243,6 +273,7 @@
         "alpha_2_code": "BR",
         "alpha_3_code": "BRA",
         "en_short_name": "Brazil",
+        "fr_short_name": "Brésil",
         "nationality": "Brazilian",
         "dial_code": "+55"
     },
@@ -251,6 +282,7 @@
         "alpha_2_code": "IO",
         "alpha_3_code": "IOT",
         "en_short_name": "British Indian Ocean Territory",
+        "fr_short_name": "Territoire britannique de l'océan Indien",
         "nationality": "BIOT",
         "dial_code": "+246"
     },
@@ -259,6 +291,7 @@
         "alpha_2_code": "BN",
         "alpha_3_code": "BRN",
         "en_short_name": "Brunei Darussalam",
+        "fr_short_name": "Brunei",
         "nationality": "Bruneian",
         "dial_code": "+673"
     },
@@ -267,6 +300,7 @@
         "alpha_2_code": "BG",
         "alpha_3_code": "BGR",
         "en_short_name": "Bulgaria",
+        "fr_short_name": "Bulgarie",
         "nationality": "Bulgarian",
         "dial_code": "+359"
     },
@@ -275,6 +309,7 @@
         "alpha_2_code": "BF",
         "alpha_3_code": "BFA",
         "en_short_name": "Burkina Faso",
+        "fr_short_name": "Burkina Faso",
         "nationality": "Burkinabé",
         "dial_code": "+226"
     },
@@ -283,6 +318,7 @@
         "alpha_2_code": "BI",
         "alpha_3_code": "BDI",
         "en_short_name": "Burundi",
+        "fr_short_name": "Burundi",
         "nationality": "Burundian",
         "dial_code": "+257"
     },
@@ -291,6 +327,7 @@
         "alpha_2_code": "CV",
         "alpha_3_code": "CPV",
         "en_short_name": "Cabo Verde",
+        "fr_short_name": "Cap-Vert",
         "nationality": "Cabo Verdean",
         "dial_code": "+238"
     },
@@ -299,6 +336,7 @@
         "alpha_2_code": "KH",
         "alpha_3_code": "KHM",
         "en_short_name": "Cambodia",
+        "fr_short_name": "Cambodge",
         "nationality": "Cambodian",
         "dial_code": "+855"
     },
@@ -307,6 +345,7 @@
         "alpha_2_code": "CM",
         "alpha_3_code": "CMR",
         "en_short_name": "Cameroon",
+        "fr_short_name": "Cameroun",
         "nationality": "Cameroonian",
         "dial_code": "+237"
     },
@@ -315,6 +354,7 @@
         "alpha_2_code": "CA",
         "alpha_3_code": "CAN",
         "en_short_name": "Canada",
+        "fr_short_name": "Canada",
         "nationality": "Canadian",
         "dial_code": "+1"
     },
@@ -323,6 +363,7 @@
         "alpha_2_code": "KY",
         "alpha_3_code": "CYM",
         "en_short_name": "Cayman Islands",
+        "fr_short_name": "Îles Caïmans",
         "nationality": "Caymanian",
         "dial_code": "+ 345"
     },
@@ -331,6 +372,7 @@
         "alpha_2_code": "CF",
         "alpha_3_code": "CAF",
         "en_short_name": "Central African Republic",
+        "fr_short_name": "République centrafricaine",
         "nationality": "Central African",
         "dial_code": "+236"
     },
@@ -339,6 +381,7 @@
         "alpha_2_code": "TD",
         "alpha_3_code": "TCD",
         "en_short_name": "Chad",
+        "fr_short_name": "Tchad",
         "nationality": "Chadian",
         "dial_code": "+235"
     },
@@ -347,6 +390,7 @@
         "alpha_2_code": "CL",
         "alpha_3_code": "CHL",
         "en_short_name": "Chile",
+        "fr_short_name": "Chili",
         "nationality": "Chilean",
         "dial_code": "+56"
     },
@@ -355,6 +399,7 @@
         "alpha_2_code": "CN",
         "alpha_3_code": "CHN",
         "en_short_name": "China",
+        "fr_short_name": "Chine",
         "nationality": "Chinese",
         "dial_code": "+86"
     },
@@ -363,6 +408,7 @@
         "alpha_2_code": "CX",
         "alpha_3_code": "CXR",
         "en_short_name": "Christmas Island",
+        "fr_short_name": "L'île de noël",
         "nationality": "Christmas Island",
         "dial_code": "+61"
     },
@@ -371,6 +417,7 @@
         "alpha_2_code": "CC",
         "alpha_3_code": "CCK",
         "en_short_name": "Cocos (Keeling) Islands",
+        "fr_short_name": "Îles Cocos",
         "nationality": "Cocos Island",
         "dial_code": "+61"
     },
@@ -379,6 +426,7 @@
         "alpha_2_code": "CO",
         "alpha_3_code": "COL",
         "en_short_name": "Colombia",
+        "fr_short_name": "Colombie",
         "nationality": "Colombian",
         "dial_code": "+57"
     },
@@ -387,6 +435,7 @@
         "alpha_2_code": "KM",
         "alpha_3_code": "COM",
         "en_short_name": "Comoros",
+        "fr_short_name": "Comores",
         "nationality": "Comoran, Comorian",
         "dial_code": "+269"
     },
@@ -395,6 +444,7 @@
         "alpha_2_code": "CG",
         "alpha_3_code": "COG",
         "en_short_name": "Congo (Republic of the)",
+        "fr_short_name": "République du Congo",
         "nationality": "Congolese",
         "dial_code": "+242"
     },
@@ -403,6 +453,7 @@
         "alpha_2_code": "CD",
         "alpha_3_code": "COD",
         "en_short_name": "Congo (Democratic Republic of the)",
+        "fr_short_name": "République démocratique du Congo",
         "nationality": "Congolese",
         "dial_code": "+243"
     },
@@ -411,6 +462,7 @@
         "alpha_2_code": "CK",
         "alpha_3_code": "COK",
         "en_short_name": "Cook Islands",
+        "fr_short_name": "Îles Cook",
         "nationality": "Cook Island",
         "dial_code": "+682"
     },
@@ -419,6 +471,7 @@
         "alpha_2_code": "CR",
         "alpha_3_code": "CRI",
         "en_short_name": "Costa Rica",
+        "fr_short_name": "Costa Rica",
         "nationality": "Costa Rican",
         "dial_code": "+506"
     },
@@ -427,6 +480,7 @@
         "alpha_2_code": "CI",
         "alpha_3_code": "CIV",
         "en_short_name": "Côte d'Ivoire",
+        "fr_short_name": "Côte d'Ivoire",
         "nationality": "Ivorian",
         "dial_code": "+225"
     },
@@ -435,6 +489,7 @@
         "alpha_2_code": "HR",
         "alpha_3_code": "HRV",
         "en_short_name": "Croatia",
+        "fr_short_name": "Croatie",
         "nationality": "Croatian",
         "dial_code": "+385"
     },
@@ -443,6 +498,7 @@
         "alpha_2_code": "CU",
         "alpha_3_code": "CUB",
         "en_short_name": "Cuba",
+        "fr_short_name": "Cuba",
         "nationality": "Cuban",
         "dial_code": "+53"
     },
@@ -451,6 +507,7 @@
         "alpha_2_code": "CY",
         "alpha_3_code": "CYP",
         "en_short_name": "Cyprus",
+        "fr_short_name": "Chypre",
         "nationality": "Cypriot",
         "dial_code": "+357"
     },
@@ -459,6 +516,7 @@
         "alpha_2_code": "CZ",
         "alpha_3_code": "CZE",
         "en_short_name": "Czech Republic",
+        "fr_short_name": "Tchéquie",
         "nationality": "Czech",
         "dial_code": "+420"
     },
@@ -467,6 +525,7 @@
         "alpha_2_code": "DK",
         "alpha_3_code": "DNK",
         "en_short_name": "Denmark",
+        "fr_short_name": "Danemark",
         "nationality": "Danish",
         "dial_code": "+45"
     },
@@ -475,6 +534,7 @@
         "alpha_2_code": "DJ",
         "alpha_3_code": "DJI",
         "en_short_name": "Djibouti",
+        "fr_short_name": "Djibouti",
         "nationality": "Djiboutian",
         "dial_code": "+253"
     },
@@ -483,6 +543,7 @@
         "alpha_2_code": "DM",
         "alpha_3_code": "DMA",
         "en_short_name": "Dominica",
+        "fr_short_name": "Dominique",
         "nationality": "Dominican",
         "dial_code": "+1767"
     },
@@ -491,6 +552,7 @@
         "alpha_2_code": "DO",
         "alpha_3_code": "DOM",
         "en_short_name": "Dominican Republic",
+        "fr_short_name": "République dominicaine",
         "nationality": "Dominican",
         "dial_code": "+1849"
     },
@@ -499,6 +561,7 @@
         "alpha_2_code": "EC",
         "alpha_3_code": "ECU",
         "en_short_name": "Ecuador",
+        "fr_short_name": "Équateur",
         "nationality": "Ecuadorian",
         "dial_code": "+593"
     },
@@ -507,6 +570,7 @@
         "alpha_2_code": "EG",
         "alpha_3_code": "EGY",
         "en_short_name": "Egypt",
+        "fr_short_name": "Égypte",
         "nationality": "Egyptian",
         "dial_code": "+20"
     },
@@ -515,6 +579,7 @@
         "alpha_2_code": "SV",
         "alpha_3_code": "SLV",
         "en_short_name": "El Salvador",
+        "fr_short_name": "Salvador",
         "nationality": "Salvadoran",
         "dial_code": "+503"
     },
@@ -523,6 +588,7 @@
         "alpha_2_code": "GQ",
         "alpha_3_code": "GNQ",
         "en_short_name": "Equatorial Guinea",
+        "fr_short_name": "Guinée équatoriale",
         "nationality": "Equatorial Guinean, Equatoguinean",
         "dial_code": "+240"
     },
@@ -531,6 +597,7 @@
         "alpha_2_code": "ER",
         "alpha_3_code": "ERI",
         "en_short_name": "Eritrea",
+        "fr_short_name": "Érythrée",
         "nationality": "Eritrean",
         "dial_code": "+291"
     },
@@ -539,6 +606,7 @@
         "alpha_2_code": "EE",
         "alpha_3_code": "EST",
         "en_short_name": "Estonia",
+        "fr_short_name": "Estonie",
         "nationality": "Estonian",
         "dial_code": "+372"
     },
@@ -547,6 +615,7 @@
         "alpha_2_code": "ET",
         "alpha_3_code": "ETH",
         "en_short_name": "Ethiopia",
+        "fr_short_name": "Éthiopie",
         "nationality": "Ethiopian",
         "dial_code": "+251"
     },
@@ -555,6 +624,7 @@
         "alpha_2_code": "FK",
         "alpha_3_code": "FLK",
         "en_short_name": "Falkland Islands (Malvinas)",
+        "fr_short_name": "îles Falkland",
         "nationality": "Falkland Island",
         "dial_code": "+500"
     },
@@ -563,6 +633,7 @@
         "alpha_2_code": "FO",
         "alpha_3_code": "FRO",
         "en_short_name": "Faroe Islands",
+        "fr_short_name": "Îles Féroé",
         "nationality": "Faroese",
         "dial_code": "+298"
     },
@@ -571,6 +642,7 @@
         "alpha_2_code": "FJ",
         "alpha_3_code": "FJI",
         "en_short_name": "Fiji",
+        "fr_short_name": "Fidji",
         "nationality": "Fijian",
         "dial_code": "+679"
     },
@@ -579,6 +651,7 @@
         "alpha_2_code": "FI",
         "alpha_3_code": "FIN",
         "en_short_name": "Finland",
+        "fr_short_name": "Finlande",
         "nationality": "Finnish",
         "dial_code": "+358"
     },
@@ -587,6 +660,7 @@
         "alpha_2_code": "FR",
         "alpha_3_code": "FRA",
         "en_short_name": "France",
+        "fr_short_name": "France",
         "nationality": "French",
         "dial_code": "+33"
     },
@@ -595,6 +669,7 @@
         "alpha_2_code": "GF",
         "alpha_3_code": "GUF",
         "en_short_name": "French Guiana",
+        "fr_short_name": "Guyane Française",
         "nationality": "French Guianese",
         "dial_code": "+594"
     },
@@ -603,6 +678,7 @@
         "alpha_2_code": "PF",
         "alpha_3_code": "PYF",
         "en_short_name": "French Polynesia",
+        "fr_short_name": "Polynésie Française",
         "nationality": "French Polynesian",
         "dial_code": "+689"
     },
@@ -611,6 +687,7 @@
         "alpha_2_code": "TF",
         "alpha_3_code": "ATF",
         "en_short_name": "French Southern Territories",
+        "fr_short_name": "Terres australes françaises",
         "nationality": "French Southern Territories",
         "dial_code": "+262"
     },
@@ -619,6 +696,7 @@
         "alpha_2_code": "GA",
         "alpha_3_code": "GAB",
         "en_short_name": "Gabon",
+        "fr_short_name": "Gabon",
         "nationality": "Gabonese",
         "dial_code": "+241"
     },
@@ -627,6 +705,7 @@
         "alpha_2_code": "GM",
         "alpha_3_code": "GMB",
         "en_short_name": "Gambia",
+        "fr_short_name": "Gambie",
         "nationality": "Gambian",
         "dial_code": "+220"
     },
@@ -635,6 +714,7 @@
         "alpha_2_code": "GE",
         "alpha_3_code": "GEO",
         "en_short_name": "Georgia",
+        "fr_short_name": "Géorgie",
         "nationality": "Georgian",
         "dial_code": "+995"
     },
@@ -643,6 +723,7 @@
         "alpha_2_code": "DE",
         "alpha_3_code": "DEU",
         "en_short_name": "Germany",
+        "fr_short_name": "Allemagne",
         "nationality": "German",
         "dial_code": "+49"
     },
@@ -651,6 +732,7 @@
         "alpha_2_code": "GH",
         "alpha_3_code": "GHA",
         "en_short_name": "Ghana",
+        "fr_short_name": "Ghana",
         "nationality": "Ghanaian",
         "dial_code": "+233"
     },
@@ -659,6 +741,7 @@
         "alpha_2_code": "GI",
         "alpha_3_code": "GIB",
         "en_short_name": "Gibraltar",
+        "fr_short_name": "Gibraltar",
         "nationality": "Gibraltar",
         "dial_code": "+350"
     },
@@ -667,6 +750,7 @@
         "alpha_2_code": "GR",
         "alpha_3_code": "GRC",
         "en_short_name": "Greece",
+        "fr_short_name": "Grèce",
         "nationality": "Greek, Hellenic",
         "dial_code": "+30"
     },
@@ -675,6 +759,7 @@
         "alpha_2_code": "GL",
         "alpha_3_code": "GRL",
         "en_short_name": "Greenland",
+        "fr_short_name": "Greenland",
         "nationality": "Greenlandic",
         "dial_code": "+299"
     },
@@ -683,6 +768,7 @@
         "alpha_2_code": "GD",
         "alpha_3_code": "GRD",
         "en_short_name": "Grenada",
+        "fr_short_name": "Grenade",
         "nationality": "Grenadian",
         "dial_code": "+1473"
     },
@@ -691,6 +777,7 @@
         "alpha_2_code": "GP",
         "alpha_3_code": "GLP",
         "en_short_name": "Guadeloupe",
+        "fr_short_name": "Guadeloupe",
         "nationality": "Guadeloupe",
         "dial_code": "+590"
     },
@@ -699,6 +786,7 @@
         "alpha_2_code": "GU",
         "alpha_3_code": "GUM",
         "en_short_name": "Guam",
+        "fr_short_name": "Guam",
         "nationality": "Guamanian, Guambat",
         "dial_code": "+1671"
     },
@@ -707,6 +795,7 @@
         "alpha_2_code": "GT",
         "alpha_3_code": "GTM",
         "en_short_name": "Guatemala",
+        "fr_short_name": "Guatemala",
         "nationality": "Guatemalan",
         "dial_code": "+502"
     },
@@ -715,6 +804,7 @@
         "alpha_2_code": "GG",
         "alpha_3_code": "GGY",
         "en_short_name": "Guernsey",
+        "fr_short_name": "Guernsey",
         "nationality": "Channel Island",
         "dial_code": "+44"
     },
@@ -723,6 +813,7 @@
         "alpha_2_code": "GN",
         "alpha_3_code": "GIN",
         "en_short_name": "Guinea",
+        "fr_short_name": "Guinée",
         "nationality": "Guinean",
         "dial_code": "+224"
     },
@@ -731,6 +822,7 @@
         "alpha_2_code": "GW",
         "alpha_3_code": "GNB",
         "en_short_name": "Guinea-Bissau",
+        "fr_short_name": "Guinée-Bissau",
         "nationality": "Bissau-Guinean",
         "dial_code": "+245"
     },
@@ -739,6 +831,7 @@
         "alpha_2_code": "GY",
         "alpha_3_code": "GUY",
         "en_short_name": "Guyana",
+        "fr_short_name": "Guyana",
         "nationality": "Guyanese",
         "dial_code": "+592"
     },
@@ -747,6 +840,7 @@
         "alpha_2_code": "HT",
         "alpha_3_code": "HTI",
         "en_short_name": "Haiti",
+        "fr_short_name": "Haïti",
         "nationality": "Haitian",
         "dial_code": "+509"
     },
@@ -755,6 +849,7 @@
         "alpha_2_code": "HM",
         "alpha_3_code": "HMD",
         "en_short_name": "Heard Island and McDonald Islands",
+        "fr_short_name": "Iles Heard et McDonald",
         "nationality": "Heard Island or McDonald Islands",
         "dial_code": "+0"
     },
@@ -763,6 +858,7 @@
         "alpha_2_code": "VA",
         "alpha_3_code": "VAT",
         "en_short_name": "Vatican City State",
+        "fr_short_name": "État de la Cité du Vatican",
         "nationality": "Vatican",
         "dial_code": "+379"
     },
@@ -771,6 +867,7 @@
         "alpha_2_code": "HN",
         "alpha_3_code": "HND",
         "en_short_name": "Honduras",
+        "fr_short_name": "Honduras",
         "nationality": "Honduran",
         "dial_code": "+504"
     },
@@ -779,6 +876,7 @@
         "alpha_2_code": "HK",
         "alpha_3_code": "HKG",
         "en_short_name": "Hong Kong",
+        "fr_short_name": "Hong Kong",
         "nationality": "Hong Kong, Hong Kongese",
         "dial_code": "+852"
     },
@@ -787,6 +885,7 @@
         "alpha_2_code": "HU",
         "alpha_3_code": "HUN",
         "en_short_name": "Hungary",
+        "fr_short_name": "Hongrie",
         "nationality": "Hungarian, Magyar",
         "dial_code": "+36"
     },
@@ -795,6 +894,7 @@
         "alpha_2_code": "IS",
         "alpha_3_code": "ISL",
         "en_short_name": "Iceland",
+        "fr_short_name": "Islande",
         "nationality": "Icelandic",
         "dial_code": "+354"
     },
@@ -803,6 +903,7 @@
         "alpha_2_code": "IN",
         "alpha_3_code": "IND",
         "en_short_name": "India",
+        "fr_short_name": "Inde",
         "nationality": "Indian",
         "dial_code": "+91"
     },
@@ -811,6 +912,7 @@
         "alpha_2_code": "ID",
         "alpha_3_code": "IDN",
         "en_short_name": "Indonesia",
+        "fr_short_name": "Indonésie",
         "nationality": "Indonesian",
         "dial_code": "+62"
     },
@@ -819,6 +921,7 @@
         "alpha_2_code": "IR",
         "alpha_3_code": "IRN",
         "en_short_name": "Iran",
+        "fr_short_name": "Iran",
         "nationality": "Iranian, Persian",
         "dial_code": "+98"
     },
@@ -827,6 +930,7 @@
         "alpha_2_code": "IQ",
         "alpha_3_code": "IRQ",
         "en_short_name": "Iraq",
+        "fr_short_name": "Irak",
         "nationality": "Iraqi",
         "dial_code": "+964"
     },
@@ -835,6 +939,7 @@
         "alpha_2_code": "IE",
         "alpha_3_code": "IRL",
         "en_short_name": "Ireland",
+        "fr_short_name": "Irlande",
         "nationality": "Irish",
         "dial_code": "+353"
     },
@@ -843,6 +948,7 @@
         "alpha_2_code": "IM",
         "alpha_3_code": "IMN",
         "en_short_name": "Isle of Man",
+        "fr_short_name": "Isle of Man",
         "nationality": "Manx",
         "dial_code": "+44"
     },
@@ -851,6 +957,7 @@
         "alpha_2_code": "IL",
         "alpha_3_code": "ISR",
         "en_short_name": "Israel",
+        "fr_short_name": "Israël",
         "nationality": "Israeli",
         "dial_code": "+972"
     },
@@ -859,6 +966,7 @@
         "alpha_2_code": "IT",
         "alpha_3_code": "ITA",
         "en_short_name": "Italy",
+        "fr_short_name": "Italie",
         "nationality": "Italian",
         "dial_code": "+39"
     },
@@ -867,6 +975,7 @@
         "alpha_2_code": "JM",
         "alpha_3_code": "JAM",
         "en_short_name": "Jamaica",
+        "fr_short_name": "Jamaïque",
         "nationality": "Jamaican",
         "dial_code": "+1876"
     },
@@ -875,6 +984,7 @@
         "alpha_2_code": "JP",
         "alpha_3_code": "JPN",
         "en_short_name": "Japan",
+        "fr_short_name": "Japon",
         "nationality": "Japanese",
         "dial_code": "+81"
     },
@@ -883,6 +993,7 @@
         "alpha_2_code": "JE",
         "alpha_3_code": "JEY",
         "en_short_name": "Jersey",
+        "fr_short_name": "Jersey",
         "nationality": "Channel Island",
         "dial_code": "+44"
     },
@@ -891,6 +1002,7 @@
         "alpha_2_code": "JO",
         "alpha_3_code": "JOR",
         "en_short_name": "Jordan",
+        "fr_short_name": "Jordanie",
         "nationality": "Jordanian",
         "dial_code": "+962"
     },
@@ -899,6 +1011,7 @@
         "alpha_2_code": "KZ",
         "alpha_3_code": "KAZ",
         "en_short_name": "Kazakhstan",
+        "fr_short_name": "Kazakhstan",
         "nationality": "Kazakhstani, Kazakh",
         "dial_code": "+7"
     },
@@ -907,6 +1020,7 @@
         "alpha_2_code": "KE",
         "alpha_3_code": "KEN",
         "en_short_name": "Kenya",
+        "fr_short_name": "Kenya",
         "nationality": "Kenyan",
         "dial_code": "+254"
     },
@@ -915,6 +1029,7 @@
         "alpha_2_code": "KI",
         "alpha_3_code": "KIR",
         "en_short_name": "Kiribati",
+        "fr_short_name": "Kiribati",
         "nationality": "I-Kiribati",
         "dial_code": "+686"
     },
@@ -923,6 +1038,7 @@
         "alpha_2_code": "KP",
         "alpha_3_code": "PRK",
         "en_short_name": "Korea (Democratic People's Republic of)",
+        "fr_short_name": "Corée du Nord",
         "nationality": "North Korean",
         "dial_code": "+850"
     },
@@ -931,6 +1047,7 @@
         "alpha_2_code": "KR",
         "alpha_3_code": "KOR",
         "en_short_name": "Korea (Republic of)",
+        "fr_short_name": "Corée du Sud",
         "nationality": "South Korean",
         "dial_code": "+82"
     },
@@ -939,6 +1056,7 @@
         "alpha_2_code": "KW",
         "alpha_3_code": "KWT",
         "en_short_name": "Kuwait",
+        "fr_short_name": "Koweït",
         "nationality": "Kuwaiti",
         "dial_code": "+965"
     },
@@ -947,6 +1065,7 @@
         "alpha_2_code": "KG",
         "alpha_3_code": "KGZ",
         "en_short_name": "Kyrgyzstan",
+        "fr_short_name": "Kirghizistan",
         "nationality": "Kyrgyzstani, Kyrgyz, Kirgiz, Kirghiz",
         "dial_code": "+996"
     },
@@ -955,6 +1074,7 @@
         "alpha_2_code": "LA",
         "alpha_3_code": "LAO",
         "en_short_name": "Lao People's Democratic Republic",
+        "fr_short_name": "Laos",
         "nationality": "Lao, Laotian",
         "dial_code": "+856"
     },
@@ -963,6 +1083,7 @@
         "alpha_2_code": "LV",
         "alpha_3_code": "LVA",
         "en_short_name": "Latvia",
+        "fr_short_name": "Lettonie",
         "nationality": "Latvian",
         "dial_code": "+371"
     },
@@ -971,6 +1092,7 @@
         "alpha_2_code": "LB",
         "alpha_3_code": "LBN",
         "en_short_name": "Lebanon",
+        "fr_short_name": "Liban",
         "nationality": "Lebanese",
         "dial_code": "+961"
     },
@@ -979,6 +1101,7 @@
         "alpha_2_code": "LS",
         "alpha_3_code": "LSO",
         "en_short_name": "Lesotho",
+        "fr_short_name": "Lesotho",
         "nationality": "Basotho",
         "dial_code": "+266"
     },
@@ -987,6 +1110,7 @@
         "alpha_2_code": "LR",
         "alpha_3_code": "LBR",
         "en_short_name": "Liberia",
+        "fr_short_name": "Liberia",
         "nationality": "Liberian",
         "dial_code": "+231"
     },
@@ -995,6 +1119,7 @@
         "alpha_2_code": "LY",
         "alpha_3_code": "LBY",
         "en_short_name": "Libya",
+        "fr_short_name": "Libye",
         "nationality": "Libyan",
         "dial_code": "+218"
     },
@@ -1003,6 +1128,7 @@
         "alpha_2_code": "LI",
         "alpha_3_code": "LIE",
         "en_short_name": "Liechtenstein",
+        "fr_short_name": "Liechtenstein",
         "nationality": "Liechtenstein",
         "dial_code": "+423"
     },
@@ -1011,6 +1137,7 @@
         "alpha_2_code": "LT",
         "alpha_3_code": "LTU",
         "en_short_name": "Lithuania",
+        "fr_short_name": "Lituanie",
         "nationality": "Lithuanian",
         "dial_code": "+370"
     },
@@ -1019,6 +1146,7 @@
         "alpha_2_code": "LU",
         "alpha_3_code": "LUX",
         "en_short_name": "Luxembourg",
+        "fr_short_name": "Luxembourg",
         "nationality": "Luxembourg, Luxembourgish",
         "dial_code": "+352"
     },
@@ -1027,6 +1155,7 @@
         "alpha_2_code": "MO",
         "alpha_3_code": "MAC",
         "en_short_name": "Macao",
+        "fr_short_name": "Macao",
         "nationality": "Macanese, Chinese",
         "dial_code": "+853"
     },
@@ -1035,6 +1164,7 @@
         "alpha_2_code": "MK",
         "alpha_3_code": "MKD",
         "en_short_name": "Macedonia (the former Yugoslav Republic of)",
+        "fr_short_name": "Macédoine du Nord",
         "nationality": "Macedonian",
         "dial_code": "+389"
     },
@@ -1043,6 +1173,7 @@
         "alpha_2_code": "MG",
         "alpha_3_code": "MDG",
         "en_short_name": "Madagascar",
+        "fr_short_name": "Madagascar",
         "nationality": "Malagasy",
         "dial_code": "+261"
     },
@@ -1051,6 +1182,7 @@
         "alpha_2_code": "MW",
         "alpha_3_code": "MWI",
         "en_short_name": "Malawi",
+        "fr_short_name": "Malawi",
         "nationality": "Malawian",
         "dial_code": "+265"
     },
@@ -1059,6 +1191,7 @@
         "alpha_2_code": "MY",
         "alpha_3_code": "MYS",
         "en_short_name": "Malaysia",
+        "fr_short_name": "Malaisie",
         "nationality": "Malaysian",
         "dial_code": "+60"
     },
@@ -1067,6 +1200,7 @@
         "alpha_2_code": "MV",
         "alpha_3_code": "MDV",
         "en_short_name": "Maldives",
+        "fr_short_name": "Maldives",
         "nationality": "Maldivian",
         "dial_code": "+960"
     },
@@ -1075,6 +1209,7 @@
         "alpha_2_code": "ML",
         "alpha_3_code": "MLI",
         "en_short_name": "Mali",
+        "fr_short_name": "Mali",
         "nationality": "Malian, Malinese",
         "dial_code": "+223"
     },
@@ -1083,6 +1218,7 @@
         "alpha_2_code": "MT",
         "alpha_3_code": "MLT",
         "en_short_name": "Malta",
+        "fr_short_name": "Malte",
         "nationality": "Maltese",
         "dial_code": "+356"
     },
@@ -1091,6 +1227,7 @@
         "alpha_2_code": "MH",
         "alpha_3_code": "MHL",
         "en_short_name": "Marshall Islands",
+        "fr_short_name": "Îles Marshall",
         "nationality": "Marshallese",
         "dial_code": "+692"
     },
@@ -1099,6 +1236,7 @@
         "alpha_2_code": "MQ",
         "alpha_3_code": "MTQ",
         "en_short_name": "Martinique",
+        "fr_short_name": "Martinique",
         "nationality": "Martiniquais, Martinican",
         "dial_code": "+596"
     },
@@ -1107,6 +1245,7 @@
         "alpha_2_code": "MR",
         "alpha_3_code": "MRT",
         "en_short_name": "Mauritania",
+        "fr_short_name": "Mauritanie",
         "nationality": "Mauritanian",
         "dial_code": "+222"
     },
@@ -1115,6 +1254,7 @@
         "alpha_2_code": "MU",
         "alpha_3_code": "MUS",
         "en_short_name": "Mauritius",
+        "fr_short_name": "Maurice",
         "nationality": "Mauritian",
         "dial_code": "+230"
     },
@@ -1123,6 +1263,7 @@
         "alpha_2_code": "YT",
         "alpha_3_code": "MYT",
         "en_short_name": "Mayotte",
+        "fr_short_name": "Mayotte",
         "nationality": "Mahoran",
         "dial_code": "+262"
     },
@@ -1131,6 +1272,7 @@
         "alpha_2_code": "MX",
         "alpha_3_code": "MEX",
         "en_short_name": "Mexico",
+        "fr_short_name": "Mexique",
         "nationality": "Mexican",
         "dial_code": "+52"
     },
@@ -1139,6 +1281,7 @@
         "alpha_2_code": "FM",
         "alpha_3_code": "FSM",
         "en_short_name": "Micronesia (Federated States of)",
+        "fr_short_name": "États fédérés de Micronésie",
         "nationality": "Micronesian",
         "dial_code": "+691"
     },
@@ -1147,6 +1290,7 @@
         "alpha_2_code": "MD",
         "alpha_3_code": "MDA",
         "en_short_name": "Moldova (Republic of)",
+        "fr_short_name": "Moldavie",
         "nationality": "Moldovan",
         "dial_code": "+373"
     },
@@ -1155,6 +1299,7 @@
         "alpha_2_code": "MC",
         "alpha_3_code": "MCO",
         "en_short_name": "Monaco",
+        "fr_short_name": "Monaco",
         "nationality": "Monégasque, Monacan",
         "dial_code": "+377"
     },
@@ -1163,6 +1308,7 @@
         "alpha_2_code": "MN",
         "alpha_3_code": "MNG",
         "en_short_name": "Mongolia",
+        "fr_short_name": "Mongolie",
         "nationality": "Mongolian",
         "dial_code": "+976"
     },
@@ -1171,6 +1317,7 @@
         "alpha_2_code": "ME",
         "alpha_3_code": "MNE",
         "en_short_name": "Montenegro",
+        "fr_short_name": "Monténégro",
         "nationality": "Montenegrin",
         "dial_code": "+382"
     },
@@ -1179,6 +1326,7 @@
         "alpha_2_code": "MS",
         "alpha_3_code": "MSR",
         "en_short_name": "Montserrat",
+        "fr_short_name": "Montserrat",
         "nationality": "Montserratian",
         "dial_code": "+1664"
     },
@@ -1187,6 +1335,7 @@
         "alpha_2_code": "MA",
         "alpha_3_code": "MAR",
         "en_short_name": "Morocco",
+        "fr_short_name": "Maroc",
         "nationality": "Moroccan",
         "dial_code": "+212"
     },
@@ -1195,6 +1344,7 @@
         "alpha_2_code": "MZ",
         "alpha_3_code": "MOZ",
         "en_short_name": "Mozambique",
+        "fr_short_name": "Mozambique",
         "nationality": "Mozambican",
         "dial_code": "+258"
     },
@@ -1203,6 +1353,7 @@
         "alpha_2_code": "MM",
         "alpha_3_code": "MMR",
         "en_short_name": "Myanmar",
+        "fr_short_name": "Birmanie",
         "nationality": "Burmese",
         "dial_code": "+95"
     },
@@ -1211,6 +1362,7 @@
         "alpha_2_code": "NA",
         "alpha_3_code": "NAM",
         "en_short_name": "Namibia",
+        "fr_short_name": "Namibie",
         "nationality": "Namibian",
         "dial_code": "+264"
     },
@@ -1219,6 +1371,7 @@
         "alpha_2_code": "NR",
         "alpha_3_code": "NRU",
         "en_short_name": "Nauru",
+        "fr_short_name": "Nauru",
         "nationality": "Nauruan",
         "dial_code": "+674"
     },
@@ -1227,6 +1380,7 @@
         "alpha_2_code": "NP",
         "alpha_3_code": "NPL",
         "en_short_name": "Nepal",
+        "fr_short_name": "Népal",
         "nationality": "Nepali, Nepalese",
         "dial_code": "+977"
     },
@@ -1235,6 +1389,7 @@
         "alpha_2_code": "NL",
         "alpha_3_code": "NLD",
         "en_short_name": "Netherlands",
+        "fr_short_name": "Pays-Bas",
         "nationality": "Dutch, Netherlandic",
         "dial_code": "+31"
     },
@@ -1243,6 +1398,7 @@
         "alpha_2_code": "NC",
         "alpha_3_code": "NCL",
         "en_short_name": "New Caledonia",
+        "fr_short_name": "New Caledonia",
         "nationality": "New Caledonian",
         "dial_code": "+687"
     },
@@ -1251,6 +1407,7 @@
         "alpha_2_code": "NZ",
         "alpha_3_code": "NZL",
         "en_short_name": "New Zealand",
+        "fr_short_name": "Nouvelle-Zélande",
         "nationality": "New Zealand, NZ",
         "dial_code": "+64"
     },
@@ -1259,6 +1416,7 @@
         "alpha_2_code": "NI",
         "alpha_3_code": "NIC",
         "en_short_name": "Nicaragua",
+        "fr_short_name": "Nicaragua",
         "nationality": "Nicaraguan",
         "dial_code": "+505"
     },
@@ -1267,6 +1425,7 @@
         "alpha_2_code": "NE",
         "alpha_3_code": "NER",
         "en_short_name": "Niger",
+        "fr_short_name": "Niger",
         "nationality": "Nigerien",
         "dial_code": "+227"
     },
@@ -1275,6 +1434,7 @@
         "alpha_2_code": "NG",
         "alpha_3_code": "NGA",
         "en_short_name": "Nigeria",
+        "fr_short_name": "Nigeria",
         "nationality": "Nigerian",
         "dial_code": "+234"
     },
@@ -1283,6 +1443,7 @@
         "alpha_2_code": "NU",
         "alpha_3_code": "NIU",
         "en_short_name": "Niue",
+        "fr_short_name": "Niue",
         "nationality": "Niuean",
         "dial_code": "+683"
     },
@@ -1291,6 +1452,7 @@
         "alpha_2_code": "NF",
         "alpha_3_code": "NFK",
         "en_short_name": "Norfolk Island",
+        "fr_short_name": "l'ile de Norfolk",
         "nationality": "Norfolk Island",
         "dial_code": "+672"
     },
@@ -1299,6 +1461,7 @@
         "alpha_2_code": "MP",
         "alpha_3_code": "MNP",
         "en_short_name": "Northern Mariana Islands",
+        "fr_short_name": "Îles Mariannes du Nord",
         "nationality": "Northern Marianan",
         "dial_code": "+1670"
     },
@@ -1307,6 +1470,7 @@
         "alpha_2_code": "NO",
         "alpha_3_code": "NOR",
         "en_short_name": "Norway",
+        "fr_short_name": "Norvège",
         "nationality": "Norwegian",
         "dial_code": "+47"
     },
@@ -1315,6 +1479,7 @@
         "alpha_2_code": "OM",
         "alpha_3_code": "OMN",
         "en_short_name": "Oman",
+        "fr_short_name": "Oman",
         "nationality": "Omani",
         "dial_code": "+968"
     },
@@ -1323,6 +1488,7 @@
         "alpha_2_code": "PK",
         "alpha_3_code": "PAK",
         "en_short_name": "Pakistan",
+        "fr_short_name": "Pakistan",
         "nationality": "Pakistani",
         "dial_code": "+92"
     },
@@ -1331,6 +1497,7 @@
         "alpha_2_code": "PW",
         "alpha_3_code": "PLW",
         "en_short_name": "Palau",
+        "fr_short_name": "Palaos",
         "nationality": "Palauan",
         "dial_code": "+680"
     },
@@ -1339,6 +1506,7 @@
         "alpha_2_code": "PS",
         "alpha_3_code": "PSE",
         "en_short_name": "Palestine, State of",
+        "fr_short_name": "Palestine",
         "nationality": "Palestinian",
         "dial_code": "+970"
     },
@@ -1347,6 +1515,7 @@
         "alpha_2_code": "PA",
         "alpha_3_code": "PAN",
         "en_short_name": "Panama",
+        "fr_short_name": "Panama",
         "nationality": "Panamanian",
         "dial_code": "+507"
     },
@@ -1355,6 +1524,7 @@
         "alpha_2_code": "PG",
         "alpha_3_code": "PNG",
         "en_short_name": "Papua New Guinea",
+        "fr_short_name": "Papouasie-Nouvelle-Guinée",
         "nationality": "Papua New Guinean, Papuan",
         "dial_code": "+675"
     },
@@ -1363,6 +1533,7 @@
         "alpha_2_code": "PY",
         "alpha_3_code": "PRY",
         "en_short_name": "Paraguay",
+        "fr_short_name": "Paraguay",
         "nationality": "Paraguayan",
         "dial_code": "+595"
     },
@@ -1371,6 +1542,7 @@
         "alpha_2_code": "PE",
         "alpha_3_code": "PER",
         "en_short_name": "Peru",
+        "fr_short_name": "Pérou",
         "nationality": "Peruvian",
         "dial_code": "+51"
     },
@@ -1379,6 +1551,7 @@
         "alpha_2_code": "PH",
         "alpha_3_code": "PHL",
         "en_short_name": "Philippines",
+        "fr_short_name": "Philippines",
         "nationality": "Philippine, Filipino",
         "dial_code": "+63"
     },
@@ -1387,6 +1560,7 @@
         "alpha_2_code": "PN",
         "alpha_3_code": "PCN",
         "en_short_name": "Pitcairn",
+        "fr_short_name": "Pitcairn",
         "nationality": "Pitcairn Island",
         "dial_code": "+64"
     },
@@ -1395,6 +1569,7 @@
         "alpha_2_code": "PL",
         "alpha_3_code": "POL",
         "en_short_name": "Poland",
+        "fr_short_name": "Pologne",
         "nationality": "Polish",
         "dial_code": "+48"
     },
@@ -1403,6 +1578,7 @@
         "alpha_2_code": "PT",
         "alpha_3_code": "PRT",
         "en_short_name": "Portugal",
+        "fr_short_name": "Portugal",
         "nationality": "Portuguese",
         "dial_code": "+351"
     },
@@ -1411,6 +1587,7 @@
         "alpha_2_code": "PR",
         "alpha_3_code": "PRI",
         "en_short_name": "Puerto Rico",
+        "fr_short_name": "Porto Rico",
         "nationality": "Puerto Rican",
         "dial_code": "+1939"
     },
@@ -1419,6 +1596,7 @@
         "alpha_2_code": "QA",
         "alpha_3_code": "QAT",
         "en_short_name": "Qatar",
+        "fr_short_name": "Qatar",
         "nationality": "Qatari",
         "dial_code": "+974"
     },
@@ -1427,6 +1605,7 @@
         "alpha_2_code": "RE",
         "alpha_3_code": "REU",
         "en_short_name": "Réunion",
+        "fr_short_name": "Réunion",
         "nationality": "Réunionese, Réunionnais",
         "dial_code": "+262"
     },
@@ -1435,6 +1614,7 @@
         "alpha_2_code": "RO",
         "alpha_3_code": "ROU",
         "en_short_name": "Romania",
+        "fr_short_name": "Roumanie",
         "nationality": "Romanian",
         "dial_code": "+40"
     },
@@ -1443,6 +1623,7 @@
         "alpha_2_code": "RU",
         "alpha_3_code": "RUS",
         "en_short_name": "Russian Federation",
+        "fr_short_name": "Russie",
         "nationality": "Russian",
         "dial_code": "+7"
     },
@@ -1451,6 +1632,7 @@
         "alpha_2_code": "RW",
         "alpha_3_code": "RWA",
         "en_short_name": "Rwanda",
+        "fr_short_name": "Rwanda",
         "nationality": "Rwandan",
         "dial_code": "+250"
     },
@@ -1459,6 +1641,7 @@
         "alpha_2_code": "BL",
         "alpha_3_code": "BLM",
         "en_short_name": "Saint Barthélemy",
+        "fr_short_name": "Saint Barthélemy",
         "nationality": "Barthélemois",
         "dial_code": "+590"
     },
@@ -1467,6 +1650,7 @@
         "alpha_2_code": "SH",
         "alpha_3_code": "SHN",
         "en_short_name": "Saint Helena, Ascension and Tristan da Cunha",
+        "fr_short_name": "Sainte-Hélène, Ascension et Tristan da Cunha",
         "nationality": "Saint Helenian",
         "dial_code": "+290"
     },
@@ -1475,6 +1659,7 @@
         "alpha_2_code": "KN",
         "alpha_3_code": "KNA",
         "en_short_name": "Saint Kitts and Nevis",
+        "fr_short_name": "Saint-Christophe-et-Niévès",
         "nationality": "Kittitian or Nevisian",
         "dial_code": "+1869"
     },
@@ -1483,6 +1668,7 @@
         "alpha_2_code": "LC",
         "alpha_3_code": "LCA",
         "en_short_name": "Saint Lucia",
+        "fr_short_name": "Sainte-Lucie",
         "nationality": "Saint Lucian",
         "dial_code": "+1758"
     },
@@ -1491,6 +1677,7 @@
         "alpha_2_code": "MF",
         "alpha_3_code": "MAF",
         "en_short_name": "Saint Martin (French part)",
+        "fr_short_name": "Saint Martin",
         "nationality": "Saint-Martinoise",
         "dial_code": "+590"
     },
@@ -1499,6 +1686,7 @@
         "alpha_2_code": "PM",
         "alpha_3_code": "SPM",
         "en_short_name": "Saint Pierre and Miquelon",
+        "fr_short_name": "Saint Pierre et Miquelon",
         "nationality": "Saint-Pierrais or Miquelonnais",
         "dial_code": "+508"
     },
@@ -1507,6 +1695,7 @@
         "alpha_2_code": "VC",
         "alpha_3_code": "VCT",
         "en_short_name": "Saint Vincent and the Grenadines",
+        "fr_short_name": "Saint-Vincent-et-les-Grenadines",
         "nationality": "Saint Vincentian, Vincentian",
         "dial_code": "+1784"
     },
@@ -1515,6 +1704,7 @@
         "alpha_2_code": "WS",
         "alpha_3_code": "WSM",
         "en_short_name": "Samoa",
+        "fr_short_name": "Samoa",
         "nationality": "Samoan",
         "dial_code": "+685"
     },
@@ -1523,6 +1713,7 @@
         "alpha_2_code": "SM",
         "alpha_3_code": "SMR",
         "en_short_name": "San Marino",
+        "fr_short_name": "Saint-Marin",
         "nationality": "Sammarinese",
         "dial_code": "+378"
     },
@@ -1531,6 +1722,7 @@
         "alpha_2_code": "ST",
         "alpha_3_code": "STP",
         "en_short_name": "Sao Tome and Principe",
+        "fr_short_name": "Sao Tomé-et-Principe",
         "nationality": "São Toméan",
         "dial_code": "+239"
     },
@@ -1539,6 +1731,7 @@
         "alpha_2_code": "SA",
         "alpha_3_code": "SAU",
         "en_short_name": "Saudi Arabia",
+        "fr_short_name": "Arabie saoudite",
         "nationality": "Saudi, Saudi Arabian",
         "dial_code": "+966"
     },
@@ -1547,6 +1740,7 @@
         "alpha_2_code": "SN",
         "alpha_3_code": "SEN",
         "en_short_name": "Senegal",
+        "fr_short_name": "Sénégal",
         "nationality": "Senegalese",
         "dial_code": "+221"
     },
@@ -1555,6 +1749,7 @@
         "alpha_2_code": "RS",
         "alpha_3_code": "SRB",
         "en_short_name": "Serbia",
+        "fr_short_name": "Serbie",
         "nationality": "Serbian",
         "dial_code": "+381"
     },
@@ -1563,6 +1758,7 @@
         "alpha_2_code": "SC",
         "alpha_3_code": "SYC",
         "en_short_name": "Seychelles",
+        "fr_short_name": "Seychelles",
         "nationality": "Seychellois",
         "dial_code": "+248"
     },
@@ -1571,6 +1767,7 @@
         "alpha_2_code": "SL",
         "alpha_3_code": "SLE",
         "en_short_name": "Sierra Leone",
+        "fr_short_name": "Sierra Leone",
         "nationality": "Sierra Leonean",
         "dial_code": "+232"
     },
@@ -1579,6 +1776,7 @@
         "alpha_2_code": "SG",
         "alpha_3_code": "SGP",
         "en_short_name": "Singapore",
+        "fr_short_name": "Singapour",
         "nationality": "Singaporean",
         "dial_code": "+65"
     },
@@ -1587,6 +1785,7 @@
         "alpha_2_code": "SK",
         "alpha_3_code": "SVK",
         "en_short_name": "Slovakia",
+        "fr_short_name": "Slovaquie",
         "nationality": "Slovak",
         "dial_code": "+421"
     },
@@ -1595,6 +1794,7 @@
         "alpha_2_code": "SI",
         "alpha_3_code": "SVN",
         "en_short_name": "Slovenia",
+        "fr_short_name": "Slovénie",
         "nationality": "Slovenian, Slovene",
         "dial_code": "+386"
     },
@@ -1603,6 +1803,7 @@
         "alpha_2_code": "SB",
         "alpha_3_code": "SLB",
         "en_short_name": "Solomon Islands",
+        "fr_short_name": "îles Salomon",
         "nationality": "Solomon Island",
         "dial_code": "+677"
     },
@@ -1611,6 +1812,7 @@
         "alpha_2_code": "SO",
         "alpha_3_code": "SOM",
         "en_short_name": "Somalia",
+        "fr_short_name": "Somalie",
         "nationality": "Somali, Somalian",
         "dial_code": "+252"
     },
@@ -1619,6 +1821,7 @@
         "alpha_2_code": "ZA",
         "alpha_3_code": "ZAF",
         "en_short_name": "South Africa",
+        "fr_short_name": "Afrique du Sud",
         "nationality": "South African",
         "dial_code": "+27"
     },
@@ -1627,6 +1830,7 @@
         "alpha_2_code": "GS",
         "alpha_3_code": "SGS",
         "en_short_name": "South Georgia and the South Sandwich Islands",
+        "fr_short_name": "Géorgie du Sud et îles Sandwich du Sud",
         "nationality": "South Georgia or South Sandwich Islands",
         "dial_code": "+500"
     },
@@ -1635,6 +1839,7 @@
         "alpha_2_code": "SS",
         "alpha_3_code": "SSD",
         "en_short_name": "South Sudan",
+        "fr_short_name": "Soudan du Sud",
         "nationality": "South Sudanese",
         "dial_code": "+211"
     },
@@ -1643,6 +1848,7 @@
         "alpha_2_code": "ES",
         "alpha_3_code": "ESP",
         "en_short_name": "Spain",
+        "fr_short_name": "Espagne",
         "nationality": "Spanish",
         "dial_code": "+34"
     },
@@ -1651,6 +1857,7 @@
         "alpha_2_code": "LK",
         "alpha_3_code": "LKA",
         "en_short_name": "Sri Lanka",
+        "fr_short_name": "Sri Lanka",
         "nationality": "Sri Lankan",
         "dial_code": "+94"
     },
@@ -1659,6 +1866,7 @@
         "alpha_2_code": "SD",
         "alpha_3_code": "SDN",
         "en_short_name": "Sudan",
+        "fr_short_name": "Soudan",
         "nationality": "Sudanese",
         "dial_code": "+249"
     },
@@ -1667,6 +1875,7 @@
         "alpha_2_code": "SR",
         "alpha_3_code": "SUR",
         "en_short_name": "Suriname",
+        "fr_short_name": "Suriname",
         "nationality": "Surinamese",
         "dial_code": "+597"
     },
@@ -1675,6 +1884,7 @@
         "alpha_2_code": "SJ",
         "alpha_3_code": "SJM",
         "en_short_name": "Svalbard and Jan Mayen",
+        "fr_short_name": "Svalbard et Jan Mayen",
         "nationality": "Svalbard",
         "dial_code": "+47"
     },
@@ -1683,6 +1893,7 @@
         "alpha_2_code": "SZ",
         "alpha_3_code": "SWZ",
         "en_short_name": "Swaziland",
+        "fr_short_name": "Eswatini",
         "nationality": "Swazi",
         "dial_code": "+268"
     },
@@ -1691,6 +1902,7 @@
         "alpha_2_code": "SE",
         "alpha_3_code": "SWE",
         "en_short_name": "Sweden",
+        "fr_short_name": "Suède",
         "nationality": "Swedish",
         "dial_code": "+46"
     },
@@ -1699,6 +1911,7 @@
         "alpha_2_code": "CH",
         "alpha_3_code": "CHE",
         "en_short_name": "Switzerland",
+        "fr_short_name": "Suisse",
         "nationality": "Swiss",
         "dial_code": "+41"
     },
@@ -1707,6 +1920,7 @@
         "alpha_2_code": "SY",
         "alpha_3_code": "SYR",
         "en_short_name": "Syrian Arab Republic",
+        "fr_short_name": "Syrie",
         "nationality": "Syrian",
         "dial_code": "+963"
     },
@@ -1715,6 +1929,7 @@
         "alpha_2_code": "TW",
         "alpha_3_code": "TWN",
         "en_short_name": "Taiwan, Province of China",
+        "fr_short_name": "Taïwan",
         "nationality": "Chinese, Taiwanese",
         "dial_code": "+886"
     },
@@ -1723,6 +1938,7 @@
         "alpha_2_code": "TJ",
         "alpha_3_code": "TJK",
         "en_short_name": "Tajikistan",
+        "fr_short_name": "Tadjikistan",
         "nationality": "Tajikistani",
         "dial_code": "+992"
     },
@@ -1731,6 +1947,7 @@
         "alpha_2_code": "TZ",
         "alpha_3_code": "TZA",
         "en_short_name": "Tanzania, United Republic of",
+        "fr_short_name": "Tanzanie",
         "nationality": "Tanzanian",
         "dial_code": "+255"
     },
@@ -1739,6 +1956,7 @@
         "alpha_2_code": "TH",
         "alpha_3_code": "THA",
         "en_short_name": "Thailand",
+        "fr_short_name": "Thaïlande",
         "nationality": "Thai",
         "dial_code": "+66"
     },
@@ -1747,6 +1965,7 @@
         "alpha_2_code": "TL",
         "alpha_3_code": "TLS",
         "en_short_name": "Timor-Leste",
+        "fr_short_name": "Timor oriental",
         "nationality": "Timorese",
         "dial_code": "+670"
     },
@@ -1755,6 +1974,7 @@
         "alpha_2_code": "TG",
         "alpha_3_code": "TGO",
         "en_short_name": "Togo",
+        "fr_short_name": "Togo",
         "nationality": "Togolese",
         "dial_code": "+228"
     },
@@ -1763,6 +1983,7 @@
         "alpha_2_code": "TK",
         "alpha_3_code": "TKL",
         "en_short_name": "Tokelau",
+        "fr_short_name": "Tokélaou",
         "nationality": "Tokelauan",
         "dial_code": "+690"
     },
@@ -1771,6 +1992,7 @@
         "alpha_2_code": "TO",
         "alpha_3_code": "TON",
         "en_short_name": "Tonga",
+        "fr_short_name": "Tonga",
         "nationality": "Tongan",
         "dial_code": "+676"
     },
@@ -1779,6 +2001,7 @@
         "alpha_2_code": "TT",
         "alpha_3_code": "TTO",
         "en_short_name": "Trinidad and Tobago",
+        "fr_short_name": "Trinité-et-Tobago",
         "nationality": "Trinidadian or Tobagonian",
         "dial_code": "+1868"
     },
@@ -1787,6 +2010,7 @@
         "alpha_2_code": "TN",
         "alpha_3_code": "TUN",
         "en_short_name": "Tunisia",
+        "fr_short_name": "Tunisie",
         "nationality": "Tunisian",
         "dial_code": "+216"
     },
@@ -1795,6 +2019,7 @@
         "alpha_2_code": "TR",
         "alpha_3_code": "TUR",
         "en_short_name": "Turkey",
+        "fr_short_name": "Turquie",
         "nationality": "Turkish",
         "dial_code": "+90"
     },
@@ -1803,6 +2028,7 @@
         "alpha_2_code": "TM",
         "alpha_3_code": "TKM",
         "en_short_name": "Turkmenistan",
+        "fr_short_name": "Turkménistan",
         "nationality": "Turkmen",
         "dial_code": "+993"
     },
@@ -1811,6 +2037,7 @@
         "alpha_2_code": "TC",
         "alpha_3_code": "TCA",
         "en_short_name": "Turks and Caicos Islands",
+        "fr_short_name": "îles Turques-et-Caïques",
         "nationality": "Turks and Caicos Island",
         "dial_code": "+1649"
     },
@@ -1819,6 +2046,7 @@
         "alpha_2_code": "TV",
         "alpha_3_code": "TUV",
         "en_short_name": "Tuvalu",
+        "fr_short_name": "Tuvalu",
         "nationality": "Tuvaluan",
         "dial_code": "+688"
     },
@@ -1827,6 +2055,7 @@
         "alpha_2_code": "UG",
         "alpha_3_code": "UGA",
         "en_short_name": "Uganda",
+        "fr_short_name": "Ouganda",
         "nationality": "Ugandan",
         "dial_code": "+256"
     },
@@ -1835,6 +2064,7 @@
         "alpha_2_code": "UA",
         "alpha_3_code": "UKR",
         "en_short_name": "Ukraine",
+        "fr_short_name": "Ukraine",
         "nationality": "Ukrainian",
         "dial_code": "+380"
     },
@@ -1843,6 +2073,7 @@
         "alpha_2_code": "AE",
         "alpha_3_code": "ARE",
         "en_short_name": "United Arab Emirates",
+        "fr_short_name": "Émirats arabes unis",
         "nationality": "Emirati, Emirian, Emiri",
         "dial_code": "+971"
     },
@@ -1851,6 +2082,7 @@
         "alpha_2_code": "GB",
         "alpha_3_code": "GBR",
         "en_short_name": "United Kingdom of Great Britain and Northern Ireland",
+        "fr_short_name": "Royaume-Uni",
         "nationality": "British, UK",
         "dial_code": "+44"
     },
@@ -1859,6 +2091,7 @@
         "alpha_2_code": "US",
         "alpha_3_code": "USA",
         "en_short_name": "United States of America",
+        "fr_short_name": "États-Unis",
         "nationality": "American",
         "dial_code": "+1"
     },
@@ -1867,6 +2100,7 @@
         "alpha_2_code": "UY",
         "alpha_3_code": "URY",
         "en_short_name": "Uruguay",
+        "fr_short_name": "Uruguay",
         "nationality": "Uruguayan",
         "dial_code": "+598"
     },
@@ -1875,6 +2109,7 @@
         "alpha_2_code": "UZ",
         "alpha_3_code": "UZB",
         "en_short_name": "Uzbekistan",
+        "fr_short_name": "Ouzbékistan",
         "nationality": "Uzbekistani, Uzbek",
         "dial_code": "+998"
     },
@@ -1883,6 +2118,7 @@
         "alpha_2_code": "VU",
         "alpha_3_code": "VUT",
         "en_short_name": "Vanuatu",
+        "fr_short_name": "Vanuatu",
         "nationality": "Ni-Vanuatu, Vanuatuan",
         "dial_code": "+678"
     },
@@ -1891,6 +2127,7 @@
         "alpha_2_code": "VE",
         "alpha_3_code": "VEN",
         "en_short_name": "Venezuela (Bolivarian Republic of)",
+        "fr_short_name": "Venezuela",
         "nationality": "Venezuelan",
         "dial_code": "+58"
     },
@@ -1899,6 +2136,7 @@
         "alpha_2_code": "VN",
         "alpha_3_code": "VNM",
         "en_short_name": "Vietnam",
+        "fr_short_name": "Viêt Nam",
         "nationality": "Vietnamese",
         "dial_code": "+84"
     },
@@ -1907,6 +2145,7 @@
         "alpha_2_code": "VG",
         "alpha_3_code": "VGB",
         "en_short_name": "Virgin Islands (British)",
+        "fr_short_name": "Les iles vierges",
         "nationality": "British Virgin Island",
         "dial_code": "+1284"
     },
@@ -1915,6 +2154,7 @@
         "alpha_2_code": "VI",
         "alpha_3_code": "VIR",
         "en_short_name": "Virgin Islands (U.S.)",
+        "fr_short_name": "U.S. Les iles vierges",
         "nationality": "U.S. Virgin Island",
         "dial_code": "+1340"
     },
@@ -1923,6 +2163,7 @@
         "alpha_2_code": "WF",
         "alpha_3_code": "WLF",
         "en_short_name": "Wallis and Futuna",
+        "fr_short_name": "Wallis et Futuna",
         "nationality": "Wallis and Futuna, Wallisian or Futunan",
         "dial_code": "+681"
     },
@@ -1931,6 +2172,7 @@
         "alpha_2_code": "YE",
         "alpha_3_code": "YEM",
         "en_short_name": "Yemen",
+        "fr_short_name": "Yémen",
         "nationality": "Yemeni",
         "dial_code": "+967"
     },
@@ -1939,6 +2181,7 @@
         "alpha_2_code": "ZM",
         "alpha_3_code": "ZMB",
         "en_short_name": "Zambia",
+        "fr_short_name": "Zambie",
         "nationality": "Zambian",
         "dial_code": "+260"
     },
@@ -1947,6 +2190,7 @@
         "alpha_2_code": "ZW",
         "alpha_3_code": "ZWE",
         "en_short_name": "Zimbabwe",
+        "fr_short_name": "Zimbabwe",
         "nationality": "Zimbabwean",
         "dial_code": "+263"
     }

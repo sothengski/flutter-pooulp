@@ -307,6 +307,10 @@ class SignUpForm extends GetView<SignUpController> {
                                                 ),
                                               ),
                                               child: CountryListSelector(
+                                                languageCode:
+                                                    LanguageController()
+                                                        .currentLanguageStore
+                                                        .value,
                                                 countrylist: countryList,
                                                 selectedCountry: controller
                                                     .selectedCountry.value,

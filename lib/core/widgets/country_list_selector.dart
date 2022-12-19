@@ -14,6 +14,7 @@ class CountryListSelector extends StatefulWidget {
   final Function(CountryModel)? onTap;
   final bool? showPhoneCode;
   final bool? showCountry;
+  final String? languageCode;
 
   const CountryListSelector({
     this.countrylist,
@@ -24,6 +25,7 @@ class CountryListSelector extends StatefulWidget {
     this.showPhoneCode = true,
     this.showCountry = true,
     @required this.selectedCountry,
+    this.languageCode = 'en',
   }) : super(key: key);
 
   @override
@@ -85,7 +87,9 @@ class _CountryListSelectorState extends State<CountryListSelector> {
                           alignment: AlignmentDirectional.centerStart,
                           child: widget.showCountry == true
                               ? CustomTextWidget(
-                                  text: "${country.name}",
+                                  text: widget.languageCode! == 'fr'
+                                      ? "${country.frName}"
+                                      : "${country.name}",
                                   fontSize: 16.0,
                                   maxLine: 2,
                                   fontWeight: FontWeightManager.medium,

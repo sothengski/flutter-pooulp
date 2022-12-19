@@ -408,7 +408,7 @@
         "alpha_2_code": "CX",
         "alpha_3_code": "CXR",
         "en_short_name": "Christmas Island",
-        "fr_short_name": "L'île de noël",
+        "fr_short_name": "Île Christmas",
         "nationality": "Christmas Island",
         "dial_code": "+61"
     },
@@ -948,7 +948,7 @@
         "alpha_2_code": "IM",
         "alpha_3_code": "IMN",
         "en_short_name": "Isle of Man",
-        "fr_short_name": "Isle of Man",
+        "fr_short_name": "île de Man",
         "nationality": "Manx",
         "dial_code": "+44"
     },
@@ -1452,7 +1452,7 @@
         "alpha_2_code": "NF",
         "alpha_3_code": "NFK",
         "en_short_name": "Norfolk Island",
-        "fr_short_name": "l'ile de Norfolk",
+        "fr_short_name": "ile de Norfolk",
         "nationality": "Norfolk Island",
         "dial_code": "+672"
     },
@@ -2145,7 +2145,7 @@
         "alpha_2_code": "VG",
         "alpha_3_code": "VGB",
         "en_short_name": "Virgin Islands (British)",
-        "fr_short_name": "Les iles vierges",
+        "fr_short_name": "iles vierges",
         "nationality": "British Virgin Island",
         "dial_code": "+1284"
     },

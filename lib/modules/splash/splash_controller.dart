@@ -18,8 +18,8 @@ class SplashController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     // await handleDeepLinks();
-    // await checkAuth();
-    // await checkAppBasicTime();
+    await checkAuth();
+    await checkAppBasicTime();
     // await getAppBasicStatusProvider();
   }
 

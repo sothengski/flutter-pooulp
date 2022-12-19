@@ -17,18 +17,22 @@ class SplashPage extends GetView<SplashController> {
           color: ColorsManager.primaryBlue,
           child: const Padding(
             padding: EdgeInsets.only(
-              left: AppSize.s48,
-              right: AppSize.s48,
+              left: AppSize.s12,
+              right: AppSize.s12,
+              top: 150,
             ),
             // child: SvgPicture.asset(
             //   AssetsManager.appLogoWhiteSvg,
             //   height: 80,
             //   matchTextDirection: true,
             // ),
-            child: Image(
-              //   // height: 150,
-              //   // width: 150,
-              image: AssetImage(AssetsManager.appLogoRose),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Image(
+                //   // height: 150,
+                //   // width: 150,
+                image: AssetImage(AssetsManager.splashScreen),
+              ),
             ),
           ),
         ),

@@ -537,6 +537,39 @@ class SignUpForm extends GetView<SignUpController> {
                               children: [
                                 CustomIconButtonWidget(
                                   isConstraints: true,
+                                  iconWidget:
+                                      controller.isCheckMarketing.value == true
+                                          ? const Icon(
+                                              Icons.check_box,
+                                              color: ColorsManager.primary,
+                                            )
+                                          : const Icon(
+                                              Icons
+                                                  .check_box_outline_blank_sharp,
+                                              color: ColorsManager.grey,
+                                            ),
+                                  onClick: () =>
+                                      controller.checkingBoolMarketing(
+                                    boolValue:
+                                        controller.isCheckMarketing.value,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: getWidth * 0.7,
+                                  child: CustomTextWidget(
+                                    text: 'marketingEmailAgreement'
+                                        .tr, //'auth.joinEmailListText'.tr,
+                                    maxLine: 3,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: AppSize.s5),
+                            Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomIconButtonWidget(
+                                  isConstraints: true,
                                   iconWidget: controller
                                               .isCheckTermCondition.value ==
                                           true
@@ -625,39 +658,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 // )
                               ],
                             ),
-                            const SizedBox(height: AppSize.s5),
-                            Row(
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomIconButtonWidget(
-                                  isConstraints: true,
-                                  iconWidget:
-                                      controller.isCheckMarketing.value == true
-                                          ? const Icon(
-                                              Icons.check_box,
-                                              color: ColorsManager.primary,
-                                            )
-                                          : const Icon(
-                                              Icons
-                                                  .check_box_outline_blank_sharp,
-                                              color: ColorsManager.grey,
-                                            ),
-                                  onClick: () =>
-                                      controller.checkingBoolMarketing(
-                                    boolValue:
-                                        controller.isCheckMarketing.value,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: getWidth * 0.7,
-                                  child: CustomTextWidget(
-                                    text: 'marketingEmailAgreement'
-                                        .tr, //'auth.joinEmailListText'.tr,
-                                    maxLine: 3,
-                                  ),
-                                ),
-                              ],
-                            ),
+
                             const SizedBox(
                               height: 16.0,
                             ),

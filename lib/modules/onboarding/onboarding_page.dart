@@ -451,7 +451,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                       value: controller
                                           .internshipRadiusRxInt.value
                                           .toDouble(),
-                                      min: 10.0,
+                                      min: 5.0,
                                       max: 200.0,
                                       divisions: 200,
                                       activeColor: ColorsManager.primary,
@@ -678,7 +678,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                       value: controller
                                           .studentJobRadiusRxInt.value
                                           .toDouble(),
-                                      min: 10.0,
+                                      min: 5.0,
                                       max: 200.0,
                                       divisions: 200,
                                       activeColor: ColorsManager.primary,

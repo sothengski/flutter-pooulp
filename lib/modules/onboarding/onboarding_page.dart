@@ -133,15 +133,15 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   Wrap(
                                     children: [
                                       CustomTextWidget(
-                                        text: 'internshipTypes'.tr,
-                                        fontSize: AppSize.s20,
-                                        fontWeight: FontWeight.w600,
+                                        text: 'lookingForInternshipType'.tr,
+                                        fontSize: AppSize.s18,
+                                        fontWeight: FontWeight.w500,
                                         maxLine:
                                             controller.isUpdate.value == true
                                                 ? 3
                                                 : 3,
                                         color: ColorsManager.white,
-                                        textAlign: TextAlign.center,
+                                        textAlign: TextAlign.left,
                                         marginTop: AppSize.s16,
                                         marginLeft: AppSize.s8,
                                         marginRight: AppSize.s8,
@@ -222,9 +222,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   Wrap(
                                     children: [
                                       CustomTextWidget(
-                                        text: 'internshipPeriods'.tr,
-                                        fontSize: AppSize.s20,
-                                        fontWeight: FontWeight.w600,
+                                        text: 'internshipDuration'.tr,
+                                        fontSize: AppSize.s18,
+                                        fontWeight: FontWeight.w500,
                                         maxLine:
                                             controller.isUpdate.value == true
                                                 ? 3

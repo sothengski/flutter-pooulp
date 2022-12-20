@@ -324,6 +324,14 @@ class OnboardingController extends GetxController
             (!isSelectInternshipInLookingFor &&
                 !isSelectStudentJobInLookingFor &&
                 selectedPageIndex.value == 1) ||
+            // if we didn't found or selected internship Type in page 2
+            (isSelectInternshipInLookingFor &&
+                selectedPageIndex.value == 2 &&
+                internshipTypeSelectedList.isEmpty) ||
+            // if we didn't found or selected internship Period in page 2
+            (isSelectInternshipInLookingFor &&
+                selectedPageIndex.value == 2 &&
+                internshipPeriodSelectedList.isEmpty) ||
             // if we didn't found or selected internship and internshipInterested in page 3
             ((selectedPageIndex.value == 3) &&
                 isSelectInternshipInLookingFor &&

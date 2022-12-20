@@ -21,7 +21,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                 ? Container()
                 : Container(
                     padding: const EdgeInsets.only(
-                      top: AppSize.s48,
+                      top: AppSize.s32,
                       left: AppSize.s16,
                       right: AppSize.s16,
                     ),
@@ -32,6 +32,32 @@ class OnboardingPage extends GetView<OnboardingController> {
                         PageTemplateWidget(
                           bodyPageWidget: Column(
                             children: [
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                  left: AppSize.s32,
+                                  right: AppSize.s32,
+                                ),
+                                child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Image(
+                                    image:
+                                        AssetImage(AssetsManager.appLogoRose),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: AppSize.s16),
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                  left: AppSize.s32,
+                                  right: AppSize.s32,
+                                ),
+                                child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Image(
+                                    image: AssetImage(AssetsManager.sloganImg),
+                                  ),
+                                ),
+                              ),
                               Center(
                                 child: CustomTextWidget(
                                   text: pageData[0].title,

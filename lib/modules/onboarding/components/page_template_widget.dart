@@ -27,24 +27,24 @@ class PageTemplateWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // if (title == '')
-        //   Container()
-        // else
-        Expanded(
-          flex: 8,
-          child: Center(
-            child: CustomTextWidget(
-              text: '$title',
-              fontSize: titleFontSize,
-              fontWeight: FontWeight.w700,
-              color: ColorsManager.white,
-              textAlign: TextAlign.center,
-              marginLeft: AppSize.s8,
-              marginRight: AppSize.s8,
-              maxLine: 3,
+        if (title == '')
+          Container()
+        else
+          Expanded(
+            flex: 8,
+            child: Center(
+              child: CustomTextWidget(
+                text: '$title',
+                fontSize: titleFontSize,
+                fontWeight: FontWeight.w700,
+                color: ColorsManager.white,
+                textAlign: TextAlign.center,
+                marginLeft: AppSize.s8,
+                marginRight: AppSize.s8,
+                maxLine: 3,
+              ),
             ),
           ),
-        ),
         if (subTitle == '')
           Container()
         else

@@ -25,7 +25,8 @@ class AssetsManager {
 
   static const String coverImgBubbles = '$imagePath/cover-img-bubbles.png';
   static const String diagonalLinePng = '$imagePath/diagonal-lines.png';
-  static const String splashScreen = '$imagePath/splash-screen.png';
+  static const String splashScreenImg = '$imagePath/splash-screen.png';
+  static const String sloganImg = '$imagePath/slogan.png';
 
   // static const String socialMediaBrowsing =
   //     '$imagePath/social-media-browsing.png';

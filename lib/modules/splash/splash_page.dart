@@ -31,7 +31,7 @@ class SplashPage extends GetView<SplashController> {
               child: Image(
                 //   // height: 150,
                 //   // width: 150,
-                image: AssetImage(AssetsManager.splashScreen),
+                image: AssetImage(AssetsManager.splashScreenImg),
               ),
             ),
           ),

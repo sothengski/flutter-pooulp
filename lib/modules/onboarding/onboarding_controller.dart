@@ -593,6 +593,7 @@ class OnboardingController extends GetxController
     bool? refresh = false,
   }) async {
     fieldListForSelect.addAll(await tagProvider.getAllFields());
+    fieldListForSelect.sort((a, b) => a.label!.compareTo(b.label!));
     for (final element in fieldListForSelect) {
       //tagCategories contain internship type
       if (element.tagCategories!.isNotEmpty &&

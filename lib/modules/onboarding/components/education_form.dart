@@ -229,76 +229,6 @@ class EducationForm extends GetView<OnboardingController> {
             ),
             //===== Bottom of Fields Component =====//
 
-            ///===== Top of School Degree Component =====//
-            ContainerDialogWidget(
-              inputTitle: 'eduDegreeLabel'.tr,
-              fontSizeTitle: AppSize.s16,
-              // validatorFunction: (_) => Validator().notEmptyValidator(
-              //   controller.selectedLanguage.value.label ?? '',
-              // ),
-              dialogType: DialogType.bottomSheetDialog,
-              dialogWidget: Container(
-                height: getHeight,
-                decoration: const ShapeDecoration(
-                  color: ColorsManager.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(
-                        AppSize.s16,
-                      ),
-                      topRight: Radius.circular(
-                        AppSize.s16,
-                      ),
-                    ),
-                  ),
-                ),
-                child: Obx(
-                  () => controller.schoolDegreeList.isNotEmpty
-                      ? FieldListSelector(
-                          inputHintText: 'search'.tr,
-                          dataListforSelected: controller.schoolDegreeList,
-                          selectedItem:
-                              controller.educationList[eduIndex!].degreeTag,
-                          onTap: (field) {
-                            controller.educationList[eduIndex!].degreeTag =
-                                field;
-                            controller.getUpdate();
-                            Navigator.pop(context, true);
-                          },
-                        )
-                      : const LoadingWidget(),
-                ),
-              ),
-              containerWidget: Obx(
-                () => controller.educationList[eduIndex!].degreeTag!.id == null
-                    ? RowContentInputWidget(
-                        centerWidget: CustomTextWidget(
-                          text: 'eduDegreeLabel'.tr,
-                          color: ColorsManager.grey400,
-                          fontWeight: FontWeight.w400,
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidget: const Icon(
-                          IconsManager.arrowDropDown,
-                          color: ColorsManager.grey600,
-                        ),
-                      )
-                    : RowContentInputWidget(
-                        centerWidget: CustomTextWidget(
-                          text: controller
-                              .educationList[eduIndex!].degreeTag!.label,
-                          color: ColorsManager.black,
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidget: const Icon(
-                          IconsManager.arrowDropDown,
-                          color: ColorsManager.grey600,
-                        ),
-                      ),
-              ),
-            ),
-            //===== Bottom of School Degree Component =====//
-
             ///===== Top of Degree Component =====//
             // CustomTextInput(
             //   topPadding: AppSize.s16,
@@ -377,6 +307,76 @@ class EducationForm extends GetView<OnboardingController> {
                       ),
               ),
             ),
+
+            ///===== Top of School Degree Component =====//
+            ContainerDialogWidget(
+              inputTitle: 'eduDegreeLabel'.tr,
+              fontSizeTitle: AppSize.s16,
+              // validatorFunction: (_) => Validator().notEmptyValidator(
+              //   controller.selectedLanguage.value.label ?? '',
+              // ),
+              dialogType: DialogType.bottomSheetDialog,
+              dialogWidget: Container(
+                height: getHeight,
+                decoration: const ShapeDecoration(
+                  color: ColorsManager.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        AppSize.s16,
+                      ),
+                      topRight: Radius.circular(
+                        AppSize.s16,
+                      ),
+                    ),
+                  ),
+                ),
+                child: Obx(
+                  () => controller.schoolDegreeList.isNotEmpty
+                      ? FieldListSelector(
+                          inputHintText: 'search'.tr,
+                          dataListforSelected: controller.schoolDegreeList,
+                          selectedItem:
+                              controller.educationList[eduIndex!].degreeTag,
+                          onTap: (field) {
+                            controller.educationList[eduIndex!].degreeTag =
+                                field;
+                            controller.getUpdate();
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      : const LoadingWidget(),
+                ),
+              ),
+              containerWidget: Obx(
+                () => controller.educationList[eduIndex!].degreeTag!.id == null
+                    ? RowContentInputWidget(
+                        centerWidget: CustomTextWidget(
+                          text: 'eduDegreeLabel'.tr,
+                          color: ColorsManager.grey400,
+                          fontWeight: FontWeight.w400,
+                          fontSize: AppSize.s16,
+                        ),
+                        suffixWidget: const Icon(
+                          IconsManager.arrowDropDown,
+                          color: ColorsManager.grey600,
+                        ),
+                      )
+                    : RowContentInputWidget(
+                        centerWidget: CustomTextWidget(
+                          text: controller
+                              .educationList[eduIndex!].degreeTag!.label,
+                          color: ColorsManager.black,
+                          fontSize: AppSize.s16,
+                        ),
+                        suffixWidget: const Icon(
+                          IconsManager.arrowDropDown,
+                          color: ColorsManager.grey600,
+                        ),
+                      ),
+              ),
+            ),
+            //===== Bottom of School Degree Component =====//
           ],
         ),
       ),

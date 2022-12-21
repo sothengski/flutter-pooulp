@@ -897,31 +897,45 @@ class OnboardingPage extends GetView<OnboardingController> {
                           ),
                         ),
                         PageTemplateWidget(
-                          title: pageData[10].title,
+                          // title: pageData[10].title,
                           // subTitle: pageData[10].subtitle,
                           bodyPageWidget: Column(
                             children: [
+                              // const Padding(
+                              //   padding: EdgeInsets.only(
+                              //     left: AppSize.s32,
+                              //     right: AppSize.s32,
+                              //   ),
+                              //   child: Align(
+                              //     alignment: Alignment.topCenter,
+                              //     child: Image(
+                              //       image:
+                              //           AssetImage(AssetsManager.appLogoRose),
+                              //     ),
+                              //   ),
+                              // ),
+                              const SizedBox(height: AppSize.s16),
                               Center(
                                 child: CustomTextWidget(
-                                  text: 'onboarding_advice_text_body'.tr,
+                                  text: 'infoForFillTheProfile'.tr,
                                   color: ColorsManager.white,
                                   marginTop: AppSize.s32,
-                                  fontSize: AppSize.s18,
+                                  fontSize: AppSize.s20,
                                   height: 1.75,
                                   textAlign: TextAlign.center,
                                   maxLine: 10,
                                 ),
                               ),
-                              Center(
-                                child: CustomTextWidget(
-                                  text: 'onboarding_advice_text_footer'.tr,
-                                  color: ColorsManager.white,
-                                  fontSize: AppSize.s18,
-                                  fontWeight: FontWeight.w600,
-                                  marginTop: AppSize.s48,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
+                              // Center(
+                              //   child: CustomTextWidget(
+                              //     text: 'onboarding_advice_text_footer'.tr,
+                              //     color: ColorsManager.white,
+                              //     fontSize: AppSize.s18,
+                              //     fontWeight: FontWeight.w600,
+                              //     marginTop: AppSize.s48,
+                              //     textAlign: TextAlign.center,
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),

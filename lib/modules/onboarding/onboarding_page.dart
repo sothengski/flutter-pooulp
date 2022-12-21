@@ -750,51 +750,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                         //       ],
                         //     ),
                         //   ),
-                        // Good At
-                        PageTemplateWidget(
-                          title: pageData[7].title,
-                          // subTitle: pageData[7].title,
-                          subTitle2: "(${'multipleSelectLabel'.tr})",
-                          bodyPageWidget: SingleChildScrollView(
-                            child: Wrap(
-                              children: pageData[7]
-                                  .allSkills!
-                                  .map(
-                                    (element) => Obx(
-                                      () => Padding(
-                                        padding: const EdgeInsets.only(
-                                          right: AppSize.s8,
-                                          bottom: AppSize.s12,
-                                        ),
-                                        child: TextCardClickableWidget(
-                                          isCenterText: false,
-                                          text: element.label ??
-                                              element.category.toString(),
-                                          maxLine:
-                                              controller.isUpdate.value == true
-                                                  ? 3
-                                                  : 3,
-                                          fontSize: AppSize.s24,
-                                          itemList: controller
-                                              .goodAtfieldSelectedList,
-                                          item: element,
-                                          onClick: () {
-                                            controller.addOrRemoveDataInList(
-                                              pageIndex: 7,
-                                              addToList: controller
-                                                  .goodAtfieldSelectedList,
-                                              itemToBeAdd: element,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                  .toSet()
-                                  .toList(),
-                            ),
-                          ),
-                        ),
+                        //Edu
                         PageTemplateWidget(
                           title: pageData[8].title,
                           // subTitle: pageData[8].title,
@@ -851,6 +807,52 @@ class OnboardingPage extends GetView<OnboardingController> {
                             ),
                           ),
                         ),
+                        // Good At
+                        PageTemplateWidget(
+                          title: pageData[7].title,
+                          // subTitle: pageData[7].title,
+                          subTitle2: "(${'multipleSelectLabel'.tr})",
+                          bodyPageWidget: SingleChildScrollView(
+                            child: Wrap(
+                              children: pageData[7]
+                                  .allSkills!
+                                  .map(
+                                    (element) => Obx(
+                                      () => Padding(
+                                        padding: const EdgeInsets.only(
+                                          right: AppSize.s8,
+                                          bottom: AppSize.s12,
+                                        ),
+                                        child: TextCardClickableWidget(
+                                          isCenterText: false,
+                                          text: element.label ??
+                                              element.category.toString(),
+                                          maxLine:
+                                              controller.isUpdate.value == true
+                                                  ? 3
+                                                  : 3,
+                                          fontSize: AppSize.s24,
+                                          itemList: controller
+                                              .goodAtfieldSelectedList,
+                                          item: element,
+                                          onClick: () {
+                                            controller.addOrRemoveDataInList(
+                                              pageIndex: 7,
+                                              addToList: controller
+                                                  .goodAtfieldSelectedList,
+                                              itemToBeAdd: element,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toSet()
+                                  .toList(),
+                            ),
+                          ),
+                        ),
+
                         PageTemplateWidget(
                           title: pageData[9].title,
                           // subTitle: pageData[9].title,

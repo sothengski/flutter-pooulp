@@ -901,26 +901,26 @@ class OnboardingPage extends GetView<OnboardingController> {
                           // subTitle: pageData[10].subtitle,
                           bodyPageWidget: Column(
                             children: [
-                              // const Padding(
-                              //   padding: EdgeInsets.only(
-                              //     left: AppSize.s32,
-                              //     right: AppSize.s32,
-                              //   ),
-                              //   child: Align(
-                              //     alignment: Alignment.topCenter,
-                              //     child: Image(
-                              //       image:
-                              //           AssetImage(AssetsManager.appLogoRose),
-                              //     ),
-                              //   ),
-                              // ),
-                              const SizedBox(height: AppSize.s16),
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                  left: AppSize.s32,
+                                  right: AppSize.s32,
+                                ),
+                                child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Image(
+                                    image:
+                                        AssetImage(AssetsManager.appLogoRose),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: AppSize.s40),
                               Center(
                                 child: CustomTextWidget(
                                   text: 'infoForFillTheProfile'.tr,
                                   color: ColorsManager.white,
-                                  marginTop: AppSize.s32,
-                                  fontSize: AppSize.s20,
+                                  marginTop: AppSize.s40,
+                                  fontSize: AppSize.s24,
                                   height: 1.75,
                                   textAlign: TextAlign.center,
                                   maxLine: 10,

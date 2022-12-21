@@ -310,7 +310,7 @@ class EducationForm extends GetView<OnboardingController> {
 
             ///===== Top of School Degree Component =====//
             ContainerDialogWidget(
-              inputTitle: 'eduDegreeLabel'.tr,
+              inputTitle: 'currentStudyLevel'.tr,
               fontSizeTitle: AppSize.s16,
               // validatorFunction: (_) => Validator().notEmptyValidator(
               //   controller.selectedLanguage.value.label ?? '',
@@ -352,7 +352,7 @@ class EducationForm extends GetView<OnboardingController> {
                 () => controller.educationList[eduIndex!].degreeTag!.id == null
                     ? RowContentInputWidget(
                         centerWidget: CustomTextWidget(
-                          text: 'eduDegreeLabel'.tr,
+                          text: 'currentStudyLevel'.tr,
                           color: ColorsManager.grey400,
                           fontWeight: FontWeight.w400,
                           fontSize: AppSize.s16,

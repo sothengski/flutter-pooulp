@@ -300,7 +300,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                             true)
                           PageTemplateWidget(
                             title: pageData[3].title,
-                            subTitle: pageData[3].subtitle,
+                            subTitle: "${pageData[3].subtitle}",
                             subTitle2: "(${'multipleSelectLabel'.tr})",
                             bodyPageWidget: SingleChildScrollView(
                               child: Wrap(

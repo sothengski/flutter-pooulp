@@ -49,8 +49,9 @@ class PageTemplateWidget extends StatelessWidget {
           Container()
         else
           Expanded(
-            flex: 5,
-            child: Center(
+            flex: 6,
+            child: Align(
+              alignment: Alignment.topCenter,
               child: CustomTextWidget(
                 text: '$subTitle',
                 fontSize: subTitleFontSize,

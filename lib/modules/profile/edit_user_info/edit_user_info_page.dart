@@ -461,6 +461,61 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ),
                       //===== Bottom of Description Component =====//
 
+                      ///===== Top of Driving License Component =====//
+                      Obx(
+                        () => RowContentInputWidget(
+                          centerWidget: CustomTextWidget(
+                            marginLeft: AppSize.s12,
+                            textAlign: TextAlign.center,
+                            text: 'drivingLicense'.tr,
+                            fontSize: AppSize.s16,
+                          ),
+                          suffixWidgetFlex: 20,
+                          suffixWidget: Switch(
+                            value: controller.drivingLicenseRxBool.value,
+                            onChanged: (value) {
+                              controller.drivingLicenseRxBool.value =
+                                  switchingBooleanValue(
+                                boolValue:
+                                    controller.drivingLicenseRxBool.value,
+                              );
+                            },
+                            activeTrackColor: ColorsManager.primary25,
+                            activeColor: ColorsManager.primary,
+                          ),
+                        ),
+                      ),
+                      //===== Bottom of Driving License Component =====//
+                      // const Divider(
+                      //   height: 10,
+                      //   thickness: 1,
+                      // ),
+
+                      ///===== Top of Has AutomobileComponent =====//
+                      Obx(
+                        () => RowContentInputWidget(
+                          centerWidget: CustomTextWidget(
+                            marginLeft: AppSize.s12,
+                            textAlign: TextAlign.center,
+                            text: 'haveVehicle'.tr,
+                            fontSize: AppSize.s16,
+                          ),
+                          suffixWidgetFlex: 20,
+                          suffixWidget: Switch(
+                            value: controller.hasAutoMobileRxBool.value,
+                            onChanged: (value) {
+                              controller.hasAutoMobileRxBool.value =
+                                  switchingBooleanValue(
+                                boolValue: controller.hasAutoMobileRxBool.value,
+                              );
+                            },
+                            activeTrackColor: ColorsManager.primary25,
+                            activeColor: ColorsManager.primary,
+                          ),
+                        ),
+                      ),
+                      //===== Bottom of Has AutomobileComponent =====//
+
                       ///===== Top of Address Information Component =====//
                       Align(
                         alignment: Alignment.centerLeft,

@@ -830,37 +830,44 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     children: pageData[7]
                                         .allSkills!
                                         .map(
-                                          (element) => Obx(
-                                            () => Padding(
-                                              padding: const EdgeInsets.only(
-                                                right: AppSize.s8,
-                                                bottom: AppSize.s12,
-                                              ),
-                                              child: TextCardClickableWidget(
-                                                isCenterText: false,
-                                                text: element.label ??
-                                                    element.category.toString(),
-                                                maxLine:
-                                                    controller.isUpdate.value ==
-                                                            true
-                                                        ? 3
-                                                        : 3,
-                                                fontSize: AppSize.s24,
-                                                itemList: controller
-                                                    .goodAtfieldSelectedList,
-                                                item: element,
-                                                onClick: () {
-                                                  controller
-                                                      .addOrRemoveDataInList(
-                                                    pageIndex: 7,
-                                                    addToList: controller
-                                                        .goodAtfieldSelectedList,
-                                                    itemToBeAdd: element,
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ),
+                                          (element) => element.type ==
+                                                  'hard skill'
+                                              ? Obx(
+                                                  () => Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      right: AppSize.s8,
+                                                      bottom: AppSize.s8,
+                                                    ),
+                                                    child:
+                                                        TextCardClickableWidget(
+                                                      isCenterText: false,
+                                                      text: element.label ??
+                                                          element.category
+                                                              .toString(),
+                                                      maxLine: controller
+                                                                  .isUpdate
+                                                                  .value ==
+                                                              true
+                                                          ? 3
+                                                          : 3,
+                                                      fontSize: AppSize.s14,
+                                                      itemList: controller
+                                                          .goodAtfieldSelectedList,
+                                                      item: element,
+                                                      onClick: () {
+                                                        controller
+                                                            .addOrRemoveDataInList(
+                                                          pageIndex: 7,
+                                                          addToList: controller
+                                                              .goodAtfieldSelectedList,
+                                                          itemToBeAdd: element,
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                )
+                                              : Container(),
                                         )
                                         .toSet()
                                         .toList(),
@@ -884,37 +891,44 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     children: pageData[7]
                                         .allSkills!
                                         .map(
-                                          (element) => Obx(
-                                            () => Padding(
-                                              padding: const EdgeInsets.only(
-                                                right: AppSize.s8,
-                                                bottom: AppSize.s12,
-                                              ),
-                                              child: TextCardClickableWidget(
-                                                isCenterText: false,
-                                                text: element.label ??
-                                                    element.category.toString(),
-                                                maxLine:
-                                                    controller.isUpdate.value ==
-                                                            true
-                                                        ? 3
-                                                        : 3,
-                                                fontSize: AppSize.s24,
-                                                itemList: controller
-                                                    .goodAtfieldSelectedList,
-                                                item: element,
-                                                onClick: () {
-                                                  controller
-                                                      .addOrRemoveDataInList(
-                                                    pageIndex: 7,
-                                                    addToList: controller
-                                                        .goodAtfieldSelectedList,
-                                                    itemToBeAdd: element,
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ),
+                                          (element) => element.type ==
+                                                  'soft skill'
+                                              ? Obx(
+                                                  () => Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      right: AppSize.s8,
+                                                      bottom: AppSize.s8,
+                                                    ),
+                                                    child:
+                                                        TextCardClickableWidget(
+                                                      isCenterText: false,
+                                                      text: element.label ??
+                                                          element.category
+                                                              .toString(),
+                                                      maxLine: controller
+                                                                  .isUpdate
+                                                                  .value ==
+                                                              true
+                                                          ? 3
+                                                          : 3,
+                                                      fontSize: AppSize.s14,
+                                                      itemList: controller
+                                                          .goodAtfieldSelectedList,
+                                                      item: element,
+                                                      onClick: () {
+                                                        controller
+                                                            .addOrRemoveDataInList(
+                                                          pageIndex: 7,
+                                                          addToList: controller
+                                                              .goodAtfieldSelectedList,
+                                                          itemToBeAdd: element,
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                )
+                                              : Container(),
                                         )
                                         .toSet()
                                         .toList(),

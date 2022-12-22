@@ -49,71 +49,71 @@ class ProfileHeaderComponent extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        Positioned(
-          top: 5.0,
-          right: 50.0,
-          child: controller!.homeController.userToken!.accountType == 'student'
-              ? CustomIconButtonWidget(
-                  iconData: Icons.contact_page_outlined,
-                  iconColor: ColorsManager.grey300,
-                  tooltip: 'Settings',
-                  onClick: () => Get.dialog(
-                    ConfirmationDialogWidget(
-                      dialogTitle: 'jobTitle'.tr,
-                      contentWidget:
-                          // CustomTextWidget(text: 'CV body'.tr),
-                          TextField(
-                        controller: controller!.jobTitleTextCtrl,
-                        // focusNode: ref.read(messageController).messageFieldNode,
-                        // onTap: ref.read(emojiVisiblityController.notifier).onFieldTap,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                          isCollapsed: true,
-                          isDense: true,
-                          hintText: 'jobTitleHint'.tr,
-                          border: InputBorder.none,
-                        ),
-                        maxLines: 2,
-                        // onChanged: controller.onChangedTextCtrl,
-                      ),
-                      actionWidget: OutlinedButton.icon(
-                        onPressed: () async => {await controller!.generateCV()},
-                        icon: const Icon(
-                          IconsManager.check,
-                          color: Colors.white,
-                        ),
-                        label: CustomTextWidget(
-                          marginRight: AppSize.s24,
-                          text: 'generateCv'.tr,
-                          color: Colors.red,
-                        ),
-                      ),
-                      onPressed: null,
-                    ),
-                  ),
-                )
-              : controller!.enterpriseSwitching.value == true
-                  ? CustomIconButtonWidget(
-                      iconData: Icons.person,
-                      iconColor: ColorsManager.grey300,
-                      tooltip: 'User Profile',
-                      onClick: () => controller!.enterpriseSwitching.value =
-                          controller!.updateSwitchingToggle(
-                        switchingNewValue:
-                            controller!.enterpriseSwitching.value,
-                      ),
-                    )
-                  : CustomIconButtonWidget(
-                      iconData: Icons.location_city,
-                      iconColor: ColorsManager.grey300,
-                      tooltip: 'Enterprise Profile',
-                      onClick: () => controller!.enterpriseSwitching.value =
-                          controller!.updateSwitchingToggle(
-                        switchingNewValue:
-                            controller!.enterpriseSwitching.value,
-                      ),
-                    ),
-        ),
+        // Positioned(
+        //   top: 5.0,
+        //   right: 50.0,
+        //   child: controller!.homeController.userToken!.accountType == 'student'
+        //       ? CustomIconButtonWidget(
+        //           iconData: Icons.contact_page_outlined,
+        //           iconColor: ColorsManager.grey300,
+        //           tooltip: 'Settings',
+        //           onClick: () => Get.dialog(
+        //             ConfirmationDialogWidget(
+        //               dialogTitle: 'jobTitle'.tr,
+        //               contentWidget:
+        //                   // CustomTextWidget(text: 'CV body'.tr),
+        //                   TextField(
+        //                 controller: controller!.jobTitleTextCtrl,
+        //                 // focusNode: ref.read(messageController).messageFieldNode,
+        //                 // onTap: ref.read(emojiVisiblityController.notifier).onFieldTap,
+        //                 decoration: InputDecoration(
+        //                   contentPadding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+        //                   isCollapsed: true,
+        //                   isDense: true,
+        //                   hintText: 'jobTitleHint'.tr,
+        //                   border: InputBorder.none,
+        //                 ),
+        //                 maxLines: 2,
+        //                 // onChanged: controller.onChangedTextCtrl,
+        //               ),
+        //               actionWidget: OutlinedButton.icon(
+        //                 onPressed: () async => {await controller!.generateCV()},
+        //                 icon: const Icon(
+        //                   IconsManager.check,
+        //                   color: Colors.white,
+        //                 ),
+        //                 label: CustomTextWidget(
+        //                   marginRight: AppSize.s24,
+        //                   text: 'generateCv'.tr,
+        //                   color: Colors.red,
+        //                 ),
+        //               ),
+        //               onPressed: null,
+        //             ),
+        //           ),
+        //         )
+        //       : controller!.enterpriseSwitching.value == true
+        //           ? CustomIconButtonWidget(
+        //               iconData: Icons.person,
+        //               iconColor: ColorsManager.grey300,
+        //               tooltip: 'User Profile',
+        //               onClick: () => controller!.enterpriseSwitching.value =
+        //                   controller!.updateSwitchingToggle(
+        //                 switchingNewValue:
+        //                     controller!.enterpriseSwitching.value,
+        //               ),
+        //             )
+        //           : CustomIconButtonWidget(
+        //               iconData: Icons.location_city,
+        //               iconColor: ColorsManager.grey300,
+        //               tooltip: 'Enterprise Profile',
+        //               onClick: () => controller!.enterpriseSwitching.value =
+        //                   controller!.updateSwitchingToggle(
+        //                 switchingNewValue:
+        //                     controller!.enterpriseSwitching.value,
+        //               ),
+        //             ),
+        // ),
         Positioned(
           top: 5.0,
           right: 0.0,

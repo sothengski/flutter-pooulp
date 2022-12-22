@@ -372,14 +372,12 @@ class EditUserInformationController extends GetxController {
 
       final StudentProfileModel studentProfileInfoToBeUpdate =
           StudentProfileModel(
-        drivingLicense:
-            profileController.studentInfoRepsonse.value.drivingLicense,
+        drivingLicense: drivingLicenseRxBool.value,
         shifting: profileController.studentInfoRepsonse.value.shifting,
         radius: profileController.studentInfoRepsonse.value.radius,
         telecommuting:
             profileController.studentInfoRepsonse.value.telecommuting,
-        hasAutomobile:
-            profileController.studentInfoRepsonse.value.hasAutomobile,
+        hasAutomobile: hasAutoMobileRxBool.value,
         facebookLink: profileController.studentInfoRepsonse.value.facebookLink,
         linkedinLink: linkedInProfile,
         whatsappLink: profileController.studentInfoRepsonse.value.whatsappLink,

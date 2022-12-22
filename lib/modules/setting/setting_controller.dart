@@ -20,6 +20,7 @@ class SettingController extends GetxController {
   RxBool drivingLicenseRxBool = false.obs;
   RxBool hasAutoMobileRxBool = false.obs;
   RxBool emailNotificationRxBool = false.obs;
+  RxBool newLetterNotificationRxBool = false.obs;
   RxInt radiusRxInt = 10.obs;
   RxString languageRxString = 'en'.obs;
   RxBool isVerifyEmailSent = false.obs;

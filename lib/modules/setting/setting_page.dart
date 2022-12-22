@@ -521,6 +521,42 @@ class SettingPage extends GetView<SettingController> {
                         thickness: 1,
                       ),
 
+                      ///===== Top of NewLetter Notification Component =====//
+                      InkWell(
+                        onTap: () {
+                          controller.newLetterNotificationRxBool.value =
+                              controller.updatingBoolValue(
+                            newValue:
+                                !controller.newLetterNotificationRxBool.value,
+                          )!;
+                        },
+                        child: RowContentInputWidget(
+                          centerWidget: CustomTextWidget(
+                            marginLeft: AppSize.s12,
+                            textAlign: TextAlign.center,
+                            text: 'newLetterNotifications'.tr,
+                            fontSize: AppSize.s16,
+                          ),
+                          suffixWidgetFlex: 20,
+                          suffixWidget: Switch(
+                            value: controller.newLetterNotificationRxBool.value,
+                            onChanged: (value) {
+                              controller.newLetterNotificationRxBool.value =
+                                  controller.updatingBoolValue(
+                                newValue: value,
+                              )!;
+                            },
+                            activeTrackColor: ColorsManager.primary25,
+                            activeColor: ColorsManager.primary,
+                          ),
+                        ),
+                      ),
+                      //===== Bottom of NewLetter Notification Component =====//
+                      const Divider(
+                        height: 10,
+                        thickness: 1,
+                      ),
+
                       ///===== Top of Change Password Component =====//
                       InkWell(
                         onTap: () {

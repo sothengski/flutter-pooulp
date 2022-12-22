@@ -77,7 +77,7 @@ class TextCardClickableWidget extends StatelessWidget {
                   text: text,
                   textAlign: TextAlign.center,
                   maxLine: maxLine,
-                  fontSize: AppSize.s16,
+                  fontSize: fontSize,
                   color: itemList!.contains(item)
                       ? ColorsManager.white
                       : ColorsManager.black,
@@ -89,7 +89,7 @@ class TextCardClickableWidget extends StatelessWidget {
                         text: text,
                         textAlign: TextAlign.center,
                         maxLine: maxLine,
-                        fontSize: AppSize.s16,
+                        fontSize: fontSize,
                         color: itemList!.contains(item)
                             ? ColorsManager.white
                             : ColorsManager.black,

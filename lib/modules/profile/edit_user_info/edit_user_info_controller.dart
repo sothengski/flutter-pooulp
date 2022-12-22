@@ -374,7 +374,7 @@ class EditUserInformationController extends GetxController {
           StudentProfileModel(
         drivingLicense: drivingLicenseRxBool.value,
         shifting: profileController.studentInfoRepsonse.value.shifting,
-        radius: profileController.studentInfoRepsonse.value.radius,
+        radius: profileController.studentInfoRepsonse.value.radius! ~/ 1000,
         telecommuting:
             profileController.studentInfoRepsonse.value.telecommuting,
         hasAutomobile: hasAutoMobileRxBool.value,

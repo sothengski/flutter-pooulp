@@ -99,7 +99,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                             controller.isUpdate.value == true
                                                 ? 3
                                                 : 3,
-                                        fontSize: AppSize.s24,
+                                        // fontSize: AppSize.s16,
                                         itemList:
                                             controller.lookingForSelectedList,
                                         item: item,
@@ -175,7 +175,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                             true
                                                         ? 3
                                                         : 3,
-                                                    fontSize: AppSize.s24,
+                                                    // fontSize: AppSize.s24,
                                                     itemList: controller
                                                         .internshipTypeSelectedList,
                                                     item: pageData[2]
@@ -265,7 +265,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                             true
                                                         ? 3
                                                         : 3,
-                                                    fontSize: AppSize.s24,
+                                                    // fontSize: AppSize.s24,
                                                     itemList: controller
                                                         .internshipPeriodSelectedList,
                                                     item: pageData[2]
@@ -322,7 +322,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                         true
                                                     ? 3
                                                     : 3,
-                                            fontSize: AppSize.s24,
+                                            // fontSize: AppSize.s24,
                                             itemList: controller
                                                 .internshipInterestedInSelectedList,
                                             item: element,
@@ -502,7 +502,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                         //                     controller.isUpdate.value == true
                         //                         ? 3
                         //                         : 3,
-                        //                 fontSize: AppSize.s24,
+                        // fontSize: AppSize.s24,
                         //                 itemList: controller
                         //                     .internshipLanguageSelectedList,
                         //                 item: controller.onboardingPages[4]
@@ -553,7 +553,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                         true
                                                     ? 3
                                                     : 3,
-                                            fontSize: AppSize.s24,
+                                            // fontSize: AppSize.s24,
                                             itemList: controller
                                                 .studentJobInterestedInSelectedList,
                                             item: element,
@@ -851,7 +851,6 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                               true
                                                           ? 3
                                                           : 3,
-                                                      fontSize: AppSize.s14,
                                                       itemList: controller
                                                           .goodAtfieldSelectedList,
                                                       item: element,
@@ -912,7 +911,6 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                               true
                                                           ? 3
                                                           : 3,
-                                                      fontSize: AppSize.s14,
                                                       itemList: controller
                                                           .goodAtfieldSelectedList,
                                                       item: element,
@@ -960,7 +958,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                               controller.isUpdate.value == true
                                                   ? 3
                                                   : 3,
-                                          fontSize: AppSize.s24,
+                                          // fontSize: AppSize.s24,
                                           itemList: controller
                                               .knowFromSourceSelectedList,
                                           item: element,

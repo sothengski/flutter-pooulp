@@ -812,44 +812,116 @@ class OnboardingPage extends GetView<OnboardingController> {
                           title: pageData[7].title,
                           // subTitle: pageData[7].title,
                           subTitle2: "(${'multipleSelectLabel'.tr})",
-                          bodyPageWidget: SingleChildScrollView(
-                            child: Wrap(
-                              children: pageData[7]
-                                  .allSkills!
-                                  .map(
-                                    (element) => Obx(
-                                      () => Padding(
-                                        padding: const EdgeInsets.only(
-                                          right: AppSize.s8,
-                                          bottom: AppSize.s12,
-                                        ),
-                                        child: TextCardClickableWidget(
-                                          isCenterText: false,
-                                          text: element.label ??
-                                              element.category.toString(),
-                                          maxLine:
-                                              controller.isUpdate.value == true
-                                                  ? 3
-                                                  : 3,
-                                          fontSize: AppSize.s24,
-                                          itemList: controller
-                                              .goodAtfieldSelectedList,
-                                          item: element,
-                                          onClick: () {
-                                            controller.addOrRemoveDataInList(
-                                              pageIndex: 7,
-                                              addToList: controller
-                                                  .goodAtfieldSelectedList,
-                                              itemToBeAdd: element,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                  .toSet()
-                                  .toList(),
-                            ),
+                          bodyPageWidget: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: CustomTextWidget(
+                                  text: 'hardSkills'.tr,
+                                  color: ColorsManager.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: AppSize.s18,
+                                  marginBottom: AppSize.s12,
+                                ),
+                              ),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: Wrap(
+                                    children: pageData[7]
+                                        .allSkills!
+                                        .map(
+                                          (element) => Obx(
+                                            () => Padding(
+                                              padding: const EdgeInsets.only(
+                                                right: AppSize.s8,
+                                                bottom: AppSize.s12,
+                                              ),
+                                              child: TextCardClickableWidget(
+                                                isCenterText: false,
+                                                text: element.label ??
+                                                    element.category.toString(),
+                                                maxLine:
+                                                    controller.isUpdate.value ==
+                                                            true
+                                                        ? 3
+                                                        : 3,
+                                                fontSize: AppSize.s24,
+                                                itemList: controller
+                                                    .goodAtfieldSelectedList,
+                                                item: element,
+                                                onClick: () {
+                                                  controller
+                                                      .addOrRemoveDataInList(
+                                                    pageIndex: 7,
+                                                    addToList: controller
+                                                        .goodAtfieldSelectedList,
+                                                    itemToBeAdd: element,
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toSet()
+                                        .toList(),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: AppSize.s12),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: CustomTextWidget(
+                                  text: 'softSkills'.tr,
+                                  color: ColorsManager.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: AppSize.s18,
+                                  marginBottom: AppSize.s12,
+                                ),
+                              ),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: Wrap(
+                                    children: pageData[7]
+                                        .allSkills!
+                                        .map(
+                                          (element) => Obx(
+                                            () => Padding(
+                                              padding: const EdgeInsets.only(
+                                                right: AppSize.s8,
+                                                bottom: AppSize.s12,
+                                              ),
+                                              child: TextCardClickableWidget(
+                                                isCenterText: false,
+                                                text: element.label ??
+                                                    element.category.toString(),
+                                                maxLine:
+                                                    controller.isUpdate.value ==
+                                                            true
+                                                        ? 3
+                                                        : 3,
+                                                fontSize: AppSize.s24,
+                                                itemList: controller
+                                                    .goodAtfieldSelectedList,
+                                                item: element,
+                                                onClick: () {
+                                                  controller
+                                                      .addOrRemoveDataInList(
+                                                    pageIndex: 7,
+                                                    addToList: controller
+                                                        .goodAtfieldSelectedList,
+                                                    itemToBeAdd: element,
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toSet()
+                                        .toList(),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
 

@@ -61,6 +61,9 @@ class EditUserInformationController extends GetxController {
   String addressLat = '';
   String addressLng = '';
 
+  RxBool drivingLicenseRxBool = false.obs;
+  RxBool hasAutoMobileRxBool = false.obs;
+
   Rx<GooglePlaceDetailModel> googlePlaceDetail = GooglePlaceDetailModel().obs;
 
   Rx<CountryModel> selectedCountryPhoneNumber = const CountryModel().obs;

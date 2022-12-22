@@ -102,6 +102,11 @@ class EditUserInformationController extends GetxController {
         profileController.studentInfoRepsonse.value.youtubeLink!;
     descriptionCtrl.text = profileController.userProfileInfo.value.description!;
 
+    drivingLicenseRxBool.value =
+        profileController.studentInfoRepsonse.value.drivingLicense!;
+    hasAutoMobileRxBool.value =
+        profileController.studentInfoRepsonse.value.hasAutomobile!;
+
     countryCtrl.text = profileController.userProfileInfo.value.addressCountry!;
     cityStateCtrl.text = profileController.userProfileInfo.value.addressCity!;
     zipCodeCtrl.text = profileController.userProfileInfo.value.addressZip!;

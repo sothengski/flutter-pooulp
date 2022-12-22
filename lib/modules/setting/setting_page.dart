@@ -41,232 +41,232 @@ class SettingPage extends GetView<SettingController> {
             child: Column(
               children: [
                 ///===== Top of More Information Component =====//
-                CustomContainerWidget(
-                  leftMargin: AppSize.s12,
-                  rightMargin: AppSize.s12,
-                  topMargin: AppSize.s12,
-                  bottomMargin: AppSize.s12,
-                  // leftTitle: 'settings.moreInformation'.tr,
-                  // titleFontSize: AppSize.s16,
-                  // titleFontWeight: FontWeight.bold,
-                  // titleTopPadding: AppSize.s12,
-                  // titleBottomPadding: AppSize.s4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ///===== Top of Telecommuting Component =====//
-                      RowContentInputWidget(
-                        centerWidget: CustomTextWidget(
-                          marginLeft: AppSize.s12,
-                          textAlign: TextAlign.center,
-                          text: 'telecommuting'.tr,
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidgetFlex: 20,
-                        suffixWidget: Switch(
-                          value: controller.telecommutingRxBool.value,
-                          onChanged: (value) {
-                            controller.telecommutingRxBool.value =
-                                controller.updatingBoolValue(newValue: value)!;
-                          },
-                          activeTrackColor: ColorsManager.primary25,
-                          activeColor: ColorsManager.primary,
-                        ),
-                      ),
-                      //===== Bottom of Telecommuting Component =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                // CustomContainerWidget(
+                //   leftMargin: AppSize.s12,
+                //   rightMargin: AppSize.s12,
+                //   topMargin: AppSize.s12,
+                //   bottomMargin: AppSize.s12,
+                //   // leftTitle: 'settings.moreInformation'.tr,
+                //   // titleFontSize: AppSize.s16,
+                //   // titleFontWeight: FontWeight.bold,
+                //   // titleTopPadding: AppSize.s12,
+                //   // titleBottomPadding: AppSize.s4,
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       ///===== Top of Telecommuting Component =====//
+                //       RowContentInputWidget(
+                //         centerWidget: CustomTextWidget(
+                //           marginLeft: AppSize.s12,
+                //           textAlign: TextAlign.center,
+                //           text: 'telecommuting'.tr,
+                //           fontSize: AppSize.s16,
+                //         ),
+                //         suffixWidgetFlex: 20,
+                //         suffixWidget: Switch(
+                //           value: controller.telecommutingRxBool.value,
+                //           onChanged: (value) {
+                //             controller.telecommutingRxBool.value =
+                //                 controller.updatingBoolValue(newValue: value)!;
+                //           },
+                //           activeTrackColor: ColorsManager.primary25,
+                //           activeColor: ColorsManager.primary,
+                //         ),
+                //       ),
+                //       //===== Bottom of Telecommuting Component =====//
+                //       const Divider(
+                //         height: 10,
+                //         thickness: 1,
+                //       ),
 
-                      ///===== Top of ShiftingComponent =====//
-                      // RowContentInputWidget(
-                      //   centerWidget: CustomTextWidget(
-                      //     marginLeft: AppSize.s12,
-                      //     textAlign: TextAlign.center,
-                      //     text: 'settings.shifting'.tr,
-                      //     fontSize: AppSize.s16,
-                      //   ),
-                      //   suffixWidgetFlex: 20,
-                      //   suffixWidget: Switch(
-                      //     value: controller.shiftingRxBool.value,
-                      //     onChanged: (value) {
-                      //       controller.shiftingRxBool.value =
-                      //           controller.updatingBoolValue(newValue: value)!;
-                      //     },
-                      //     activeTrackColor: ColorsManager.primary25,
-                      //     activeColor: ColorsManager.primary,
-                      //   ),
-                      // ),
-                      // //===== Bottom of ShiftingComponent =====//
-                      // const Divider(
-                      //   height: 10,
-                      //   thickness: 1,
-                      // ),
+                //       ///===== Top of ShiftingComponent =====//
+                //       // RowContentInputWidget(
+                //       //   centerWidget: CustomTextWidget(
+                //       //     marginLeft: AppSize.s12,
+                //       //     textAlign: TextAlign.center,
+                //       //     text: 'settings.shifting'.tr,
+                //       //     fontSize: AppSize.s16,
+                //       //   ),
+                //       //   suffixWidgetFlex: 20,
+                //       //   suffixWidget: Switch(
+                //       //     value: controller.shiftingRxBool.value,
+                //       //     onChanged: (value) {
+                //       //       controller.shiftingRxBool.value =
+                //       //           controller.updatingBoolValue(newValue: value)!;
+                //       //     },
+                //       //     activeTrackColor: ColorsManager.primary25,
+                //       //     activeColor: ColorsManager.primary,
+                //       //   ),
+                //       // ),
+                //       // //===== Bottom of ShiftingComponent =====//
+                //       // const Divider(
+                //       //   height: 10,
+                //       //   thickness: 1,
+                //       // ),
 
-                      ///===== Top of Driving License Component =====//
-                      RowContentInputWidget(
-                        centerWidget: CustomTextWidget(
-                          marginLeft: AppSize.s12,
-                          textAlign: TextAlign.center,
-                          text: 'haveDrivingLicense'.tr,
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidgetFlex: 20,
-                        suffixWidget: Switch(
-                          value: controller.drivingLicenseRxBool.value,
-                          onChanged: (value) {
-                            controller.drivingLicenseRxBool.value =
-                                controller.updatingBoolValue(newValue: value)!;
-                          },
-                          activeTrackColor: ColorsManager.primary25,
-                          activeColor: ColorsManager.primary,
-                        ),
-                      ),
-                      //===== Bottom of Driving License Component =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                //       ///===== Top of Driving License Component =====//
+                //       RowContentInputWidget(
+                //         centerWidget: CustomTextWidget(
+                //           marginLeft: AppSize.s12,
+                //           textAlign: TextAlign.center,
+                //           text: 'haveDrivingLicense'.tr,
+                //           fontSize: AppSize.s16,
+                //         ),
+                //         suffixWidgetFlex: 20,
+                //         suffixWidget: Switch(
+                //           value: controller.drivingLicenseRxBool.value,
+                //           onChanged: (value) {
+                //             controller.drivingLicenseRxBool.value =
+                //                 controller.updatingBoolValue(newValue: value)!;
+                //           },
+                //           activeTrackColor: ColorsManager.primary25,
+                //           activeColor: ColorsManager.primary,
+                //         ),
+                //       ),
+                //       //===== Bottom of Driving License Component =====//
+                //       const Divider(
+                //         height: 10,
+                //         thickness: 1,
+                //       ),
 
-                      ///===== Top of Has AutomobileComponent =====//
-                      RowContentInputWidget(
-                        centerWidget: CustomTextWidget(
-                          marginLeft: AppSize.s12,
-                          textAlign: TextAlign.center,
-                          text: 'motorized'.tr,
-                          fontSize: AppSize.s16,
-                        ),
-                        suffixWidgetFlex: 20,
-                        suffixWidget: Switch(
-                          value: controller.hasAutoMobileRxBool.value,
-                          onChanged: (value) {
-                            controller.hasAutoMobileRxBool.value =
-                                controller.updatingBoolValue(newValue: value)!;
-                          },
-                          activeTrackColor: ColorsManager.primary25,
-                          activeColor: ColorsManager.primary,
-                        ),
-                      ),
-                      //===== Bottom of Has AutomobileComponent =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                //       ///===== Top of Has AutomobileComponent =====//
+                //       RowContentInputWidget(
+                //         centerWidget: CustomTextWidget(
+                //           marginLeft: AppSize.s12,
+                //           textAlign: TextAlign.center,
+                //           text: 'motorized'.tr,
+                //           fontSize: AppSize.s16,
+                //         ),
+                //         suffixWidgetFlex: 20,
+                //         suffixWidget: Switch(
+                //           value: controller.hasAutoMobileRxBool.value,
+                //           onChanged: (value) {
+                //             controller.hasAutoMobileRxBool.value =
+                //                 controller.updatingBoolValue(newValue: value)!;
+                //           },
+                //           activeTrackColor: ColorsManager.primary25,
+                //           activeColor: ColorsManager.primary,
+                //         ),
+                //       ),
+                //       //===== Bottom of Has AutomobileComponent =====//
+                //       const Divider(
+                //         height: 10,
+                //         thickness: 1,
+                //       ),
 
-                      ///===== Top of Internship Period Component =====//
-                      InkWell(
-                        onTap: () => Get.dialog(
-                          MaterialDialogWidget(
-                            title: 'selectOption'.tr,
-                            contentWidget: ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: controller.internshipPeriodList.length,
-                              itemBuilder: (context, index) {
-                                return RowDataSelectionWidget.radioButton(
-                                  isLeftSideText: false,
-                                  isClickingValue: intComparation(
-                                    object1: controller
-                                        .internshipPeriodList[index].id,
-                                    object2: controller
-                                        .internshipPeriodSelected.value.id,
-                                  ),
-                                  text: controller
-                                      .internshipPeriodList[index].label,
-                                  onPressed: () {
-                                    controller.internshipPeriodSelected.value =
-                                        controller.internshipPeriodList[index];
-                                    controller.isUpdating.value = true;
-                                    Get.back();
-                                  },
-                                );
-                              },
-                              separatorBuilder: (context, index) {
-                                return const Divider(
-                                  height: 1.0,
-                                  color: ColorsManager.grey300,
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(vertical: AppSize.s12),
-                          child: RowContentInputWidget(
-                            centerWidgetFlex: 50,
-                            centerWidget: CustomTextWidget(
-                              marginLeft: AppSize.s12,
-                              textAlign: TextAlign.center,
-                              text: 'internshipPeriod'.tr,
-                              fontSize: AppSize.s16,
-                            ),
-                            suffixWidgetFlex: 50,
-                            suffixWidget: Padding(
-                              padding:
-                                  const EdgeInsets.only(right: AppSize.s12),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  CustomTextWidget(
-                                    textAlign: TextAlign.center,
-                                    text: controller
-                                        .internshipPeriodSelected.value.label,
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: AppSize.s4,
-                                    ),
-                                    child: Icon(
-                                      Icons.keyboard_arrow_right_outlined,
-                                      color: ColorsManager.grey,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      //===== Bottom of Internship Period Component =====//
+                //       ///===== Top of Internship Period Component =====//
+                //       InkWell(
+                //         onTap: () => Get.dialog(
+                //           MaterialDialogWidget(
+                //             title: 'selectOption'.tr,
+                //             contentWidget: ListView.separated(
+                //               shrinkWrap: true,
+                //               itemCount: controller.internshipPeriodList.length,
+                //               itemBuilder: (context, index) {
+                //                 return RowDataSelectionWidget.radioButton(
+                //                   isLeftSideText: false,
+                //                   isClickingValue: intComparation(
+                //                     object1: controller
+                //                         .internshipPeriodList[index].id,
+                //                     object2: controller
+                //                         .internshipPeriodSelected.value.id,
+                //                   ),
+                //                   text: controller
+                //                       .internshipPeriodList[index].label,
+                //                   onPressed: () {
+                //                     controller.internshipPeriodSelected.value =
+                //                         controller.internshipPeriodList[index];
+                //                     controller.isUpdating.value = true;
+                //                     Get.back();
+                //                   },
+                //                 );
+                //               },
+                //               separatorBuilder: (context, index) {
+                //                 return const Divider(
+                //                   height: 1.0,
+                //                   color: ColorsManager.grey300,
+                //                 );
+                //               },
+                //             ),
+                //           ),
+                //         ),
+                //         child: Padding(
+                //           padding:
+                //               const EdgeInsets.symmetric(vertical: AppSize.s12),
+                //           child: RowContentInputWidget(
+                //             centerWidgetFlex: 50,
+                //             centerWidget: CustomTextWidget(
+                //               marginLeft: AppSize.s12,
+                //               textAlign: TextAlign.center,
+                //               text: 'internshipPeriod'.tr,
+                //               fontSize: AppSize.s16,
+                //             ),
+                //             suffixWidgetFlex: 50,
+                //             suffixWidget: Padding(
+                //               padding:
+                //                   const EdgeInsets.only(right: AppSize.s12),
+                //               child: Row(
+                //                 mainAxisAlignment: MainAxisAlignment.end,
+                //                 children: [
+                //                   CustomTextWidget(
+                //                     textAlign: TextAlign.center,
+                //                     text: controller
+                //                         .internshipPeriodSelected.value.label,
+                //                   ),
+                //                   const Padding(
+                //                     padding: EdgeInsets.symmetric(
+                //                       horizontal: AppSize.s4,
+                //                     ),
+                //                     child: Icon(
+                //                       Icons.keyboard_arrow_right_outlined,
+                //                       color: ColorsManager.grey,
+                //                     ),
+                //                   ),
+                //                 ],
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //       //===== Bottom of Internship Period Component =====//
 
-                      ///===== Top of Radius Component =====//
-                      // RowContentInputWidget(
-                      //   centerWidgetFlex: 50,
-                      //   centerWidget: CustomTextWidget(
-                      //     marginLeft: AppSize.s12,
-                      //     textAlign: TextAlign.center,
-                      //     text:
-                      //         '${'settings.radius'.tr}(Km): ${controller.radiusRxInt.value}',
-                      //     fontSize: AppSize.s16,
-                      //   ),
-                      //   suffixWidgetFlex: 50,
-                      //   suffixWidget: Slider(
-                      //     value: controller.radiusRxInt.value.toDouble(),
-                      //     min: 5.0,
-                      //     max: 100.0,
-                      //     divisions: 100,
-                      //     activeColor: ColorsManager.primary,
-                      //     inactiveColor: ColorsManager.grey300,
-                      //     thumbColor: ColorsManager.primary,
-                      //     label: '${controller.radiusRxInt.value}',
-                      //     onChanged: (double newValue) {
-                      //       controller.isUpdating.value = true;
-                      //       controller.radiusRxInt.value = newValue.toInt();
-                      //     },
-                      //   ),
-                      // ),
-                      //===== Bottom of Radius Component =====//
-                    ],
-                  ),
-                ),
+                //       ///===== Top of Radius Component =====//
+                //       // RowContentInputWidget(
+                //       //   centerWidgetFlex: 50,
+                //       //   centerWidget: CustomTextWidget(
+                //       //     marginLeft: AppSize.s12,
+                //       //     textAlign: TextAlign.center,
+                //       //     text:
+                //       //         '${'settings.radius'.tr}(Km): ${controller.radiusRxInt.value}',
+                //       //     fontSize: AppSize.s16,
+                //       //   ),
+                //       //   suffixWidgetFlex: 50,
+                //       //   suffixWidget: Slider(
+                //       //     value: controller.radiusRxInt.value.toDouble(),
+                //       //     min: 5.0,
+                //       //     max: 100.0,
+                //       //     divisions: 100,
+                //       //     activeColor: ColorsManager.primary,
+                //       //     inactiveColor: ColorsManager.grey300,
+                //       //     thumbColor: ColorsManager.primary,
+                //       //     label: '${controller.radiusRxInt.value}',
+                //       //     onChanged: (double newValue) {
+                //       //       controller.isUpdating.value = true;
+                //       //       controller.radiusRxInt.value = newValue.toInt();
+                //       //     },
+                //       //   ),
+                //       // ),
+                //       //===== Bottom of Radius Component =====//
+                //     ],
+                //   ),
+                // ),
                 //===== Bottom of More Information Component =====//
 
                 ///===== Top of Settings Component =====//
                 CustomContainerWidget(
                   leftMargin: AppSize.s12,
                   rightMargin: AppSize.s12,
-                  // topMargin: AppSize.s12,
+                  topMargin: AppSize.s12,
                   bottomMargin: AppSize.s12,
                   leftTitle: 'settings'.tr,
                   titleFontSize: AppSize.s16,

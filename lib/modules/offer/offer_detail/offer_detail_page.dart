@@ -753,6 +753,36 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                     ),
                                   //===== Job Description Component =====//
 
+                                  ///===== Long Description Component =====//
+                                  if (controller.jobOfferDetail!.value
+                                      .longDescription!.isNotEmpty)
+                                    OutlineContainerWidget(
+                                      title: 'jobDescription'.tr,
+                                      titleColor: ColorsManager.primaryBlue,
+                                      childWidget: CustomTextWidget(
+                                        text:
+                                            '${controller.jobOfferDetail!.value.longDescription}',
+                                        fontWeight: FontWeightManager.regular,
+                                        maxLine: 200,
+                                      ),
+                                    ),
+                                  //===== Long Description Component =====//
+
+                                  ///===== exp Description Component =====//
+                                  if (controller.jobOfferDetail!.value
+                                      .expDescription!.isNotEmpty)
+                                    OutlineContainerWidget(
+                                      title: 'jobDescription'.tr,
+                                      titleColor: ColorsManager.primaryBlue,
+                                      childWidget: CustomTextWidget(
+                                        text:
+                                            '${controller.jobOfferDetail!.value.expDescription}',
+                                        fontWeight: FontWeightManager.regular,
+                                        maxLine: 200,
+                                      ),
+                                    ),
+                                  //===== exp Description Component =====//
+
                                   ///===== Additional Information Component =====//
                                   if (controller.jobOfferDetail!.value
                                       .additionalInfo!.isNotEmpty)

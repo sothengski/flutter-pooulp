@@ -32,7 +32,7 @@ class OfferListComponent extends StatelessWidget {
         return Obx(
           () => OfferCard(
             jobOfferItem: offerList![index],
-            isCustomActBtn: jobOfferType == OfferStrings.savedState,
+            // isCustomActBtn: jobOfferType == OfferStrings.savedState,
             jobOfferState: jobOfferType,
             // &&
             //     (offerList![index].dateOfferEnd != null &&
@@ -201,32 +201,35 @@ class OfferListComponent extends StatelessWidget {
                               ]
                             : [
                                 Expanded(
-                                  flex: 32,
-                                  key: const ValueKey(OfferStrings.applyAction),
+                                  // flex: 40,
+                                  key: const ValueKey(
+                                    OfferStrings.unSaveAction,
+                                  ),
                                   child: OutlineIconButtonWidget(
-                                    buttonTitle: 'apply'.tr,
-                                    iconData: Icons.thumb_up_outlined,
-                                    iconDataOnClick: Icons.thumb_up,
+                                    buttonTitle: 'unsave'.tr,
+                                    iconData: Icons.bookmark_remove_outlined,
+                                    iconDataOnClick: Icons.bookmark_remove,
                                     // iconColor: ColorsManager.grey600,
-                                    iconColorOnClick: ColorsManager.green,
-                                    buttonState: offerList![index].applyState,
-                                    oneTimePress: offerList![index].applyState,
+                                    iconColorOnClick:
+                                        ColorsManager.lightBlueAccent,
+                                    buttonState: offerList![index].savedState,
+                                    oneTimePress: offerList![index].savedState,
                                     onPressed: () {
                                       offerController!
                                           .onClickActionButtonJobOffer(
-                                        actionType: OfferStrings.applyAction,
+                                        actionType: OfferStrings.unSaveAction,
                                         jobOfferId: offerList![index].id,
                                       );
-                                      offerList![index].applyState =
+                                      offerList![index].savedState =
                                           offerController!
                                               .jobOfferOnClickBoolSwitching(
-                                        boolValue: offerList![index].applyState,
+                                        boolValue: offerList![index].savedState,
                                       );
                                     },
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 33,
+                                  // flex: 33,
                                   key: const ValueKey(
                                     OfferStrings.informationAction,
                                   ),
@@ -252,29 +255,26 @@ class OfferListComponent extends StatelessWidget {
                                   ),
                                 ),
                                 Expanded(
-                                  // flex: 40,
-                                  key: const ValueKey(
-                                    OfferStrings.unSaveAction,
-                                  ),
+                                  // flex: 32,
+                                  key: const ValueKey(OfferStrings.applyAction),
                                   child: OutlineIconButtonWidget(
-                                    buttonTitle: 'unsave'.tr,
-                                    iconData: Icons.bookmark_remove_outlined,
-                                    iconDataOnClick: Icons.bookmark_remove,
+                                    buttonTitle: 'apply'.tr,
+                                    iconData: Icons.thumb_up_outlined,
+                                    iconDataOnClick: Icons.thumb_up,
                                     // iconColor: ColorsManager.grey600,
-                                    iconColorOnClick:
-                                        ColorsManager.lightBlueAccent,
-                                    buttonState: offerList![index].savedState,
-                                    oneTimePress: offerList![index].savedState,
+                                    iconColorOnClick: ColorsManager.green,
+                                    buttonState: offerList![index].applyState,
+                                    oneTimePress: offerList![index].applyState,
                                     onPressed: () {
                                       offerController!
                                           .onClickActionButtonJobOffer(
-                                        actionType: OfferStrings.unSaveAction,
+                                        actionType: OfferStrings.applyAction,
                                         jobOfferId: offerList![index].id,
                                       );
-                                      offerList![index].savedState =
+                                      offerList![index].applyState =
                                           offerController!
                                               .jobOfferOnClickBoolSwitching(
-                                        boolValue: offerList![index].savedState,
+                                        boolValue: offerList![index].applyState,
                                       );
                                     },
                                   ),

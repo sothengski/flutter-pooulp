@@ -11,6 +11,8 @@ class JobOfferModel {
   final String? title;
   final String? studySubject;
   final String? description;
+  final String? longDescription;
+  final String? expDescription;
   final String? additionalInfo;
   final bool? isDraft;
   final DateTime? dateOfferStart;
@@ -58,6 +60,8 @@ class JobOfferModel {
     this.title,
     this.studySubject,
     this.description,
+    this.longDescription,
+    this.expDescription,
     this.additionalInfo,
     this.isDraft,
     this.dateOfferStart,
@@ -159,6 +163,8 @@ class JobOfferModel {
         title: json['title'] as String? ?? '',
         studySubject: json['study_subject'] as String? ?? '',
         description: json['description'] as String? ?? '',
+        longDescription: json['long_description'] as String? ?? '',
+        expDescription: json['experience_description'] as String? ?? '',
         additionalInfo: json['additional_information'] as String? ?? '',
         isDraft: json['is_draft'] as bool?,
         dateOfferStart:

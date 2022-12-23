@@ -130,6 +130,25 @@ class OfferCard extends StatelessWidget {
                             left: AppSize.s4,
                             bottom: AppSize.s10,
                           ),
+                          child: Expanded(
+                            child: CustomTextWidget(
+                              text: '${jobOfferItem!.description}...',
+                              fontSize: AppSize.s12,
+                              color: ColorsManager.grey800,
+                              maxLine: 2,
+                              marginLeft: AppSize.s4,
+                              // marginBottom: 10.0,
+                            ),
+                          ),
+                        ),
+                        //===== Location Icon & Enterprise Name Component =====//
+
+                        ///===== Location Icon & Enterprise Name Component =====//
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: AppSize.s4,
+                            bottom: AppSize.s10,
+                          ),
                           child: Row(
                             children: [
                               const Icon(

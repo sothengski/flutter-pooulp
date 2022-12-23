@@ -328,6 +328,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                     ),
                                     child: Obx(
                                       () => CountryListSelector(
+                                        languageCode: LanguageController()
+                                            .currentLanguageStore
+                                            .value,
                                         countrylist: countryList,
                                         selectedCountry: controller
                                             .selectedCountryPhoneNumber.value,

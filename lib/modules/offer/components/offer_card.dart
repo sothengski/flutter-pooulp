@@ -124,7 +124,7 @@ class OfferCard extends StatelessWidget {
                         ),
                         //===== Job Offer Title Component =====//
 
-                        ///===== Location Icon & Enterprise Name Component =====//
+                        ///===== Description Component =====//
                         Padding(
                           padding: const EdgeInsets.only(
                             left: AppSize.s4,
@@ -141,7 +141,7 @@ class OfferCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        //===== Location Icon & Enterprise Name Component =====//
+                        //===== Description Component =====//
 
                         ///===== Location Icon & Enterprise Name Component =====//
                         Padding(

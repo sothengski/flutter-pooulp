@@ -152,6 +152,9 @@ class JobOfferModel {
   String? get dateJobStartFormat => dateFormatSlashDDMMYYYY(date: dateJobStart);
   String? get dateJobEndFormat => dateFormatSlashDDMMYYYY(date: dateJobEnd);
 
+  String? get dateJobStartEndFormat =>
+      "$dateJobStartFormat ${dateJobEndFormat!.isNotEmpty ? '-' : ''} $dateJobEndFormat";
+
   factory JobOfferModel.fromRawJson(String str) =>
       JobOfferModel.fromJson(json.decode(str) as Map<String, dynamic>);
 

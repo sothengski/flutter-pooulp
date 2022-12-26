@@ -172,42 +172,46 @@ class OfferCard extends StatelessWidget {
                         //===== Location Icon & Enterprise Name Component =====//
 
                         ///===== Start Date Card Component =====//
-                        ClipRRect(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(AppSize.s4),
+                        if (jobOfferItem!.dateJobStartEndFormat!.trim() == '')
+                          Container()
+                        else
+                          ClipRRect(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(AppSize.s4),
+                            ),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: ColorsManager.grey200,
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSize.s4,
+                                vertical: AppSize.s4,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(
+                                    Icons.today_outlined,
+                                    color: ColorsManager.primaryBlue,
+                                    size: AppSize.s16,
+                                  ),
+                                  CustomTextWidget(
+                                    marginLeft: AppSize.s4,
+                                    text:
+                                        "${jobOfferItem!.dateJobStartEndFormat}",
+                                    // "${jobOfferItem!.dateJobStartFormat} - ${jobOfferItem!.dateJobEndFormat}", //${'startFrom'.tr}:
+                                    // text: 'offer.startFrom'.trParams({
+                                    //   'date':
+                                    //       '${jobOfferItem!.dateJobStartFormat}'
+                                    // }),
+                                    fontSize: AppSize.s12,
+                                    fontWeight: FontWeightManager.regular,
+                                    maxLine: 3,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              color: ColorsManager.grey200,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSize.s4,
-                              vertical: AppSize.s4,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.today_outlined,
-                                  color: ColorsManager.primaryBlue,
-                                  size: AppSize.s16,
-                                ),
-                                CustomTextWidget(
-                                  marginLeft: AppSize.s4,
-                                  text:
-                                      "${jobOfferItem!.dateJobStartFormat} - ${jobOfferItem!.dateJobEndFormat}", //${'startFrom'.tr}:
-                                  // text: 'offer.startFrom'.trParams({
-                                  //   'date':
-                                  //       '${jobOfferItem!.dateJobStartFormat}'
-                                  // }),
-                                  fontSize: AppSize.s12,
-                                  fontWeight: FontWeightManager.regular,
-                                  maxLine: 3,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
                         //===== Start Date Card Component =====//
                       ],
                     ),

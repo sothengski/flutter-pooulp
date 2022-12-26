@@ -131,7 +131,7 @@ class OfferCard extends StatelessWidget {
                             bottom: AppSize.s10,
                           ),
                           child: CustomTextWidget(
-                            text: '${jobOfferItem!.description}...',
+                            text: '${jobOfferItem!.description}',
                             fontSize: AppSize.s12,
                             color: ColorsManager.grey800,
                             maxLine: 2,

@@ -33,6 +33,8 @@ class FieldModel {
   final int? categoryId;
   final String? category;
   final String? videoUrl;
+  final int? languageSpokenLv;
+  final int? languageWrittenLv;
   int? total;
   bool? selected;
   final List<FieldModel>? subFieldList;
@@ -48,6 +50,8 @@ class FieldModel {
     this.categoryId,
     this.category,
     this.videoUrl,
+    this.languageSpokenLv,
+    this.languageWrittenLv,
     this.total,
     this.selected = false,
     this.subFieldList,
@@ -85,6 +89,8 @@ class FieldModel {
         level: json['level'] as int?,
         categoryId: json['category_id'] as int?,
         category: json['category'] as String?,
+        languageSpokenLv: json['spoken'] as int?,
+        languageWrittenLv: json['written'] as int?,
         videoUrl: json['video_url'] as String?,
         subFieldList: json['skills'] == null || json['skills'] == []
             ? []
@@ -116,6 +122,8 @@ class FieldModel {
         'level': level,
         'category_id': categoryId,
         'category': category,
+        'spoken': languageSpokenLv,
+        'written': languageWrittenLv,
         'video_url': videoUrl,
         'skills': subFieldList == null || subFieldList == []
             ? null
@@ -143,6 +151,8 @@ class FieldModel {
       level: $level,
       categoryId: $categoryId,
       category: $category,
+      languageSpokenLv: $languageSpokenLv,
+      languageWrittenLv: $languageWrittenLv,
       video_url: $videoUrl,
       total: $total,
       subFieldList: $subFieldList

@@ -102,6 +102,8 @@ class LanguageUsageController extends GetxController {
     required GlobalKey<FormState>? formKey,
     required int? languageTagId,
     required int? languageProficiencyLevel,
+    bool? spoken = false,
+    bool? written = false,
     String? languageVideoUrl = '',
   }) async {
     if (formKey!.currentState!.validate()) {
@@ -118,6 +120,8 @@ class LanguageUsageController extends GetxController {
         tagId: languageTagId, //selectedLanguage.value.id,
         level: languageProficiencyLevel, //selectedProficiency.value.level,
         videoUrl: languageVideoUrl, //'',
+        languageSpokenLv: spoken == true ? 1 : 0,
+        languageWrittenLv: written == true ? 1 : 0,
       );
       await makeRequestToSpokenLanguageAPI(
         spokenLanguageId: languageTagId, //selectedLanguage.value.id,

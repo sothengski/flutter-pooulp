@@ -99,6 +99,7 @@ class LanguageUsageController extends GetxController {
     selectedMotherTongueLanguage.value = FieldModel();
     selectedLanguage.value = FieldModel();
     selectedProficiency.value = FieldModel(label: '');
+    selectedlanguageTypes.value = [];
   }
 
   FieldModel selectedLanguageOnClick({FieldModel? selectedItem}) {

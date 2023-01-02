@@ -231,6 +231,100 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                     ),
                     //===== Bottom of Language Selection Component =====//
 
+                    ///===== Top of Types Selection Component =====//
+                    ContainerDialogWidget(
+                      inputTitle: 'types'.tr,
+                      inputTitleMarginTop: AppSize.s16,
+                      validatorFunction: (_) => Validator().notEmptyValidator(
+                        controller.selectedlanguageTypes.isEmpty ? '' : 'a',
+                      ),
+                      dialogWidget: MaterialDialogWidget(
+                        title: 'types'.tr,
+                        contentWidget: ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: controller.languageTypeList.length,
+                          itemBuilder: (context, index) {
+                            return Obx(
+                              () => RowDataSelectionWidget.checkBox(
+                                isLeftSideText: false,
+                                isClickingValue:
+                                    controller.selectedlanguageTypes
+                                        .where(
+                                          (p0) =>
+                                              p0.label ==
+                                              controller.languageTypeList[index]
+                                                  .label,
+                                        )
+                                        .isNotEmpty,
+                                text: controller.languageTypeList[index].label,
+                                onPressed: () {
+                                  addingOrRemovingFieldInFieldList(
+                                    list: controller.selectedlanguageTypes,
+                                    fieldValue:
+                                        controller.languageTypeList[index],
+                                  );
+                                  Navigator.pop(
+                                    context,
+                                    true,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Divider(
+                              height: 1.0,
+                              color: ColorsManager.grey300,
+                            );
+                          },
+                        ),
+                      ),
+                      containerWidget: Obx(
+                        () => RowContentInputWidget(
+                          centerWidget:
+                              controller.selectedlanguageTypes.isNotEmpty
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: AppSize.s4,
+                                        bottom: AppSize.s4,
+                                      ),
+                                      child: Wrap(
+                                        children: [
+                                          for (var i = 0;
+                                              i <
+                                                  controller
+                                                      .selectedlanguageTypes
+                                                      .length;
+                                              i++)
+                                            RemovableTextCardWidget(
+                                              text:
+                                                  '${controller.selectedlanguageTypes[i].label}',
+                                              onRemove: () =>
+                                                  addingOrRemovingFieldInFieldList(
+                                                list: controller
+                                                    .selectedlanguageTypes,
+                                                fieldValue: controller
+                                                    .selectedlanguageTypes[i],
+                                              ),
+                                            )
+                                        ],
+                                      ),
+                                    )
+                                  : CustomTextWidget(
+                                      text: 'types'.tr,
+                                      color: ColorsManager.grey400,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: AppSize.s16,
+                                    ),
+                          suffixWidget: const Icon(
+                            IconsManager.arrowDropDown,
+                            color: ColorsManager.grey600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    //===== Bottom of Types Selection Component =====//
+
                     ///===== Top of Proficiency Selection Component =====//
                     ContainerDialogWidget(
                       inputTitle: 'proficiency'.tr,

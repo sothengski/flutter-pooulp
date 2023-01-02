@@ -51,10 +51,19 @@ Color containerColorState({
 void addingOrRemovingFieldInFieldList({
   RxList<FieldModel>? list,
   FieldModel? fieldValue,
+  bool? isList = true,
 }) {
-  if (list!.contains(fieldValue)) {
-    list.removeWhere((element) => element.id == fieldValue!.id);
-  } else {
+  /// select/add multiple items to the list
+  if (isList == true) {
+    if (list!.contains(fieldValue)) {
+      list.removeWhere((element) => element.id == fieldValue!.id);
+    } else {
+      list.add(fieldValue!);
+    }
+  }
+  // else select only one item to the list
+  else {
+    list!.clear();
     list.add(fieldValue!);
   }
 }

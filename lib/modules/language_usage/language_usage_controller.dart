@@ -23,6 +23,8 @@ class LanguageUsageController extends GetxController {
 
   Rx<FieldModel> selectedProficiency = FieldModel(label: '').obs;
 
+  RxList<FieldModel> selectedlanguageTypes = <FieldModel>[].obs;
+
   Rx<bool> isSubmitBtnProcessing = false.obs;
 
   RxList<FieldModel> allLanguageListFromAPI = <FieldModel>[].obs;
@@ -35,6 +37,11 @@ class LanguageUsageController extends GetxController {
     FieldModel(id: 2, label: LevelStrings.intermediate, level: 2),
     FieldModel(id: 3, label: LevelStrings.professional, level: 3),
     // FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
+  ].obs;
+
+  RxList<FieldModel> languageTypeList = <FieldModel>[
+    FieldModel(id: 1, label: 'spoken'.tr),
+    FieldModel(id: 2, label: 'written'.tr),
   ].obs;
 
   List<TextEditingController> vdoUrlListTextCtrl = [];

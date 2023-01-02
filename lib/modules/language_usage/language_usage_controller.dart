@@ -15,7 +15,11 @@ class LanguageUsageController extends GetxController {
 
   final editLangaugeFormKey = GlobalKey<FormState>();
 
+  final editMontherTongueLangaugeFormKey = GlobalKey<FormState>();
+
   Rx<FieldModel> selectedLanguage = FieldModel().obs;
+
+  Rx<FieldModel> selectedMotherTongueLanguage = FieldModel().obs;
 
   Rx<FieldModel> selectedProficiency = FieldModel(label: '').obs;
 
@@ -85,6 +89,7 @@ class LanguageUsageController extends GetxController {
   }
 
   void clearDataFromForm() {
+    selectedMotherTongueLanguage.value = FieldModel();
     selectedLanguage.value = FieldModel();
     selectedProficiency.value = FieldModel(label: '');
   }
@@ -93,8 +98,13 @@ class LanguageUsageController extends GetxController {
     return selectedItem!;
   }
 
-  Future<void> saveButtonOnClick() async {
-    if (editLangaugeFormKey.currentState!.validate()) {
+  Future<void> saveButtonOnClick({
+    required GlobalKey<FormState>? formKey,
+    required int? languageTagId,
+    required int? languageProficiencyLevel,
+    String? languageVideoUrl = '',
+  }) async {
+    if (formKey!.currentState!.validate()) {
       isSubmitBtnProcessing.value = switchingBooleanValue(
         boolValue: isSubmitBtnProcessing.value,
       );
@@ -105,12 +115,12 @@ class LanguageUsageController extends GetxController {
       //   'selectedProficiency:: $selectedProficiency',
       // );
       final FieldModel fieldDataToBeAddOrEdit = FieldModel(
-        tagId: selectedLanguage.value.id,
-        level: selectedProficiency.value.level,
-        videoUrl: '',
+        tagId: languageTagId, //selectedLanguage.value.id,
+        level: languageProficiencyLevel, //selectedProficiency.value.level,
+        videoUrl: languageVideoUrl, //'',
       );
       await makeRequestToSpokenLanguageAPI(
-        spokenLanguageId: selectedLanguage.value.id,
+        spokenLanguageId: languageTagId, //selectedLanguage.value.id,
         spokenLanguageData: fieldDataToBeAddOrEdit,
         operation: title,
       );

@@ -34,7 +34,7 @@ class LanguageUsageController extends GetxController {
     FieldModel(id: 1, label: LevelStrings.beginner, level: 1),
     FieldModel(id: 2, label: LevelStrings.intermediate, level: 2),
     FieldModel(id: 3, label: LevelStrings.professional, level: 3),
-    FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
+    // FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
   ].obs;
 
   List<TextEditingController> vdoUrlListTextCtrl = [];

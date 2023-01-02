@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 
 import '/core/core.dart';
 
@@ -8,6 +9,11 @@ List<FieldModel>? proficiencyList = <FieldModel>[
   FieldModel(id: 2, label: LevelStrings.intermediate, level: 2),
   FieldModel(id: 3, label: LevelStrings.professional, level: 3),
   FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
+];
+
+List<FieldModel>? languageTypeList = <FieldModel>[
+  FieldModel(id: 1, label: 'spoken'.tr),
+  FieldModel(id: 2, label: 'written'.tr),
 ];
 
 List<FieldModel>? skillCategoryList = <FieldModel>[

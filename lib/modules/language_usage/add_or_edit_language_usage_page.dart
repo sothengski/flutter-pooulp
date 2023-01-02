@@ -666,7 +666,6 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                               child: UrlLanguageInput(
                                                 controller: controller,
                                                 languageItem: languageItem,
-                                                index: index,
                                               ),
                                             ),
                                           ),
@@ -860,7 +859,6 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                               child: UrlLanguageInput(
                                                 controller: controller,
                                                 languageItem: languageItem,
-                                                index: index,
                                               ),
                                             ),
                                           ),
@@ -919,13 +917,11 @@ class UrlLanguageInput extends StatelessWidget {
     Key? key,
     this.controller,
     required this.languageItem,
-    this.index,
     this.vdoUrlCtrl,
   }) : super(key: key);
 
   final LanguageUsageController? controller;
   final FieldModel? languageItem;
-  final int? index;
   TextEditingController? vdoUrlCtrl;
 
   @override

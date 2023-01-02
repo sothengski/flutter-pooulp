@@ -436,6 +436,12 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                   controller.selectedLanguage.value.id,
                               languageProficiencyLevel:
                                   controller.selectedProficiency.value.level,
+                              spoken: controller.selectedlanguageTypes
+                                  .where((element) => element.id == 1)
+                                  .isNotEmpty,
+                              written: controller.selectedlanguageTypes
+                                  .where((element) => element.id == 2)
+                                  .isNotEmpty,
                             );
                           }
                         },

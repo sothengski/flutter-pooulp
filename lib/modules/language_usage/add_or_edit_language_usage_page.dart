@@ -494,184 +494,193 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                       .studentInfoRepsonse
                                       .value
                                       .spokenLanguages!
-                                      .where((element) => element.level == 4)
+                                      // .where((element) => element.level == 4)
                                       .length,
                                   itemBuilder: (context, index) {
                                     final FieldModel languageItem = controller
                                         .profileController
                                         .studentInfoRepsonse
                                         .value
-                                        .spokenLanguages!
-                                        .where((element) => element.level == 4)
-                                        .first;
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: AppSize.s8,
-                                      ),
-                                      // width: double.infinity,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Wrap(
-                                                children: [
-                                                  CustomIconButtonWidget(
-                                                    iconData:
-                                                        Icons.remove_circle,
-                                                    iconColor:
-                                                        ColorsManager.red,
-                                                    isConstraints: true,
-                                                    iconSize: AppSize.s20,
-                                                    onClick: () {
-                                                      controller
-                                                          .makeRequestToSpokenLanguageAPI(
-                                                        spokenLanguageId:
-                                                            languageItem.id,
-                                                        operation: Keys
-                                                            .deleteOperation,
-                                                      );
-                                                    },
-                                                  ),
-                                                  CustomTextWidget(
-                                                    text:
-                                                        '${languageItem.label}',
-                                                    fontSize: AppSize.s16,
-                                                    fontWeight: FontWeight.w500,
-                                                    marginLeft: AppSize.s10,
-                                                    marginTop: AppSize.s8,
-                                                    marginBottom: AppSize.s20,
-                                                  ),
-                                                ],
-                                              ),
-                                              // CustomBoxWidget(
-                                              //   leftPadding: AppSize.s12,
-                                              //   child: GestureDetector(
-                                              //     onTap: () {
-                                              //       Get.dialog(
-                                              //         MaterialDialogWidget(
-                                              //           title: 'proficiencyHint'
-                                              //               .tr,
-                                              //           contentWidget:
-                                              //               ListView.separated(
-                                              //             shrinkWrap: true,
-                                              //             itemCount: controller
-                                              //                 .proficiencyList
-                                              //                 .length,
-                                              //             itemBuilder: (
-                                              //               context,
-                                              //               index,
-                                              //             ) {
-                                              //               return Obx(
-                                              //                 () => RowDataSelectionWidget
-                                              //                     .radioButton(
-                                              //                   isLeftSideText:
-                                              //                       false,
-                                              //                   isClickingValue:
-                                              //                       intComparation(
-                                              //                     object1: controller
-                                              //                         .proficiencyList[
-                                              //                             index]
-                                              //                         .level,
-                                              //                     object2:
-                                              //                         languageItem
-                                              //                             .level,
-                                              //                   ),
-                                              //                   text:
-                                              //                       translateStateWords(
-                                              //                     stateWord:
-                                              //                         '${controller.proficiencyList[index].label}',
-                                              //                   ),
-                                              //                   onPressed: () {
-                                              //                     controller
-                                              //                         .makeRequestToSpokenLanguageAPI(
-                                              //                       spokenLanguageId:
-                                              //                           languageItem
-                                              //                               .id,
-                                              //                       spokenLanguageData:
-                                              //                           FieldModel(
-                                              //                         level: controller
-                                              //                             .proficiencyList[
-                                              //                                 index]
-                                              //                             .level,
-                                              //                         videoUrl:
-                                              //                             languageItem.videoUrl ??
-                                              //                                 '',
-                                              //                       ),
-                                              //                       operation: Keys
-                                              //                           .editOperation,
-                                              //                     );
-                                              //                     Navigator.pop(
-                                              //                       context,
-                                              //                       true,
-                                              //                     );
-                                              //                   },
-                                              //                 ),
-                                              //               );
-                                              //             },
-                                              //             separatorBuilder: (
-                                              //               context,
-                                              //               index,
-                                              //             ) {
-                                              //               return const Divider(
-                                              //                 height: 1.0,
-                                              //                 color:
-                                              //                     ColorsManager
-                                              //                         .grey300,
-                                              //               );
-                                              //             },
-                                              //           ),
-                                              //         ),
-                                              //       );
-                                              //     },
-                                              //     child: Row(
-                                              //       // crossAxisAlignment:
-                                              //       //     CrossAxisAlignment.end,
-                                              //       children: [
-                                              //         CustomTextWidget(
-                                              //           textAlign:
-                                              //               TextAlign.center,
-                                              //           text:
-                                              //               translateStateWords(
-                                              //             stateWord:
-                                              //                 '${languageItem.getLabelProficiencyLevel}',
-                                              //           ),
-                                              //           fontSize: AppSize.s16,
-                                              //           fontWeight:
-                                              //               FontWeight.w400,
-                                              //           // marginTop: AppSize.s8,
-                                              //           // marginBottom: AppSize.s24,
-                                              //         ),
-                                              //         const Icon(
-                                              //           Icons.arrow_drop_down,
-                                              //           color: ColorsManager
-                                              //               .grey600,
-                                              //         ),
-                                              //       ],
-                                              //     ),
-                                              //   ),
-                                              // ),
-                                            ],
-                                          ),
-                                          Obx(
-                                            () => Container(
-                                              padding:
-                                                  controller.isUpdating.value ==
-                                                          false
-                                                      ? EdgeInsets.zero
-                                                      : EdgeInsets.zero,
-                                              child: UrlLanguageInput(
-                                                controller: controller,
-                                                languageItem: languageItem,
-                                              ),
+                                        .spokenLanguages![index];
+                                    // .where((element) => element.level == 4)
+                                    // .first;
+                                    return languageItem.level != 4
+                                        ? Container()
+                                        : Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: AppSize.s8,
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
+                                            // width: double.infinity,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Wrap(
+                                                      children: [
+                                                        CustomIconButtonWidget(
+                                                          iconData: Icons
+                                                              .remove_circle,
+                                                          iconColor:
+                                                              ColorsManager.red,
+                                                          isConstraints: true,
+                                                          iconSize: AppSize.s20,
+                                                          onClick: () {
+                                                            controller
+                                                                .makeRequestToSpokenLanguageAPI(
+                                                              spokenLanguageId:
+                                                                  languageItem
+                                                                      .id,
+                                                              operation: Keys
+                                                                  .deleteOperation,
+                                                            );
+                                                          },
+                                                        ),
+                                                        CustomTextWidget(
+                                                          text:
+                                                              '${languageItem.label}',
+                                                          fontSize: AppSize.s16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          marginLeft:
+                                                              AppSize.s10,
+                                                          marginTop: AppSize.s8,
+                                                          marginBottom:
+                                                              AppSize.s20,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    // CustomBoxWidget(
+                                                    //   leftPadding: AppSize.s12,
+                                                    //   child: GestureDetector(
+                                                    //     onTap: () {
+                                                    //       Get.dialog(
+                                                    //         MaterialDialogWidget(
+                                                    //           title: 'proficiencyHint'
+                                                    //               .tr,
+                                                    //           contentWidget:
+                                                    //               ListView.separated(
+                                                    //             shrinkWrap: true,
+                                                    //             itemCount: controller
+                                                    //                 .proficiencyList
+                                                    //                 .length,
+                                                    //             itemBuilder: (
+                                                    //               context,
+                                                    //               index,
+                                                    //             ) {
+                                                    //               return Obx(
+                                                    //                 () => RowDataSelectionWidget
+                                                    //                     .radioButton(
+                                                    //                   isLeftSideText:
+                                                    //                       false,
+                                                    //                   isClickingValue:
+                                                    //                       intComparation(
+                                                    //                     object1: controller
+                                                    //                         .proficiencyList[
+                                                    //                             index]
+                                                    //                         .level,
+                                                    //                     object2:
+                                                    //                         languageItem
+                                                    //                             .level,
+                                                    //                   ),
+                                                    //                   text:
+                                                    //                       translateStateWords(
+                                                    //                     stateWord:
+                                                    //                         '${controller.proficiencyList[index].label}',
+                                                    //                   ),
+                                                    //                   onPressed: () {
+                                                    //                     controller
+                                                    //                         .makeRequestToSpokenLanguageAPI(
+                                                    //                       spokenLanguageId:
+                                                    //                           languageItem
+                                                    //                               .id,
+                                                    //                       spokenLanguageData:
+                                                    //                           FieldModel(
+                                                    //                         level: controller
+                                                    //                             .proficiencyList[
+                                                    //                                 index]
+                                                    //                             .level,
+                                                    //                         videoUrl:
+                                                    //                             languageItem.videoUrl ??
+                                                    //                                 '',
+                                                    //                       ),
+                                                    //                       operation: Keys
+                                                    //                           .editOperation,
+                                                    //                     );
+                                                    //                     Navigator.pop(
+                                                    //                       context,
+                                                    //                       true,
+                                                    //                     );
+                                                    //                   },
+                                                    //                 ),
+                                                    //               );
+                                                    //             },
+                                                    //             separatorBuilder: (
+                                                    //               context,
+                                                    //               index,
+                                                    //             ) {
+                                                    //               return const Divider(
+                                                    //                 height: 1.0,
+                                                    //                 color:
+                                                    //                     ColorsManager
+                                                    //                         .grey300,
+                                                    //               );
+                                                    //             },
+                                                    //           ),
+                                                    //         ),
+                                                    //       );
+                                                    //     },
+                                                    //     child: Row(
+                                                    //       // crossAxisAlignment:
+                                                    //       //     CrossAxisAlignment.end,
+                                                    //       children: [
+                                                    //         CustomTextWidget(
+                                                    //           textAlign:
+                                                    //               TextAlign.center,
+                                                    //           text:
+                                                    //               translateStateWords(
+                                                    //             stateWord:
+                                                    //                 '${languageItem.getLabelProficiencyLevel}',
+                                                    //           ),
+                                                    //           fontSize: AppSize.s16,
+                                                    //           fontWeight:
+                                                    //               FontWeight.w400,
+                                                    //           // marginTop: AppSize.s8,
+                                                    //           // marginBottom: AppSize.s24,
+                                                    //         ),
+                                                    //         const Icon(
+                                                    //           Icons.arrow_drop_down,
+                                                    //           color: ColorsManager
+                                                    //               .grey600,
+                                                    //         ),
+                                                    //       ],
+                                                    //     ),
+                                                    //   ),
+                                                    // ),
+                                                  ],
+                                                ),
+                                                Obx(
+                                                  () => Container(
+                                                    padding: controller
+                                                                .isUpdating
+                                                                .value ==
+                                                            false
+                                                        ? EdgeInsets.zero
+                                                        : EdgeInsets.zero,
+                                                    child: UrlLanguageInput(
+                                                      controller: controller,
+                                                      languageItem:
+                                                          languageItem,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
                                   },
                                 ),
                               ],
@@ -694,6 +703,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                       .studentInfoRepsonse
                                       .value
                                       .spokenLanguages!
+                                      // .where((element) => element.level != 4)
                                       .length,
                                   itemBuilder: (context, index) {
                                     final FieldModel languageItem = controller
@@ -701,170 +711,188 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                         .studentInfoRepsonse
                                         .value
                                         .spokenLanguages![index];
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: AppSize.s8,
-                                      ),
-                                      // width: double.infinity,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Wrap(
-                                                children: [
-                                                  CustomIconButtonWidget(
-                                                    iconData:
-                                                        Icons.remove_circle,
-                                                    iconColor:
-                                                        ColorsManager.red,
-                                                    isConstraints: true,
-                                                    iconSize: AppSize.s20,
-                                                    onClick: () {
-                                                      controller
-                                                          .makeRequestToSpokenLanguageAPI(
-                                                        spokenLanguageId:
-                                                            languageItem.id,
-                                                        operation: Keys
-                                                            .deleteOperation,
-                                                      );
-                                                    },
-                                                  ),
-                                                  CustomTextWidget(
-                                                    text:
-                                                        '${languageItem.label}',
-                                                    fontSize: AppSize.s16,
-                                                    fontWeight: FontWeight.w500,
-                                                    marginLeft: AppSize.s10,
-                                                    marginTop: AppSize.s8,
-                                                    marginBottom: AppSize.s20,
-                                                  ),
-                                                ],
-                                              ),
-                                              CustomBoxWidget(
-                                                leftPadding: AppSize.s12,
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    Get.dialog(
-                                                      MaterialDialogWidget(
-                                                        title: 'proficiencyHint'
-                                                            .tr,
-                                                        contentWidget:
-                                                            ListView.separated(
-                                                          shrinkWrap: true,
-                                                          itemCount: controller
-                                                              .proficiencyList
-                                                              .length,
-                                                          itemBuilder:
-                                                              (context, index) {
-                                                            return Obx(
-                                                              () => RowDataSelectionWidget
-                                                                  .radioButton(
-                                                                isLeftSideText:
-                                                                    false,
-                                                                isClickingValue:
-                                                                    intComparation(
-                                                                  object1: controller
-                                                                      .proficiencyList[
-                                                                          index]
-                                                                      .level,
-                                                                  object2:
-                                                                      languageItem
-                                                                          .level,
-                                                                ),
-                                                                text:
-                                                                    translateStateWords(
-                                                                  stateWord:
-                                                                      '${controller.proficiencyList[index].label}',
-                                                                ),
-                                                                onPressed: () {
-                                                                  controller
-                                                                      .makeRequestToSpokenLanguageAPI(
-                                                                    spokenLanguageId:
-                                                                        languageItem
-                                                                            .id,
-                                                                    spokenLanguageData:
-                                                                        FieldModel(
-                                                                      level: controller
-                                                                          .proficiencyList[
-                                                                              index]
-                                                                          .level,
-                                                                      videoUrl:
-                                                                          languageItem.videoUrl ??
-                                                                              '',
-                                                                    ),
-                                                                    operation: Keys
-                                                                        .editOperation,
-                                                                  );
-                                                                  Navigator.pop(
-                                                                    context,
+                                    return languageItem.level == 4
+                                        ? Container()
+                                        : Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: AppSize.s8,
+                                            ),
+                                            // width: double.infinity,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Wrap(
+                                                      children: [
+                                                        CustomIconButtonWidget(
+                                                          iconData: Icons
+                                                              .remove_circle,
+                                                          iconColor:
+                                                              ColorsManager.red,
+                                                          isConstraints: true,
+                                                          iconSize: AppSize.s20,
+                                                          onClick: () {
+                                                            controller
+                                                                .makeRequestToSpokenLanguageAPI(
+                                                              spokenLanguageId:
+                                                                  languageItem
+                                                                      .id,
+                                                              operation: Keys
+                                                                  .deleteOperation,
+                                                            );
+                                                          },
+                                                        ),
+                                                        CustomTextWidget(
+                                                          text:
+                                                              '${languageItem.label}',
+                                                          fontSize: AppSize.s16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          marginLeft:
+                                                              AppSize.s10,
+                                                          marginTop: AppSize.s8,
+                                                          marginBottom:
+                                                              AppSize.s20,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    CustomBoxWidget(
+                                                      leftPadding: AppSize.s12,
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          Get.dialog(
+                                                            MaterialDialogWidget(
+                                                              title:
+                                                                  'proficiencyHint'
+                                                                      .tr,
+                                                              contentWidget:
+                                                                  ListView
+                                                                      .separated(
+                                                                shrinkWrap:
                                                                     true,
+                                                                itemCount:
+                                                                    controller
+                                                                        .proficiencyList
+                                                                        .length,
+                                                                itemBuilder: (
+                                                                  context,
+                                                                  index,
+                                                                ) {
+                                                                  return Obx(
+                                                                    () => RowDataSelectionWidget
+                                                                        .radioButton(
+                                                                      isLeftSideText:
+                                                                          false,
+                                                                      isClickingValue:
+                                                                          intComparation(
+                                                                        object1: controller
+                                                                            .proficiencyList[index]
+                                                                            .level,
+                                                                        object2:
+                                                                            languageItem.level,
+                                                                      ),
+                                                                      text:
+                                                                          translateStateWords(
+                                                                        stateWord:
+                                                                            '${controller.proficiencyList[index].label}',
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        controller
+                                                                            .makeRequestToSpokenLanguageAPI(
+                                                                          spokenLanguageId:
+                                                                              languageItem.id,
+                                                                          spokenLanguageData:
+                                                                              FieldModel(
+                                                                            level:
+                                                                                controller.proficiencyList[index].level,
+                                                                            videoUrl:
+                                                                                languageItem.videoUrl ?? '',
+                                                                          ),
+                                                                          operation:
+                                                                              Keys.editOperation,
+                                                                        );
+                                                                        Navigator
+                                                                            .pop(
+                                                                          context,
+                                                                          true,
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                  );
+                                                                },
+                                                                separatorBuilder:
+                                                                    (
+                                                                  context,
+                                                                  index,
+                                                                ) {
+                                                                  return const Divider(
+                                                                    height: 1.0,
+                                                                    color: ColorsManager
+                                                                        .grey300,
                                                                   );
                                                                 },
                                                               ),
-                                                            );
-                                                          },
-                                                          separatorBuilder:
-                                                              (context, index) {
-                                                            return const Divider(
-                                                              height: 1.0,
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: Row(
+                                                          // crossAxisAlignment:
+                                                          //     CrossAxisAlignment.end,
+                                                          children: [
+                                                            CustomTextWidget(
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              text:
+                                                                  translateStateWords(
+                                                                stateWord:
+                                                                    '${languageItem.getLabelProficiencyLevel}',
+                                                              ),
+                                                              fontSize:
+                                                                  AppSize.s16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              // marginTop: AppSize.s8,
+                                                              // marginBottom: AppSize.s24,
+                                                            ),
+                                                            const Icon(
+                                                              Icons
+                                                                  .arrow_drop_down,
                                                               color:
                                                                   ColorsManager
-                                                                      .grey300,
-                                                            );
-                                                          },
+                                                                      .grey600,
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                    );
-                                                  },
-                                                  child: Row(
-                                                    // crossAxisAlignment:
-                                                    //     CrossAxisAlignment.end,
-                                                    children: [
-                                                      CustomTextWidget(
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        text:
-                                                            translateStateWords(
-                                                          stateWord:
-                                                              '${languageItem.getLabelProficiencyLevel}',
-                                                        ),
-                                                        fontSize: AppSize.s16,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        // marginTop: AppSize.s8,
-                                                        // marginBottom: AppSize.s24,
-                                                      ),
-                                                      const Icon(
-                                                        Icons.arrow_drop_down,
-                                                        color: ColorsManager
-                                                            .grey600,
-                                                      ),
-                                                    ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Obx(
+                                                  () => Container(
+                                                    padding: controller
+                                                                .isUpdating
+                                                                .value ==
+                                                            false
+                                                        ? EdgeInsets.zero
+                                                        : EdgeInsets.zero,
+                                                    child: UrlLanguageInput(
+                                                      controller: controller,
+                                                      languageItem:
+                                                          languageItem,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          Obx(
-                                            () => Container(
-                                              padding:
-                                                  controller.isUpdating.value ==
-                                                          false
-                                                      ? EdgeInsets.zero
-                                                      : EdgeInsets.zero,
-                                              child: UrlLanguageInput(
-                                                controller: controller,
-                                                languageItem: languageItem,
-                                              ),
+                                              ],
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
+                                          );
                                   },
                                 ),
                               ],

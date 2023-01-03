@@ -751,6 +751,36 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                                     );
                                                                   },
                                                                 ),
+                                                                //   actionWidget:
+                                                                //       OutlinedButton
+                                                                //           .icon(
+                                                                //     onPressed:
+                                                                //         () {
+                                                                //       Navigator
+                                                                //           .pop(
+                                                                //         context,
+                                                                //         true,
+                                                                //       );
+                                                                //     },
+                                                                //     icon:
+                                                                //         const Icon(
+                                                                //       IconsManager
+                                                                //           .close,
+                                                                //       color: Colors
+                                                                //           .white,
+                                                                //     ),
+                                                                //     label:
+                                                                //         CustomTextWidget(
+                                                                //       marginRight:
+                                                                //           AppSize
+                                                                //               .s24,
+                                                                //       text:
+                                                                //           'Close'
+                                                                //               .tr,
+                                                                //       color: Colors
+                                                                //           .red,
+                                                                //     ),
+                                                                //   ),
                                                               ),
                                                               containerWidget:
                                                                   // Obx(

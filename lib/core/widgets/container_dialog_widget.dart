@@ -22,6 +22,7 @@ LocaleType localeTypeFunc({required String? dateLocale}) {
 
 class ContainerDialogWidget extends StatelessWidget {
   final String? inputTitle;
+  final Color? inputTitleColor;
   final double? fontSizeTitle;
   final FontWeight? fontWeightTitle;
   final double? leftPadding;
@@ -44,6 +45,7 @@ class ContainerDialogWidget extends StatelessWidget {
   const ContainerDialogWidget({
     Key? key,
     this.inputTitle = '',
+    this.inputTitleColor = ColorsManager.primaryBlue,
     this.fontSizeTitle = AppSize.s14,
     this.fontWeightTitle = FontWeight.w400,
     this.dialogWidget,
@@ -80,6 +82,7 @@ class ContainerDialogWidget extends StatelessWidget {
           else
             CustomTextWidget(
               text: inputTitle,
+              color: inputTitleColor,
               marginTop: inputTitleMarginTop,
               textAlign: TextAlign.left,
               fontSize: fontSizeTitle,

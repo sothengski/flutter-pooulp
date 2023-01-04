@@ -708,7 +708,7 @@ class OnboardingController extends GetxController
     selectedlanguageTypes.value = [];
   }
 
-  void addOrRemoveLanguageOnClick({
+  void operationLanguageOnClick({
     // required GlobalKey<FormState>? formKey,
     required int? languageId,
     required String? languageLabel,
@@ -717,6 +717,7 @@ class OnboardingController extends GetxController
     bool? written = false,
     String? languageVideoUrl = '',
     int? operation = 0, //0 = add, 1 = edit, 2 = delete
+    int? indexForEditOrDelete,
   }) {
     // if (formKey!.currentState!.validate()) {
 
@@ -729,6 +730,7 @@ class OnboardingController extends GetxController
     if (operation == 0) {
       languageSelectedList.add(
         FieldModel(
+          id: languageId,
           tagId: languageId, //selectedLanguage.value.id,
           label: languageLabel,
           level: languageProficiencyLevel, //selectedProficiency.value.level,
@@ -737,12 +739,25 @@ class OnboardingController extends GetxController
           languageWrittenLv: written == true ? 1 : 0,
         ),
       );
-    } else if (operation == 1) {
-    } else if (operation == 2) {
-      languageSelectedList
-          .removeWhere((element) => element.tagId == languageId);
+    } else if (operation == 1 && indexForEditOrDelete != null) {
+      // print('b4: $languageSelectedList');
+      languageSelectedList[indexForEditOrDelete] = FieldModel(
+        id: languageId,
+        tagId: languageId, //selectedLanguage.value.id,
+        label: languageLabel,
+        level: languageProficiencyLevel, //selectedProficiency.value.level,
+        videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',
+        languageSpokenLv: spoken == true ? 1 : 0,
+        languageWrittenLv: written == true ? 1 : 0,
+      );
+      // print('after: $languageSelectedList');
+    } else if (operation == 2 && indexForEditOrDelete != null) {
+      languageSelectedList.removeAt(indexForEditOrDelete);
     }
     clearDataFromForm();
+    isUpdate.value = switchingBooleanValue(
+      boolValue: isUpdate.value,
+    );
     // }
   }
 }

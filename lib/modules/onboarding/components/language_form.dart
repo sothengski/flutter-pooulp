@@ -42,30 +42,28 @@ class LanguageForm extends GetView<OnboardingController> {
                           ),
                         ),
                       ),
-                      child:
-                          //  Obx(
-                          //   () => controller.languageListForSelection.isNotEmpty
-                          //       ? FieldListSelector(
-                          //           inputHintText: 'search'.tr,
-                          //           dataListforSelected:
-                          //               controller.languageListForSelection,
-                          //           selectedItem: controller
-                          //               .selectedMotherTongueLanguage.value,
-                          //           onTap: (field) {
-                          //             controller
-                          //                     .selectedMotherTongueLanguage.value =
-                          //                 controller.selectedLanguageOnClick(
-                          //               selectedItem: field,
-                          //             );
-                          //             Navigator.pop(
-                          //               context,
-                          //               true,
-                          //             );
-                          //           },
-                          //         )
-                          //       :
-                          const LoadingWidget(),
-                      // ),
+                      child: Obx(
+                        () => controller.languageListForSelection.isNotEmpty
+                            ? FieldListSelector(
+                                inputHintText: 'search'.tr,
+                                dataListforSelected:
+                                    controller.languageListForSelection,
+                                selectedItem:
+                                    controller.languageListForSelection[1],
+                                onTap: (field) {
+                                  // controller
+                                  //         .selectedMotherTongueLanguage.value =
+                                  //     controller.selectedLanguageOnClick(
+                                  //   selectedItem: field,
+                                  // );
+                                  Navigator.pop(
+                                    context,
+                                    true,
+                                  );
+                                },
+                              )
+                            : const LoadingWidget(),
+                      ),
                     ),
                     containerWidget:
                         //  Obx(

@@ -708,7 +708,7 @@ class OnboardingController extends GetxController
     selectedlanguageTypes.value = [];
   }
 
-  void addLanguageOnClick({
+  void addOrRemoveLanguageOnClick({
     // required GlobalKey<FormState>? formKey,
     required int? languageId,
     required String? languageLabel,
@@ -716,6 +716,7 @@ class OnboardingController extends GetxController
     bool? spoken = false,
     bool? written = false,
     String? languageVideoUrl = '',
+    bool? isRemove = false,
   }) {
     // if (formKey!.currentState!.validate()) {
 
@@ -725,16 +726,21 @@ class OnboardingController extends GetxController
     // debugPrint(
     //   'selectedProficiency:: $selectedProficiency',
     // );
-    languageSelectedList.add(
-      FieldModel(
-        tagId: languageId, //selectedLanguage.value.id,
-        label: languageLabel,
-        level: languageProficiencyLevel, //selectedProficiency.value.level,
-        videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',
-        languageSpokenLv: spoken == true ? 1 : 0,
-        languageWrittenLv: written == true ? 1 : 0,
-      ),
-    );
+    if (isRemove! == true) {
+      languageSelectedList
+          .removeWhere((element) => element.tagId == languageId);
+    } else {
+      languageSelectedList.add(
+        FieldModel(
+          tagId: languageId, //selectedLanguage.value.id,
+          label: languageLabel,
+          level: languageProficiencyLevel, //selectedProficiency.value.level,
+          videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',
+          languageSpokenLv: spoken == true ? 1 : 0,
+          languageWrittenLv: written == true ? 1 : 0,
+        ),
+      );
+    }
     clearDataFromForm();
     // }
   }

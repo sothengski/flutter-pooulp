@@ -118,7 +118,7 @@ class LanguageForm extends GetView<OnboardingController> {
                     buttonWidth: getWidth,
                     onPressed: () {
                       unFocusKeyBoard(context);
-                      controller.addLanguageOnClick(
+                      controller.addOrRemoveLanguageOnClick(
                         languageId:
                             controller.selectedMotherTongueLanguage.value.id,
                         languageLabel:
@@ -405,7 +405,7 @@ class LanguageForm extends GetView<OnboardingController> {
                     buttonWidth: getWidth,
                     onPressed: () {
                       unFocusKeyBoard(context);
-                      controller.addLanguageOnClick(
+                      controller.addOrRemoveLanguageOnClick(
                         languageId: controller.selectedLanguage.value.id,
                         languageLabel: controller.selectedLanguage.value.label,
                         languageProficiencyLevel:
@@ -463,133 +463,40 @@ class LanguageForm extends GetView<OnboardingController> {
                       )
                     : Wrap(
                         children: [
-                          Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: CustomTextWidget(
-                                  text: 'motherTongue'.tr,
-                                  color: ColorsManager.white,
-                                  fontSize: AppSize.s20,
-                                  fontWeight: FontWeight.w600,
+                          if (controller.languageSelectedList
+                              .where((element) => element.level == 4)
+                              .isEmpty)
+                            Container()
+                          else
+                            Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: CustomTextWidget(
+                                    text: 'motherTongue'.tr,
+                                    color: ColorsManager.white,
+                                    fontSize: AppSize.s20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const ScrollPhysics(),
-                                padding: const EdgeInsets.only(
-                                  bottom: AppSize.s4,
-                                ),
-                                itemCount: controller
-                                    .languageSelectedList
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const ScrollPhysics(),
+                                  padding: const EdgeInsets.only(
+                                    bottom: AppSize.s4,
+                                  ),
+                                  itemCount: controller
+                                      .languageSelectedList
+                                      // .where((element) => element.level == 4)
+                                      .length,
+                                  itemBuilder: (context, index) {
+                                    final FieldModel languageItem =
+                                        controller.languageSelectedList[index];
                                     // .where((element) => element.level == 4)
-                                    .length,
-                                itemBuilder: (context, index) {
-                                  final FieldModel languageItem =
-                                      controller.languageSelectedList[index];
-                                  // .where((element) => element.level == 4)
-                                  // .first;
-                                  return languageItem.level != 4
-                                      ? Container()
-                                      : Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: AppSize.s8,
-                                          ),
-                                          // width: double.infinity,
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Wrap(
-                                                    children: [
-                                                      CustomIconButtonWidget(
-                                                        iconData:
-                                                            Icons.remove_circle,
-                                                        iconColor:
-                                                            ColorsManager.red,
-                                                        isConstraints: true,
-                                                        iconSize: AppSize.s20,
-                                                        onClick: () {
-                                                          // controller
-                                                          //     .makeRequestToSpokenLanguageAPI(
-                                                          //   spokenLanguageId:
-                                                          //       languageItem.id,
-                                                          //   operation: Keys
-                                                          //       .deleteOperation,
-                                                          // );
-                                                        },
-                                                      ),
-                                                      CustomTextWidget(
-                                                        text:
-                                                            '${languageItem.label}(${languageItem.tagId})',
-                                                        color:
-                                                            ColorsManager.white,
-                                                        fontSize: AppSize.s16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        marginLeft: AppSize.s10,
-                                                        marginTop: AppSize.s8,
-                                                        marginBottom:
-                                                            AppSize.s20,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              // Obx(
-                                              //   () =>
-                                              Container(
-                                                padding:
-                                                    // controller.isUpdating
-                                                    //             .value ==
-                                                    //         false
-                                                    //     ? EdgeInsets.zero
-                                                    //     :
-                                                    EdgeInsets.zero,
-                                                child:
-                                                    UrlLanguageInputOnboarding(
-                                                  controller: controller,
-                                                  languageItem: languageItem,
-                                                ),
-                                              ),
-                                              // ),
-                                            ],
-                                          ),
-                                        );
-                                },
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: CustomTextWidget(
-                                  text: 'otherLanguages'.tr,
-                                  color: ColorsManager.white,
-                                  fontSize: AppSize.s20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const ScrollPhysics(),
-                                itemCount: controller
-                                    .languageSelectedList
-                                    // .where((element) => element.level != 4)
-                                    .length,
-                                itemBuilder: (context, index) {
-                                  final FieldModel languageItem =
-                                      controller.languageSelectedList[index];
-                                  return languageItem.level == 4
-                                      ? Container()
-                                      : Obx(
-                                          () => Padding(
+                                    // .first;
+                                    return languageItem.level != 4
+                                        ? Container()
+                                        : Padding(
                                             padding: const EdgeInsets.symmetric(
                                               vertical: AppSize.s8,
                                             ),
@@ -613,14 +520,18 @@ class LanguageForm extends GetView<OnboardingController> {
                                                           isConstraints: true,
                                                           iconSize: AppSize.s20,
                                                           onClick: () {
-                                                            // controller
-                                                            //     .makeRequestToSpokenLanguageAPI(
-                                                            //   spokenLanguageId:
-                                                            //       languageItem
-                                                            //           .id,
-                                                            //   operation: Keys
-                                                            //       .deleteOperation,
-                                                            // );
+                                                            controller
+                                                                .addOrRemoveLanguageOnClick(
+                                                              languageId:
+                                                                  languageItem
+                                                                      .tagId,
+                                                              languageLabel:
+                                                                  languageItem
+                                                                      .label,
+                                                              languageProficiencyLevel:
+                                                                  4,
+                                                              isRemove: true,
+                                                            );
                                                           },
                                                         ),
                                                         CustomTextWidget(
@@ -641,338 +552,8 @@ class LanguageForm extends GetView<OnboardingController> {
                                                     ),
                                                   ],
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    ///===== Top of Types Selection Component =====//
-                                                    Expanded(
-                                                      flex: 55,
-                                                      child:
-                                                          ContainerDialogWidget(
-                                                        dialogWidget:
-                                                            MaterialDialogWidget(
-                                                          title: 'types'.tr,
-                                                          contentWidget:
-                                                              ListView
-                                                                  .separated(
-                                                            shrinkWrap: true,
-                                                            itemCount: controller
-                                                                .languageTypeList
-                                                                .length,
-                                                            itemBuilder: (
-                                                              context,
-                                                              index,
-                                                            ) {
-                                                              return Obx(
-                                                                () => RowDataSelectionWidget
-                                                                    .checkBox(
-                                                                  isLeftSideText:
-                                                                      false,
-                                                                  isClickingValue: (controller.languageTypeList[index].label ==
-                                                                              'spoken'
-                                                                                  .tr &&
-                                                                          languageItem.languageSpokenLv ==
-                                                                              1) ||
-                                                                      (controller.languageTypeList[index].label ==
-                                                                              'written'
-                                                                                  .tr &&
-                                                                          languageItem.languageWrittenLv ==
-                                                                              1),
-                                                                  text: controller
-                                                                      .languageTypeList[
-                                                                          index]
-                                                                      .label,
-                                                                  onPressed:
-                                                                      () {
-                                                                    // controller
-                                                                    //     .makeRequestToSpokenLanguageAPI(
-                                                                    //   spokenLanguageId:
-                                                                    //       languageItem
-                                                                    //           .id,
-                                                                    //   spokenLanguageData:
-                                                                    //       FieldModel(
-                                                                    //     level: languageItem
-                                                                    //         .level,
-                                                                    //     videoUrl:
-                                                                    //         languageItem.videoUrl ??
-                                                                    //             '',
-                                                                    //     languageSpokenLv: controller.languageTypeList[index].label ==
-                                                                    //             'spoken'.tr
-                                                                    //         ? 1
-                                                                    //         : languageItem.languageSpokenLv,
-                                                                    //     languageWrittenLv: controller.languageTypeList[index].label ==
-                                                                    //             'written'.tr
-                                                                    //         ? 1
-                                                                    //         : languageItem.languageWrittenLv,
-                                                                    //   ),
-                                                                    //   operation:
-                                                                    //       Keys.editOperation,
-                                                                    // );
-                                                                    Navigator
-                                                                        .pop(
-                                                                      context,
-                                                                      true,
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              );
-                                                            },
-                                                            separatorBuilder: (
-                                                              context,
-                                                              index,
-                                                            ) {
-                                                              return const Divider(
-                                                                height: 1.0,
-                                                                color:
-                                                                    ColorsManager
-                                                                        .grey300,
-                                                              );
-                                                            },
-                                                          ),
-                                                          //   actionWidget:
-                                                          //       OutlinedButton
-                                                          //           .icon(
-                                                          //     onPressed:
-                                                          //         () {
-                                                          //       Navigator
-                                                          //           .pop(
-                                                          //         context,
-                                                          //         true,
-                                                          //       );
-                                                          //     },
-                                                          //     icon:
-                                                          //         const Icon(
-                                                          //       IconsManager
-                                                          //           .close,
-                                                          //       color: Colors
-                                                          //           .white,
-                                                          //     ),
-                                                          //     label:
-                                                          //         CustomTextWidget(
-                                                          //       marginRight:
-                                                          //           AppSize
-                                                          //               .s24,
-                                                          //       text:
-                                                          //           'Close'
-                                                          //               .tr,
-                                                          //       color: Colors
-                                                          //           .red,
-                                                          //     ),
-                                                          //   ),
-                                                        ),
-                                                        containerWidget:
-                                                            // Obx(
-                                                            //   () =>
-                                                            RowContentInputWidget(
-                                                          centerWidget: languageItem
-                                                                          .languageSpokenLv ==
-                                                                      1 ||
-                                                                  languageItem
-                                                                          .languageWrittenLv ==
-                                                                      1
-                                                              ? Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                    top: AppSize
-                                                                        .s4,
-                                                                    bottom:
-                                                                        AppSize
-                                                                            .s4,
-                                                                  ),
-                                                                  child: Wrap(
-                                                                    children: [
-                                                                      if (languageItem
-                                                                              .languageSpokenLv ==
-                                                                          1)
-                                                                        RemovableTextCardWidget(
-                                                                          text:
-                                                                              'spoken'.tr,
-                                                                          onRemove: () =>
-                                                                              '',
-                                                                          //     controller.makeRequestToSpokenLanguageAPI(
-                                                                          //   spokenLanguageId:
-                                                                          //       languageItem.id,
-                                                                          //   spokenLanguageData:
-                                                                          //       FieldModel(
-                                                                          //     level: languageItem.level,
-                                                                          //     videoUrl: languageItem.videoUrl ?? '',
-                                                                          //     languageSpokenLv: 0,
-                                                                          //     languageWrittenLv: languageItem.languageWrittenLv,
-                                                                          //   ),
-                                                                          //   operation:
-                                                                          //       Keys.editOperation,
-                                                                          // ),
-                                                                        ),
-                                                                      if (languageItem
-                                                                              .languageWrittenLv ==
-                                                                          1)
-                                                                        RemovableTextCardWidget(
-                                                                          text:
-                                                                              'written'.tr,
-                                                                          onRemove: () =>
-                                                                              'null',
-                                                                          //     controller.makeRequestToSpokenLanguageAPI(
-                                                                          //   spokenLanguageId:
-                                                                          //       languageItem.id,
-                                                                          //   spokenLanguageData:
-                                                                          //       FieldModel(
-                                                                          //     level: languageItem.level,
-                                                                          //     videoUrl: languageItem.videoUrl ?? '',
-                                                                          //     languageSpokenLv: languageItem.languageSpokenLv,
-                                                                          //     languageWrittenLv: 0,
-                                                                          //   ),
-                                                                          //   operation:
-                                                                          //       Keys.editOperation,
-                                                                          // ),
-                                                                        )
-                                                                    ],
-                                                                  ),
-                                                                )
-                                                              : CustomTextWidget(
-                                                                  text: 'types'
-                                                                      .tr,
-                                                                  color: ColorsManager
-                                                                      .grey400,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize:
-                                                                      AppSize
-                                                                          .s16,
-                                                                ),
-                                                          suffixWidget:
-                                                              const Icon(
-                                                            IconsManager
-                                                                .arrowDropDown,
-                                                            color: ColorsManager
-                                                                .grey600,
-                                                          ),
-                                                        ),
-                                                        // ),
-                                                      ),
-                                                    ),
-                                                    //===== Bottom of Types Selection Component =====//
-                                                    const SizedBox(
-                                                      width: 4.0,
-                                                    ),
-
-                                                    ///===== Top of Proficiency Selection Component =====//
-                                                    Expanded(
-                                                      flex: 40,
-                                                      child:
-                                                          ContainerDialogWidget(
-                                                        dialogWidget:
-                                                            MaterialDialogWidget(
-                                                          title:
-                                                              'proficiencyHint'
-                                                                  .tr,
-                                                          contentWidget:
-                                                              ListView
-                                                                  .separated(
-                                                            shrinkWrap: true,
-                                                            itemCount: controller
-                                                                .proficiencyList
-                                                                .length,
-                                                            itemBuilder: (
-                                                              context,
-                                                              index,
-                                                            ) {
-                                                              return Obx(
-                                                                () => RowDataSelectionWidget
-                                                                    .radioButton(
-                                                                  isLeftSideText:
-                                                                      false,
-                                                                  isClickingValue:
-                                                                      intComparation(
-                                                                    object1: controller
-                                                                        .proficiencyList[
-                                                                            index]
-                                                                        .level,
-                                                                    object2:
-                                                                        languageItem
-                                                                            .level,
-                                                                  ),
-                                                                  text:
-                                                                      translateStateWords(
-                                                                    stateWord:
-                                                                        '${controller.proficiencyList[index].label}',
-                                                                  ),
-                                                                  onPressed:
-                                                                      () {
-                                                                    // controller
-                                                                    //     .makeRequestToSpokenLanguageAPI(
-                                                                    //   spokenLanguageId:
-                                                                    //       languageItem
-                                                                    //           .id,
-                                                                    //   spokenLanguageData:
-                                                                    //       FieldModel(
-                                                                    //     level: controller
-                                                                    //         .proficiencyList[index]
-                                                                    //         .level,
-                                                                    //     videoUrl:
-                                                                    //         languageItem.videoUrl ??
-                                                                    //             '',
-                                                                    //     languageSpokenLv:
-                                                                    //         languageItem.languageSpokenLv,
-                                                                    //     languageWrittenLv:
-                                                                    //         languageItem.languageWrittenLv,
-                                                                    //   ),
-                                                                    //   operation:
-                                                                    //       Keys.editOperation,
-                                                                    // );
-                                                                    Navigator
-                                                                        .pop(
-                                                                      context,
-                                                                      true,
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              );
-                                                            },
-                                                            separatorBuilder: (
-                                                              context,
-                                                              index,
-                                                            ) {
-                                                              return const Divider(
-                                                                height: 1.0,
-                                                                color:
-                                                                    ColorsManager
-                                                                        .grey300,
-                                                              );
-                                                            },
-                                                          ),
-                                                        ),
-                                                        containerWidget:
-                                                            RowContentInputWidget(
-                                                          centerWidget:
-                                                              CustomTextWidget(
-                                                            //marginLeft: 4.0,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            text:
-                                                                translateStateWords(
-                                                              stateWord:
-                                                                  '${languageItem.getLabelProficiencyLevel}',
-                                                            ),
-                                                            fontSize:
-                                                                AppSize.s16,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                          ),
-                                                          suffixWidgetFlex: 15,
-                                                          suffixWidget:
-                                                              const Icon(
-                                                            Icons
-                                                                .arrow_drop_down,
-                                                            color: ColorsManager
-                                                                .grey600,
-                                                          ),
-                                                        ),
-                                                        // ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                // Obx(
+                                                //   () =>
                                                 Container(
                                                   padding:
                                                       // controller.isUpdating
@@ -987,14 +568,460 @@ class LanguageForm extends GetView<OnboardingController> {
                                                     languageItem: languageItem,
                                                   ),
                                                 ),
+                                                // ),
                                               ],
                                             ),
-                                          ),
-                                        );
-                                },
-                              ),
-                            ],
-                          ),
+                                          );
+                                  },
+                                ),
+                              ],
+                            ),
+                          if (controller.languageSelectedList
+                              .where((element) => element.level != 4)
+                              .isEmpty)
+                            Container()
+                          else
+                            Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: CustomTextWidget(
+                                    text: 'otherLanguages'.tr,
+                                    color: ColorsManager.white,
+                                    fontSize: AppSize.s20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const ScrollPhysics(),
+                                  itemCount: controller
+                                      .languageSelectedList
+                                      // .where((element) => element.level != 4)
+                                      .length,
+                                  itemBuilder: (context, index) {
+                                    final FieldModel languageItem =
+                                        controller.languageSelectedList[index];
+                                    return languageItem.level == 4
+                                        ? Container()
+                                        : Obx(
+                                            () => Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                vertical: AppSize.s8,
+                                              ),
+                                              // width: double.infinity,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Wrap(
+                                                        children: [
+                                                          CustomIconButtonWidget(
+                                                            iconData: Icons
+                                                                .remove_circle,
+                                                            iconColor:
+                                                                ColorsManager
+                                                                    .red,
+                                                            isConstraints: true,
+                                                            iconSize:
+                                                                AppSize.s20,
+                                                            onClick: () {
+                                                              controller
+                                                                  .addOrRemoveLanguageOnClick(
+                                                                languageId:
+                                                                    languageItem
+                                                                        .tagId,
+                                                                languageLabel:
+                                                                    languageItem
+                                                                        .label,
+                                                                languageProficiencyLevel:
+                                                                    4,
+                                                                isRemove: true,
+                                                              );
+                                                            },
+                                                          ),
+                                                          CustomTextWidget(
+                                                            text:
+                                                                '${languageItem.label}(${languageItem.tagId})',
+                                                            color: ColorsManager
+                                                                .white,
+                                                            fontSize:
+                                                                AppSize.s16,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            marginLeft:
+                                                                AppSize.s10,
+                                                            marginTop:
+                                                                AppSize.s8,
+                                                            marginBottom:
+                                                                AppSize.s20,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      ///===== Top of Types Selection Component =====//
+                                                      Expanded(
+                                                        flex: 55,
+                                                        child:
+                                                            ContainerDialogWidget(
+                                                          dialogWidget:
+                                                              MaterialDialogWidget(
+                                                            title: 'types'.tr,
+                                                            contentWidget:
+                                                                ListView
+                                                                    .separated(
+                                                              shrinkWrap: true,
+                                                              itemCount: controller
+                                                                  .languageTypeList
+                                                                  .length,
+                                                              itemBuilder: (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return Obx(
+                                                                  () => RowDataSelectionWidget
+                                                                      .checkBox(
+                                                                    isLeftSideText:
+                                                                        false,
+                                                                    isClickingValue: (controller.languageTypeList[index].label == 'spoken'.tr &&
+                                                                            languageItem.languageSpokenLv ==
+                                                                                1) ||
+                                                                        (controller.languageTypeList[index].label == 'written'.tr &&
+                                                                            languageItem.languageWrittenLv ==
+                                                                                1),
+                                                                    text: controller
+                                                                        .languageTypeList[
+                                                                            index]
+                                                                        .label,
+                                                                    onPressed:
+                                                                        () {
+                                                                      // controller
+                                                                      //     .makeRequestToSpokenLanguageAPI(
+                                                                      //   spokenLanguageId:
+                                                                      //       languageItem
+                                                                      //           .id,
+                                                                      //   spokenLanguageData:
+                                                                      //       FieldModel(
+                                                                      //     level: languageItem
+                                                                      //         .level,
+                                                                      //     videoUrl:
+                                                                      //         languageItem.videoUrl ??
+                                                                      //             '',
+                                                                      //     languageSpokenLv: controller.languageTypeList[index].label ==
+                                                                      //             'spoken'.tr
+                                                                      //         ? 1
+                                                                      //         : languageItem.languageSpokenLv,
+                                                                      //     languageWrittenLv: controller.languageTypeList[index].label ==
+                                                                      //             'written'.tr
+                                                                      //         ? 1
+                                                                      //         : languageItem.languageWrittenLv,
+                                                                      //   ),
+                                                                      //   operation:
+                                                                      //       Keys.editOperation,
+                                                                      // );
+                                                                      Navigator
+                                                                          .pop(
+                                                                        context,
+                                                                        true,
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                );
+                                                              },
+                                                              separatorBuilder:
+                                                                  (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return const Divider(
+                                                                  height: 1.0,
+                                                                  color: ColorsManager
+                                                                      .grey300,
+                                                                );
+                                                              },
+                                                            ),
+                                                            //   actionWidget:
+                                                            //       OutlinedButton
+                                                            //           .icon(
+                                                            //     onPressed:
+                                                            //         () {
+                                                            //       Navigator
+                                                            //           .pop(
+                                                            //         context,
+                                                            //         true,
+                                                            //       );
+                                                            //     },
+                                                            //     icon:
+                                                            //         const Icon(
+                                                            //       IconsManager
+                                                            //           .close,
+                                                            //       color: Colors
+                                                            //           .white,
+                                                            //     ),
+                                                            //     label:
+                                                            //         CustomTextWidget(
+                                                            //       marginRight:
+                                                            //           AppSize
+                                                            //               .s24,
+                                                            //       text:
+                                                            //           'Close'
+                                                            //               .tr,
+                                                            //       color: Colors
+                                                            //           .red,
+                                                            //     ),
+                                                            //   ),
+                                                          ),
+                                                          containerWidget:
+                                                              // Obx(
+                                                              //   () =>
+                                                              RowContentInputWidget(
+                                                            centerWidget: languageItem
+                                                                            .languageSpokenLv ==
+                                                                        1 ||
+                                                                    languageItem
+                                                                            .languageWrittenLv ==
+                                                                        1
+                                                                ? Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .only(
+                                                                      top: AppSize
+                                                                          .s4,
+                                                                      bottom:
+                                                                          AppSize
+                                                                              .s4,
+                                                                    ),
+                                                                    child: Wrap(
+                                                                      children: [
+                                                                        if (languageItem.languageSpokenLv ==
+                                                                            1)
+                                                                          RemovableTextCardWidget(
+                                                                            text:
+                                                                                'spoken'.tr,
+                                                                            onRemove: () =>
+                                                                                '',
+                                                                            //     controller.makeRequestToSpokenLanguageAPI(
+                                                                            //   spokenLanguageId:
+                                                                            //       languageItem.id,
+                                                                            //   spokenLanguageData:
+                                                                            //       FieldModel(
+                                                                            //     level: languageItem.level,
+                                                                            //     videoUrl: languageItem.videoUrl ?? '',
+                                                                            //     languageSpokenLv: 0,
+                                                                            //     languageWrittenLv: languageItem.languageWrittenLv,
+                                                                            //   ),
+                                                                            //   operation:
+                                                                            //       Keys.editOperation,
+                                                                            // ),
+                                                                          ),
+                                                                        if (languageItem.languageWrittenLv ==
+                                                                            1)
+                                                                          RemovableTextCardWidget(
+                                                                            text:
+                                                                                'written'.tr,
+                                                                            onRemove: () =>
+                                                                                'null',
+                                                                            //     controller.makeRequestToSpokenLanguageAPI(
+                                                                            //   spokenLanguageId:
+                                                                            //       languageItem.id,
+                                                                            //   spokenLanguageData:
+                                                                            //       FieldModel(
+                                                                            //     level: languageItem.level,
+                                                                            //     videoUrl: languageItem.videoUrl ?? '',
+                                                                            //     languageSpokenLv: languageItem.languageSpokenLv,
+                                                                            //     languageWrittenLv: 0,
+                                                                            //   ),
+                                                                            //   operation:
+                                                                            //       Keys.editOperation,
+                                                                            // ),
+                                                                          )
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                : CustomTextWidget(
+                                                                    text:
+                                                                        'types'
+                                                                            .tr,
+                                                                    color: ColorsManager
+                                                                        .grey400,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontSize:
+                                                                        AppSize
+                                                                            .s16,
+                                                                  ),
+                                                            suffixWidget:
+                                                                const Icon(
+                                                              IconsManager
+                                                                  .arrowDropDown,
+                                                              color:
+                                                                  ColorsManager
+                                                                      .grey600,
+                                                            ),
+                                                          ),
+                                                          // ),
+                                                        ),
+                                                      ),
+                                                      //===== Bottom of Types Selection Component =====//
+                                                      const SizedBox(
+                                                        width: 4.0,
+                                                      ),
+
+                                                      ///===== Top of Proficiency Selection Component =====//
+                                                      Expanded(
+                                                        flex: 40,
+                                                        child:
+                                                            ContainerDialogWidget(
+                                                          dialogWidget:
+                                                              MaterialDialogWidget(
+                                                            title:
+                                                                'proficiencyHint'
+                                                                    .tr,
+                                                            contentWidget:
+                                                                ListView
+                                                                    .separated(
+                                                              shrinkWrap: true,
+                                                              itemCount: controller
+                                                                  .proficiencyList
+                                                                  .length,
+                                                              itemBuilder: (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return Obx(
+                                                                  () => RowDataSelectionWidget
+                                                                      .radioButton(
+                                                                    isLeftSideText:
+                                                                        false,
+                                                                    isClickingValue:
+                                                                        intComparation(
+                                                                      object1: controller
+                                                                          .proficiencyList[
+                                                                              index]
+                                                                          .level,
+                                                                      object2:
+                                                                          languageItem
+                                                                              .level,
+                                                                    ),
+                                                                    text:
+                                                                        translateStateWords(
+                                                                      stateWord:
+                                                                          '${controller.proficiencyList[index].label}',
+                                                                    ),
+                                                                    onPressed:
+                                                                        () {
+                                                                      // controller
+                                                                      //     .makeRequestToSpokenLanguageAPI(
+                                                                      //   spokenLanguageId:
+                                                                      //       languageItem
+                                                                      //           .id,
+                                                                      //   spokenLanguageData:
+                                                                      //       FieldModel(
+                                                                      //     level: controller
+                                                                      //         .proficiencyList[index]
+                                                                      //         .level,
+                                                                      //     videoUrl:
+                                                                      //         languageItem.videoUrl ??
+                                                                      //             '',
+                                                                      //     languageSpokenLv:
+                                                                      //         languageItem.languageSpokenLv,
+                                                                      //     languageWrittenLv:
+                                                                      //         languageItem.languageWrittenLv,
+                                                                      //   ),
+                                                                      //   operation:
+                                                                      //       Keys.editOperation,
+                                                                      // );
+                                                                      Navigator
+                                                                          .pop(
+                                                                        context,
+                                                                        true,
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                );
+                                                              },
+                                                              separatorBuilder:
+                                                                  (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return const Divider(
+                                                                  height: 1.0,
+                                                                  color: ColorsManager
+                                                                      .grey300,
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                          containerWidget:
+                                                              RowContentInputWidget(
+                                                            centerWidget:
+                                                                CustomTextWidget(
+                                                              //marginLeft: 4.0,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              text:
+                                                                  translateStateWords(
+                                                                stateWord:
+                                                                    '${languageItem.getLabelProficiencyLevel}',
+                                                              ),
+                                                              fontSize:
+                                                                  AppSize.s16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
+                                                            suffixWidgetFlex:
+                                                                15,
+                                                            suffixWidget:
+                                                                const Icon(
+                                                              Icons
+                                                                  .arrow_drop_down,
+                                                              color:
+                                                                  ColorsManager
+                                                                      .grey600,
+                                                            ),
+                                                          ),
+                                                          // ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Container(
+                                                    padding:
+                                                        // controller.isUpdating
+                                                        //             .value ==
+                                                        //         false
+                                                        //     ? EdgeInsets.zero
+                                                        //     :
+                                                        EdgeInsets.zero,
+                                                    child:
+                                                        UrlLanguageInputOnboarding(
+                                                      controller: controller,
+                                                      languageItem:
+                                                          languageItem,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                  },
+                                ),
+                              ],
+                            ),
                         ],
                       ),
               ),

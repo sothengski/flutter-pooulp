@@ -75,6 +75,19 @@ class OnboardingController extends GetxController
 
   RxBool isUpdate = false.obs;
   RxInt numPage = 0.obs;
+  int totalPage = 12;
+  int introductionPageNum = 0;
+  int lokkingForPageNum = 1;
+  int specificInternshipPageNum = 2;
+  int internshipInterestedInPageNum = 3;
+  int studentJobInterestedInPageNum = 5;
+  int internshipLocationPageNum = 4;
+  int studentJobLocationPageNum = 6;
+  int educationPageNum = 8;
+  int languagePageNum = 9;
+  int goodAtPageNum = 7;
+  int hearFromPageNum = 10;
+  int thankYouPageNum = 11;
 
   String? sessionToken = '';
   GooglePlaceSearchModel? results;
@@ -131,32 +144,40 @@ class OnboardingController extends GetxController
     // debugPrint(
     //   'onboardingPagesAPIData: $onboardingPagesAPIData',
     // );
-    for (var page = 0; page < 11; page++) {
+    for (var page = 0; page < totalPage; page++) {
       final List<OnboardingPageModel> onboardingData =
           onboardingPagesAPIData.value.pages!;
 
       /// page 0 = Introduction Page
       /// page 10 = Thank you page
-      if (page == 0 || page == 10) {
+      if (page == introductionPageNum || page == thankYouPageNum) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 0 ? 0 : 10,
-          title: page == 0
+          pageIndex: page == introductionPageNum
+              ? introductionPageNum
+              : thankYouPageNum,
+          title: page == introductionPageNum
               ? 'onboardingIntroTitle'.tr
               : 'onboarding_advice_text_title'.tr,
-          subtitle: page == 0 ? '' : 'onboarding_advice_text_body'.tr,
+          subtitle: page == introductionPageNum
+              ? ''
+              : 'onboarding_advice_text_body'.tr,
         );
         onboardingPages.add(temp);
       }
 
       /// page 1 = looking for
       /// page 2 = specific internship
-      if (page == 1 || page == 2) {
+      if (page == lokkingForPageNum || page == specificInternshipPageNum) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 1 ? 1 : 2,
-          title: page == 1
+          pageIndex: page == lokkingForPageNum
+              ? lokkingForPageNum
+              : specificInternshipPageNum,
+          title: page == lokkingForPageNum
               ? onboardingData[0].title
               : 'Internship'.tr, //'onboardingInternshipTitle'.tr,
-          subtitle: page == 2 ? 'onboardingInternshipTitle'.tr : '',
+          subtitle: page == specificInternshipPageNum
+              ? 'onboardingInternshipTitle'.tr
+              : '',
           isSkippable: onboardingData[0].isSkippable,
           selectionItems: onboardingData[0].selectionItems,
           allSkills: onboardingData[0].allSkills,
@@ -167,10 +188,13 @@ class OnboardingController extends GetxController
       }
 
       /// page 3 & 5 = interested in ? Event, Horeca, ...
-      if (page == 3 || page == 5) {
+      if (page == internshipInterestedInPageNum ||
+          page == studentJobInterestedInPageNum) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 3 ? 3 : 5,
-          title: page == 3
+          pageIndex: page == internshipInterestedInPageNum
+              ? internshipInterestedInPageNum
+              : studentJobInterestedInPageNum,
+          title: page == internshipInterestedInPageNum
               ? 'onboardingInternshipTitle'.tr
               : 'onboardingYourStudentJob'.tr,
           subtitle: 'onboardingFieldTitle'.tr, //onboardingData[1].title,
@@ -188,10 +212,13 @@ class OnboardingController extends GetxController
       }
 
       /// page 3 & 6 want to work => city & radius
-      if (page == 4 || page == 6) {
+      if (page == internshipLocationPageNum ||
+          page == studentJobLocationPageNum) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 4 ? 4 : 6,
-          title: page == 4
+          pageIndex: page == internshipLocationPageNum
+              ? internshipLocationPageNum
+              : studentJobLocationPageNum,
+          title: page == internshipLocationPageNum
               ? 'onboardingInternshipTitle'.tr
               : 'onboardingYourStudentJob'.tr,
           subtitle: 'onboardingLocationTitle'.tr, //onboardingData[4].title,
@@ -224,25 +251,37 @@ class OnboardingController extends GetxController
       // }
 
       /// page 8 = Education Page
-      if (page == 8) {
+      if (page == educationPageNum) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: 8,
+          pageIndex: educationPageNum,
           title: 'onboardingEducationTitle'.tr,
           subtitle: 'onboardingEducationTitle'.tr,
         );
         onboardingPages.add(temp);
       }
 
-      /// page 7 = good at list: data analysis
-      /// page 9 = hear about Pooulp list
-      if (page == 7 || page == 9) {
+      /// page 9 = Language Page
+      if (page == languagePageNum) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == 7 ? 7 : 10,
-          title: onboardingData[page == 7 ? 2 : 5].title,
+          pageIndex: languagePageNum,
+          title: 'onboardingTitle4'.tr,
+          subtitle: '',
+        );
+        onboardingPages.add(temp);
+      }
+
+      /// page 7 = good at list: data analysis
+      /// page 10 = hear about Pooulp list
+      if (page == goodAtPageNum || page == hearFromPageNum) {
+        final OnboardingPageModel temp = OnboardingPageModel(
+          pageIndex: page == goodAtPageNum ? goodAtPageNum : hearFromPageNum,
+          title: onboardingData[page == goodAtPageNum ? 2 : 5].title,
           // subtitle: page == 4 ? 'stage' : 'student job',
-          isSkippable: onboardingData[page == 7 ? 2 : 5].isSkippable,
-          selectionItems: onboardingData[page == 7 ? 2 : 5].selectionItems,
-          allSkills: onboardingData[page == 7 ? 2 : 5].allSkills,
+          isSkippable:
+              onboardingData[page == goodAtPageNum ? 2 : 5].isSkippable,
+          selectionItems:
+              onboardingData[page == goodAtPageNum ? 2 : 5].selectionItems,
+          allSkills: onboardingData[page == goodAtPageNum ? 2 : 5].allSkills,
           // internshipTypeItems: onboardingData[1].internshipTypeItems,
           // internshipPeriodItems: onboardingData[1].internshipPeriodItems,
         );
@@ -288,13 +327,13 @@ class OnboardingController extends GetxController
         ) ==
         true;
     if (isSelectInternshipInLookingFor && isSelectStudentJobInLookingFor) {
-      numPage.value = 11;
+      numPage.value = totalPage;
     } else if (isSelectInternshipInLookingFor) {
-      numPage.value = 9;
+      numPage.value = totalPage - 1;
     } else if (isSelectStudentJobInLookingFor) {
-      numPage.value = 8;
+      numPage.value = totalPage - 2;
     } else {
-      numPage.value = 11;
+      numPage.value = totalPage;
     }
   }
 

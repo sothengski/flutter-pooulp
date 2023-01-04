@@ -108,7 +108,6 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                   ),
                       ),
                     ),
-
                     //===== Bottom of Mother Tongue Language Selection Component =====//
 
                     ///===== Top of Add Language Button Component =====//

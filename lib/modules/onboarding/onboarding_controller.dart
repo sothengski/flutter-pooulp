@@ -51,7 +51,24 @@ class OnboardingController extends GetxController
   RxList<FieldModel>? goodAtfieldSelectedList = <FieldModel>[].obs;
   RxList<FieldModel>? knowFromSourceSelectedList = <FieldModel>[].obs;
 
+// language variable
   RxList<FieldModel> languageSelectedList = <FieldModel>[].obs;
+  Rx<FieldModel> selectedLanguage = FieldModel().obs;
+  Rx<FieldModel> selectedMotherTongueLanguage = FieldModel().obs;
+  Rx<FieldModel> selectedProficiency = FieldModel(label: '').obs;
+  RxList<FieldModel> selectedlanguageTypes = <FieldModel>[].obs;
+  RxList<FieldModel> proficiencyList = <FieldModel>[
+    // FieldModel(id: 0, label: LanguageLevelStrings.levelUndefined, level: 0),
+    FieldModel(id: 1, label: LevelStrings.beginner, level: 1),
+    FieldModel(id: 2, label: LevelStrings.intermediate, level: 2),
+    FieldModel(id: 3, label: LevelStrings.professional, level: 3),
+    // FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
+  ].obs;
+  RxList<FieldModel> languageTypeList = <FieldModel>[
+    FieldModel(id: 1, label: 'spoken'.tr),
+    FieldModel(id: 2, label: 'written'.tr),
+  ].obs;
+  // language variable
 
   RxBool isCheckGraduated = false.obs;
   // Rx<SchoolModel> selectedSchool = SchoolModel().obs;
@@ -677,5 +694,9 @@ class OnboardingController extends GetxController
     allLanguageListFromAPI.addAll(await tagProvider.getLanguages());
     languageListForSelection.addAll(allLanguageListFromAPI);
     return allLanguageListFromAPI;
+  }
+
+  FieldModel selectedLanguageOnClick({FieldModel? selectedItem}) {
+    return selectedItem!;
   }
 }

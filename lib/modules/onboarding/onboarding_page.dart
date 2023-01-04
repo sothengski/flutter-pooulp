@@ -936,13 +936,18 @@ class OnboardingPage extends GetView<OnboardingController> {
                             ],
                           ),
                         ),
-
                         PageTemplateWidget(
                           title: pageData[9].title,
                           // subTitle: pageData[9].title,
+                          bodyPageWidget: const LanguageForm(),
+                        ),
+                        //hear from
+                        PageTemplateWidget(
+                          title: pageData[10].title,
+                          // subTitle: pageData[9].title,
                           bodyPageWidget: SingleChildScrollView(
                             child: Wrap(
-                              children: pageData[9]
+                              children: pageData[10]
                                   .selectionItems!
                                   .map(
                                     (element) => Obx(

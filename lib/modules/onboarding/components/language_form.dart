@@ -530,7 +530,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                       .label,
                                                               languageProficiencyLevel:
                                                                   4,
-                                                              isRemove: true,
+                                                              operation: 2,
                                                             );
                                                           },
                                                         ),
@@ -643,7 +643,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                         .label,
                                                                 languageProficiencyLevel:
                                                                     4,
-                                                                isRemove: true,
+                                                                operation: 2,
                                                               );
                                                             },
                                                           ),

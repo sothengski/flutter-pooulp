@@ -710,7 +710,7 @@ class OnboardingController extends GetxController
 
   void addLanguageOnClick({
     // required GlobalKey<FormState>? formKey,
-    required int? languageTagId,
+    required int? languageId,
     required String? languageLabel,
     required int? languageProficiencyLevel,
     bool? spoken = false,
@@ -727,7 +727,7 @@ class OnboardingController extends GetxController
     // );
     languageSelectedList.add(
       FieldModel(
-        tagId: languageTagId, //selectedLanguage.value.id,
+        tagId: languageId, //selectedLanguage.value.id,
         label: languageLabel,
         level: languageProficiencyLevel, //selectedProficiency.value.level,
         videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',

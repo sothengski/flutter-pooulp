@@ -119,8 +119,8 @@ class LanguageForm extends GetView<OnboardingController> {
                     onPressed: () {
                       unFocusKeyBoard(context);
                       controller.addLanguageOnClick(
-                        languageTagId:
-                            controller.selectedMotherTongueLanguage.value.tagId,
+                        languageId:
+                            controller.selectedMotherTongueLanguage.value.id,
                         languageLabel:
                             controller.selectedMotherTongueLanguage.value.label,
                         languageProficiencyLevel: 4,
@@ -405,6 +405,18 @@ class LanguageForm extends GetView<OnboardingController> {
                     buttonWidth: getWidth,
                     onPressed: () {
                       unFocusKeyBoard(context);
+                      controller.addLanguageOnClick(
+                        languageId: controller.selectedLanguage.value.id,
+                        languageLabel: controller.selectedLanguage.value.label,
+                        languageProficiencyLevel:
+                            controller.selectedProficiency.value.level,
+                        spoken: controller.selectedlanguageTypes
+                            .where((element) => element.id == 1)
+                            .isNotEmpty,
+                        written: controller.selectedlanguageTypes
+                            .where((element) => element.id == 2)
+                            .isNotEmpty,
+                      );
                       // if (!controller.isSubmitBtnProcessing.value == true) {
                       //   controller.saveButtonOnClick(
                       //     formKey: controller.editLangaugeFormKey,
@@ -514,7 +526,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                       ),
                                                       CustomTextWidget(
                                                         text:
-                                                            '${languageItem.label}',
+                                                            '${languageItem.label}(${languageItem.tagId})',
                                                         color:
                                                             ColorsManager.white,
                                                         fontSize: AppSize.s16,
@@ -613,7 +625,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                         ),
                                                         CustomTextWidget(
                                                           text:
-                                                              '${languageItem.label}',
+                                                              '${languageItem.label}(${languageItem.tagId})',
                                                           color: ColorsManager
                                                               .white,
                                                           fontSize: AppSize.s16,

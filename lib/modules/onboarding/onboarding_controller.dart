@@ -108,7 +108,7 @@ class OnboardingController extends GetxController
   int educationPageNum = 8;
   int languagePageNum = 9;
   int goodAtPageNum = 7;
-  int hearFromPageNum = 10;
+  int knowFromSourcePageNum = 10;
   int thankYouPageNum = 11;
 
   String? sessionToken = '';
@@ -295,9 +295,10 @@ class OnboardingController extends GetxController
 
       /// page 7 = good at list: data analysis
       /// page 10 = hear about Pooulp list
-      if (page == goodAtPageNum || page == hearFromPageNum) {
+      if (page == goodAtPageNum || page == knowFromSourcePageNum) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex: page == goodAtPageNum ? goodAtPageNum : hearFromPageNum,
+          pageIndex:
+              page == goodAtPageNum ? goodAtPageNum : knowFromSourcePageNum,
           title: onboardingData[page == goodAtPageNum ? 2 : 5].title,
           // subtitle: page == 4 ? 'stage' : 'student job',
           isSkippable:
@@ -385,46 +386,46 @@ class OnboardingController extends GetxController
             isLastPage ||
             (!isSelectInternshipInLookingFor &&
                 !isSelectStudentJobInLookingFor &&
-                selectedPageIndex.value == 1) ||
+                selectedPageIndex.value == lokkingForPageNum) ||
             // if we didn't found or selected internship Type in page 2
             (isSelectInternshipInLookingFor &&
-                selectedPageIndex.value == 2 &&
+                selectedPageIndex.value == specificInternshipPageNum &&
                 internshipTypeSelectedList.isEmpty) ||
             // if we didn't found or selected internship Period in page 2
             (isSelectInternshipInLookingFor &&
-                selectedPageIndex.value == 2 &&
+                selectedPageIndex.value == specificInternshipPageNum &&
                 internshipPeriodSelectedList.isEmpty) ||
             // if we didn't found or selected internship and internshipInterested in page 3
-            ((selectedPageIndex.value == 3) &&
+            ((selectedPageIndex.value == internshipInterestedInPageNum) &&
                 isSelectInternshipInLookingFor &&
                 internshipInterestedInSelectedList.isEmpty) ||
             // if we didn't found or selected internship and internshipAddress in page 4
-            ((selectedPageIndex.value == 4) &&
+            ((selectedPageIndex.value == internshipLocationPageNum) &&
                 isSelectInternshipInLookingFor &&
                 internshipPlaceDetail!.value.fullAddress == null) ||
             // if we didn't found or selected StudentJob and StudentJobInterested in page 5
-            ((selectedPageIndex.value == 5) &&
+            ((selectedPageIndex.value == studentJobInterestedInPageNum) &&
                 isSelectStudentJobInLookingFor &&
                 studentJobInterestedInSelectedList.isEmpty) ||
             // if we didn't found or selected only StudentJob and StudentJobInterested in page 2
-            (((selectedPageIndex.value == 2) &&
+            (((selectedPageIndex.value == specificInternshipPageNum) &&
                     isSelectStudentJobInLookingFor &&
                     !isSelectInternshipInLookingFor) &&
                 studentJobInterestedInSelectedList.isEmpty) ||
             // if we didn't found or selected only StudentJob and StudentJobAddress in page 2
-            ((selectedPageIndex.value == 3) &&
+            ((selectedPageIndex.value == internshipInterestedInPageNum) &&
                 isSelectStudentJobInLookingFor &&
                 !isSelectInternshipInLookingFor &&
                 studentJobPlaceDetail!.value.fullAddress == null) ||
             // if we didn't found or selected knowFromSourceSelectedList in page 6(only studentJob)
             // page 7(only Internship) // page 9 for select both
-            (((selectedPageIndex.value == 6 &&
+            (((selectedPageIndex.value == 7 &&
                         isSelectStudentJobInLookingFor &&
                         !isSelectInternshipInLookingFor) ||
-                    (selectedPageIndex.value == 7 &&
+                    (selectedPageIndex.value == 8 &&
                         isSelectInternshipInLookingFor &&
                         !isSelectStudentJobInLookingFor) ||
-                    (selectedPageIndex.value == 9 &&
+                    (selectedPageIndex.value == 10 &&
                         isSelectInternshipInLookingFor &&
                         isSelectStudentJobInLookingFor)) &&
                 knowFromSourceSelectedList!.isEmpty)) {

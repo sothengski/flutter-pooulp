@@ -118,7 +118,7 @@ class LanguageForm extends GetView<OnboardingController> {
                     buttonWidth: getWidth,
                     onPressed: () {
                       unFocusKeyBoard(context);
-                      controller.addOrRemoveLanguageOnClick(
+                      controller.operationLanguageOnClick(
                         languageId:
                             controller.selectedMotherTongueLanguage.value.id,
                         languageLabel:
@@ -405,7 +405,7 @@ class LanguageForm extends GetView<OnboardingController> {
                     buttonWidth: getWidth,
                     onPressed: () {
                       unFocusKeyBoard(context);
-                      controller.addOrRemoveLanguageOnClick(
+                      controller.operationLanguageOnClick(
                         languageId: controller.selectedLanguage.value.id,
                         languageLabel: controller.selectedLanguage.value.label,
                         languageProficiencyLevel:
@@ -521,7 +521,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                           iconSize: AppSize.s20,
                                                           onClick: () {
                                                             controller
-                                                                .addOrRemoveLanguageOnClick(
+                                                                .operationLanguageOnClick(
                                                               languageId:
                                                                   languageItem
                                                                       .tagId,
@@ -531,6 +531,8 @@ class LanguageForm extends GetView<OnboardingController> {
                                                               languageProficiencyLevel:
                                                                   4,
                                                               operation: 2,
+                                                              indexForEditOrDelete:
+                                                                  index,
                                                             );
                                                           },
                                                         ),
@@ -552,23 +554,22 @@ class LanguageForm extends GetView<OnboardingController> {
                                                     ),
                                                   ],
                                                 ),
-                                                // Obx(
-                                                //   () =>
-                                                Container(
-                                                  padding:
-                                                      // controller.isUpdating
-                                                      //             .value ==
-                                                      //         false
-                                                      //     ? EdgeInsets.zero
-                                                      //     :
-                                                      EdgeInsets.zero,
-                                                  child:
-                                                      UrlLanguageInputOnboarding(
-                                                    controller: controller,
-                                                    languageItem: languageItem,
+                                                Obx(
+                                                  () => Container(
+                                                    padding: controller.isUpdate
+                                                                .value ==
+                                                            false
+                                                        ? EdgeInsets.zero
+                                                        : EdgeInsets.zero,
+                                                    child:
+                                                        UrlLanguageInputOnboarding(
+                                                      controller: controller,
+                                                      languageItem:
+                                                          languageItem,
+                                                      index: index,
+                                                    ),
                                                   ),
                                                 ),
-                                                // ),
                                               ],
                                             ),
                                           );
@@ -634,7 +635,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                 AppSize.s20,
                                                             onClick: () {
                                                               controller
-                                                                  .addOrRemoveLanguageOnClick(
+                                                                  .operationLanguageOnClick(
                                                                 languageId:
                                                                     languageItem
                                                                         .tagId,
@@ -644,6 +645,8 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                 languageProficiencyLevel:
                                                                     4,
                                                                 operation: 2,
+                                                                indexForEditOrDelete:
+                                                                    index,
                                                               );
                                                             },
                                                           ),
@@ -809,20 +812,16 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                             text:
                                                                                 'spoken'.tr,
                                                                             onRemove: () =>
-                                                                                '',
-                                                                            //     controller.makeRequestToSpokenLanguageAPI(
-                                                                            //   spokenLanguageId:
-                                                                            //       languageItem.id,
-                                                                            //   spokenLanguageData:
-                                                                            //       FieldModel(
-                                                                            //     level: languageItem.level,
-                                                                            //     videoUrl: languageItem.videoUrl ?? '',
-                                                                            //     languageSpokenLv: 0,
-                                                                            //     languageWrittenLv: languageItem.languageWrittenLv,
-                                                                            //   ),
-                                                                            //   operation:
-                                                                            //       Keys.editOperation,
-                                                                            // ),
+                                                                                controller.operationLanguageOnClick(
+                                                                              languageId: languageItem.tagId,
+                                                                              languageLabel: languageItem.label,
+                                                                              languageProficiencyLevel: languageItem.level,
+                                                                              // spoken: false,
+                                                                              written: languageItem.languageWrittenLv == 1,
+                                                                              languageVideoUrl: languageItem.videoUrl,
+                                                                              operation: 1,
+                                                                              indexForEditOrDelete: index,
+                                                                            ),
                                                                           ),
                                                                         if (languageItem.languageWrittenLv ==
                                                                             1)
@@ -830,20 +829,16 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                             text:
                                                                                 'written'.tr,
                                                                             onRemove: () =>
-                                                                                'null',
-                                                                            //     controller.makeRequestToSpokenLanguageAPI(
-                                                                            //   spokenLanguageId:
-                                                                            //       languageItem.id,
-                                                                            //   spokenLanguageData:
-                                                                            //       FieldModel(
-                                                                            //     level: languageItem.level,
-                                                                            //     videoUrl: languageItem.videoUrl ?? '',
-                                                                            //     languageSpokenLv: languageItem.languageSpokenLv,
-                                                                            //     languageWrittenLv: 0,
-                                                                            //   ),
-                                                                            //   operation:
-                                                                            //       Keys.editOperation,
-                                                                            // ),
+                                                                                controller.operationLanguageOnClick(
+                                                                              languageId: languageItem.tagId,
+                                                                              languageLabel: languageItem.label,
+                                                                              languageProficiencyLevel: languageItem.level,
+                                                                              spoken: languageItem.languageSpokenLv == 1,
+                                                                              // written: false,
+                                                                              languageVideoUrl: languageItem.videoUrl,
+                                                                              operation: 1,
+                                                                              indexForEditOrDelete: index,
+                                                                            ),
                                                                           )
                                                                       ],
                                                                     ),
@@ -999,19 +994,21 @@ class LanguageForm extends GetView<OnboardingController> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Container(
-                                                    padding:
-                                                        // controller.isUpdating
-                                                        //             .value ==
-                                                        //         false
-                                                        //     ? EdgeInsets.zero
-                                                        //     :
-                                                        EdgeInsets.zero,
-                                                    child:
-                                                        UrlLanguageInputOnboarding(
-                                                      controller: controller,
-                                                      languageItem:
-                                                          languageItem,
+                                                  Obx(
+                                                    () => Container(
+                                                      padding: controller
+                                                                  .isUpdate
+                                                                  .value ==
+                                                              false
+                                                          ? EdgeInsets.zero
+                                                          : EdgeInsets.zero,
+                                                      child:
+                                                          UrlLanguageInputOnboarding(
+                                                        controller: controller,
+                                                        languageItem:
+                                                            languageItem,
+                                                        index: index,
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
@@ -1041,11 +1038,13 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
     this.controller,
     required this.languageItem,
     this.vdoUrlCtrl,
+    this.index,
   }) : super(key: key);
 
   final OnboardingController? controller;
   final FieldModel? languageItem;
   TextEditingController? vdoUrlCtrl;
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -1061,6 +1060,7 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
                 child: CustomTextWidget(
                   textAlign: TextAlign.left,
                   text: languageItem!.videoUrl ?? 'no link',
+                  color: ColorsManager.white,
                   maxLine: 2,
                   fontSize: AppSize.s16,
                   fontWeight: FontWeight.w400,
@@ -1079,9 +1079,9 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
                   iconData: Icons.edit,
                   iconSize: AppSize.s20,
                   onClick: () {
-                    // controller!.isUpdating.value = switchingBooleanValue(
-                    //   boolValue: controller!.isUpdating.value,
-                    // );
+                    controller!.isUpdate.value = switchingBooleanValue(
+                      boolValue: controller!.isUpdate.value,
+                    );
                     languageItem!.selected = true;
                   },
                 ),
@@ -1108,10 +1108,9 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
                           iconSize: AppSize.s20,
                           onClick: () {
                             languageItem!.selected = false;
-                            // controller!.isUpdating.value =
-                            //     switchingBooleanValue(
-                            //   boolValue: controller!.isUpdating.value,
-                            // );
+                            controller!.isUpdate.value = switchingBooleanValue(
+                              boolValue: controller!.isUpdate.value,
+                            );
                           },
                         ),
                 ),
@@ -1139,6 +1138,17 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
                     iconColor: ColorsManager.green,
                     iconSize: AppSize.s20,
                     onClick: () {
+                      controller!.operationLanguageOnClick(
+                        languageId: languageItem!.tagId,
+                        languageLabel: languageItem!.label,
+                        languageProficiencyLevel: languageItem!.level,
+                        spoken: languageItem!.languageSpokenLv == 1,
+                        written: languageItem!.languageWrittenLv == 1,
+                        languageVideoUrl: vdoUrlCtrl!.text,
+                        operation: 1,
+                        indexForEditOrDelete: index,
+                      );
+                      languageItem!.selected = false;
                       // controller!.makeRequestToSpokenLanguageAPI(
                       //   spokenLanguageId: languageItem!.id,
                       //   spokenLanguageData: FieldModel(

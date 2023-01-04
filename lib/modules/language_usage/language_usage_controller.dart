@@ -21,7 +21,9 @@ class LanguageUsageController extends GetxController {
 
   Rx<FieldModel> selectedMotherTongueLanguage = FieldModel().obs;
 
-  Rx<FieldModel> selectedProficiency = FieldModel(label: '').obs;
+  // Rx<FieldModel> selectedProficiency = FieldModel(label: '').obs;
+  Rx<FieldModel> selectedSpokenProficiency = FieldModel(label: '').obs;
+  Rx<FieldModel> selectedWrittenProficiency = FieldModel(label: '').obs;
 
   RxList<FieldModel> selectedlanguageTypes = <FieldModel>[].obs;
 
@@ -98,7 +100,9 @@ class LanguageUsageController extends GetxController {
   void clearDataFromForm() {
     selectedMotherTongueLanguage.value = FieldModel();
     selectedLanguage.value = FieldModel();
-    selectedProficiency.value = FieldModel(label: '');
+    // selectedProficiency.value = FieldModel(label: '');
+    selectedSpokenProficiency.value = FieldModel(label: '');
+    selectedWrittenProficiency.value = FieldModel(label: '');
     selectedlanguageTypes.value = [];
   }
 
@@ -110,8 +114,8 @@ class LanguageUsageController extends GetxController {
     required GlobalKey<FormState>? formKey,
     required int? languageTagId,
     required int? languageProficiencyLevel,
-    bool? spoken = false,
-    bool? written = false,
+    int? spoken = 1,
+    int? written = 1,
     String? languageVideoUrl = '',
   }) async {
     if (formKey!.currentState!.validate()) {
@@ -128,8 +132,8 @@ class LanguageUsageController extends GetxController {
         tagId: languageTagId, //selectedLanguage.value.id,
         level: languageProficiencyLevel, //selectedProficiency.value.level,
         videoUrl: languageVideoUrl, //'',
-        languageSpokenLv: spoken == true ? 1 : 0,
-        languageWrittenLv: written == true ? 1 : 0,
+        languageSpokenLv: spoken,
+        languageWrittenLv: written,
       );
       await makeRequestToSpokenLanguageAPI(
         spokenLanguageId: languageTagId, //selectedLanguage.value.id,

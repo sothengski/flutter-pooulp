@@ -118,15 +118,13 @@ class LanguageForm extends GetView<OnboardingController> {
                     buttonWidth: getWidth,
                     onPressed: () {
                       unFocusKeyBoard(context);
-                      // if (!controller.isSubmitBtnProcessing.value == true) {
-                      //   controller.saveButtonOnClick(
-                      //     formKey:
-                      //         controller.editMontherTongueLangaugeFormKey,
-                      //     languageTagId: controller
-                      //         .selectedMotherTongueLanguage.value.id,
-                      //     languageProficiencyLevel: 4,
-                      //   );
-                      // }
+                      controller.addLanguageOnClick(
+                        languageTagId:
+                            controller.selectedMotherTongueLanguage.value.tagId,
+                        languageLabel:
+                            controller.selectedMotherTongueLanguage.value.label,
+                        languageProficiencyLevel: 4,
+                      );
                     },
                   ),
                   // ),
@@ -422,6 +420,7 @@ class LanguageForm extends GetView<OnboardingController> {
                       //         .isNotEmpty,
                       //   );
                       // }
+                      controller.clearDataFromForm();
                     },
                   ),
                   // ),
@@ -458,6 +457,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                 alignment: Alignment.centerLeft,
                                 child: CustomTextWidget(
                                   text: 'motherTongue'.tr,
+                                  color: ColorsManager.white,
                                   fontSize: AppSize.s20,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -515,6 +515,8 @@ class LanguageForm extends GetView<OnboardingController> {
                                                       CustomTextWidget(
                                                         text:
                                                             '${languageItem.label}',
+                                                        color:
+                                                            ColorsManager.white,
                                                         fontSize: AppSize.s16,
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -527,22 +529,23 @@ class LanguageForm extends GetView<OnboardingController> {
                                                   ),
                                                 ],
                                               ),
-                                              Obx(
-                                                () => Container(
-                                                  padding:
-                                                      // controller.isUpdating
-                                                      //             .value ==
-                                                      //         false
-                                                      //     ? EdgeInsets.zero
-                                                      //     :
-                                                      EdgeInsets.zero,
-                                                  child:
-                                                      UrlLanguageInputOnboarding(
-                                                    controller: controller,
-                                                    languageItem: languageItem,
-                                                  ),
+                                              // Obx(
+                                              //   () =>
+                                              Container(
+                                                padding:
+                                                    // controller.isUpdating
+                                                    //             .value ==
+                                                    //         false
+                                                    //     ? EdgeInsets.zero
+                                                    //     :
+                                                    EdgeInsets.zero,
+                                                child:
+                                                    UrlLanguageInputOnboarding(
+                                                  controller: controller,
+                                                  languageItem: languageItem,
                                                 ),
                                               ),
+                                              // ),
                                             ],
                                           ),
                                         );
@@ -556,6 +559,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                 alignment: Alignment.centerLeft,
                                 child: CustomTextWidget(
                                   text: 'otherLanguages'.tr,
+                                  color: ColorsManager.white,
                                   fontSize: AppSize.s20,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -610,6 +614,8 @@ class LanguageForm extends GetView<OnboardingController> {
                                                         CustomTextWidget(
                                                           text:
                                                               '${languageItem.label}',
+                                                          color: ColorsManager
+                                                              .white,
                                                           fontSize: AppSize.s16,
                                                           fontWeight:
                                                               FontWeight.w500,
@@ -1080,6 +1086,7 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
                     // controller: controller!.vdoUrlListTextCtrl[index!],
                     // leftPadding: AppSize.s48,
                     hintText: 'addLanguageVideoPresentationLink'.tr,
+                    fontColor: ColorsManager.white,
                   ),
                 ),
                 const SizedBox(

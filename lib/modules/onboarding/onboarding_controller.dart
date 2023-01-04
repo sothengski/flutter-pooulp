@@ -700,4 +700,42 @@ class OnboardingController extends GetxController
   FieldModel selectedLanguageOnClick({FieldModel? selectedItem}) {
     return selectedItem!;
   }
+
+  void clearDataFromForm() {
+    selectedMotherTongueLanguage.value = FieldModel();
+    selectedLanguage.value = FieldModel();
+    selectedProficiency.value = FieldModel(label: '');
+    selectedlanguageTypes.value = [];
+  }
+
+  void addLanguageOnClick({
+    // required GlobalKey<FormState>? formKey,
+    required int? languageTagId,
+    required String? languageLabel,
+    required int? languageProficiencyLevel,
+    bool? spoken = false,
+    bool? written = false,
+    String? languageVideoUrl = '',
+  }) {
+    // if (formKey!.currentState!.validate()) {
+
+    // debugPrint(
+    //   'selectedLanguage:: $selectedLanguage',
+    // );
+    // debugPrint(
+    //   'selectedProficiency:: $selectedProficiency',
+    // );
+    languageSelectedList.add(
+      FieldModel(
+        tagId: languageTagId, //selectedLanguage.value.id,
+        label: languageLabel,
+        level: languageProficiencyLevel, //selectedProficiency.value.level,
+        videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',
+        languageSpokenLv: spoken == true ? 1 : 0,
+        languageWrittenLv: written == true ? 1 : 0,
+      ),
+    );
+    clearDataFromForm();
+    // }
+  }
 }

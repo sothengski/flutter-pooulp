@@ -137,6 +137,8 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                               languageTagId: controller
                                   .selectedMotherTongueLanguage.value.id,
                               languageProficiencyLevel: 4,
+                              spoken: 4,
+                              written: 4,
                             );
                           }
                         },
@@ -324,12 +326,12 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                     // ),
                     //===== Bottom of Types Selection Component =====//
 
-                    ///===== Top of Proficiency Selection Component =====//
+                    ///===== Top of Spoken Proficiency Selection Component =====//
                     ContainerDialogWidget(
-                      inputTitle: 'proficiency'.tr,
+                      inputTitle: 'spoken'.tr,
                       inputTitleMarginTop: AppSize.s16,
                       validatorFunction: (_) => Validator().notEmptyValidator(
-                        controller.selectedProficiency.value.label ?? '',
+                        controller.selectedSpokenProficiency.value.label ?? '',
                       ),
                       dialogWidget: MaterialDialogWidget(
                         title: 'proficiencyHint'.tr,
@@ -345,7 +347,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                       .proficiencyList[index].label!
                                       .toLowerCase(),
                                   object2: controller
-                                      .selectedProficiency.value.label!
+                                      .selectedSpokenProficiency.value.label!
                                       .toLowerCase(),
                                 ),
                                 text: translateStateWords(
@@ -353,7 +355,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                       controller.proficiencyList[index].label,
                                 ),
                                 onPressed: () {
-                                  controller.selectedProficiency.value =
+                                  controller.selectedSpokenProficiency.value =
                                       controller.selectedLanguageOnClick(
                                     selectedItem:
                                         controller.proficiencyList[index],
@@ -375,38 +377,130 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                         ),
                       ),
                       containerWidget: Obx(
-                        () => controller.selectedProficiency.value.label == ''
-                            ? RowContentInputWidget(
-                                centerWidget: CustomTextWidget(
-                                  text: 'proficiencyHint'.tr,
-                                  // marginLeft: AppSize.s8,
-                                  color: ColorsManager.grey400,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16.0,
-                                ),
-                                suffixWidget: const Icon(
-                                  Icons.arrow_drop_down,
-                                  color: ColorsManager.grey600,
-                                ),
-                              )
-                            : RowContentInputWidget(
-                                centerWidget: CustomTextWidget(
-                                  //marginLeft: 4.0,
-                                  text: translateStateWords(
-                                    stateWord: controller
-                                        .selectedProficiency.value.label,
+                        () =>
+                            controller.selectedSpokenProficiency.value.label ==
+                                    ''
+                                ? RowContentInputWidget(
+                                    centerWidget: CustomTextWidget(
+                                      text: 'proficiencyHint'.tr,
+                                      // marginLeft: AppSize.s8,
+                                      color: ColorsManager.grey400,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16.0,
+                                    ),
+                                    suffixWidget: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: ColorsManager.grey600,
+                                    ),
+                                  )
+                                : RowContentInputWidget(
+                                    centerWidget: CustomTextWidget(
+                                      //marginLeft: 4.0,
+                                      text: translateStateWords(
+                                        stateWord: controller
+                                            .selectedSpokenProficiency
+                                            .value
+                                            .label,
+                                      ),
+                                      color: ColorsManager.black,
+                                      fontSize: 16.0,
+                                    ),
+                                    suffixWidget: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: ColorsManager.grey600,
+                                    ),
                                   ),
-                                  color: ColorsManager.black,
-                                  fontSize: 16.0,
-                                ),
-                                suffixWidget: const Icon(
-                                  Icons.arrow_drop_down,
-                                  color: ColorsManager.grey600,
-                                ),
-                              ),
                       ),
                     ),
-                    //===== Bottom of Proficiency Selection Component =====//
+                    //===== Bottom of Spoken Proficiency Selection Component =====//
+
+                    ///===== Top of Written Proficiency Selection Component =====//
+                    ContainerDialogWidget(
+                      inputTitle: 'written'.tr,
+                      inputTitleMarginTop: AppSize.s16,
+                      validatorFunction: (_) => Validator().notEmptyValidator(
+                        controller.selectedWrittenProficiency.value.label ?? '',
+                      ),
+                      dialogWidget: MaterialDialogWidget(
+                        title: 'proficiencyHint'.tr,
+                        contentWidget: ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: controller.proficiencyList.length,
+                          itemBuilder: (context, index) {
+                            return Obx(
+                              () => RowDataSelectionWidget.radioButton(
+                                isLeftSideText: false,
+                                isClickingValue: stringsComparation(
+                                  object1: controller
+                                      .proficiencyList[index].label!
+                                      .toLowerCase(),
+                                  object2: controller
+                                      .selectedWrittenProficiency.value.label!
+                                      .toLowerCase(),
+                                ),
+                                text: translateStateWords(
+                                  stateWord:
+                                      controller.proficiencyList[index].label,
+                                ),
+                                onPressed: () {
+                                  controller.selectedWrittenProficiency.value =
+                                      controller.selectedLanguageOnClick(
+                                    selectedItem:
+                                        controller.proficiencyList[index],
+                                  );
+                                  Navigator.pop(
+                                    context,
+                                    true,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Divider(
+                              height: 1.0,
+                              color: ColorsManager.grey300,
+                            );
+                          },
+                        ),
+                      ),
+                      containerWidget: Obx(
+                        () =>
+                            controller.selectedWrittenProficiency.value.label ==
+                                    ''
+                                ? RowContentInputWidget(
+                                    centerWidget: CustomTextWidget(
+                                      text: 'proficiencyHint'.tr,
+                                      // marginLeft: AppSize.s8,
+                                      color: ColorsManager.grey400,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16.0,
+                                    ),
+                                    suffixWidget: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: ColorsManager.grey600,
+                                    ),
+                                  )
+                                : RowContentInputWidget(
+                                    centerWidget: CustomTextWidget(
+                                      //marginLeft: 4.0,
+                                      text: translateStateWords(
+                                        stateWord: controller
+                                            .selectedWrittenProficiency
+                                            .value
+                                            .label,
+                                      ),
+                                      color: ColorsManager.black,
+                                      fontSize: 16.0,
+                                    ),
+                                    suffixWidget: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: ColorsManager.grey600,
+                                    ),
+                                  ),
+                      ),
+                    ),
+                    //===== Bottom of Written Proficiency Selection Component =====//
 
                     ///===== Top of Add Language Button Component =====//
                     Obx(
@@ -433,14 +527,19 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                               formKey: controller.editLangaugeFormKey,
                               languageTagId:
                                   controller.selectedLanguage.value.id,
-                              languageProficiencyLevel:
-                                  controller.selectedProficiency.value.level,
-                              spoken: controller.selectedlanguageTypes
-                                  .where((element) => element.id == 1)
-                                  .isNotEmpty,
-                              written: controller.selectedlanguageTypes
-                                  .where((element) => element.id == 2)
-                                  .isNotEmpty,
+                              languageProficiencyLevel: 1,
+                              spoken: controller
+                                  .selectedSpokenProficiency.value.level,
+                              written: controller
+                                  .selectedWrittenProficiency.value.level,
+                              // languageProficiencyLevel: controller
+                              //     .selectedProficiency.value.level,
+                              // spoken: controller.selectedlanguageTypes
+                              //     .where((element) => element.id == 1)
+                              //     .isNotEmpty,
+                              // written: controller.selectedlanguageTypes
+                              //     .where((element) => element.id == 2)
+                              //     .isNotEmpty,
                             );
                           }
                         },

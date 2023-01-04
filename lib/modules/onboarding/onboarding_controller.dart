@@ -716,7 +716,7 @@ class OnboardingController extends GetxController
     bool? spoken = false,
     bool? written = false,
     String? languageVideoUrl = '',
-    bool? isRemove = false,
+    int? operation = 0, //0 = add, 1 = edit, 2 = delete
   }) {
     // if (formKey!.currentState!.validate()) {
 
@@ -726,10 +726,7 @@ class OnboardingController extends GetxController
     // debugPrint(
     //   'selectedProficiency:: $selectedProficiency',
     // );
-    if (isRemove! == true) {
-      languageSelectedList
-          .removeWhere((element) => element.tagId == languageId);
-    } else {
+    if (operation == 0) {
       languageSelectedList.add(
         FieldModel(
           tagId: languageId, //selectedLanguage.value.id,
@@ -740,6 +737,10 @@ class OnboardingController extends GetxController
           languageWrittenLv: written == true ? 1 : 0,
         ),
       );
+    } else if (operation == 1) {
+    } else if (operation == 2) {
+      languageSelectedList
+          .removeWhere((element) => element.tagId == languageId);
     }
     clearDataFromForm();
     // }

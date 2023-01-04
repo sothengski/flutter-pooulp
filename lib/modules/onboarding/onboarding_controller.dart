@@ -20,6 +20,9 @@ class OnboardingController extends GetxController
   RxList<FieldModel> fieldListForSelect = <FieldModel>[].obs;
   RxList<FieldModel> internshipFieldListForSelect = <FieldModel>[].obs;
   RxList<FieldModel> studentJobFieldListForSelect = <FieldModel>[].obs;
+  RxList<FieldModel> allLanguageListFromAPI = <FieldModel>[].obs;
+
+  RxList<FieldModel> languageListForSelection = <FieldModel>[].obs;
 
   RxList<FieldModel> schoolDegreeList = <FieldModel>[].obs;
 
@@ -47,6 +50,8 @@ class OnboardingController extends GetxController
 
   RxList<FieldModel>? goodAtfieldSelectedList = <FieldModel>[].obs;
   RxList<FieldModel>? knowFromSourceSelectedList = <FieldModel>[].obs;
+
+  RxList<FieldModel> languageSelectedList = <FieldModel>[].obs;
 
   RxBool isCheckGraduated = false.obs;
   // Rx<SchoolModel> selectedSchool = SchoolModel().obs;
@@ -105,6 +110,7 @@ class OnboardingController extends GetxController
     await getSchoolListResponseProvider();
     await getFieldsListResponseProvider();
     await getSchoolDegreeListResponseProvider();
+    await getLanguageListResponseProvider();
   }
 
   void uuidTokenGenerator() => sessionToken = UuidGenerator().uuidV4();
@@ -663,5 +669,13 @@ class OnboardingController extends GetxController
     //   'fieldListForSelect:: ${fieldListForSelect.map((element) => '${element.label}\n')}',
     // );
     return schoolDegreeList;
+  }
+
+  Future<List<FieldModel>> getLanguageListResponseProvider({
+    bool? refresh = false,
+  }) async {
+    allLanguageListFromAPI.addAll(await tagProvider.getLanguages());
+    languageListForSelection.addAll(allLanguageListFromAPI);
+    return allLanguageListFromAPI;
   }
 }

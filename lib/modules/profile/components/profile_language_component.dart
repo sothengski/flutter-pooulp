@@ -28,9 +28,6 @@ class ProfileLanguageComponent extends StatelessWidget {
           Get.toNamed(addOrEditLangRoute!, arguments: [Keys.addOperation]),
         },
       ),
-      // child: CustomList(
-      //   subtitleList: controller.languageList,
-      // ),
       child: spokenLanguageList! == []
           ? Container()
           : Container(
@@ -39,11 +36,40 @@ class ProfileLanguageComponent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: spokenLanguageList!
                     .map(
-                      (e) => CustomTextWidget(
-                        text: '${e.displayLabelAndLevel}',
-                        color: ColorsManager.grey800,
-                        marginBottom: AppSize.s8,
-                      ),
+                      (e) => e.level == 4
+                          ? CustomTextWidget(
+                              text: '''${e.displayLabelAndLevel}''',
+                              color: ColorsManager.grey800,
+                              marginBottom: AppSize.s8,
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "${e.label}\n",
+                                      style: const TextStyle(
+                                        color: ColorsManager.grey800,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text:
+                                          "${e.displaySpokenAndWrittenLabelAndLevel}",
+                                      style: const TextStyle(
+                                        color: ColorsManager.grey800,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                      // CustomTextWidget(
+                      //   text:
+                      //       '''${e.label}\n${e.displaySpokenAndWrittenLabelAndLevel}''',
+                      //   color: ColorsManager.grey800,
+                      //   marginBottom: AppSize.s8,
+                      // ),
                     )
                     .toList(),
               ),

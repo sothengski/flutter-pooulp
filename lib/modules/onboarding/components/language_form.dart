@@ -18,15 +18,15 @@ class LanguageForm extends GetView<OnboardingController> {
           children: [
             ///===== Top of Mother Tongue Language Selection Component =====//
             Form(
-              // key: controller.editMontherTongueLangaugeFormKey,
+              key: controller.editMontherTongueLangaugeFormKey,
               child: Wrap(
                 children: [
                   ContainerDialogWidget(
                     inputTitle: 'motherTongue'.tr,
                     inputTitleColor: ColorsManager.white,
-                    // validatorFunction: (_) => Validator().notEmptyValidator(
-                    //   controller.selectedMotherTongueLanguage.value.label ?? '',
-                    // ),
+                    validatorFunction: (_) => Validator().notEmptyValidator(
+                      controller.selectedMotherTongueLanguage.value.label ?? '',
+                    ),
                     dialogType:
                         DialogType.bottomSheetDialog, // controller: controller,
                     dialogWidget: Container(
@@ -105,26 +105,22 @@ class LanguageForm extends GetView<OnboardingController> {
                     topPadding: AppSize.s20,
                     bottomPadding: AppSize.s20,
                     text: 'add'.tr,
-                    // childWidget: controller.isSubmitBtnProcessing.value == true
-                    //     ? const SizedBox(
-                    //         height: 40,
-                    //         child: LoadingWidget(
-                    //           isTreeBounceLoading: true,
-                    //           color: ColorsManager.white,
-                    //         ),
-                    //       )
-                    //     : null,
                     fontSize: AppSize.s20,
                     buttonWidth: getWidth,
                     onPressed: () {
                       unFocusKeyBoard(context);
-                      controller.operationLanguageOnClick(
-                        languageId:
-                            controller.selectedMotherTongueLanguage.value.id,
-                        languageLabel:
-                            controller.selectedMotherTongueLanguage.value.label,
-                        languageProficiencyLevel: 4,
-                      );
+                      if (controller
+                          .editMontherTongueLangaugeFormKey.currentState!
+                          .validate()) {
+                        controller.operationLanguageOnClick(
+                          // formKey: controller.editMontherTongueLangaugeFormKey,
+                          languageId:
+                              controller.selectedMotherTongueLanguage.value.id,
+                          languageLabel: controller
+                              .selectedMotherTongueLanguage.value.label,
+                          languageProficiencyLevel: 4,
+                        );
+                      }
                     },
                   ),
                   // ),
@@ -140,7 +136,7 @@ class LanguageForm extends GetView<OnboardingController> {
 
             ///===== Top of Language Selection Component =====//
             Form(
-              // key: controller.editLangaugeFormKey,
+              key: controller.editLangaugeFormKey,
               child: Wrap(
                 children: [
                   ContainerDialogWidget(
@@ -217,182 +213,378 @@ class LanguageForm extends GetView<OnboardingController> {
                   //===== Bottom of Language Selection Component =====//
 
                   ///===== Top of Types Selection Component =====//
-                  ContainerDialogWidget(
-                    inputTitle: 'types'.tr,
-                    inputTitleColor: ColorsManager.white,
-                    inputTitleMarginTop: AppSize.s16,
-                    validatorFunction: (_) => Validator().notEmptyValidator(
-                      controller.selectedlanguageTypes.isEmpty ? '' : 'a',
-                    ),
-                    dialogWidget: MaterialDialogWidget(
-                      title: 'types'.tr,
-                      contentWidget: ListView.separated(
-                        shrinkWrap: true,
-                        itemCount: controller.languageTypeList.length,
-                        itemBuilder: (context, index) {
-                          return Obx(
-                            () => RowDataSelectionWidget.checkBox(
-                              isLeftSideText: false,
-                              isClickingValue: controller.selectedlanguageTypes
-                                  .where(
-                                    (p0) =>
-                                        p0.label ==
-                                        controller
-                                            .languageTypeList[index].label,
-                                  )
-                                  .isNotEmpty,
-                              text: controller.languageTypeList[index].label,
-                              onPressed: () {
-                                addingOrRemovingFieldInFieldList(
-                                  list: controller.selectedlanguageTypes,
-                                  fieldValue:
-                                      controller.languageTypeList[index],
-                                );
-                                Navigator.pop(
-                                  context,
-                                  true,
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const Divider(
-                            height: 1.0,
-                            color: ColorsManager.grey300,
-                          );
-                        },
-                      ),
-                    ),
-                    containerWidget: Obx(
-                      () => RowContentInputWidget(
-                        centerWidget: controller
-                                .selectedlanguageTypes.isNotEmpty
-                            ? Padding(
-                                padding: const EdgeInsets.only(
-                                  top: AppSize.s4,
-                                  bottom: AppSize.s4,
-                                ),
-                                child: Wrap(
-                                  children: [
-                                    for (var i = 0;
-                                        i <
-                                            controller
-                                                .selectedlanguageTypes.length;
-                                        i++)
-                                      RemovableTextCardWidget(
-                                        text:
-                                            '${controller.selectedlanguageTypes[i].label}',
-                                        onRemove: () =>
-                                            addingOrRemovingFieldInFieldList(
-                                          list:
-                                              controller.selectedlanguageTypes,
-                                          fieldValue: controller
-                                              .selectedlanguageTypes[i],
-                                        ),
-                                      )
-                                  ],
-                                ),
-                              )
-                            : CustomTextWidget(
-                                text: 'types'.tr,
-                                color: ColorsManager.grey400,
-                                fontWeight: FontWeight.w400,
-                                fontSize: AppSize.s16,
-                              ),
-                        suffixWidget: const Icon(
-                          IconsManager.arrowDropDown,
-                          color: ColorsManager.grey600,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // ContainerDialogWidget(
+                  //   inputTitle: 'types'.tr,
+                  //   inputTitleColor: ColorsManager.white,
+                  //   inputTitleMarginTop: AppSize.s16,
+                  //   validatorFunction: (_) => Validator().notEmptyValidator(
+                  //     controller.selectedlanguageTypes.isEmpty ? '' : 'a',
+                  //   ),
+                  //   dialogWidget: MaterialDialogWidget(
+                  //     title: 'types'.tr,
+                  //     contentWidget: ListView.separated(
+                  //       shrinkWrap: true,
+                  //       itemCount: controller.languageTypeList.length,
+                  //       itemBuilder: (context, index) {
+                  //         return Obx(
+                  //           () => RowDataSelectionWidget.checkBox(
+                  //             isLeftSideText: false,
+                  //             isClickingValue: controller.selectedlanguageTypes
+                  //                 .where(
+                  //                   (p0) =>
+                  //                       p0.label ==
+                  //                       controller
+                  //                           .languageTypeList[index].label,
+                  //                 )
+                  //                 .isNotEmpty,
+                  //             text: controller.languageTypeList[index].label,
+                  //             onPressed: () {
+                  //               addingOrRemovingFieldInFieldList(
+                  //                 list: controller.selectedlanguageTypes,
+                  //                 fieldValue:
+                  //                     controller.languageTypeList[index],
+                  //               );
+                  //               Navigator.pop(
+                  //                 context,
+                  //                 true,
+                  //               );
+                  //             },
+                  //           ),
+                  //         );
+                  //       },
+                  //       separatorBuilder: (context, index) {
+                  //         return const Divider(
+                  //           height: 1.0,
+                  //           color: ColorsManager.grey300,
+                  //         );
+                  //       },
+                  //     ),
+                  //   ),
+                  //   containerWidget: Obx(
+                  //     () => RowContentInputWidget(
+                  //       centerWidget: controller
+                  //               .selectedlanguageTypes.isNotEmpty
+                  //           ? Padding(
+                  //               padding: const EdgeInsets.only(
+                  //                 top: AppSize.s4,
+                  //                 bottom: AppSize.s4,
+                  //               ),
+                  //               child: Wrap(
+                  //                 children: [
+                  //                   for (var i = 0;
+                  //                       i <
+                  //                           controller
+                  //                               .selectedlanguageTypes.length;
+                  //                       i++)
+                  //                     RemovableTextCardWidget(
+                  //                       text:
+                  //                           '${controller.selectedlanguageTypes[i].label}',
+                  //                       onRemove: () =>
+                  //                           addingOrRemovingFieldInFieldList(
+                  //                         list:
+                  //                             controller.selectedlanguageTypes,
+                  //                         fieldValue: controller
+                  //                             .selectedlanguageTypes[i],
+                  //                       ),
+                  //                     )
+                  //                 ],
+                  //               ),
+                  //             )
+                  //           : CustomTextWidget(
+                  //               text: 'types'.tr,
+                  //               color: ColorsManager.grey400,
+                  //               fontWeight: FontWeight.w400,
+                  //               fontSize: AppSize.s16,
+                  //             ),
+                  //       suffixWidget: const Icon(
+                  //         IconsManager.arrowDropDown,
+                  //         color: ColorsManager.grey600,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   //===== Bottom of Types Selection Component =====//
 
                   ///===== Top of Proficiency Selection Component =====//
-                  ContainerDialogWidget(
-                    inputTitle: 'proficiency'.tr,
-                    inputTitleColor: ColorsManager.white,
-                    inputTitleMarginTop: AppSize.s16,
-                    validatorFunction: (_) => Validator().notEmptyValidator(
-                      controller.selectedProficiency.value.label ?? '',
-                    ),
-                    dialogWidget: MaterialDialogWidget(
-                      title: 'proficiencyHint'.tr,
-                      contentWidget: ListView.separated(
-                        shrinkWrap: true,
-                        itemCount: controller.proficiencyList.length,
-                        itemBuilder: (context, index) {
-                          return Obx(
-                            () => RowDataSelectionWidget.radioButton(
-                              isLeftSideText: false,
-                              isClickingValue: stringsComparation(
-                                object1: controller
-                                    .proficiencyList[index].label!
-                                    .toLowerCase(),
-                                object2: controller
-                                    .selectedProficiency.value.label!
-                                    .toLowerCase(),
-                              ),
-                              text: translateStateWords(
-                                stateWord:
-                                    controller.proficiencyList[index].label,
-                              ),
-                              onPressed: () {
-                                controller.selectedProficiency.value =
-                                    controller.selectedLanguageOnClick(
-                                  selectedItem:
-                                      controller.proficiencyList[index],
+                  // ContainerDialogWidget(
+                  //   inputTitle: 'proficiency'.tr,
+                  //   inputTitleColor: ColorsManager.white,
+                  //   inputTitleMarginTop: AppSize.s16,
+                  //   validatorFunction: (_) => Validator().notEmptyValidator(
+                  //     controller.selectedProficiency.value.label ?? '',
+                  //   ),
+                  //   dialogWidget: MaterialDialogWidget(
+                  //     title: 'proficiencyHint'.tr,
+                  //     contentWidget: ListView.separated(
+                  //       shrinkWrap: true,
+                  //       itemCount: controller.proficiencyList.length,
+                  //       itemBuilder: (context, index) {
+                  //         return Obx(
+                  //           () => RowDataSelectionWidget.radioButton(
+                  //             isLeftSideText: false,
+                  //             isClickingValue: stringsComparation(
+                  //               object1: controller
+                  //                   .proficiencyList[index].label!
+                  //                   .toLowerCase(),
+                  //               object2: controller
+                  //                   .selectedProficiency.value.label!
+                  //                   .toLowerCase(),
+                  //             ),
+                  //             text: translateStateWords(
+                  //               stateWord:
+                  //                   controller.proficiencyList[index].label,
+                  //             ),
+                  //             onPressed: () {
+                  //               controller.selectedProficiency.value =
+                  //                   controller.selectedLanguageOnClick(
+                  //                 selectedItem:
+                  //                     controller.proficiencyList[index],
+                  //               );
+                  //               Navigator.pop(
+                  //                 context,
+                  //                 true,
+                  //               );
+                  //             },
+                  //           ),
+                  //         );
+                  //       },
+                  //       separatorBuilder: (context, index) {
+                  //         return const Divider(
+                  //           height: 1.0,
+                  //           color: ColorsManager.grey300,
+                  //         );
+                  //       },
+                  //     ),
+                  //   ),
+                  //   containerWidget: Obx(
+                  //     () => controller.selectedProficiency.value.label == ''
+                  //         ? RowContentInputWidget(
+                  //             centerWidget: CustomTextWidget(
+                  //               text: 'proficiencyHint'.tr,
+                  //               // marginLeft: AppSize.s8,
+                  //               color: ColorsManager.grey400,
+                  //               fontWeight: FontWeight.w400,
+                  //               fontSize: 16.0,
+                  //             ),
+                  //             suffixWidget: const Icon(
+                  //               Icons.arrow_drop_down,
+                  //               color: ColorsManager.grey600,
+                  //             ),
+                  //           )
+                  //         : RowContentInputWidget(
+                  //             centerWidget: CustomTextWidget(
+                  //               //marginLeft: 4.0,
+                  //               text: translateStateWords(
+                  //                 stateWord: controller
+                  //                     .selectedProficiency.value.label,
+                  //               ),
+                  //               color: ColorsManager.black,
+                  //               fontSize: 16.0,
+                  //             ),
+                  //             suffixWidget: const Icon(
+                  //               Icons.arrow_drop_down,
+                  //               color: ColorsManager.grey600,
+                  //             ),
+                  //           ),
+                  //   ),
+                  // ),
+                  //===== Bottom of Proficiency Selection Component =====//
+                  Row(
+                    children: [
+                      ///===== Top of Spoken Proficiency Selection Component =====//
+                      Expanded(
+                        child: ContainerDialogWidget(
+                          inputTitle: 'spoken'.tr,
+                          inputTitleColor: ColorsManager.white,
+                          inputTitleMarginTop: AppSize.s8,
+                          validatorFunction: (_) =>
+                              Validator().notEmptyValidator(
+                            controller.selectedSpokenProficiency.value.label ??
+                                '',
+                          ),
+                          dialogWidget: MaterialDialogWidget(
+                            title: 'proficiencyHint'.tr,
+                            contentWidget: ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: controller.proficiencyList.length,
+                              itemBuilder: (context, index) {
+                                return Obx(
+                                  () => RowDataSelectionWidget.radioButton(
+                                    isLeftSideText: false,
+                                    isClickingValue: stringsComparation(
+                                      object1: controller
+                                          .proficiencyList[index].label!
+                                          .toLowerCase(),
+                                      object2: controller
+                                          .selectedSpokenProficiency
+                                          .value
+                                          .label!
+                                          .toLowerCase(),
+                                    ),
+                                    text: translateStateWords(
+                                      stateWord: controller
+                                          .proficiencyList[index].label,
+                                    ),
+                                    onPressed: () {
+                                      controller
+                                              .selectedSpokenProficiency.value =
+                                          controller.selectedLanguageOnClick(
+                                        selectedItem:
+                                            controller.proficiencyList[index],
+                                      );
+                                      Navigator.pop(
+                                        context,
+                                        true,
+                                      );
+                                    },
+                                  ),
                                 );
-                                Navigator.pop(
-                                  context,
-                                  true,
+                              },
+                              separatorBuilder: (context, index) {
+                                return const Divider(
+                                  height: 1.0,
+                                  color: ColorsManager.grey300,
                                 );
                               },
                             ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const Divider(
-                            height: 1.0,
-                            color: ColorsManager.grey300,
-                          );
-                        },
+                          ),
+                          containerWidget: Obx(
+                            () => controller.selectedSpokenProficiency.value
+                                        .label ==
+                                    ''
+                                ? RowContentInputWidget(
+                                    centerWidget: CustomTextWidget(
+                                      text: 'proficiencyHint'.tr,
+                                      // marginLeft: AppSize.s8,
+                                      color: ColorsManager.grey400,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16.0,
+                                    ),
+                                    suffixWidget: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: ColorsManager.grey600,
+                                    ),
+                                  )
+                                : RowContentInputWidget(
+                                    centerWidget: CustomTextWidget(
+                                      //marginLeft: 4.0,
+                                      text: translateStateWords(
+                                        stateWord: controller
+                                            .selectedSpokenProficiency
+                                            .value
+                                            .label,
+                                      ),
+                                      color: ColorsManager.black,
+                                      fontSize: 16.0,
+                                    ),
+                                    suffixWidget: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: ColorsManager.grey600,
+                                    ),
+                                  ),
+                          ),
+                        ),
                       ),
-                    ),
-                    containerWidget: Obx(
-                      () => controller.selectedProficiency.value.label == ''
-                          ? RowContentInputWidget(
-                              centerWidget: CustomTextWidget(
-                                text: 'proficiencyHint'.tr,
-                                // marginLeft: AppSize.s8,
-                                color: ColorsManager.grey400,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.0,
-                              ),
-                              suffixWidget: const Icon(
-                                Icons.arrow_drop_down,
-                                color: ColorsManager.grey600,
-                              ),
-                            )
-                          : RowContentInputWidget(
-                              centerWidget: CustomTextWidget(
-                                //marginLeft: 4.0,
-                                text: translateStateWords(
-                                  stateWord: controller
-                                      .selectedProficiency.value.label,
-                                ),
-                                color: ColorsManager.black,
-                                fontSize: 16.0,
-                              ),
-                              suffixWidget: const Icon(
-                                Icons.arrow_drop_down,
-                                color: ColorsManager.grey600,
-                              ),
+                      //===== Bottom of Spoken Proficiency Selection Component =====//
+                      const SizedBox(width: 4.0),
+
+                      ///===== Top of Written Proficiency Selection Component =====//
+                      Expanded(
+                        child: ContainerDialogWidget(
+                          inputTitle: 'written'.tr,
+                          inputTitleColor: ColorsManager.white,
+                          inputTitleMarginTop: AppSize.s8,
+                          validatorFunction: (_) =>
+                              Validator().notEmptyValidator(
+                            controller.selectedWrittenProficiency.value.label ??
+                                '',
+                          ),
+                          dialogWidget: MaterialDialogWidget(
+                            title: 'proficiencyHint'.tr,
+                            contentWidget: ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: controller.proficiencyList.length,
+                              itemBuilder: (context, index) {
+                                return Obx(
+                                  () => RowDataSelectionWidget.radioButton(
+                                    isLeftSideText: false,
+                                    isClickingValue: stringsComparation(
+                                      object1: controller
+                                          .proficiencyList[index].label!
+                                          .toLowerCase(),
+                                      object2: controller
+                                          .selectedWrittenProficiency
+                                          .value
+                                          .label!
+                                          .toLowerCase(),
+                                    ),
+                                    text: translateStateWords(
+                                      stateWord: controller
+                                          .proficiencyList[index].label,
+                                    ),
+                                    onPressed: () {
+                                      controller.selectedWrittenProficiency
+                                              .value =
+                                          controller.selectedLanguageOnClick(
+                                        selectedItem:
+                                            controller.proficiencyList[index],
+                                      );
+                                      Navigator.pop(
+                                        context,
+                                        true,
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const Divider(
+                                  height: 1.0,
+                                  color: ColorsManager.grey300,
+                                );
+                              },
                             ),
-                    ),
+                          ),
+                          containerWidget: Obx(
+                            () => controller.selectedWrittenProficiency.value
+                                        .label ==
+                                    ''
+                                ? RowContentInputWidget(
+                                    centerWidget: CustomTextWidget(
+                                      text: 'proficiencyHint'.tr,
+                                      // marginLeft: AppSize.s8,
+                                      color: ColorsManager.grey400,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16.0,
+                                    ),
+                                    suffixWidget: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: ColorsManager.grey600,
+                                    ),
+                                  )
+                                : RowContentInputWidget(
+                                    centerWidget: CustomTextWidget(
+                                      //marginLeft: 4.0,
+                                      text: translateStateWords(
+                                        stateWord: controller
+                                            .selectedWrittenProficiency
+                                            .value
+                                            .label,
+                                      ),
+                                      color: ColorsManager.black,
+                                      fontSize: 16.0,
+                                    ),
+                                    suffixWidget: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: ColorsManager.grey600,
+                                    ),
+                                  ),
+                          ),
+                        ),
+                      ),
+                      //===== Bottom of Written Proficiency Selection Component =====//
+                    ],
                   ),
-                  //===== Bottom of Proficiency Selection Component =====//
 
                   ///===== Top of Add Language Button Component =====//
                   // Obx(
@@ -405,34 +597,36 @@ class LanguageForm extends GetView<OnboardingController> {
                     buttonWidth: getWidth,
                     onPressed: () {
                       unFocusKeyBoard(context);
-                      controller.operationLanguageOnClick(
-                        languageId: controller.selectedLanguage.value.id,
-                        languageLabel: controller.selectedLanguage.value.label,
-                        languageProficiencyLevel:
-                            controller.selectedProficiency.value.level,
-                        spoken: controller.selectedlanguageTypes
-                            .where((element) => element.id == 1)
-                            .isNotEmpty,
-                        written: controller.selectedlanguageTypes
-                            .where((element) => element.id == 2)
-                            .isNotEmpty,
-                      );
-                      // if (!controller.isSubmitBtnProcessing.value == true) {
-                      //   controller.saveButtonOnClick(
-                      //     formKey: controller.editLangaugeFormKey,
-                      //     languageTagId:
-                      //         controller.selectedLanguage.value.id,
-                      //     languageProficiencyLevel:
-                      //         controller.selectedProficiency.value.level,
-                      //     spoken: controller.selectedlanguageTypes
-                      //         .where((element) => element.id == 1)
-                      //         .isNotEmpty,
-                      //     written: controller.selectedlanguageTypes
-                      //         .where((element) => element.id == 2)
-                      //         .isNotEmpty,
-                      //   );
-                      // }
-                      controller.clearDataFromForm();
+                      if (controller.editLangaugeFormKey.currentState!
+                          .validate()) {
+                        controller.operationLanguageOnClick(
+                          // formKey: controller.editLangaugeFormKey,
+                          languageId: controller.selectedLanguage.value.id,
+                          languageLabel:
+                              controller.selectedLanguage.value.label,
+                          languageProficiencyLevel: 1,
+                          spoken:
+                              controller.selectedSpokenProficiency.value.level,
+                          written:
+                              controller.selectedWrittenProficiency.value.level,
+                        );
+                        // if (!controller.isSubmitBtnProcessing.value == true) {
+                        //   controller.saveButtonOnClick(
+                        //     formKey: controller.editLangaugeFormKey,
+                        //     languageTagId:
+                        //         controller.selectedLanguage.value.id,
+                        //     languageProficiencyLevel:
+                        //         controller.selectedProficiency.value.level,
+                        //     spoken: controller.selectedlanguageTypes
+                        //         .where((element) => element.id == 1)
+                        //         .isNotEmpty,
+                        //     written: controller.selectedlanguageTypes
+                        //         .where((element) => element.id == 2)
+                        //         .isNotEmpty,
+                        //   );
+                        // }
+                        controller.clearDataFromForm();
+                      }
                     },
                   ),
                   // ),
@@ -664,7 +858,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                             marginTop:
                                                                 AppSize.s8,
                                                             marginBottom:
-                                                                AppSize.s20,
+                                                                AppSize.s2,
                                                           ),
                                                         ],
                                                       ),
@@ -673,211 +867,218 @@ class LanguageForm extends GetView<OnboardingController> {
                                                   Row(
                                                     children: [
                                                       ///===== Top of Types Selection Component =====//
-                                                      Expanded(
-                                                        flex: 55,
-                                                        child:
-                                                            ContainerDialogWidget(
-                                                          dialogWidget:
-                                                              MaterialDialogWidget(
-                                                            title: 'types'.tr,
-                                                            contentWidget:
-                                                                ListView
-                                                                    .separated(
-                                                              shrinkWrap: true,
-                                                              itemCount: controller
-                                                                  .languageTypeList
-                                                                  .length,
-                                                              itemBuilder: (
-                                                                context,
-                                                                index,
-                                                              ) {
-                                                                return Obx(
-                                                                  () => RowDataSelectionWidget
-                                                                      .checkBox(
-                                                                    isLeftSideText:
-                                                                        false,
-                                                                    isClickingValue: (controller.languageTypeList[index].label == 'spoken'.tr &&
-                                                                            languageItem.languageSpokenLv ==
-                                                                                1) ||
-                                                                        (controller.languageTypeList[index].label == 'written'.tr &&
-                                                                            languageItem.languageWrittenLv ==
-                                                                                1),
-                                                                    text: controller
-                                                                        .languageTypeList[
-                                                                            index]
-                                                                        .label,
-                                                                    onPressed:
-                                                                        () {
-                                                                      // controller
-                                                                      //     .makeRequestToSpokenLanguageAPI(
-                                                                      //   spokenLanguageId:
-                                                                      //       languageItem
-                                                                      //           .id,
-                                                                      //   spokenLanguageData:
-                                                                      //       FieldModel(
-                                                                      //     level: languageItem
-                                                                      //         .level,
-                                                                      //     videoUrl:
-                                                                      //         languageItem.videoUrl ??
-                                                                      //             '',
-                                                                      //     languageSpokenLv: controller.languageTypeList[index].label ==
-                                                                      //             'spoken'.tr
-                                                                      //         ? 1
-                                                                      //         : languageItem.languageSpokenLv,
-                                                                      //     languageWrittenLv: controller.languageTypeList[index].label ==
-                                                                      //             'written'.tr
-                                                                      //         ? 1
-                                                                      //         : languageItem.languageWrittenLv,
-                                                                      //   ),
-                                                                      //   operation:
-                                                                      //       Keys.editOperation,
-                                                                      // );
-                                                                      Navigator
-                                                                          .pop(
-                                                                        context,
-                                                                        true,
-                                                                      );
-                                                                    },
-                                                                  ),
-                                                                );
-                                                              },
-                                                              separatorBuilder:
-                                                                  (
-                                                                context,
-                                                                index,
-                                                              ) {
-                                                                return const Divider(
-                                                                  height: 1.0,
-                                                                  color: ColorsManager
-                                                                      .grey300,
-                                                                );
-                                                              },
-                                                            ),
-                                                            //   actionWidget:
-                                                            //       OutlinedButton
-                                                            //           .icon(
-                                                            //     onPressed:
-                                                            //         () {
-                                                            //       Navigator
-                                                            //           .pop(
-                                                            //         context,
-                                                            //         true,
-                                                            //       );
-                                                            //     },
-                                                            //     icon:
-                                                            //         const Icon(
-                                                            //       IconsManager
-                                                            //           .close,
-                                                            //       color: Colors
-                                                            //           .white,
-                                                            //     ),
-                                                            //     label:
-                                                            //         CustomTextWidget(
-                                                            //       marginRight:
-                                                            //           AppSize
-                                                            //               .s24,
-                                                            //       text:
-                                                            //           'Close'
-                                                            //               .tr,
-                                                            //       color: Colors
-                                                            //           .red,
-                                                            //     ),
-                                                            //   ),
-                                                          ),
-                                                          containerWidget:
-                                                              // Obx(
-                                                              //   () =>
-                                                              RowContentInputWidget(
-                                                            centerWidget: languageItem
-                                                                            .languageSpokenLv ==
-                                                                        1 ||
-                                                                    languageItem
-                                                                            .languageWrittenLv ==
-                                                                        1
-                                                                ? Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                      top: AppSize
-                                                                          .s4,
-                                                                      bottom:
-                                                                          AppSize
-                                                                              .s4,
-                                                                    ),
-                                                                    child: Wrap(
-                                                                      children: [
-                                                                        if (languageItem.languageSpokenLv ==
-                                                                            1)
-                                                                          RemovableTextCardWidget(
-                                                                            text:
-                                                                                'spoken'.tr,
-                                                                            onRemove: () =>
-                                                                                controller.operationLanguageOnClick(
-                                                                              languageId: languageItem.tagId,
-                                                                              languageLabel: languageItem.label,
-                                                                              languageProficiencyLevel: languageItem.level,
-                                                                              // spoken: false,
-                                                                              written: languageItem.languageWrittenLv == 1,
-                                                                              languageVideoUrl: languageItem.videoUrl,
-                                                                              operation: 1,
-                                                                              indexForEditOrDelete: index,
-                                                                            ),
-                                                                          ),
-                                                                        if (languageItem.languageWrittenLv ==
-                                                                            1)
-                                                                          RemovableTextCardWidget(
-                                                                            text:
-                                                                                'written'.tr,
-                                                                            onRemove: () =>
-                                                                                controller.operationLanguageOnClick(
-                                                                              languageId: languageItem.tagId,
-                                                                              languageLabel: languageItem.label,
-                                                                              languageProficiencyLevel: languageItem.level,
-                                                                              spoken: languageItem.languageSpokenLv == 1,
-                                                                              // written: false,
-                                                                              languageVideoUrl: languageItem.videoUrl,
-                                                                              operation: 1,
-                                                                              indexForEditOrDelete: index,
-                                                                            ),
-                                                                          )
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                : CustomTextWidget(
-                                                                    text:
-                                                                        'types'
-                                                                            .tr,
-                                                                    color: ColorsManager
-                                                                        .grey400,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        AppSize
-                                                                            .s16,
-                                                                  ),
-                                                            suffixWidget:
-                                                                const Icon(
-                                                              IconsManager
-                                                                  .arrowDropDown,
-                                                              color:
-                                                                  ColorsManager
-                                                                      .grey600,
-                                                            ),
-                                                          ),
-                                                          // ),
-                                                        ),
-                                                      ),
+                                                      // Expanded(
+                                                      //   flex: 55,
+                                                      //   child:
+                                                      //       ContainerDialogWidget(
+                                                      //     dialogWidget:
+                                                      //         MaterialDialogWidget(
+                                                      //       title: 'types'.tr,
+                                                      //       contentWidget:
+                                                      //           ListView
+                                                      //               .separated(
+                                                      //         shrinkWrap: true,
+                                                      //         itemCount: controller
+                                                      //             .languageTypeList
+                                                      //             .length,
+                                                      //         itemBuilder: (
+                                                      //           context,
+                                                      //           index,
+                                                      //         ) {
+                                                      //           return Obx(
+                                                      //             () => RowDataSelectionWidget
+                                                      //                 .checkBox(
+                                                      //               isLeftSideText:
+                                                      //                   false,
+                                                      //               isClickingValue: (controller.languageTypeList[index].label == 'spoken'.tr &&
+                                                      //                       languageItem.languageSpokenLv ==
+                                                      //                           1) ||
+                                                      //                   (controller.languageTypeList[index].label == 'written'.tr &&
+                                                      //                       languageItem.languageWrittenLv ==
+                                                      //                           1),
+                                                      //               text: controller
+                                                      //                   .languageTypeList[
+                                                      //                       index]
+                                                      //                   .label,
+                                                      //               onPressed:
+                                                      //                   () {
+                                                      //                 // controller
+                                                      //                 //     .makeRequestToSpokenLanguageAPI(
+                                                      //                 //   spokenLanguageId:
+                                                      //                 //       languageItem
+                                                      //                 //           .id,
+                                                      //                 //   spokenLanguageData:
+                                                      //                 //       FieldModel(
+                                                      //                 //     level: languageItem
+                                                      //                 //         .level,
+                                                      //                 //     videoUrl:
+                                                      //                 //         languageItem.videoUrl ??
+                                                      //                 //             '',
+                                                      //                 //     languageSpokenLv: controller.languageTypeList[index].label ==
+                                                      //                 //             'spoken'.tr
+                                                      //                 //         ? 1
+                                                      //                 //         : languageItem.languageSpokenLv,
+                                                      //                 //     languageWrittenLv: controller.languageTypeList[index].label ==
+                                                      //                 //             'written'.tr
+                                                      //                 //         ? 1
+                                                      //                 //         : languageItem.languageWrittenLv,
+                                                      //                 //   ),
+                                                      //                 //   operation:
+                                                      //                 //       Keys.editOperation,
+                                                      //                 // );
+                                                      //                 Navigator
+                                                      //                     .pop(
+                                                      //                   context,
+                                                      //                   true,
+                                                      //                 );
+                                                      //               },
+                                                      //             ),
+                                                      //           );
+                                                      //         },
+                                                      //         separatorBuilder:
+                                                      //             (
+                                                      //           context,
+                                                      //           index,
+                                                      //         ) {
+                                                      //           return const Divider(
+                                                      //             height: 1.0,
+                                                      //             color: ColorsManager
+                                                      //                 .grey300,
+                                                      //           );
+                                                      //         },
+                                                      //       ),
+                                                      //       //   actionWidget:
+                                                      //       //       OutlinedButton
+                                                      //       //           .icon(
+                                                      //       //     onPressed:
+                                                      //       //         () {
+                                                      //       //       Navigator
+                                                      //       //           .pop(
+                                                      //       //         context,
+                                                      //       //         true,
+                                                      //       //       );
+                                                      //       //     },
+                                                      //       //     icon:
+                                                      //       //         const Icon(
+                                                      //       //       IconsManager
+                                                      //       //           .close,
+                                                      //       //       color: Colors
+                                                      //       //           .white,
+                                                      //       //     ),
+                                                      //       //     label:
+                                                      //       //         CustomTextWidget(
+                                                      //       //       marginRight:
+                                                      //       //           AppSize
+                                                      //       //               .s24,
+                                                      //       //       text:
+                                                      //       //           'Close'
+                                                      //       //               .tr,
+                                                      //       //       color: Colors
+                                                      //       //           .red,
+                                                      //       //     ),
+                                                      //       //   ),
+                                                      //     ),
+                                                      //     containerWidget:
+                                                      //         // Obx(
+                                                      //         //   () =>
+                                                      //         RowContentInputWidget(
+                                                      //       centerWidget: languageItem
+                                                      //                       .languageSpokenLv ==
+                                                      //                   1 ||
+                                                      //               languageItem
+                                                      //                       .languageWrittenLv ==
+                                                      //                   1
+                                                      //           ? Padding(
+                                                      //               padding:
+                                                      //                   const EdgeInsets
+                                                      //                       .only(
+                                                      //                 top: AppSize
+                                                      //                     .s4,
+                                                      //                 bottom:
+                                                      //                     AppSize
+                                                      //                         .s4,
+                                                      //               ),
+                                                      //               child: Wrap(
+                                                      //                 children: [
+                                                      //                   if (languageItem.languageSpokenLv ==
+                                                      //                       1)
+                                                      //                     RemovableTextCardWidget(
+                                                      //                       text:
+                                                      //                           'spoken'.tr,
+                                                      //                       onRemove: () =>
+                                                      //                           controller.operationLanguageOnClick(
+                                                      //                         languageId: languageItem.tagId,
+                                                      //                         languageLabel: languageItem.label,
+                                                      //                         languageProficiencyLevel: languageItem.level,
+                                                      //                         // spoken: false,
+                                                      //                         written: languageItem.languageWrittenLv == 1,
+                                                      //                         languageVideoUrl: languageItem.videoUrl,
+                                                      //                         operation: 1,
+                                                      //                         indexForEditOrDelete: index,
+                                                      //                       ),
+                                                      //                     ),
+                                                      //                   if (languageItem.languageWrittenLv ==
+                                                      //                       1)
+                                                      //                     RemovableTextCardWidget(
+                                                      //                       text:
+                                                      //                           'written'.tr,
+                                                      //                       onRemove: () =>
+                                                      //                           controller.operationLanguageOnClick(
+                                                      //                         languageId: languageItem.tagId,
+                                                      //                         languageLabel: languageItem.label,
+                                                      //                         languageProficiencyLevel: languageItem.level,
+                                                      //                         spoken: languageItem.languageSpokenLv == 1,
+                                                      //                         // written: false,
+                                                      //                         languageVideoUrl: languageItem.videoUrl,
+                                                      //                         operation: 1,
+                                                      //                         indexForEditOrDelete: index,
+                                                      //                       ),
+                                                      //                     )
+                                                      //                 ],
+                                                      //               ),
+                                                      //             )
+                                                      //           : CustomTextWidget(
+                                                      //               text:
+                                                      //                   'types'
+                                                      //                       .tr,
+                                                      //               color: ColorsManager
+                                                      //                   .grey400,
+                                                      //               fontWeight:
+                                                      //                   FontWeight
+                                                      //                       .w400,
+                                                      //               fontSize:
+                                                      //                   AppSize
+                                                      //                       .s16,
+                                                      //             ),
+                                                      //       suffixWidget:
+                                                      //           const Icon(
+                                                      //         IconsManager
+                                                      //             .arrowDropDown,
+                                                      //         color:
+                                                      //             ColorsManager
+                                                      //                 .grey600,
+                                                      //       ),
+                                                      //     ),
+                                                      //     // ),
+                                                      //   ),
+                                                      // ),
                                                       //===== Bottom of Types Selection Component =====//
                                                       const SizedBox(
                                                         width: 4.0,
                                                       ),
 
-                                                      ///===== Top of Proficiency Selection Component =====//
+                                                      ///===== Top of Spoken Proficiency Selection Component =====//
                                                       Expanded(
                                                         flex: 40,
                                                         child:
                                                             ContainerDialogWidget(
+                                                          inputTitle:
+                                                              'spoken'.tr,
+                                                          inputTitleColor:
+                                                              ColorsManager
+                                                                  .white,
+                                                          inputTitleMarginTop:
+                                                              AppSize.s2,
                                                           dialogWidget:
                                                               MaterialDialogWidget(
                                                             title:
@@ -907,7 +1108,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                           .level,
                                                                       object2:
                                                                           languageItem
-                                                                              .level,
+                                                                              .languageSpokenLv,
                                                                     ),
                                                                     text:
                                                                         translateStateWords(
@@ -919,18 +1120,16 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                       // controller
                                                                       //     .makeRequestToSpokenLanguageAPI(
                                                                       //   spokenLanguageId:
-                                                                      //       languageItem
-                                                                      //           .id,
+                                                                      //       languageItem.id,
                                                                       //   spokenLanguageData:
                                                                       //       FieldModel(
-                                                                      //     level: controller
+                                                                      //     level:
+                                                                      //         1,
+                                                                      //     videoUrl:
+                                                                      //         languageItem.videoUrl ?? '',
+                                                                      //     languageSpokenLv: controller
                                                                       //         .proficiencyList[index]
                                                                       //         .level,
-                                                                      //     videoUrl:
-                                                                      //         languageItem.videoUrl ??
-                                                                      //             '',
-                                                                      //     languageSpokenLv:
-                                                                      //         languageItem.languageSpokenLv,
                                                                       //     languageWrittenLv:
                                                                       //         languageItem.languageWrittenLv,
                                                                       //   ),
@@ -968,10 +1167,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                   TextAlign
                                                                       .center,
                                                               text:
-                                                                  translateStateWords(
-                                                                stateWord:
-                                                                    '${languageItem.getLabelProficiencyLevel}',
-                                                              ),
+                                                                  '${languageItem.getLabelSpokenProficiencyLevel}',
                                                               fontSize:
                                                                   AppSize.s16,
                                                               fontWeight:
@@ -992,6 +1188,136 @@ class LanguageForm extends GetView<OnboardingController> {
                                                           // ),
                                                         ),
                                                       ),
+                                                      //===== Bottom of Spoken Proficiency Selection Component =====//
+                                                      const SizedBox(
+                                                        width: 4.0,
+                                                      ),
+
+                                                      ///===== Top of Written Proficiency Selection Component =====//
+                                                      Expanded(
+                                                        flex: 40,
+                                                        child:
+                                                            ContainerDialogWidget(
+                                                          inputTitle:
+                                                              'written'.tr,
+                                                          inputTitleColor:
+                                                              ColorsManager
+                                                                  .white,
+                                                          inputTitleMarginTop:
+                                                              AppSize.s2,
+                                                          dialogWidget:
+                                                              MaterialDialogWidget(
+                                                            title:
+                                                                'proficiencyHint'
+                                                                    .tr,
+                                                            contentWidget:
+                                                                ListView
+                                                                    .separated(
+                                                              shrinkWrap: true,
+                                                              itemCount: controller
+                                                                  .proficiencyList
+                                                                  .length,
+                                                              itemBuilder: (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return Obx(
+                                                                  () => RowDataSelectionWidget
+                                                                      .radioButton(
+                                                                    isLeftSideText:
+                                                                        false,
+                                                                    isClickingValue:
+                                                                        intComparation(
+                                                                      object1: controller
+                                                                          .proficiencyList[
+                                                                              index]
+                                                                          .level,
+                                                                      object2:
+                                                                          languageItem
+                                                                              .languageWrittenLv,
+                                                                    ),
+                                                                    text:
+                                                                        translateStateWords(
+                                                                      stateWord:
+                                                                          '${controller.proficiencyList[index].label}',
+                                                                    ),
+                                                                    onPressed:
+                                                                        () {
+                                                                      // controller
+                                                                      //     .makeRequestToSpokenLanguageAPI(
+                                                                      //   spokenLanguageId:
+                                                                      //       languageItem.id,
+                                                                      //   spokenLanguageData:
+                                                                      //       FieldModel(
+                                                                      //     level:
+                                                                      //         1,
+                                                                      //     videoUrl:
+                                                                      //         languageItem.videoUrl ?? '',
+                                                                      //     languageSpokenLv:
+                                                                      //         languageItem.languageSpokenLv,
+                                                                      //     languageWrittenLv: controller
+                                                                      //         .proficiencyList[index]
+                                                                      //         .level,
+                                                                      //   ),
+                                                                      //   operation:
+                                                                      //       Keys.editOperation,
+                                                                      // );
+                                                                      Navigator
+                                                                          .pop(
+                                                                        context,
+                                                                        true,
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                );
+                                                              },
+                                                              separatorBuilder:
+                                                                  (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return const Divider(
+                                                                  height: 1.0,
+                                                                  color: ColorsManager
+                                                                      .grey300,
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                          containerWidget:
+                                                              RowContentInputWidget(
+                                                            centerWidget:
+                                                                CustomTextWidget(
+                                                              //marginLeft: 4.0,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              text:
+                                                                  //   translateStateWords(
+                                                                  // stateWord:
+                                                                  '${languageItem.getLabelWrittenProficiencyLevel}',
+                                                              // ),
+                                                              fontSize:
+                                                                  AppSize.s16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
+                                                            suffixWidgetFlex:
+                                                                15,
+                                                            suffixWidget:
+                                                                const Icon(
+                                                              Icons
+                                                                  .arrow_drop_down,
+                                                              color:
+                                                                  ColorsManager
+                                                                      .grey600,
+                                                            ),
+                                                          ),
+                                                          // ),
+                                                        ),
+                                                      ),
+                                                      //===== Bottom of Written Proficiency Selection Component =====//
                                                     ],
                                                   ),
                                                   Obx(
@@ -1142,8 +1468,8 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
                         languageId: languageItem!.tagId,
                         languageLabel: languageItem!.label,
                         languageProficiencyLevel: languageItem!.level,
-                        spoken: languageItem!.languageSpokenLv == 1,
-                        written: languageItem!.languageWrittenLv == 1,
+                        spoken: languageItem!.languageSpokenLv,
+                        written: languageItem!.languageWrittenLv,
                         languageVideoUrl: vdoUrlCtrl!.text,
                         operation: 1,
                         indexForEditOrDelete: index,

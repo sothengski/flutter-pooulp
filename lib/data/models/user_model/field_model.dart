@@ -88,7 +88,20 @@ class FieldModel {
 
   String? get displayLabelAndLevel => level == null || level == 0
       ? '• $label'
-      : "• $label - ${translateStateWords(stateWord: getLabelProficiencyLevel)}";
+      : "$label - ${translateStateWords(stateWord: getLabelProficiencyLevel)}";
+
+  String? get displaySpokenLabelAndLevel => languageSpokenLv == null ||
+          level == 0
+      ? ''
+      : "• ${'spoken'.tr} - ${translateStateWords(stateWord: getLabelSpokenProficiencyLevel)}";
+
+  String? get displayWrittenLabelAndLevel => languageWrittenLv == null ||
+          level == 0
+      ? ''
+      : "• ${'written'.tr} - ${translateStateWords(stateWord: getLabelWrittenProficiencyLevel)}";
+
+  String? get displaySpokenAndWrittenLabelAndLevel =>
+      '$displaySpokenLabelAndLevel${displayWrittenLabelAndLevel == '' ? null : '\n'}$displayWrittenLabelAndLevel';
 
   factory FieldModel.fromRawJson(String str) => FieldModel.fromJson(
         json.decode(str) as Map<String, dynamic>,

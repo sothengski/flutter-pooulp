@@ -634,7 +634,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                   if (controller
                                       .jobOfferDetail!.value.skills!.isNotEmpty)
                                     OutlineContainerWidget(
-                                      title: 'skills'.tr,
+                                      title: 'jobSkillLabel'.tr,
                                       titleColor: ColorsManager.primaryBlue,
                                       childWidget: controller.jobOfferDetail!
                                                   .value.skills !=
@@ -680,7 +680,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                   if (controller.jobOfferDetail!.value
                                       .spokenLanguages!.isNotEmpty)
                                     OutlineContainerWidget(
-                                      title: 'spokenLanguages'.tr,
+                                      title: 'languageRequired'.tr,
                                       titleColor: ColorsManager.primaryBlue,
                                       childWidget: controller.jobOfferDetail!
                                                   .value.spokenLanguages !=
@@ -742,7 +742,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                   if (controller.jobOfferDetail!.value
                                       .description!.isNotEmpty)
                                     OutlineContainerWidget(
-                                      title: 'jobDescription'.tr,
+                                      title: 'shortDescription'.tr,
                                       titleColor: ColorsManager.primaryBlue,
                                       childWidget: CustomTextWidget(
                                         text:
@@ -757,7 +757,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                   if (controller.jobOfferDetail!.value
                                       .longDescription!.isNotEmpty)
                                     OutlineContainerWidget(
-                                      title: 'jobDescription'.tr,
+                                      title: 'longDescription'.tr,
                                       titleColor: ColorsManager.primaryBlue,
                                       childWidget: CustomTextWidget(
                                         text:
@@ -772,7 +772,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                   if (controller.jobOfferDetail!.value
                                       .expDescription!.isNotEmpty)
                                     OutlineContainerWidget(
-                                      title: 'jobDescription'.tr,
+                                      title: 'experienceRequired'.tr,
                                       titleColor: ColorsManager.primaryBlue,
                                       childWidget: CustomTextWidget(
                                         text:

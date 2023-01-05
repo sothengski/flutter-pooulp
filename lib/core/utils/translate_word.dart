@@ -37,7 +37,7 @@ String translateStateWords({required String? stateWord}) {
   //   return 'offer.all'.tr;
   // }
   else {
-    return 'offer.na'.tr;
+    return '-'.tr;
   }
 }
 

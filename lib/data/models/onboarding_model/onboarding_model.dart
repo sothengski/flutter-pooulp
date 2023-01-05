@@ -112,6 +112,11 @@ class OnboardingModel {
         'searches': searches != null && searches != []
             ? List<dynamic>.from(searches!.map((x) => x.toJson()))
             : [],
+        'languages': languages != null && languages != []
+            ? List<dynamic>.from(
+                languages!.map((x) => x.toJson()),
+              )
+            : [],
         // 'types': offerTypePreferences != null && offerTypePreferences != []
         //     ? List<dynamic>.from(offerTypePreferences!.map((x) => x.id))
         //     : [],

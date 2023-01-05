@@ -363,7 +363,7 @@ class OnboardingController extends GetxController
     } else if (isSelectInternshipInLookingFor) {
       numPage.value = totalPage - 1;
     } else if (isSelectStudentJobInLookingFor) {
-      numPage.value = totalPage - 2;
+      numPage.value = totalPage - 3;
     } else {
       numPage.value = totalPage;
     }
@@ -548,10 +548,26 @@ class OnboardingController extends GetxController
         );
       }
     }
+    final List<FieldModel> languageToBeAdd = [];
+    for (var i = 0; i < languageSelectedList.length; i++) {
+      if (languageSelectedList[i].id != null) {
+        languageToBeAdd.add(
+          FieldModel(
+            tagId: languageSelectedList[i].tagId,
+            level: languageSelectedList[i].level,
+            languageSpokenLv: languageSelectedList[i].languageSpokenLv,
+            languageWrittenLv: languageSelectedList[i].languageWrittenLv,
+            videoUrl: languageSelectedList[i].videoUrl,
+          ),
+        );
+      }
+    }
+    // print('language: $languageToBeAdd');
     final OnboardingModel onboardingDataToBeAdd = OnboardingModel(
       source: knowFromSourceSelectedList![0],
       skills: goodAtfieldSelectedList,
       educations: eduToBeAdd,
+      languages: languageToBeAdd,
       searches: [
         if (haveitemInList(
               lookingForSelectedList,

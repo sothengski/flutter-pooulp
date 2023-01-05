@@ -682,41 +682,90 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                     OutlineContainerWidget(
                                       title: 'languageRequired'.tr,
                                       titleColor: ColorsManager.primaryBlue,
-                                      childWidget: controller.jobOfferDetail!
-                                                  .value.spokenLanguages !=
-                                              []
-                                          ? Wrap(
-                                              children: [
-                                                for (var i = 0;
-                                                    i <
-                                                        controller
-                                                            .jobOfferDetail!
-                                                            .value
-                                                            .spokenLanguages!
-                                                            .length;
-                                                    i++)
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                      right: AppSize.s8,
-                                                      bottom: AppSize.s4,
-                                                    ),
-                                                    child: CustomBoxWidget(
-                                                      child: CustomTextWidget(
-                                                        textAlign:
-                                                            TextAlign.center,
+                                      childWidget: Wrap(
+                                        children: [
+                                          ...controller.jobOfferDetail!.value
+                                              .spokenLanguages!
+                                              .map(
+                                                (e) => e.level == 4
+                                                    ? CustomTextWidget(
                                                         text:
-                                                            '${controller.jobOfferDetail!.value.spokenLanguages![i].label}',
-                                                        fontWeight:
-                                                            FontWeightManager
-                                                                .regular,
-                                                        fontSize: AppSize.s12,
+                                                            '''${e.displayLabelAndLevel}''',
+                                                        // color: ColorsManager
+                                                        //     .grey800,
+                                                        marginBottom:
+                                                            AppSize.s8,
+                                                      )
+                                                    : Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                          bottom: 8.0,
+                                                        ),
+                                                        child: RichText(
+                                                          text: TextSpan(
+                                                            children: [
+                                                              TextSpan(
+                                                                text:
+                                                                    "${e.label}\n",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorsManager
+                                                                      .primaryBlue,
+                                                                ),
+                                                              ),
+                                                              TextSpan(
+                                                                text:
+                                                                    "${e.displaySpokenAndWrittenLabelAndLevel}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorsManager
+                                                                      .primaryBlue,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ),
-                                              ],
-                                            )
-                                          : Container(),
+                                              )
+                                              .toList(),
+                                        ],
+                                      ),
+                                      // childWidget: controller.jobOfferDetail!
+                                      //             .value.spokenLanguages !=
+                                      //         []
+                                      //     ? Wrap(
+                                      //         children: [
+                                      //           for (var i = 0;
+                                      //               i <
+                                      //                   controller
+                                      //                       .jobOfferDetail!
+                                      //                       .value
+                                      //                       .spokenLanguages!
+                                      //                       .length;
+                                      //               i++)
+                                      //             Padding(
+                                      //               padding:
+                                      //                   const EdgeInsets.only(
+                                      //                 right: AppSize.s8,
+                                      //                 bottom: AppSize.s4,
+                                      //               ),
+                                      //               child: CustomBoxWidget(
+                                      //                 child: CustomTextWidget(
+                                      //                   textAlign:
+                                      //                       TextAlign.center,
+                                      //                   text:
+                                      //                       '${controller.jobOfferDetail!.value.spokenLanguages![i].label}',
+                                      //                   fontWeight:
+                                      //                       FontWeightManager
+                                      //                           .regular,
+                                      //                   fontSize: AppSize.s12,
+                                      //                 ),
+                                      //               ),
+                                      //             ),
+                                      //         ],
+                                      //       )
+                                      //     : Container(),
                                     )
                                   else
                                     Container(),

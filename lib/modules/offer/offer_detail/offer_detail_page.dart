@@ -173,16 +173,18 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             marginTop: AppSize.s10,
                             // marginBottom: AppSize.s10,
                           ),
-                          CustomTextWidget(
-                            text:
-                                "${'expiryDate'.tr}: ${controller.jobOfferDetail!.value.dateOfferEndFormat}",
-                            fontSize: AppSize.s12,
-                            fontWeight: FontWeight.w500,
-                            color: ColorsManager.red,
-                            marginLeft: AppSize.s20,
-                            marginTop: AppSize.s4,
-                            marginBottom: AppSize.s10,
-                          ),
+                          if (controller.jobOfferDetail!.value
+                              .dateOfferEndFormat!.isNotEmpty)
+                            CustomTextWidget(
+                              text:
+                                  "${'expiryDate'.tr}: ${controller.jobOfferDetail!.value.dateOfferEndFormat}",
+                              fontSize: AppSize.s12,
+                              fontWeight: FontWeight.w500,
+                              color: ColorsManager.red,
+                              marginLeft: AppSize.s20,
+                              marginTop: AppSize.s4,
+                              marginBottom: AppSize.s10,
+                            ),
                           DecoratedBox(
                             decoration: BoxDecoration(
                               // color: ColorsManager.green,

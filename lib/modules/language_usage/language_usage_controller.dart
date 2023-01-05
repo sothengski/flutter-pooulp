@@ -21,9 +21,13 @@ class LanguageUsageController extends GetxController {
 
   Rx<FieldModel> selectedMotherTongueLanguage = FieldModel().obs;
 
+  FieldModel beginnerLevel =
+      FieldModel(id: 1, label: LevelStrings.beginner, level: 1);
   // Rx<FieldModel> selectedProficiency = FieldModel(label: '').obs;
-  Rx<FieldModel> selectedSpokenProficiency = FieldModel(label: '').obs;
-  Rx<FieldModel> selectedWrittenProficiency = FieldModel(label: '').obs;
+  Rx<FieldModel> selectedSpokenProficiency =
+      FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
+  Rx<FieldModel> selectedWrittenProficiency =
+      FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
 
   RxList<FieldModel> selectedlanguageTypes = <FieldModel>[].obs;
 
@@ -41,10 +45,10 @@ class LanguageUsageController extends GetxController {
     // FieldModel(id: 4, label: LevelStrings.motherTongue, level: 4),
   ].obs;
 
-  RxList<FieldModel> languageTypeList = <FieldModel>[
-    FieldModel(id: 1, label: 'spoken'.tr),
-    FieldModel(id: 2, label: 'written'.tr),
-  ].obs;
+  // RxList<FieldModel> languageTypeList = <FieldModel>[
+  //   FieldModel(id: 1, label: 'spoken'.tr),
+  //   FieldModel(id: 2, label: 'written'.tr),
+  // ].obs;
 
   // List<TextEditingController> vdoUrlListTextCtrl = [];
 
@@ -101,8 +105,8 @@ class LanguageUsageController extends GetxController {
     selectedMotherTongueLanguage.value = FieldModel();
     selectedLanguage.value = FieldModel();
     // selectedProficiency.value = FieldModel(label: '');
-    selectedSpokenProficiency.value = FieldModel(label: '');
-    selectedWrittenProficiency.value = FieldModel(label: '');
+    selectedSpokenProficiency.value = beginnerLevel;
+    selectedWrittenProficiency.value = beginnerLevel;
     selectedlanguageTypes.value = [];
   }
 

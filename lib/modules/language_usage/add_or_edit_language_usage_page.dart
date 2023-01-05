@@ -182,11 +182,11 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                           ),
                         ),
                         child: Obx(
-                          () => controller.languageListForSelection.isNotEmpty
+                          () => controller.allLanguageListFromAPI.isNotEmpty
                               ? FieldListSelector(
                                   inputHintText: 'search'.tr,
                                   dataListforSelected:
-                                      controller.languageListForSelection,
+                                      controller.allLanguageListFromAPI,
                                   selectedItem:
                                       controller.selectedLanguage.value,
                                   onTap: (field) {
@@ -649,7 +649,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                               AppSize.s10,
                                                           marginTop: AppSize.s8,
                                                           marginBottom:
-                                                              AppSize.s20,
+                                                              AppSize.s2,
                                                         ),
                                                       ],
                                                     ),
@@ -756,7 +756,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                             marginTop:
                                                                 AppSize.s8,
                                                             marginBottom:
-                                                                AppSize.s20,
+                                                                AppSize.s2,
                                                           ),
                                                         ],
                                                       ),
@@ -940,15 +940,16 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                       //   ),
                                                       // ),
                                                       //===== Bottom of Types Selection Component =====//
-                                                      const SizedBox(
-                                                        width: 4.0,
-                                                      ),
 
-                                                      ///===== Top of Proficiency Selection Component =====//
+                                                      ///===== Top of Spoken Proficiency Selection Component =====//
                                                       Expanded(
                                                         flex: 40,
                                                         child:
                                                             ContainerDialogWidget(
+                                                          inputTitle:
+                                                              'spoken'.tr,
+                                                          inputTitleMarginTop:
+                                                              AppSize.s2,
                                                           dialogWidget:
                                                               MaterialDialogWidget(
                                                             title:
@@ -978,7 +979,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                                           .level,
                                                                       object2:
                                                                           languageItem
-                                                                              .level,
+                                                                              .languageSpokenLv,
                                                                     ),
                                                                     text:
                                                                         translateStateWords(
@@ -993,13 +994,13 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                                             languageItem.id,
                                                                         spokenLanguageData:
                                                                             FieldModel(
-                                                                          level: controller
-                                                                              .proficiencyList[index]
-                                                                              .level,
+                                                                          level:
+                                                                              1,
                                                                           videoUrl:
                                                                               languageItem.videoUrl ?? '',
-                                                                          languageSpokenLv:
-                                                                              languageItem.languageSpokenLv,
+                                                                          languageSpokenLv: controller
+                                                                              .proficiencyList[index]
+                                                                              .level,
                                                                           languageWrittenLv:
                                                                               languageItem.languageWrittenLv,
                                                                         ),
@@ -1037,10 +1038,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                                   TextAlign
                                                                       .center,
                                                               text:
-                                                                  translateStateWords(
-                                                                stateWord:
-                                                                    '${languageItem.getLabelProficiencyLevel}',
-                                                              ),
+                                                                  '${languageItem.getLabelSpokenProficiencyLevel}',
                                                               fontSize:
                                                                   AppSize.s16,
                                                               fontWeight:
@@ -1061,6 +1059,133 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                           // ),
                                                         ),
                                                       ),
+                                                      //===== Bottom of Spoken Proficiency Selection Component =====//
+                                                      const SizedBox(
+                                                        width: 4.0,
+                                                      ),
+
+                                                      ///===== Top of Written Proficiency Selection Component =====//
+                                                      Expanded(
+                                                        flex: 40,
+                                                        child:
+                                                            ContainerDialogWidget(
+                                                          inputTitle:
+                                                              'written'.tr,
+                                                          inputTitleMarginTop:
+                                                              AppSize.s2,
+                                                          dialogWidget:
+                                                              MaterialDialogWidget(
+                                                            title:
+                                                                'proficiencyHint'
+                                                                    .tr,
+                                                            contentWidget:
+                                                                ListView
+                                                                    .separated(
+                                                              shrinkWrap: true,
+                                                              itemCount: controller
+                                                                  .proficiencyList
+                                                                  .length,
+                                                              itemBuilder: (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return Obx(
+                                                                  () => RowDataSelectionWidget
+                                                                      .radioButton(
+                                                                    isLeftSideText:
+                                                                        false,
+                                                                    isClickingValue:
+                                                                        intComparation(
+                                                                      object1: controller
+                                                                          .proficiencyList[
+                                                                              index]
+                                                                          .level,
+                                                                      object2:
+                                                                          languageItem
+                                                                              .languageWrittenLv,
+                                                                    ),
+                                                                    text:
+                                                                        translateStateWords(
+                                                                      stateWord:
+                                                                          '${controller.proficiencyList[index].label}',
+                                                                    ),
+                                                                    onPressed:
+                                                                        () {
+                                                                      controller
+                                                                          .makeRequestToSpokenLanguageAPI(
+                                                                        spokenLanguageId:
+                                                                            languageItem.id,
+                                                                        spokenLanguageData:
+                                                                            FieldModel(
+                                                                          level:
+                                                                              1,
+                                                                          videoUrl:
+                                                                              languageItem.videoUrl ?? '',
+                                                                          languageSpokenLv:
+                                                                              languageItem.languageSpokenLv,
+                                                                          languageWrittenLv: controller
+                                                                              .proficiencyList[index]
+                                                                              .level,
+                                                                        ),
+                                                                        operation:
+                                                                            Keys.editOperation,
+                                                                      );
+                                                                      Navigator
+                                                                          .pop(
+                                                                        context,
+                                                                        true,
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                );
+                                                              },
+                                                              separatorBuilder:
+                                                                  (
+                                                                context,
+                                                                index,
+                                                              ) {
+                                                                return const Divider(
+                                                                  height: 1.0,
+                                                                  color: ColorsManager
+                                                                      .grey300,
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                          containerWidget:
+                                                              RowContentInputWidget(
+                                                            centerWidget:
+                                                                CustomTextWidget(
+                                                              //marginLeft: 4.0,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              text:
+                                                                  //   translateStateWords(
+                                                                  // stateWord:
+                                                                  '${languageItem.getLabelWrittenProficiencyLevel}',
+                                                              // ),
+                                                              fontSize:
+                                                                  AppSize.s16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
+                                                            suffixWidgetFlex:
+                                                                15,
+                                                            suffixWidget:
+                                                                const Icon(
+                                                              Icons
+                                                                  .arrow_drop_down,
+                                                              color:
+                                                                  ColorsManager
+                                                                      .grey600,
+                                                            ),
+                                                          ),
+                                                          // ),
+                                                        ),
+                                                      ),
+                                                      //===== Bottom of Written Proficiency Selection Component =====//
                                                     ],
                                                   ),
                                                   Container(
@@ -1236,6 +1361,8 @@ class UrlLanguageInput extends StatelessWidget {
                           level: languageItem!.level,
                           videoUrl: vdoUrlCtrl!.text,
                           // controller!.vdoUrlListTextCtrl[index!].text,
+                          languageSpokenLv: languageItem!.languageSpokenLv,
+                          languageWrittenLv: languageItem!.languageWrittenLv,
                         ),
                         operation: Keys.editOperation,
                       );

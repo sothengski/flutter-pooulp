@@ -70,6 +70,16 @@ class FieldModel {
   String? get getLabelProficiencyLevel =>
       proficiencyList!.firstWhere((element) => element.level == level).label;
 
+  String? get getLabelSpokenProficiencyLevel => proficiencyList!
+      .firstWhere((element) => element.level == languageSpokenLv)
+      .label;
+
+  String? get getLabelWrittenProficiencyLevel => proficiencyList!
+      .firstWhere(
+        (element) => element.level == languageWrittenLv,
+      )
+      .label;
+
   // String? get displayLevel => level == null ? '' : 'Level $level';
   String? get displayLevel => level == null
       ? ''

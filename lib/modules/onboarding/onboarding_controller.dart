@@ -52,10 +52,18 @@ class OnboardingController extends GetxController
   RxList<FieldModel>? knowFromSourceSelectedList = <FieldModel>[].obs;
 
 // language variable
+  final editLangaugeFormKey = GlobalKey<FormState>();
+
+  final editMontherTongueLangaugeFormKey = GlobalKey<FormState>();
   RxList<FieldModel> languageSelectedList = <FieldModel>[].obs;
   Rx<FieldModel> selectedLanguage = FieldModel().obs;
   Rx<FieldModel> selectedMotherTongueLanguage = FieldModel().obs;
-  Rx<FieldModel> selectedProficiency = FieldModel(label: '').obs;
+  // Rx<FieldModel> selectedProficiency =
+  //     FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
+  Rx<FieldModel> selectedSpokenProficiency =
+      FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
+  Rx<FieldModel> selectedWrittenProficiency =
+      FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
   RxList<FieldModel> selectedlanguageTypes = <FieldModel>[].obs;
   RxList<FieldModel> proficiencyList = <FieldModel>[
     // FieldModel(id: 0, label: LanguageLevelStrings.levelUndefined, level: 0),
@@ -704,23 +712,25 @@ class OnboardingController extends GetxController
   void clearDataFromForm() {
     selectedMotherTongueLanguage.value = FieldModel();
     selectedLanguage.value = FieldModel();
-    selectedProficiency.value = FieldModel(label: '');
+    // selectedProficiency.value =
+    //     FieldModel(id: 1, label: LevelStrings.beginner, level: 1);
+    selectedSpokenProficiency.value =
+        FieldModel(id: 1, label: LevelStrings.beginner, level: 1);
+    selectedWrittenProficiency.value =
+        FieldModel(id: 1, label: LevelStrings.beginner, level: 1);
     selectedlanguageTypes.value = [];
   }
 
   void operationLanguageOnClick({
-    // required GlobalKey<FormState>? formKey,
     required int? languageId,
     required String? languageLabel,
     required int? languageProficiencyLevel,
-    bool? spoken = false,
-    bool? written = false,
+    int? spoken = 1,
+    int? written = 1,
     String? languageVideoUrl = '',
     int? operation = 0, //0 = add, 1 = edit, 2 = delete
     int? indexForEditOrDelete,
   }) {
-    // if (formKey!.currentState!.validate()) {
-
     // debugPrint(
     //   'selectedLanguage:: $selectedLanguage',
     // );
@@ -735,8 +745,8 @@ class OnboardingController extends GetxController
           label: languageLabel,
           level: languageProficiencyLevel, //selectedProficiency.value.level,
           videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',
-          languageSpokenLv: spoken == true ? 1 : 0,
-          languageWrittenLv: written == true ? 1 : 0,
+          languageSpokenLv: spoken,
+          languageWrittenLv: written,
         ),
       );
     } else if (operation == 1 && indexForEditOrDelete != null) {
@@ -747,8 +757,8 @@ class OnboardingController extends GetxController
         label: languageLabel,
         level: languageProficiencyLevel, //selectedProficiency.value.level,
         videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',
-        languageSpokenLv: spoken == true ? 1 : 0,
-        languageWrittenLv: written == true ? 1 : 0,
+        languageSpokenLv: spoken,
+        languageWrittenLv: written,
       );
       // print('after: $languageSelectedList');
     } else if (operation == 2 && indexForEditOrDelete != null) {
@@ -758,6 +768,5 @@ class OnboardingController extends GetxController
     isUpdate.value = switchingBooleanValue(
       boolValue: isUpdate.value,
     );
-    // }
   }
 }

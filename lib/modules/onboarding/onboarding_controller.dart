@@ -52,8 +52,8 @@ class OnboardingController extends GetxController
   RxList<FieldModel>? knowFromSourceSelectedList = <FieldModel>[].obs;
 
 // language variable
+  RxInt newLangaugeId = 0.obs;
   final editLangaugeFormKey = GlobalKey<FormState>();
-
   final editMontherTongueLangaugeFormKey = GlobalKey<FormState>();
   RxList<FieldModel> languageSelectedList = <FieldModel>[].obs;
   Rx<FieldModel> selectedLanguage = FieldModel().obs;
@@ -730,6 +730,7 @@ class OnboardingController extends GetxController
     String? languageVideoUrl = '',
     int? operation = 0, //0 = add, 1 = edit, 2 = delete
     int? indexForEditOrDelete,
+    int? generateId,
   }) {
     // debugPrint(
     //   'selectedLanguage:: $selectedLanguage',
@@ -738,9 +739,10 @@ class OnboardingController extends GetxController
     //   'selectedProficiency:: $selectedProficiency',
     // );
     if (operation == 0) {
+      newLangaugeId++;
       languageSelectedList.add(
         FieldModel(
-          id: languageId,
+          id: newLangaugeId.value,
           tagId: languageId, //selectedLanguage.value.id,
           label: languageLabel,
           level: languageProficiencyLevel, //selectedProficiency.value.level,
@@ -750,17 +752,31 @@ class OnboardingController extends GetxController
         ),
       );
     } else if (operation == 1 && indexForEditOrDelete != null) {
-      // print('b4: $languageSelectedList');
-      languageSelectedList[indexForEditOrDelete] = FieldModel(
-        id: languageId,
-        tagId: languageId, //selectedLanguage.value.id,
-        label: languageLabel,
-        level: languageProficiencyLevel, //selectedProficiency.value.level,
-        videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',
-        languageSpokenLv: spoken,
-        languageWrittenLv: written,
+      // print('b4 $indexForEditOrDelete: ');
+      languageSelectedList.removeWhere((element) => element.id == generateId);
+      languageSelectedList.add(
+        FieldModel(
+          id: generateId,
+          tagId: languageId, //selectedLanguage.value.id,
+          label: languageLabel,
+          level: languageProficiencyLevel, //selectedProficiency.value.level,
+          videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',
+          languageSpokenLv: spoken,
+          languageWrittenLv: written,
+        ),
       );
-      // print('after: $languageSelectedList');
+      languageSelectedList.sort((a, b) => a.id!.compareTo(b.id!));
+
+      // languageSelectedList[indexForEditOrDelete] = FieldModel(
+      //   id: generateId,
+      //   tagId: languageId, //selectedLanguage.value.id,
+      //   label: languageLabel,
+      //   level: languageProficiencyLevel, //selectedProficiency.value.level,
+      //   videoUrl: languageVideoUrl == '' ? null : languageVideoUrl, //'',
+      //   languageSpokenLv: spoken,
+      //   languageWrittenLv: written,
+      // );
+      // print('after $indexForEditOrDelete: ');
     } else if (operation == 2 && indexForEditOrDelete != null) {
       languageSelectedList.removeAt(indexForEditOrDelete);
     }

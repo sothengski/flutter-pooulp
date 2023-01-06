@@ -23,6 +23,7 @@ class ProfileModel {
   final DateTime? birthDate;
   final String? pictureUrl;
   final bool? emailNotification;
+  final bool? newsLetterNotification;
 
   final String? addressStreet;
   final String? addressCity;
@@ -83,6 +84,7 @@ class ProfileModel {
     this.birthDate,
     this.pictureUrl,
     this.emailNotification,
+    this.newsLetterNotification,
     this.addressStreet,
     this.addressCity,
     this.addressZip,
@@ -158,6 +160,8 @@ class ProfileModel {
             : DateTime.parse(json['birthdate'].toString()),
         pictureUrl: json['picture_url'] as String?,
         emailNotification: json['settings_notifications_email'] as bool?,
+        newsLetterNotification:
+            json['settings_notifications_email_newsletter'] as bool?,
         addressStreet: json['address_street'] as String?,
         addressCity: json['address_city'] as String?,
         addressZip: json['address_zip'] as String?,
@@ -247,6 +251,7 @@ class ProfileModel {
             : "${birthDate!.year.toString().padLeft(4, '0')}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}",
         'picture_url': pictureUrl,
         'settings_notifications_email': emailNotification,
+        'settings_notifications_email_newsletter': newsLetterNotification,
         'address_street': addressStreet,
         'address_city': addressCity,
         'address_zip': addressZip,
@@ -307,6 +312,7 @@ class ProfileModel {
       birthDate: $birthDate,
       pictureUrl: $pictureUrl,
       emailNotification: $emailNotification,
+      newsLetterNotification: $newsLetterNotification,
       addressStreet: $addressStreet,
       addressCity: $addressCity,
       addressZip: $addressZip,

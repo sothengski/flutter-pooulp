@@ -46,6 +46,8 @@ class SettingController extends GetxController {
             : profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
     emailNotificationRxBool.value =
         profileController.userProfileInfo.value.emailNotification ?? false;
+    newsLetterNotificationRxBool.value =
+        profileController.userProfileInfo.value.newsLetterNotification ?? false;
     internshipPeriodSelected.value = profileController
             .studentInfoRepsonse.value.internshipPeriods!.isNotEmpty
         ? profileController.studentInfoRepsonse.value.internshipPeriods!.first
@@ -109,6 +111,7 @@ class SettingController extends GetxController {
           profileController.userInfoRepsonse.value.profile!.addressLongitude,
       uiLanguage: languageRxString.value,
       emailNotification: emailNotificationRxBool.value,
+      newsLetterNotification: newsLetterNotificationRxBool.value,
     );
     makeRequestToUserProfileAPI(
       userProfileData: profileInfoToBeUpdate,

@@ -521,27 +521,28 @@ class SettingPage extends GetView<SettingController> {
                         thickness: 1,
                       ),
 
-                      ///===== Top of NewLetter Notification Component =====//
+                      ///===== Top of NewsLetter Notification Component =====//
                       InkWell(
                         onTap: () {
-                          controller.newLetterNotificationRxBool.value =
+                          controller.newsLetterNotificationRxBool.value =
                               controller.updatingBoolValue(
                             newValue:
-                                !controller.newLetterNotificationRxBool.value,
+                                !controller.newsLetterNotificationRxBool.value,
                           )!;
                         },
                         child: RowContentInputWidget(
                           centerWidget: CustomTextWidget(
                             marginLeft: AppSize.s12,
                             textAlign: TextAlign.center,
-                            text: 'newLetterNotifications'.tr,
+                            text: 'notificationsNewsletter'.tr,
                             fontSize: AppSize.s16,
                           ),
                           suffixWidgetFlex: 20,
                           suffixWidget: Switch(
-                            value: controller.newLetterNotificationRxBool.value,
+                            value:
+                                controller.newsLetterNotificationRxBool.value,
                             onChanged: (value) {
-                              controller.newLetterNotificationRxBool.value =
+                              controller.newsLetterNotificationRxBool.value =
                                   controller.updatingBoolValue(
                                 newValue: value,
                               )!;

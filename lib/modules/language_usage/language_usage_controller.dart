@@ -88,6 +88,8 @@ class LanguageUsageController extends GetxController {
   }
 
   void languageListFilter() {
+    languageListForSelection.clear();
+    languageListForSelection.addAll(allLanguageListFromAPI);
     for (final item
         in profileController.studentInfoRepsonse.value.spokenLanguages!) {
       languageListForSelection.removeWhere(

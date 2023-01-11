@@ -540,7 +540,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                         ),
                                                         CustomTextWidget(
                                                           text:
-                                                              '${languageItem.label}(${languageItem.tagId})',
+                                                              '${languageItem.label}',
                                                           color: ColorsManager
                                                               .white,
                                                           fontSize: AppSize.s16,
@@ -657,7 +657,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                           ),
                                                           CustomTextWidget(
                                                             text:
-                                                                '${languageItem.label}(${languageItem.tagId})',
+                                                                '${languageItem.label}',
                                                             color: ColorsManager
                                                                 .white,
                                                             fontSize:

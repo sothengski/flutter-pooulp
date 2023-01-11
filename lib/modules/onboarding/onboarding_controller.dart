@@ -726,6 +726,8 @@ class OnboardingController extends GetxController
   }
 
   void clearDataFromForm() {
+    languageListForSelection.clear();
+    languageListForSelection.addAll(allLanguageListFromAPI);
     selectedMotherTongueLanguage.value = FieldModel();
     selectedLanguage.value = FieldModel();
     // selectedProficiency.value =
@@ -735,6 +737,12 @@ class OnboardingController extends GetxController
     selectedWrittenProficiency.value =
         FieldModel(id: 1, label: LevelStrings.beginner, level: 1);
     selectedlanguageTypes.value = [];
+
+    for (final item in languageSelectedList) {
+      languageListForSelection.removeWhere(
+        (element) => item.tagId == element.id,
+      );
+    }
   }
 
   void operationLanguageOnClick({

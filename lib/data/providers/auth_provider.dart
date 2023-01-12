@@ -67,6 +67,7 @@ class AuthProvider extends BaseProvider {
         // throw Exception('Error: ${dataResponse.statusText}');
       } else {
         final data = json.decode(dataResponse.bodyString.toString());
+        debugPrint('resp data: $data');
         return LoginModel.fromJson(data as Map<String, dynamic>);
       }
     } catch (e) {

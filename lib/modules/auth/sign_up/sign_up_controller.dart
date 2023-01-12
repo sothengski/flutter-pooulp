@@ -185,35 +185,55 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
         source: Platform.isAndroid ? 3 : 2,
       );
       authProvider
-          .registerNewUserAPI(
-        registrationData: registrationInputData,
-      )
+          .registerNewUserAPI(registrationData: registrationInputData)
           .then(
         (LoginModel value) {
-          Get.dialog(
-            CustomAlertDialog(
-              title: 'Welcome'.tr, //'core.success'.tr,
-              content: 'pooulpMember'.tr, //'auth.memberPooulp'.tr,
-              routePath: Routes.homeRoute,
-              type: AlertDialogType.success,
-              buttonLabel: 'continue'.tr, //'core.continue'.tr,
-              onPressed: () async {
-                final bool loginStatus = await AuthServices().saveUserToken(
-                  bodyData: value,
-                );
-                if (loginStatus == true) {
-                  Get.offAllNamed(Routes.onBoardingRoute);
-                } else {
-                  customSnackbar(
-                    msgTitle: "Can't save user Data",
-                    msgContent: "Can't save user Data",
-                    bgColor: ColorsManager.red,
+          debugPrint('resp Value: $value');
+          if (value.accountType! != 'student') {
+            Get.dialog(
+              CustomAlertDialog(
+                title: 'Welcome'.tr, //'core.success'.tr,
+                content: 'Please direct to our Web App', //'pooulpMember'.tr,
+                // routePath: Routes.homeRoute,
+                type: AlertDialogType.success,
+                buttonLabel: 'continue'.tr, //'core.continue'.tr,
+                onPressed: () async {
+                  urlLauncherUtils(
+                    thingToLaunch: UrlWebsiteStrings.loginPage,
+                    // inApp: true,
                   );
-                }
-              },
-            ),
-            barrierDismissible: false,
-          );
+                  // Get.back();
+                },
+              ),
+              barrierDismissible: true,
+            );
+          } else {
+            //professional
+            Get.dialog(
+              CustomAlertDialog(
+                title: 'Welcome'.tr, //'core.success'.tr,
+                content: 'pooulpMember'.tr, //'auth.memberPooulp'.tr,
+                routePath: Routes.homeRoute,
+                type: AlertDialogType.success,
+                buttonLabel: 'continue'.tr, //'core.continue'.tr,
+                onPressed: () async {
+                  final bool loginStatus = await AuthServices().saveUserToken(
+                    bodyData: value,
+                  );
+                  if (loginStatus == true) {
+                    Get.offAllNamed(Routes.onBoardingRoute);
+                  } else {
+                    customSnackbar(
+                      msgTitle: "Can't save user Data",
+                      msgContent: "Can't save user Data",
+                      bgColor: ColorsManager.red,
+                    );
+                  }
+                },
+              ),
+              barrierDismissible: false,
+            );
+          }
           clearData();
           change(value, status: RxStatus.success());
         },

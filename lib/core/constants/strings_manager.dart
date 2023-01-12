@@ -1,3 +1,5 @@
+import 'package:pooulp_flutter/data/data.dart';
+
 ///==================== Keys ====================
 
 class Keys {
@@ -82,4 +84,5 @@ class OfferStrings {
 class UrlWebsiteStrings {
   static const String privacyPolicy = 'http://pooulp.com/privacy-policy/';
   static const String termsOfUse = 'http://pooulp.com/terms-of-use/';
+  static const String loginPage = '${API.webDomain}/login';
 }

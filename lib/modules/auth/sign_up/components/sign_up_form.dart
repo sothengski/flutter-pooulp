@@ -517,7 +517,7 @@ class SignUpForm extends GetView<SignUpController> {
                                 isFilled: true,
                                 topPadding: AppSize.s12,
                                 // bottomPadding: AppSize.s16,
-                                // validator: Validator().password,
+                                validator: Validator().notEmptyValidator,
                               ),
                             const SizedBox(height: AppSize.s16),
                             Row(

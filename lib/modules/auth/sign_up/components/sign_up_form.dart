@@ -525,8 +525,8 @@ class SignUpForm extends GetView<SignUpController> {
                                 controller: controller.jobTitleTextCtrl,
                                 inputTitle: 'jobTitleLabel'
                                     .tr, //'auth.enterpriseID'.tr,
-                                hintText:
-                                    'jobTitleLabel', //'auth.enterpriseIDHint'.tr,
+                                hintText: 'jobTitleLabel'
+                                    .tr, //'auth.enterpriseIDHint'.tr,
                                 isFilled: true,
                                 topPadding: AppSize.s12,
                                 bottomPadding: AppSize.s16,

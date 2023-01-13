@@ -511,7 +511,7 @@ class SignUpForm extends GetView<SignUpController> {
                               CustomTextInput(
                                 controller: controller.enterpriseIDCtrl,
                                 inputTitle:
-                                    'enterpriseId'.tr, //'auth.enterpriseID'.tr,
+                                    "${'enterpriseId'.tr}*", //'auth.enterpriseID'.tr,
                                 hintText:
                                     'xxxx xxx xxx', //'auth.enterpriseIDHint'.tr,
                                 isFilled: true,

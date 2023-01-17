@@ -439,7 +439,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       ///===== Top of Video presentation link Component =====//
                       CustomTextInput(
                         controller: controller.videoLinkCtrl,
-                        inputTitle: "${'videoPresentation'.tr} Youtube",
+                        // inputTitle: "${'videoPresentation'.tr} Youtube",
+                        inputTitle: 'studentVdoIntoLink'.tr,
                         hintText: 'videoPresentation'.tr,
                         isFilled: true,
                         topPadding: AppSize.s12,

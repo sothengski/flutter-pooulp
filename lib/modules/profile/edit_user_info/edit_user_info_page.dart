@@ -470,7 +470,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                           centerWidget: CustomTextWidget(
                             marginLeft: AppSize.s12,
                             textAlign: TextAlign.center,
-                            text: 'drivingLicense'.tr,
+                            text: 'iHaveDrivingLicense'.tr,
                             fontSize: AppSize.s16,
                           ),
                           suffixWidgetFlex: 20,

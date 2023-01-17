@@ -582,14 +582,16 @@ class SignUpForm extends GetView<SignUpController> {
                                       children: [
                                         TextSpan(
                                           text:
-                                              "${'youAgreeToPooulp'.tr} ", //'auth.agreeToPooulp'.tr,
+                                              "${controller.registerAgreeLabelFirstPart} ",
+                                          // "${'youAgreeToPooulp'.tr} ", //'auth.agreeToPooulp'.tr,
                                           style: const TextStyle(
                                             color: ColorsManager.primaryBlue,
                                           ),
                                         ),
                                         TextSpan(
-                                          text: 'privacyPolicy'
-                                              .tr, // 'auth.privacy'.tr,
+                                          text:
+                                              "${controller.registerAgreeLabelPrivacyPolicy}",
+                                          // 'privacyPolicy'.tr, // 'auth.privacy'.tr,
                                           style: const TextStyle(
                                             color: Colors.blue,
                                           ),
@@ -610,7 +612,8 @@ class SignUpForm extends GetView<SignUpController> {
                                         ),
                                         TextSpan(
                                           text:
-                                              'termsOfUse'.tr, //'auth.term'.tr,
+                                              "${controller.registerAgreeLabelCookiesPolicy}",
+                                          // 'termsOfUse'.tr, //'auth.term'.tr,
                                           style: const TextStyle(
                                             color: Colors.blue,
                                           ),
@@ -631,16 +634,19 @@ class SignUpForm extends GetView<SignUpController> {
                                 //   width: getWidth * 0.7,
                                 //   child: GestureDetector(
                                 //     onTap: () async {
-                                //       urlLaucherUtils(
-                                //         url:
-                                //             'http://pooulp.com/privacy-policy/',
-                                //         inApp: true,
-                                //       );
+                                //       // urlLaucherUtils(
+                                //       //   url:
+                                //       //       'http://pooulp.com/privacy-policy/',
+                                //       //   inApp: true,
+                                //       // );
                                 //     },
-                                //     child: const CustomTextWidget(
-                                //       text:
-                                //           "I agree to Pooulp Privacy Policy & Terms",
-                                //       maxLine: 2,
+                                //     child: CustomTextWidget(
+                                //       text: 'registerAgreeLabel'
+                                //           .tr
+                                //           .replaceAll('<a href=', 'replace'),
+                                //       // text:
+                                //       //     "I agree to Pooulp Privacy Policy & Terms",
+                                //       maxLine: 3,
                                 //     ),
                                 //   ),
                                 // )

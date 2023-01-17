@@ -582,16 +582,14 @@ class SignUpForm extends GetView<SignUpController> {
                                       children: [
                                         TextSpan(
                                           text:
-                                              "${controller.registerAgreeLabelFirstPart} ",
-                                          // "${'youAgreeToPooulp'.tr} ", //'auth.agreeToPooulp'.tr,
+                                              "${'youAgreeToPooulp'.tr} ", //'auth.agreeToPooulp'.tr,
                                           style: const TextStyle(
                                             color: ColorsManager.primaryBlue,
                                           ),
                                         ),
                                         TextSpan(
-                                          text:
-                                              "${controller.registerAgreeLabelPrivacyPolicy}",
-                                          // 'privacyPolicy'.tr, // 'auth.privacy'.tr,
+                                          text: 'privacyPolicy'
+                                              .tr, // 'auth.privacy'.tr,
                                           style: const TextStyle(
                                             color: Colors.blue,
                                           ),
@@ -611,9 +609,8 @@ class SignUpForm extends GetView<SignUpController> {
                                           ),
                                         ),
                                         TextSpan(
-                                          text:
-                                              "${controller.registerAgreeLabelCookiesPolicy}",
-                                          // 'termsOfUse'.tr, //'auth.term'.tr,
+                                          text: 'cookiesPolicy'
+                                              .tr, //'auth.term'.tr,
                                           style: const TextStyle(
                                             color: Colors.blue,
                                           ),

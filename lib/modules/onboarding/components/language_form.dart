@@ -589,7 +589,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: CustomTextWidget(
-                                    text: 'otherLanguages'.tr,
+                                    text: "${'otherLanguage'.tr}s",
                                     color: ColorsManager.white,
                                     fontSize: AppSize.s20,
                                     fontWeight: FontWeight.w600,

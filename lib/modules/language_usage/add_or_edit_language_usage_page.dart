@@ -682,7 +682,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: CustomTextWidget(
-                                    text: 'otherLanguages'.tr,
+                                    text: "${'otherLanguage'.tr}s",
                                     fontSize: AppSize.s20,
                                     fontWeight: FontWeight.w600,
                                   ),

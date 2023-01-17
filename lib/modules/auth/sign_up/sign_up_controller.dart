@@ -48,11 +48,6 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
 
   late LoginModel loginRepsonseData;
 
-  RxString registerAgreeLabelFirstPart = 'You agree to pooulp'.obs;
-  RxString registerAgreeLabelPrivacyPolicy = 'Privacy policy'.obs;
-  RxString registerAgreeLabelAnd = 'and'.obs;
-  RxString registerAgreeLabelCookiesPolicy = 'Cookies Policy'.obs;
-
   @override
   void onInit() {
     super.onInit();

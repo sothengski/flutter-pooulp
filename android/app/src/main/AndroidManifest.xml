@@ -14,7 +14,7 @@
     </intent>
     <!-- If your app checks for SMS support -->
     <intent>
-        <action android:name="android.intent.action.VIEW" />
+        <action android:name="android.intent.action.VIEW" /> 
         <data android:scheme="sms" />
     </intent>
     <!-- If your sends SMS messages -->
@@ -43,6 +43,7 @@
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
         <activity
+            android:exported="false"
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
@@ -105,6 +106,7 @@
 
         </activity>
         <activity
+            android:exported="false"
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

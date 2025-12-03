@@ -102,28 +102,34 @@ class OfferDetailController extends GetxController
   Future<void> getJobOfferDetail({required String? jobOfferUUID}) async {
     JobOfferModel tempResp;
 
-    if (jobOfferUUID!.contains('-')) {
-      tempResp = await offerProvider.getJobOfferDetailByUUID(
-        jobOfferUUID: jobOfferUUID,
-      );
-    } else {
-      tempResp = await offerProvider.getJobOfferDetailByID(
-        jobOfferID: jobOfferUUID,
-      );
-    }
+    tempResp = await FakeOfferProvider().getJobOfferDetailByUUID(
+      jobOfferUUID: jobOfferUUID,
+    );
+
+    /// TODO: remove this function after offline testing
+    // if (jobOfferUUID!.contains('-')) {
+    //   tempResp = await offerProvider.getJobOfferDetailByUUID(
+    //     jobOfferUUID: jobOfferUUID,
+    //   );
+    // } else {
+    //   tempResp = await offerProvider.getJobOfferDetailByID(
+    //     jobOfferID: jobOfferUUID,
+    //   );
+    // }
     // if (tempResp.uuid!.isNotEmpty) {
     // debugPrint(
     //   "getJobOfferDetail: $tempResp",
     // );
     jobOfferDetail!.value = tempResp;
-    if (jobOfferDetail!.value.uuid!.isNotEmpty) {
-      youtubeVideoId = jobOfferDetail!.value.enterprise!.youtubeLink == null
-          ? ''
-          : jobOfferDetail!.value.enterprise!.youtubeLink!.split('=').last;
-      makeRequestToPOSTJobOfferViewCountAPI(
-        jobOfferUUID: jobOfferDetail!.value.uuid,
-      );
-    }
+    // TODO: remove this function after offline testing
+    // if (jobOfferDetail!.value.uuid!.isNotEmpty) {
+    //   youtubeVideoId = jobOfferDetail!.value.enterprise!.youtubeLink == null
+    //       ? ''
+    //       : jobOfferDetail!.value.enterprise!.youtubeLink!.split('=').last;
+    //   makeRequestToPOSTJobOfferViewCountAPI(
+    //     jobOfferUUID: jobOfferDetail!.value.uuid,
+    //   );
+    // }
     // }
   }
 

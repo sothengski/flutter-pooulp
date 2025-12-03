@@ -50,8 +50,9 @@ class ExperienceController extends GetxController {
           (Get.arguments as List)[2] as ExperienceModel;
       expId = expDataArg.id!;
       if (expType.value == AppStrings.personalKey) {
-        experienceTypeInt.value =
-            expDataArg.tags!.isNotEmpty ? expDataArg.tags!.first! as int : 0;
+        experienceTypeInt.value = expDataArg.tags!.isNotEmpty
+            ? expDataArg.tags!.first! as int
+            : 0;
         // if (title.toString() == Keys.editOperation) {
         selectedExperienceType.value = experienceTypeInt.value == 0
             ? FieldModel(label: '')
@@ -67,10 +68,12 @@ class ExperienceController extends GetxController {
       } else {
         isCheckStillWorking.value = false;
       }
-      selectedStartedDateString.value =
-          expDataArg.dateStart == null ? '' : expDataArg.dateStart.toString();
-      selectedEndDateString.value =
-          expDataArg.dateEnd == null ? '' : expDataArg.dateEnd.toString();
+      selectedStartedDateString.value = expDataArg.dateStart == null
+          ? ''
+          : expDataArg.dateStart.toString();
+      selectedEndDateString.value = expDataArg.dateEnd == null
+          ? ''
+          : expDataArg.dateEnd.toString();
       descriptionTextCtrl.text = expDataArg.description!;
       cityTextCtrl.text = expDataArg.addressCity!;
       countryTextCtrl.text = expDataArg.addressCountry!;
@@ -88,7 +91,11 @@ class ExperienceController extends GetxController {
   Future<List<FieldModel>> getExperienceTypeListResponseProvider({
     bool? refresh = false,
   }) async {
-    experienceTypeList.addAll(await tagProvider.getExperienceTypes());
+    experienceTypeList.addAll(
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getExperienceTypes(),
+      await FakeTagProvider().getExperienceTypes(),
+    );
     return experienceTypeList;
   }
 
@@ -109,14 +116,10 @@ class ExperienceController extends GetxController {
         completed: isCheckStillWorking.value == true ? 1 : 0,
         dateStart: selectedStartedDateString.value == ''
             ? null
-            : DateTime.tryParse(
-                selectedStartedDateString.value,
-              ),
+            : DateTime.tryParse(selectedStartedDateString.value),
         dateEnd: selectedEndDateString.value == ''
             ? null
-            : DateTime.tryParse(
-                selectedEndDateString.value,
-              ),
+            : DateTime.tryParse(selectedEndDateString.value),
         addressCity: cityTextCtrl.text.trim(),
         addressCountry: countryTextCtrl.text.trim(),
         description: descriptionTextCtrl.text.trim(),
@@ -165,8 +168,9 @@ class ExperienceController extends GetxController {
         msgContent: operation == Keys.addOperation
             ? 'successfullyAdded'.tr
             : operation == Keys.editOperation
-                ? 'successfullyUpdated'.tr //'profile.expEditSuccessMsg'.tr
-                : 'successfullyDeleted'.tr, //'profile.expDeleteSuccessMsg'.tr,
+            ? 'successfullyUpdated'
+                  .tr //'profile.expEditSuccessMsg'.tr
+            : 'successfullyDeleted'.tr, //'profile.expDeleteSuccessMsg'.tr,
         // 'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Experience Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

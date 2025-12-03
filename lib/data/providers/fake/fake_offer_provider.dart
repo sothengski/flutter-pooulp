@@ -1,297 +1,9 @@
 import 'dart:async';
 
-import '../data.dart';
+import '../../data.dart';
 
-class FakeAuthProvider {
-  /// Fake login API that returns mock data for local testing
-  Future<LoginModel> loginAPI({required ProfileModel? loginData}) async {
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    // Validate credentials (optional - you can remove this if you want to always succeed)
-    if (loginData?.email == 'john.appleseed@example.com' &&
-        loginData?.password == '123456') {
-      // Return mock login response
-      return LoginModel.fromJson({
-        'token':
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuZGV2LWxhbXAtMDEuc3J2LnBvb3VscC5ldVwvbG9naW4iLCJpYXQiOjE2MzkwMzA3NDQsImV4cCI6MTYzOTExNzE0NCwibmJmIjoxNjM5MDMwNzQ0LCJqdGkiOiJhTDZxcVFvQXFva3R3MmFGIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.eQlxq-xcBssX02jB8OaP3hquQn_TuA-Nw5iXtFRIDZ4',
-        'token_type': 'bearer',
-        'expires_in': 86400,
-        'account_type': 'student',
-      });
-    } else {
-      // Return error for invalid credentials
-      return Future.error('Invalid email or password');
-    }
-  }
-}
-
-class FakeUserInfoProvider {
-  /// Fake getUserInfo API that returns mock data for local testing
-  Future<UserModel> getUserInfo() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    // Return mock user info response
-    return UserModel.fromJson({
-      'id': 2,
-      'uuid': '',
-      'email': 'barbara.appleseed@example.com',
-      'is_activated': true,
-      'profile': {
-        'account_type': 'professional',
-        'first_name': 'Barbara',
-        'last_name': 'Appleseed',
-        'description': null,
-        'phone1_country_code': '+33',
-        'phone1': '07 87 98 07 79',
-        'phone2_country_code': null,
-        'phone2': null,
-        'birthdate': null,
-        'address_street': null,
-        'address_city': null,
-        'address_zip': null,
-        'address_country': null,
-        'address_latitude': null,
-        'address_longitude': null,
-        'picture_url': null,
-        'ui_language': 'en',
-        'settings_notifications_email': true,
-      },
-      'enterprise': {
-        'id': 1,
-        'name': 'Orange France',
-        'enterprise_id': '380 129 866 46850',
-        'description': null,
-        'address_street': "6 place d'Alleray",
-        'address_city': 'Paris',
-        'address_zip': '75015',
-        'address_country': 'France',
-        'address_latitude': '',
-        'address_longitude': null,
-        'subsidiary_of': null,
-        'school_id': null,
-        'logo_urn': 'c89865c0-2de2-419d-bbe0-e99e20b64dc1',
-        'created_at': '2021-10-14T13:35:38.000000Z',
-        'updated_at': '2022-01-04T03:24:38.000000Z',
-        'facebook_link': '',
-        'linkedin_link': '',
-        'whatsapp_link': '',
-        'statecode': 1,
-        'uuid': '',
-      },
-    });
-  }
-}
-
-class FakeTagProvider {
-  /// Fake getJobOfferTypes API that returns mock data for local testing
-  Future<List<FieldModel>> getJobOfferTypes() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    // Return mock job offer types response
-    final List<Map<String, dynamic>> mockData = [
-      {
-        'id': 242,
-        'type': 'joboffer',
-        'label': 'Internship',
-        'category_id': 23,
-        'category': 'Job offer types',
-      },
-      {
-        'id': 243,
-        'type': 'joboffer',
-        'label': 'Study subject',
-        'category_id': 23,
-        'category': 'Job offer types',
-      },
-      {
-        'id': 244,
-        'type': 'joboffer',
-        'label': 'Student job',
-        'category_id': 23,
-        'category': 'Job offer types',
-      },
-      {
-        'id': 245,
-        'type': 'joboffer',
-        'label': 'Job',
-        'category_id': 23,
-        'category': 'Job offer types',
-      },
-    ];
-
-    return mockData.map((json) => FieldModel.fromJson(json)).toList();
-  }
-
-  /// Fake getAllFields API that returns mock data for local testing
-  Future<List<FieldModel>> getAllFields() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    // Return mock all fields response
-    final List<Map<String, dynamic>> mockData = [
-      {'id': 104, 'type': 'field', 'label': 'Finance', 'category': 'Business'},
-      {
-        'id': 109,
-        'type': 'field',
-        'label': 'Communication',
-        'category': 'Business',
-      },
-      {
-        'id': 207,
-        'type': 'field',
-        'label': 'Information Technology',
-        'category': 'Science',
-      },
-      {
-        'id': 208,
-        'type': 'field',
-        'label': 'Business management',
-        'category': 'Business',
-      },
-      {
-        'id': 209,
-        'type': 'field',
-        'label': 'Marketing',
-        'category': 'Business',
-      },
-      {
-        'id': 210,
-        'type': 'field',
-        'label': 'Mathematics',
-        'category': 'Science',
-      },
-      {'id': 211, 'type': 'field', 'label': 'Chemistry', 'category': 'Science'},
-      {'id': 212, 'type': 'field', 'label': 'Physics', 'category': 'Science'},
-      {'id': 213, 'type': 'field', 'label': 'Literature', 'category': 'Arts'},
-      {
-        'id': 214,
-        'type': 'field',
-        'label': 'IT Security',
-        'category': 'Science',
-      },
-      {'id': 215, 'type': 'field', 'label': 'Art', 'category': 'Arts'},
-      {
-        'id': 216,
-        'type': 'field',
-        'label': 'Architecture',
-        'category': 'Science',
-      },
-      {
-        'id': 217,
-        'type': 'field',
-        'label': 'Business engeenering',
-        'category': 'Business',
-      },
-      {
-        'id': 218,
-        'type': 'field',
-        'label': 'Hospitality',
-        'category': 'Services',
-      },
-      {'id': 219, 'type': 'field', 'label': 'Cooking', 'category': 'Services'},
-      {'id': 220, 'type': 'field', 'label': 'Medecine', 'category': 'Science'},
-      {'id': 221, 'type': 'field', 'label': 'Pharmacy', 'category': 'Science'},
-      {'id': 222, 'type': 'field', 'label': 'Army', 'category': 'Services'},
-      {
-        'id': 223,
-        'type': 'field',
-        'label': 'Agriculture/Farming',
-        'category': 'Agriculture',
-      },
-      {
-        'id': 224,
-        'type': 'field',
-        'label': 'Civil engeenering',
-        'category': 'Science',
-      },
-      {'id': 225, 'type': 'field', 'label': 'Sport', 'category': 'Science'},
-      {'id': 226, 'type': 'field', 'label': 'Audio visual', 'category': 'Arts'},
-      {
-        'id': 227,
-        'type': 'field',
-        'label': 'Bio engeenering',
-        'category': 'Science',
-      },
-      {
-        'id': 228,
-        'type': 'field',
-        'label': 'Design/Graphism',
-        'category': 'Arts',
-      },
-      {'id': 229, 'type': 'field', 'label': 'Languages', 'category': 'Culture'},
-      {'id': 230, 'type': 'field', 'label': 'Ciminal Law', 'category': 'Law'},
-      {'id': 231, 'type': 'field', 'label': 'Civil Law', 'category': 'Law'},
-      {'id': 232, 'type': 'field', 'label': 'Business Law', 'category': 'Law'},
-      {
-        'id': 233,
-        'type': 'field',
-        'label': 'International Law',
-        'category': 'Law',
-      },
-      {
-        'id': 234,
-        'type': 'field',
-        'label': 'HR/Administration',
-        'category': 'Business',
-      },
-      {
-        'id': 235,
-        'type': 'field',
-        'label': 'Politic science',
-        'category': 'Law',
-      },
-      {
-        'id': 236,
-        'type': 'field',
-        'label': 'Psychology',
-        'category': 'Science',
-      },
-      {
-        'id': 237,
-        'type': 'field',
-        'label': 'Digital marketing',
-        'category': 'Business',
-      },
-      {
-        'id': 238,
-        'type': 'field',
-        'label': 'Inudstrial engeneering',
-        'category': 'Science',
-      },
-      {
-        'id': 239,
-        'type': 'field',
-        'label': 'Electrical engeneering',
-        'category': 'Science',
-      },
-      {
-        'id': 240,
-        'type': 'field',
-        'label': 'Civil engeneering',
-        'category': 'Science',
-      },
-      {
-        'id': 241,
-        'type': 'field',
-        'label': 'Sewing',
-        'category': 'Arts and crafts',
-      },
-      {
-        'id': 242,
-        'type': 'field',
-        'label': 'Higher School Preparatory Classes',
-        'category': 'Science',
-      },
-    ];
-
-    return mockData.map((json) => FieldModel.fromJson(json)).toList();
-  }
-}
-
-class FakeOfferProvider {
+class FakeOfferProvider implements IOfferProvider {
+  @override
   /// Fake getSavedOffers API that returns mock data for local testing
   Future<List<JobOfferModel>> getSavedOffers() async {
     // Simulate network delay
@@ -818,6 +530,7 @@ class FakeOfferProvider {
   }
 
   /// Fake getPendingOffers API that returns mock data for local testing
+  @override
   Future<List<JobOfferModel>> getPendingOffers() async {
     // Simulate network delay
     await Future.delayed(const Duration(milliseconds: 500));
@@ -1465,5 +1178,655 @@ class FakeOfferProvider {
     ];
 
     return mockData.map((json) => JobOfferModel.fromJson(json)).toList();
+  }
+
+  @override
+  Future<JsonResponse> deleteSavedSearch({required int? savedSearchId}) {
+    // TODO: implement deleteSavedSearch
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<JobOfferModel>> getFeedOffers() {
+    // TODO: implement getFeedOffers
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<JobOfferModel> getJobOfferDetailByID({
+    required String? jobOfferID,
+  }) async {
+    // Simulate network delay
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    // Return mock job offer detail response
+    return JobOfferModel.fromJson({
+      'id': 10,
+      'uuid': '2261712a-908a-11ec-b60c-fa163ec78948',
+      'title': 'Full Stack Developper Intern',
+      'study_subject': '',
+      'description':
+          "Internship\n\nYou and your role at Pivot\n\nRole: Full stack Developer (we accept competences on Front or back only)\nStart date: ASAP\nFramework : Experience with a JS framework: Front (React/Redux is a plus); Technologies : Machine Learning, VueJS, Angular, React, iOS, Android; UI/UX : Figma, Wireframing, CSS\nYour team: The Foundry @Pivot – Responsible for the design and the implementation of our data products and services for our clients.\nTeam player and willingness to learn\nGood oral and written communication of technical challenges\nGood problem solving skills\nBeing comfortable with English is a must have as we are an international team\n\nAbout Pivot:\n\nPivot and Co is a decision science strategy advisory. We focus on business transformation, combining the power of Artificial Intelligence and human intuition to empower leaders and decision makers to better navigate their businesses.\n\n\nYour mission:\n\nAs Full stack developer and working with Machine Learning scientist, UI designer and Product Officer, you will assist the development of a web application for a subscription process and improve your skills in integrating Artificial Intelligence for automatic image recognition, real time scoring and API development.\n\n\nYour role will be to:\n\nDesign the User Experience and assisting the developpement of wireframes for the Front End and the Back end\nCreate and extend functionality of our products by contributing to our microservice-based platform\nDevelop clean and highly maintainable code\nShare best practices in web app development and enhance Pivot & co knowledge.\n\nYour mission beyond your day-to-day tasks\n\nIn complement with your day-to-day tasks, you'll have a dedicated mission with full responsibility of methodology and delivery on this specific mission. This mission will be agreed upon between you and your supervisor during the first week of your integration.\n\n\nGratification\n\n1300 Eur/Mois + Ticket Restau (9,5 Eur) + Navigo (50%)\nYou and your role at Pivot\n\nRole: Full stack Developer (we accept competences on Front or back only)\nStart date: ASAP\nFramework : Experience with a JS framework: Front (React/Redux is a plus); Technologies : Machine Learning, VueJS, Angular, React, iOS, Android; UI/UX : Figma, Wireframing, CSS\nYour team: The Foundry @Pivot – Responsible for the design and the implementation of our data products and services for our clients.\nTeam player and willingness to learn\nGood oral and written communication of technical challenges\nGood problem solving skills\nBeing comfortable with English is a must have as we are an international team\n\nAbout Pivot:\n\nPivot and Co is a decision science strategy advisory. We focus on business transformation, combining the power of Artificial Intelligence and human intuition to empower leaders and decision makers to better navigate their businesses.\n\n\nYour mission:\n\nAs Full stack developer and working with Machine Learning scientist, UI designer and Product Officer, you will assist the development of a web application for a subscription process and improve your skills in integrating Artificial Intelligence for automatic image recognition, real time scoring and API development.\n\n\nYour role will be to:\n\nDesign the User Experience and assisting the developpement of wireframes for the Front End and the Back end\nCreate and extend functionality of our products by contributing to our microservice-based platform\nDevelop clean and highly maintainable code\nShare best practices in web app development and enhance Pivot & co knowledge.\n\nYour mission beyond your day-to-day tasks\n\nIn complement with your day-to-day tasks, you'll have a dedicated mission with full responsibility of methodology and delivery on this specific mission. This mission will be agreed upon between you and your supervisor during the first week of your integration.\n\n\nGratification\n\n1300 Eur/Mois + Ticket Restau (9,5 Eur) + Navigo (50%)",
+      'is_draft': false,
+      'date_offer_start': '2022-02-18 00:00:00',
+      'date_offer_end': '2022-07-18 00:00:00',
+      'date_job_start': '2022-09-01 00:00:00',
+      'date_job_end': null,
+      'telecommuting': 0,
+      'shifting': 1,
+      'number_of_working_hour_per_week': 30,
+      'address_street': 'Paris, Île-de-France, France',
+      'address_city': 'Paris',
+      'address_zip': '123123',
+      'address_country': 'France',
+      'address_latitude': '0',
+      'address_longitude': '0',
+      'types': [
+        {
+          'id': 243,
+          'type': 'joboffer',
+          'label': 'Internship',
+          'category_id': 23,
+          'category': 'Job offer types',
+        },
+      ],
+      'fields': [
+        {
+          'id': 207,
+          'type': 'field',
+          'label': 'Information Technology',
+          'category_id': 15,
+          'category': 'Science',
+        },
+      ],
+      'spoken_languages': [
+        {
+          'id': 117,
+          'tag_id': 1,
+          'label': 'English',
+          'level': 1,
+          'video_url': null,
+        },
+        {
+          'id': 118,
+          'tag_id': 2,
+          'label': 'French',
+          'level': 2,
+          'video_url': null,
+        },
+        {
+          'id': 119,
+          'tag_id': 4,
+          'label': 'Dutch',
+          'level': 4,
+          'video_url': null,
+        },
+      ],
+      'skills': [
+        {
+          'id': 64,
+          'tag_id': 111,
+          'label': 'Responsability',
+          'category_id': 2,
+          'category': 'Soft skills',
+          'type': 'soft skill',
+          'level': null,
+        },
+      ],
+      'job_offer_state': {
+        'id': null,
+        'datetime_saved': null,
+        'datetime_refused': null,
+        'datetime_matched': null,
+        'datetime_enterprise_matched': null,
+        'datetime_enterprise_refused': null,
+      },
+      'enterprise': {
+        'id': 1,
+        'name': 'Orange France',
+        'enterprise_id': '380 129 866 46850',
+        'email': '',
+        'description': '',
+        'address_street': "6 place d'Alleray",
+        'address_city': 'Paris',
+        'address_zip': '75015',
+        'address_country': 'France',
+        'address_latitude': '',
+        'address_longitude': '',
+        'subsidiary_of': <String, dynamic>{},
+        'school': <String, dynamic>{},
+        'fields': [
+          {
+            'id': 214,
+            'type': 'field',
+            'label': 'IT Security',
+            'category_id': 15,
+            'category': 'Science',
+          },
+          {
+            'id': 207,
+            'type': 'field',
+            'label': 'Information Technology',
+            'category_id': 15,
+            'category': 'Science',
+          },
+          {
+            'id': 239,
+            'type': 'field',
+            'label': 'Electrical engeneering',
+            'category_id': 15,
+            'category': 'Science',
+          },
+          {
+            'id': 207,
+            'type': 'field',
+            'label': 'Information Technology',
+            'category_id': 15,
+            'category': 'Science',
+          },
+          {
+            'id': 208,
+            'type': 'field',
+            'label': 'Business management',
+            'category_id': 16,
+            'category': 'Business',
+          },
+        ],
+        'spoken_languages': [
+          {
+            'id': 3,
+            'tag_id': 1,
+            'label': 'English',
+            'level': 2,
+            'video_url': null,
+          },
+          {
+            'id': 4,
+            'tag_id': 2,
+            'label': 'French',
+            'level': 2,
+            'video_url': null,
+          },
+        ],
+        'logo_url':
+            '/uploads/images/logo/1/c89865c0-2de2-419d-bbe0-e99e20b64dc1',
+        'facebook_link': '',
+        'linkedin_link': '',
+        'whatsapp_link': '',
+        'managers': [
+          {
+            'id': 1,
+            'role': 'admin',
+            'user': {
+              'id': 2,
+              'uuid': 'cb3e0e6e-7d9a-11ec-90d6-0242ac120003',
+              'email': 'barbara.appleseed@example.com',
+              'is_activated': true,
+              'profile': {
+                'account_type': 'professional',
+                'first_name': 'Barbara',
+                'last_name': 'Appleseed',
+                'description': '',
+                'phone1_country_code': '+33',
+                'phone1': '07 87 98 07 80',
+                'phone2_country_code': '',
+                'phone2': '',
+                'birthdate': null,
+                'address_street': '',
+                'address_city': '',
+                'address_zip': '',
+                'address_country': '',
+                'address_latitude': '',
+                'address_longitude': '',
+                'picture_url': '',
+                'ui_language': 'en',
+                'settings_notifications_email': true,
+              },
+              'enterprise': {
+                'id': 1,
+                'name': 'Orange France',
+                'enterprise_id': '380 129 866 46850',
+                'email': '',
+                'description': '',
+                'address_street': "6 place d'Alleray",
+                'address_city': 'Paris',
+                'address_zip': '75015',
+                'address_country': 'France',
+                'address_latitude': '',
+                'address_longitude': '',
+                'subsidiary_of': <String, dynamic>{},
+                'school': <String, dynamic>{},
+                'fields': [
+                  {
+                    'id': 214,
+                    'type': 'field',
+                    'label': 'IT Security',
+                    'category_id': 15,
+                    'category': 'Science',
+                  },
+                  {
+                    'id': 207,
+                    'type': 'field',
+                    'label': 'Information Technology',
+                    'category_id': 15,
+                    'category': 'Science',
+                  },
+                  {
+                    'id': 239,
+                    'type': 'field',
+                    'label': 'Electrical engeneering',
+                    'category_id': 15,
+                    'category': 'Science',
+                  },
+                  {
+                    'id': 207,
+                    'type': 'field',
+                    'label': 'Information Technology',
+                    'category_id': 15,
+                    'category': 'Science',
+                  },
+                  {
+                    'id': 208,
+                    'type': 'field',
+                    'label': 'Business management',
+                    'category_id': 16,
+                    'category': 'Business',
+                  },
+                ],
+                'spoken_languages': [
+                  {
+                    'id': 3,
+                    'tag_id': 1,
+                    'label': 'English',
+                    'level': 2,
+                    'video_url': null,
+                  },
+                  {
+                    'id': 4,
+                    'tag_id': 2,
+                    'label': 'French',
+                    'level': 2,
+                    'video_url': null,
+                  },
+                ],
+                'logo_url':
+                    '/uploads/images/logo/1/c89865c0-2de2-419d-bbe0-e99e20b64dc1',
+                'facebook_link': '',
+                'linkedin_link': '',
+                'whatsapp_link': '',
+              },
+            },
+          },
+        ],
+      },
+    });
+  }
+
+  @override
+  Future<JobOfferModel> getJobOfferDetailByUUID({
+    required String? jobOfferUUID,
+  }) async {
+    // Simulate network delay
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    // Return mock job offer detail response
+    return JobOfferModel.fromJson({
+      'id': 10,
+      'uuid': '2261712a-908a-11ec-b60c-fa163ec78948',
+      'title': 'Full Stack Developper Intern',
+      'study_subject': '',
+      'description':
+          "Internship\n\nYou and your role at Pivot\n\nRole: Full stack Developer (we accept competences on Front or back only)\nStart date: ASAP\nFramework : Experience with a JS framework: Front (React/Redux is a plus); Technologies : Machine Learning, VueJS, Angular, React, iOS, Android; UI/UX : Figma, Wireframing, CSS\nYour team: The Foundry @Pivot – Responsible for the design and the implementation of our data products and services for our clients.\nTeam player and willingness to learn\nGood oral and written communication of technical challenges\nGood problem solving skills\nBeing comfortable with English is a must have as we are an international team\n\nAbout Pivot:\n\nPivot and Co is a decision science strategy advisory. We focus on business transformation, combining the power of Artificial Intelligence and human intuition to empower leaders and decision makers to better navigate their businesses.\n\n\nYour mission:\n\nAs Full stack developer and working with Machine Learning scientist, UI designer and Product Officer, you will assist the development of a web application for a subscription process and improve your skills in integrating Artificial Intelligence for automatic image recognition, real time scoring and API development.\n\n\nYour role will be to:\n\nDesign the User Experience and assisting the developpement of wireframes for the Front End and the Back end\nCreate and extend functionality of our products by contributing to our microservice-based platform\nDevelop clean and highly maintainable code\nShare best practices in web app development and enhance Pivot & co knowledge.\n\nYour mission beyond your day-to-day tasks\n\nIn complement with your day-to-day tasks, you'll have a dedicated mission with full responsibility of methodology and delivery on this specific mission. This mission will be agreed upon between you and your supervisor during the first week of your integration.\n\n\nGratification\n\n1300 Eur/Mois + Ticket Restau (9,5 Eur) + Navigo (50%)\nYou and your role at Pivot\n\nRole: Full stack Developer (we accept competences on Front or back only)\nStart date: ASAP\nFramework : Experience with a JS framework: Front (React/Redux is a plus); Technologies : Machine Learning, VueJS, Angular, React, iOS, Android; UI/UX : Figma, Wireframing, CSS\nYour team: The Foundry @Pivot – Responsible for the design and the implementation of our data products and services for our clients.\nTeam player and willingness to learn\nGood oral and written communication of technical challenges\nGood problem solving skills\nBeing comfortable with English is a must have as we are an international team\n\nAbout Pivot:\n\nPivot and Co is a decision science strategy advisory. We focus on business transformation, combining the power of Artificial Intelligence and human intuition to empower leaders and decision makers to better navigate their businesses.\n\n\nYour mission:\n\nAs Full stack developer and working with Machine Learning scientist, UI designer and Product Officer, you will assist the development of a web application for a subscription process and improve your skills in integrating Artificial Intelligence for automatic image recognition, real time scoring and API development.\n\n\nYour role will be to:\n\nDesign the User Experience and assisting the developpement of wireframes for the Front End and the Back end\nCreate and extend functionality of our products by contributing to our microservice-based platform\nDevelop clean and highly maintainable code\nShare best practices in web app development and enhance Pivot & co knowledge.\n\nYour mission beyond your day-to-day tasks\n\nIn complement with your day-to-day tasks, you'll have a dedicated mission with full responsibility of methodology and delivery on this specific mission. This mission will be agreed upon between you and your supervisor during the first week of your integration.\n\n\nGratification\n\n1300 Eur/Mois + Ticket Restau (9,5 Eur) + Navigo (50%)",
+      'is_draft': false,
+      'date_offer_start': '2022-02-18 00:00:00',
+      'date_offer_end': '2022-07-18 00:00:00',
+      'date_job_start': '2022-09-01 00:00:00',
+      'date_job_end': null,
+      'telecommuting': 0,
+      'shifting': 1,
+      'number_of_working_hour_per_week': 30,
+      'address_street': 'Paris, Île-de-France, France',
+      'address_city': 'Paris',
+      'address_zip': '123123',
+      'address_country': 'France',
+      'address_latitude': '0',
+      'address_longitude': '0',
+      'types': [
+        {
+          'id': 243,
+          'type': 'joboffer',
+          'label': 'Internship',
+          'category_id': 23,
+          'category': 'Job offer types',
+        },
+      ],
+      'fields': [
+        {
+          'id': 207,
+          'type': 'field',
+          'label': 'Information Technology',
+          'category_id': 15,
+          'category': 'Science',
+        },
+      ],
+      'spoken_languages': [
+        {
+          'id': 117,
+          'tag_id': 1,
+          'label': 'English',
+          'level': 1,
+          'video_url': null,
+        },
+        {
+          'id': 118,
+          'tag_id': 2,
+          'label': 'French',
+          'level': 2,
+          'video_url': null,
+        },
+        {
+          'id': 119,
+          'tag_id': 4,
+          'label': 'Dutch',
+          'level': 4,
+          'video_url': null,
+        },
+      ],
+      'skills': [
+        {
+          'id': 64,
+          'tag_id': 111,
+          'label': 'Responsability',
+          'category_id': 2,
+          'category': 'Soft skills',
+          'type': 'soft skill',
+          'level': null,
+        },
+      ],
+      'job_offer_state': {
+        'id': null,
+        'datetime_saved': null,
+        'datetime_refused': null,
+        'datetime_matched': null,
+        'datetime_enterprise_matched': null,
+        'datetime_enterprise_refused': null,
+      },
+      'enterprise': {
+        'id': 1,
+        'name': 'Orange France',
+        'enterprise_id': '380 129 866 46850',
+        'email': '',
+        'description': '',
+        'address_street': "6 place d'Alleray",
+        'address_city': 'Paris',
+        'address_zip': '75015',
+        'address_country': 'France',
+        'address_latitude': '',
+        'address_longitude': '',
+        'subsidiary_of': <String, dynamic>{},
+        'school': <String, dynamic>{},
+        'fields': [
+          {
+            'id': 214,
+            'type': 'field',
+            'label': 'IT Security',
+            'category_id': 15,
+            'category': 'Science',
+          },
+          {
+            'id': 207,
+            'type': 'field',
+            'label': 'Information Technology',
+            'category_id': 15,
+            'category': 'Science',
+          },
+          {
+            'id': 239,
+            'type': 'field',
+            'label': 'Electrical engeneering',
+            'category_id': 15,
+            'category': 'Science',
+          },
+          {
+            'id': 207,
+            'type': 'field',
+            'label': 'Information Technology',
+            'category_id': 15,
+            'category': 'Science',
+          },
+          {
+            'id': 208,
+            'type': 'field',
+            'label': 'Business management',
+            'category_id': 16,
+            'category': 'Business',
+          },
+        ],
+        'spoken_languages': [
+          {
+            'id': 3,
+            'tag_id': 1,
+            'label': 'English',
+            'level': 2,
+            'video_url': null,
+          },
+          {
+            'id': 4,
+            'tag_id': 2,
+            'label': 'French',
+            'level': 2,
+            'video_url': null,
+          },
+        ],
+        'logo_url':
+            '/uploads/images/logo/1/c89865c0-2de2-419d-bbe0-e99e20b64dc1',
+        'facebook_link': '',
+        'linkedin_link': '',
+        'whatsapp_link': '',
+        'managers': [
+          {
+            'id': 1,
+            'role': 'admin',
+            'user': {
+              'id': 2,
+              'uuid': 'cb3e0e6e-7d9a-11ec-90d6-0242ac120003',
+              'email': 'barbara.appleseed@example.com',
+              'is_activated': true,
+              'profile': {
+                'account_type': 'professional',
+                'first_name': 'Barbara',
+                'last_name': 'Appleseed',
+                'description': '',
+                'phone1_country_code': '+33',
+                'phone1': '07 87 98 07 80',
+                'phone2_country_code': '',
+                'phone2': '',
+                'birthdate': null,
+                'address_street': '',
+                'address_city': '',
+                'address_zip': '',
+                'address_country': '',
+                'address_latitude': '',
+                'address_longitude': '',
+                'picture_url': '',
+                'ui_language': 'en',
+                'settings_notifications_email': true,
+              },
+              'enterprise': {
+                'id': 1,
+                'name': 'Orange France',
+                'enterprise_id': '380 129 866 46850',
+                'email': '',
+                'description': '',
+                'address_street': "6 place d'Alleray",
+                'address_city': 'Paris',
+                'address_zip': '75015',
+                'address_country': 'France',
+                'address_latitude': '',
+                'address_longitude': '',
+                'subsidiary_of': <String, dynamic>{},
+                'school': <String, dynamic>{},
+                'fields': [
+                  {
+                    'id': 214,
+                    'type': 'field',
+                    'label': 'IT Security',
+                    'category_id': 15,
+                    'category': 'Science',
+                  },
+                  {
+                    'id': 207,
+                    'type': 'field',
+                    'label': 'Information Technology',
+                    'category_id': 15,
+                    'category': 'Science',
+                  },
+                  {
+                    'id': 239,
+                    'type': 'field',
+                    'label': 'Electrical engeneering',
+                    'category_id': 15,
+                    'category': 'Science',
+                  },
+                  {
+                    'id': 207,
+                    'type': 'field',
+                    'label': 'Information Technology',
+                    'category_id': 15,
+                    'category': 'Science',
+                  },
+                  {
+                    'id': 208,
+                    'type': 'field',
+                    'label': 'Business management',
+                    'category_id': 16,
+                    'category': 'Business',
+                  },
+                ],
+                'spoken_languages': [
+                  {
+                    'id': 3,
+                    'tag_id': 1,
+                    'label': 'English',
+                    'level': 2,
+                    'video_url': null,
+                  },
+                  {
+                    'id': 4,
+                    'tag_id': 2,
+                    'label': 'French',
+                    'level': 2,
+                    'video_url': null,
+                  },
+                ],
+                'logo_url':
+                    '/uploads/images/logo/1/c89865c0-2de2-419d-bbe0-e99e20b64dc1',
+                'facebook_link': '',
+                'linkedin_link': '',
+                'whatsapp_link': '',
+              },
+            },
+          },
+        ],
+      },
+    });
+  }
+
+  @override
+  Future<List<JobOfferModel>> getMatchedOffers() {
+    // TODO: implement getMatchedOffers
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<JobOfferModel>> getRejectedOffers() {
+    // TODO: implement getRejectedOffers
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<SearchModel>> getSavedSearchList() {
+    // TODO: implement getSavedSearchList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<SearchPreferencesModel> getSearchPreferences() {
+    // TODO: implement getSearchPreferences
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<JobOfferModel> postApplyOffer({required int? jobOfferId}) {
+    // TODO: implement postApplyOffer
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<SearchModel> postCreateSavedSearch({
+    JobOfferModel? jobOfferForSearch,
+  }) {
+    // TODO: implement postCreateSavedSearch
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<JobOfferModel> postHideOffer({required int? jobOfferId}) {
+    // TODO: implement postHideOffer
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<JsonResponse> postJobOfferViewCount({required String? jobOfferUUID}) {
+    // TODO: implement postJobOfferViewCount
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<JobOfferModel> postSaveOffer({required int? jobOfferId}) {
+    // TODO: implement postSaveOffer
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<JobOfferModel>> postSearchOffer({
+    int? pageNumber = 1,
+    JobOfferModel? jobOfferForSearch,
+  }) {
+    // TODO: implement postSearchOffer
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<PaginationModel> postSearchOfferWithPagination({
+    int? pageNumber = 1,
+    JobOfferModel? jobOfferForSearch,
+  }) {
+    // TODO: implement postSearchOfferWithPagination
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<JobOfferModel> postUnApplyOffer({required int? jobOfferId}) {
+    // TODO: implement postUnApplyOffer
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<JobOfferModel> postUnHideOffer({required int? jobOfferId}) {
+    // TODO: implement postUnHideOffer
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<JobOfferModel> postUnSaveOffer({required int? jobOfferId}) {
+    // TODO: implement postUnSaveOffer
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<SearchModel> putEditSavedSearch({JobOfferModel? jobOfferForSearch}) {
+    // TODO: implement putEditSavedSearch
+    throw UnimplementedError();
   }
 }

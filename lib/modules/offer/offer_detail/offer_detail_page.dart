@@ -395,27 +395,28 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                       //===== Remuneration Component =====//
 
                                       ///===== Remuneration Component =====//
-                                      if (controller
-                                              .jobOfferDetail!
-                                              .value
-                                              .drivingLicence! ==
-                                          1)
-                                        OutlineContainerWidget(
-                                          title: 'required'.tr,
-                                          titleColor: ColorsManager.primaryBlue,
-                                          childWidget: CustomBoxWidget(
-                                            child: CustomTextWidget(
-                                              textAlign: TextAlign.center,
-                                              text: 'drivingLicense'.tr,
-                                              fontWeight:
-                                                  FontWeightManager.regular,
-                                              fontSize: AppSize.s12,
-                                              // marginBottom: AppSize.s10,
-                                            ),
+                                      // if (controller
+                                      //             .jobOfferDetail!
+                                      //             .value
+                                      //             .drivingLicence! ==
+                                      //         1 )
+                                      OutlineContainerWidget(
+                                        title: 'required'.tr,
+                                        titleColor: ColorsManager.primaryBlue,
+                                        childWidget: CustomBoxWidget(
+                                          child: CustomTextWidget(
+                                            textAlign: TextAlign.center,
+                                            text: 'drivingLicense'.tr,
+                                            fontWeight:
+                                                FontWeightManager.regular,
+                                            fontSize: AppSize.s12,
+                                            // marginBottom: AppSize.s10,
                                           ),
-                                        )
-                                      else
-                                        Container(),
+                                        ),
+                                      ),
+                                      // else
+                                      // Container()
+
                                       //===== Remuneration Component =====//
 
                                       ///===== Work Availabilities Component =====//

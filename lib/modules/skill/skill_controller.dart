@@ -46,7 +46,11 @@ class SkillController extends GetxController {
   Future<List<FieldModel>> getHardSkillListFromProvider({
     bool? refresh = false,
   }) async {
-    hardSkillListFromAPI.addAll(await tagProvider.getOnlyHardSkills());
+    hardSkillListFromAPI.addAll(
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getOnlyHardSkills(),
+      await FakeTagProvider().getOnlyHardSkills(),
+    );
     hardSkillListForSelection.addAll(hardSkillListFromAPI);
     return hardSkillListFromAPI;
   }
@@ -54,7 +58,11 @@ class SkillController extends GetxController {
   Future<List<FieldModel>> getSoftSkillListFromProvider({
     bool? refresh = false,
   }) async {
-    softSkillListFromAPI.addAll(await tagProvider.getOnlySoftSkills());
+    softSkillListFromAPI.addAll(
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getOnlySoftSkills(),
+      await FakeTagProvider().getOnlySoftSkills(),
+    );
     softSkillListForSelection.addAll(softSkillListFromAPI);
     return softSkillListFromAPI;
   }
@@ -119,8 +127,8 @@ class SkillController extends GetxController {
       responseData = await studentProvider.postStudentSkill(
         skillCategory:
             selectedSkillCategory.value.label == SkillCategoryStrings.hardSkill
-                ? 'hardskills'
-                : 'softskills',
+            ? 'hardskills'
+            : 'softskills',
         skillData: skillData,
       );
     } else if (operation == Keys.editOperation) {
@@ -131,9 +139,7 @@ class SkillController extends GetxController {
       );
     } else {
       // debugPrint('=====deleteOperation=====');
-      responseData = await studentProvider.deleteStudentSkill(
-        skillId: skillId,
-      );
+      responseData = await studentProvider.deleteStudentSkill(skillId: skillId);
     }
     if (responseData.success!) {
       // debugPrint('=====success=====');
@@ -144,11 +150,12 @@ class SkillController extends GetxController {
       customSnackbar(
         msgTitle: 'success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'successfullyAdded'.tr //'profile.skillAddSuccessMsg'.tr
+            ? 'successfullyAdded'
+                  .tr //'profile.skillAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'successfullyUpdated'.tr //'profile.skillEditSuccessMsg'.tr
-                : 'successfullyDeleted'
-                    .tr, //'profile.skillDeleteSuccessMsg'.tr,
+            ? 'successfullyUpdated'
+                  .tr //'profile.skillEditSuccessMsg'.tr
+            : 'successfullyDeleted'.tr, //'profile.skillDeleteSuccessMsg'.tr,
         // 'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Skill Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

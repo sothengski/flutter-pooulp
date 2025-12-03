@@ -21,13 +21,22 @@ class LanguageUsageController extends GetxController {
 
   Rx<FieldModel> selectedMotherTongueLanguage = FieldModel().obs;
 
-  FieldModel beginnerLevel =
-      FieldModel(id: 1, label: LevelStrings.beginner, level: 1);
+  FieldModel beginnerLevel = FieldModel(
+    id: 1,
+    label: LevelStrings.beginner,
+    level: 1,
+  );
   // Rx<FieldModel> selectedProficiency = FieldModel(label: '').obs;
-  Rx<FieldModel> selectedSpokenProficiency =
-      FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
-  Rx<FieldModel> selectedWrittenProficiency =
-      FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
+  Rx<FieldModel> selectedSpokenProficiency = FieldModel(
+    id: 1,
+    label: LevelStrings.beginner,
+    level: 1,
+  ).obs;
+  Rx<FieldModel> selectedWrittenProficiency = FieldModel(
+    id: 1,
+    label: LevelStrings.beginner,
+    level: 1,
+  ).obs;
 
   RxList<FieldModel> selectedlanguageTypes = <FieldModel>[].obs;
 
@@ -82,7 +91,11 @@ class LanguageUsageController extends GetxController {
   Future<List<FieldModel>> getLanguagesListResponseProvider({
     bool? refresh = false,
   }) async {
-    allLanguageListFromAPI.addAll(await tagProvider.getLanguages());
+    allLanguageListFromAPI.addAll(
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getLanguages(),
+      await FakeTagProvider().getLanguages(),
+    );
     languageListForSelection.addAll(allLanguageListFromAPI);
     return allLanguageListFromAPI;
   }
@@ -186,10 +199,12 @@ class LanguageUsageController extends GetxController {
       customSnackbar(
         msgTitle: 'success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'successfullyAdded'.tr //'profile.langAddSuccessMsg'.tr
+            ? 'successfullyAdded'
+                  .tr //'profile.langAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'successfullyUpdated'.tr //'profile.langEditSuccessMsg'.tr
-                : 'successfullyDeleted'.tr, //'profile.langDeleteSuccessMsg'.tr,
+            ? 'successfullyUpdated'
+                  .tr //'profile.langEditSuccessMsg'.tr
+            : 'successfullyDeleted'.tr, //'profile.langDeleteSuccessMsg'.tr,
         //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Language Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

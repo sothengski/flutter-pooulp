@@ -541,7 +541,8 @@ class OfferFeedController extends GetxController
   Future<List<FieldModel>> getLanguagesListResponseProvider({
     bool? refresh = false,
   }) async {
-    languageListForSearch.addAll(await tagProvider.getLanguages());
+    /// TODO: remove this function after offline testing
+    languageListForSearch.addAll(await FakeTagProvider().getLanguages());
     // debugPrint(
     //   'languageListForSearch:: ${languageListForSearch.map((element) => '${element.label}\n')}',
     // );
@@ -552,7 +553,9 @@ class OfferFeedController extends GetxController
     bool? refresh = false,
   }) async {
     availabilitiesTagListForSearch.addAll(
-      await tagProvider.getAvailabilitiesTags(),
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getAvailabilitiesTags(),
+      await FakeTagProvider().getAvailabilitiesTags(),
     );
     // debugPrint(
     //   'availabilitiesTagListForSearch:: ${availabilitiesTagListForSearch.map((element) => '${element.label}\n')}',
@@ -564,7 +567,10 @@ class OfferFeedController extends GetxController
     bool? refresh = false,
   }) async {
     internshipTypeTagListForSearch.addAll(
-      await tagProvider.getInternshipTypeTags(),
+      [],
+
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getInternshipTypeTags(),
     );
     return internshipTypeTagListForSearch;
   }
@@ -573,7 +579,10 @@ class OfferFeedController extends GetxController
     bool? refresh = false,
   }) async {
     internshipPeriodTagListForSearch.addAll(
-      await tagProvider.getInternshipPeriodTags(),
+      [],
+
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getInternshipPeriodTags(),
     );
     return internshipPeriodTagListForSearch;
   }

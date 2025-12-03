@@ -80,7 +80,10 @@ class ProfileController extends GetxController {
     bool? refresh = false,
   }) async {
     if (homeController.userToken!.accountType == 'student') {
-      studentInfoRepsonse.value = await userInfoProvider
+      /// TODO: remove this function after offline testing
+      // studentInfoRepsonse.value = await userInfoProvider
+      //     .getStudentProfileInfo();
+      studentInfoRepsonse.value = await FakeUserInfoProvider()
           .getStudentProfileInfo();
       return studentInfoRepsonse;
     }

@@ -85,145 +85,115 @@ class StudentProfileModel {
         completePercent += fullPercentage / fieldCounter;
       }
     }
-    return double.tryParse(
-      completePercent.toStringAsFixed(2),
-    );
+    return double.tryParse(completePercent.toStringAsFixed(2));
   }
 
   int get radiusFromMeterToKM => radius == null ? 0 : radius! ~/ 1000;
 
   factory StudentProfileModel.fromRawJson(String str) =>
-      StudentProfileModel.fromJson(
-        json.decode(str) as Map<String, dynamic>,
-      );
+      StudentProfileModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
   String toRawJson() => json.encode(toJson());
 
-  factory StudentProfileModel.fromJson(Map<String, dynamic> json) =>
-      StudentProfileModel(
-        telecommuting: json['telecommuting'] as bool?,
-        shifting: json['shifting'] as bool?,
-        radius: json['radius'] as int?,
-        drivingLicense: json['driving_license'] as bool?,
-        hasAutomobile: json['has_automobile'] as bool?,
-        facebookLink: json['facebook_link'] as String?,
-        linkedinLink: json['linkedin_link'] as String?,
-        whatsappLink: json['whatsapp_link'] as String?,
-        youtubeLink: json['youtube_link'] as String?,
-        gender: json['gender'] as String?,
-        skills: json['skills'] != null || json['skills'] != []
-            ? (json['skills'] as List)
-                .map(
-                  (i) => SkillModel.fromJson(
-                    i as Map<String, dynamic>,
-                  ),
-                )
-                .toList()
-            : [],
-        spokenLanguages:
-            json['spoken_languages'] != null || json['spoken_languages'] != []
-                ? (json['spoken_languages'] as List)
-                    .map(
-                      (i) => FieldModel.fromJson(
-                        i as Map<String, dynamic>,
-                      ),
-                    )
-                    .toList()
-                : [],
-        educations: json['educations'] != null || json['educations'] != []
-            ? (json['educations'] as List)
-                .map(
-                  (i) => EducationModel.fromJson(
-                    i as Map<String, dynamic>,
-                  ),
-                )
-                .toList()
-            : [],
-        experiences: json['experiences'] != null || json['experiences'] != []
-            ? (json['experiences'] as List)
-                .map(
-                  (i) => ExperienceModel.fromJson(
-                    i as Map<String, dynamic>,
-                  ),
-                )
-                .toList()
-            : [],
-        achievements: json['achievements'] != null || json['achievements'] != []
-            ? (json['achievements'] as List)
-                .map(
-                  (i) => AchievementModel.fromJson(
-                    i as Map<String, dynamic>,
-                  ),
-                )
-                .toList()
-            : [],
-        certificates: json['certificates'] == null || json['certificates'] == []
-            ? []
-            : (json['certificates'] as List)
-                .map(
-                  (i) => CertificateModel.fromJson(
-                    i as Map<String, dynamic>,
-                  ),
-                )
-                .toList(),
-        periods: json['periods'] != null || json['periods'] != []
-            ? (json['periods'] as List)
-                .map(
-                  (i) => PeriodModel.fromJson(
-                    i as Map<String, dynamic>,
-                  ),
-                )
-                .toList()
-            : [],
-        internshipPeriods: json['internship_periods'] != null ||
-                json['internship_periods'] != []
-            ? (json['internship_periods'] as List)
-                .map(
-                  (i) => FieldModel.fromJson(
-                    i as Map<String, dynamic>,
-                  ),
-                )
-                .toList()
-            : [],
-      );
+  factory StudentProfileModel.fromJson(
+    Map<String, dynamic> json,
+  ) => StudentProfileModel(
+    telecommuting: json['telecommuting'] as bool?,
+    shifting: json['shifting'] as bool?,
+    radius: json['radius'] as int?,
+    drivingLicense: json['driving_license'] as bool?,
+    hasAutomobile: json['has_automobile'] as bool?,
+    facebookLink: json['facebook_link'] as String?,
+    linkedinLink: json['linkedin_link'] as String?,
+    whatsappLink: json['whatsapp_link'] as String?,
+    youtubeLink: json['youtube_link'] as String?,
+    gender: json['gender'] as String?,
+    skills: json['skills'] != null || json['skills'] != []
+        ? (json['skills'] as List)
+              .map((i) => SkillModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+        : [],
+    spokenLanguages:
+        json['spoken_languages'] != null || json['spoken_languages'] != []
+        ? (json['spoken_languages'] as List)
+              .map((i) => FieldModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+        : [],
+    educations: json['educations'] != null || json['educations'] != []
+        ? (json['educations'] as List)
+              .map((i) => EducationModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+        : [],
+    experiences: json['experiences'] != null || json['experiences'] != []
+        ? (json['experiences'] as List)
+              .map((i) => ExperienceModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+        : [],
+    achievements: json['achievements'] != null || json['achievements'] != []
+        ? (json['achievements'] as List)
+              .map((i) => AchievementModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+        : [],
+    certificates: json['certificates'] == null || json['certificates'] == []
+        ? []
+        : (json['certificates'] as List)
+              .map((i) => CertificateModel.fromJson(i as Map<String, dynamic>))
+              .toList(),
+    periods: json['periods'] != null || json['periods'] != []
+        ? (json['periods'] as List)
+              .map((i) => PeriodModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+        : [],
+    internshipPeriods:
+        // json['internship_periods'] != null ||
+        //         json['internship_periods'] != []
+        //     ? (json['internship_periods'] as List)
+        //         .map(
+        //           (i) => FieldModel.fromJson(
+        //             i as Map<String, dynamic>,
+        //           ),
+        //         )
+        //         .toList()
+        //     :
+        [],
+  );
 
   Map<String, dynamic> toJson() => {
-        'telecommuting': telecommuting,
-        'shifting': shifting,
-        'radius': radius! * 1000,
-        'driving_license': drivingLicense,
-        'has_automobile': hasAutomobile,
-        'facebook_link': facebookLink,
-        'linkedin_link': linkedinLink,
-        'whatsapp_link': whatsappLink,
-        'youtube_link': youtubeLink,
-        'gender': gender,
-        'skills': skills == null || skills == []
-            ? null
-            : List<dynamic>.from(skills!.map((x) => x.toJson())),
-        'spoken_languages': spokenLanguages == null || spokenLanguages == []
-            ? null
-            : List<dynamic>.from(spokenLanguages!.map((x) => x.toJson())),
-        'educations': educations == null || educations == []
-            ? null
-            : List<dynamic>.from(educations!.map((x) => x.toJson())),
-        'experiences': experiences == null || experiences == []
-            ? null
-            : List<dynamic>.from(experiences!.map((x) => x.toJson())),
-        'achievements': achievements == null || achievements == []
-            ? null
-            : List<dynamic>.from(achievements!.map((x) => x.toJson())),
-        'certificates': certificates == null || certificates == []
-            ? null
-            : List<dynamic>.from(certificates!.map((x) => x.toJson())),
-        'periods': periods == null || periods == []
-            ? null
-            : List<dynamic>.from(periods!.map((x) => x.toJson())),
-        'internship_periods':
-            internshipPeriods == null || internshipPeriods == []
-                ? null
-                : List<dynamic>.from(internshipPeriods!.map((x) => x.id)),
-      }..removeWhere((_, v) => v == null);
+    'telecommuting': telecommuting,
+    'shifting': shifting,
+    'radius': radius! * 1000,
+    'driving_license': drivingLicense,
+    'has_automobile': hasAutomobile,
+    'facebook_link': facebookLink,
+    'linkedin_link': linkedinLink,
+    'whatsapp_link': whatsappLink,
+    'youtube_link': youtubeLink,
+    'gender': gender,
+    'skills': skills == null || skills == []
+        ? null
+        : List<dynamic>.from(skills!.map((x) => x.toJson())),
+    'spoken_languages': spokenLanguages == null || spokenLanguages == []
+        ? null
+        : List<dynamic>.from(spokenLanguages!.map((x) => x.toJson())),
+    'educations': educations == null || educations == []
+        ? null
+        : List<dynamic>.from(educations!.map((x) => x.toJson())),
+    'experiences': experiences == null || experiences == []
+        ? null
+        : List<dynamic>.from(experiences!.map((x) => x.toJson())),
+    'achievements': achievements == null || achievements == []
+        ? null
+        : List<dynamic>.from(achievements!.map((x) => x.toJson())),
+    'certificates': certificates == null || certificates == []
+        ? null
+        : List<dynamic>.from(certificates!.map((x) => x.toJson())),
+    'periods': periods == null || periods == []
+        ? null
+        : List<dynamic>.from(periods!.map((x) => x.toJson())),
+    'internship_periods': internshipPeriods == null || internshipPeriods == []
+        ? null
+        : List<dynamic>.from(internshipPeriods!.map((x) => x.id)),
+  }..removeWhere((_, v) => v == null);
 
   @override
   String toString() {

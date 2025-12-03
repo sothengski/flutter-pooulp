@@ -6,7 +6,7 @@ import '../offer/offer.dart';
 import 'feed.dart';
 
 class FeedPage extends GetView<FeedController> {
-  const FeedPage({Key? key}) : super(key: key);
+  const FeedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +47,12 @@ class FeedPage extends GetView<FeedController> {
                     Expanded(
                       flex: 50,
                       child: Obx(
-                        () => controller.profileController.userInfoRepsonse
-                                    .value.profile ==
+                        () =>
+                            controller
+                                    .profileController
+                                    .userInfoRepsonse
+                                    .value
+                                    .profile ==
                                 null
                             ? Container(
                                 margin: const EdgeInsets.symmetric(
@@ -59,8 +63,9 @@ class FeedPage extends GetView<FeedController> {
                                   width: 120,
                                   height: 1,
                                   shapeBorder: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(AppSize.s8),
+                                    borderRadius: BorderRadius.circular(
+                                      AppSize.s8,
+                                    ),
                                   ),
                                 ),
                               )
@@ -138,14 +143,8 @@ class FeedPage extends GetView<FeedController> {
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
-                              flex: 9,
-                              child: OfferTypesListComponent(),
-                            ),
-                            Expanded(
-                              flex: 90,
-                              child: FeedListComponent(),
-                            ),
+                            Expanded(flex: 9, child: OfferTypesListComponent()),
+                            Expanded(flex: 90, child: FeedListComponent()),
                           ],
                         )
                       : Center(
@@ -159,9 +158,7 @@ class FeedPage extends GetView<FeedController> {
                           ),
                         ),
                 ),
-                onLoading: const Center(
-                  child: ItemListShimmerLoadingWidget(),
-                ),
+                onLoading: const Center(child: ItemListShimmerLoadingWidget()),
                 onError: (error) => Center(
                   child: StateHandlerWidget(
                     imgPath: AssetsManager.emptyDataIcon,

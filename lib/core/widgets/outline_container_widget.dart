@@ -29,8 +29,8 @@ class OutlineContainerWidget extends StatelessWidget {
     this.isDivider = true,
     this.heightDivider = AppSize.s8,
     this.thicknessDivider = AppSize.s0_5,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +55,11 @@ class OutlineContainerWidget extends StatelessWidget {
               marginRight: titleMarginRight,
             ),
           Padding(
-            padding: const EdgeInsets.only(
-              bottom: AppSize.s8,
-            ),
+            padding: const EdgeInsets.only(bottom: AppSize.s8),
             child: childWidget,
           ),
           if (isDivider == true)
-            Divider(
-              height: heightDivider,
-              thickness: thicknessDivider,
-            )
+            Divider(height: heightDivider, thickness: thicknessDivider)
           else
             Container(),
         ],

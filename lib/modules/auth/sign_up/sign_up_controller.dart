@@ -197,7 +197,7 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
                 // routePath: Routes.homeRoute,
                 type: AlertDialogType.success,
                 buttonLabel: 'continue'.tr, //'core.continue'.tr,
-                onPressed: () async {
+                onPressed: () {
                   urlLauncherUtils(
                     thingToLaunch: UrlWebsiteStrings.loginPage,
                     // inApp: true,

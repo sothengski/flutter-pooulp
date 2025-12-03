@@ -95,11 +95,11 @@ class OfferFeedListComponent extends StatelessWidget {
                             .feedListRepsonse[index].rejectedState,
                         oneTimePress: feedController
                             .feedListRepsonse[index].rejectedState,
-                        onPressed: () async {
+                        onPressed: () {
                           Get.dialog(
                             ConfirmationDialogWidget(
                               dialogBody: 'notInterestedAlert'.tr,
-                              onPressed: () async {
+                              onPressed: () {
                                 feedController.onClickActionButtonJobOfferFeed(
                                   actionType: OfferStrings.hideAction,
                                   jobOfferId:
@@ -189,11 +189,11 @@ class OfferFeedListComponent extends StatelessWidget {
                                 .feedListRepsonse[index].rejectedState,
                             oneTimePress: feedController
                                 .feedListRepsonse[index].rejectedState,
-                            onPressed: () async {
+                            onPressed: () {
                               Get.dialog(
                                 ConfirmationDialogWidget(
                                   dialogBody: 'notInterestedAlert'.tr,
-                                  onPressed: () async {
+                                  onPressed: () {
                                     feedController
                                         .onClickActionButtonJobOfferFeed(
                                       actionType: OfferStrings.hideAction,

@@ -36,8 +36,8 @@ class CustomBoxWidget extends StatelessWidget {
     this.isCircle = false,
     this.borderWidth = 0.0,
     this.boxShadow,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   const CustomBoxWidget.chatAvatarDefault({
     this.child,
@@ -55,8 +55,8 @@ class CustomBoxWidget extends StatelessWidget {
     this.isCircle = true,
     this.borderWidth = 0.0,
     this.boxShadow,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,8 @@ class CustomBoxWidget extends StatelessWidget {
           left: leftMargin!,
           right: rightMargin!,
         ),
-        child: child ??
+        child:
+            child ??
             DecoratedBox(
               decoration: BoxDecoration(
                 shape: isCircle! ? BoxShape.circle : BoxShape.rectangle,

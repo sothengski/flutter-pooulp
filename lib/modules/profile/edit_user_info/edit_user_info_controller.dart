@@ -28,7 +28,7 @@ class EditUserInformationController extends GetxController {
 
   String? sessionToken = '';
 
-//save the result of gallery file
+  //save the result of gallery file
   Rx<String> selectedImagePath = ''.obs;
   Rx<String> selectedImageSize = ''.obs;
 
@@ -43,7 +43,7 @@ class EditUserInformationController extends GetxController {
   // late File galleryFile;
   // String imagePath = '';
   // final imagePicker = ImagePicker();
-//save the result of camera file
+  //save the result of camera file
   // late File cameraFile;
 
   TextEditingController firstNameCtrl = TextEditingController();
@@ -134,8 +134,9 @@ class EditUserInformationController extends GetxController {
   void uuidTokenGenerator() => sessionToken = UuidGenerator().uuidV4();
 
   void initPhoneNumberCountryCode({String? phoneNumberCode}) {
-    selectedCountryPhoneNumber.value = countryList
-        .firstWhere((element) => element.phoneCode == phoneNumberCode);
+    selectedCountryPhoneNumber.value = countryList.firstWhere(
+      (element) => element.phoneCode == phoneNumberCode,
+    );
   }
 
   CountryModel selectedCountryPhoneNumberOnClick(CountryModel selectedItem) {
@@ -160,9 +161,7 @@ class EditUserInformationController extends GetxController {
   bool saveBtnBoolSwitching({bool? value}) =>
       isSubmitBtnProcessing.value = value!;
 
-  Future<void> getImage({
-    bool? isCamera = false,
-  }) async {
+  Future<void> getImage({bool? isCamera = false}) async {
     final pickedFile = await ImagePicker().pickImage(
       source: isCamera == true ? ImageSource.camera : ImageSource.gallery,
     );
@@ -182,7 +181,8 @@ class EditUserInformationController extends GetxController {
         maxHeight: 512,
         // compressFormat: ImageCompressFormat.jpg,
         aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-        cropStyle: CropStyle.circle,
+        // cropStyle: CropStyle.circle,
+
         // androidUiSettings: const AndroidUiSettings(
         //   toolbarWidgetColor: ColorsManager.white,
         //   toolbarColor: ColorsManager.primary,
@@ -200,9 +200,7 @@ class EditUserInformationController extends GetxController {
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false,
           ),
-          IOSUiSettings(
-            title: 'Crop Image',
-          ),
+          IOSUiSettings(title: 'Crop Image'),
         ],
       );
       if (cropImageFile != null) {
@@ -243,29 +241,23 @@ class EditUserInformationController extends GetxController {
     await userInfoProvider
         .uploadImage(filepath: file!.path, fileName: fileName)
         .then((resp) {
-      if (resp.pictureUrl!.isNotEmpty) {
-        profileController.userProfileInfo.value = resp;
-        customSnackbar(
-          msgTitle: 'Success',
-          msgContent: 'File Uploaded',
-        );
-      } else {
-        customSnackbar(
-          msgTitle: 'Failed',
-          msgContent: "Can't Uploaded your Image.",
-        );
-      }
-    });
+          if (resp.pictureUrl!.isNotEmpty) {
+            profileController.userProfileInfo.value = resp;
+            customSnackbar(msgTitle: 'Success', msgContent: 'File Uploaded');
+          } else {
+            customSnackbar(
+              msgTitle: 'Failed',
+              msgContent: "Can't Uploaded your Image.",
+            );
+          }
+        });
     uploadImgBoolSwitching();
   }
 
   String? isPhoneNumberValidate({bool? isPhoneNumberField = false}) {
     if (selectedCountryPhoneNumber.value.phoneCode == null ||
         phoneNumberCtrl.text.isEmpty ||
-        Validator().isPhoneNumberValidate(
-              phoneNumberCtrl.text,
-            ) ==
-            false) {
+        Validator().isPhoneNumberValidate(phoneNumberCtrl.text) == false) {
       if (selectedCountryPhoneNumber.value.phoneCode == null &&
           phoneNumberCtrl.text.isEmpty) {
         return isPhoneNumberField == false
@@ -273,10 +265,7 @@ class EditUserInformationController extends GetxController {
             : 'This field is required.';
       }
       if (selectedCountryPhoneNumber.value.phoneCode == null &&
-          Validator().isPhoneNumberValidate(
-                phoneNumberCtrl.text,
-              ) ==
-              false) {
+          Validator().isPhoneNumberValidate(phoneNumberCtrl.text) == false) {
         return isPhoneNumberField == false
             ? 'This field is required.'
             : '${Validator().phoneNumberValidator(phoneNumberCtrl.text)}';
@@ -318,10 +307,10 @@ class EditUserInformationController extends GetxController {
         zipCodeCtrl.text = c.longName!;
       }
     }
-    addressLat =
-        googlePlaceDetail.value.result!.geometry!.location!.lat!.toString();
-    addressLng =
-        googlePlaceDetail.value.result!.geometry!.location!.lng!.toString();
+    addressLat = googlePlaceDetail.value.result!.geometry!.location!.lat!
+        .toString();
+    addressLng = googlePlaceDetail.value.result!.geometry!.location!.lng!
+        .toString();
     // countryCtrl.text = googlePlaceDetail.value.result!.googlePlaceCountry;
     addressCtrl.text = googlePlaceDetail.value.result!.formattedAddress!;
     return googlePlaceDetail;
@@ -334,8 +323,8 @@ class EditUserInformationController extends GetxController {
       final String lastName = lastNameCtrl.text;
       final String selectGender = selectedGender.value;
       // final String selectBD = selectedBirthday.value;
-      final String phoneNumberCode =
-          selectedCountryPhoneNumber.value.phoneCode.toString();
+      final String phoneNumberCode = selectedCountryPhoneNumber.value.phoneCode
+          .toString();
       final String phoneNum = phoneNumberCtrl.text;
       final String linkedInProfile = linkedInProfileCtrl.text;
       final String videoLink = videoLinkCtrl.text;
@@ -369,8 +358,8 @@ class EditUserInformationController extends GetxController {
             profileController.userInfoRepsonse.value.profile!.uiLanguage,
       );
 
-      final StudentProfileModel studentProfileInfoToBeUpdate =
-          StudentProfileModel(
+      final StudentProfileModel
+      studentProfileInfoToBeUpdate = StudentProfileModel(
         drivingLicense: drivingLicenseRxBool.value,
         shifting: profileController.studentInfoRepsonse.value.shifting,
         radius: profileController.studentInfoRepsonse.value.radius! ~/ 1000,
@@ -386,18 +375,16 @@ class EditUserInformationController extends GetxController {
       );
 
       userInfoProvider
-          .putUpdateStudentProfileInfo(
-        data: studentProfileInfoToBeUpdate,
-      )
+          .putUpdateStudentProfileInfo(data: studentProfileInfoToBeUpdate)
           .then((StudentProfileModel value) {
-        profileController.studentInfoRepsonse.value = value;
-        // customSnackbar(
-        //   msgTitle: 'Success',
-        //   msgContent: 'Student Profile Information Updated',
-        //   bgColor: ColorsManager.green,
-        // );
-        // saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
-      });
+            profileController.studentInfoRepsonse.value = value;
+            // customSnackbar(
+            //   msgTitle: 'Success',
+            //   msgContent: 'Student Profile Information Updated',
+            //   bgColor: ColorsManager.green,
+            // );
+            // saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
+          });
       // } else {
       // customSnackbar(
       //   msgTitle: 'Required Fields',
@@ -407,18 +394,16 @@ class EditUserInformationController extends GetxController {
       // }
 
       userInfoProvider
-          .putUpdateUserProfileInfo(
-        data: profileInfoToBeUpdate,
-      )
+          .putUpdateUserProfileInfo(data: profileInfoToBeUpdate)
           .then((ProfileModel value) {
-        profileController.userProfileInfo.value = value;
-        customSnackbar(
-          msgTitle: 'success'.tr,
-          msgContent: 'successfullyUpdated'.tr,
-          bgColor: ColorsManager.green,
-        );
-        saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
-      });
+            profileController.userProfileInfo.value = value;
+            customSnackbar(
+              msgTitle: 'success'.tr,
+              msgContent: 'successfullyUpdated'.tr,
+              bgColor: ColorsManager.green,
+            );
+            saveBtnBoolSwitching(value: !isSubmitBtnProcessing.value);
+          });
     } else {
       customSnackbar(
         msgTitle: 'requireFields'.tr,

@@ -6,17 +6,13 @@ import '../../../data/data.dart';
 import '../../modules.dart';
 
 class EditUserInformationPage extends GetView<EditUserInformationController> {
-  const EditUserInformationPage({
-    Key? key,
-  }) : super(key: key);
+  const EditUserInformationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: ColorsManager.grey100,
-      appBar: CustomAppBar(
-        title: 'editInformation'.tr,
-      ),
+      appBar: CustomAppBar(title: 'editInformation'.tr),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -41,8 +37,11 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         leftPadding: 1.0,
                         rightPadding: 1.0,
                         child: CachedNetworkImgWidget(
-                          imgUrl: controller.profileController.userProfileInfo
-                              .value.pictureUrl,
+                          imgUrl: controller
+                              .profileController
+                              .userProfileInfo
+                              .value
+                              .pictureUrl,
                           borderRadius: 75,
                           defaultImg: AssetsManager.logoStudentDefault,
                         ),
@@ -66,15 +65,10 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                   text: 'takeAPicture'.tr,
                                   onPressed: () {
                                     controller.getImage(isCamera: true);
-                                    Navigator.pop(
-                                      context,
-                                      true,
-                                    );
+                                    Navigator.pop(context, true);
                                   },
                                 ),
-                                const Divider(
-                                  height: 5,
-                                ),
+                                const Divider(height: 5),
                                 RowDataSelectionWidget(
                                   iconDataUnClick: Icons.image_outlined,
                                   iconColorUnClick: ColorsManager.grey600,
@@ -82,10 +76,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                   text: 'phoneGallery'.tr,
                                   onPressed: () {
                                     controller.getImage();
-                                    Navigator.pop(
-                                      context,
-                                      true,
-                                    );
+                                    Navigator.pop(context, true);
                                   },
                                 ),
                               ],
@@ -97,18 +88,13 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                       color: ColorsManager.primary,
                       elevation: 0,
                       shape: const CircleBorder(),
-                      child: const Icon(
-                        Icons.add_a_photo_rounded,
-                        size: 18,
-                      ),
+                      child: const Icon(Icons.add_a_photo_rounded, size: 18),
                     ),
                   ),
                   Obx(
                     () => Visibility(
                       visible: controller.isUploadingImage.value,
-                      child: const LoadingWidget(
-                        color: ColorsManager.red,
-                      ),
+                      child: const LoadingWidget(color: ColorsManager.red),
                     ),
                   ),
                 ],
@@ -252,16 +238,19 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                         () => ContainerDialogWidget(
                           inputTitle: 'birthdate'.tr,
                           dialogType: DialogType.dateTimePickerDialog,
-                          dateLocale: controller.profileController
-                              .userProfileInfo.value.uiLanguage,
+                          dateLocale: controller
+                              .profileController
+                              .userProfileInfo
+                              .value
+                              .uiLanguage,
                           currentTime: controller.selectedBirthday.value,
                           onConfirmDate: (date) {
                             controller.selectedBirthdayOnClick(
                               selectedItem: date,
                             );
                           },
-                          containerWidget: controller
-                                      .selectedBirthday.value.year ==
+                          containerWidget:
+                              controller.selectedBirthday.value.year ==
                                   controller.now.year
                               ? RowContentInputWidget(
                                   centerWidget: CustomTextWidget(
@@ -317,12 +306,8 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                       color: ColorsManager.white,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(
-                                            16,
-                                          ),
-                                          topRight: Radius.circular(
-                                            16,
-                                          ),
+                                          topLeft: Radius.circular(16),
+                                          topRight: Radius.circular(16),
                                         ),
                                       ),
                                     ),
@@ -333,12 +318,13 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                             .value,
                                         countrylist: countryList,
                                         selectedCountry: controller
-                                            .selectedCountryPhoneNumber.value,
+                                            .selectedCountryPhoneNumber
+                                            .value,
                                         onTap: (country) {
                                           controller
                                               .selectedCountryPhoneNumberOnClick(
-                                            country,
-                                          );
+                                                country,
+                                              );
                                           Navigator.pop(
                                             context,
                                             true,
@@ -348,8 +334,11 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                     ),
                                   ),
                                   containerWidget: Obx(
-                                    () => controller.selectedCountryPhoneNumber
-                                                .value.phoneCode ==
+                                    () =>
+                                        controller
+                                                .selectedCountryPhoneNumber
+                                                .value
+                                                .phoneCode ==
                                             null
                                         ? RowContentInputWidget(
                                             centerWidget: CustomTextWidget(
@@ -384,9 +373,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: AppSize.s8,
-                              ),
+                              const SizedBox(width: AppSize.s8),
                               Expanded(
                                 flex: 60,
                                 child: CustomTextInput(
@@ -480,9 +467,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                             onChanged: (value) {
                               controller.drivingLicenseRxBool.value =
                                   switchingBooleanValue(
-                                boolValue:
-                                    controller.drivingLicenseRxBool.value,
-                              );
+                                    boolValue:
+                                        controller.drivingLicenseRxBool.value,
+                                  );
                             },
                             activeTrackColor: ColorsManager.primary25,
                             activeThumbColor: ColorsManager.primary,
@@ -508,8 +495,9 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                           suffixWidget: Switch(
                             value: controller.hasAutoMobileRxBool.value,
                             onChanged: (value) {
-                              controller.hasAutoMobileRxBool.value =
-                                  switchingBooleanValue(
+                              controller
+                                  .hasAutoMobileRxBool
+                                  .value = switchingBooleanValue(
                                 boolValue: controller.hasAutoMobileRxBool.value,
                               );
                             },
@@ -560,10 +548,10 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                           ),
                         ),
                       ),
+
                       //===== Bottom of Address Component =====//
 
                       ///===== Top of Country & City/State Component =====//
-
                       CustomTextInput(
                         controller: controller.cityStateCtrl,
                         inputTitle: 'city'.tr,

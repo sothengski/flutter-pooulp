@@ -7,7 +7,7 @@ import '../../../routes/routes.dart';
 import '../offer.dart';
 
 class OfferFeedPage extends GetView<OfferFeedController> {
-  const OfferFeedPage({Key? key}) : super(key: key);
+  const OfferFeedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +44,12 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                     Expanded(
                       flex: 45,
                       child: Obx(
-                        () => controller.profileController.userInfoRepsonse
-                                    .value.profile ==
+                        () =>
+                            controller
+                                    .profileController
+                                    .userInfoRepsonse
+                                    .value
+                                    .profile ==
                                 null
                             ? const SizedBox(
                                 width: 100,
@@ -146,9 +150,9 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                         title: 'filter'.tr,
                                         searchOptType:
                                             controller.typeSelected.value.id ==
-                                                    0
-                                                ? 1
-                                                : 2,
+                                                0
+                                            ? 1
+                                            : 2,
                                       ),
                                       // Get.dialog(
                                       //   OfferFeedFilterSearch(
@@ -176,7 +180,8 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                                 ColorsManager.primary,
                                             child: CustomTextWidget(
                                               text: controller
-                                                  .filterCountRxInt.value
+                                                  .filterCountRxInt
+                                                  .value
                                                   .toString(),
                                               fontSize: AppSize.s12,
                                               color: ColorsManager.white,
@@ -219,10 +224,17 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                   ),
                   const SizedBox(height: AppSize.s4),
                   Obx(
-                    () => controller.profileController.userProfileInfo.value
+                    () =>
+                        controller
+                                    .profileController
+                                    .userProfileInfo
+                                    .value
                                     .pictureUrl !=
                                 null ||
-                            controller.profileController.userProfileInfo.value
+                            controller
+                                    .profileController
+                                    .userProfileInfo
+                                    .value
                                     .pictureUrl !=
                                 ''
                         ? Container()
@@ -270,7 +282,7 @@ class OfferFeedPage extends GetView<OfferFeedController> {
                                             color: ColorsManager.lightBlue,
                                           ),
                                           recognizer: TapGestureRecognizer()
-                                            ..onTap = () async {
+                                            ..onTap = () {
                                               Get.toNamed(
                                                 Routes.editUserInfoRoute,
                                               );

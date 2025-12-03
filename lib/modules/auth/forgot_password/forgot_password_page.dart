@@ -5,16 +5,13 @@ import '../../../core/core.dart';
 import '../../modules.dart';
 
 class ForgotPasswordPage extends GetView<ForgotPasswordController> {
-  const ForgotPasswordPage({Key? key}) : super(key: key);
+  const ForgotPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.primaryBlue,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       body: GestureDetector(
         onTap: () => unFocusKeyBoard(context),
         child: Container(

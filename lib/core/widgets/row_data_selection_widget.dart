@@ -16,7 +16,7 @@ class RowDataSelectionWidget extends StatelessWidget {
   final double horizontalPadding;
 
   const RowDataSelectionWidget({
-    Key? key,
+    super.key,
     this.text = '',
     this.textWidget,
     this.isLeftSideText = true,
@@ -28,10 +28,10 @@ class RowDataSelectionWidget extends StatelessWidget {
     this.onPressed,
     this.verticalPadding = 8.0,
     this.horizontalPadding = 8.0,
-  }) : super(key: key);
+  });
 
   const RowDataSelectionWidget.radioButton({
-    Key? key,
+    super.key,
     this.text = '',
     this.textWidget,
     this.isLeftSideText = true,
@@ -43,10 +43,10 @@ class RowDataSelectionWidget extends StatelessWidget {
     this.onPressed,
     this.verticalPadding = 8.0,
     this.horizontalPadding = 8.0,
-  }) : super(key: key);
+  });
 
   const RowDataSelectionWidget.checkBox({
-    Key? key,
+    super.key,
     this.text = '',
     this.textWidget,
     this.isLeftSideText = true,
@@ -58,7 +58,7 @@ class RowDataSelectionWidget extends StatelessWidget {
     this.onPressed,
     this.verticalPadding = 8.0,
     this.horizontalPadding = 8.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -79,17 +79,11 @@ class RowDataSelectionWidget extends StatelessWidget {
                   if (isClickingValue == true)
                     iconDataClick == null
                         ? Container()
-                        : Icon(
-                            iconDataClick,
-                            color: iconColorClick,
-                          )
+                        : Icon(iconDataClick, color: iconColorClick)
                   else
                     iconDataUnClick == null
                         ? Container()
-                        : Icon(
-                            iconDataUnClick,
-                            color: iconColorUnClick,
-                          ),
+                        : Icon(iconDataUnClick, color: iconColorUnClick),
                   // const SizedBox(width: 8.0),
                 ],
               )
@@ -97,7 +91,8 @@ class RowDataSelectionWidget extends StatelessWidget {
               Container(),
             Expanded(
               flex: 75,
-              child: textWidget ??
+              child:
+                  textWidget ??
                   CustomTextWidget(
                     marginLeft: 8.0,
                     marginRight: 8.0,
@@ -115,17 +110,11 @@ class RowDataSelectionWidget extends StatelessWidget {
                   if (isClickingValue == true)
                     iconDataClick == null
                         ? Container()
-                        : Icon(
-                            iconDataClick,
-                            color: iconColorClick,
-                          )
+                        : Icon(iconDataClick, color: iconColorClick)
                   else
                     iconDataUnClick == null
                         ? Container()
-                        : Icon(
-                            iconDataUnClick,
-                            color: iconColorUnClick,
-                          ),
+                        : Icon(iconDataUnClick, color: iconColorUnClick),
                   const SizedBox(width: 8.0),
                 ],
               )

@@ -17,8 +17,8 @@ class CustomList extends StatelessWidget {
     this.rightPadding = 8.0,
     this.topPadding = 0.0,
     this.bottomPadding = 8.0,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +44,8 @@ class CustomList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: subtitleList!
                 .map(
-                  (item) => CustomTextWidget(
-                    text: '• $item',
-                    marginBottom: 5.0,
-                  ),
+                  (item) =>
+                      CustomTextWidget(text: '• $item', marginBottom: 5.0),
                 )
                 .toList(),
           ),

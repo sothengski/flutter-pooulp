@@ -4,7 +4,7 @@ import '../core.dart';
 
 class CustomAnimatedBottomBar extends StatelessWidget {
   const CustomAnimatedBottomBar({
-    Key? key,
+    super.key,
     this.selectedIndex = 0,
     this.showElevation = true,
     this.iconSize = 24,
@@ -16,8 +16,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
     required this.items,
     required this.onItemSelected,
     this.curve = Curves.linear,
-  })  : assert(items.length >= 2 && items.length <= 5),
-        super(key: key);
+  }) : assert(items.length >= 2 && items.length <= 5);
 
   final int selectedIndex;
   final double iconSize;
@@ -41,10 +40,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
         color: bgColor,
         boxShadow: [
           if (showElevation)
-            const BoxShadow(
-              color: Colors.black12,
-              blurRadius: 2,
-            ),
+            const BoxShadow(color: Colors.black12, blurRadius: 2),
         ],
       ),
       child: SafeArea(
@@ -92,7 +88,7 @@ class ItemWidget extends StatelessWidget {
   final String? bagLabel;
 
   const ItemWidget({
-    Key? key,
+    super.key,
     required this.item,
     required this.isSelected,
     required this.backgroundColor,
@@ -102,7 +98,7 @@ class ItemWidget extends StatelessWidget {
     this.isBag = false,
     this.curve = Curves.linear,
     this.bagLabel = '',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +141,9 @@ class ItemWidget extends StatelessWidget {
                                 ? item.activeColor.withValues(alpha: 1)
                                 : item.inActiveColor ?? item.activeColor,
                           ),
-                          child:
-                              isSelected ? item.activeIcon : item.inActiveIcon,
+                          child: isSelected
+                              ? item.activeIcon
+                              : item.inActiveIcon,
                         ),
                       ),
                       if (isBag == false)
@@ -154,9 +151,7 @@ class ItemWidget extends StatelessWidget {
                       else
                         Container(
                           alignment: Alignment.topCenter,
-                          padding: const EdgeInsets.only(
-                            left: AppSize.s16,
-                          ),
+                          padding: const EdgeInsets.only(left: AppSize.s16),
                           child: CustomBoxWidget(
                             borderRadius: AppSize.s12,
                             topPadding: AppSize.s1,

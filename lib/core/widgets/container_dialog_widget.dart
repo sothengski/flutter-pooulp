@@ -18,8 +18,8 @@ LocaleType localeTypeFunc({required String? dateLocale}) {
   return dateLocale == 'fr'
       ? LocaleType.fr
       : dateLocale == 'nl'
-          ? LocaleType.nl
-          : LocaleType.en;
+      ? LocaleType.nl
+      : LocaleType.en;
 }
 
 class ContainerDialogWidget extends StatelessWidget {
@@ -45,7 +45,7 @@ class ContainerDialogWidget extends StatelessWidget {
   // final FormFieldValidator? validatorFunction;
 
   const ContainerDialogWidget({
-    Key? key,
+    super.key,
     this.inputTitle = '',
     this.inputTitleColor = ColorsManager.primaryBlue,
     this.fontSizeTitle = AppSize.s14,
@@ -65,7 +65,7 @@ class ContainerDialogWidget extends StatelessWidget {
     this.rightPadding = 0.0,
     this.topPadding = 0.0,
     this.bottomPadding = 0.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -91,138 +91,132 @@ class ContainerDialogWidget extends StatelessWidget {
               fontWeight: fontWeightTitle,
               marginBottom: inputTitleMarginBottom,
             ),
-          const SizedBox(
-            height: 3.0,
-          ),
+          const SizedBox(height: 3.0),
           GestureDetector(
             onTap: isTap == false
                 ? () {}
                 : () => {
-                      unFocusKeyBoard(context),
-                      if (dialogType == DialogType.dateTimePickerDialog)
-                        DatePicker.showDatePicker(
-                          context,
+                    unFocusKeyBoard(context),
+                    if (dialogType == DialogType.dateTimePickerDialog)
+                      DatePicker.showDatePicker(
+                        context,
+                        locale: localeTypeFunc(dateLocale: dateLocale),
+                        minTime: minTime ?? DateTime(1970),
+                        // maxTime: DateTime(2009, 12, 31),
+                        currentTime: currentTime,
+                        // locale: LocaleType.kh,
+                        theme: const datetimepicker.DatePickerTheme(
+                          headerColor: ColorsManager.grey100,
+                          backgroundColor: ColorsManager.grey100,
+                          itemStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                          doneStyle: TextStyle(
+                            color: ColorsManager.primaryBlue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onChanged: (date) {
+                          // print(
+                          //   'change $date in time zone ${date.timeZoneOffset.inHours}',
+                          // );
+                        },
+                        onConfirm: onConfirmDate,
+                        // (date) {
+                        //   // print('confirm $date');
+                        //   controller!.selectedBirthdayOnClick(
+                        //     selectedItem: date,
+                        //   );
+                        //   // controller!.selectedBirthdayOnClick(
+                        //   //   selectedItem: '${date.year}-${date.month}-${date.day}',
+                        //   // );
+                        // },
+                      )
+                    else if (dialogType ==
+                        DialogType.dateWithoutDayPickerDialog)
+                      DatePicker.showPicker(
+                        context,
+                        locale: localeTypeFunc(dateLocale: dateLocale),
+                        pickerModel: CustomMonthPicker(
+                          currentTime: currentTime,
                           locale: localeTypeFunc(dateLocale: dateLocale),
                           minTime: minTime ?? DateTime(1970),
                           // maxTime: DateTime(2009, 12, 31),
-                          currentTime: currentTime,
                           // locale: LocaleType.kh,
-                          theme: const datetimepicker.DatePickerTheme(
-                            headerColor: ColorsManager.grey100,
-                            backgroundColor: ColorsManager.grey100,
-                            itemStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                            doneStyle: TextStyle(
-                              color: ColorsManager.primaryBlue,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        ),
+                        theme: const datetimepicker.DatePickerTheme(
+                          headerColor: ColorsManager.grey100,
+                          backgroundColor: ColorsManager.grey100,
+                          itemStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
                           ),
-                          onChanged: (date) {
-                            // print(
-                            //   'change $date in time zone ${date.timeZoneOffset.inHours}',
-                            // );
-                          },
-                          onConfirm: onConfirmDate,
-                          // (date) {
-                          //   // print('confirm $date');
-                          //   controller!.selectedBirthdayOnClick(
-                          //     selectedItem: date,
-                          //   );
-                          //   // controller!.selectedBirthdayOnClick(
-                          //   //   selectedItem: '${date.year}-${date.month}-${date.day}',
-                          //   // );
-                          // },
-                        )
-                      else if (dialogType ==
-                          DialogType.dateWithoutDayPickerDialog)
-                        DatePicker.showPicker(
-                          context,
-                          locale: localeTypeFunc(dateLocale: dateLocale),
-                          pickerModel: CustomMonthPicker(
-                            currentTime: currentTime,
-                            locale: localeTypeFunc(dateLocale: dateLocale),
-                            minTime: minTime ?? DateTime(1970),
-                            // maxTime: DateTime(2009, 12, 31),
-                            // locale: LocaleType.kh,
+                          doneStyle: TextStyle(
+                            color: ColorsManager.primaryBlue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
-                          theme: const datetimepicker.DatePickerTheme(
-                            headerColor: ColorsManager.grey100,
-                            backgroundColor: ColorsManager.grey100,
-                            itemStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                            doneStyle: TextStyle(
-                              color: ColorsManager.primaryBlue,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          onChanged: (date) {
-                            // print(
-                            //   'change $date in time zone ${date.timeZoneOffset.inHours}',
-                            // );
-                          },
-                          onConfirm: onConfirmDate,
-                          // (date) {
-                          //   // print('confirm $date');
-                          //   controller!.selectedBirthdayOnClick(
-                          //     selectedItem: date,
-                          //   );
-                          //   // controller!.selectedBirthdayOnClick(
-                          //   //   selectedItem: '${date.year}-${date.month}-${date.day}',
-                          //   // );
-                          // },
-                        )
-                      else if (dialogType == DialogType.timePickerDialog)
-                        // DatePicker.showTimePicker(
-                        //   context,
-                        //   locale: dateLocale == 'fr'
-                        //       ? LocaleType.fr
-                        //       : dateLocale == 'nl'
-                        //           ? LocaleType.nl
-                        //           : LocaleType.en,
-                        //   showSecondsColumn: false,
-                        //   onChanged: (date) {
-                        //     // print(
-                        //     //   'change $date in time zone ${date.timeZoneOffset.inHours}',
-                        //     // );
-                        //   },
-                        //   onConfirm: onConfirmDate,
-                        //   currentTime: currentTime,
-                        // )
-                        DatePicker.showPicker(
-                          context,
-                          onChanged: (date) {
-                            // print(
-                            //   'change $date in time zone ${date.timeZoneOffset.inHours}',
-                            // );
-                          },
-                          locale: localeTypeFunc(dateLocale: dateLocale),
-                          onConfirm: onConfirmDate,
-                          pickerModel: CustomPicker(
-                            currentTime: currentTime,
-                            // locale: dateLocale == 'fr'
-                            //     ? LocaleType.fr
-                            //     : dateLocale == 'nl'
-                            //         ? LocaleType.nl
-                            //         : LocaleType.en,
-                          ),
-                        )
-                      else
-                        dialogType == DialogType.bottomSheetDialog
-                            ? Get.bottomSheet(
-                                dialogWidget!,
-                              )
-                            : Get.dialog(
-                                dialogWidget!,
-                              ),
-                    },
+                        ),
+                        onChanged: (date) {
+                          // print(
+                          //   'change $date in time zone ${date.timeZoneOffset.inHours}',
+                          // );
+                        },
+                        onConfirm: onConfirmDate,
+                        // (date) {
+                        //   // print('confirm $date');
+                        //   controller!.selectedBirthdayOnClick(
+                        //     selectedItem: date,
+                        //   );
+                        //   // controller!.selectedBirthdayOnClick(
+                        //   //   selectedItem: '${date.year}-${date.month}-${date.day}',
+                        //   // );
+                        // },
+                      )
+                    else if (dialogType == DialogType.timePickerDialog)
+                      // DatePicker.showTimePicker(
+                      //   context,
+                      //   locale: dateLocale == 'fr'
+                      //       ? LocaleType.fr
+                      //       : dateLocale == 'nl'
+                      //           ? LocaleType.nl
+                      //           : LocaleType.en,
+                      //   showSecondsColumn: false,
+                      //   onChanged: (date) {
+                      //     // print(
+                      //     //   'change $date in time zone ${date.timeZoneOffset.inHours}',
+                      //     // );
+                      //   },
+                      //   onConfirm: onConfirmDate,
+                      //   currentTime: currentTime,
+                      // )
+                      DatePicker.showPicker(
+                        context,
+                        onChanged: (date) {
+                          // print(
+                          //   'change $date in time zone ${date.timeZoneOffset.inHours}',
+                          // );
+                        },
+                        locale: localeTypeFunc(dateLocale: dateLocale),
+                        onConfirm: onConfirmDate,
+                        pickerModel: CustomPicker(
+                          currentTime: currentTime,
+                          // locale: dateLocale == 'fr'
+                          //     ? LocaleType.fr
+                          //     : dateLocale == 'nl'
+                          //         ? LocaleType.nl
+                          //         : LocaleType.en,
+                        ),
+                      )
+                    else
+                      dialogType == DialogType.bottomSheetDialog
+                          ? Get.bottomSheet(dialogWidget!)
+                          : Get.dialog(dialogWidget!),
+                  },
             child: Container(
               // height: 50.0,
               alignment: Alignment.centerLeft,
@@ -232,9 +226,7 @@ class ContainerDialogWidget extends StatelessWidget {
                 validator: validatorFunction,
                 // validator: (_) => controller
                 //     .isPhoneNumberValidate(),
-                builder: (
-                  FormFieldState<String> state,
-                ) {
+                builder: (FormFieldState<String> state) {
                   return InputDecorator(
                     // alignedDropdown: true,
                     decoration: InputDecoration(
@@ -248,31 +240,23 @@ class ContainerDialogWidget extends StatelessWidget {
                       fillColor: ColorsManager.grey100,
                       filled: true,
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          AppSize.s8,
-                        ),
+                        borderRadius: BorderRadius.circular(AppSize.s8),
                       ),
                       errorText: state.hasError ? state.errorText : null,
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          AppSize.s8,
-                        ),
+                        borderRadius: BorderRadius.circular(AppSize.s8),
                         borderSide: const BorderSide(
                           color: ColorsManager.grey100,
                         ),
                       ),
                       errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          AppSize.s8,
-                        ),
+                        borderRadius: BorderRadius.circular(AppSize.s8),
                         borderSide: const BorderSide(
                           color: ColorsManager.red900,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          AppSize.s8,
-                        ),
+                        borderRadius: BorderRadius.circular(AppSize.s8),
                         borderSide: const BorderSide(
                           color: ColorsManager.grey300,
                         ),

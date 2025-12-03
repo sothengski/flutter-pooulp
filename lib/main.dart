@@ -69,10 +69,7 @@ Future<void> main() async {
 
 class MyApp extends StatefulWidget {
   final StorageServices? storageServices;
-  const MyApp({
-    Key? key,
-    this.storageServices,
-  }) : super(key: key);
+  const MyApp({super.key, this.storageServices});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -140,16 +137,14 @@ class _MyAppState extends State<MyApp> {
       unknownRoute: AppPages.unknownRoute,
       defaultTransition: Transition.fade,
       title: 'Pooulp Flutter',
-      theme: ThemeManager.createTheme(
-        AppThemeLight(),
-      ),
+      theme: ThemeManager.createTheme(AppThemeLight()),
       locale: LanguageController().getLocale,
+
       // locale: storageServices!.languageCode == 'nl'
       //     ? const Locale('nl', 'NL')
       //     : storageServices!.languageCode == 'fr'
       //         ? const Locale('fr', 'FR')
       //         : const Locale('en', 'US'),
-
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
       // home: const MyHomePage(title: 'Pooulp Flutter Demo Home Page'),

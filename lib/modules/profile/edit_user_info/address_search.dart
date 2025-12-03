@@ -63,14 +63,13 @@ class AddressSearchBarWidget extends SearchDelegate<GooglePlaceSearchModel> {
           );
         } else {
           if (snapshot.hasData) {
-            final List<GooglePlaceSearchModel> listOfPlace =
-                snapshot.data! as List<GooglePlaceSearchModel>;
+            final List<GooglePlaceSearchModel> listOfPlace = snapshot.data!;
             return ListView.builder(
               itemBuilder: (context, index) {
                 final GooglePlaceSearchModel place = listOfPlace[index];
                 return ListTile(
                   title: Text(' ${place.description}'),
-                  onTap: () async {
+                  onTap: () {
                     editInformationController.getPlaceDetail(
                       placeId: place.placeId,
                       sessionToken: editInformationController.sessionToken,

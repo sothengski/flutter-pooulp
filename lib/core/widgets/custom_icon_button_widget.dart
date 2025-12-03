@@ -23,8 +23,8 @@ class CustomIconButtonWidget extends StatelessWidget {
     this.padding = 8.0,
     this.isConstraints = false,
     this.splashRadius = 1.0,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,8 @@ class CustomIconButtonWidget extends StatelessWidget {
       padding: EdgeInsets.all(padding!),
       iconSize: iconSize,
       splashRadius: splashRadius,
-      icon: iconWidget ??
+      icon:
+          iconWidget ??
           Icon(
             iconData,
             color: iconColor,

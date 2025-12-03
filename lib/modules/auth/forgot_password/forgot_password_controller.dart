@@ -40,7 +40,7 @@ class ForgotPasswordController extends GetxController {
         email: emailCtrl.text,
       )
           .then(
-        (value) async {
+        (value) {
           // isSubmitBtnProcessing.value = switchingBooleanValue(
           //   boolValue: isSubmitBtnProcessing.value,
           // );

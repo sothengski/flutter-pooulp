@@ -13,13 +13,13 @@ class OfferCard extends StatelessWidget {
   final String? jobOfferState;
 
   const OfferCard({
-    Key? key,
+    super.key,
     this.jobOfferItem,
     // this.bottomActionWidget,
     this.bottomActionWidgetList = const [],
     this.isCustomActBtn = false,
     this.jobOfferState = '',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +58,7 @@ class OfferCard extends StatelessWidget {
                 bottomLeft: Radius.circular(AppSize.s8),
               ),
               child: Container(
-                decoration: const BoxDecoration(
-                  color: ColorsManager.primary,
-                ),
+                decoration: const BoxDecoration(color: ColorsManager.primary),
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppSize.s20,
                   vertical: AppSize.s5,
@@ -290,9 +288,11 @@ class OfferCard extends StatelessWidget {
                             ),
                           )
                         else if (jobOfferItem!.internshipPeriods != [])
-                          for (var i = 0;
-                              i < jobOfferItem!.internshipPeriods!.length;
-                              i++)
+                          for (
+                            var i = 0;
+                            i < jobOfferItem!.internshipPeriods!.length;
+                            i++
+                          )
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 // horizontal: AppSize.s2,
@@ -328,10 +328,7 @@ class OfferCard extends StatelessWidget {
                 ),
               ],
             ),
-            const Divider(
-              height: AppSize.s1,
-              thickness: AppSize.s1,
-            ),
+            const Divider(height: AppSize.s1, thickness: AppSize.s1),
             // bottomActionWidget ?? Container(),
             ///===== Job Offer Action Buttons Component =====//
             Row(

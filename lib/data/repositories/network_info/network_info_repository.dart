@@ -4,7 +4,7 @@ class NetWorkInfoImpl implements NetworkInfoRepository {
   ConnectivityResult? _connectivityResult;
 
   Future _connect() async {
-    _connectivityResult = await Connectivity().checkConnectivity();
+    _connectivityResult = (await Connectivity().checkConnectivity()).first;
   }
 
   @override

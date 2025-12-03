@@ -9,11 +9,11 @@ class LoadingWidget extends StatelessWidget {
   final bool? isTreeBounceLoading;
 
   const LoadingWidget({
-    Key? key,
+    super.key,
     this.color = ColorsManager.primary,
     this.size = 50.0,
     this.isTreeBounceLoading = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,8 @@ class LoadingWidget extends StatelessWidget {
       // color: background,
       child: Center(
         child: isTreeBounceLoading == true
-            ? SpinKitThreeBounce(
-                color: color,
-                size: size! * 0.4,
-              )
-            : SpinKitFadingCircle(
-                color: color,
-                size: size!,
-              ),
+            ? SpinKitThreeBounce(color: color, size: size! * 0.4)
+            : SpinKitFadingCircle(color: color, size: size!),
       ),
     );
   }

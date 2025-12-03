@@ -19,8 +19,8 @@ class PageTemplateWidget extends StatelessWidget {
     this.subTitle2 = '',
     this.subTitleFontSize2 = AppSize.s14,
     this.bodyPageWidget,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -86,9 +86,7 @@ class PageTemplateWidget extends StatelessWidget {
         Expanded(
           flex: 85,
           child: Container(
-            padding: const EdgeInsets.only(
-              top: AppSize.s16,
-            ),
+            padding: const EdgeInsets.only(top: AppSize.s16),
             child: bodyPageWidget,
           ),
         ),

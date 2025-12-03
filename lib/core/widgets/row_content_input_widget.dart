@@ -12,7 +12,7 @@ class RowContentInputWidget extends StatelessWidget {
   final FormFieldValidator? validatorFunction;
 
   const RowContentInputWidget({
-    Key? key,
+    super.key,
     this.prefixWidget,
     this.centerWidget,
     this.suffixWidget,
@@ -22,17 +22,14 @@ class RowContentInputWidget extends StatelessWidget {
     this.prefixWidgetRightPadding = 0.0,
     this.suffixWidgetLeftPadding = 8.0,
     this.validatorFunction,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         if (prefixWidget != null)
-          Expanded(
-            flex: prefixWidgetFlex!,
-            child: prefixWidget!,
-          )
+          Expanded(flex: prefixWidgetFlex!, child: prefixWidget!)
         else
           Container(),
         if (centerWidget != null)
@@ -50,10 +47,7 @@ class RowContentInputWidget extends StatelessWidget {
         else
           Container(),
         if (suffixWidget != null)
-          Expanded(
-            flex: suffixWidgetFlex!,
-            child: suffixWidget!,
-          )
+          Expanded(flex: suffixWidgetFlex!, child: suffixWidget!)
         else
           Container(),
       ],

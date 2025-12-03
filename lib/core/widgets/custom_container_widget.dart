@@ -26,7 +26,7 @@ class CustomContainerWidget extends StatelessWidget {
   final double? bottomMargin;
 
   const CustomContainerWidget({
-    Key? key,
+    super.key,
     this.leftTitle = '',
     this.rightWidget,
     this.titleFontSize = 14.0,
@@ -48,10 +48,10 @@ class CustomContainerWidget extends StatelessWidget {
     this.topMargin = 0.0,
     this.rightMargin = 0.0,
     this.bottomMargin = 0.0,
-  }) : super(key: key);
+  });
 
   const CustomContainerWidget.profileComponent({
-    Key? key,
+    super.key,
     this.leftTitle = '',
     this.rightWidget,
     this.titleFontSize = 16.0,
@@ -73,7 +73,7 @@ class CustomContainerWidget extends StatelessWidget {
     this.topMargin = 0.0,
     this.rightMargin = 16.0,
     this.bottomMargin = 12.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

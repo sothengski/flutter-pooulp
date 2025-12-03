@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'language_usage.dart';
 
 class LanguageUsagePage extends GetView<LanguageUsageController> {
-  const LanguageUsagePage({Key? key}) : super(key: key);
+  const LanguageUsagePage({super.key});
 
   @override
   Widget build(BuildContext context) {

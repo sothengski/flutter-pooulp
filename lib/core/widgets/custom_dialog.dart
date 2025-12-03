@@ -14,7 +14,7 @@ class CustomAlertDialog extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const CustomAlertDialog({
-    Key? key,
+    super.key,
     this.title = '',
     this.content = '',
     this.icon,
@@ -22,7 +22,7 @@ class CustomAlertDialog extends StatelessWidget {
     this.routePath = '',
     this.type = AlertDialogType.info,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +50,7 @@ class CustomAlertDialog extends StatelessWidget {
                 color: ColorsManager.primary,
               ),
               const SizedBox(height: 15.0),
-              CustomTextWidget(
-                text: content,
-                maxLine: 5,
-              ),
+              CustomTextWidget(text: content, maxLine: 5),
               const SizedBox(height: 5.0),
               const Divider(),
               MaterialButton(
@@ -106,10 +103,7 @@ Color getColorForType({AlertDialogType? type}) {
   }
 }
 
-Widget getIconForType({
-  AlertDialogType? type,
-  double? size = 80.0,
-}) {
+Widget getIconForType({AlertDialogType? type, double? size = 80.0}) {
   switch (type) {
     case AlertDialogType.warning:
       return Icon(
@@ -118,28 +112,12 @@ Widget getIconForType({
         size: size,
       );
     case AlertDialogType.success:
-      return Icon(
-        Icons.check_circle,
-        color: Colors.green,
-        size: size,
-      );
+      return Icon(Icons.check_circle, color: Colors.green, size: size);
     case AlertDialogType.error:
-      return Icon(
-        Icons.highlight_off,
-        color: Colors.red,
-        size: size,
-      );
+      return Icon(Icons.highlight_off, color: Colors.red, size: size);
     case AlertDialogType.info:
-      return Icon(
-        Icons.info_outline_rounded,
-        color: Colors.grey,
-        size: size,
-      );
+      return Icon(Icons.info_outline_rounded, color: Colors.grey, size: size);
     default:
-      return Icon(
-        Icons.info_outline_rounded,
-        color: Colors.grey,
-        size: size,
-      );
+      return Icon(Icons.info_outline_rounded, color: Colors.grey, size: size);
   }
 }

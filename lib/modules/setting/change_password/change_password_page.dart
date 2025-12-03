@@ -5,15 +5,13 @@ import '../../../core/core.dart';
 import '../setting.dart';
 
 class ChangePasswordPage extends GetView<ChangePasswordController> {
-  const ChangePasswordPage({Key? key}) : super(key: key);
+  const ChangePasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: CustomAppBar(
-        title: 'changePassword'.tr,
-      ),
+      appBar: CustomAppBar(title: 'changePassword'.tr),
 
       ///===== Top of body Component =====//
       body: SingleChildScrollView(
@@ -45,8 +43,8 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                             ),
                       onPressed: () => controller.showCurrentPassword.value =
                           switchingBooleanValue(
-                        boolValue: controller.showCurrentPassword.value,
-                      ),
+                            boolValue: controller.showCurrentPassword.value,
+                          ),
                     ),
                     obscureText: !controller.showCurrentPassword.value,
                     isFilled: true,
@@ -82,8 +80,8 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                             ),
                       onPressed: () => controller.showNewPassword.value =
                           switchingBooleanValue(
-                        boolValue: controller.showNewPassword.value,
-                      ),
+                            boolValue: controller.showNewPassword.value,
+                          ),
                     ),
                     obscureText: !controller.showNewPassword.value,
                     isFilled: true,
@@ -117,10 +115,13 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
                               color: ColorsManager.grey400,
                               size: 20.0,
                             ),
-                      onPressed: () => controller.showNewPasswordConfirmation
-                          .value = switchingBooleanValue(
-                        boolValue: controller.showNewPasswordConfirmation.value,
-                      ),
+                      onPressed: () =>
+                          controller
+                              .showNewPasswordConfirmation
+                              .value = switchingBooleanValue(
+                            boolValue:
+                                controller.showNewPasswordConfirmation.value,
+                          ),
                     ),
                     obscureText: !controller.showNewPasswordConfirmation.value,
                     isFilled: true,

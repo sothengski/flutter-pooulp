@@ -23,7 +23,7 @@ class CustomTextWidget extends StatelessWidget {
   final TextDecoration? textDecoration;
 
   const CustomTextWidget({
-    Key? key,
+    super.key,
     this.text = '',
     this.color = ColorsManager.primaryBlue,
     this.fontFamily,
@@ -41,7 +41,7 @@ class CustomTextWidget extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.textStyle,
     this.textDecoration = TextDecoration.none,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,8 @@ class CustomTextWidget extends StatelessWidget {
         text ?? AppStrings.emptyText,
         overflow: TextOverflow.ellipsis,
         softWrap: false,
-        style: textStyle ??
+        style:
+            textStyle ??
             TextStyle(
               color: color,
               fontWeight: fontWeight,

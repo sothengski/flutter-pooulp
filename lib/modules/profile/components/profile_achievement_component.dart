@@ -10,11 +10,11 @@ class ProfileAchievementComponent extends StatelessWidget {
   final List<AchievementModel>? achievementList;
 
   const ProfileAchievementComponent({
-    Key? key,
+    super.key,
     this.title,
     this.addOrEditAchievementRoute,
     this.achievementList,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

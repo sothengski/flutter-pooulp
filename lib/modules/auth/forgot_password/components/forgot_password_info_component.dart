@@ -8,10 +8,10 @@ class ForgotPasswordInfoComponent extends StatelessWidget {
   final VoidCallback? switchingForm;
 
   const ForgotPasswordInfoComponent({
-    Key? key,
+    super.key,
     this.email = '',
     this.switchingForm,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

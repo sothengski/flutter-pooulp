@@ -6,7 +6,7 @@ import '../../../data/data.dart';
 import '../../modules.dart';
 
 class LanguageForm extends GetView<OnboardingController> {
-  const LanguageForm({Key? key}) : super(key: key);
+  const LanguageForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +35,8 @@ class LanguageForm extends GetView<OnboardingController> {
                         color: ColorsManager.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(
-                              AppSize.s16,
-                            ),
-                            topRight: Radius.circular(
-                              AppSize.s16,
-                            ),
+                            topLeft: Radius.circular(AppSize.s16),
+                            topRight: Radius.circular(AppSize.s16),
                           ),
                         ),
                       ),
@@ -51,24 +47,24 @@ class LanguageForm extends GetView<OnboardingController> {
                                 dataListforSelected:
                                     controller.languageListForSelection,
                                 selectedItem: controller
-                                    .selectedMotherTongueLanguage.value,
+                                    .selectedMotherTongueLanguage
+                                    .value,
                                 onTap: (field) {
                                   controller
-                                          .selectedMotherTongueLanguage.value =
-                                      controller.selectedLanguageOnClick(
-                                    selectedItem: field,
-                                  );
-                                  Navigator.pop(
-                                    context,
-                                    true,
-                                  );
+                                      .selectedMotherTongueLanguage
+                                      .value = controller
+                                      .selectedLanguageOnClick(
+                                        selectedItem: field,
+                                      );
+                                  Navigator.pop(context, true);
                                 },
                               )
                             : const LoadingWidget(),
                       ),
                     ),
                     containerWidget: Obx(
-                      () => controller.selectedMotherTongueLanguage.value.id ==
+                      () =>
+                          controller.selectedMotherTongueLanguage.value.id ==
                               null
                           ? RowContentInputWidget(
                               centerWidget: CustomTextWidget(
@@ -85,7 +81,9 @@ class LanguageForm extends GetView<OnboardingController> {
                           : RowContentInputWidget(
                               centerWidget: CustomTextWidget(
                                 text: controller
-                                    .selectedMotherTongueLanguage.value.label,
+                                    .selectedMotherTongueLanguage
+                                    .value
+                                    .label,
                                 color: ColorsManager.black,
                                 fontSize: AppSize.s16,
                               ),
@@ -110,14 +108,17 @@ class LanguageForm extends GetView<OnboardingController> {
                     onPressed: () {
                       unFocusKeyBoard(context);
                       if (controller
-                          .editMontherTongueLangaugeFormKey.currentState!
+                          .editMontherTongueLangaugeFormKey
+                          .currentState!
                           .validate()) {
                         controller.operationLanguageOnClick(
                           // formKey: controller.editMontherTongueLangaugeFormKey,
                           languageId:
                               controller.selectedMotherTongueLanguage.value.id,
                           languageLabel: controller
-                              .selectedMotherTongueLanguage.value.label,
+                              .selectedMotherTongueLanguage
+                              .value
+                              .label,
                           languageProficiencyLevel: 4,
                           spoken: 4,
                           written: 4,
@@ -155,12 +156,8 @@ class LanguageForm extends GetView<OnboardingController> {
                         color: ColorsManager.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(
-                              AppSize.s16,
-                            ),
-                            topRight: Radius.circular(
-                              AppSize.s16,
-                            ),
+                            topLeft: Radius.circular(AppSize.s16),
+                            topRight: Radius.circular(AppSize.s16),
                           ),
                         ),
                       ),
@@ -172,14 +169,11 @@ class LanguageForm extends GetView<OnboardingController> {
                                     controller.languageListForSelection,
                                 selectedItem: controller.selectedLanguage.value,
                                 onTap: (field) {
-                                  controller.selectedLanguage.value =
-                                      controller.selectedLanguageOnClick(
-                                    selectedItem: field,
-                                  );
-                                  Navigator.pop(
-                                    context,
-                                    true,
-                                  );
+                                  controller.selectedLanguage.value = controller
+                                      .selectedLanguageOnClick(
+                                        selectedItem: field,
+                                      );
+                                  Navigator.pop(context, true);
                                 },
                               )
                             : const LoadingWidget(),
@@ -222,9 +216,12 @@ class LanguageForm extends GetView<OnboardingController> {
                           inputTitleMarginTop: AppSize.s8,
                           validatorFunction: (_) =>
                               Validator().notEmptyValidator(
-                            controller.selectedSpokenProficiency.value.label ??
-                                '',
-                          ),
+                                controller
+                                        .selectedSpokenProficiency
+                                        .value
+                                        .label ??
+                                    '',
+                              ),
                           dialogWidget: MaterialDialogWidget(
                             title: 'proficiencyHint'.tr,
                             contentWidget: ListView.separated(
@@ -236,7 +233,8 @@ class LanguageForm extends GetView<OnboardingController> {
                                     isLeftSideText: false,
                                     isClickingValue: stringsComparation(
                                       object1: controller
-                                          .proficiencyList[index].label!
+                                          .proficiencyList[index]
+                                          .label!
                                           .toLowerCase(),
                                       object2: controller
                                           .selectedSpokenProficiency
@@ -246,19 +244,18 @@ class LanguageForm extends GetView<OnboardingController> {
                                     ),
                                     text: translateStateWords(
                                       stateWord: controller
-                                          .proficiencyList[index].label,
+                                          .proficiencyList[index]
+                                          .label,
                                     ),
                                     onPressed: () {
                                       controller
-                                              .selectedSpokenProficiency.value =
-                                          controller.selectedLanguageOnClick(
-                                        selectedItem:
-                                            controller.proficiencyList[index],
-                                      );
-                                      Navigator.pop(
-                                        context,
-                                        true,
-                                      );
+                                          .selectedSpokenProficiency
+                                          .value = controller
+                                          .selectedLanguageOnClick(
+                                            selectedItem: controller
+                                                .proficiencyList[index],
+                                          );
+                                      Navigator.pop(context, true);
                                     },
                                   ),
                                 );
@@ -272,7 +269,10 @@ class LanguageForm extends GetView<OnboardingController> {
                             ),
                           ),
                           containerWidget: Obx(
-                            () => controller.selectedSpokenProficiency.value
+                            () =>
+                                controller
+                                        .selectedSpokenProficiency
+                                        .value
                                         .label ==
                                     ''
                                 ? RowContentInputWidget(
@@ -319,9 +319,12 @@ class LanguageForm extends GetView<OnboardingController> {
                           inputTitleMarginTop: AppSize.s8,
                           validatorFunction: (_) =>
                               Validator().notEmptyValidator(
-                            controller.selectedWrittenProficiency.value.label ??
-                                '',
-                          ),
+                                controller
+                                        .selectedWrittenProficiency
+                                        .value
+                                        .label ??
+                                    '',
+                              ),
                           dialogWidget: MaterialDialogWidget(
                             title: 'proficiencyHint'.tr,
                             contentWidget: ListView.separated(
@@ -333,7 +336,8 @@ class LanguageForm extends GetView<OnboardingController> {
                                     isLeftSideText: false,
                                     isClickingValue: stringsComparation(
                                       object1: controller
-                                          .proficiencyList[index].label!
+                                          .proficiencyList[index]
+                                          .label!
                                           .toLowerCase(),
                                       object2: controller
                                           .selectedWrittenProficiency
@@ -343,19 +347,18 @@ class LanguageForm extends GetView<OnboardingController> {
                                     ),
                                     text: translateStateWords(
                                       stateWord: controller
-                                          .proficiencyList[index].label,
+                                          .proficiencyList[index]
+                                          .label,
                                     ),
                                     onPressed: () {
-                                      controller.selectedWrittenProficiency
-                                              .value =
-                                          controller.selectedLanguageOnClick(
-                                        selectedItem:
-                                            controller.proficiencyList[index],
-                                      );
-                                      Navigator.pop(
-                                        context,
-                                        true,
-                                      );
+                                      controller
+                                          .selectedWrittenProficiency
+                                          .value = controller
+                                          .selectedLanguageOnClick(
+                                            selectedItem: controller
+                                                .proficiencyList[index],
+                                          );
+                                      Navigator.pop(context, true);
                                     },
                                   ),
                                 );
@@ -369,7 +372,10 @@ class LanguageForm extends GetView<OnboardingController> {
                             ),
                           ),
                           containerWidget: Obx(
-                            () => controller.selectedWrittenProficiency.value
+                            () =>
+                                controller
+                                        .selectedWrittenProficiency
+                                        .value
                                         .label ==
                                     ''
                                 ? RowContentInputWidget(
@@ -443,21 +449,12 @@ class LanguageForm extends GetView<OnboardingController> {
               ),
             ),
 
-            const Divider(
-              height: 1,
-              thickness: 1,
-              color: ColorsManager.white,
-            ),
+            const Divider(height: 1, thickness: 1, color: ColorsManager.white),
 
             ///===== Top of User Language List Component =====//
             Obx(
               () => Container(
-                padding: const EdgeInsets.fromLTRB(
-                  0.0,
-                  8.0,
-                  0.0,
-                  8.0,
-                ),
+                padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 8.0),
                 child: controller.languageSelectedList.isEmpty
                     ? CustomTextWidget(
                         text: 'noLanguagesFound'.tr,
@@ -522,8 +519,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                           isConstraints: true,
                                                           iconSize: AppSize.s20,
                                                           onClick: () {
-                                                            controller
-                                                                .operationLanguageOnClick(
+                                                            controller.operationLanguageOnClick(
                                                               languageId:
                                                                   languageItem
                                                                       .tagId,
@@ -558,18 +554,21 @@ class LanguageForm extends GetView<OnboardingController> {
                                                 ),
                                                 Obx(
                                                   () => Container(
-                                                    padding: controller.isUpdate
+                                                    padding:
+                                                        controller
+                                                                .isUpdate
                                                                 .value ==
                                                             false
                                                         ? EdgeInsets.zero
                                                         : EdgeInsets.zero,
                                                     child:
                                                         UrlLanguageInputOnboarding(
-                                                      controller: controller,
-                                                      languageItem:
-                                                          languageItem,
-                                                      index: index,
-                                                    ),
+                                                          controller:
+                                                              controller,
+                                                          languageItem:
+                                                              languageItem,
+                                                          index: index,
+                                                        ),
                                                   ),
                                                 ),
                                               ],
@@ -614,8 +613,8 @@ class LanguageForm extends GetView<OnboardingController> {
                                             () => Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                vertical: AppSize.s8,
-                                              ),
+                                                    vertical: AppSize.s8,
+                                                  ),
                                               // width: double.infinity,
                                               child: Column(
                                                 children: [
@@ -639,8 +638,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                             iconSize:
                                                                 AppSize.s20,
                                                             onClick: () {
-                                                              controller
-                                                                  .operationLanguageOnClick(
+                                                              controller.operationLanguageOnClick(
                                                                 languageId:
                                                                     languageItem
                                                                         .tagId,
@@ -680,8 +678,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                       ///===== Top of Spoken Proficiency Selection Component =====//
                                                       Expanded(
                                                         flex: 40,
-                                                        child:
-                                                            ContainerDialogWidget(
+                                                        child: ContainerDialogWidget(
                                                           inputTitle:
                                                               'spoken'.tr,
                                                           inputTitleColor:
@@ -689,49 +686,37 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                   .white,
                                                           inputTitleMarginTop:
                                                               AppSize.s2,
-                                                          dialogWidget:
-                                                              MaterialDialogWidget(
+                                                          dialogWidget: MaterialDialogWidget(
                                                             title:
                                                                 'proficiencyHint'
                                                                     .tr,
-                                                            contentWidget:
-                                                                ListView
-                                                                    .separated(
+                                                            contentWidget: ListView.separated(
                                                               shrinkWrap: true,
                                                               itemCount: controller
                                                                   .proficiencyList
                                                                   .length,
-                                                              itemBuilder: (
-                                                                context,
-                                                                index,
-                                                              ) {
+                                                              itemBuilder: (context, index) {
                                                                 return Obx(
-                                                                  () => RowDataSelectionWidget
-                                                                      .radioButton(
+                                                                  () => RowDataSelectionWidget.radioButton(
                                                                     isLeftSideText:
                                                                         false,
-                                                                    isClickingValue:
-                                                                        intComparation(
+                                                                    isClickingValue: intComparation(
                                                                       object1: controller
-                                                                          .proficiencyList[
-                                                                              index]
+                                                                          .proficiencyList[index]
                                                                           .level,
                                                                       object2:
                                                                           languageItem
                                                                               .languageSpokenLv,
                                                                     ),
-                                                                    text:
-                                                                        translateStateWords(
+                                                                    text: translateStateWords(
                                                                       stateWord:
                                                                           '${controller.proficiencyList[index].label}',
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
+                                                                    onPressed: () {
                                                                       // print(
                                                                       //   'item index:$index $languageItem',
                                                                       // );
-                                                                      controller
-                                                                          .operationLanguageOnClick(
+                                                                      controller.operationLanguageOnClick(
                                                                         generateId:
                                                                             languageItem.id,
                                                                         languageId:
@@ -752,8 +737,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                         indexForEditOrDelete:
                                                                             index,
                                                                       );
-                                                                      Navigator
-                                                                          .pop(
+                                                                      Navigator.pop(
                                                                         context,
                                                                         true,
                                                                       );
@@ -763,21 +747,20 @@ class LanguageForm extends GetView<OnboardingController> {
                                                               },
                                                               separatorBuilder:
                                                                   (
-                                                                context,
-                                                                index,
-                                                              ) {
-                                                                return const Divider(
-                                                                  height: 1.0,
-                                                                  color: ColorsManager
-                                                                      .grey300,
-                                                                );
-                                                              },
+                                                                    context,
+                                                                    index,
+                                                                  ) {
+                                                                    return const Divider(
+                                                                      height:
+                                                                          1.0,
+                                                                      color: ColorsManager
+                                                                          .grey300,
+                                                                    );
+                                                                  },
                                                             ),
                                                           ),
-                                                          containerWidget:
-                                                              RowContentInputWidget(
-                                                            centerWidget:
-                                                                CustomTextWidget(
+                                                          containerWidget: RowContentInputWidget(
+                                                            centerWidget: CustomTextWidget(
                                                               //marginLeft: 4.0,
                                                               textAlign:
                                                                   TextAlign
@@ -792,8 +775,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                             ),
                                                             suffixWidgetFlex:
                                                                 15,
-                                                            suffixWidget:
-                                                                const Icon(
+                                                            suffixWidget: const Icon(
                                                               Icons
                                                                   .arrow_drop_down,
                                                               color:
@@ -812,8 +794,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                       ///===== Top of Written Proficiency Selection Component =====//
                                                       Expanded(
                                                         flex: 40,
-                                                        child:
-                                                            ContainerDialogWidget(
+                                                        child: ContainerDialogWidget(
                                                           inputTitle:
                                                               'written'.tr,
                                                           inputTitleColor:
@@ -821,46 +802,34 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                   .white,
                                                           inputTitleMarginTop:
                                                               AppSize.s2,
-                                                          dialogWidget:
-                                                              MaterialDialogWidget(
+                                                          dialogWidget: MaterialDialogWidget(
                                                             title:
                                                                 'proficiencyHint'
                                                                     .tr,
-                                                            contentWidget:
-                                                                ListView
-                                                                    .separated(
+                                                            contentWidget: ListView.separated(
                                                               shrinkWrap: true,
                                                               itemCount: controller
                                                                   .proficiencyList
                                                                   .length,
-                                                              itemBuilder: (
-                                                                context,
-                                                                index,
-                                                              ) {
+                                                              itemBuilder: (context, index) {
                                                                 return Obx(
-                                                                  () => RowDataSelectionWidget
-                                                                      .radioButton(
+                                                                  () => RowDataSelectionWidget.radioButton(
                                                                     isLeftSideText:
                                                                         false,
-                                                                    isClickingValue:
-                                                                        intComparation(
+                                                                    isClickingValue: intComparation(
                                                                       object1: controller
-                                                                          .proficiencyList[
-                                                                              index]
+                                                                          .proficiencyList[index]
                                                                           .level,
                                                                       object2:
                                                                           languageItem
                                                                               .languageWrittenLv,
                                                                     ),
-                                                                    text:
-                                                                        translateStateWords(
+                                                                    text: translateStateWords(
                                                                       stateWord:
                                                                           '${controller.proficiencyList[index].label}',
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      controller
-                                                                          .operationLanguageOnClick(
+                                                                    onPressed: () {
+                                                                      controller.operationLanguageOnClick(
                                                                         generateId:
                                                                             languageItem.id,
                                                                         languageId:
@@ -881,8 +850,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                                         indexForEditOrDelete:
                                                                             index,
                                                                       );
-                                                                      Navigator
-                                                                          .pop(
+                                                                      Navigator.pop(
                                                                         context,
                                                                         true,
                                                                       );
@@ -892,21 +860,20 @@ class LanguageForm extends GetView<OnboardingController> {
                                                               },
                                                               separatorBuilder:
                                                                   (
-                                                                context,
-                                                                index,
-                                                              ) {
-                                                                return const Divider(
-                                                                  height: 1.0,
-                                                                  color: ColorsManager
-                                                                      .grey300,
-                                                                );
-                                                              },
+                                                                    context,
+                                                                    index,
+                                                                  ) {
+                                                                    return const Divider(
+                                                                      height:
+                                                                          1.0,
+                                                                      color: ColorsManager
+                                                                          .grey300,
+                                                                    );
+                                                                  },
                                                             ),
                                                           ),
-                                                          containerWidget:
-                                                              RowContentInputWidget(
-                                                            centerWidget:
-                                                                CustomTextWidget(
+                                                          containerWidget: RowContentInputWidget(
+                                                            centerWidget: CustomTextWidget(
                                                               //marginLeft: 4.0,
                                                               textAlign:
                                                                   TextAlign
@@ -924,8 +891,7 @@ class LanguageForm extends GetView<OnboardingController> {
                                                             ),
                                                             suffixWidgetFlex:
                                                                 15,
-                                                            suffixWidget:
-                                                                const Icon(
+                                                            suffixWidget: const Icon(
                                                               Icons
                                                                   .arrow_drop_down,
                                                               color:
@@ -941,7 +907,8 @@ class LanguageForm extends GetView<OnboardingController> {
                                                   ),
                                                   Obx(
                                                     () => Container(
-                                                      padding: controller
+                                                      padding:
+                                                          controller
                                                                   .isUpdate
                                                                   .value ==
                                                               false
@@ -949,11 +916,12 @@ class LanguageForm extends GetView<OnboardingController> {
                                                           : EdgeInsets.zero,
                                                       child:
                                                           UrlLanguageInputOnboarding(
-                                                        controller: controller,
-                                                        languageItem:
-                                                            languageItem,
-                                                        index: index,
-                                                      ),
+                                                            controller:
+                                                                controller,
+                                                            languageItem:
+                                                                languageItem,
+                                                            index: index,
+                                                          ),
                                                     ),
                                                   ),
                                                 ],
@@ -979,12 +947,12 @@ class LanguageForm extends GetView<OnboardingController> {
 // ignore: must_be_immutable
 class UrlLanguageInputOnboarding extends StatelessWidget {
   UrlLanguageInputOnboarding({
-    Key? key,
+    super.key,
     this.controller,
     required this.languageItem,
     this.vdoUrlCtrl,
     this.index,
-  }) : super(key: key);
+  });
 
   final OnboardingController? controller;
   final FieldModel? languageItem;
@@ -1014,9 +982,7 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
                   // marginBottom: AppSize.s24,
                 ),
               ),
-              const SizedBox(
-                width: AppSize.s8,
-              ),
+              const SizedBox(width: AppSize.s8),
               Expanded(
                 flex: 5,
                 child: CustomIconButtonWidget(
@@ -1035,10 +1001,7 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
           )
         else
           Padding(
-            padding: const EdgeInsets.only(
-              left: 8.0,
-              right: 8.0,
-            ),
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -1059,9 +1022,7 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
                           },
                         ),
                 ),
-                const SizedBox(
-                  width: AppSize.s8,
-                ),
+                const SizedBox(width: AppSize.s8),
                 Flexible(
                   flex: 90,
                   child: CustomTextInput(
@@ -1070,9 +1031,7 @@ class UrlLanguageInputOnboarding extends StatelessWidget {
                     fontColor: ColorsManager.white,
                   ),
                 ),
-                const SizedBox(
-                  width: AppSize.s8,
-                ),
+                const SizedBox(width: AppSize.s8),
                 Expanded(
                   flex: 5,
                   child: CustomIconButtonWidget(

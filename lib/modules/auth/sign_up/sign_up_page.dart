@@ -5,16 +5,13 @@ import '../../../core/core.dart';
 import '../../modules.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.primaryBlue,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       body: GestureDetector(
         onTap: () => unFocusKeyBoard(context),
         child: Container(
@@ -59,15 +56,11 @@ class SignUpPage extends StatelessWidget {
                     onPressed: () {
                       customGeneralDialog(
                         context: context,
-                        widget: const SignUpForm(
-                          userType: "Student",
-                        ),
+                        widget: const SignUpForm(userType: "Student"),
                       );
                     },
                   ),
-                  const SizedBox(
-                    height: 40.0,
-                  ),
+                  const SizedBox(height: 40.0),
                   CustomMaterialButton(
                     text: 'enterprise'.tr, // 'auth.enterprise'.tr,
                     fontSize: 20.0,
@@ -86,9 +79,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: getHeight * 0.2,
-              ),
+              SizedBox(height: getHeight * 0.2),
             ],
           ),
         ),

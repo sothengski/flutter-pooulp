@@ -61,8 +61,8 @@ class CustomListTileWidget extends StatelessWidget {
     this.backgroundColor = ColorsManager.white,
     this.leftFlex = 10,
     this.crossAxisAlignment = CrossAxisAlignment.start,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +72,7 @@ class CustomListTileWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           border: leftWidget == null && isDivider == true
-              ? const Border(
-                  bottom: BorderSide(
-                    color: ColorsManager.grey100,
-                  ),
-                )
+              ? const Border(bottom: BorderSide(color: ColorsManager.grey100))
               : null,
         ),
         padding: EdgeInsets.fromLTRB(
@@ -89,19 +85,12 @@ class CustomListTileWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: crossAxisAlignment,
           children: <Widget>[
-            const SizedBox(
-              width: 8.0,
-            ),
+            const SizedBox(width: 8.0),
             if (leftWidget != null)
-              Expanded(
-                flex: leftFlex!,
-                child: leftWidget!,
-              )
+              Expanded(flex: leftFlex!, child: leftWidget!)
             else
               Container(),
-            const SizedBox(
-              width: 10.0,
-            ),
+            const SizedBox(width: 10.0),
             Flexible(
               flex: 100 - leftFlex!,
               child: Container(
@@ -112,9 +101,7 @@ class CustomListTileWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: leftWidget != null && isDivider == true
                       ? const Border(
-                          bottom: BorderSide(
-                            color: ColorsManager.grey300,
-                          ),
+                          bottom: BorderSide(color: ColorsManager.grey300),
                         )
                       : null,
                 ),
@@ -177,15 +164,10 @@ class CustomListTileWidget extends StatelessWidget {
                       ),
                     ),
                     if (rightWidget != null)
-                      Flexible(
-                        flex: 10,
-                        child: rightWidget!,
-                      )
+                      Flexible(flex: 10, child: rightWidget!)
                     else
                       Container(),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
+                    const SizedBox(width: 2.0),
                   ],
                 ),
               ),

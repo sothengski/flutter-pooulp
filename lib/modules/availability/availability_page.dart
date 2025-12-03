@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AvailabilityPage extends StatelessWidget {
-  const AvailabilityPage({Key? key}) : super(key: key);
+  const AvailabilityPage({super.key});
 
   @override
   Widget build(BuildContext context) {

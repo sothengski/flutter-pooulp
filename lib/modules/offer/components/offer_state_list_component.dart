@@ -11,10 +11,10 @@ class OfferStateListComponent extends StatelessWidget {
   final OfferController? offerController;
 
   const OfferStateListComponent({
-    Key? key,
+    super.key,
     this.jobOfferStateList,
     this.offerController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +53,17 @@ class OfferStateListComponent extends StatelessWidget {
                       label: Row(
                         children: [
                           CustomTextWidget(
-                            text:
-                                translateStateWords(stateWord: '${item.label}'),
+                            text: translateStateWords(
+                              stateWord: '${item.label}',
+                            ),
                             // fontSize: AppSize.s14,
                             fontWeight: FontWeightManager.medium,
                             color: containerColorState(
                               object1: '${item.label}',
                               object2: offerController!
-                                  .jobOfferStateSelected.value.label,
+                                  .jobOfferStateSelected
+                                  .value
+                                  .label,
                               unEqualStateColor: ColorsManager.primaryBlue,
                             ),
                             marginRight: AppSize.s4,
@@ -74,7 +77,9 @@ class OfferStateListComponent extends StatelessWidget {
                             backgroundColor: containerColorState(
                               object1: '${item.label}',
                               object2: offerController!
-                                  .jobOfferStateSelected.value.label,
+                                  .jobOfferStateSelected
+                                  .value
+                                  .label,
                               equalStateColor: ColorsManager.primary,
                               unEqualStateColor: ColorsManager.white,
                               isTextColor: false,
@@ -85,7 +90,9 @@ class OfferStateListComponent extends StatelessWidget {
                               color: containerColorState(
                                 object1: '${item.label}',
                                 object2: offerController!
-                                    .jobOfferStateSelected.value.label,
+                                    .jobOfferStateSelected
+                                    .value
+                                    .label,
                                 equalStateColor: ColorsManager.primaryBlue,
                                 unEqualStateColor: ColorsManager.white,
                               ),
@@ -103,9 +110,7 @@ class OfferStateListComponent extends StatelessWidget {
                         isTextColor: false,
                       ),
                       onSelected: (_) {
-                        offerController!.selectjobOfferState(
-                          state: item,
-                        );
+                        offerController!.selectjobOfferState(state: item);
                       },
                     ),
                   ),

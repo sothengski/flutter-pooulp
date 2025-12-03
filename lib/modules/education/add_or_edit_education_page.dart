@@ -5,9 +5,11 @@ import '../../core/core.dart';
 import 'education_controller.dart';
 
 class AddOrEditEducationPage extends GetView<EducationController> {
+  const AddOrEditEducationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    controller.title = controller.title;
+    // controller.title = controller.title;
     return Scaffold(
       appBar: CustomAppBar(
         title: controller.title == AppStrings.addText
@@ -77,12 +79,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                       color: ColorsManager.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                            AppSize.s16,
-                          ),
-                          topRight: Radius.circular(
-                            AppSize.s16,
-                          ),
+                          topLeft: Radius.circular(AppSize.s16),
+                          topRight: Radius.circular(AppSize.s16),
                         ),
                       ),
                     ),
@@ -92,14 +90,11 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                               dataListforSelected: controller.schoolList,
                               selectedItem: controller.selectedSchool.value,
                               onTap: (school) {
-                                controller.selectedSchool.value =
-                                    controller.selectedSchoolOnClick(
-                                  selectedItem: school,
-                                );
-                                Navigator.pop(
-                                  context,
-                                  true,
-                                );
+                                controller.selectedSchool.value = controller
+                                    .selectedSchoolOnClick(
+                                      selectedItem: school,
+                                    );
+                                Navigator.pop(context, true);
                               },
                             )
                           : const LoadingWidget(),
@@ -161,12 +156,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                         color: ColorsManager.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(
-                              AppSize.s16,
-                            ),
-                            topRight: Radius.circular(
-                              AppSize.s16,
-                            ),
+                            topLeft: Radius.circular(AppSize.s16),
+                            topRight: Radius.circular(AppSize.s16),
                           ),
                         ),
                       ),
@@ -193,18 +184,20 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                               alignment: AlignmentDirectional.centerStart,
                               child: Wrap(
                                 children: [
-                                  for (var i = 0;
-                                      i < controller.fieldListSelected.length;
-                                      i++)
+                                  for (
+                                    var i = 0;
+                                    i < controller.fieldListSelected.length;
+                                    i++
+                                  )
                                     RemovableTextCardWidget(
                                       text:
                                           '${controller.fieldListSelected[i].label}',
                                       onRemove: () =>
                                           addingOrRemovingFieldInFieldList(
-                                        list: controller.fieldListSelected,
-                                        fieldValue:
-                                            controller.fieldListSelected[i],
-                                      ),
+                                            list: controller.fieldListSelected,
+                                            fieldValue:
+                                                controller.fieldListSelected[i],
+                                          ),
                                     ),
                                 ],
                               ),
@@ -257,12 +250,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                       color: ColorsManager.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                            AppSize.s16,
-                          ),
-                          topRight: Radius.circular(
-                            AppSize.s16,
-                          ),
+                          topLeft: Radius.circular(AppSize.s16),
+                          topRight: Radius.circular(AppSize.s16),
                         ),
                       ),
                     ),
@@ -275,10 +264,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                                   controller.schoolDegreeSelected.value,
                               onTap: (field) {
                                 controller.schoolDegreeSelected.value = field;
-                                Navigator.pop(
-                                  context,
-                                  true,
-                                );
+                                Navigator.pop(context, true);
                               },
                             )
                           : const LoadingWidget(),
@@ -366,8 +352,12 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                         ),
                         dialogType: DialogType.dateWithoutDayPickerDialog,
                         dateLocale: controller
-                            .profileController.userProfileInfo.value.uiLanguage,
-                        currentTime: DateTime.tryParse(
+                            .profileController
+                            .userProfileInfo
+                            .value
+                            .uiLanguage,
+                        currentTime:
+                            DateTime.tryParse(
                               controller.selectedStartedDateString.value,
                             ) ??
                             DateTime.now(),
@@ -395,7 +385,8 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                                     text: dateFormatSlashMMYYYY(
                                       date: DateTime.tryParse(
                                         controller
-                                            .selectedStartedDateString.value,
+                                            .selectedStartedDateString
+                                            .value,
                                       ),
                                     ),
                                     color: ColorsManager.black,
@@ -411,9 +402,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                       ),
                     ),
                     //===== Bottom of Start Date Component =====//
-                    const SizedBox(
-                      width: AppSize.s12,
-                    ),
+                    const SizedBox(width: AppSize.s12),
 
                     ///===== Top of End Date Component =====//
                     Expanded(
@@ -424,8 +413,12 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                         inputTitleMarginTop: AppSize.s16,
                         dialogType: DialogType.dateWithoutDayPickerDialog,
                         dateLocale: controller
-                            .profileController.userProfileInfo.value.uiLanguage,
-                        currentTime: DateTime.tryParse(
+                            .profileController
+                            .userProfileInfo
+                            .value
+                            .uiLanguage,
+                        currentTime:
+                            DateTime.tryParse(
                               controller.selectedEndDateString.value,
                             ) ??
                             DateTime.now(),

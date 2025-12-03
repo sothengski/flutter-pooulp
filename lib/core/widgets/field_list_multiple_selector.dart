@@ -20,13 +20,13 @@ class FieldListMultipleSelector extends StatefulWidget {
     this.scrollController,
     this.separatorIndex = 1,
     this.onTap,
-    Key? key,
+    super.key,
     this.showPhoneCode = true,
     this.showCountry = true,
     this.selectedItems,
     this.inputHintText = 'Search...',
     this.cardItem,
-  }) : super(key: key);
+  });
 
   @override
   State<FieldListMultipleSelector> createState() =>
@@ -96,10 +96,7 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
                   shrinkWrap: true,
                   itemCount: filteredDataList!.length,
                   separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(
-                    height: 0.0,
-                    thickness: 0.0,
-                  ),
+                      const Divider(height: 0.0, thickness: 0.0),
                   itemBuilder: (BuildContext context, int index) {
                     final FieldModel fieldItem = filteredDataList![index];
                     return Card(
@@ -112,9 +109,7 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
                         // widget.selectedItems!.contains(fieldItem),
                         text: fieldItem.label,
                         onPressed: () => {
-                          setState(
-                            () => widget.onTap!(fieldItem),
-                          ),
+                          setState(() => widget.onTap!(fieldItem)),
                         },
                       ),
                     );
@@ -123,9 +118,7 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
               : const Padding(
                   key: Key('no-result'),
                   padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text(
-                    'No result found',
-                  ),
+                  child: Text('No result found'),
                 ),
         ),
       ],
@@ -138,11 +131,7 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
       searchResult.addAll(widget.dataListforSelected!);
     } else {
       searchResult = widget.dataListforSelected!
-          .where(
-            (c) => c.label!.toLowerCase().startsWith(
-                  query.toLowerCase(),
-                ),
-          )
+          .where((c) => c.label!.toLowerCase().startsWith(query.toLowerCase()))
           .toList();
     }
     setState(() => filteredDataList = searchResult);

@@ -19,7 +19,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
   final int? searchOptType; //1 == save new form, //2 == edit current form
 
   const OfferFeedFilterSearch({
-    Key? key,
+    super.key,
     this.title = '',
     this.contentWidget,
     this.icon,
@@ -31,9 +31,9 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
     this.onPressed2,
     this.onPressed3,
     this.searchOptType = 2,
-  }) : super(key: key);
+  });
 
-  Future<PlaceDetailModel?> showSearchFunc(BuildContext context) async {
+  Future<PlaceDetailModel?> showSearchFunc(BuildContext context) {
     return showSearch(
       context: context,
       delegate: GoogleAddressSearchBarWidget(
@@ -66,10 +66,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
               fontSize: 20.0,
               fontWeight: FontWeightManager.medium,
             ),
-            const Divider(
-              height: 1.0,
-              color: ColorsManager.grey,
-            ),
+            const Divider(height: 1.0, color: ColorsManager.grey),
             // contentWidget!,
             ///===== Top of Body/Content Component =====//
             Obx(
@@ -184,10 +181,11 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                           );
                                           controller
                                               .addingOrRemovingFieldInFieldListToBeSearch(
-                                            list: controller.typesListInFilter,
-                                            fieldValue: e,
-                                            isList: false,
-                                          );
+                                                list: controller
+                                                    .typesListInFilter,
+                                                fieldValue: e,
+                                                isList: false,
+                                              );
                                         },
                                       )
                                     : Container(),
@@ -246,23 +244,31 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   // ),
                                   dialogType:
                                       DialogType.dateWithoutDayPickerDialog,
-                                  dateLocale: controller.profileController
-                                      .userProfileInfo.value.uiLanguage,
-                                  minTime: DateTime.now()
-                                      .subtract(const Duration(days: 1)),
-                                  currentTime: DateTime.tryParse(
+                                  dateLocale: controller
+                                      .profileController
+                                      .userProfileInfo
+                                      .value
+                                      .uiLanguage,
+                                  minTime: DateTime.now().subtract(
+                                    const Duration(days: 1),
+                                  ),
+                                  currentTime:
+                                      DateTime.tryParse(
                                         controller
                                             .selectedStartDateStringInFilter
                                             .value,
                                       ) ??
                                       DateTime.now(),
                                   onConfirmDate: (date) {
-                                    controller.selectedStartDateStringInFilter
-                                            .value =
-                                        dateTimeToString(selectedItem: date);
+                                    controller
+                                        .selectedStartDateStringInFilter
+                                        .value = dateTimeToString(
+                                      selectedItem: date,
+                                    );
                                   },
                                   containerWidget: Obx(
-                                    () => controller
+                                    () =>
+                                        controller
                                                 .selectedStartDateStringInFilter
                                                 .value ==
                                             ''
@@ -273,7 +279,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                               fontWeight: FontWeight.w400,
                                               fontSize: AppSize.s16,
                                             ),
-                                            suffixWidgetFlex: controller
+                                            suffixWidgetFlex:
+                                                controller
                                                         .typeSelected
                                                         .value
                                                         .id ==
@@ -320,23 +327,31 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   //       .selectedStartDateStringInFilter.value,
                                   // ),
                                   dialogType: DialogType.dateTimePickerDialog,
-                                  dateLocale: controller.profileController
-                                      .userProfileInfo.value.uiLanguage,
-                                  minTime: DateTime.now()
-                                      .subtract(const Duration(days: 1)),
-                                  currentTime: DateTime.tryParse(
+                                  dateLocale: controller
+                                      .profileController
+                                      .userProfileInfo
+                                      .value
+                                      .uiLanguage,
+                                  minTime: DateTime.now().subtract(
+                                    const Duration(days: 1),
+                                  ),
+                                  currentTime:
+                                      DateTime.tryParse(
                                         controller
                                             .selectedStartDateStringInFilter
                                             .value,
                                       ) ??
                                       DateTime.now(),
                                   onConfirmDate: (date) {
-                                    controller.selectedStartDateStringInFilter
-                                            .value =
-                                        dateTimeToString(selectedItem: date);
+                                    controller
+                                        .selectedStartDateStringInFilter
+                                        .value = dateTimeToString(
+                                      selectedItem: date,
+                                    );
                                   },
                                   containerWidget: Obx(
-                                    () => controller
+                                    () =>
+                                        controller
                                                 .selectedStartDateStringInFilter
                                                 .value ==
                                             ''
@@ -378,17 +393,15 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
 
                             ///===== Top of To Date Component =====//
                             if (controller.typesListInFilter[0].id != 1)
-                              const SizedBox(
-                                width: AppSize.s12,
-                              ),
+                              const SizedBox(width: AppSize.s12),
                             if (controller.typesListInFilter[0].id != 1)
                               Expanded(
                                 flex: 40,
                                 child: ContainerDialogWidget(
                                   inputTitle:
                                       controller.typesListInFilter[0].id == 1
-                                          ? 'internshipEndDate'.tr
-                                          : 'jobEnd'.tr,
+                                      ? 'internshipEndDate'.tr
+                                      : 'jobEnd'.tr,
                                   // fontSizeTitle: AppSize.s16,
                                   fontWeightTitle: FontWeight.w600,
                                   inputTitleMarginTop: AppSize.s5,
@@ -398,22 +411,31 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   //       .selectedEndDateStringInFilter.value,
                                   // ),
                                   dialogType: DialogType.dateTimePickerDialog,
-                                  dateLocale: controller.profileController
-                                      .userProfileInfo.value.uiLanguage,
-                                  minTime: DateTime.now()
-                                      .subtract(const Duration(days: 1)),
-                                  currentTime: DateTime.tryParse(
-                                        controller.selectedEndDateStringInFilter
+                                  dateLocale: controller
+                                      .profileController
+                                      .userProfileInfo
+                                      .value
+                                      .uiLanguage,
+                                  minTime: DateTime.now().subtract(
+                                    const Duration(days: 1),
+                                  ),
+                                  currentTime:
+                                      DateTime.tryParse(
+                                        controller
+                                            .selectedEndDateStringInFilter
                                             .value,
                                       ) ??
                                       DateTime.now(),
                                   onConfirmDate: (date) {
-                                    controller.selectedEndDateStringInFilter
-                                            .value =
-                                        dateTimeToString(selectedItem: date);
+                                    controller
+                                        .selectedEndDateStringInFilter
+                                        .value = dateTimeToString(
+                                      selectedItem: date,
+                                    );
                                   },
                                   containerWidget: Obx(
-                                    () => controller
+                                    () =>
+                                        controller
                                                 .selectedEndDateStringInFilter
                                                 .value ==
                                             ''
@@ -573,17 +595,14 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   color: ColorsManager.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(
-                                        AppSize.s16,
-                                      ),
-                                      topRight: Radius.circular(
-                                        AppSize.s16,
-                                      ),
+                                      topLeft: Radius.circular(AppSize.s16),
+                                      topRight: Radius.circular(AppSize.s16),
                                     ),
                                   ),
                                 ),
                                 child: Obx(
-                                  () => controller
+                                  () =>
+                                      controller
                                           .internshipTypeTagListForSearch
                                           .isNotEmpty
                                       ? FieldListMultipleSelector(
@@ -595,17 +614,18 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                           onTap: (field) {
                                             controller
                                                 .addingOrRemovingFieldInFieldListToBeSearch(
-                                              list: controller
-                                                  .internshipTypeTagListInFilter,
-                                              fieldValue: field,
-                                            );
+                                                  list: controller
+                                                      .internshipTypeTagListInFilter,
+                                                  fieldValue: field,
+                                                );
                                           },
                                         )
                                       : const LoadingWidget(),
                                 ),
                               ),
                               containerWidget: RowContentInputWidget(
-                                centerWidget: controller
+                                centerWidget:
+                                    controller
                                         .internshipTypeTagListInFilter
                                         .isNotEmpty
                                     ? Padding(
@@ -615,22 +635,24 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                         ),
                                         child: Wrap(
                                           children: [
-                                            for (var i = 0;
-                                                i <
-                                                    controller
-                                                        .internshipTypeTagListInFilter
-                                                        .length;
-                                                i++)
+                                            for (
+                                              var i = 0;
+                                              i <
+                                                  controller
+                                                      .internshipTypeTagListInFilter
+                                                      .length;
+                                              i++
+                                            )
                                               RemovableTextCardWidget(
                                                 text:
                                                     '${controller.internshipTypeTagListInFilter[i].label}',
                                                 onRemove: () => controller
                                                     .addingOrRemovingFieldInFieldListToBeSearch(
-                                                  list: controller
-                                                      .internshipTypeTagListInFilter,
-                                                  fieldValue: controller
-                                                      .internshipTypeTagListInFilter[i],
-                                                ),
+                                                      list: controller
+                                                          .internshipTypeTagListInFilter,
+                                                      fieldValue: controller
+                                                          .internshipTypeTagListInFilter[i],
+                                                    ),
                                               ),
                                           ],
                                         ),
@@ -700,12 +722,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             color: ColorsManager.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(
-                                  AppSize.s16,
-                                ),
-                                topRight: Radius.circular(
-                                  AppSize.s16,
-                                ),
+                                topLeft: Radius.circular(AppSize.s16),
+                                topRight: Radius.circular(AppSize.s16),
                               ),
                             ),
                           ),
@@ -719,27 +737,26 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                     onTap: (field) {
                                       controller
                                           .addingOrRemovingFieldInFieldListToBeSearch(
-                                        list: controller.fieldListInFilter,
-                                        fieldValue: field,
-                                      );
-                                    },
-                                  )
-                                : controller.fieldListForSearch.isNotEmpty
-                                    ? FieldListMultipleSelector(
-                                        inputHintText: 'search'.tr,
-                                        dataListforSelected:
-                                            controller.fieldListForSearch,
-                                        selectedItems:
-                                            controller.fieldListInFilter,
-                                        onTap: (field) {
-                                          controller
-                                              .addingOrRemovingFieldInFieldListToBeSearch(
                                             list: controller.fieldListInFilter,
                                             fieldValue: field,
                                           );
-                                        },
-                                      )
-                                    : const LoadingWidget(),
+                                    },
+                                  )
+                                : controller.fieldListForSearch.isNotEmpty
+                                ? FieldListMultipleSelector(
+                                    inputHintText: 'search'.tr,
+                                    dataListforSelected:
+                                        controller.fieldListForSearch,
+                                    selectedItems: controller.fieldListInFilter,
+                                    onTap: (field) {
+                                      controller
+                                          .addingOrRemovingFieldInFieldListToBeSearch(
+                                            list: controller.fieldListInFilter,
+                                            fieldValue: field,
+                                          );
+                                    },
+                                  )
+                                : const LoadingWidget(),
                           ),
                         ),
                         containerWidget: RowContentInputWidget(
@@ -751,20 +768,21 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   ),
                                   child: Wrap(
                                     children: [
-                                      for (var i = 0;
-                                          i <
-                                              controller
-                                                  .fieldListInFilter.length;
-                                          i++)
+                                      for (
+                                        var i = 0;
+                                        i < controller.fieldListInFilter.length;
+                                        i++
+                                      )
                                         RemovableTextCardWidget(
                                           text:
                                               '${controller.fieldListInFilter[i].label}',
                                           onRemove: () => controller
                                               .addingOrRemovingFieldInFieldListToBeSearch(
-                                            list: controller.fieldListInFilter,
-                                            fieldValue:
-                                                controller.fieldListInFilter[i],
-                                          ),
+                                                list: controller
+                                                    .fieldListInFilter,
+                                                fieldValue: controller
+                                                    .fieldListInFilter[i],
+                                              ),
                                         ),
                                     ],
                                   ),
@@ -824,12 +842,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             color: ColorsManager.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(
-                                  AppSize.s16,
-                                ),
-                                topRight: Radius.circular(
-                                  AppSize.s16,
-                                ),
+                                topLeft: Radius.circular(AppSize.s16),
+                                topRight: Radius.circular(AppSize.s16),
                               ),
                             ),
                           ),
@@ -844,17 +858,18 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                     onTap: (field) {
                                       controller
                                           .addingOrRemovingFieldInFieldListToBeSearch(
-                                        list: controller.languageListInFilter,
-                                        fieldValue: field,
-                                      );
+                                            list:
+                                                controller.languageListInFilter,
+                                            fieldValue: field,
+                                          );
                                     },
                                   )
                                 : const LoadingWidget(),
                           ),
                         ),
                         containerWidget: RowContentInputWidget(
-                          centerWidget: controller
-                                  .languageListInFilter.isNotEmpty
+                          centerWidget:
+                              controller.languageListInFilter.isNotEmpty
                               ? Padding(
                                   padding: const EdgeInsets.only(
                                     top: AppSize.s4,
@@ -862,21 +877,24 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                   ),
                                   child: Wrap(
                                     children: [
-                                      for (var i = 0;
-                                          i <
-                                              controller
-                                                  .languageListInFilter.length;
-                                          i++)
+                                      for (
+                                        var i = 0;
+                                        i <
+                                            controller
+                                                .languageListInFilter
+                                                .length;
+                                        i++
+                                      )
                                         RemovableTextCardWidget(
                                           text:
                                               '${controller.languageListInFilter[i].label}',
                                           onRemove: () => controller
                                               .addingOrRemovingFieldInFieldListToBeSearch(
-                                            list:
-                                                controller.languageListInFilter,
-                                            fieldValue: controller
-                                                .languageListInFilter[i],
-                                          ),
+                                                list: controller
+                                                    .languageListInFilter,
+                                                fieldValue: controller
+                                                    .languageListInFilter[i],
+                                              ),
                                         ),
                                     ],
                                   ),
@@ -941,18 +959,16 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                               color: ColorsManager.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(
-                                    AppSize.s16,
-                                  ),
-                                  topRight: Radius.circular(
-                                    AppSize.s16,
-                                  ),
+                                  topLeft: Radius.circular(AppSize.s16),
+                                  topRight: Radius.circular(AppSize.s16),
                                 ),
                               ),
                             ),
                             child: Obx(
-                              () => controller
-                                      .availabilitiesTagListForSearch.isNotEmpty
+                              () =>
+                                  controller
+                                      .availabilitiesTagListForSearch
+                                      .isNotEmpty
                                   ? FieldListMultipleSelector(
                                       inputHintText: 'search'.tr,
                                       dataListforSelected: controller
@@ -962,18 +978,20 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                       onTap: (field) {
                                         controller
                                             .addingOrRemovingFieldInFieldListToBeSearch(
-                                          list: controller
-                                              .availabilitiesTagListInFilter,
-                                          fieldValue: field,
-                                        );
+                                              list: controller
+                                                  .availabilitiesTagListInFilter,
+                                              fieldValue: field,
+                                            );
                                       },
                                     )
                                   : const LoadingWidget(),
                             ),
                           ),
                           containerWidget: RowContentInputWidget(
-                            centerWidget: controller
-                                    .availabilitiesTagListInFilter.isNotEmpty
+                            centerWidget:
+                                controller
+                                    .availabilitiesTagListInFilter
+                                    .isNotEmpty
                                 ? Padding(
                                     padding: const EdgeInsets.only(
                                       top: AppSize.s4,
@@ -981,22 +999,24 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                     ),
                                     child: Wrap(
                                       children: [
-                                        for (var i = 0;
-                                            i <
-                                                controller
-                                                    .availabilitiesTagListInFilter
-                                                    .length;
-                                            i++)
+                                        for (
+                                          var i = 0;
+                                          i <
+                                              controller
+                                                  .availabilitiesTagListInFilter
+                                                  .length;
+                                          i++
+                                        )
                                           RemovableTextCardWidget(
                                             text:
                                                 '${controller.availabilitiesTagListInFilter[i].label}',
                                             onRemove: () => controller
                                                 .addingOrRemovingFieldInFieldListToBeSearch(
-                                              list: controller
-                                                  .availabilitiesTagListInFilter,
-                                              fieldValue: controller
-                                                  .availabilitiesTagListInFilter[i],
-                                            ),
+                                                  list: controller
+                                                      .availabilitiesTagListInFilter,
+                                                  fieldValue: controller
+                                                      .availabilitiesTagListInFilter[i],
+                                                ),
                                           ),
                                       ],
                                     ),
@@ -1013,6 +1033,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                             ),
                           ),
                         ),
+
                       // Container(
                       //   padding: const EdgeInsets.only(
                       //     left: AppSize.s10,
@@ -1041,7 +1062,6 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                       // ),
                       //===== Bottom of Availabilities Tags Component =====//
                       // const SizedBox(height: 8.0),
-
                       if (controller.workPlaceTypesInFilter.value == 1 &&
                           (controller.typesListInFilter.isNotEmpty &&
                               controller.typesListInFilter
@@ -1061,8 +1081,12 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                 children: [
                                   GestureDetector(
                                     onTap: () async {
-                                      controller.placeDetail.value =
-                                          (await showSearchFunc(context))!;
+                                      final result = await showSearchFunc(
+                                        context,
+                                      );
+                                      if (result != null) {
+                                        controller.placeDetail.value = result;
+                                      }
                                     },
                                     child: AbsorbPointer(
                                       child: Stack(
@@ -1082,8 +1106,11 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                             inputTitle: 'location'.tr,
                                             fontSizeTitle: AppSize.s16,
                                             fontWeightTitle: FontWeight.w600,
-                                            hintText: controller.placeDetail
-                                                    .value.fullAddress ??
+                                            hintText:
+                                                controller
+                                                    .placeDetail
+                                                    .value
+                                                    .fullAddress ??
                                                 '',
                                             hintTextColor: ColorsManager.black,
                                             isFilled: true,
@@ -1107,10 +1134,14 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                     ),
                                   ),
                                   if (controller
-                                              .placeDetail.value.fullAddress ==
+                                              .placeDetail
+                                              .value
+                                              .fullAddress ==
                                           null ||
                                       controller
-                                              .placeDetail.value.fullAddress ==
+                                              .placeDetail
+                                              .value
+                                              .fullAddress ==
                                           '')
                                     Container()
                                   else
@@ -1121,7 +1152,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                       child: Container(
                                         alignment: Alignment.centerRight,
                                         child: GestureDetector(
-                                          onTap: () async {
+                                          onTap: () {
                                             controller.clearPlaceDetail();
                                           },
                                           child: const Icon(
@@ -1159,8 +1190,8 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                 thumbColor: ColorsManager.primary,
                                 label: '${controller.radiusRxInt.value}',
                                 onChanged: (double newValue) {
-                                  controller.radiusRxInt.value =
-                                      newValue.toInt();
+                                  controller.radiusRxInt.value = newValue
+                                      .toInt();
                                 },
                               ),
                             ),
@@ -1173,15 +1204,14 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
               ),
             ),
             //===== Bottom Body/Content Component =====//
-            const Divider(
-              height: 1.0,
-              color: ColorsManager.grey,
-            ),
+            const Divider(height: 1.0, color: ColorsManager.grey),
 
             ///===== Top of Button Actions List Component =====//
             Padding(
-              padding:
-                  const EdgeInsets.only(left: AppSize.s8, right: AppSize.s8),
+              padding: const EdgeInsets.only(
+                left: AppSize.s8,
+                right: AppSize.s8,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

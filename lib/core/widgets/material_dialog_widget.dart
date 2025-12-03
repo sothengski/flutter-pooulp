@@ -13,7 +13,7 @@ class MaterialDialogWidget extends StatelessWidget {
   final Widget? actionWidget;
 
   const MaterialDialogWidget({
-    Key? key,
+    super.key,
     this.title = '',
     this.titleFontSize = 16.0,
     this.titleHorizontalMargin = 16.0,
@@ -22,7 +22,7 @@ class MaterialDialogWidget extends StatelessWidget {
     this.dialogMargin = 40,
     this.contentWidget,
     this.actionWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +48,9 @@ class MaterialDialogWidget extends StatelessWidget {
                   Container()
                 else
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: AppSize.s12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSize.s12,
+                    ),
                     child: Row(
                       mainAxisAlignment: rightWidget == null
                           ? MainAxisAlignment.center
@@ -66,18 +67,13 @@ class MaterialDialogWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                const Divider(
-                  height: 1.0,
-                  color: ColorsManager.grey,
-                ),
+                const Divider(height: 1.0, color: ColorsManager.grey),
 
                 ///===== Top of Body/Content Component =====//
                 Container(
                   // height: getHeight * 0.25,
                   alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(
-                    AppSize.s8,
-                  ),
+                  padding: const EdgeInsets.all(AppSize.s8),
                   child: contentWidget,
                 ),
                 //===== Bottom Body/Content Component =====//
@@ -86,10 +82,7 @@ class MaterialDialogWidget extends StatelessWidget {
                 if (actionWidget == null)
                   Container()
                 else
-                  const Divider(
-                    height: 1.0,
-                    color: ColorsManager.grey,
-                  ),
+                  const Divider(height: 1.0, color: ColorsManager.grey),
                 Container(
                   // height: getHeight * 0.25,
                   alignment: Alignment.topCenter,

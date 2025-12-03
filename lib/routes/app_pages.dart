@@ -70,7 +70,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.addOrEditEducationRoute,
-      page: () => AddOrEditEducationPage(),
+      page: () => const AddOrEditEducationPage(),
       binding: EducationBinding(),
     ),
     GetPage(

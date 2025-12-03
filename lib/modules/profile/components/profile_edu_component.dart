@@ -10,11 +10,11 @@ class ProfileEduComponent extends StatelessWidget {
   final List<EducationModel>? eduList;
 
   const ProfileEduComponent({
-    Key? key,
+    super.key,
     this.title,
     this.addOrEditEduRoute,
     this.eduList,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,7 @@ class ProfileEduComponent extends StatelessWidget {
         padding: 0.0,
         isConstraints: true,
         onClick: () => {
-          Get.toNamed(
-            addOrEditEduRoute!,
-            arguments: [Keys.addOperation],
-          ),
+          Get.toNamed(addOrEditEduRoute!, arguments: [Keys.addOperation]),
         },
       ),
       child: Column(

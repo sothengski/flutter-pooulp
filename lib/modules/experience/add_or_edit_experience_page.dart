@@ -5,7 +5,7 @@ import '../../core/core.dart';
 import 'experience.dart';
 
 class AddOrEditExperiencePage extends GetView<ExperienceController> {
-  const AddOrEditExperiencePage({Key? key}) : super(key: key);
+  const AddOrEditExperiencePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,6 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (controller.expType.value == AppStrings.professionalKey)
-
                   ///===== Top of Company Name Component =====//
                   CustomTextInput(
                     topPadding: AppSize.s16,
@@ -63,7 +62,6 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                   )
                 //===== Bottom of Company Name Component =====//
                 else
-
                   ///===== Top of Type Component =====//
                   ContainerDialogWidget(
                     inputTitle: 'Type'.tr,
@@ -83,20 +81,24 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                                       isLeftSideText: false,
                                       isClickingValue: stringsComparation(
                                         object1: controller
-                                            .experienceTypeList[index].label,
+                                            .experienceTypeList[index]
+                                            .label,
                                         object2: controller
-                                            .selectedExperienceType.value.label,
+                                            .selectedExperienceType
+                                            .value
+                                            .label,
                                       ),
                                       text: controller
-                                          .experienceTypeList[index].label,
+                                          .experienceTypeList[index]
+                                          .label,
                                       onPressed: () {
                                         controller
-                                                .selectedExperienceType.value =
-                                            controller
-                                                .selectedExperienceTypeOnClick(
-                                          selectedItem: controller
-                                              .experienceTypeList[index],
-                                        );
+                                            .selectedExperienceType
+                                            .value = controller
+                                            .selectedExperienceTypeOnClick(
+                                              selectedItem: controller
+                                                  .experienceTypeList[index],
+                                            );
                                         Navigator.pop(
                                           context,
                                           true,
@@ -132,7 +134,9 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                           : RowContentInputWidget(
                               centerWidget: CustomTextWidget(
                                 text: controller
-                                    .selectedExperienceType.value.label,
+                                    .selectedExperienceType
+                                    .value
+                                    .label,
                                 color: ColorsManager.black,
                                 fontSize: AppSize.s16,
                               ),
@@ -169,8 +173,8 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                       onPressed: () {
                         controller.isCheckStillWorking.value =
                             switchingBooleanValue(
-                          boolValue: controller.isCheckStillWorking.value,
-                        );
+                              boolValue: controller.isCheckStillWorking.value,
+                            );
                       },
                     ),
                   )
@@ -193,8 +197,12 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                         ),
                         dialogType: DialogType.dateTimePickerDialog,
                         dateLocale: controller
-                            .profileController.userProfileInfo.value.uiLanguage,
-                        currentTime: DateTime.tryParse(
+                            .profileController
+                            .userProfileInfo
+                            .value
+                            .uiLanguage,
+                        currentTime:
+                            DateTime.tryParse(
                               controller.selectedStartedDateString.value,
                             ) ??
                             DateTime.now(),
@@ -222,7 +230,8 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                                     text: dateFormatSlashDDMMYYYY(
                                       date: DateTime.tryParse(
                                         controller
-                                            .selectedStartedDateString.value,
+                                            .selectedStartedDateString
+                                            .value,
                                       ),
                                     ),
                                     color: ColorsManager.black,
@@ -238,9 +247,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                       ),
                     ),
                     //===== Bottom of Start Date Component =====//
-                    const SizedBox(
-                      width: AppSize.s12,
-                    ),
+                    const SizedBox(width: AppSize.s12),
 
                     ///===== Top of End Date Component =====//
                     Expanded(
@@ -250,8 +257,12 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                         inputTitleMarginTop: AppSize.s0,
                         dialogType: DialogType.dateTimePickerDialog,
                         dateLocale: controller
-                            .profileController.userProfileInfo.value.uiLanguage,
-                        currentTime: DateTime.tryParse(
+                            .profileController
+                            .userProfileInfo
+                            .value
+                            .uiLanguage,
+                        currentTime:
+                            DateTime.tryParse(
                               controller.selectedEndDateString.value,
                             ) ??
                             DateTime.now(),
@@ -314,9 +325,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                       ),
                     ),
                     //===== Bottom of City Component =====//
-                    const SizedBox(
-                      width: AppSize.s12,
-                    ),
+                    const SizedBox(width: AppSize.s12),
 
                     ///===== Top of Country Component =====//
                     Expanded(

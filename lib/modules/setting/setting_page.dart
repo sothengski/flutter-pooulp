@@ -7,7 +7,7 @@ import '../../routes/routes.dart';
 import 'setting.dart';
 
 class SettingPage extends GetView<SettingController> {
-  const SettingPage({Key? key}) : super(key: key);
+  const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,7 @@ class SettingPage extends GetView<SettingController> {
 
         //===== Bottom of Will Pop Scope Component =====//
         child: Scaffold(
-          appBar: CustomAppBar(
-            title: 'preferences'.tr,
-          ),
+          appBar: CustomAppBar(title: 'preferences'.tr),
 
           ///===== Top of body Component =====//
           body: SingleChildScrollView(
@@ -278,7 +276,9 @@ class SettingPage extends GetView<SettingController> {
                               child: ListView.separated(
                                 shrinkWrap: true,
                                 itemCount: controller
-                                    .languageController.languageOptions.length,
+                                    .languageController
+                                    .languageOptions
+                                    .length,
                                 separatorBuilder: (context, index) {
                                   return const Divider(
                                     color: ColorsManager.grey600,
@@ -299,8 +299,10 @@ class SettingPage extends GetView<SettingController> {
                                       centerWidget: CustomTextWidget(
                                         // marginTop: AppSize.s4,
                                         // marginBottom: AppSize.s4,
-                                        text: controller.languageController
-                                            .languageOptions[index].value,
+                                        text: controller
+                                            .languageController
+                                            .languageOptions[index]
+                                            .value,
                                         fontWeight: FontWeightManager.medium,
                                         fontSize: AppSize.s16,
                                       ),
@@ -310,8 +312,10 @@ class SettingPage extends GetView<SettingController> {
                                           right: AppSize.s8,
                                         ),
                                         child: CircleFlag(
-                                          controller.languageController
-                                              .languageOptions[index].flagPath!,
+                                          controller
+                                              .languageController
+                                              .languageOptions[index]
+                                              .flagPath!,
                                           padding: AppSize.s16,
                                         ),
                                       ),
@@ -323,8 +327,9 @@ class SettingPage extends GetView<SettingController> {
                           ),
                         ),
                         child: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(vertical: AppSize.s12),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: AppSize.s12,
+                          ),
                           child: RowContentInputWidget(
                             centerWidgetFlex: 50,
                             centerWidget: CustomTextWidget(
@@ -335,15 +340,17 @@ class SettingPage extends GetView<SettingController> {
                             ),
                             suffixWidgetFlex: 50,
                             suffixWidget: Padding(
-                              padding:
-                                  const EdgeInsets.only(right: AppSize.s12),
+                              padding: const EdgeInsets.only(
+                                right: AppSize.s12,
+                              ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   CustomTextWidget(
                                     textAlign: TextAlign.center,
                                     text: controller
-                                        .languageController.languageOptions
+                                        .languageController
+                                        .languageOptions
                                         .firstWhere(
                                           (e) =>
                                               e.key ==
@@ -367,15 +374,13 @@ class SettingPage extends GetView<SettingController> {
                         ),
                       ),
                       //===== Bottom of Change Language Component =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                      const Divider(height: 10, thickness: 1),
 
                       ///===== Top of Verify Email Component =====//
                       Padding(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: AppSize.s12),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: AppSize.s12,
+                        ),
                         child: RowContentInputWidget(
                           centerWidgetFlex: 30,
                           centerWidget: CustomTextWidget(
@@ -387,8 +392,12 @@ class SettingPage extends GetView<SettingController> {
                           suffixWidgetFlex: 70,
                           suffixWidget: Padding(
                             padding: const EdgeInsets.only(right: AppSize.s12),
-                            child: controller.profileController.userInfoRepsonse
-                                        .value.emailConfirmedAt !=
+                            child:
+                                controller
+                                        .profileController
+                                        .userInfoRepsonse
+                                        .value
+                                        .emailConfirmedAt !=
                                     null
                                 ? Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -415,13 +424,16 @@ class SettingPage extends GetView<SettingController> {
                                     onTap: () => {
                                       controller
                                           .makeRequestToAuthVerifyEmailAPI(
-                                        email: controller.profileController
-                                            .userInfoRepsonse.value.email,
-                                      ),
+                                            email: controller
+                                                .profileController
+                                                .userInfoRepsonse
+                                                .value
+                                                .email,
+                                          ),
                                     },
                                     child: Obx(
-                                      () => controller
-                                                  .isVerifyEmailSent.value ==
+                                      () =>
+                                          controller.isVerifyEmailSent.value ==
                                               true
                                           ? Row(
                                               mainAxisAlignment:
@@ -473,18 +485,16 @@ class SettingPage extends GetView<SettingController> {
                         ),
                       ),
                       //===== Bottom of Verify Email Component =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                      const Divider(height: 10, thickness: 1),
 
                       ///===== Top of Email Notification Component =====//
                       InkWell(
                         onTap: () {
-                          controller.emailNotificationRxBool.value =
-                              controller.updatingBoolValue(
-                            newValue: !controller.emailNotificationRxBool.value,
-                          )!;
+                          controller.emailNotificationRxBool.value = controller
+                              .updatingBoolValue(
+                                newValue:
+                                    !controller.emailNotificationRxBool.value,
+                              )!;
                         },
                         child: RowContentInputWidget(
                           centerWidget: CustomTextWidget(
@@ -499,8 +509,8 @@ class SettingPage extends GetView<SettingController> {
                             onChanged: (value) {
                               controller.emailNotificationRxBool.value =
                                   controller.updatingBoolValue(
-                                newValue: value,
-                              )!;
+                                    newValue: value,
+                                  )!;
                             },
                             activeTrackColor: ColorsManager.primary25,
                             activeThumbColor: ColorsManager.primary,
@@ -508,16 +518,14 @@ class SettingPage extends GetView<SettingController> {
                         ),
                       ),
                       //===== Bottom of Email Notification Component =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                      const Divider(height: 10, thickness: 1),
 
                       ///===== Top of NewsLetter Notification Component =====//
                       InkWell(
                         onTap: () {
-                          controller.newsLetterNotificationRxBool.value =
-                              controller.updatingBoolValue(
+                          controller
+                              .newsLetterNotificationRxBool
+                              .value = controller.updatingBoolValue(
                             newValue:
                                 !controller.newsLetterNotificationRxBool.value,
                           )!;
@@ -536,8 +544,8 @@ class SettingPage extends GetView<SettingController> {
                             onChanged: (value) {
                               controller.newsLetterNotificationRxBool.value =
                                   controller.updatingBoolValue(
-                                newValue: value,
-                              )!;
+                                    newValue: value,
+                                  )!;
                             },
                             activeTrackColor: ColorsManager.primary25,
                             activeThumbColor: ColorsManager.primary,
@@ -545,10 +553,7 @@ class SettingPage extends GetView<SettingController> {
                         ),
                       ),
                       //===== Bottom of NewLetter Notification Component =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                      const Divider(height: 10, thickness: 1),
 
                       ///===== Top of Change Password Component =====//
                       InkWell(
@@ -556,8 +561,9 @@ class SettingPage extends GetView<SettingController> {
                           Get.toNamed(Routes.changePasswordRoute);
                         },
                         child: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(vertical: AppSize.s12),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: AppSize.s12,
+                          ),
                           child: RowContentInputWidget(
                             centerWidget: CustomTextWidget(
                               marginLeft: AppSize.s12,
@@ -576,10 +582,7 @@ class SettingPage extends GetView<SettingController> {
                         ),
                       ),
                       //===== Bottom of Change Password Component =====//
-                      const Divider(
-                        height: 10,
-                        thickness: 1,
-                      ),
+                      const Divider(height: 10, thickness: 1),
 
                       ///===== Top of Delete Account Component =====//
                       InkWell(
@@ -588,23 +591,21 @@ class SettingPage extends GetView<SettingController> {
                             dialogBody:
                                 "${'delectAccountWarming'.tr}\n\n${'deleteAccountConfirmMsg'.tr}",
                             onPressed: () async => {
-                              Get.dialog(
-                                const LoadingWidget(),
-                              ),
+                              Get.dialog(const LoadingWidget()),
                               await Future.delayed(DurationConstant.d750, () {
                                 controller.makeRequestToAuthDeleteAccountAPI();
                               }),
                               await AuthServices().removeToken().then(
-                                    (value) =>
-                                        Get.offAllNamed(Routes.splashRoute),
-                                  ),
+                                (value) => Get.offAllNamed(Routes.splashRoute),
+                              ),
                               // Get.back(),
                             },
                           ),
                         ),
                         child: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(vertical: AppSize.s12),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: AppSize.s12,
+                          ),
                           child: RowContentInputWidget(
                             centerWidget: CustomTextWidget(
                               marginLeft: AppSize.s12,
@@ -624,9 +625,7 @@ class SettingPage extends GetView<SettingController> {
                         ),
                       ),
                       //===== Bottom of Delete Account Component =====//
-                      const SizedBox(
-                        height: AppSize.s8,
-                      ),
+                      const SizedBox(height: AppSize.s8),
                     ],
                   ),
                 ),
@@ -656,9 +655,7 @@ class SettingPage extends GetView<SettingController> {
               Get.dialog(
                 ConfirmationDialogWidget(
                   dialogBody: 'logOutConfirmMsg'.tr,
-                  onPressed: () => {
-                    controller.homeController.signOut(),
-                  },
+                  onPressed: () => {controller.homeController.signOut()},
                 ),
               );
             },

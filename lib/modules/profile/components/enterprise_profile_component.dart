@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import '../../modules.dart';
 
 class EnterpriseProfileComponent extends StatelessWidget {
-  const EnterpriseProfileComponent({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const EnterpriseProfileComponent({super.key, required this.controller});
 
   final ProfileController controller;
 

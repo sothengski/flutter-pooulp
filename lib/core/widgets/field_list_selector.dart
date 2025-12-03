@@ -28,13 +28,13 @@ class FieldListSelector extends StatefulWidget {
     this.scrollController,
     this.separatorIndex = 1,
     this.onTap,
-    Key? key,
+    super.key,
     this.showPhoneCode = true,
     this.showCountry = true,
     this.selectedItem,
     this.inputHintText = 'Search...',
     // this.selectedItems = const [],
-  }) : super(key: key);
+  });
 
   @override
   State<FieldListSelector> createState() => _FieldListSelectorState();
@@ -72,10 +72,7 @@ class _FieldListSelectorState extends State<FieldListSelector> {
                   shrinkWrap: true,
                   itemCount: filteredDataList!.length,
                   separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(
-                    height: 0.0,
-                    thickness: 0.0,
-                  ),
+                      const Divider(height: 0.0, thickness: 0.0),
                   itemBuilder: (BuildContext context, int index) {
                     final FieldModel fieldItem = filteredDataList![index];
                     return Card(
@@ -86,8 +83,10 @@ class _FieldListSelectorState extends State<FieldListSelector> {
                       child: ListTile(
                         key: Key(fieldItem.id.toString()),
                         dense: true,
-                        contentPadding:
-                            const EdgeInsets.only(left: 20.0, right: 20.0),
+                        contentPadding: const EdgeInsets.only(
+                          left: 20.0,
+                          right: 20.0,
+                        ),
                         // leading: CircleFlag(
                         //  schoolItem.id.toString(),
                         // ),
@@ -143,9 +142,7 @@ class _FieldListSelectorState extends State<FieldListSelector> {
               : const Padding(
                   key: Key('no-result'),
                   padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text(
-                    'No result found',
-                  ),
+                  child: Text('No result found'),
                 ),
         ),
       ],
@@ -158,11 +155,7 @@ class _FieldListSelectorState extends State<FieldListSelector> {
       searchResult.addAll(widget.dataListforSelected!);
     } else {
       searchResult = widget.dataListforSelected!
-          .where(
-            (c) => c.label!.toLowerCase().startsWith(
-                  query.toLowerCase(),
-                ),
-          )
+          .where((c) => c.label!.toLowerCase().startsWith(query.toLowerCase()))
           .toList();
     }
     setState(() => filteredDataList = searchResult);

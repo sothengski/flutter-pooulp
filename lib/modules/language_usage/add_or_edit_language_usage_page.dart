@@ -6,15 +6,13 @@ import '../../data/data.dart';
 import '../modules.dart';
 
 class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
-  const AddOrEditLanguageUsagePage({Key? key}) : super(key: key);
+  const AddOrEditLanguageUsagePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       ///===== Top of appBar Component =====//
-      appBar: CustomAppBar(
-        title: 'languages'.tr,
-      ),
+      appBar: CustomAppBar(title: 'languages'.tr),
       //===== Bottom of appBar Component =====//
 
       ///===== Top of body Component =====//
@@ -44,12 +42,8 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                           color: ColorsManager.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(
-                                AppSize.s16,
-                              ),
-                              topRight: Radius.circular(
-                                AppSize.s16,
-                              ),
+                              topLeft: Radius.circular(AppSize.s16),
+                              topRight: Radius.circular(AppSize.s16),
                             ),
                           ),
                         ),
@@ -60,17 +54,16 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                   dataListforSelected:
                                       controller.languageListForSelection,
                                   selectedItem: controller
-                                      .selectedMotherTongueLanguage.value,
+                                      .selectedMotherTongueLanguage
+                                      .value,
                                   onTap: (field) {
-                                    controller.selectedMotherTongueLanguage
-                                            .value =
-                                        controller.selectedLanguageOnClick(
-                                      selectedItem: field,
-                                    );
-                                    Navigator.pop(
-                                      context,
-                                      true,
-                                    );
+                                    controller
+                                        .selectedMotherTongueLanguage
+                                        .value = controller
+                                        .selectedLanguageOnClick(
+                                          selectedItem: field,
+                                        );
+                                    Navigator.pop(context, true);
                                   },
                                 )
                               : const LoadingWidget(),
@@ -79,33 +72,33 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                       containerWidget: Obx(
                         () =>
                             controller.selectedMotherTongueLanguage.value.id ==
-                                    null
-                                ? RowContentInputWidget(
-                                    centerWidget: CustomTextWidget(
-                                      text: 'languageHint'.tr,
-                                      color: ColorsManager.grey400,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: AppSize.s16,
-                                    ),
-                                    suffixWidget: const Icon(
-                                      IconsManager.arrowDropDown,
-                                      color: ColorsManager.grey600,
-                                    ),
-                                  )
-                                : RowContentInputWidget(
-                                    centerWidget: CustomTextWidget(
-                                      text: controller
-                                          .selectedMotherTongueLanguage
-                                          .value
-                                          .label,
-                                      color: ColorsManager.black,
-                                      fontSize: AppSize.s16,
-                                    ),
-                                    suffixWidget: const Icon(
-                                      IconsManager.arrowDropDown,
-                                      color: ColorsManager.grey600,
-                                    ),
-                                  ),
+                                null
+                            ? RowContentInputWidget(
+                                centerWidget: CustomTextWidget(
+                                  text: 'languageHint'.tr,
+                                  color: ColorsManager.grey400,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: AppSize.s16,
+                                ),
+                                suffixWidget: const Icon(
+                                  IconsManager.arrowDropDown,
+                                  color: ColorsManager.grey600,
+                                ),
+                              )
+                            : RowContentInputWidget(
+                                centerWidget: CustomTextWidget(
+                                  text: controller
+                                      .selectedMotherTongueLanguage
+                                      .value
+                                      .label,
+                                  color: ColorsManager.black,
+                                  fontSize: AppSize.s16,
+                                ),
+                                suffixWidget: const Icon(
+                                  IconsManager.arrowDropDown,
+                                  color: ColorsManager.grey600,
+                                ),
+                              ),
                       ),
                     ),
                     //===== Bottom of Mother Tongue Language Selection Component =====//
@@ -118,14 +111,14 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                         text: 'add'.tr,
                         childWidget:
                             controller.isSubmitBtnProcessing.value == true
-                                ? const SizedBox(
-                                    height: 40,
-                                    child: LoadingWidget(
-                                      isTreeBounceLoading: true,
-                                      color: ColorsManager.white,
-                                    ),
-                                  )
-                                : null,
+                            ? const SizedBox(
+                                height: 40,
+                                child: LoadingWidget(
+                                  isTreeBounceLoading: true,
+                                  color: ColorsManager.white,
+                                ),
+                              )
+                            : null,
                         fontSize: AppSize.s20,
                         buttonWidth: getWidth,
                         onPressed: () {
@@ -135,7 +128,9 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                               formKey:
                                   controller.editMontherTongueLangaugeFormKey,
                               languageTagId: controller
-                                  .selectedMotherTongueLanguage.value.id,
+                                  .selectedMotherTongueLanguage
+                                  .value
+                                  .id,
                               languageProficiencyLevel: 4,
                               spoken: 4,
                               written: 4,
@@ -172,12 +167,8 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                           color: ColorsManager.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(
-                                AppSize.s16,
-                              ),
-                              topRight: Radius.circular(
-                                AppSize.s16,
-                              ),
+                              topLeft: Radius.circular(AppSize.s16),
+                              topRight: Radius.circular(AppSize.s16),
                             ),
                           ),
                         ),
@@ -192,12 +183,9 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                   onTap: (field) {
                                     controller.selectedLanguage.value =
                                         controller.selectedLanguageOnClick(
-                                      selectedItem: field,
-                                    );
-                                    Navigator.pop(
-                                      context,
-                                      true,
-                                    );
+                                          selectedItem: field,
+                                        );
+                                    Navigator.pop(context, true);
                                   },
                                 )
                               : const LoadingWidget(),
@@ -344,10 +332,13 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                 isLeftSideText: false,
                                 isClickingValue: stringsComparation(
                                   object1: controller
-                                      .proficiencyList[index].label!
+                                      .proficiencyList[index]
+                                      .label!
                                       .toLowerCase(),
                                   object2: controller
-                                      .selectedSpokenProficiency.value.label!
+                                      .selectedSpokenProficiency
+                                      .value
+                                      .label!
                                       .toLowerCase(),
                                 ),
                                 text: translateStateWords(
@@ -357,13 +348,10 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                 onPressed: () {
                                   controller.selectedSpokenProficiency.value =
                                       controller.selectedLanguageOnClick(
-                                    selectedItem:
-                                        controller.proficiencyList[index],
-                                  );
-                                  Navigator.pop(
-                                    context,
-                                    true,
-                                  );
+                                        selectedItem:
+                                            controller.proficiencyList[index],
+                                      );
+                                  Navigator.pop(context, true);
                                 },
                               ),
                             );
@@ -379,37 +367,37 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                       containerWidget: Obx(
                         () =>
                             controller.selectedSpokenProficiency.value.label ==
-                                    ''
-                                ? RowContentInputWidget(
-                                    centerWidget: CustomTextWidget(
-                                      text: 'proficiencyHint'.tr,
-                                      // marginLeft: AppSize.s8,
-                                      color: ColorsManager.grey400,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16.0,
-                                    ),
-                                    suffixWidget: const Icon(
-                                      Icons.arrow_drop_down,
-                                      color: ColorsManager.grey600,
-                                    ),
-                                  )
-                                : RowContentInputWidget(
-                                    centerWidget: CustomTextWidget(
-                                      //marginLeft: 4.0,
-                                      text: translateStateWords(
-                                        stateWord: controller
-                                            .selectedSpokenProficiency
-                                            .value
-                                            .label,
-                                      ),
-                                      color: ColorsManager.black,
-                                      fontSize: 16.0,
-                                    ),
-                                    suffixWidget: const Icon(
-                                      Icons.arrow_drop_down,
-                                      color: ColorsManager.grey600,
-                                    ),
+                                ''
+                            ? RowContentInputWidget(
+                                centerWidget: CustomTextWidget(
+                                  text: 'proficiencyHint'.tr,
+                                  // marginLeft: AppSize.s8,
+                                  color: ColorsManager.grey400,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16.0,
+                                ),
+                                suffixWidget: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: ColorsManager.grey600,
+                                ),
+                              )
+                            : RowContentInputWidget(
+                                centerWidget: CustomTextWidget(
+                                  //marginLeft: 4.0,
+                                  text: translateStateWords(
+                                    stateWord: controller
+                                        .selectedSpokenProficiency
+                                        .value
+                                        .label,
                                   ),
+                                  color: ColorsManager.black,
+                                  fontSize: 16.0,
+                                ),
+                                suffixWidget: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: ColorsManager.grey600,
+                                ),
+                              ),
                       ),
                     ),
                     //===== Bottom of Spoken Proficiency Selection Component =====//
@@ -432,10 +420,13 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                 isLeftSideText: false,
                                 isClickingValue: stringsComparation(
                                   object1: controller
-                                      .proficiencyList[index].label!
+                                      .proficiencyList[index]
+                                      .label!
                                       .toLowerCase(),
                                   object2: controller
-                                      .selectedWrittenProficiency.value.label!
+                                      .selectedWrittenProficiency
+                                      .value
+                                      .label!
                                       .toLowerCase(),
                                 ),
                                 text: translateStateWords(
@@ -445,13 +436,10 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                 onPressed: () {
                                   controller.selectedWrittenProficiency.value =
                                       controller.selectedLanguageOnClick(
-                                    selectedItem:
-                                        controller.proficiencyList[index],
-                                  );
-                                  Navigator.pop(
-                                    context,
-                                    true,
-                                  );
+                                        selectedItem:
+                                            controller.proficiencyList[index],
+                                      );
+                                  Navigator.pop(context, true);
                                 },
                               ),
                             );
@@ -467,37 +455,37 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                       containerWidget: Obx(
                         () =>
                             controller.selectedWrittenProficiency.value.label ==
-                                    ''
-                                ? RowContentInputWidget(
-                                    centerWidget: CustomTextWidget(
-                                      text: 'proficiencyHint'.tr,
-                                      // marginLeft: AppSize.s8,
-                                      color: ColorsManager.grey400,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16.0,
-                                    ),
-                                    suffixWidget: const Icon(
-                                      Icons.arrow_drop_down,
-                                      color: ColorsManager.grey600,
-                                    ),
-                                  )
-                                : RowContentInputWidget(
-                                    centerWidget: CustomTextWidget(
-                                      //marginLeft: 4.0,
-                                      text: translateStateWords(
-                                        stateWord: controller
-                                            .selectedWrittenProficiency
-                                            .value
-                                            .label,
-                                      ),
-                                      color: ColorsManager.black,
-                                      fontSize: 16.0,
-                                    ),
-                                    suffixWidget: const Icon(
-                                      Icons.arrow_drop_down,
-                                      color: ColorsManager.grey600,
-                                    ),
+                                ''
+                            ? RowContentInputWidget(
+                                centerWidget: CustomTextWidget(
+                                  text: 'proficiencyHint'.tr,
+                                  // marginLeft: AppSize.s8,
+                                  color: ColorsManager.grey400,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16.0,
+                                ),
+                                suffixWidget: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: ColorsManager.grey600,
+                                ),
+                              )
+                            : RowContentInputWidget(
+                                centerWidget: CustomTextWidget(
+                                  //marginLeft: 4.0,
+                                  text: translateStateWords(
+                                    stateWord: controller
+                                        .selectedWrittenProficiency
+                                        .value
+                                        .label,
                                   ),
+                                  color: ColorsManager.black,
+                                  fontSize: 16.0,
+                                ),
+                                suffixWidget: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: ColorsManager.grey600,
+                                ),
+                              ),
                       ),
                     ),
                     //===== Bottom of Written Proficiency Selection Component =====//
@@ -510,14 +498,14 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                         text: 'add'.tr,
                         childWidget:
                             controller.isSubmitBtnProcessing.value == true
-                                ? const SizedBox(
-                                    height: 40,
-                                    child: LoadingWidget(
-                                      isTreeBounceLoading: true,
-                                      color: ColorsManager.white,
-                                    ),
-                                  )
-                                : null,
+                            ? const SizedBox(
+                                height: 40,
+                                child: LoadingWidget(
+                                  isTreeBounceLoading: true,
+                                  color: ColorsManager.white,
+                                ),
+                              )
+                            : null,
                         fontSize: AppSize.s20,
                         buttonWidth: getWidth,
                         onPressed: () {
@@ -529,9 +517,13 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                   controller.selectedLanguage.value.id,
                               languageProficiencyLevel: 1,
                               spoken: controller
-                                  .selectedSpokenProficiency.value.level,
+                                  .selectedSpokenProficiency
+                                  .value
+                                  .level,
                               written: controller
-                                  .selectedWrittenProficiency.value.level,
+                                  .selectedWrittenProficiency
+                                  .value
+                                  .level,
                               // languageProficiencyLevel: controller
                               //     .selectedProficiency.value.level,
                               // spoken: controller.selectedlanguageTypes
@@ -559,17 +551,15 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
               ///===== Top of User Language List Component =====//
               Obx(
                 () => Container(
-                  padding: const EdgeInsets.fromLTRB(
-                    0.0,
-                    16.0,
-                    0.0,
-                    16.0,
-                  ),
-                  child: controller.profileController.studentInfoRepsonse.value
-                          .spokenLanguages!.isEmpty
-                      ? CustomTextWidget(
-                          text: 'noLanguagesFound'.tr,
-                        )
+                  padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 16.0),
+                  child:
+                      controller
+                          .profileController
+                          .studentInfoRepsonse
+                          .value
+                          .spokenLanguages!
+                          .isEmpty
+                      ? CustomTextWidget(text: 'noLanguagesFound'.tr)
                       : Wrap(
                           children: [
                             Column(
@@ -629,8 +619,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                           isConstraints: true,
                                                           iconSize: AppSize.s20,
                                                           onClick: () {
-                                                            controller
-                                                                .makeRequestToSpokenLanguageAPI(
+                                                            controller.makeRequestToSpokenLanguageAPI(
                                                               spokenLanguageId:
                                                                   languageItem
                                                                       .id,
@@ -657,7 +646,8 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                 ),
                                                 Obx(
                                                   () => Container(
-                                                    padding: controller
+                                                    padding:
+                                                        controller
                                                                 .isUpdating
                                                                 .value ==
                                                             false
@@ -709,8 +699,8 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                             () => Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                vertical: AppSize.s8,
-                                              ),
+                                                    vertical: AppSize.s8,
+                                                  ),
                                               // width: double.infinity,
                                               child: Column(
                                                 children: [
@@ -734,8 +724,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                             iconSize:
                                                                 AppSize.s20,
                                                             onClick: () {
-                                                              controller
-                                                                  .makeRequestToSpokenLanguageAPI(
+                                                              controller.makeRequestToSpokenLanguageAPI(
                                                                 spokenLanguageId:
                                                                     languageItem
                                                                         .id,
@@ -944,60 +933,47 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                       ///===== Top of Spoken Proficiency Selection Component =====//
                                                       Expanded(
                                                         flex: 40,
-                                                        child:
-                                                            ContainerDialogWidget(
+                                                        child: ContainerDialogWidget(
                                                           inputTitle:
                                                               'spoken'.tr,
                                                           inputTitleMarginTop:
                                                               AppSize.s2,
-                                                          dialogWidget:
-                                                              MaterialDialogWidget(
+                                                          dialogWidget: MaterialDialogWidget(
                                                             title:
                                                                 'proficiencyHint'
                                                                     .tr,
-                                                            contentWidget:
-                                                                ListView
-                                                                    .separated(
+                                                            contentWidget: ListView.separated(
                                                               shrinkWrap: true,
                                                               itemCount: controller
                                                                   .proficiencyList
                                                                   .length,
-                                                              itemBuilder: (
-                                                                context,
-                                                                index,
-                                                              ) {
+                                                              itemBuilder: (context, index) {
                                                                 return Obx(
-                                                                  () => RowDataSelectionWidget
-                                                                      .radioButton(
+                                                                  () => RowDataSelectionWidget.radioButton(
                                                                     isLeftSideText:
                                                                         false,
-                                                                    isClickingValue:
-                                                                        intComparation(
+                                                                    isClickingValue: intComparation(
                                                                       object1: controller
-                                                                          .proficiencyList[
-                                                                              index]
+                                                                          .proficiencyList[index]
                                                                           .level,
                                                                       object2:
                                                                           languageItem
                                                                               .languageSpokenLv,
                                                                     ),
-                                                                    text:
-                                                                        translateStateWords(
+                                                                    text: translateStateWords(
                                                                       stateWord:
                                                                           '${controller.proficiencyList[index].label}',
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      controller
-                                                                          .makeRequestToSpokenLanguageAPI(
+                                                                    onPressed: () {
+                                                                      controller.makeRequestToSpokenLanguageAPI(
                                                                         spokenLanguageId:
                                                                             languageItem.id,
-                                                                        spokenLanguageData:
-                                                                            FieldModel(
+                                                                        spokenLanguageData: FieldModel(
                                                                           level:
                                                                               1,
                                                                           videoUrl:
-                                                                              languageItem.videoUrl ?? '',
+                                                                              languageItem.videoUrl ??
+                                                                              '',
                                                                           languageSpokenLv: controller
                                                                               .proficiencyList[index]
                                                                               .level,
@@ -1007,8 +983,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                                         operation:
                                                                             Keys.editOperation,
                                                                       );
-                                                                      Navigator
-                                                                          .pop(
+                                                                      Navigator.pop(
                                                                         context,
                                                                         true,
                                                                       );
@@ -1018,21 +993,20 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                               },
                                                               separatorBuilder:
                                                                   (
-                                                                context,
-                                                                index,
-                                                              ) {
-                                                                return const Divider(
-                                                                  height: 1.0,
-                                                                  color: ColorsManager
-                                                                      .grey300,
-                                                                );
-                                                              },
+                                                                    context,
+                                                                    index,
+                                                                  ) {
+                                                                    return const Divider(
+                                                                      height:
+                                                                          1.0,
+                                                                      color: ColorsManager
+                                                                          .grey300,
+                                                                    );
+                                                                  },
                                                             ),
                                                           ),
-                                                          containerWidget:
-                                                              RowContentInputWidget(
-                                                            centerWidget:
-                                                                CustomTextWidget(
+                                                          containerWidget: RowContentInputWidget(
+                                                            centerWidget: CustomTextWidget(
                                                               //marginLeft: 4.0,
                                                               textAlign:
                                                                   TextAlign
@@ -1047,8 +1021,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                             ),
                                                             suffixWidgetFlex:
                                                                 15,
-                                                            suffixWidget:
-                                                                const Icon(
+                                                            suffixWidget: const Icon(
                                                               Icons
                                                                   .arrow_drop_down,
                                                               color:
@@ -1067,60 +1040,47 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                       ///===== Top of Written Proficiency Selection Component =====//
                                                       Expanded(
                                                         flex: 40,
-                                                        child:
-                                                            ContainerDialogWidget(
+                                                        child: ContainerDialogWidget(
                                                           inputTitle:
                                                               'written'.tr,
                                                           inputTitleMarginTop:
                                                               AppSize.s2,
-                                                          dialogWidget:
-                                                              MaterialDialogWidget(
+                                                          dialogWidget: MaterialDialogWidget(
                                                             title:
                                                                 'proficiencyHint'
                                                                     .tr,
-                                                            contentWidget:
-                                                                ListView
-                                                                    .separated(
+                                                            contentWidget: ListView.separated(
                                                               shrinkWrap: true,
                                                               itemCount: controller
                                                                   .proficiencyList
                                                                   .length,
-                                                              itemBuilder: (
-                                                                context,
-                                                                index,
-                                                              ) {
+                                                              itemBuilder: (context, index) {
                                                                 return Obx(
-                                                                  () => RowDataSelectionWidget
-                                                                      .radioButton(
+                                                                  () => RowDataSelectionWidget.radioButton(
                                                                     isLeftSideText:
                                                                         false,
-                                                                    isClickingValue:
-                                                                        intComparation(
+                                                                    isClickingValue: intComparation(
                                                                       object1: controller
-                                                                          .proficiencyList[
-                                                                              index]
+                                                                          .proficiencyList[index]
                                                                           .level,
                                                                       object2:
                                                                           languageItem
                                                                               .languageWrittenLv,
                                                                     ),
-                                                                    text:
-                                                                        translateStateWords(
+                                                                    text: translateStateWords(
                                                                       stateWord:
                                                                           '${controller.proficiencyList[index].label}',
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      controller
-                                                                          .makeRequestToSpokenLanguageAPI(
+                                                                    onPressed: () {
+                                                                      controller.makeRequestToSpokenLanguageAPI(
                                                                         spokenLanguageId:
                                                                             languageItem.id,
-                                                                        spokenLanguageData:
-                                                                            FieldModel(
+                                                                        spokenLanguageData: FieldModel(
                                                                           level:
                                                                               1,
                                                                           videoUrl:
-                                                                              languageItem.videoUrl ?? '',
+                                                                              languageItem.videoUrl ??
+                                                                              '',
                                                                           languageSpokenLv:
                                                                               languageItem.languageSpokenLv,
                                                                           languageWrittenLv: controller
@@ -1130,8 +1090,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                                         operation:
                                                                             Keys.editOperation,
                                                                       );
-                                                                      Navigator
-                                                                          .pop(
+                                                                      Navigator.pop(
                                                                         context,
                                                                         true,
                                                                       );
@@ -1141,21 +1100,20 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                               },
                                                               separatorBuilder:
                                                                   (
-                                                                context,
-                                                                index,
-                                                              ) {
-                                                                return const Divider(
-                                                                  height: 1.0,
-                                                                  color: ColorsManager
-                                                                      .grey300,
-                                                                );
-                                                              },
+                                                                    context,
+                                                                    index,
+                                                                  ) {
+                                                                    return const Divider(
+                                                                      height:
+                                                                          1.0,
+                                                                      color: ColorsManager
+                                                                          .grey300,
+                                                                    );
+                                                                  },
                                                             ),
                                                           ),
-                                                          containerWidget:
-                                                              RowContentInputWidget(
-                                                            centerWidget:
-                                                                CustomTextWidget(
+                                                          containerWidget: RowContentInputWidget(
+                                                            centerWidget: CustomTextWidget(
                                                               //marginLeft: 4.0,
                                                               textAlign:
                                                                   TextAlign
@@ -1173,8 +1131,7 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                             ),
                                                             suffixWidgetFlex:
                                                                 15,
-                                                            suffixWidget:
-                                                                const Icon(
+                                                            suffixWidget: const Icon(
                                                               Icons
                                                                   .arrow_drop_down,
                                                               color:
@@ -1189,7 +1146,8 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
                                                     ],
                                                   ),
                                                   Container(
-                                                    padding: controller
+                                                    padding:
+                                                        controller
                                                                 .isUpdating
                                                                 .value ==
                                                             false
@@ -1254,11 +1212,11 @@ class AddOrEditLanguageUsagePage extends GetView<LanguageUsageController> {
 // ignore: must_be_immutable
 class UrlLanguageInput extends StatelessWidget {
   UrlLanguageInput({
-    Key? key,
+    super.key,
     this.controller,
     required this.languageItem,
     this.vdoUrlCtrl,
-  }) : super(key: key);
+  });
 
   final LanguageUsageController? controller;
   final FieldModel? languageItem;
@@ -1286,9 +1244,7 @@ class UrlLanguageInput extends StatelessWidget {
                   // marginBottom: AppSize.s24,
                 ),
               ),
-              const SizedBox(
-                width: AppSize.s8,
-              ),
+              const SizedBox(width: AppSize.s8),
               Expanded(
                 flex: 5,
                 child: CustomIconButtonWidget(
@@ -1307,10 +1263,7 @@ class UrlLanguageInput extends StatelessWidget {
           )
         else
           Padding(
-            padding: const EdgeInsets.only(
-              left: 8.0,
-              right: 8.0,
-            ),
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -1327,14 +1280,12 @@ class UrlLanguageInput extends StatelessWidget {
                             languageItem!.selected = false;
                             controller!.isUpdating.value =
                                 switchingBooleanValue(
-                              boolValue: controller!.isUpdating.value,
-                            );
+                                  boolValue: controller!.isUpdating.value,
+                                );
                           },
                         ),
                 ),
-                const SizedBox(
-                  width: AppSize.s8,
-                ),
+                const SizedBox(width: AppSize.s8),
                 Flexible(
                   flex: 90,
                   child: CustomTextInput(
@@ -1344,9 +1295,7 @@ class UrlLanguageInput extends StatelessWidget {
                     hintText: 'addLanguageVideoPresentationLink'.tr,
                   ),
                 ),
-                const SizedBox(
-                  width: AppSize.s8,
-                ),
+                const SizedBox(width: AppSize.s8),
                 Expanded(
                   flex: 5,
                   child: CustomIconButtonWidget(

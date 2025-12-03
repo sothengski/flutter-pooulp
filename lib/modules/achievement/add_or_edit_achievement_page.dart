@@ -5,7 +5,7 @@ import '../../core/core.dart';
 import '../modules.dart';
 
 class AddOrEditAchievementPage extends GetView<AchievementController> {
-  const AddOrEditAchievementPage({Key? key}) : super(key: key);
+  const AddOrEditAchievementPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +70,12 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                   ),
                   dialogType: DialogType.dateTimePickerDialog,
                   dateLocale: controller
-                      .profileController.userProfileInfo.value.uiLanguage,
-                  currentTime: DateTime.tryParse(
+                      .profileController
+                      .userProfileInfo
+                      .value
+                      .uiLanguage,
+                  currentTime:
+                      DateTime.tryParse(
                         controller.selectedCompletionDateString.value,
                       ) ??
                       DateTime.now(),

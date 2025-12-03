@@ -11,20 +11,21 @@ class ConfirmationDialogWidget extends StatelessWidget {
   final Widget? actionWidget;
 
   const ConfirmationDialogWidget({
-    Key? key,
+    super.key,
     this.dialogTitle, // = AppStrings.confirmationText,
     this.dialogBody, // = "Would you like to remove this information?",
     this.contentWidget,
     this.actionWidget,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return MaterialDialogWidget(
       title: dialogTitle ?? 'confirmation'.tr,
       titleHorizontalMargin: AppSize.s12,
-      contentWidget: contentWidget ??
+      contentWidget:
+          contentWidget ??
           Center(
             child: CustomTextWidget(
               marginTop: AppSize.s12,
@@ -33,22 +34,17 @@ class ConfirmationDialogWidget extends StatelessWidget {
               maxLine: 5,
             ),
           ),
-      actionWidget: actionWidget ??
+      actionWidget:
+          actionWidget ??
           Row(
             children: [
               Expanded(
                 flex: 40,
                 child: OutlinedButton.icon(
                   onPressed: () {
-                    Navigator.pop(
-                      context,
-                      true,
-                    );
+                    Navigator.pop(context, true);
                   },
-                  icon: const Icon(
-                    IconsManager.close,
-                    color: Colors.white,
-                  ),
+                  icon: const Icon(IconsManager.close, color: Colors.white),
                   label: CustomTextWidget(
                     marginRight: AppSize.s24,
                     text: 'no'.tr,
@@ -68,10 +64,7 @@ class ConfirmationDialogWidget extends StatelessWidget {
                 flex: 40,
                 child: OutlinedButton.icon(
                   onPressed: onPressed,
-                  icon: const Icon(
-                    IconsManager.check,
-                    color: Colors.white,
-                  ),
+                  icon: const Icon(IconsManager.check, color: Colors.white),
                   label: CustomTextWidget(
                     marginRight: AppSize.s24,
                     text: 'yes'.tr,

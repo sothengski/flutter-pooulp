@@ -10,16 +10,17 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  get: ^4.6.5
-  get_storage: ^2.0.3
+  get: ^4.6.6
+  get_storage: ^2.1.1
   flutter_spinkit: ^5.1.0
-  intl: ^0.17.0
-  connectivity_plus: ^2.2.0
+  intl: ^0.18.0
+  connectivity_plus: ^5.0.1
   # flutter_datetime_picker: ^1.5.1 //issue with themeColor, change direct to git repo
-  flutter_datetime_picker:
-    git:
-      url: https://github.com/Realank/flutter_datetime_picker.git
-      ref: master
+  #  flutter_datetime_picker:
+  #    git:
+  #      url: https://github.com/Realank/flutter_datetime_picker.git
+  #      ref: master
+  flutter_datetime_picker_plus: ^2.1.0
   flutter_svg: ^1.0.3
   shimmer: ^2.0.0
   cached_network_image: ^3.2.0

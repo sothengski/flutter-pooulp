@@ -82,9 +82,9 @@ class API {
   static const String host =
       //'localhost:80'; //Local BASEURL
       // 'https://pooulp_api.test'; //Local Valet BASEURL
-      'http://api.dev-lamp-01.srv.pooulp.eu'; //Development BASEURL
-  // 'http://uat-api.pooulp.eu'; //UAT BASEURL
-  // 'https://api.pooulp.com'; //Production BASEURL
+      // 'http://api.dev-lamp-01.srv.pooulp.eu'; //Development BASEURL
+      // 'http://uat-api.pooulp.eu'; //UAT BASEURL
+      'https://api.pooulp.com'; //Production BASEURL
 
   /// API End Point Path URLs
   static final Map<Endpoint, String> paths = {

@@ -62,82 +62,82 @@ class TextThemeLight implements ITextTheme {
     this.displayColor,
   }) {
     data = TextTheme(
-      headline1: TextStyle(
+      headlineLarge: TextStyle(
         fontSize: 98,
         fontWeight: FontWeight.w300,
         letterSpacing: -1.5,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      headline2: TextStyle(
+      headlineMedium: TextStyle(
         fontSize: 61,
         fontWeight: FontWeight.w300,
         letterSpacing: -0.5,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      headline3: TextStyle(
+      headlineSmall: TextStyle(
         fontSize: 49,
         fontWeight: FontWeight.w400,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      headline4: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 35,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.25,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      headline5: TextStyle(
+      titleMedium: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w400,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      headline6: TextStyle(
+      titleSmall: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.15,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      subtitle1: TextStyle(
+      bodyLarge: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.15,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      subtitle2: TextStyle(
+      bodyMedium: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.1,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      bodyText1: TextStyle(
+      bodySmall: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.5,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      bodyText2: TextStyle(
+      labelLarge: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.25,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      button: TextStyle(
+      labelMedium: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         letterSpacing: 1.25,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      caption: TextStyle(
+      labelSmall: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.4,
         fontFamilyFallback: fontFamilyFallBack,
       ),
-      overline: TextStyle(
-        fontSize: 10,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.4,
-        fontFamilyFallback: fontFamilyFallBack,
-      ),
+      // overline: TextStyle(
+      //   fontSize: 10,
+      //   fontWeight: FontWeight.w400,
+      //   letterSpacing: 0.4,
+      //   fontFamilyFallback: fontFamilyFallBack,
+      // ),
     ).apply(
       bodyColor: primaryColor,
       displayColor: displayColor,

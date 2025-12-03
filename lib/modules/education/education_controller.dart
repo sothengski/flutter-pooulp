@@ -61,10 +61,12 @@ class EducationController extends GetxController {
       if (eduDataArg.degreeTag != null) {
         schoolDegreeSelected.value = eduDataArg.degreeTag!;
       }
-      selectedStartedDateString.value =
-          eduDataArg.dateStart == null ? '' : eduDataArg.dateStart.toString();
-      selectedEndDateString.value =
-          eduDataArg.dateEnd == null ? '' : eduDataArg.dateEnd.toString();
+      selectedStartedDateString.value = eduDataArg.dateStart == null
+          ? ''
+          : eduDataArg.dateStart.toString();
+      selectedEndDateString.value = eduDataArg.dateEnd == null
+          ? ''
+          : eduDataArg.dateEnd.toString();
       isCurrentStudy.value = eduDataArg.completed!;
       currentStudyYrTextCtrl.text = eduDataArg.studyingYear != null
           ? eduDataArg.studyingYear.toString()
@@ -81,14 +83,48 @@ class EducationController extends GetxController {
   Future<List<SchoolModel>> getSchoolListResponseProvider({
     bool? refresh = false,
   }) async {
-    schoolList.addAll(await tagProvider.getSchools());
+    schoolList.addAll(
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getSchools(),
+      // await FakeTagProvider().getSchools(),
+      [
+        SchoolModel(
+          id: 1,
+          name: 'School 1',
+          addressCity: 'City 1',
+          addressCountry: 'Country 1',
+        ),
+        SchoolModel(
+          id: 2,
+          name: 'School 2',
+          addressCity: 'City 2',
+          addressCountry: 'Country 2',
+        ),
+        SchoolModel(
+          id: 3,
+          name: 'School 3',
+          addressCity: 'City 3',
+          addressCountry: 'Country 3',
+        ),
+        SchoolModel(
+          id: 4,
+          name: 'School 4',
+          addressCity: 'City 4',
+          addressCountry: 'Country 4',
+        ),
+      ],
+    );
     return schoolList;
   }
 
   Future<List<FieldModel>> getFieldsListResponseProvider({
     bool? refresh = false,
   }) async {
-    fieldListForSelect.addAll(await tagProvider.getAllFields());
+    fieldListForSelect.addAll(
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getAllFields(),
+      await FakeTagProvider().getAllFields(),
+    );
     // debugPrint(
     //   'fieldListForSelect:: ${fieldListForSelect.map((element) => '${element.label}\n')}',
     // );
@@ -98,7 +134,18 @@ class EducationController extends GetxController {
   Future<List<FieldModel>> getSchoolDegreeListResponseProvider({
     bool? refresh = false,
   }) async {
-    schoolDegreeList.addAll(await tagProvider.getSchoolDegreeTags());
+    schoolDegreeList.addAll(
+      [
+        FieldModel(id: 1, label: 'High School', category: 'Education'),
+        FieldModel(id: 2, label: 'Bachelor', category: 'Education'),
+        FieldModel(id: 3, label: 'Master', category: 'Education'),
+        FieldModel(id: 4, label: 'Doctorate', category: 'Education'),
+      ],
+
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getSchoolDegreeTags(),
+      // await FakeTagProvider().getSchoolDegreeTags(),
+    );
     // debugPrint(
     //   'fieldListForSelect:: ${fieldListForSelect.map((element) => '${element.label}\n')}',
     // );
@@ -125,8 +172,9 @@ class EducationController extends GetxController {
 
   void saveButtonOnClick() {
     if (editEducationFormKey.currentState!.validate()) {
-      isSubmitBtnProcessing.value =
-          switchingBooleanValue(boolValue: isSubmitBtnProcessing.value);
+      isSubmitBtnProcessing.value = switchingBooleanValue(
+        boolValue: isSubmitBtnProcessing.value,
+      );
       final EducationModel educationToBeAddOrEdit = EducationModel(
         schoolId: selectedSchool.value.id,
         // name: fieldOfStudyTextCtrl.text.trim(),
@@ -135,14 +183,10 @@ class EducationController extends GetxController {
         studyingYear: int.tryParse(currentStudyYrTextCtrl.text),
         dateStart: selectedStartedDateString.value == ''
             ? null
-            : DateTime.tryParse(
-                selectedStartedDateString.value,
-              ),
+            : DateTime.tryParse(selectedStartedDateString.value),
         dateEnd: selectedEndDateString.value == ''
             ? null
-            : DateTime.tryParse(
-                selectedEndDateString.value,
-              ),
+            : DateTime.tryParse(selectedEndDateString.value),
         completed: isCurrentStudy.value,
         description: descriptionTextCtrl.text.trim(),
         fields: [...fieldListSelected],
@@ -166,8 +210,9 @@ class EducationController extends GetxController {
     final JsonResponse responseData;
     if (operation == Keys.addOperation) {
       // debugPrint('=====addOperation=====');
-      responseData =
-          await studentProvider.postStudentEducation(educationData: eduData);
+      responseData = await studentProvider.postStudentEducation(
+        educationData: eduData,
+      );
     } else if (operation == Keys.editOperation) {
       // debugPrint('=====editOperation=====');
       responseData = await studentProvider.putStudentEducation(
@@ -176,9 +221,7 @@ class EducationController extends GetxController {
       );
     } else {
       // debugPrint('=====deleteOperation=====');
-      responseData = await studentProvider.deleteStudentEducation(
-        eduId: eduId,
-      );
+      responseData = await studentProvider.deleteStudentEducation(eduId: eduId);
     }
     if (responseData.success!) {
       // debugPrint('=====success=====');
@@ -187,16 +230,19 @@ class EducationController extends GetxController {
       customSnackbar(
         msgTitle: 'success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'successfullyAdded'.tr //'profile.eduAddSuccessMsg'.tr
+            ? 'successfullyAdded'
+                  .tr //'profile.eduAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'successfullyUpdated'.tr //'profile.eduEditSuccessMsg'.tr
-                : 'successfullyDeleted'.tr, //'profile.eduDeleteSuccessMsg'.tr,
+            ? 'successfullyUpdated'
+                  .tr //'profile.eduEditSuccessMsg'.tr
+            : 'successfullyDeleted'.tr, //'profile.eduDeleteSuccessMsg'.tr,
         // 'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Education Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,
       );
     }
-    isSubmitBtnProcessing.value =
-        switchingBooleanValue(boolValue: isSubmitBtnProcessing.value);
+    isSubmitBtnProcessing.value = switchingBooleanValue(
+      boolValue: isSubmitBtnProcessing.value,
+    );
   }
 }

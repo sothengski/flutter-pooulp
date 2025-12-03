@@ -42,17 +42,26 @@ class SettingController extends GetxController {
         profileController.studentInfoRepsonse.value.hasAutomobile!;
     radiusRxInt.value =
         profileController.studentInfoRepsonse.value.radiusFromMeterToKM <= 5
-            ? 5
-            : profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
+        ? 5
+        : profileController.studentInfoRepsonse.value.radiusFromMeterToKM;
     emailNotificationRxBool.value =
         profileController.userProfileInfo.value.emailNotification ?? false;
     newsLetterNotificationRxBool.value =
         profileController.userProfileInfo.value.newsLetterNotification ?? false;
-    internshipPeriodSelected.value = profileController
-            .studentInfoRepsonse.value.internshipPeriods!.isNotEmpty
+    internshipPeriodSelected.value =
+        profileController
+            .studentInfoRepsonse
+            .value
+            .internshipPeriods!
+            .isNotEmpty
         ? profileController.studentInfoRepsonse.value.internshipPeriods!.first
         : FieldModel(id: 9999, label: '');
-    internshipPeriodList.addAll(await tagProvider.getInternshipPeriodTags());
+    internshipPeriodList.addAll(
+      /// TODO: remove this function after offline testing
+      // await tagProvider.getInternshipPeriodTags(),
+      // await FakeTagProvider().getInternshipPeriodTags(),
+      [],
+    );
     languageRxString.value =
         profileController.userProfileInfo.value.uiLanguage!;
     super.onInit();
@@ -66,14 +75,12 @@ class SettingController extends GetxController {
   void changeLanguage({required String? languageKey}) {
     isUpdating.value = true;
     languageRxString.value = languageKey!;
-    languageController.updateLanguage(
-      languageKey,
-    );
+    languageController.updateLanguage(languageKey);
   }
 
   void dataSummitionAndValidation() {
-    final StudentProfileModel studentProfileInfoToBeUpdate =
-        StudentProfileModel(
+    final StudentProfileModel
+    studentProfileInfoToBeUpdate = StudentProfileModel(
       drivingLicense: drivingLicenseRxBool.value,
       shifting: shiftingRxBool.value,
       radius: radiusRxInt.value,
@@ -123,19 +130,15 @@ class SettingController extends GetxController {
     ProfileModel? userProfileData,
     StudentProfileModel? studentProfileData,
   }) {
-    userInfoProvider
-        .putUpdateStudentProfileInfo(
-      data: studentProfileData,
-    )
-        .then((StudentProfileModel value) {
-      profileController.studentInfoRepsonse.value = value;
-    });
+    userInfoProvider.putUpdateStudentProfileInfo(data: studentProfileData).then(
+      (StudentProfileModel value) {
+        profileController.studentInfoRepsonse.value = value;
+      },
+    );
 
-    userInfoProvider
-        .putUpdateUserProfileInfo(
-      data: userProfileData,
-    )
-        .then((ProfileModel value) {
+    userInfoProvider.putUpdateUserProfileInfo(data: userProfileData).then((
+      ProfileModel value,
+    ) {
       profileController.userProfileInfo.value = value;
       customSnackbar(
         msgTitle: 'Success',

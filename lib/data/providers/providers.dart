@@ -2,6 +2,7 @@ export 'api.dart';
 export 'api_keys.dart';
 export 'app_basic_provider.dart';
 export 'auth_provider.dart';
+export 'fake_auth_provider.dart';
 export 'base_provider.dart';
 export 'feed_provider.dart';
 export 'messaging_provider.dart';

@@ -10,6 +10,7 @@ import '../../modules.dart';
 
 class SignInController extends GetxController with StateMixin<LoginModel> {
   final authProvider = Get.find<AuthProvider>();
+  final fakeAuthProvider = FakeAuthProvider();
   final languageController = Get.put(LanguageController());
 
   final signInFormKey = GlobalKey<FormState>();
@@ -222,8 +223,8 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
         email: emailCtrl.text.trim(),
         password: passwordCtrl.text.trim(),
       );
-      authProvider
-          .logInAPI(loginData: loginData)
+      fakeAuthProvider
+          .loginAPI(loginData: loginData)
           .then(
             (value) async {
               swithcingBoolValueLoginBtn(boolValue: false);
@@ -244,9 +245,11 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
             },
             onError: (error) {
               swithcingBoolValueLoginBtn(boolValue: false);
+              final errorMessage = error.toString().split('').last;
+              debugPrint('error: $errorMessage');
               customSnackbar(
                 msgTitle: 'sthWentWrong'.tr,
-                msgContent: "$error",
+                msgContent: error.toString().split('').last,
                 bgColor: ColorsManager.red,
               );
               change(null, status: RxStatus.error(error.toString()));

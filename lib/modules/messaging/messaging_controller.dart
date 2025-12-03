@@ -33,7 +33,9 @@ class MessagingController extends GetxController
     getRoomListDataState(refresh: true);
     addRoomToChatRooms();
     addMessagesToChat();
-    getConversationStatusResponseProvider();
+
+    /// TODO: remove this function after offline testing
+    // getConversationStatusResponseProvider();
     super.onInit();
   }
 
@@ -44,10 +46,7 @@ class MessagingController extends GetxController
         change(resp, status: RxStatus.success());
       },
       onError: (err) {
-        change(
-          null,
-          status: RxStatus.error('Error'),
-        );
+        change(null, status: RxStatus.error('Error'));
       },
     );
   }
@@ -102,13 +101,13 @@ class MessagingController extends GetxController
       //   pageNumber: 1,
       // );
     }
-    messagesAsPageRepsonse.value =
-        await messagingProvider.getMessagesAsPageByRoomID(
-      roomId: roomId,
-      pageNumber: refresh == true
-          ? 1
-          : messagesAsPageRepsonse.value.meta!.currentPage! + 1,
-    );
+    messagesAsPageRepsonse.value = await messagingProvider
+        .getMessagesAsPageByRoomID(
+          roomId: roomId,
+          pageNumber: refresh == true
+              ? 1
+              : messagesAsPageRepsonse.value.meta!.currentPage! + 1,
+        );
     isMessageLoading.value = false;
     isLoadingIndicator.value = false;
     roomMessagingDetailsRepsonse.addAll(messagesAsPageRepsonse.value.data!);
@@ -118,8 +117,8 @@ class MessagingController extends GetxController
   Future<Rx<ConversationModel>> getConversationStatusResponseProvider({
     bool? refresh = false,
   }) async {
-    conversationStatusRepsonse.value =
-        await messagingProvider.getConversationStatus();
+    conversationStatusRepsonse.value = await messagingProvider
+        .getConversationStatus();
 
     /// For Messaging Bags
     if (conversationStatusRepsonse.value.nbrNewConversation! > 0 ||
@@ -128,8 +127,10 @@ class MessagingController extends GetxController
     } else {
       homeController.isMessagingBag.value = false;
     }
-    homeController.messagingBagLabel.value =
-        conversationStatusRepsonse.value.nbrNewMsg!.toString();
+    homeController.messagingBagLabel.value = conversationStatusRepsonse
+        .value
+        .nbrNewMsg!
+        .toString();
     // For Messaging Bags
     return conversationStatusRepsonse;
   }
@@ -171,19 +172,12 @@ class MessagingController extends GetxController
     sendingTextCtrl.text = '';
     selectedRoom.value = MessagingModel();
     selectedRoom.value = roomValue!;
-    getRoomDetailsResponseProvider(
-      roomId: roomValue.uuid,
-      refresh: true,
-    );
+    getRoomDetailsResponseProvider(roomId: roomValue.uuid, refresh: true);
     if (roomValue.unseenMessages! > 0) {
-      makeRequestToPOSTSeenAllMessagesAPI(
-        roomId: roomValue.uuid,
-      );
+      makeRequestToPOSTSeenAllMessagesAPI(roomId: roomValue.uuid);
     }
     if (roomValue.newConversation! > 0) {
-      makeRequestToPOSTSeenConversationAPI(
-        roomId: roomValue.uuid,
-      );
+      makeRequestToPOSTSeenConversationAPI(roomId: roomValue.uuid);
     }
   }
 
@@ -243,8 +237,9 @@ class MessagingController extends GetxController
       onChangedTextCtrl('');
       await getRoomListResponseProvider(refresh: true);
       if (tempResp.data != null) {
-        final tempData =
-            MessagingModel.fromJson(tempResp.data as Map<String, dynamic>);
+        final tempData = MessagingModel.fromJson(
+          tempResp.data as Map<String, dynamic>,
+        );
         roomMessagingDetailsRepsonse.insert(0, tempData);
         update();
       }

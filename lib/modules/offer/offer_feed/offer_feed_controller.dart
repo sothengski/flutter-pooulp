@@ -26,8 +26,9 @@ class OfferFeedController extends GetxController
   RxList<JobOfferModel> feedListRepsonse = <JobOfferModel>[].obs;
   RxList<JobOfferModel> feedFilterList = <JobOfferModel>[].obs;
 
-  Rx<PaginationModel> feedListPagination =
-      PaginationModel(meta: MetaModel()).obs;
+  Rx<PaginationModel> feedListPagination = PaginationModel(
+    meta: MetaModel(),
+  ).obs;
 
   int pageNum = 1;
 
@@ -123,7 +124,9 @@ class OfferFeedController extends GetxController
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getSearchPreferenceResponseProvider();
+
+    /// TODO: remove this function after offline testing
+    // await getSearchPreferenceResponseProvider();
     await getjobOfferTypesListResponseProvider();
     await getFieldsListResponseProvider();
     await getLanguagesListResponseProvider();
@@ -131,8 +134,8 @@ class OfferFeedController extends GetxController
     await getInternshipTypeTagsListResponseProvider();
     await getInternshipPeriodTagsListResponseProvider();
     await getFeedsDataState(refresh: true)
-        // .then((value) => isProcessingStudentInfoRepsonse.value = true)
-        ;
+    // .then((value) => isProcessingStudentInfoRepsonse.value = true)
+    ;
     await addItemsIntoList();
   }
 
@@ -140,17 +143,17 @@ class OfferFeedController extends GetxController
       keywordToBeSearch.value = newKeyword.toString();
 
   void syncKeyWord({String? newKeyword = ''}) => {
-        keywordToBeSearch.value = newKeyword.toString(),
-        keywordToBeSearchTextCtrl.text = newKeyword.toString(),
-      };
+    keywordToBeSearch.value = newKeyword.toString(),
+    keywordToBeSearchTextCtrl.text = newKeyword.toString(),
+  };
 
   String updateSearchName({String? newSearchName = ''}) =>
       searchNameToBeSearch.value = newSearchName.toString();
 
   void syncSearchName({String? newSearchName = ''}) => {
-        searchNameToBeSearch.value = newSearchName.toString(),
-        searchNameToBeSearchTextCtrl.text = newSearchName.toString(),
-      };
+    searchNameToBeSearch.value = newSearchName.toString(),
+    searchNameToBeSearchTextCtrl.text = newSearchName.toString(),
+  };
 
   CountryModel selectedCountryOnClick(CountryModel selectedItem) {
     return selectedCountryInFilter.value = selectedItem;
@@ -265,9 +268,7 @@ class OfferFeedController extends GetxController
     radiusRxInt.value = 50;
     countFilterField();
     if (deleteSavedSearch == true) {
-      offerProvider.deleteSavedSearch(
-        savedSearchId: typeSelected.value.id,
-      );
+      offerProvider.deleteSavedSearch(savedSearchId: typeSelected.value.id);
     }
 
     // debugPrint(
@@ -419,23 +420,14 @@ class OfferFeedController extends GetxController
     // if failed,use refreshFailed()
   }
 
-  Future<void> getFeedsDataState({
-    bool? refresh,
-    int? searchOpt = 0,
-  }) async {
+  Future<void> getFeedsDataState({bool? refresh, int? searchOpt = 0}) async {
     change(null, status: RxStatus.loading());
-    getfeedListResponseProvider(
-      refresh: refresh,
-      searchOpt: searchOpt,
-    ).then(
+    getfeedListResponseProvider(refresh: refresh, searchOpt: searchOpt).then(
       (resp) {
         change(resp, status: RxStatus.success());
       },
       onError: (err) {
-        change(
-          null,
-          status: RxStatus.error('Error'),
-        );
+        change(null, status: RxStatus.error('Error'));
         isLoadingIndicator.value = false;
       },
     );
@@ -528,15 +520,18 @@ class OfferFeedController extends GetxController
   }) async {
     selectType(type: allType, isRefresh: false);
     // listJobOfferTypes.add(allType);
-    listJobOfferTypes.addAll(await tagProvider.getJobOfferTypes());
-
+    /// TODO: remove this function after offline testing
+    // listJobOfferTypes.addAll(await tagProvider.getJobOfferTypes());
+    listJobOfferTypes.addAll(await FakeTagProvider().getJobOfferTypes());
     return listJobOfferTypes;
   }
 
   Future<List<FieldModel>> getFieldsListResponseProvider({
     bool? refresh = false,
   }) async {
-    fieldListForSearch.addAll(await tagProvider.getAllFields());
+    /// TODO: remove this function after offline testing
+    // fieldListForSearch.addAll(await tagProvider.getAllFields());
+    fieldListForSearch.addAll(await FakeTagProvider().getAllFields());
     // debugPrint(
     //   'fieldListForSearch:: ${fieldListForSearch.map((element) => '${element.label}\n')}',
     // );
@@ -556,8 +551,9 @@ class OfferFeedController extends GetxController
   Future<List<FieldModel>> getAvailabilitiesTagListResponseProvider({
     bool? refresh = false,
   }) async {
-    availabilitiesTagListForSearch
-        .addAll(await tagProvider.getAvailabilitiesTags());
+    availabilitiesTagListForSearch.addAll(
+      await tagProvider.getAvailabilitiesTags(),
+    );
     // debugPrint(
     //   'availabilitiesTagListForSearch:: ${availabilitiesTagListForSearch.map((element) => '${element.label}\n')}',
     // );
@@ -567,16 +563,18 @@ class OfferFeedController extends GetxController
   Future<List<FieldModel>> getInternshipTypeTagsListResponseProvider({
     bool? refresh = false,
   }) async {
-    internshipTypeTagListForSearch
-        .addAll(await tagProvider.getInternshipTypeTags());
+    internshipTypeTagListForSearch.addAll(
+      await tagProvider.getInternshipTypeTags(),
+    );
     return internshipTypeTagListForSearch;
   }
 
   Future<List<FieldModel>> getInternshipPeriodTagsListResponseProvider({
     bool? refresh = false,
   }) async {
-    internshipPeriodTagListForSearch
-        .addAll(await tagProvider.getInternshipPeriodTags());
+    internshipPeriodTagListForSearch.addAll(
+      await tagProvider.getInternshipPeriodTags(),
+    );
     return internshipPeriodTagListForSearch;
   }
 
@@ -612,24 +610,22 @@ class OfferFeedController extends GetxController
       // location: countryToBeSearch.value.name,
       location: placeDetail.value.fullAddress,
       addressStreet: placeDetail.value.fullAddress,
-      addressLatitude:
-          placeDetail.value.lat == null ? '' : placeDetail.value.lat.toString(),
-      addressLongitude:
-          placeDetail.value.lng == null ? '' : placeDetail.value.lng.toString(),
+      addressLatitude: placeDetail.value.lat == null
+          ? ''
+          : placeDetail.value.lat.toString(),
+      addressLongitude: placeDetail.value.lng == null
+          ? ''
+          : placeDetail.value.lng.toString(),
       addressCity: placeDetail.value.areaLevel1,
       addressCountry: placeDetail.value.country,
       addressZip: placeDetail.value.postalCode,
       range: radiusRxInt.value,
       dateJobStart: selectedStartDateStringToBeSearch.value == ''
           ? null
-          : DateTime.tryParse(
-              selectedStartDateStringToBeSearch.value,
-            ),
+          : DateTime.tryParse(selectedStartDateStringToBeSearch.value),
       dateJobEnd: selectedEndDateStringToBeSearch.value == ''
           ? null
-          : DateTime.tryParse(
-              selectedEndDateStringToBeSearch.value,
-            ),
+          : DateTime.tryParse(selectedEndDateStringToBeSearch.value),
       searchName: searchNameToBeSearch.value,
       searchId: typeSelected.value.id == 0 ? null : typeSelected.value.id,
     );
@@ -648,11 +644,11 @@ class OfferFeedController extends GetxController
           feedListPagination.value.meta!.lastPage!) {
         pageNum = feedListPagination.value.meta!.currentPage! + 1;
         // debugPrint('pageNum if:: $pageNum');
-        feedListPaginationRepsonse =
-            await offerProvider.postSearchOfferWithPagination(
-          pageNumber: pageNum,
-          jobOfferForSearch: jobOfferToBeSearch.value,
-        );
+        feedListPaginationRepsonse = await offerProvider
+            .postSearchOfferWithPagination(
+              pageNumber: pageNum,
+              jobOfferForSearch: jobOfferToBeSearch.value,
+            );
         feedListPagination.value = feedListPaginationRepsonse;
         feedTempListResponse.addAll(feedListPagination.value.data!);
         feedListRepsonse.addAll(feedTempListResponse);
@@ -678,18 +674,17 @@ class OfferFeedController extends GetxController
         // debugPrint(
         //   "$searchOpt jobOfferToBeSearch delete: ${jobOfferToBeSearch.value}",
         // );
-        await offerProvider.deleteSavedSearch(
-          savedSearchId: 1,
-        );
+        await offerProvider.deleteSavedSearch(savedSearchId: 1);
       }
 
-      await getSearchPreferenceResponseProvider();
+      /// TODO: remove this function after offline testing
+      // await getSearchPreferenceResponseProvider();
 
-      feedListPaginationRepsonse =
-          await offerProvider.postSearchOfferWithPagination(
-        pageNumber: 1,
-        jobOfferForSearch: jobOfferToBeSearch.value,
-      );
+      feedListPaginationRepsonse = await offerProvider
+          .postSearchOfferWithPagination(
+            pageNumber: 1,
+            jobOfferForSearch: jobOfferToBeSearch.value,
+          );
       feedListPagination.value = feedListPaginationRepsonse;
       feedTempListResponse.addAll(feedListPagination.value.data!);
       feedListRepsonse.value = feedTempListResponse;
@@ -721,9 +716,7 @@ class OfferFeedController extends GetxController
 
     if (actionType == OfferStrings.applyAction) {
       await offerProvider
-          .postApplyOffer(
-            jobOfferId: jobOfferId,
-          )
+          .postApplyOffer(jobOfferId: jobOfferId)
           .then(
             (value) => offerHelper.removeItemFromJobOfferList(
               jobOfferList: feedListRepsonse,
@@ -740,9 +733,7 @@ class OfferFeedController extends GetxController
       homeController.isMyOfferBag.value =
           true; // for Bag status active in My Offer tab
     } else if (actionType == OfferStrings.saveAction) {
-      await offerProvider.postSaveOffer(
-        jobOfferId: jobOfferId,
-      );
+      await offerProvider.postSaveOffer(jobOfferId: jobOfferId);
       offerHelper.removeItemFromJobOfferList(
         jobOfferList: feedListRepsonse,
         jobOfferId: jobOfferId,
@@ -754,9 +745,7 @@ class OfferFeedController extends GetxController
       await offerController.onRefresh();
     } else if (actionType == OfferStrings.hideAction) {
       await offerProvider
-          .postHideOffer(
-            jobOfferId: jobOfferId,
-          )
+          .postHideOffer(jobOfferId: jobOfferId)
           .then(
             (value) => offerHelper.removeItemFromJobOfferList(
               jobOfferList: feedListRepsonse,
@@ -796,12 +785,12 @@ class OfferFeedController extends GetxController
 
           selectedStartDateStringToBeSearch.value =
               tempSearch.search!.dateJobStart != null
-                  ? tempSearch.search!.dateJobStart!.toIso8601String()
-                  : '';
+              ? tempSearch.search!.dateJobStart!.toIso8601String()
+              : '';
           selectedEndDateStringToBeSearch.value =
               tempSearch.search!.dateJobEnd != null
-                  ? tempSearch.search!.dateJobEnd!.toIso8601String()
-                  : '';
+              ? tempSearch.search!.dateJobEnd!.toIso8601String()
+              : '';
           typesListToBeSearch.clear();
           typesListToBeSearch.add(tempSearch.type!);
 
@@ -854,12 +843,8 @@ class OfferFeedController extends GetxController
           placeDetail.value = PlaceDetailModel(
             fullAddress: tempSearch.search!.location,
             streetNumber: tempSearch.search!.street,
-            lat: double.tryParse(
-              tempSearch.search!.latitude.toString(),
-            ),
-            lng: double.tryParse(
-              tempSearch.search!.longitude.toString(),
-            ),
+            lat: double.tryParse(tempSearch.search!.latitude.toString()),
+            lng: double.tryParse(tempSearch.search!.longitude.toString()),
             areaLevel1: tempSearch.search!.city,
             country: tempSearch.search!.country,
             postalCode: tempSearch.search!.zipcode,
@@ -881,6 +866,7 @@ class OfferFeedController extends GetxController
       onRefresh();
     }
   }
+
   //V1
   // void selectType({FieldModel? type, bool? isRefresh = true}) {
   //   FieldModel tempType = allType;

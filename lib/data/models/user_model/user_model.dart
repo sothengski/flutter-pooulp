@@ -32,51 +32,44 @@ class UserModel {
 
   String get managerEmailContact => '${user!.email}';
 
-  factory UserModel.fromRawJson(String str) => UserModel.fromJson(
-        json.decode(str) as Map<String, dynamic>,
-      );
+  factory UserModel.fromRawJson(String str) =>
+      UserModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
   String toRawJson() => json.encode(toJson());
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json['id'] as int?,
-        uuid: json['uuid'] as String?,
-        email: json['email'] as String?,
-        isActivated: json['is_activated'] as bool?,
-        emailConfirmedAt: json['email_confirmed_at'] != null
-            ? DateTime.parse(json['email_confirmed_at'].toString())
-            : null,
-        profile: json['profile'] == null
-            ? null
-            : ProfileModel.fromJson(
-                json['profile'] as Map<String, dynamic>,
-              ),
-        enterprise: json['enterprise'] == null
-            ? null
-            : ProfileModel.fromJson(
-                json['enterprise'] as Map<String, dynamic>,
-              ),
-        role: json['role'] as int?,
-        roleLabel: json['role_label'] as String?,
-        user: json['user'] == null
-            ? null
-            : UserModel.fromJson(
-                json['user'] as Map<String, dynamic>,
-              ),
-      );
+    id: json['id'] as int?,
+    uuid: json['uuid'] as String?,
+    email: json['email'] as String?,
+    isActivated: json['is_activated'] as bool?,
+    emailConfirmedAt: json['email_confirmed_at'] != null
+        ? DateTime.parse(json['email_confirmed_at'].toString())
+        : null,
+    profile: json['profile'] == null
+        ? null
+        : ProfileModel.fromJson(json['profile'] as Map<String, dynamic>),
+    enterprise: json['enterprise'] == null
+        ? null
+        : ProfileModel.fromJson(json['enterprise'] as Map<String, dynamic>),
+    // role: json['role'] as int?,
+    roleLabel: json['role_label'] as String?,
+    user: json['user'] == null
+        ? null
+        : UserModel.fromJson(json['user'] as Map<String, dynamic>),
+  );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'uuid': uuid,
-        'email': email,
-        'is_activated': isActivated,
-        'email_confirmed_at': emailConfirmedAt?.toIso8601String(),
-        'profile': profile?.toJson(),
-        'enterprise': enterprise?.toJson(),
-        'role': role,
-        'role_label': roleLabel,
-        'user': user?.toJson(),
-      }..removeWhere((_, v) => v == null);
+    'id': id,
+    'uuid': uuid,
+    'email': email,
+    'is_activated': isActivated,
+    'email_confirmed_at': emailConfirmedAt?.toIso8601String(),
+    'profile': profile?.toJson(),
+    'enterprise': enterprise?.toJson(),
+    'role': role,
+    'role_label': roleLabel,
+    'user': user?.toJson(),
+  }..removeWhere((_, v) => v == null);
 
   @override
   String toString() {

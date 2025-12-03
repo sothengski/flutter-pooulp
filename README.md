@@ -77,6 +77,86 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
 - **Address Search**: Google Places API integration
 - **Settings**: App preferences and account management
 
+## 📸 Screenshots
+
+### 🔐 Authentication & Onboarding
+
+<div align="center">
+  <img src="screenshots/Login-Page.png" width="200" alt="Login Page" />
+  <img src="screenshots/Onboarding-Page.png" width="200" alt="Onboarding Page" />
+  <img src="screenshots/splash-screen.png" width="200" alt="Splash Screen" />
+</div>
+
+### 💼 Job Discovery & Offers
+
+<div align="center">
+  <img src="screenshots/Feed-Page.png" width="200" alt="Feed Page" />
+  <img src="screenshots/Feed-Page-1.png" width="200" alt="Feed Page 1" />
+  <img src="screenshots/Feed-Page-2.png" width="200" alt="Feed Page 2" />
+</div>
+
+<div align="center">
+  <img src="screenshots/Job-detail-Page.png" width="200" alt="Job Detail Page" />
+  <img src="screenshots/Job-detail-Page-1.png" width="200" alt="Job Detail Page 1" />
+  <img src="screenshots/Search-Preferences.png" width="200" alt="Search Preferences" />
+</div>
+
+<div align="center">
+  <img src="screenshots/MyOffers-Page-Matched.png" width="200" alt="My Offers - Matched" />
+  <img src="screenshots/MyOffers-Page-Matched1.png" width="200" alt="My Offers - Matched 1" />
+  <img src="screenshots/MyOffers-Page-Pending.png" width="200" alt="My Offers - Pending" />
+</div>
+
+### 👤 Profile Management
+
+<div align="center">
+  <img src="screenshots/Profile-Page.png" width="200" alt="Profile Page" />
+  <img src="screenshots/Profile-Page-1.png" width="200" alt="Profile Page 1" />
+  <img src="screenshots/Profile-Page-2.png" width="200" alt="Profile Page 2" />
+</div>
+
+<div align="center">
+  <img src="screenshots/Profile-Page-3.png" width="200" alt="Profile Page 3" />
+  <img src="screenshots/Profile-Page-4.png" width="200" alt="Profile Page 4" />
+  <img src="screenshots/Profile-Edit-Info-Page.png" width="200" alt="Profile Edit Info Page" />
+</div>
+
+### 🎓 Profile Building Features
+
+<div align="center">
+  <img src="screenshots/Education-Add-Page.png" width="200" alt="Education Add Page" />
+  <img src="screenshots/Education-Add-Page-1.png" width="200" alt="Education Add Page 1" />
+  <img src="screenshots/Experience-Add-Page.png" width="200" alt="Experience Add Page" />
+</div>
+
+<div align="center">
+  <img src="screenshots/Experience-Add-Page-1.png" width="200" alt="Experience Add Page 1" />
+  <img src="screenshots/Achievement-Add-Page.png" width="200" alt="Achievement Add Page" />
+  <img src="screenshots/Achievement-Add-Page-1.png" width="200" alt="Achievement Add Page 1" />
+</div>
+
+<div align="center">
+  <img src="screenshots/Skill-Add-Page.png" width="200" alt="Skill Add Page" />
+  <img src="screenshots/Skill-Add-Page-1.png" width="200" alt="Skill Add Page 1" />
+  <img src="screenshots/Language-Add-Page.png" width="200" alt="Language Add Page" />
+</div>
+
+### 💬 Messaging & Communication
+
+<div align="center">
+  <img src="screenshots/Messaging-Page.png" width="200" alt="Messaging Page" />
+  <img src="screenshots/Messaging-Page-1.png" width="200" alt="Messaging Page 1" />
+  <img src="screenshots/Chatting-Page.png" width="200" alt="Chatting Page" />
+</div>
+
+### 🔍 Additional Views
+
+<div align="center">
+  <img src="screenshots/Feed-And-Profile-Page.png" width="200" alt="Feed And Profile Page" />
+  <img src="screenshots/Search-Preferences-1.png" width="200" alt="Search Preferences 1" />
+  <img src="screenshots/Promotion-popup.png" width="200" alt="Promotion Popup" />
+</div>
+
 ## 🛠 Tech Stack
 
 ### Core Framework
@@ -164,7 +244,7 @@ lib/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/sothengski/flutter-pooulp.git
    cd flutter-pooulp
    ```
 

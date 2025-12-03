@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as datetimepicker;
 import 'package:get/get.dart';
 
 import '../core.dart';
@@ -105,7 +107,7 @@ class ContainerDialogWidget extends StatelessWidget {
                           // maxTime: DateTime(2009, 12, 31),
                           currentTime: currentTime,
                           // locale: LocaleType.kh,
-                          theme: const DatePickerTheme(
+                          theme: const datetimepicker.DatePickerTheme(
                             headerColor: ColorsManager.grey100,
                             backgroundColor: ColorsManager.grey100,
                             itemStyle: TextStyle(
@@ -147,7 +149,7 @@ class ContainerDialogWidget extends StatelessWidget {
                             // maxTime: DateTime(2009, 12, 31),
                             // locale: LocaleType.kh,
                           ),
-                          theme: const DatePickerTheme(
+                          theme: const datetimepicker.DatePickerTheme(
                             headerColor: ColorsManager.grey100,
                             backgroundColor: ColorsManager.grey100,
                             itemStyle: TextStyle(
@@ -219,7 +221,7 @@ class ContainerDialogWidget extends StatelessWidget {
                               )
                             : Get.dialog(
                                 dialogWidget!,
-                              )
+                              ),
                     },
             child: Container(
               // height: 50.0,

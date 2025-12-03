@@ -51,8 +51,10 @@ mixin ThemeManager {
           primaryColor: theme.colors.primaryColor,
         ),
         cardColor: theme.colors.colorScheme?.surface,
-        bottomAppBarColor: theme.colors.iconColor,
-        tabBarTheme: TabBarTheme(
+        bottomAppBarTheme: BottomAppBarThemeData(
+          color: theme.colors.iconColor,
+        ),
+        tabBarTheme: TabBarThemeData(
           indicator: const BoxDecoration(),
           labelColor: theme.colors.tabbarSelectedColor,
           unselectedLabelColor: theme.colors.disabledColor,

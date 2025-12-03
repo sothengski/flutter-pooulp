@@ -20,7 +20,7 @@ class PlaceApiProvider extends GetConnect {
         .body; //same as // final apiResponse = json.decode(response.bodyString.toString());
 
     final jsonResults = (apiResponse as Map)['predictions'] as List;
-// debugPrint('<=====jsonResults:: $jsonResults=====>');
+    // debugPrint('<=====jsonResults:: $jsonResults=====>');
     return jsonResults
         .map(
           (place) =>
@@ -43,8 +43,9 @@ class PlaceApiProvider extends GetConnect {
 
     // final jsonResult = apiResponse['result'] as Map<String, dynamic>;
 
-    final jsonResp =
-        GooglePlaceDetailModel.fromJson(apiResponse as Map<String, dynamic>);
+    final jsonResp = GooglePlaceDetailModel.fromJson(
+      apiResponse as Map<String, dynamic>,
+    );
 
     // debugPrint("jsonResp:: $jsonResp");
     // debugPrint(
@@ -97,8 +98,9 @@ class PlaceApiProvider extends GetConnect {
 
     // final jsonResult = apiResponse['result'] as Map<String, dynamic>;
 
-    final jsonResp =
-        GooglePlaceDetailModel.fromJson(apiResponse as Map<String, dynamic>);
+    final jsonResp = GooglePlaceDetailModel.fromJson(
+      apiResponse as Map<String, dynamic>,
+    );
     final data = jsonResp.result!.addressComponents;
     for (final c in data!) {
       if (c.types!.contains('country')) {

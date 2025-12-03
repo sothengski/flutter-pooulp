@@ -21,16 +21,21 @@ class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
   @override
   Future<UserModel> getUserInfo() async {
     try {
-      final Response dataResponse = await get(
-        API.paths[Endpoint.userInfo].toString(),
-      );
-      if (dataResponse.hasError) {
-        throw "(resp: ${dataResponse.bodyString})";
-      } else {
-        return UserModel.fromJson(
-          dataResponse.body as Map<String, dynamic>,
-        );
-      }
+      final Response dataResponse =
+          await FakeUserInfoProvider().getUserInfo() as Response<dynamic>;
+      return UserModel.fromJson(dataResponse.body as Map<String, dynamic>);
+
+      /// TODO: remove this function after offline testing
+      // final Response dataResponse = await get(
+      //   API.paths[Endpoint.userInfo].toString(),
+      // );
+      // if (dataResponse.hasError) {
+      //   throw "(resp: ${dataResponse.bodyString})";
+      // } else {
+      //   return UserModel.fromJson(
+      //     dataResponse.body as Map<String, dynamic>,
+      //   );
+      // }
     } catch (e) {
       return Future.error(e.toString());
     }
@@ -78,9 +83,7 @@ class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
       final resp = json.decode(respStr);
       // debugPrint("respStr::$respStr ");
       // debugPrint("resp::$resp ");
-      return ProfileModel.fromJson(
-        resp as Map<String, dynamic>,
-      );
+      return ProfileModel.fromJson(resp as Map<String, dynamic>);
       // return true;
     } else {
       return Future.error(response.toString());
@@ -98,9 +101,7 @@ class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
       } else {
-        return ProfileModel.fromJson(
-          dataResponse.body as Map<String, dynamic>,
-        );
+        return ProfileModel.fromJson(dataResponse.body as Map<String, dynamic>);
       }
     } catch (e) {
       return Future.error(e.toString());

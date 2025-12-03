@@ -45,10 +45,12 @@ class ProfileController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getUserInfoResponseProvider()
-        .then((value) => isProcessingUserInfoRepsonse.value = true);
-    await getStudentInfoResponseProvider()
-        .then((value) => isProcessingStudentInfoRepsonse.value = true);
+    await getUserInfoResponseProvider().then(
+      (value) => isProcessingUserInfoRepsonse.value = true,
+    );
+    await getStudentInfoResponseProvider().then(
+      (value) => isProcessingStudentInfoRepsonse.value = true,
+    );
   }
 
   Future<void> onRefresh() async {
@@ -63,7 +65,9 @@ class ProfileController extends GetxController {
   Future<Rx<UserModel>> getUserInfoResponseProvider({
     bool? refresh = false,
   }) async {
-    userInfoRepsonse.value = await userInfoProvider.getUserInfo();
+    /// TODO: remove this function after offline testing
+    // userInfoRepsonse.value = await userInfoProvider.getUserInfo();
+    userInfoRepsonse.value = await FakeUserInfoProvider().getUserInfo();
     userProfileInfo.value = userInfoRepsonse.value.profile!;
     // debugPrint('userInfoRepsonse: $userInfoRepsonse');
     changeLanguageBasedOnProfileLanguage(
@@ -76,8 +80,8 @@ class ProfileController extends GetxController {
     bool? refresh = false,
   }) async {
     if (homeController.userToken!.accountType == 'student') {
-      studentInfoRepsonse.value =
-          await userInfoProvider.getStudentProfileInfo();
+      studentInfoRepsonse.value = await userInfoProvider
+          .getStudentProfileInfo();
       return studentInfoRepsonse;
     }
     return studentInfoRepsonse;
@@ -89,9 +93,7 @@ class ProfileController extends GetxController {
 
   void changeLanguageBasedOnProfileLanguage({required String? languageKey}) {
     if (languageController.currentLanguage != languageKey) {
-      languageController.updateLanguage(
-        languageKey,
-      );
+      languageController.updateLanguage(languageKey);
     }
   }
 

@@ -49,9 +49,11 @@ class OfferController extends GetxController
     jobOfferStateSelected.value = jobOfferStateFilterList[0];
 
     await getOffersDataState(refresh: true)
-        // .then((value) => isProcessingStudentInfoRepsonse.value = true)
-        ;
-    await getNotificationMessagesProvider();
+    // .then((value) => isProcessingStudentInfoRepsonse.value = true)
+    ;
+
+    /// TODO: remove this function after offline testing
+    // await getNotificationMessagesProvider();
   }
 
   bool jobOfferOnClickBoolSwitching({bool? boolValue}) {
@@ -76,7 +78,8 @@ class OfferController extends GetxController
     Future<List<JobOfferModel>>? getListFomProvider,
     bool? isStateFilter = true,
   }) async {
-    jobOfferList!.clear();
+    jobOfferList = RxList<JobOfferModel>([]);
+    // jobOfferList!.clear();
     jobOfferListFilter?.clear();
     jobOfferList.value = await getListFomProvider!;
     int itemCount = 0;
@@ -130,9 +133,7 @@ class OfferController extends GetxController
     required int? jobOfferId,
   }) async {
     if (actionType == OfferStrings.applyAction) {
-      await offerProvider.postApplyOffer(
-        jobOfferId: jobOfferId,
-      );
+      await offerProvider.postApplyOffer(jobOfferId: jobOfferId);
       offerHelper.removeItemFromJobOfferList(
         jobOfferList: savedOfferListFilter,
         jobOfferId: jobOfferId,
@@ -148,9 +149,7 @@ class OfferController extends GetxController
         getListFomProvider: offerProvider.getPendingOffers(),
       );
     } else if (actionType == OfferStrings.cancelAction) {
-      await offerProvider.postUnApplyOffer(
-        jobOfferId: jobOfferId,
-      );
+      await offerProvider.postUnApplyOffer(jobOfferId: jobOfferId);
       offerHelper.removeItemFromJobOfferList(
         jobOfferList: pendingOfferListRepsonse,
         jobOfferId: jobOfferId,
@@ -168,14 +167,10 @@ class OfferController extends GetxController
       );
       feedController.onRefresh();
     } else if (actionType == OfferStrings.saveAction) {
-      await offerProvider.postSaveOffer(
-        jobOfferId: jobOfferId,
-      );
+      await offerProvider.postSaveOffer(jobOfferId: jobOfferId);
     } else if (actionType == OfferStrings.unSaveAction) {
       await offerProvider
-          .postUnSaveOffer(
-            jobOfferId: jobOfferId,
-          )
+          .postUnSaveOffer(jobOfferId: jobOfferId)
           .then(
             (value) => offerHelper.removeItemFromJobOfferList(
               jobOfferList: savedOfferListFilter,
@@ -197,13 +192,9 @@ class OfferController extends GetxController
       );
       await feedController.onRefresh();
     } else if (actionType == OfferStrings.hideAction) {
-      await offerProvider.postHideOffer(
-        jobOfferId: jobOfferId,
-      );
+      await offerProvider.postHideOffer(jobOfferId: jobOfferId);
     } else if (actionType == OfferStrings.unHideAction) {
-      await offerProvider.postUnHideOffer(
-        jobOfferId: jobOfferId,
-      );
+      await offerProvider.postUnHideOffer(jobOfferId: jobOfferId);
     } else {}
   }
 
@@ -214,10 +205,7 @@ class OfferController extends GetxController
         change(resp, status: RxStatus.success());
       },
       onError: (err) {
-        change(
-          null,
-          status: RxStatus.error('Error'),
-        );
+        change(null, status: RxStatus.error('Error'));
         isLoadingIndicator.value = false;
       },
     );
@@ -229,23 +217,40 @@ class OfferController extends GetxController
     stateOnRefresh(
       actionStateName: OfferStrings.pendingState,
       jobOfferList: pendingOfferListRepsonse,
-      getListFomProvider: offerProvider.getPendingOffers(),
+
+      /// TODO: remove this function after offline testing
+      // getListFomProvider: offerProvider.getPendingOffers(),
+      getListFomProvider: FakeOfferProvider().getPendingOffers(),
     );
     stateOnRefresh(
       actionStateName: OfferStrings.matchedState,
       jobOfferList: matchedOfferListRepsonse,
-      getListFomProvider: offerProvider.getMatchedOffers(),
+
+      /// TODO: remove this function after offline testing
+      // getListFomProvider: offerProvider.getMatchedOffers(),
+      getListFomProvider: Future.value(
+        <JobOfferModel>[],
+      ), //FakeOfferProvider().getMatchedOffers(),
     );
     stateOnRefresh(
       actionStateName: OfferStrings.savedState,
       jobOfferList: savedOfferListRepsonse,
       jobOfferListFilter: savedOfferListFilter,
-      getListFomProvider: offerProvider.getSavedOffers(),
+
+      /// TODO: remove this function after offline testing
+      // getListFomProvider: offerProvider.getSavedOffers(),
+      getListFomProvider: FakeOfferProvider().getSavedOffers(),
+      //FakeOfferProvider().getSavedOffers(),
     );
     stateOnRefresh(
       actionStateName: OfferStrings.rejectedState,
       jobOfferList: rejectedOfferListRepsonse,
-      getListFomProvider: offerProvider.getRejectedOffers(),
+
+      /// TODO: remove this function after offline testing
+      // getListFomProvider: offerProvider.getRejectedOffers(),
+      getListFomProvider: Future.value(
+        <JobOfferModel>[],
+      ), //FakeOfferProvider().getRejectedOffers(),
     );
     return pendingOfferListRepsonse;
   }

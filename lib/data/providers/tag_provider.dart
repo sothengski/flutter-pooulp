@@ -43,9 +43,7 @@ class TagProvider extends BaseProvider implements ITagProvider {
   @override
   Future<List<FieldModel>> getAllFields() async {
     try {
-      final dataResponse = await get(
-        API.paths[Endpoint.getFields].toString(),
-      );
+      final dataResponse = await get(API.paths[Endpoint.getFields].toString());
       final List<FieldModel> jobOfferTypeList = <FieldModel>[];
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
@@ -87,9 +85,7 @@ class TagProvider extends BaseProvider implements ITagProvider {
   @override
   Future<List<SchoolModel>> getSchools() async {
     try {
-      final dataResponse = await get(
-        API.paths[Endpoint.getSchools].toString(),
-      );
+      final dataResponse = await get(API.paths[Endpoint.getSchools].toString());
       final List<SchoolModel> schoolList = <SchoolModel>[];
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
@@ -141,8 +137,9 @@ class TagProvider extends BaseProvider implements ITagProvider {
         final apiResponse =
             json.decode(dataResponse.bodyString.toString()) as List;
         for (final e in apiResponse) {
-          hardAndSoftSkillList
-              .add(FieldModel.fromJson(e as Map<String, dynamic>));
+          hardAndSoftSkillList.add(
+            FieldModel.fromJson(e as Map<String, dynamic>),
+          );
         }
         return hardAndSoftSkillList;
       }
@@ -208,8 +205,9 @@ class TagProvider extends BaseProvider implements ITagProvider {
         final apiResponse =
             json.decode(dataResponse.bodyString.toString()) as List;
         for (final e in apiResponse) {
-          availabilitiesTags
-              .add(FieldModel.fromJson(e as Map<String, dynamic>));
+          availabilitiesTags.add(
+            FieldModel.fromJson(e as Map<String, dynamic>),
+          );
         }
         return availabilitiesTags;
       }
@@ -231,8 +229,9 @@ class TagProvider extends BaseProvider implements ITagProvider {
         final apiResponse =
             json.decode(dataResponse.bodyString.toString()) as List;
         for (final e in apiResponse) {
-          internshipTypeTags
-              .add(FieldModel.fromJson(e as Map<String, dynamic>));
+          internshipTypeTags.add(
+            FieldModel.fromJson(e as Map<String, dynamic>),
+          );
         }
         return internshipTypeTags;
       }
@@ -254,8 +253,9 @@ class TagProvider extends BaseProvider implements ITagProvider {
         final apiResponse =
             json.decode(dataResponse.bodyString.toString()) as List;
         for (final e in apiResponse) {
-          internshipPeriodTags
-              .add(FieldModel.fromJson(e as Map<String, dynamic>));
+          internshipPeriodTags.add(
+            FieldModel.fromJson(e as Map<String, dynamic>),
+          );
         }
         return internshipPeriodTags;
       }
@@ -277,8 +277,9 @@ class TagProvider extends BaseProvider implements ITagProvider {
         final apiResponse =
             json.decode(dataResponse.bodyString.toString()) as List;
         for (final e in apiResponse) {
-          internshipPeriodTags
-              .add(FieldModel.fromJson(e as Map<String, dynamic>));
+          internshipPeriodTags.add(
+            FieldModel.fromJson(e as Map<String, dynamic>),
+          );
         }
         return internshipPeriodTags;
       }

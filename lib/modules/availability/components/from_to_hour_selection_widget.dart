@@ -10,7 +10,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
   final String? dayLabel;
   final bool? swichingValue;
   final String? dateLanguage;
-  final Function(bool)? swichingFunction;
+  final void Function({required bool value})? swichingFunction;
   final FormFieldValidator<String>? validatorFunction;
   final List<SlotModel>? slotList;
   final bool? isUpdateTrigger;
@@ -20,7 +20,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
     required this.dayIndex,
     this.dayLabel = '',
     this.swichingValue = false,
-    this.swichingFunction,
+    required this.swichingFunction,
     this.dateLanguage,
     this.validatorFunction,
     this.slotList,
@@ -42,9 +42,11 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
             ),
             suffixWidget: Switch(
               value: swichingValue!,
-              onChanged: swichingFunction,
+              onChanged: swichingFunction != null
+                  ? (bool value) => swichingFunction!(value: value)
+                  : null,
               activeTrackColor: ColorsManager.primary25,
-              activeColor: ColorsManager.primary,
+              activeThumbColor: ColorsManager.primary,
             ),
           ),
           if (slotList!.isEmpty)
@@ -54,7 +56,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
                   padding: const EdgeInsets.symmetric(
                     vertical: AppSize.s4,
                   ),
-                )
+                ),
               ],
             )
           else if (swichingValue == false)

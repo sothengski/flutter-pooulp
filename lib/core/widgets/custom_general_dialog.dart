@@ -10,17 +10,15 @@ void customGeneralDialog({
     barrierDismissible: barrierDismissible!,
     context: context,
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-    barrierColor: Colors.black45,
-    transitionDuration: const Duration(milliseconds: 200),
+    barrierColor: Colors.black.withValues(alpha: 0.45),
     pageBuilder: (
       BuildContext buildContext,
       Animation animation,
       Animation secondaryAnimation,
     ) =>
-        WillPopScope(
-      onWillPop: () {
+        PopScope(
+      onPopInvokedWithResult: (bool didPop, dynamic result) {
         Get.back();
-        return Future.value(true);
       },
       child: widget,
     ),

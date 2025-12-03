@@ -222,7 +222,7 @@ class EducationForm extends GetView<OnboardingController> {
                           );
                           controller.getUpdate();
                         },
-                      )
+                      ),
                   ],
                 ),
               ),

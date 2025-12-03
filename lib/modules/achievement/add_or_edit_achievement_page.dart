@@ -35,7 +35,7 @@ class AddOrEditAchievementPage extends GetView<AchievementController> {
                   },
                 ),
               ),
-            )
+            ),
         ],
       ),
       //===== Bottom of appBar Component =====//

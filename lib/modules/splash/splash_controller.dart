@@ -36,7 +36,7 @@ class SplashController extends GetxController {
         else
           {
             Get.offNamed(Routes.signInRoute),
-          }
+          },
       },
     );
   }
@@ -63,10 +63,10 @@ class SplashController extends GetxController {
                 ),
                 await getAllTranslationLangsProvider(lang: 'en'),
                 await getAllTranslationLangsProvider(lang: 'fr'),
-                await getAllTranslationLangsProvider(lang: 'nl')
+                await getAllTranslationLangsProvider(lang: 'nl'),
               }
             else
-              {}
+              {},
           },
         );
   }

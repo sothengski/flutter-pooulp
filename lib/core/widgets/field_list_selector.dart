@@ -31,7 +31,7 @@ class FieldListSelector extends StatefulWidget {
     Key? key,
     this.showPhoneCode = true,
     this.showCountry = true,
-    @required this.selectedItem,
+    this.selectedItem,
     this.inputHintText = 'Search...',
     // this.selectedItems = const [],
   }) : super(key: key);

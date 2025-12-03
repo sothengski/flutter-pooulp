@@ -35,7 +35,7 @@ class AddOrEditExperiencePage extends GetView<ExperienceController> {
                   },
                 ),
               ),
-            )
+            ),
         ],
       ),
       //===== Bottom of appBar Component =====//

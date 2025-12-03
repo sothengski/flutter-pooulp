@@ -68,7 +68,7 @@ class TextCardClickableWidget extends StatelessWidget {
             spreadRadius: -5.0,
             offset: Offset(3, 5),
             color: ColorsManager.grey,
-          )
+          ),
         ],
         child: Container(
           alignment: isCenterText == true ? Alignment.center : null,

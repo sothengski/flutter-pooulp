@@ -1122,5 +1122,5 @@ const List<CityModel> belgiumCities = <CityModel>[
     capital: Capital.MINOR,
     population: '',
     populationProper: '',
-  )
+  ),
 ];

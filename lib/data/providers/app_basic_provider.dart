@@ -34,7 +34,7 @@ class AppBasicProvider extends BaseProvider implements IAppBasicProvider {
   Future<JsonResponse> getAllTranslationLangs({required String? lang}) async {
     try {
       final dataResponse = await get(
-        "${API.paths[Endpoint.getAllTranslationLangs].toString()}/$lang",
+        "${API.paths[Endpoint.getAllTranslationLangs]}/$lang",
       );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";

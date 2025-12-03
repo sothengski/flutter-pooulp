@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 // import 'api_keys.dart';
 enum Env { dev, uat, stage, prod }
 
@@ -69,7 +67,7 @@ enum Endpoint {
 }
 
 class API {
-  API({@required this.apiKey});
+  API({this.apiKey});
   final String? apiKey;
 
   // factory API.dev() => API(apiKey: APIKeys.pooulpDevKey);

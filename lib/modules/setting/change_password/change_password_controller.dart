@@ -84,7 +84,7 @@ class ChangePasswordController extends GetxController {
                   msgContent: 'recheckPassword'.tr,
                   bgColor: ColorsManager.red,
                 ),
-              }
+              },
           },
         );
   }

@@ -61,7 +61,7 @@ class FirebaseDynamicLinkService {
           () async => {
             Get.toNamed(
               "${Routes.offerdetailRoute}?id=${dynamicLinkData.link.pathSegments.last}",
-            )
+            ),
           },
         );
       },
@@ -152,8 +152,6 @@ class FirebaseDynamicLinkService {
 // //     },
 // //   );
 // // }
-
-
 
 // // Future<Uri> createDynamicLink({required String? userName}) async {
 // //   final DynamicLinkParameters parameters = DynamicLinkParameters(

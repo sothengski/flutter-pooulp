@@ -34,7 +34,7 @@ void changeLanguageDialog({
                     .updateLanguage(
                       LanguageController().languageOptions[index].key,
                     )
-                    .then((value) => Get.back())
+                    .then((value) => Get.back()),
               },
               child: RowContentInputWidget(
                 centerWidget: CustomTextWidget(

@@ -12,22 +12,14 @@ class SettingPage extends GetView<SettingController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => WillPopScope(
+      () => PopScope(
+        onPopInvokedWithResult: (bool didPop, dynamic result) {
+          Get.back();
+        },
+
         ///===== Top of Will Pop Scope Component =====//
-        onWillPop: controller.isUpdating.value == false
-            ? () async {
-                return Future.value(true);
-              }
-            : () async {
-                Get.dialog(
-                  const LoadingWidget(),
-                );
-                await Future.delayed(DurationConstant.d750, () {
-                  controller.dataSummitionAndValidation();
-                });
-                Get.back();
-                return Future.value(true);
-              },
+        canPop: controller.isUpdating.value == false,
+
         //===== Bottom of Will Pop Scope Component =====//
         child: Scaffold(
           appBar: CustomAppBar(
@@ -511,7 +503,7 @@ class SettingPage extends GetView<SettingController> {
                               )!;
                             },
                             activeTrackColor: ColorsManager.primary25,
-                            activeColor: ColorsManager.primary,
+                            activeThumbColor: ColorsManager.primary,
                           ),
                         ),
                       ),
@@ -548,7 +540,7 @@ class SettingPage extends GetView<SettingController> {
                               )!;
                             },
                             activeTrackColor: ColorsManager.primary25,
-                            activeColor: ColorsManager.primary,
+                            activeThumbColor: ColorsManager.primary,
                           ),
                         ),
                       ),

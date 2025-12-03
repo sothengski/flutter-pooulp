@@ -56,8 +56,8 @@ class UserProfileComponent extends StatelessWidget {
               color: ColorsManager.grey800,
               size: AppSize.s24,
             ),
-            child: Column(
-              children: const [
+            child: const Column(
+              children: [
                 CustomListTileWidget(
                   text1: 'Automation internship',
                   text1Color: ColorsManager.grey850,
@@ -104,7 +104,7 @@ class UserProfileComponent extends StatelessWidget {
               color: ColorsManager.grey800,
               size: AppSize.s24,
             ),
-            child: Column(),
+            child: const Column(),
           ),
         ),
         //===== Personal Component =====//
@@ -140,9 +140,9 @@ class UserProfileComponent extends StatelessWidget {
                     8.0,
                     8.0,
                   ),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       CustomTextWidget(
                         text: 'Hard Skill',
                         marginBottom: 5.0,
@@ -171,7 +171,7 @@ class UserProfileComponent extends StatelessWidget {
                       // ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -219,8 +219,8 @@ class UserProfileComponent extends StatelessWidget {
               color: ColorsManager.grey800,
               size: AppSize.s24,
             ),
-            child: Column(
-              children: const [
+            child: const Column(
+              children: [
                 CustomListTileWidget(
                   text1: 'TOEIC',
                   text1Color: ColorsManager.grey850,

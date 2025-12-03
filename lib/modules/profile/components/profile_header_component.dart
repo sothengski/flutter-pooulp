@@ -181,7 +181,7 @@ class ProfileHeaderComponent extends StatelessWidget {
                     blurRadius: 1.0,
                     offset: Offset(1.0, 1.0),
                     spreadRadius: 1.0,
-                  )
+                  ),
                 ],
                 // image: const DecorationImage(
                 //   fit: BoxFit.cover,
@@ -247,7 +247,7 @@ class ProfileHeaderComponent extends StatelessWidget {
                         //   marginRight: AppSize.s16,
                         // ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

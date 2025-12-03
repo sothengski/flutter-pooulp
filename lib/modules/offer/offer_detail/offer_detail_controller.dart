@@ -52,7 +52,7 @@ class OfferDetailController extends GetxController
       initialVideoId: 'K2NePZwi0Ok', //'tcodrIK2P_I',
       params: const YoutubePlayerParams(
         playlist: [
-          'K2NePZwi0Ok'
+          'K2NePZwi0Ok',
           // 'nPt8bK2gbaU',
           // 'K18cpp_-gP8',
           // 'iLnmTe5Q2Qw',
@@ -96,7 +96,7 @@ class OfferDetailController extends GetxController
             : youtubeVideoId!, //'tcodrIK2P_I',
         params: YoutubePlayerParams(
           playlist: [
-            if (youtubeVideoId! == '') 'K2NePZwi0Ok' else youtubeVideoId!
+            if (youtubeVideoId! == '') 'K2NePZwi0Ok' else youtubeVideoId!,
           ],
           showFullscreenButton: true,
           privacyEnhanced: true,

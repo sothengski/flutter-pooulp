@@ -125,7 +125,7 @@ class CustomContainerWidget extends StatelessWidget {
                       fontWeight: titleFontWeight,
                     ),
                     // if (rightWidget != null)
-                    rightWidget ?? Container()
+                    rightWidget ?? Container(),
                     // else
                     //   CustomTextWidget(
                     //     text: rightTitle ?? '',

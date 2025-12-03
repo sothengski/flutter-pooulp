@@ -117,7 +117,7 @@ class OfferFeedController extends GetxController
     'Microsoft Office',
     'Business administration',
     'Information systems',
-    'Nursing'
+    'Nursing',
   ];
 
   @override

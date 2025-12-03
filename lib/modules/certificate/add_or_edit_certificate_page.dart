@@ -35,7 +35,7 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                   },
                 ),
               ),
-            )
+            ),
         ],
       ),
       //===== Bottom of appBar Component =====//

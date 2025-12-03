@@ -48,7 +48,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.primary,
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'Offer Details',
         elevation: 0.0,
       ),
@@ -544,7 +544,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                       ],
                     ),
                     //===== Second Tab Component =====//
-                  ][tabController!.index]
+                  ][tabController!.index],
                 ],
               ),
             ),
@@ -641,7 +641,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

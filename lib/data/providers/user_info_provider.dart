@@ -60,7 +60,7 @@ class UserInfoProvider extends BaseProvider implements IUserInfoProvider {
     final String userToken = AuthServices().getStringToken().toString();
     final Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
-      "Authorization": "Bearer $userToken"
+      "Authorization": "Bearer $userToken",
     };
     final request = http.MultipartRequest('POST', Uri.parse(addimageUrl))
       // ..fields.addAll(body)

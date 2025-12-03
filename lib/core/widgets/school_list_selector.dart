@@ -21,7 +21,7 @@ class SchoolListSelector extends StatefulWidget {
     Key? key,
     this.showPhoneCode = true,
     this.showCountry = true,
-    @required this.selectedItem,
+    this.selectedItem,
   }) : super(key: key);
 
   @override

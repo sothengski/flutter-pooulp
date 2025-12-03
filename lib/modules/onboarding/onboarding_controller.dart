@@ -100,7 +100,7 @@ class OnboardingController extends GetxController
       // // degree: '',
       degreeTag: FieldModel(),
       completed: false,
-    )
+    ),
   ].obs;
 
   RxBool isUpdate = false.obs;

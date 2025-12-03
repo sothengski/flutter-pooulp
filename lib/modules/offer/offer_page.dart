@@ -126,7 +126,7 @@ class OfferPage extends GetView<OfferController> {
       DurationConstant.d2000,
       () => (controller.notificationMessageList.isNotEmpty &&
               controller.notificationMessageList[0].status == 1)
-          ? notificationMessageAlert(context)
+          ? () => notificationMessageAlert(context)
           : null,
     );
 
@@ -197,7 +197,7 @@ class OfferPage extends GetView<OfferController> {
                               noDataHeader: 'noResult'.tr,
                             ),
             ),
-          )
+          ),
         ],
       ),
     );

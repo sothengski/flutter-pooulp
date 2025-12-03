@@ -34,7 +34,7 @@ class MessagingPage extends GetView<MessagingController> {
               );
             },
             icon: const Icon(Icons.more_vert_rounded),
-          )
+          ),
           // PopupMenuButton<MenuItem>(
           //   // icon: const Icon(Icons.more_vert),
           //   itemBuilder: (_) => [
@@ -62,7 +62,10 @@ class MessagingPage extends GetView<MessagingController> {
           // ),
         ],
       ),
-      body: WillPopScope(
+      body: PopScope(
+        onPopInvokedWithResult: (bool didPop, dynamic result) {
+          Get.back();
+        },
         child: LayoutBuilder(
           builder: (context, constraints) {
             return Obx(
@@ -247,10 +250,10 @@ class MessagingPage extends GetView<MessagingController> {
             );
           },
         ),
-        onWillPop: () {
-          Get.back();
-          return Future.value(false);
-        },
+        // onWillPop: () {
+        //   Get.back();
+        //   return Future.value(false);
+        // },
       ),
     );
   }

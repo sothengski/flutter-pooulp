@@ -57,7 +57,7 @@ class CustomAlertDialog extends StatelessWidget {
               const SizedBox(height: 5.0),
               const Divider(),
               MaterialButton(
-                color: ColorsManager.primary.withOpacity(0.75),
+                color: ColorsManager.primary.withValues(alpha: 0.75),
                 minWidth: getWidth / 3,
                 height: 35,
                 elevation: 5.0,

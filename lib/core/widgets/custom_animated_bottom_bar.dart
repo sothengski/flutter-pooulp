@@ -142,7 +142,7 @@ class ItemWidget extends StatelessWidget {
                           data: IconThemeData(
                             size: iconSize,
                             color: isSelected
-                                ? item.activeColor.withOpacity(1)
+                                ? item.activeColor.withValues(alpha: 1)
                                 : item.inActiveColor ?? item.activeColor,
                           ),
                           child:

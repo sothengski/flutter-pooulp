@@ -123,8 +123,9 @@ class _MyAppState extends State<MyApp> {
       initialBinding: NetworkBinding(),
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context)
-              .copyWith(textScaler: const TextScaler.linear(1.0)),
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.noScaling,
+          ), //const TextScaler.linear(1.0)),
           child: GestureDetector(
             onTap: () {
               unFocusKeyBoard(context);

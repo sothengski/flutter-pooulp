@@ -34,7 +34,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                   },
                 ),
               ),
-            )
+            ),
         ],
       ),
       //===== Bottom of appBar Component =====//
@@ -256,7 +256,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                               child: CustomTextWidget(
                                 text: 'alwaysAvailable'.tr,
                               ),
-                            )
+                            ),
                           ]
                         : [
                             ...controller.weeklyAvailability
@@ -267,7 +267,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                                     dateLanguage: controller.profileController
                                         .userProfileInfo.value.uiLanguage,
                                     swichingValue: element.isOpen,
-                                    swichingFunction: (value) {
+                                    swichingFunction: ({required bool value}) {
                                       element.isOpen = switchingBooleanValue(
                                         boolValue: element.isOpen,
                                       );
@@ -282,7 +282,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                                     ),
                                   ),
                                 )
-                                .toList()
+                                .toList(),
                           ],
                   ),
                 ),

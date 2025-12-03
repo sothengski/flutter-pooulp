@@ -50,7 +50,7 @@ class CustomList extends StatelessWidget {
                   ),
                 )
                 .toList(),
-          )
+          ),
         ],
       ),
     );

@@ -44,7 +44,7 @@ class OfferCard extends StatelessWidget {
               jobOfferItem!.uuid,
               bottomActionWidgetList,
               isCustomActBtn,
-              jobOfferState == OfferStrings.matchedState
+              jobOfferState == OfferStrings.matchedState,
             ],
           );
         },
@@ -337,7 +337,7 @@ class OfferCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: bottomActionWidgetList!,
-            )
+            ),
             //===== Job Offer Action Buttons Component =====//
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -760,7 +760,7 @@ class SignUpForm extends GetView<SignUpController> {
                             // ),
                             const SizedBox(
                               height: 12.0,
-                            )
+                            ),
                           ],
                         ),
                       ),

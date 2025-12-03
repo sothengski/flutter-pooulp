@@ -88,7 +88,7 @@ enum AdminName { BRUSSELS_CAPITAL_REGION, FLANDERS, WALLONIA }
 final adminNameValues = EnumValues({
   "Brussels-Capital Region": AdminName.BRUSSELS_CAPITAL_REGION,
   "Flanders": AdminName.FLANDERS,
-  "Wallonia": AdminName.WALLONIA
+  "Wallonia": AdminName.WALLONIA,
 });
 
 enum Capital { PRIMARY, MINOR, EMPTY, ADMIN }
@@ -97,7 +97,7 @@ final capitalValues = EnumValues({
   "admin": Capital.ADMIN,
   "": Capital.EMPTY,
   "minor": Capital.MINOR,
-  "primary": Capital.PRIMARY
+  "primary": Capital.PRIMARY,
 });
 
 enum Country { BELGIUM }

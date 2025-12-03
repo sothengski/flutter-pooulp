@@ -597,7 +597,7 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                           : Container(),
                                     )
                                     .toList(),
-                              )
+                              ),
                             ],
                           ),
                   ),

@@ -62,7 +62,7 @@ class MaterialDialogWidget extends StatelessWidget {
                           fontSize: titleFontSize,
                           fontWeight: FontWeightManager.medium,
                         ),
-                        rightWidget ?? Container()
+                        rightWidget ?? Container(),
                       ],
                     ),
                   ),

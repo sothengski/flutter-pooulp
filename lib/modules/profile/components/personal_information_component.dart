@@ -265,7 +265,7 @@ class PersonalInformationComponent extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -24,7 +24,7 @@ class CountryListSelector extends StatefulWidget {
     Key? key,
     this.showPhoneCode = true,
     this.showCountry = true,
-    @required this.selectedCountry,
+    this.selectedCountry,
     this.languageCode = 'en',
   }) : super(key: key);
 

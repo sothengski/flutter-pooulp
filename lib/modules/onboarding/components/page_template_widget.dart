@@ -91,7 +91,7 @@ class PageTemplateWidget extends StatelessWidget {
             ),
             child: bodyPageWidget,
           ),
-        )
+        ),
       ],
     );
   }

@@ -205,7 +205,6 @@ class SignUpController extends GetxController with StateMixin<dynamic> {
                   // Get.back();
                 },
               ),
-              barrierDismissible: true,
             );
           } else {
             //professional

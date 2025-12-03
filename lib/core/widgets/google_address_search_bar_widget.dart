@@ -38,7 +38,7 @@ class GoogleAddressSearchBarWidget extends SearchDelegate<PlaceDetailModel> {
         onPressed: () {
           query = '';
         },
-      )
+      ),
     ];
   }
 
@@ -98,7 +98,7 @@ class GoogleAddressSearchBarWidget extends SearchDelegate<PlaceDetailModel> {
               itemBuilder: (context, index) {
                 final GooglePlaceSearchModel place = listOfPlace[index];
                 return ListTile(
-                  title: Text(' ${place.description.toString()}'),
+                  title: Text(' ${place.description}'),
                   onTap: () => myAsyncMethod(
                     context: context,
                     placeId: place.placeId,

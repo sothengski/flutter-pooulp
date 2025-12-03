@@ -9,7 +9,7 @@ class GoogleSignInApi {
   static Future<GoogleSignInAccount?> handleSignOut() =>
       googleSignIn.disconnect();
 
-  static Future<GoogleSignInAuthentication?> getUserToken() =>
+  Future<GoogleSignInAuthentication?> getUserToken() =>
       googleSignIn.signIn().then(
             (result) => result!.authentication,
             //         result!.authentication.then((googleKey) {

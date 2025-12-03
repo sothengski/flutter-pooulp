@@ -197,7 +197,7 @@ class SignInForm extends GetView<SignInController> {
                 // )
                 const SizedBox(
                   height: 12.0,
-                )
+                ),
               ],
             ),
           ),

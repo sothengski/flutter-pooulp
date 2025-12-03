@@ -76,7 +76,7 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
                     fontSize: AppSize.s16,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -114,7 +114,7 @@ class _FieldListMultipleSelectorState extends State<FieldListMultipleSelector> {
                         onPressed: () => {
                           setState(
                             () => widget.onTap!(fieldItem),
-                          )
+                          ),
                         },
                       ),
                     );

@@ -18,7 +18,7 @@ class AddressSearchBarWidget extends SearchDelegate<GooglePlaceSearchModel> {
         onPressed: () {
           query = '';
         },
-      )
+      ),
     ];
   }
 
@@ -69,7 +69,7 @@ class AddressSearchBarWidget extends SearchDelegate<GooglePlaceSearchModel> {
               itemBuilder: (context, index) {
                 final GooglePlaceSearchModel place = listOfPlace[index];
                 return ListTile(
-                  title: Text(' ${place.description.toString()}'),
+                  title: Text(' ${place.description}'),
                   onTap: () async {
                     editInformationController.getPlaceDetail(
                       placeId: place.placeId,

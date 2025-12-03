@@ -74,7 +74,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                 //     .toString(),
               ),
             },
-          )
+          ),
         ],
       ),
       body: Obx(
@@ -206,7 +206,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                 unselectedLabelColor: ColorsManager.grey,
                                 tabs: [
                                   'jobInformation'.tr,
-                                  'companyInformation'.tr
+                                  'companyInformation'.tr,
                                 ]
                                     .map(
                                       (e) => Tab(
@@ -1471,7 +1471,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                             ]
                                 // ),
                                 [controller.currentIndexRx.value],
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -1706,7 +1706,7 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                               ],
                             ),
                     ),
-                  )
+                  ),
                 ],
               ),
       ),

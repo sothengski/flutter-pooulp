@@ -204,7 +204,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                 .studentInfoRepsonse
                                                 .value
                                                 .periods,
-                                          )
+                                          ),
                                           //===== Availabilities Component =====//
                                         ],
                                       )
@@ -213,7 +213,7 @@ class ProfilePage extends GetView<ProfileController> {
                                           isTreeBounceLoading: true,
                                         ),
                                       ),
-                              )
+                              ),
                           ],
                         )
                       : const Center(

@@ -631,7 +631,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                                   fieldValue: controller
                                                       .internshipTypeTagListInFilter[i],
                                                 ),
-                                              )
+                                              ),
                                           ],
                                         ),
                                       )
@@ -765,7 +765,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                             fieldValue:
                                                 controller.fieldListInFilter[i],
                                           ),
-                                        )
+                                        ),
                                     ],
                                   ),
                                 )
@@ -877,7 +877,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                             fieldValue: controller
                                                 .languageListInFilter[i],
                                           ),
-                                        )
+                                        ),
                                     ],
                                   ),
                                 )
@@ -997,7 +997,7 @@ class OfferFeedFilterSearch extends GetView<OfferFeedController> {
                                               fieldValue: controller
                                                   .availabilitiesTagListInFilter[i],
                                             ),
-                                          )
+                                          ),
                                       ],
                                     ),
                                   )

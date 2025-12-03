@@ -65,7 +65,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
 
   Future googleSignInMethod() async {
     final userInfo = await GoogleSignInApi.login();
-    final userToken = await GoogleSignInApi.getUserToken();
+    final userToken = await GoogleSignInApi().getUserToken();
 
     debugPrint("googleSignInMethod");
     if (userInfo!.id.isNotEmpty) {

@@ -74,7 +74,7 @@ class ProfileEduComponent extends StatelessWidget {
                           for (var i = 0; i < e.fields!.length; i++)
                             RemovableTextCardWidget(
                               text: '${e.fields![i].label}',
-                            )
+                            ),
                         ],
                       ),
                     ),

@@ -83,7 +83,7 @@ class ProfileSkillComponent extends StatelessWidget {
                               : Container(),
                         )
                         .toList(),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -115,7 +115,7 @@ class ProfileSkillComponent extends StatelessWidget {
                               : Container(),
                         )
                         .toList(),
-                  )
+                  ),
                 ],
               ),
             ),

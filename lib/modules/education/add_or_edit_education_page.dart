@@ -33,7 +33,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                   },
                 ),
               ),
-            )
+            ),
         ],
       ),
       // backgroundColor: ColorsManager.white,
@@ -205,7 +205,7 @@ class AddOrEditEducationPage extends GetView<EducationController> {
                                         fieldValue:
                                             controller.fieldListSelected[i],
                                       ),
-                                    )
+                                    ),
                                 ],
                               ),
                             )

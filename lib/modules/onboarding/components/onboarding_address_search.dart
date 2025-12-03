@@ -25,7 +25,7 @@ class OnBoardingAddressSearchBarWidget
         onPressed: () {
           query = '';
         },
-      )
+      ),
     ];
   }
 
@@ -76,7 +76,7 @@ class OnBoardingAddressSearchBarWidget
               itemBuilder: (context, index) {
                 final GooglePlaceSearchModel place = listOfPlace[index];
                 return ListTile(
-                  title: Text(' ${place.description.toString()}'),
+                  title: Text(' ${place.description}'),
                   onTap: () async {
                     onboardingController.getPlaceDetail(
                       placeId: place.placeId,

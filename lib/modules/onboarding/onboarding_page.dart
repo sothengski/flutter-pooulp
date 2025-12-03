@@ -1070,7 +1070,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                       controller.movingAction(forward: false),
                                   style: ButtonStyle(
                                     alignment: Alignment.centerLeft,
-                                    padding: MaterialStateProperty.all<
+                                    padding: WidgetStateProperty.all<
                                         EdgeInsetsGeometry>(
                                       const EdgeInsets.only(left: AppSize.s24),
                                     ),
@@ -1095,7 +1095,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   onPressed: controller.movingAction,
                                   style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
+                                        WidgetStateProperty.all<Color>(
                                       ColorsManager.primary,
                                     ),
                                   ),
@@ -1123,7 +1123,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   onPressed: null,
                                   style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
+                                        WidgetStateProperty.all<Color>(
                                       const Color(0x00ffffff),
                                     ),
                                   ),
@@ -1139,7 +1139,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   onPressed: controller.movingAction,
                                   style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
+                                        WidgetStateProperty.all<Color>(
                                       ColorsManager.primary,
                                     ),
                                     // alignment: Alignment.centerRight,
@@ -1158,7 +1158,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     // textAlign: TextAlign.right,
                                   ),
                                 ),
-                        )
+                        ),
                       ],
                     ),
                   ),

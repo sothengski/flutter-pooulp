@@ -34,7 +34,7 @@ class CVGenerate {
               pw.Expanded(
                 flex: 67,
                 child: pw.Container(color: PdfColors.white),
-              )
+              ),
             ],
           ),
           // theme: pw.ThemeData.withFont(base: regular, italic: italic, bold: bold, boldItalic: boldItalic),
@@ -99,7 +99,7 @@ class CVGenerate {
                           isDivider: true,
                           dividerColor: PdfColors.grey500,
                         ),
-                        for (var data in studentData!.educations!)
+                        for (final data in studentData!.educations!)
                           sectionCardComponent(
                             textTitle: data.school!.name,
                             textLocation: '${data.degree}, ${data.name}',
@@ -125,7 +125,7 @@ class CVGenerate {
                           dividerColor: PdfColors.grey500,
                         ),
                         if (studentData.experiences!.isNotEmpty)
-                          for (var data in studentData.experiences!)
+                          for (final data in studentData.experiences!)
                             if (data.type == AppStrings.professionalKey)
                               sectionCardComponent(
                                 textTitle: '${data.name}',
@@ -152,7 +152,7 @@ class CVGenerate {
                           dividerColor: PdfColors.grey500,
                         ),
                         if (studentData.experiences!.isNotEmpty)
-                          for (var data in studentData.experiences!)
+                          for (final data in studentData.experiences!)
                             if (data.type == AppStrings.personalKey)
                               sectionCardComponent(
                                 textTitle: '${data.name}',
@@ -213,7 +213,7 @@ class CVGenerate {
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
                             children: [
                               sizeBoxPdf(height: 2.0),
-                              for (var data in studentData.spokenLanguages!)
+                              for (final data in studentData.spokenLanguages!)
                                 textWidgetPdf(
                                   text: '- ${data.label}',
                                 ),
@@ -242,7 +242,7 @@ class CVGenerate {
                           dividerColor: PdfColors.grey500,
                         ),
                         if (studentData.achievements!.isNotEmpty)
-                          for (var data in studentData.achievements!)
+                          for (final data in studentData.achievements!)
                             sectionCardComponent(
                               textTitle: '${data.name}',
                               textDate: '${data.dateCompletionFormat}',
@@ -271,7 +271,7 @@ class CVGenerate {
                           dividerColor: PdfColors.grey500,
                         ),
                         if (studentData.certificates!.isNotEmpty)
-                          for (var data in studentData.certificates!)
+                          for (final data in studentData.certificates!)
                             sectionCardComponent(
                               textTitle: '${data.title}',
                               textDate: '${data.receivedDateFormat}',
@@ -281,7 +281,7 @@ class CVGenerate {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ];
@@ -309,7 +309,7 @@ class CVGenerate {
                   textDescription: expList[index].description,
                 )
               : pw.Container(),
-        )
+        ),
     ];
   }
 

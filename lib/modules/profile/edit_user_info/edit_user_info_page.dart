@@ -485,7 +485,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                               );
                             },
                             activeTrackColor: ColorsManager.primary25,
-                            activeColor: ColorsManager.primary,
+                            activeThumbColor: ColorsManager.primary,
                           ),
                         ),
                       ),
@@ -514,7 +514,7 @@ class EditUserInformationPage extends GetView<EditUserInformationController> {
                               );
                             },
                             activeTrackColor: ColorsManager.primary25,
-                            activeColor: ColorsManager.primary,
+                            activeThumbColor: ColorsManager.primary,
                           ),
                         ),
                       ),

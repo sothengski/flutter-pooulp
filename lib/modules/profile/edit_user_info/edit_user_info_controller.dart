@@ -202,7 +202,7 @@ class EditUserInformationController extends GetxController {
           ),
           IOSUiSettings(
             title: 'Crop Image',
-          )
+          ),
         ],
       );
       if (cropImageFile != null) {
@@ -233,7 +233,6 @@ class EditUserInformationController extends GetxController {
       // compressImagePath.value = compressedFile.path;
       // compressImageSize.value =
       //     "${(File(compressImagePath.value).lengthSync() / 1024 / 1024).toStringAsFixed(2)}Mb";
-
     } else {
       customSnackbar(msgTitle: 'No Image Selected', msgContent: '');
     }

@@ -6,7 +6,7 @@ import '../../data/data.dart';
 import '../modules.dart';
 
 class OfferPage extends GetView<OfferController> {
-  const OfferPage({Key? key}) : super(key: key);
+  const OfferPage({super.key});
 
   void notificationMessageAlert(BuildContext context) {
     Get.dialog(
@@ -24,15 +24,9 @@ class OfferPage extends GetView<OfferController> {
                     notificationMsgId: controller.notificationMessageList[0].id,
                   );
                   controller.getNotificationMessagesProvider();
-                  Navigator.pop(
-                    context,
-                    true,
-                  );
+                  Navigator.pop(context, true);
                 },
-                icon: const Icon(
-                  IconsManager.close,
-                  color: Colors.white,
-                ),
+                icon: const Icon(IconsManager.close, color: Colors.white),
                 label: CustomTextWidget(
                   marginRight: AppSize.s24,
                   text: 'Close'.tr,
@@ -124,16 +118,15 @@ class OfferPage extends GetView<OfferController> {
   Widget build(BuildContext context) {
     Future.delayed(
       DurationConstant.d2000,
-      () => (controller.notificationMessageList.isNotEmpty &&
+      () =>
+          (controller.notificationMessageList.isNotEmpty &&
               controller.notificationMessageList[0].status == 1)
           ? () => notificationMessageAlert(context)
           : null,
     );
 
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'myOffers'.tr,
-      ),
+      appBar: CustomAppBar(title: 'myOffers'.tr),
       body: Column(
         children: [
           // pop dialog
@@ -150,7 +143,6 @@ class OfferPage extends GetView<OfferController> {
           //         : Container();
           //   },
           // ),
-
           Expanded(
             flex: 9,
             child: Obx(
@@ -163,9 +155,10 @@ class OfferPage extends GetView<OfferController> {
           Expanded(
             flex: 91,
             child: Obx(
-              () => controller.isJobOfferStateList(
-                inputValue: OfferStrings.pendingState,
-              )
+              () =>
+                  controller.isJobOfferStateList(
+                    inputValue: OfferStrings.pendingState,
+                  )
                   ? OfferListStateComponent(
                       controller: controller,
                       offerList: controller.pendingOfferListRepsonse,
@@ -175,27 +168,27 @@ class OfferPage extends GetView<OfferController> {
                   : controller.isJobOfferStateList(
                       inputValue: OfferStrings.matchedState,
                     )
-                      ? OfferListStateComponent(
-                          controller: controller,
-                          offerList: controller.matchedOfferListRepsonse,
-                          jobOfferType: OfferStrings.matchedState,
-                          noDataHeader: 'noResult'.tr,
-                        )
-                      : controller.isJobOfferStateList(
-                          inputValue: OfferStrings.savedState,
-                        )
-                          ? OfferListStateComponent(
-                              controller: controller,
-                              offerList: controller.savedOfferListFilter,
-                              jobOfferType: OfferStrings.savedState,
-                              noDataHeader: 'noResult'.tr,
-                            )
-                          : OfferListStateComponent(
-                              controller: controller,
-                              offerList: controller.rejectedOfferListRepsonse,
-                              jobOfferType: OfferStrings.rejectedState,
-                              noDataHeader: 'noResult'.tr,
-                            ),
+                  ? OfferListStateComponent(
+                      controller: controller,
+                      offerList: controller.matchedOfferListRepsonse,
+                      jobOfferType: OfferStrings.matchedState,
+                      noDataHeader: 'noResult'.tr,
+                    )
+                  : controller.isJobOfferStateList(
+                      inputValue: OfferStrings.savedState,
+                    )
+                  ? OfferListStateComponent(
+                      controller: controller,
+                      offerList: controller.savedOfferListFilter,
+                      jobOfferType: OfferStrings.savedState,
+                      noDataHeader: 'noResult'.tr,
+                    )
+                  : OfferListStateComponent(
+                      controller: controller,
+                      offerList: controller.rejectedOfferListRepsonse,
+                      jobOfferType: OfferStrings.rejectedState,
+                      noDataHeader: 'noResult'.tr,
+                    ),
             ),
           ),
         ],
@@ -214,7 +207,7 @@ class OfferListStateComponent extends StatelessWidget {
   final String? errorBody;
 
   const OfferListStateComponent({
-    Key? key,
+    super.key,
     required this.controller,
     this.offerList,
     this.jobOfferType,
@@ -222,7 +215,7 @@ class OfferListStateComponent extends StatelessWidget {
     this.noDataBody = '',
     this.errorHeader,
     this.errorBody,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -239,9 +232,7 @@ class OfferListStateComponent extends StatelessWidget {
                 )
               : Center(
                   child: controller.isLoadingIndicator.value == true
-                      ? const ItemListShimmerLoadingWidget(
-                          isTopRowList: false,
-                        )
+                      ? const ItemListShimmerLoadingWidget(isTopRowList: false)
                       : StateHandlerWidget(
                           imgPath: AssetsManager.emptyDataIcon,
                           headerText: noDataHeader,
@@ -252,9 +243,7 @@ class OfferListStateComponent extends StatelessWidget {
                 ),
         ),
         onLoading: const Center(
-          child: ItemListShimmerLoadingWidget(
-            isTopRowList: false,
-          ),
+          child: ItemListShimmerLoadingWidget(isTopRowList: false),
         ),
         onError: (error) => Center(
           child: StateHandlerWidget(

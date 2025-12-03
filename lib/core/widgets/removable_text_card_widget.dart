@@ -6,11 +6,7 @@ class RemovableTextCardWidget extends StatelessWidget {
   final String? text;
   final VoidCallback? onRemove;
 
-  const RemovableTextCardWidget({
-    Key? key,
-    this.text = '',
-    this.onRemove,
-  }) : super(key: key);
+  const RemovableTextCardWidget({super.key, this.text = '', this.onRemove});
 
   @override
   Widget build(BuildContext context) {

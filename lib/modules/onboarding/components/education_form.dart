@@ -17,7 +17,7 @@ class EducationForm extends GetView<OnboardingController> {
   final bool? isUpdateTrigger;
 
   const EducationForm({
-    Key? key,
+    super.key,
     this.eduIndex,
     this.isCurrentStudy,
     this.school,
@@ -25,7 +25,7 @@ class EducationForm extends GetView<OnboardingController> {
     // this.currentStudyYearTextCtrl,
     // this.degreeTextCtrl,
     this.isUpdateTrigger,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,8 @@ class EducationForm extends GetView<OnboardingController> {
                   // ),
                 ),
                 Visibility(
-                  visible: controller.educationList[eduIndex!].id !=
+                  visible:
+                      controller.educationList[eduIndex!].id !=
                       999, //id = 999 first index
                   child: CustomIconButtonWidget(
                     iconData: Icons.close,
@@ -95,12 +96,8 @@ class EducationForm extends GetView<OnboardingController> {
                   color: ColorsManager.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(
-                        AppSize.s16,
-                      ),
-                      topRight: Radius.circular(
-                        AppSize.s16,
-                      ),
+                      topLeft: Radius.circular(AppSize.s16),
+                      topRight: Radius.circular(AppSize.s16),
                     ),
                   ),
                 ),
@@ -113,12 +110,9 @@ class EducationForm extends GetView<OnboardingController> {
                           onTap: (school) {
                             controller.educationList[eduIndex!].school =
                                 controller.selectedSchoolOnClick(
-                              selectedItem: school,
-                            );
-                            Navigator.pop(
-                              context,
-                              true,
-                            );
+                                  selectedItem: school,
+                                );
+                            Navigator.pop(context, true);
                           },
                         )
                       : const LoadingWidget(),
@@ -168,12 +162,8 @@ class EducationForm extends GetView<OnboardingController> {
                   color: ColorsManager.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(
-                        AppSize.s16,
-                      ),
-                      topRight: Radius.circular(
-                        AppSize.s16,
-                      ),
+                      topLeft: Radius.circular(AppSize.s16),
+                      topRight: Radius.circular(AppSize.s16),
                     ),
                   ),
                 ),
@@ -184,8 +174,9 @@ class EducationForm extends GetView<OnboardingController> {
                           dataListforSelected: controller.fieldListForSelect,
                           selectedItems: fieldList,
                           onTap: (field) {
-                            controller.educationList[eduIndex!].fields!
-                                .add(field);
+                            controller.educationList[eduIndex!].fields!.add(
+                              field,
+                            );
                             controller.getUpdate();
                           },
                         )
@@ -218,8 +209,8 @@ class EducationForm extends GetView<OnboardingController> {
                         onRemove: () {
                           controller.educationList[eduIndex!].fields!
                               .removeWhere(
-                            (element) => element.id == fieldList![i].id,
-                          );
+                                (element) => element.id == fieldList![i].id,
+                              );
                           controller.getUpdate();
                         },
                       ),
@@ -268,7 +259,8 @@ class EducationForm extends GetView<OnboardingController> {
               ),
               dialogType: DialogType.dateWithoutDayPickerDialog,
               dateLocale: LanguageController().currentLanguageStore.value,
-              currentTime: DateTime.tryParse(
+              currentTime:
+                  DateTime.tryParse(
                     controller.selectedStartedDateString[eduIndex!],
                   ) ??
                   DateTime.now(),
@@ -322,12 +314,8 @@ class EducationForm extends GetView<OnboardingController> {
                   color: ColorsManager.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(
-                        AppSize.s16,
-                      ),
-                      topRight: Radius.circular(
-                        AppSize.s16,
-                      ),
+                      topLeft: Radius.circular(AppSize.s16),
+                      topRight: Radius.circular(AppSize.s16),
                     ),
                   ),
                 ),
@@ -365,7 +353,9 @@ class EducationForm extends GetView<OnboardingController> {
                     : RowContentInputWidget(
                         centerWidget: CustomTextWidget(
                           text: controller
-                              .educationList[eduIndex!].degreeTag!.label,
+                              .educationList[eduIndex!]
+                              .degreeTag!
+                              .label,
                           color: ColorsManager.black,
                           fontSize: AppSize.s16,
                         ),

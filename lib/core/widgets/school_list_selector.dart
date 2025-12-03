@@ -18,11 +18,11 @@ class SchoolListSelector extends StatefulWidget {
     this.scrollController,
     this.separatorIndex = 1,
     this.onTap,
-    Key? key,
+    super.key,
     this.showPhoneCode = true,
     this.showCountry = true,
     this.selectedItem,
-  }) : super(key: key);
+  });
 
   @override
   State<SchoolListSelector> createState() => _SchoolListSelectorState();
@@ -59,10 +59,7 @@ class _SchoolListSelectorState extends State<SchoolListSelector> {
                   shrinkWrap: true,
                   itemCount: filteredDataList!.length,
                   separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(
-                    height: 0.0,
-                    thickness: 0.0,
-                  ),
+                      const Divider(height: 0.0, thickness: 0.0),
                   itemBuilder: (BuildContext context, int index) {
                     final SchoolModel schoolItem = filteredDataList![index];
                     return Card(
@@ -73,8 +70,10 @@ class _SchoolListSelectorState extends State<SchoolListSelector> {
                       child: ListTile(
                         key: Key(schoolItem.id.toString()),
                         dense: true,
-                        contentPadding:
-                            const EdgeInsets.only(left: 20.0, right: 20.0),
+                        contentPadding: const EdgeInsets.only(
+                          left: 20.0,
+                          right: 20.0,
+                        ),
                         // leading: CircleFlag(
                         //  schoolItem.id.toString(),
                         // ),
@@ -88,8 +87,8 @@ class _SchoolListSelectorState extends State<SchoolListSelector> {
                                   fontWeight: FontWeightManager.medium,
                                   color:
                                       widget.selectedItem!.id == schoolItem.id
-                                          ? ColorsManager.primary
-                                          : ColorsManager.primaryBlue,
+                                      ? ColorsManager.primary
+                                      : ColorsManager.primaryBlue,
                                 )
                               : Container(),
                         ),
@@ -131,9 +130,7 @@ class _SchoolListSelectorState extends State<SchoolListSelector> {
               : Padding(
                   key: const Key('no-result'),
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text(
-                    'noResult'.tr,
-                  ),
+                  child: Text('noResult'.tr),
                 ),
         ),
       ],
@@ -146,11 +143,7 @@ class _SchoolListSelectorState extends State<SchoolListSelector> {
       searchResult.addAll(widget.dataListforSelected!);
     } else {
       searchResult = widget.dataListforSelected!
-          .where(
-            (c) => c.name!.toLowerCase().startsWith(
-                  query.toLowerCase(),
-                ),
-          )
+          .where((c) => c.name!.toLowerCase().startsWith(query.toLowerCase()))
           .toList();
     }
     setState(() => filteredDataList = searchResult);

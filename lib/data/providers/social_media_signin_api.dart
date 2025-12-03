@@ -1,27 +1,17 @@
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
-class GoogleSignInApi {
-  GoogleSignInApi();
-  static final googleSignIn = GoogleSignIn();
+// class GoogleSignInApi {
+//   GoogleSignInApi();
+//   static final googleSignIn = GoogleSignIn(
+//     scopes: <String>['email', 'profile'],
+//   );
 
-  static Future<GoogleSignInAccount?> login() => googleSignIn.signIn();
+//   static Future<GoogleSignInAccount?> login() => googleSignIn.signIn();
 
-  static Future<GoogleSignInAccount?> handleSignOut() =>
-      googleSignIn.disconnect();
+//   static Future<void> handleSignOut() => googleSignIn.disconnect();
 
-  Future<GoogleSignInAuthentication?> getUserToken() =>
-      googleSignIn.signIn().then(
-            (result) => result!.authentication,
-            //         result!.authentication.then((googleKey) {
-            //       googleKey;
-            //       print("accessToken:: ${googleKey.accessToken}");
-            //       print("idToken:: ${googleKey.idToken}");
-            //     }).catchError((err) {
-            //       print('inner error');
-            //     }),
-            //   )
-            //   .catchError((err) {
-            // print('error occured');
-            // }
-          );
-}
+//   static Future<GoogleSignInAuthentication?> getUserToken() async {
+//     final result = await googleSignIn.signIn();
+//     return result?.authentication;
+//   }
+// }

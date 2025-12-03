@@ -11,10 +11,7 @@ class GoogleAddressSearchBarWidget extends SearchDelegate<PlaceDetailModel> {
   PlaceDetailModel? placeDetailData;
   final String? sessionToken;
 
-  GoogleAddressSearchBarWidget({
-    this.sessionToken,
-    this.placeDetailData,
-  });
+  GoogleAddressSearchBarWidget({this.sessionToken, this.placeDetailData});
 
   Future<void> myAsyncMethod({
     BuildContext? context,
@@ -92,8 +89,7 @@ class GoogleAddressSearchBarWidget extends SearchDelegate<PlaceDetailModel> {
           );
         } else {
           if (snapshot.hasData) {
-            final List<GooglePlaceSearchModel> listOfPlace =
-                snapshot.data! as List<GooglePlaceSearchModel>;
+            final List<GooglePlaceSearchModel> listOfPlace = snapshot.data!;
             return ListView.builder(
               itemBuilder: (context, index) {
                 final GooglePlaceSearchModel place = listOfPlace[index];

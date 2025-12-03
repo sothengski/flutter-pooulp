@@ -10,14 +10,10 @@ import '../modules.dart';
 class RoomListPage extends GetView<MessagingController> {
   late String? roomUUID = (Get.parameters['id']) ?? '';
 
-  RoomListPage({
-    Key? key,
-  }) : super(key: key);
+  RoomListPage({super.key});
 
   void btnOnClick({MessagingModel? roomValue}) {
-    controller.roomOnClick(
-      roomValue: roomValue,
-    );
+    controller.roomOnClick(roomValue: roomValue);
     Get.toNamed(Routes.roomDetailsRoute);
   }
 
@@ -26,20 +22,13 @@ class RoomListPage extends GetView<MessagingController> {
     controller.selectedRoom.value = MessagingModel(uuid: roomUUID);
 
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'messaging'.tr,
-        elevation: 0.0,
-      ),
+      appBar: CustomAppBar(title: 'messaging'.tr, elevation: 0.0),
       body: controller.obx(
         (state) => RefreshIndicator(
           color: ColorsManager.primary,
           onRefresh: () => controller.onRefreshForRoomChat(),
           child: controller.roomListRepsonse.isEmpty
-              ? Center(
-                  child: CustomTextWidget(
-                    text: 'noMessagesMsg'.tr,
-                  ),
-                )
+              ? Center(child: CustomTextWidget(text: 'noMessagesMsg'.tr))
               : Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -68,10 +57,16 @@ class RoomListPage extends GetView<MessagingController> {
                             //           Get.toNamed(Routes.roomDetailsRoute),
                             //         },
                             child: RoomCard(
-                              imgUrl: controller.roomListRepsonse[index]
-                                  .participants!.first.pictureUrl,
-                              shortName: controller.roomListRepsonse[index]
-                                  .participants!.first.shortName,
+                              imgUrl: controller
+                                  .roomListRepsonse[index]
+                                  .participants!
+                                  .first
+                                  .pictureUrl,
+                              shortName: controller
+                                  .roomListRepsonse[index]
+                                  .participants!
+                                  .first
+                                  .shortName,
                               participantName: controller
                                   .roomListRepsonse[index]
                                   .participants!
@@ -80,11 +75,14 @@ class RoomListPage extends GetView<MessagingController> {
                               lastestMessage:
                                   controller.roomListRepsonse[index].name ?? '',
                               date: controller
-                                  .roomListRepsonse[index].lastestMessageDate,
+                                  .roomListRepsonse[index]
+                                  .lastestMessageDate,
                               unseenMessage: controller
-                                  .roomListRepsonse[index].unseenMessages,
+                                  .roomListRepsonse[index]
+                                  .unseenMessages,
                               unseenbadge: controller
-                                  .roomListRepsonse[index].newConversation,
+                                  .roomListRepsonse[index]
+                                  .newConversation,
                             ),
                           );
                           // if (roomUUID!.isNotEmpty &&
@@ -111,9 +109,7 @@ class RoomListPage extends GetView<MessagingController> {
                 ),
         ),
         onLoading: const Center(
-          child: LoadingWidget(
-            isTreeBounceLoading: true,
-          ),
+          child: LoadingWidget(isTreeBounceLoading: true),
         ),
         onError: (error) => Center(
           child: StateHandlerWidget(

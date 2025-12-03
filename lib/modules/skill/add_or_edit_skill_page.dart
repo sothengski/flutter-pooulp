@@ -6,15 +6,13 @@ import '../../data/data.dart';
 import '../modules.dart';
 
 class AddOrEditSkillPage extends GetView<SkillController> {
-  const AddOrEditSkillPage({Key? key}) : super(key: key);
+  const AddOrEditSkillPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       ///===== Top of appBar Component =====//
-      appBar: CustomAppBar(
-        title: 'skills'.tr,
-      ),
+      appBar: CustomAppBar(title: 'skills'.tr),
       //===== Bottom of appBar Component =====//
 
       ///===== Top of body Component =====//
@@ -44,11 +42,12 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                           () => RowDataSelectionWidget.radioButton(
                             isLeftSideText: false,
                             isClickingValue: stringsComparation(
-                              object1: skillCategoryList![index]
-                                  .label!
+                              object1: skillCategoryList![index].label!
                                   .toLowerCase(),
                               object2: controller
-                                  .selectedSkillCategory.value.label!
+                                  .selectedSkillCategory
+                                  .value
+                                  .label!
                                   .toLowerCase(),
                             ),
                             text: translateStateWords(
@@ -57,13 +56,10 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                             onPressed: () {
                               controller.selectedSkillCategory.value =
                                   controller.selectedSkillOnClick(
-                                selectedItem: skillCategoryList![index],
-                                resetDependencyValue: true,
-                              );
-                              Navigator.pop(
-                                context,
-                                true,
-                              );
+                                    selectedItem: skillCategoryList![index],
+                                    resetDependencyValue: true,
+                                  );
+                              Navigator.pop(context, true);
                             },
                           ),
                         );
@@ -96,7 +92,9 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                               //marginLeft: 4.0,
                               text: translateStateWords(
                                 stateWord: controller
-                                    .selectedSkillCategory.value.label,
+                                    .selectedSkillCategory
+                                    .value
+                                    .label,
                               ),
                               // controller.selectedSkillCategory.value.label,
                               color: ColorsManager.black,
@@ -129,56 +127,46 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                         color: ColorsManager.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(
-                              AppSize.s16,
-                            ),
-                            topRight: Radius.circular(
-                              AppSize.s16,
-                            ),
+                            topLeft: Radius.circular(AppSize.s16),
+                            topRight: Radius.circular(AppSize.s16),
                           ),
                         ),
                       ),
                       child: Obx(
-                        () => controller.selectedSkillCategory.value.label ==
+                        () =>
+                            controller.selectedSkillCategory.value.label ==
                                 SkillCategoryStrings.softSkill
                             ? controller.softSkillListForSelection.isNotEmpty
-                                ? FieldListSelector(
-                                    inputHintText: 'search'.tr,
-                                    dataListforSelected:
-                                        controller.softSkillListForSelection,
-                                    selectedItem:
-                                        controller.selectedSkill.value,
-                                    onTap: (field) {
-                                      controller.selectedSkill.value =
-                                          controller.selectedSkillOnClick(
-                                        selectedItem: field,
-                                      );
-                                      Navigator.pop(
-                                        context,
-                                        true,
-                                      );
-                                    },
-                                  )
-                                : const LoadingWidget()
+                                  ? FieldListSelector(
+                                      inputHintText: 'search'.tr,
+                                      dataListforSelected:
+                                          controller.softSkillListForSelection,
+                                      selectedItem:
+                                          controller.selectedSkill.value,
+                                      onTap: (field) {
+                                        controller.selectedSkill.value =
+                                            controller.selectedSkillOnClick(
+                                              selectedItem: field,
+                                            );
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  : const LoadingWidget()
                             : controller.hardSkillListForSelection.isNotEmpty
-                                ? FieldListSelector(
-                                    inputHintText: 'search'.tr,
-                                    dataListforSelected:
-                                        controller.hardSkillListForSelection,
-                                    selectedItem:
-                                        controller.selectedSkill.value,
-                                    onTap: (field) {
-                                      controller.selectedSkill.value =
-                                          controller.selectedSkillOnClick(
+                            ? FieldListSelector(
+                                inputHintText: 'search'.tr,
+                                dataListforSelected:
+                                    controller.hardSkillListForSelection,
+                                selectedItem: controller.selectedSkill.value,
+                                onTap: (field) {
+                                  controller.selectedSkill.value = controller
+                                      .selectedSkillOnClick(
                                         selectedItem: field,
                                       );
-                                      Navigator.pop(
-                                        context,
-                                        true,
-                                      );
-                                    },
-                                  )
-                                : const LoadingWidget(),
+                                  Navigator.pop(context, true);
+                                },
+                              )
+                            : const LoadingWidget(),
                       ),
                     ),
                     containerWidget: controller.selectedSkill.value.id == null
@@ -191,15 +179,15 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                             ),
                             suffixWidget:
                                 controller.selectedSkillCategory.value.label ==
-                                        ''
-                                    ? const Icon(
-                                        IconsManager.arrowDropDown,
-                                        color: ColorsManager.grey400,
-                                      )
-                                    : const Icon(
-                                        IconsManager.arrowDropDown,
-                                        color: ColorsManager.grey600,
-                                      ),
+                                    ''
+                                ? const Icon(
+                                    IconsManager.arrowDropDown,
+                                    color: ColorsManager.grey400,
+                                  )
+                                : const Icon(
+                                    IconsManager.arrowDropDown,
+                                    color: ColorsManager.grey600,
+                                  ),
                           )
                         : RowContentInputWidget(
                             centerWidget: CustomTextWidget(
@@ -242,20 +230,20 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                   object1:
                                       controller.proficiencyList[index].level,
                                   object2: controller
-                                      .selectedProficiency.value.level,
+                                      .selectedProficiency
+                                      .value
+                                      .level,
                                 ),
                                 text: controller
-                                    .proficiencyList[index].displayLevel,
+                                    .proficiencyList[index]
+                                    .displayLevel,
                                 onPressed: () {
                                   controller.selectedProficiency.value =
                                       controller.selectedSkillOnClick(
-                                    selectedItem:
-                                        controller.proficiencyList[index],
-                                  );
-                                  Navigator.pop(
-                                    context,
-                                    true,
-                                  );
+                                        selectedItem:
+                                            controller.proficiencyList[index],
+                                      );
+                                  Navigator.pop(context, true);
                                 },
                               ),
                             );
@@ -287,7 +275,9 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                 centerWidget: CustomTextWidget(
                                   //marginLeft: 4.0,
                                   text: controller
-                                      .selectedProficiency.value.displayLevel,
+                                      .selectedProficiency
+                                      .value
+                                      .displayLevel,
                                   color: ColorsManager.black,
                                   fontSize: 16.0,
                                 ),
@@ -337,17 +327,15 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                 ///===== Top of User Language List Component =====//
                 Obx(
                   () => Container(
-                    padding: const EdgeInsets.fromLTRB(
-                      0.0,
-                      24.0,
-                      0.0,
-                      24.0,
-                    ),
-                    child: controller.profileController.studentInfoRepsonse
-                            .value.skills!.isEmpty
-                        ? CustomTextWidget(
-                            text: 'noSkillsFound'.tr,
-                          )
+                    padding: const EdgeInsets.fromLTRB(0.0, 24.0, 0.0, 24.0),
+                    child:
+                        controller
+                            .profileController
+                            .studentInfoRepsonse
+                            .value
+                            .skills!
+                            .isEmpty
+                        ? CustomTextWidget(text: 'noSkillsFound'.tr)
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             // mainAxisAlignment:MainAxisAlignment.start,
@@ -360,8 +348,11 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: controller.profileController
-                                    .studentInfoRepsonse.value.skills!
+                                children: controller
+                                    .profileController
+                                    .studentInfoRepsonse
+                                    .value
+                                    .skills!
                                     .map(
                                       (e) => e.type == Type.hardSkill
                                           ? Padding(
@@ -419,10 +410,10 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                                     onClick: () {
                                                       controller
                                                           .makeRequestToSkillAPI(
-                                                        skillId: e.id,
-                                                        operation: Keys
-                                                            .deleteOperation,
-                                                      );
+                                                            skillId: e.id,
+                                                            operation: Keys
+                                                                .deleteOperation,
+                                                          );
                                                     },
                                                   ),
                                                   Expanded(
@@ -446,41 +437,30 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                                             title:
                                                                 'proficiencyHint'
                                                                     .tr,
-                                                            contentWidget:
-                                                                ListView
-                                                                    .separated(
+                                                            contentWidget: ListView.separated(
                                                               shrinkWrap: true,
                                                               itemCount: controller
                                                                   .proficiencyList
                                                                   .length,
-                                                              itemBuilder: (
-                                                                context,
-                                                                index,
-                                                              ) {
+                                                              itemBuilder: (context, index) {
                                                                 return Obx(
-                                                                  () => RowDataSelectionWidget
-                                                                      .radioButton(
+                                                                  () => RowDataSelectionWidget.radioButton(
                                                                     isLeftSideText:
                                                                         false,
-                                                                    isClickingValue:
-                                                                        intComparation(
+                                                                    isClickingValue: intComparation(
                                                                       object1: controller
-                                                                          .proficiencyList[
-                                                                              index]
+                                                                          .proficiencyList[index]
                                                                           .level,
                                                                       object2: e
                                                                           .level,
                                                                     ),
                                                                     text:
                                                                         '${controller.proficiencyList[index].displayLevel}',
-                                                                    onPressed:
-                                                                        () {
-                                                                      controller
-                                                                          .makeRequestToSkillAPI(
+                                                                    onPressed: () {
+                                                                      controller.makeRequestToSkillAPI(
                                                                         skillId:
                                                                             e.id,
-                                                                        skillData:
-                                                                            FieldModel(
+                                                                        skillData: FieldModel(
                                                                           level: controller
                                                                               .proficiencyList[index]
                                                                               .level,
@@ -490,8 +470,7 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                                                         operation:
                                                                             Keys.editOperation,
                                                                       );
-                                                                      Navigator
-                                                                          .pop(
+                                                                      Navigator.pop(
                                                                         context,
                                                                         true,
                                                                       );
@@ -501,15 +480,16 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                                               },
                                                               separatorBuilder:
                                                                   (
-                                                                context,
-                                                                index,
-                                                              ) {
-                                                                return const Divider(
-                                                                  height: 1.0,
-                                                                  color: ColorsManager
-                                                                      .grey300,
-                                                                );
-                                                              },
+                                                                    context,
+                                                                    index,
+                                                                  ) {
+                                                                    return const Divider(
+                                                                      height:
+                                                                          1.0,
+                                                                      color: ColorsManager
+                                                                          .grey300,
+                                                                    );
+                                                                  },
                                                             ),
                                                           ),
                                                         );
@@ -552,8 +532,11 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: controller.profileController
-                                    .studentInfoRepsonse.value.skills!
+                                children: controller
+                                    .profileController
+                                    .studentInfoRepsonse
+                                    .value
+                                    .skills!
                                     .map(
                                       (e) => e.type == Type.softSkill
                                           ? Row(
@@ -575,10 +558,10 @@ class AddOrEditSkillPage extends GetView<SkillController> {
                                                       onClick: () {
                                                         controller
                                                             .makeRequestToSkillAPI(
-                                                          skillId: e.id,
-                                                          operation: Keys
-                                                              .deleteOperation,
-                                                        );
+                                                              skillId: e.id,
+                                                              operation: Keys
+                                                                  .deleteOperation,
+                                                            );
                                                       },
                                                     ),
                                                     CustomTextWidget(

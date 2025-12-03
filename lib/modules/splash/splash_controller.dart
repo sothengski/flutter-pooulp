@@ -19,7 +19,7 @@ class SplashController extends GetxController {
     super.onInit();
     // await handleDeepLinks();
     await checkAuth();
-    await checkAppBasicTime();
+    // await checkAppBasicTime();
     // await getAppBasicStatusProvider();
   }
 
@@ -27,16 +27,14 @@ class SplashController extends GetxController {
     final bool isHomeNavigate = AuthServices().isUserLoggedIn();
     await Future.delayed(
       DurationConstant.d2000,
-      () async => {
+      () => {
         if (isHomeNavigate == true)
           {
             // Get.offNamed(Routes.onBoardingRoute),
             Get.offNamed(Routes.homeRoute),
           }
         else
-          {
-            Get.offNamed(Routes.signInRoute),
-          },
+          {Get.offNamed(Routes.signInRoute)},
       },
     );
   }
@@ -45,30 +43,31 @@ class SplashController extends GetxController {
     final String? appBasicTimeStamp = AppBasicServices().getAppBasicTime();
     await Future.delayed(
       DurationConstant.d1000,
-      () async =>
-          {await getAppBasicStatusProvider(lastSyncDate: appBasicTimeStamp)},
+      () async => {
+        await getAppBasicStatusProvider(lastSyncDate: appBasicTimeStamp),
+      },
     );
   }
 
   Future<void> getAppBasicStatusProvider({String? lastSyncDate}) async {
     await appBasicProvider.getAppBasicStatus().then(
-          (value) async => {
-            if (DateOnlyCompare(
-                  value.latestTranslationUpdate!,
-                ).isSameDateTime(other: DateTime.parse(lastSyncDate!)) ==
-                false)
-              {
-                await AppBasicServices().saveAppBasicTime(
-                  bodyData: value.latestTranslationUpdate.toString(),
-                ),
-                await getAllTranslationLangsProvider(lang: 'en'),
-                await getAllTranslationLangsProvider(lang: 'fr'),
-                await getAllTranslationLangsProvider(lang: 'nl'),
-              }
-            else
-              {},
-          },
-        );
+      (value) async => {
+        if (DateOnlyCompare(
+              value.latestTranslationUpdate!,
+            ).isSameDateTime(other: DateTime.parse(lastSyncDate!)) ==
+            false)
+          {
+            await AppBasicServices().saveAppBasicTime(
+              bodyData: value.latestTranslationUpdate.toString(),
+            ),
+            await getAllTranslationLangsProvider(lang: 'en'),
+            await getAllTranslationLangsProvider(lang: 'fr'),
+            await getAllTranslationLangsProvider(lang: 'nl'),
+          }
+        else
+          {},
+      },
+    );
   }
 
   Future<void> getAllTranslationLangsProvider({required String? lang}) async {
@@ -77,8 +76,9 @@ class SplashController extends GetxController {
     final dir = await getTemporaryDirectory();
     final File file = File("${dir.path}/$fileName");
 
-    final JsonResponse respData =
-        await appBasicProvider.getAllTranslationLangs(lang: lang);
+    final JsonResponse respData = await appBasicProvider.getAllTranslationLangs(
+      lang: lang,
+    );
 
     if (respData.success == true) {
       // print('fileName:: $fileName,, resp: $respData.data');

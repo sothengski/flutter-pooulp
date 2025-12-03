@@ -12,7 +12,7 @@ class RoomCard extends StatelessWidget {
 
   final String? date;
   const RoomCard({
-    Key? key,
+    super.key,
     this.imgUrl = '',
     this.participantName,
     this.lastestMessage,
@@ -20,18 +20,14 @@ class RoomCard extends StatelessWidget {
     this.unseenMessage = 0,
     this.unseenbadge = 0,
     this.shortName = '',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         color: ColorsManager.white,
-        border: Border(
-          bottom: BorderSide(
-            color: ColorsManager.grey200,
-          ),
-        ),
+        border: Border(bottom: BorderSide(color: ColorsManager.grey200)),
       ),
       padding: const EdgeInsets.all(AppSize.s10),
       child: Row(

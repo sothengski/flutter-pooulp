@@ -22,20 +22,20 @@ class BaseProvider extends GetConnect {
     httpClient.defaultContentType = "application/json";
     httpClient.timeout = const Duration(seconds: 45);
 
-    httpClient.addResponseModifier((request, response) async {
+    httpClient.addResponseModifier((request, response) {
       if ('${request.url}' ==
               '${httpClient.baseUrl}${API.paths[Endpoint.signIn]}' ||
           '${request.url}' ==
               '${httpClient.baseUrl}${API.paths[Endpoint.registerNewUser]}') {
       } else {
         if
-            //  ('${request.url}' ==
-            //         '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}' &&
-            //     response.statusCode != 401)
-            ('${request.url}' ==
-                    '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}' &&
-                AuthServices().getToken()!.tokenExpirationDate!.compareTo(now) <
-                    30) {
+        //  ('${request.url}' ==
+        //         '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}' &&
+        //     response.statusCode != 401)
+        ('${request.url}' ==
+                '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}' &&
+            AuthServices().getToken()!.tokenExpirationDate!.compareTo(now) <
+                30) {
           // debugPrint(
           //   "expire: ${AuthServices().getToken()!.tokenExpirationDate!} ${AuthServices().getToken()!.tokenExpirationDate!.compareTo(now) < 30}",
           // );
@@ -75,13 +75,10 @@ class BaseProvider extends GetConnect {
                       //   "Can't save RefreshToken token: ${getUserToken()}",
                       // );
                       await AuthServices().removeToken().then(
-                            (value) => Get.offAllNamed(Routes.splashRoute),
-                          );
+                        (value) => Get.offAllNamed(Routes.splashRoute),
+                      );
                     },
-                    icon: const Icon(
-                      Icons.check,
-                      color: Colors.blue,
-                    ),
+                    icon: const Icon(Icons.check, color: Colors.blue),
                     label: const Text(
                       'Okay',
                       style: TextStyle(color: Colors.blue),
@@ -135,9 +132,9 @@ class BaseProvider extends GetConnect {
           //       (value) => Get.offAllNamed(Routes.splashRoute),
           //     );
         } else if (
-            // !('${request.url}' ==
-            //       '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}') &&
-            response.statusCode == 401) {
+        // !('${request.url}' ==
+        //       '${httpClient.baseUrl}${API.paths[Endpoint.getPendingOffer]}') &&
+        response.statusCode == 401) {
           // debugPrint(
           //   "${request.url}:${response.statusCode}: ${getUserToken()}",
           // );
@@ -154,17 +151,11 @@ class BaseProvider extends GetConnect {
                 //   "Not getPendingOffer RefreshToken token: ${getUserToken()}",
                 // );
                 await AuthServices().removeToken().then(
-                      (value) => Get.offAllNamed(Routes.splashRoute),
-                    );
+                  (value) => Get.offAllNamed(Routes.splashRoute),
+                );
               },
-              icon: const Icon(
-                Icons.check,
-                color: Colors.blue,
-              ),
-              label: const Text(
-                'Okay',
-                style: TextStyle(color: Colors.blue),
-              ),
+              icon: const Icon(Icons.check, color: Colors.blue),
+              label: const Text('Okay', style: TextStyle(color: Colors.blue)),
             ),
           );
         }
@@ -173,7 +164,7 @@ class BaseProvider extends GetConnect {
       // return getServerResponse(response);
     });
 
-    httpClient.addRequestModifier<void>((request) async {
+    httpClient.addRequestModifier<void>((request) {
       // request.headers['apikey'] = '12345678';
       request.headers['Authorization'] = 'Bearer ${getUserToken()}';
       return request;
@@ -197,10 +188,7 @@ class BaseProvider extends GetConnect {
     reqHeaders.putIfAbsent('Accept', () => 'application/json');
     reqHeaders.putIfAbsent('Accept-Encoding', () => 'gzip');
     if (addHeaderAuthorization) {
-      reqHeaders.putIfAbsent(
-        'Authorization',
-        () => 'Bearer ${getUserToken()}',
-      );
+      reqHeaders.putIfAbsent('Authorization', () => 'Bearer ${getUserToken()}');
     }
     if (addHeaderContentJson) {
       reqHeaders.putIfAbsent('Content-Type', () => 'application/json');

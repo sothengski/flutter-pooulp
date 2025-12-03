@@ -13,7 +13,7 @@ class CVGenerate {
     required StudentProfileModel? studentData,
     required ProfileModel? profileData,
     required String? jobTitle,
-  }) async {
+  }) {
     final pdf = pw.Document();
     final pdfService = PdfService();
     // final netImage = await networkImage('https://www.nfet.net/nfet.jpg');

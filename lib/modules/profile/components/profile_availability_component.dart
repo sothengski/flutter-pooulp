@@ -10,11 +10,11 @@ class ProfileAvailabilityComponent extends StatelessWidget {
   final List<PeriodModel>? availabilityList;
 
   const ProfileAvailabilityComponent({
-    Key? key,
+    super.key,
     this.availabilityList,
     this.title,
     this.addOrEditAvailabilityRoute,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +37,11 @@ class ProfileAvailabilityComponent extends StatelessWidget {
               (period) => period.to!.isBefore(now) == true
                   ? Container()
                   : Padding(
-                      padding: const EdgeInsets.all(
-                        AppSize.s4,
-                      ),
+                      padding: const EdgeInsets.all(AppSize.s4),
                       child: Theme(
-                        data: Theme.of(context)
-                            .copyWith(dividerColor: Colors.transparent),
+                        data: Theme.of(
+                          context,
+                        ).copyWith(dividerColor: Colors.transparent),
                         child: ExpansionTile(
                           backgroundColor: ColorsManager.white,
                           collapsedBackgroundColor: ColorsManager.grey100,
@@ -78,50 +77,47 @@ class ProfileAvailabilityComponent extends StatelessWidget {
                                   )
                                 else
                                   Wrap(
-                                    children: period.weekly!.map(
-                                      (e) {
-                                        return e.slots!.isEmpty
-                                            ? Container()
-                                            : Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Expanded(
-                                                    flex: 30,
-                                                    child: CustomTextWidget(
-                                                      text: '${e.dayLabel}',
-                                                      color:
-                                                          ColorsManager.black,
-                                                    ),
+                                    children: period.weekly!.map((e) {
+                                      return e.slots!.isEmpty
+                                          ? Container()
+                                          : Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                  flex: 30,
+                                                  child: CustomTextWidget(
+                                                    text: '${e.dayLabel}',
+                                                    color: ColorsManager.black,
                                                   ),
-                                                  Expanded(
-                                                    flex: 70,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: e.slots!
-                                                          .map(
-                                                            (e) =>
-                                                                CustomTextWidget(
-                                                              text:
-                                                                  '${e.startTimeToHour} - ${e.endTimeToHour}',
-                                                              color:
-                                                                  ColorsManager
-                                                                      .black,
-                                                              marginTop:
-                                                                  AppSize.s2,
-                                                              marginBottom:
-                                                                  AppSize.s2,
-                                                            ),
-                                                          )
-                                                          .toList(),
-                                                    ),
+                                                ),
+                                                Expanded(
+                                                  flex: 70,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: e.slots!
+                                                        .map(
+                                                          (
+                                                            e,
+                                                          ) => CustomTextWidget(
+                                                            text:
+                                                                '${e.startTimeToHour} - ${e.endTimeToHour}',
+                                                            color: ColorsManager
+                                                                .black,
+                                                            marginTop:
+                                                                AppSize.s2,
+                                                            marginBottom:
+                                                                AppSize.s2,
+                                                          ),
+                                                        )
+                                                        .toList(),
                                                   ),
-                                                ],
-                                              );
-                                      },
-                                    ).toList(),
+                                                ),
+                                              ],
+                                            );
+                                    }).toList(),
                                   ),
                                 Align(
                                   alignment: Alignment.topRight,

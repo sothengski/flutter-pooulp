@@ -6,7 +6,7 @@ import '../../data/data.dart';
 import '../modules.dart';
 
 class OnboardingPage extends GetView<OnboardingController> {
-  const OnboardingPage({Key? key}) : super(key: key);
+  const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,8 @@ class OnboardingPage extends GetView<OnboardingController> {
       body: SafeArea(
         child: controller.obx(
           (state) => Obx(
-            () => controller.onboardingPagesAPIData.value ==
+            () =>
+                controller.onboardingPagesAPIData.value ==
                     const OnboardingModel(totalPage: 0)
                 ? Container()
                 : Container(
@@ -27,7 +28,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                     ),
                     child: PageView(
                       controller: controller.pageController,
-                      onPageChanged: controller.selectedPageIndex,
+                      onPageChanged: controller.selectedPageIndex.call,
                       children: [
                         PageTemplateWidget(
                           bodyPageWidget: Column(
@@ -40,8 +41,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                                 child: Align(
                                   alignment: Alignment.topCenter,
                                   child: Image(
-                                    image:
-                                        AssetImage(AssetsManager.appLogoRose),
+                                    image: AssetImage(
+                                      AssetsManager.appLogoRose,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -81,7 +83,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                             // physics:
                             //     const NeverScrollableScrollPhysics(),
                             itemCount: controller
-                                .onboardingPages[1].selectionItems!.length,
+                                .onboardingPages[1]
+                                .selectionItems!
+                                .length,
                             itemBuilder: (_, itemIndex) {
                               final item =
                                   pageData[1].selectionItems![itemIndex];
@@ -97,8 +101,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                         // rightTopText: 'profile.soon'.tr,
                                         maxLine:
                                             controller.isUpdate.value == true
-                                                ? 3
-                                                : 3,
+                                            ? 3
+                                            : 3,
                                         // fontSize: AppSize.s16,
                                         itemList:
                                             controller.lookingForSelectedList,
@@ -138,8 +142,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                         fontWeight: FontWeight.w500,
                                         maxLine:
                                             controller.isUpdate.value == true
-                                                ? 3
-                                                : 3,
+                                            ? 3
+                                            : 3,
                                         color: ColorsManager.white,
                                         textAlign: TextAlign.left,
                                         marginTop: AppSize.s16,
@@ -151,26 +155,29 @@ class OnboardingPage extends GetView<OnboardingController> {
                                         alignment: Alignment.topLeft,
                                         child: Wrap(
                                           children: [
-                                            for (var i = 0;
-                                                i <
-                                                    pageData[2]
-                                                        .internshipTypeItems!
-                                                        .length;
-                                                i++)
+                                            for (
+                                              var i = 0;
+                                              i <
+                                                  pageData[2]
+                                                      .internshipTypeItems!
+                                                      .length;
+                                              i++
+                                            )
                                               Obx(
                                                 () => Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                    right: AppSize.s8,
-                                                    bottom: AppSize.s12,
-                                                  ),
-                                                  child:
-                                                      TextCardClickableWidget(
+                                                        right: AppSize.s8,
+                                                        bottom: AppSize.s12,
+                                                      ),
+                                                  child: TextCardClickableWidget(
                                                     isCenterText: false,
                                                     text: pageData[2]
                                                         .internshipTypeItems![i]
                                                         .label,
-                                                    maxLine: controller.isUpdate
+                                                    maxLine:
+                                                        controller
+                                                                .isUpdate
                                                                 .value ==
                                                             true
                                                         ? 3
@@ -181,8 +188,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                     item: pageData[2]
                                                         .internshipTypeItems![i],
                                                     onClick: () {
-                                                      controller
-                                                          .addOrRemoveDataInList(
+                                                      controller.addOrRemoveDataInList(
                                                         pageIndex: 1,
                                                         addToList: controller
                                                             .internshipTypeSelectedList,
@@ -198,7 +204,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                       ),
                                     ],
                                   ),
-                                  if (controller.internshipTypeSelectedList
+                                  if (controller
+                                          .internshipTypeSelectedList
                                           .isNotEmpty &&
                                       controller.internshipTypeSelectedList
                                           .where(
@@ -227,8 +234,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                         fontWeight: FontWeight.w500,
                                         maxLine:
                                             controller.isUpdate.value == true
-                                                ? 3
-                                                : 3,
+                                            ? 3
+                                            : 3,
                                         color: ColorsManager.white,
                                         textAlign: TextAlign.center,
                                         marginTop: AppSize.s16,
@@ -240,27 +247,29 @@ class OnboardingPage extends GetView<OnboardingController> {
                                         alignment: Alignment.topLeft,
                                         child: Wrap(
                                           children: [
-                                            for (var i = 0;
-                                                i <
-                                                    pageData[2]
-                                                        .internshipPeriodItems!
-                                                        .length;
-                                                i++)
+                                            for (
+                                              var i = 0;
+                                              i <
+                                                  pageData[2]
+                                                      .internshipPeriodItems!
+                                                      .length;
+                                              i++
+                                            )
                                               Obx(
                                                 () => Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                    right: AppSize.s8,
-                                                    bottom: AppSize.s12,
-                                                  ),
-                                                  child:
-                                                      TextCardClickableWidget(
+                                                        right: AppSize.s8,
+                                                        bottom: AppSize.s12,
+                                                      ),
+                                                  child: TextCardClickableWidget(
                                                     isCenterText: false,
                                                     text: pageData[2]
-                                                        .internshipPeriodItems![
-                                                            i]
+                                                        .internshipPeriodItems![i]
                                                         .label,
-                                                    maxLine: controller.isUpdate
+                                                    maxLine:
+                                                        controller
+                                                                .isUpdate
                                                                 .value ==
                                                             true
                                                         ? 3
@@ -271,8 +280,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                     item: pageData[2]
                                                         .internshipPeriodItems![i],
                                                     onClick: () {
-                                                      controller
-                                                          .addOrRemoveDataInList(
+                                                      controller.addOrRemoveDataInList(
                                                         pageIndex: 1,
                                                         addToList: controller
                                                             .internshipPeriodSelectedList,
@@ -315,13 +323,14 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           ),
                                           child: TextCardClickableWidget(
                                             isCenterText: false,
-                                            text: element.label ??
+                                            text:
+                                                element.label ??
                                                 element.category.toString(),
                                             maxLine:
                                                 controller.isUpdate.value ==
-                                                        true
-                                                    ? 3
-                                                    : 3,
+                                                    true
+                                                ? 3
+                                                : 3,
                                             // fontSize: AppSize.s24,
                                             itemList: controller
                                                 .internshipInterestedInSelectedList,
@@ -404,11 +413,11 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           context: context,
                                           delegate:
                                               OnBoardingAddressSearchBarWidget(
-                                            sessionToken:
-                                                UuidGenerator().uuidV4(),
-                                            placeDetail: controller
-                                                .internshipPlaceDetail,
-                                          ),
+                                                sessionToken: UuidGenerator()
+                                                    .uuidV4(),
+                                                placeDetail: controller
+                                                    .internshipPlaceDetail,
+                                              ),
                                         );
                                       },
                                       child: AbsorbPointer(
@@ -419,7 +428,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                               "${'city'.tr} / ${'zipcode'.tr} *",
                                           // "${'profile.city'.tr} / ${'profile.zipCode'.tr} *",
                                           titleColor: ColorsManager.white,
-                                          hintText: controller
+                                          hintText:
+                                              controller
                                                   .internshipPlaceDetail!
                                                   .value
                                                   .fullAddress ??
@@ -449,7 +459,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     ),
                                     Slider(
                                       value: controller
-                                          .internshipRadiusRxInt.value
+                                          .internshipRadiusRxInt
+                                          .value
                                           .toDouble(),
                                       min: 5.0,
                                       max: 200.0,
@@ -459,9 +470,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                       thumbColor: ColorsManager.primary,
                                       label:
                                           '${controller.internshipRadiusRxInt.value}',
-                                      onChanged: (
-                                        double newValue,
-                                      ) {
+                                      onChanged: (double newValue) {
                                         controller.internshipRadiusRxInt.value =
                                             newValue.toInt();
                                       },
@@ -546,13 +555,14 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           ),
                                           child: TextCardClickableWidget(
                                             isCenterText: false,
-                                            text: element.label ??
+                                            text:
+                                                element.label ??
                                                 element.category.toString(),
                                             maxLine:
                                                 controller.isUpdate.value ==
-                                                        true
-                                                    ? 3
-                                                    : 3,
+                                                    true
+                                                ? 3
+                                                : 3,
                                             // fontSize: AppSize.s24,
                                             itemList: controller
                                                 .studentJobInterestedInSelectedList,
@@ -631,11 +641,11 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           context: context,
                                           delegate:
                                               OnBoardingAddressSearchBarWidget(
-                                            sessionToken:
-                                                UuidGenerator().uuidV4(),
-                                            placeDetail: controller
-                                                .studentJobPlaceDetail,
-                                          ),
+                                                sessionToken: UuidGenerator()
+                                                    .uuidV4(),
+                                                placeDetail: controller
+                                                    .studentJobPlaceDetail,
+                                              ),
                                         );
                                       },
                                       child: AbsorbPointer(
@@ -646,7 +656,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                               "${'city'.tr} / ${'zipcode'.tr} *",
                                           // "${'profile.city'.tr} / ${'profile.zipCode'.tr} *",
                                           titleColor: ColorsManager.white,
-                                          hintText: controller
+                                          hintText:
+                                              controller
                                                   .studentJobPlaceDetail!
                                                   .value
                                                   .fullAddress ??
@@ -676,7 +687,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     ),
                                     Slider(
                                       value: controller
-                                          .studentJobRadiusRxInt.value
+                                          .studentJobRadiusRxInt
+                                          .value
                                           .toDouble(),
                                       min: 5.0,
                                       max: 200.0,
@@ -686,9 +698,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                       thumbColor: ColorsManager.primary,
                                       label:
                                           '${controller.studentJobRadiusRxInt.value}',
-                                      onChanged: (
-                                        double newValue,
-                                      ) {
+                                      onChanged: (double newValue) {
                                         controller.studentJobRadiusRxInt.value =
                                             newValue.toInt();
                                       },
@@ -779,8 +789,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           ),
                                         ),
                                       )
-                                      .values
-                                      .toList(),
+                                      .values,
                                   CustomMaterialButton(
                                     topPadding: AppSize.s12,
                                     leftPadding: AppSize.s12,
@@ -793,13 +802,13 @@ class OnboardingPage extends GetView<OnboardingController> {
                                     onPressed: () {
                                       unFocusKeyBoard(context);
                                       controller.addOrRemoveEduSlot(
-                                          // isRemove: slotList!.indexOf(e) != 0,
-                                          // eduIndex: controller,
-                                          // removeIndex: slotList!.indexOf(e) != 0
-                                          //     ? slotList!.indexOf(e)
-                                          //     : -1,
-                                          // eduSlotToBeAdd: EducationModel(),
-                                          );
+                                        // isRemove: slotList!.indexOf(e) != 0,
+                                        // eduIndex: controller,
+                                        // removeIndex: slotList!.indexOf(e) != 0
+                                        //     ? slotList!.indexOf(e)
+                                        //     : -1,
+                                        // eduSlotToBeAdd: EducationModel(),
+                                      );
                                     },
                                   ),
                                 ],
@@ -827,25 +836,25 @@ class OnboardingPage extends GetView<OnboardingController> {
                               Expanded(
                                 child: SingleChildScrollView(
                                   child: Wrap(
-                                    children: pageData[7]
-                                        .allSkills!
+                                    children: pageData[7].allSkills!
                                         .map(
-                                          (element) => element.type ==
-                                                  'hard skill'
+                                          (element) =>
+                                              element.type == 'hard skill'
                                               ? Obx(
                                                   () => Padding(
                                                     padding:
                                                         const EdgeInsets.only(
-                                                      right: AppSize.s8,
-                                                      bottom: AppSize.s8,
-                                                    ),
-                                                    child:
-                                                        TextCardClickableWidget(
+                                                          right: AppSize.s8,
+                                                          bottom: AppSize.s8,
+                                                        ),
+                                                    child: TextCardClickableWidget(
                                                       isCenterText: false,
-                                                      text: element.label ??
+                                                      text:
+                                                          element.label ??
                                                           element.category
                                                               .toString(),
-                                                      maxLine: controller
+                                                      maxLine:
+                                                          controller
                                                                   .isUpdate
                                                                   .value ==
                                                               true
@@ -855,8 +864,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                           .goodAtfieldSelectedList,
                                                       item: element,
                                                       onClick: () {
-                                                        controller
-                                                            .addOrRemoveDataInList(
+                                                        controller.addOrRemoveDataInList(
                                                           pageIndex: 7,
                                                           addToList: controller
                                                               .goodAtfieldSelectedList,
@@ -887,25 +895,25 @@ class OnboardingPage extends GetView<OnboardingController> {
                               Expanded(
                                 child: SingleChildScrollView(
                                   child: Wrap(
-                                    children: pageData[7]
-                                        .allSkills!
+                                    children: pageData[7].allSkills!
                                         .map(
-                                          (element) => element.type ==
-                                                  'soft skill'
+                                          (element) =>
+                                              element.type == 'soft skill'
                                               ? Obx(
                                                   () => Padding(
                                                     padding:
                                                         const EdgeInsets.only(
-                                                      right: AppSize.s8,
-                                                      bottom: AppSize.s8,
-                                                    ),
-                                                    child:
-                                                        TextCardClickableWidget(
+                                                          right: AppSize.s8,
+                                                          bottom: AppSize.s8,
+                                                        ),
+                                                    child: TextCardClickableWidget(
                                                       isCenterText: false,
-                                                      text: element.label ??
+                                                      text:
+                                                          element.label ??
                                                           element.category
                                                               .toString(),
-                                                      maxLine: controller
+                                                      maxLine:
+                                                          controller
                                                                   .isUpdate
                                                                   .value ==
                                                               true
@@ -915,8 +923,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                                                           .goodAtfieldSelectedList,
                                                       item: element,
                                                       onClick: () {
-                                                        controller
-                                                            .addOrRemoveDataInList(
+                                                        controller.addOrRemoveDataInList(
                                                           pageIndex: 7,
                                                           addToList: controller
                                                               .goodAtfieldSelectedList,
@@ -947,8 +954,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                           // subTitle: pageData[9].title,
                           bodyPageWidget: SingleChildScrollView(
                             child: Wrap(
-                              children: pageData[10]
-                                  .selectionItems!
+                              children: pageData[10].selectionItems!
                                   .map(
                                     (element) => Obx(
                                       () => Padding(
@@ -961,8 +967,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                           text: element.label.toString(),
                                           maxLine:
                                               controller.isUpdate.value == true
-                                                  ? 3
-                                                  : 3,
+                                              ? 3
+                                              : 3,
                                           // fontSize: AppSize.s24,
                                           itemList: controller
                                               .knowFromSourceSelectedList,
@@ -998,8 +1004,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                                 child: Align(
                                   alignment: Alignment.topCenter,
                                   child: Image(
-                                    image:
-                                        AssetImage(AssetsManager.appLogoRose),
+                                    image: AssetImage(
+                                      AssetsManager.appLogoRose,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -1048,7 +1055,8 @@ class OnboardingPage extends GetView<OnboardingController> {
       ),
       bottomNavigationBar: controller.obx(
         (state) => Obx(
-          () => controller.onboardingPagesAPIData.value ==
+          () =>
+              controller.onboardingPagesAPIData.value ==
                   const OnboardingModel(totalPage: 0)
               ? Container()
               : Obx(
@@ -1063,17 +1071,21 @@ class OnboardingPage extends GetView<OnboardingController> {
                       children: [
                         Expanded(
                           flex: 25,
-                          child: !controller.isFirstPage &&
-                                  !controller.isLastPage
+                          child:
+                              !controller.isFirstPage && !controller.isLastPage
                               ? TextButton(
                                   onPressed: () =>
                                       controller.movingAction(forward: false),
                                   style: ButtonStyle(
                                     alignment: Alignment.centerLeft,
-                                    padding: WidgetStateProperty.all<
-                                        EdgeInsetsGeometry>(
-                                      const EdgeInsets.only(left: AppSize.s24),
-                                    ),
+                                    padding:
+                                        WidgetStateProperty.all<
+                                          EdgeInsetsGeometry
+                                        >(
+                                          const EdgeInsets.only(
+                                            left: AppSize.s24,
+                                          ),
+                                        ),
                                   ),
                                   child: CustomTextWidget(
                                     text: 'back'.tr, // 'core.back'.tr,
@@ -1096,8 +1108,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   style: ButtonStyle(
                                     backgroundColor:
                                         WidgetStateProperty.all<Color>(
-                                      ColorsManager.primary,
-                                    ),
+                                          ColorsManager.primary,
+                                        ),
                                   ),
                                   child: CustomTextWidget(
                                     text: controller.isLastPage
@@ -1124,8 +1136,8 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   style: ButtonStyle(
                                     backgroundColor:
                                         WidgetStateProperty.all<Color>(
-                                      const Color(0x00ffffff),
-                                    ),
+                                          const Color(0x00ffffff),
+                                        ),
                                   ),
                                   child: CustomTextWidget(
                                     text: ''.tr, //'core.next'.tr,
@@ -1140,17 +1152,19 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   style: ButtonStyle(
                                     backgroundColor:
                                         WidgetStateProperty.all<Color>(
-                                      ColorsManager.primary,
-                                    ),
+                                          ColorsManager.primary,
+                                        ),
                                     // alignment: Alignment.centerRight,
                                     // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                                     //   const EdgeInsets.only(left: AppSize.s24),
                                     // ),
                                   ),
                                   child: CustomTextWidget(
-                                    text: (controller.numPage.value - 2 ==
+                                    text:
+                                        (controller.numPage.value - 2 ==
                                             controller.selectedPageIndex.value)
-                                        ? 'finish'.tr //'core.finish'.tr
+                                        ? 'finish'
+                                              .tr //'core.finish'.tr
                                         : 'next'.tr, //'core.next'.tr,
                                     color: ColorsManager.white,
                                     fontSize: AppSize.s16,

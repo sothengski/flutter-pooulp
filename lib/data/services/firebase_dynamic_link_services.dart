@@ -58,7 +58,7 @@ class FirebaseDynamicLinkService {
 
         Future.delayed(
           DurationConstant.d2000,
-          () async => {
+          () => {
             Get.toNamed(
               "${Routes.offerdetailRoute}?id=${dynamicLinkData.link.pathSegments.last}",
             ),

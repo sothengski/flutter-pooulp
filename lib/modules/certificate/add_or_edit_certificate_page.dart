@@ -5,7 +5,7 @@ import '../../core/core.dart';
 import '../modules.dart';
 
 class AddOrEditCertificatePage extends GetView<CertificateController> {
-  const AddOrEditCertificatePage({Key? key}) : super(key: key);
+  const AddOrEditCertificatePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +75,12 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                         ),
                         dialogType: DialogType.dateTimePickerDialog,
                         dateLocale: controller
-                            .profileController.userProfileInfo.value.uiLanguage,
-                        currentTime: DateTime.tryParse(
+                            .profileController
+                            .userProfileInfo
+                            .value
+                            .uiLanguage,
+                        currentTime:
+                            DateTime.tryParse(
                               controller.selectedReceivedDateString.value,
                             ) ??
                             DateTime.now(),
@@ -87,44 +91,42 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                         containerWidget: Obx(
                           () =>
                               controller.selectedReceivedDateString.value == ''
-                                  ? RowContentInputWidget(
-                                      centerWidget: CustomTextWidget(
-                                        text: ddmmyyyyFormat,
-                                        color: ColorsManager.grey400,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: AppSize.s16,
-                                      ),
-                                      suffixWidgetFlex: 20,
-                                      suffixWidget: const Icon(
-                                        IconsManager.dateRangeOutlined,
-                                        color: ColorsManager.grey600,
-                                      ),
-                                    )
-                                  : RowContentInputWidget(
-                                      centerWidget: CustomTextWidget(
-                                        text: dateFormatSlashDDMMYYYY(
-                                          date: DateTime.tryParse(
-                                            controller
-                                                .selectedReceivedDateString
-                                                .value,
-                                          ),
-                                        ),
-                                        color: ColorsManager.black,
-                                        fontSize: AppSize.s16,
-                                      ),
-                                      suffixWidgetFlex: 20,
-                                      suffixWidget: const Icon(
-                                        IconsManager.dateRangeOutlined,
-                                        color: ColorsManager.grey600,
+                              ? RowContentInputWidget(
+                                  centerWidget: CustomTextWidget(
+                                    text: ddmmyyyyFormat,
+                                    color: ColorsManager.grey400,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: AppSize.s16,
+                                  ),
+                                  suffixWidgetFlex: 20,
+                                  suffixWidget: const Icon(
+                                    IconsManager.dateRangeOutlined,
+                                    color: ColorsManager.grey600,
+                                  ),
+                                )
+                              : RowContentInputWidget(
+                                  centerWidget: CustomTextWidget(
+                                    text: dateFormatSlashDDMMYYYY(
+                                      date: DateTime.tryParse(
+                                        controller
+                                            .selectedReceivedDateString
+                                            .value,
                                       ),
                                     ),
+                                    color: ColorsManager.black,
+                                    fontSize: AppSize.s16,
+                                  ),
+                                  suffixWidgetFlex: 20,
+                                  suffixWidget: const Icon(
+                                    IconsManager.dateRangeOutlined,
+                                    color: ColorsManager.grey600,
+                                  ),
+                                ),
                         ),
                       ),
                     ),
                     //===== Bottom of Start Date Component =====//
-                    const SizedBox(
-                      width: AppSize.s12,
-                    ),
+                    const SizedBox(width: AppSize.s12),
 
                     ///===== Top of Expire Date Component =====//
                     Expanded(
@@ -134,8 +136,12 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                         inputTitleMarginTop: AppSize.s0,
                         dialogType: DialogType.dateTimePickerDialog,
                         dateLocale: controller
-                            .profileController.userProfileInfo.value.uiLanguage,
-                        currentTime: DateTime.tryParse(
+                            .profileController
+                            .userProfileInfo
+                            .value
+                            .uiLanguage,
+                        currentTime:
+                            DateTime.tryParse(
                               controller.selectedExpireDateString.value,
                             ) ??
                             DateTime.now(),
@@ -163,7 +169,8 @@ class AddOrEditCertificatePage extends GetView<CertificateController> {
                                     text: dateFormatSlashDDMMYYYY(
                                       date: DateTime.tryParse(
                                         controller
-                                            .selectedExpireDateString.value,
+                                            .selectedExpireDateString
+                                            .value,
                                       ),
                                     ),
                                     color: ColorsManager.black,

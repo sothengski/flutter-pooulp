@@ -7,7 +7,7 @@ Future shareUtils({
   String? urlPreview = '',
   // String? urlPreviewBody = '',
   bool? inApp = false,
-}) async {
+}) {
   final box = context.findRenderObject() as RenderBox?;
 
   String thingWillShare = '';

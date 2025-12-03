@@ -8,10 +8,10 @@ class ProfileCompletionComponent extends StatelessWidget {
   final double? completionPercentage;
 
   const ProfileCompletionComponent({
-    Key? key,
+    super.key,
     this.title,
     this.completionPercentage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +33,11 @@ class ProfileCompletionComponent extends StatelessWidget {
         rightPadding: completionPercentage!.toInt() == 100
             ? 0
             : (getWidth - AppSize.s48) -
-                ((getWidth - AppSize.s48) *
-                    completionPercentage!.toInt() /
-                    100),
+                  ((getWidth - AppSize.s48) *
+                      completionPercentage!.toInt() /
+                      100),
         bottomPadding: AppSize.s0,
-        child: const CustomBoxWidget(
-          backgroundColor: ColorsManager.primary75,
-        ),
+        child: const CustomBoxWidget(backgroundColor: ColorsManager.primary75),
       ),
     );
   }

@@ -9,11 +9,11 @@ class MessageCard extends StatelessWidget {
   final bool? isHideProfilePic;
 
   const MessageCard({
-    Key? key,
+    super.key,
     this.message,
     this.onTap,
     this.isHideProfilePic = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +27,7 @@ class MessageCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: AppSize.s4),
                   child: isHideProfilePic == true
-                      ? CustomBoxWidget.chatAvatarDefault(
-                          child: Container(),
-                        )
+                      ? CustomBoxWidget.chatAvatarDefault(child: Container())
                       : CustomBoxWidget(
                           size: 35,
                           isCircle: true,

@@ -11,12 +11,12 @@ class PersonalInformationComponent extends StatelessWidget {
   final StudentProfileModel? studentProfileModel;
 
   const PersonalInformationComponent({
-    Key? key,
+    super.key,
     required this.routeNameForEdit,
     this.profileModel,
     this.userModel,
     this.studentProfileModel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,7 @@ class PersonalInformationComponent extends StatelessWidget {
         iconData: Icons.edit_outlined,
         padding: 0.0,
         isConstraints: true,
-        onClick: () => {
-          Get.toNamed(routeNameForEdit!),
-        },
+        onClick: () => {Get.toNamed(routeNameForEdit!)},
       ),
       child: Column(
         children: [
@@ -122,9 +120,7 @@ class PersonalInformationComponent extends StatelessWidget {
                   iconData: Icons.close,
                   padding: 0.0,
                   isConstraints: true,
-                  onClick: () => {
-                    Get.back(),
-                  },
+                  onClick: () => {Get.back()},
                 ),
                 contentWidget: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

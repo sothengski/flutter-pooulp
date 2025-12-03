@@ -28,7 +28,7 @@ class CustomMaterialButton extends StatelessWidget {
   final Widget? childWidget;
 
   const CustomMaterialButton({
-    Key? key,
+    super.key,
     this.buttonColor = ColorsManager.primary,
     this.onPrimaryColor,
     this.shadowColor,
@@ -52,7 +52,7 @@ class CustomMaterialButton extends StatelessWidget {
     this.horizonalPadding = 0.0,
     this.verticalPadding = 0.0,
     this.childWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,8 @@ class CustomMaterialButton extends StatelessWidget {
         elevation: elevation,
         focusColor: onPrimaryColor,
         onPressed: onPressed,
-        child: childWidget ??
+        child:
+            childWidget ??
             CustomTextWidget(
               text: text,
               color: textColor,

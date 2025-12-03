@@ -34,7 +34,7 @@ class NetworkController extends GetxController {
     late ConnectivityResult? result;
 
     try {
-      result = await connectivity.checkConnectivity();
+      result = (await connectivity.checkConnectivity()).first;
     } on PlatformException catch (e) {
       debugPrint(e.toString());
     }
@@ -47,21 +47,17 @@ class NetworkController extends GetxController {
         connectionStatus.value = 1;
         internetStatus.value = true;
         connectionMsg.value = 'Wifi Connection';
-        break;
       case ConnectivityResult.mobile:
         connectionStatus.value = 2;
         internetStatus.value = true;
         connectionMsg.value = 'Mobile Data Connection';
-        break;
       case ConnectivityResult.none:
         connectionStatus.value = 3;
         internetStatus.value = false;
         connectionMsg.value = 'No Internet Connection';
-        break;
       default:
         internetStatus.value = false;
         Get.snackbar("Network Error", "Failed to get network connection");
-        break;
     }
   }
 }

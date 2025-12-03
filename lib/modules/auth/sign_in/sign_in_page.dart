@@ -6,7 +6,7 @@ import '../../../routes/app_routes.dart';
 import '../../modules.dart';
 
 class SignInPage extends GetView<SignInController> {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -10,11 +10,11 @@ class ProfileCertificateComponent extends StatelessWidget {
   final List<CertificateModel>? certificateList;
 
   const ProfileCertificateComponent({
-    Key? key,
+    super.key,
     this.title,
     this.addOrEditCertificateRoute,
     this.certificateList,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

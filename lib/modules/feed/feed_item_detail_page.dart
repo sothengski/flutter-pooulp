@@ -7,10 +7,7 @@ import '../modules.dart';
 
 class FeedItemDetailPage extends StatefulWidget {
   final JobOfferModel? feedItemDetail;
-  const FeedItemDetailPage({
-    this.feedItemDetail,
-    Key? key,
-  }) : super(key: key);
+  const FeedItemDetailPage({this.feedItemDetail, super.key});
 
   @override
   State<FeedItemDetailPage> createState() => _FeedItemDetailPageState();
@@ -23,10 +20,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
   final FeedController feedController = Get.find<FeedController>();
   @override
   void initState() {
-    tabController = TabController(
-      length: 2,
-      vsync: this,
-    );
+    tabController = TabController(length: 2, vsync: this);
     tabController!.addListener(handleTabSelection);
 
     super.initState();
@@ -48,10 +42,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.primary,
-      appBar: const CustomAppBar(
-        title: 'Offer Details',
-        elevation: 0.0,
-      ),
+      appBar: const CustomAppBar(title: 'Offer Details', elevation: 0.0),
       body: Column(
         children: [
           Expanded(
@@ -91,10 +82,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         color: ColorsManager.primary,
                         maxLine: 4,
                       ),
-                      const Divider(
-                        height: AppSize.s5,
-                        thickness: 1,
-                      ),
+                      const Divider(height: AppSize.s5, thickness: 1),
                       CustomListTileWidget(
                         isDivider: false,
                         leftFlex: 15,
@@ -184,9 +172,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                         //     marginBottom: AppSize.s10,
                         //   ),
                         // ),
-                        const SizedBox(
-                          height: AppSize.s10,
-                        ),
+                        const SizedBox(height: AppSize.s10),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -203,7 +189,9 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                     CustomBoxWidget(
                                       child: CustomTextWidget(
                                         textAlign: TextAlign.center,
-                                        text: widget.feedItemDetail!
+                                        text:
+                                            widget
+                                                    .feedItemDetail!
                                                     .dateJobStartFormat !=
                                                 ''
                                             ? 'Starting Date: ${widget.feedItemDetail!.dateJobStartFormat}'
@@ -214,13 +202,14 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                       ),
                                     ),
                                     if (widget
-                                            .feedItemDetail!.dateJobEndFormat ==
+                                            .feedItemDetail!
+                                            .dateJobEndFormat ==
                                         null)
                                       Container(
                                         margin:
                                             const EdgeInsetsDirectional.only(
-                                          top: AppSize.s4,
-                                        ),
+                                              top: AppSize.s4,
+                                            ),
                                         child: CustomBoxWidget(
                                           child: CustomTextWidget(
                                             textAlign: TextAlign.center,
@@ -282,11 +271,15 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                             childWidget: widget.feedItemDetail!.types != []
                                 ? Wrap(
                                     children: [
-                                      for (var i = 0;
-                                          i <
-                                              widget.feedItemDetail!.types!
-                                                  .length;
-                                          i++)
+                                      for (
+                                        var i = 0;
+                                        i <
+                                            widget
+                                                .feedItemDetail!
+                                                .types!
+                                                .length;
+                                        i++
+                                      )
                                         Padding(
                                           padding: const EdgeInsets.only(
                                             right: AppSize.s8,
@@ -319,11 +312,15 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                             childWidget: widget.feedItemDetail!.fields != []
                                 ? Wrap(
                                     children: [
-                                      for (var i = 0;
-                                          i <
-                                              widget.feedItemDetail!.fields!
-                                                  .length;
-                                          i++)
+                                      for (
+                                        var i = 0;
+                                        i <
+                                            widget
+                                                .feedItemDetail!
+                                                .fields!
+                                                .length;
+                                        i++
+                                      )
                                         Padding(
                                           padding: const EdgeInsets.only(
                                             right: AppSize.s8,
@@ -379,31 +376,35 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                             titleColor: ColorsManager.primaryBlue,
                             childWidget:
                                 widget.feedItemDetail!.spokenLanguages != []
-                                    ? Wrap(
-                                        direction: Axis.vertical,
-                                        children: [
-                                          for (var i = 0;
-                                              i <
-                                                  widget.feedItemDetail!
-                                                      .spokenLanguages!.length;
-                                              i++)
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                right: AppSize.s4,
-                                                bottom: AppSize.s4,
-                                              ),
-                                              child: CustomTextWidget(
-                                                textAlign: TextAlign.center,
-                                                text:
-                                                    '${widget.feedItemDetail!.spokenLanguages![i].displayLabelAndLevel}',
-                                                fontWeight:
-                                                    FontWeightManager.regular,
-                                                // fontSize: AppSize.s12,
-                                              ),
-                                            ),
-                                        ],
+                                ? Wrap(
+                                    direction: Axis.vertical,
+                                    children: [
+                                      for (
+                                        var i = 0;
+                                        i <
+                                            widget
+                                                .feedItemDetail!
+                                                .spokenLanguages!
+                                                .length;
+                                        i++
                                       )
-                                    : Container(),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            right: AppSize.s4,
+                                            bottom: AppSize.s4,
+                                          ),
+                                          child: CustomTextWidget(
+                                            textAlign: TextAlign.center,
+                                            text:
+                                                '${widget.feedItemDetail!.spokenLanguages![i].displayLabelAndLevel}',
+                                            fontWeight:
+                                                FontWeightManager.regular,
+                                            // fontSize: AppSize.s12,
+                                          ),
+                                        ),
+                                    ],
+                                  )
+                                : Container(),
                           )
                         else
                           Container(),
@@ -418,11 +419,15 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                                 ? Wrap(
                                     direction: Axis.vertical,
                                     children: [
-                                      for (var i = 0;
-                                          i <
-                                              widget.feedItemDetail!.skills!
-                                                  .length;
-                                          i++)
+                                      for (
+                                        var i = 0;
+                                        i <
+                                            widget
+                                                .feedItemDetail!
+                                                .skills!
+                                                .length;
+                                        i++
+                                      )
                                         Padding(
                                           padding: const EdgeInsets.only(
                                             right: AppSize.s4,
@@ -453,9 +458,7 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: AppSize.s10,
-                        ),
+                        const SizedBox(height: AppSize.s10),
 
                         ///===== Enterprise ID Component =====//
                         OutlineContainerWidget(
@@ -488,41 +491,46 @@ class _FeedItemDetailPageState extends State<FeedItemDetailPage>
 
                         ///===== Fields Component =====//
                         if (widget
-                            .feedItemDetail!.enterprise!.fields!.isNotEmpty)
+                            .feedItemDetail!
+                            .enterprise!
+                            .fields!
+                            .isNotEmpty)
                           OutlineContainerWidget(
                             title: 'Fields',
                             titleColor: ColorsManager.primaryBlue,
                             childWidget:
                                 widget.feedItemDetail!.enterprise!.fields != []
-                                    ? Wrap(
-                                        children: [
-                                          for (var i = 0;
-                                              i <
-                                                  widget
-                                                      .feedItemDetail!
-                                                      .enterprise!
-                                                      .fields!
-                                                      .length;
-                                              i++)
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                right: AppSize.s4,
-                                                bottom: AppSize.s4,
-                                              ),
-                                              child: CustomBoxWidget(
-                                                child: CustomTextWidget(
-                                                  textAlign: TextAlign.center,
-                                                  text:
-                                                      '${widget.feedItemDetail!.enterprise!.fields![i].label}',
-                                                  fontWeight:
-                                                      FontWeightManager.regular,
-                                                  fontSize: AppSize.s12,
-                                                ),
-                                              ),
-                                            ),
-                                        ],
+                                ? Wrap(
+                                    children: [
+                                      for (
+                                        var i = 0;
+                                        i <
+                                            widget
+                                                .feedItemDetail!
+                                                .enterprise!
+                                                .fields!
+                                                .length;
+                                        i++
                                       )
-                                    : Container(),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            right: AppSize.s4,
+                                            bottom: AppSize.s4,
+                                          ),
+                                          child: CustomBoxWidget(
+                                            child: CustomTextWidget(
+                                              textAlign: TextAlign.center,
+                                              text:
+                                                  '${widget.feedItemDetail!.enterprise!.fields![i].label}',
+                                              fontWeight:
+                                                  FontWeightManager.regular,
+                                              fontSize: AppSize.s12,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  )
+                                : Container(),
                           )
                         else
                           Container(),

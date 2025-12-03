@@ -7,10 +7,10 @@ class ItemListShimmerLoadingWidget extends StatelessWidget {
   final bool? isBodyList;
 
   const ItemListShimmerLoadingWidget({
-    Key? key,
+    super.key,
     this.isTopRowList = true,
     this.isBodyList = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

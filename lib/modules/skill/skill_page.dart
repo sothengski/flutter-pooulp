@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../modules.dart';
 
 class SkillPage extends GetView<SkillController> {
-  const SkillPage({Key? key}) : super(key: key);
+  const SkillPage({super.key});
 
   @override
   Widget build(BuildContext context) {

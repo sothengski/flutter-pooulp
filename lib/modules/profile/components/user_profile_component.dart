@@ -4,10 +4,7 @@ import '../../../core/core.dart';
 import '../../modules.dart';
 
 class UserProfileComponent extends StatelessWidget {
-  const UserProfileComponent({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const UserProfileComponent({super.key, required this.controller});
 
   final ProfileController controller;
 
@@ -134,12 +131,7 @@ class UserProfileComponent extends StatelessWidget {
                   subtitleList: controller.mockSkillList,
                 ),
                 Container(
-                  padding: const EdgeInsets.fromLTRB(
-                    24.0,
-                    0.0,
-                    8.0,
-                    8.0,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 8.0),
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -195,9 +187,7 @@ class UserProfileComponent extends StatelessWidget {
               color: ColorsManager.grey800,
               size: AppSize.s24,
             ),
-            child: CustomList(
-              subtitleList: controller.mockLanguageList,
-            ),
+            child: CustomList(subtitleList: controller.mockLanguageList),
           ),
         ),
         //===== Languages Component =====//

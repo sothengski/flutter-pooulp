@@ -22,8 +22,8 @@ class ProfileHeaderComponent extends StatelessWidget {
     this.numberStarRate = 0.0,
     this.headerHigh = 110,
     this.controller,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +42,7 @@ class ProfileHeaderComponent extends StatelessWidget {
           //     repeat: ImageRepeat.repeat,
           //   ),
           // ),
-          child: Image(
-            image: AssetImage(
-              coverImg!,
-            ),
-            fit: BoxFit.cover,
-          ),
+          child: Image(image: AssetImage(coverImg!), fit: BoxFit.cover),
         ),
         // Positioned(
         //   top: 5.0,

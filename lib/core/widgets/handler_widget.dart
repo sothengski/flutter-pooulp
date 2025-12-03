@@ -11,14 +11,14 @@ class StateHandlerWidget extends StatelessWidget {
   final VoidCallback? onPressedFunctionCall;
 
   const StateHandlerWidget({
-    Key? key,
+    super.key,
     this.imgPath,
     this.headerText,
     this.bodyText,
     this.buttonText,
     this.stateId,
     this.onPressedFunctionCall,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

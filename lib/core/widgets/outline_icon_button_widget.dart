@@ -27,8 +27,8 @@ class OutlineIconButtonWidget extends StatelessWidget {
     this.buttonState = false,
     this.oneTimePress = false,
     this.onPressed,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import '../../core/core.dart';
 import '../modules.dart';
 
 class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
-  const AddOrEditAvailabilityPage({Key? key}) : super(key: key);
+  const AddOrEditAvailabilityPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +37,8 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
             ),
         ],
       ),
-      //===== Bottom of appBar Component =====//
 
+      //===== Bottom of appBar Component =====//
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Form(
@@ -58,10 +58,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                           left: AppSize.s4,
                           right: AppSize.s4,
                         ),
-                        child: const Divider(
-                          color: Colors.black,
-                          height: 10,
-                        ),
+                        child: const Divider(color: Colors.black, height: 10),
                       ),
                     ),
                     CustomTextWidget(
@@ -75,10 +72,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                           left: AppSize.s4,
                           right: AppSize.s4,
                         ),
-                        child: const Divider(
-                          color: Colors.black,
-                          height: 10,
-                        ),
+                        child: const Divider(color: Colors.black, height: 10),
                       ),
                     ),
                   ],
@@ -99,8 +93,12 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                         ),
                         dialogType: DialogType.dateTimePickerDialog,
                         dateLocale: controller
-                            .profileController.userProfileInfo.value.uiLanguage,
-                        currentTime: DateTime.tryParse(
+                            .profileController
+                            .userProfileInfo
+                            .value
+                            .uiLanguage,
+                        currentTime:
+                            DateTime.tryParse(
                               controller.selectedFromDateString.value,
                             ) ??
                             DateTime.now(),
@@ -143,9 +141,7 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                       ),
                     ),
                     //===== Bottom of From Date Component =====//
-                    const SizedBox(
-                      width: AppSize.s12,
-                    ),
+                    const SizedBox(width: AppSize.s12),
 
                     ///===== Top of To Date Component =====//
                     Expanded(
@@ -159,8 +155,12 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                         ),
                         dialogType: DialogType.dateTimePickerDialog,
                         dateLocale: controller
-                            .profileController.userProfileInfo.value.uiLanguage,
-                        currentTime: DateTime.tryParse(
+                            .profileController
+                            .userProfileInfo
+                            .value
+                            .uiLanguage,
+                        currentTime:
+                            DateTime.tryParse(
                               controller.selectedToDateString.value,
                             ) ??
                             DateTime.now(),
@@ -229,21 +229,16 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                     onPressed: () {
                       controller.isCustomAvailability.value =
                           switchingBooleanValue(
-                        boolValue: controller.isCustomAvailability.value,
-                      );
+                            boolValue: controller.isCustomAvailability.value,
+                          );
                     },
                   ),
                 ),
-                //===== Bottom of Custom Availabilities Component =====//
 
+                //===== Bottom of Custom Availabilities Component =====//
                 Container(
-                  margin: const EdgeInsets.only(
-                    bottom: AppSize.s8,
-                  ),
-                  child: const Divider(
-                    color: Colors.black,
-                    height: 10,
-                  ),
+                  margin: const EdgeInsets.only(bottom: AppSize.s8),
+                  child: const Divider(color: Colors.black, height: 10),
                 ),
 
                 ///===== Top of Custom Availabilities Component =====//
@@ -259,30 +254,31 @@ class AddOrEditAvailabilityPage extends GetView<AvailabilityController> {
                             ),
                           ]
                         : [
-                            ...controller.weeklyAvailability
-                                .map(
-                                  (element) => FromToHourSelectionWidget(
-                                    dayIndex: element.day,
-                                    dayLabel: element.getDayLabelByLanguage,
-                                    dateLanguage: controller.profileController
-                                        .userProfileInfo.value.uiLanguage,
-                                    swichingValue: element.isOpen,
-                                    swichingFunction: ({required bool value}) {
-                                      element.isOpen = switchingBooleanValue(
-                                        boolValue: element.isOpen,
-                                      );
-                                      controller.getUpdate();
-                                    },
-                                    slotList: element.slots,
-                                    isUpdateTrigger:
-                                        controller.isUpdateTrigger.value,
-                                    validatorFunction: (_) =>
-                                        Validator().notEmptyValidator(
+                            ...controller.weeklyAvailability.map(
+                              (element) => FromToHourSelectionWidget(
+                                dayIndex: element.day,
+                                dayLabel: element.getDayLabelByLanguage,
+                                dateLanguage: controller
+                                    .profileController
+                                    .userProfileInfo
+                                    .value
+                                    .uiLanguage,
+                                swichingValue: element.isOpen,
+                                swichingFunction: ({required bool value}) {
+                                  element.isOpen = switchingBooleanValue(
+                                    boolValue: element.isOpen,
+                                  );
+                                  controller.getUpdate();
+                                },
+                                slotList: element.slots,
+                                isUpdateTrigger:
+                                    controller.isUpdateTrigger.value,
+                                validatorFunction: (_) =>
+                                    Validator().notEmptyValidator(
                                       controller.selectedFromDateString.value,
                                     ),
-                                  ),
-                                )
-                                .toList(),
+                              ),
+                            ),
                           ],
                   ),
                 ),

@@ -10,11 +10,11 @@ class ProfileLanguageComponent extends StatelessWidget {
   final List<FieldModel>? spokenLanguageList;
 
   const ProfileLanguageComponent({
-    Key? key,
+    super.key,
     this.title,
     this.addOrEditLangRoute,
     this.spokenLanguageList,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

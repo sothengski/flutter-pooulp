@@ -21,12 +21,12 @@ class CountryListSelector extends StatefulWidget {
     this.scrollController,
     this.separatorIndex = 1,
     this.onTap,
-    Key? key,
+    super.key,
     this.showPhoneCode = true,
     this.showCountry = true,
     this.selectedCountry,
     this.languageCode = 'en',
-  }) : super(key: key);
+  });
 
   @override
   State<CountryListSelector> createState() => _CountryListSelectorState();
@@ -63,26 +63,24 @@ class _CountryListSelectorState extends State<CountryListSelector> {
                   shrinkWrap: true,
                   itemCount: filteredCountryList!.length,
                   separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(
-                    height: 0.0,
-                    thickness: 0.0,
-                  ),
+                      const Divider(height: 0.0, thickness: 0.0),
                   itemBuilder: (BuildContext context, int index) {
                     final CountryModel country = filteredCountryList![index];
                     return Card(
                       elevation: 0.0,
-                      color: widget.selectedCountry!.iso3Code ==
+                      color:
+                          widget.selectedCountry!.iso3Code ==
                               country.iso3Code.toString()
                           ? ColorsManager.grey300
                           : ColorsManager.white,
                       child: ListTile(
                         key: Key(country.isoCode.toString()),
                         dense: true,
-                        contentPadding:
-                            const EdgeInsets.only(left: 20.0, right: 20.0),
-                        leading: CircleFlag(
-                          country.isoCode.toString(),
+                        contentPadding: const EdgeInsets.only(
+                          left: 20.0,
+                          right: 20.0,
                         ),
+                        leading: CircleFlag(country.isoCode.toString()),
                         title: Align(
                           alignment: AlignmentDirectional.centerStart,
                           child: widget.showCountry == true
@@ -93,7 +91,8 @@ class _CountryListSelectorState extends State<CountryListSelector> {
                                   fontSize: 16.0,
                                   maxLine: 2,
                                   fontWeight: FontWeightManager.medium,
-                                  color: widget.selectedCountry!.iso3Code ==
+                                  color:
+                                      widget.selectedCountry!.iso3Code ==
                                           country.iso3Code.toString()
                                       ? ColorsManager.primary
                                       : ColorsManager.primaryBlue,
@@ -103,7 +102,8 @@ class _CountryListSelectorState extends State<CountryListSelector> {
                         trailing: widget.showPhoneCode == true
                             ? CustomTextWidget(
                                 text: country.phoneCode,
-                                color: widget.selectedCountry!.iso3Code ==
+                                color:
+                                    widget.selectedCountry!.iso3Code ==
                                         country.iso3Code.toString()
                                     ? ColorsManager.primary
                                     : ColorsManager.grey600,
@@ -155,11 +155,7 @@ class _CountryListSelectorState extends State<CountryListSelector> {
       searchResult.addAll(countryList);
     } else {
       searchResult = countryList
-          .where(
-            (c) => c.name!.toLowerCase().startsWith(
-                  query.toLowerCase(),
-                ),
-          )
+          .where((c) => c.name!.toLowerCase().startsWith(query.toLowerCase()))
           .toList();
     }
     setState(() => filteredCountryList = searchResult);

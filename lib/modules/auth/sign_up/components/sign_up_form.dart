@@ -10,11 +10,7 @@ import '../../../modules.dart';
 class SignUpForm extends GetView<SignUpController> {
   final String? userType;
   final bool? isStudent;
-  const SignUpForm({
-    this.userType,
-    this.isStudent = true,
-    Key? key,
-  }) : super(key: key);
+  const SignUpForm({this.userType, this.isStudent = true, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -87,9 +83,9 @@ class SignUpForm extends GetView<SignUpController> {
                             CustomTextWidget(
                               text: isStudent == true
                                   ? 'createStudentAccount'
-                                      .tr // 'auth.createStudentAccount'.tr
+                                        .tr // 'auth.createStudentAccount'.tr
                                   : 'createEnterpriseAccount'
-                                      .tr, //'auth.createEnterpriseAccount'.tr,
+                                        .tr, //'auth.createEnterpriseAccount'.tr,
                               fontSize: 20.0,
                               fontWeight: FontWeight.w700,
                               color: ColorsManager.primary,
@@ -167,8 +163,8 @@ class SignUpForm extends GetView<SignUpController> {
                                       ),
                                 onPressed: () => controller.showPassword.value =
                                     switchingBooleanValue(
-                                  boolValue: controller.showPassword.value,
-                                ),
+                                      boolValue: controller.showPassword.value,
+                                    ),
                               ),
                               obscureText: !controller.showPassword.value,
                               isFilled: true,
@@ -202,12 +198,13 @@ class SignUpForm extends GetView<SignUpController> {
                                         color: ColorsManager.grey400,
                                         size: 20.0,
                                       ),
-                                onPressed: () => controller
-                                    .showPasswordConfirmation
-                                    .value = switchingBooleanValue(
-                                  boolValue:
-                                      controller.showPasswordConfirmation.value,
-                                ),
+                                onPressed: () =>
+                                    controller.showPasswordConfirmation.value =
+                                        switchingBooleanValue(
+                                          boolValue: controller
+                                              .showPasswordConfirmation
+                                              .value,
+                                        ),
                               ),
                               obscureText:
                                   !controller.showPasswordConfirmation.value,
@@ -217,10 +214,11 @@ class SignUpForm extends GetView<SignUpController> {
                               //     isStudent == true ? AppSize.s16 : 0.0,
                               validator: (_) =>
                                   controller.validator.matchingPasswords(
-                                password: controller.passwordCtrl.text,
-                                matchPassword:
-                                    controller.passwordConfirmationCtrl.text,
-                              ),
+                                    password: controller.passwordCtrl.text,
+                                    matchPassword: controller
+                                        .passwordConfirmationCtrl
+                                        .text,
+                                  ),
                               inputFormatterList: [
                                 FilterTextInputFormat().deny(
                                   regExpString:
@@ -249,34 +247,35 @@ class SignUpForm extends GetView<SignUpController> {
                                   },
                                   containerWidget:
                                       controller.selectedBirthday.value.year ==
-                                              controller.now.year
-                                          ? RowContentInputWidget(
-                                              centerWidget: CustomTextWidget(
-                                                text: ddmmyyyyFormat,
-                                                color: ColorsManager.grey400,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 16.0,
-                                              ),
-                                              suffixWidget: const Icon(
-                                                Icons.date_range_outlined,
-                                                color: ColorsManager.grey400,
-                                              ),
-                                            )
-                                          : RowContentInputWidget(
-                                              centerWidget: CustomTextWidget(
-                                                //marginLeft: 4.0,
-                                                text: dateFormatSlashDDMMYYYY(
-                                                  date: controller
-                                                      .selectedBirthday.value,
-                                                ),
-                                                color: ColorsManager.black,
-                                                fontSize: 16.0,
-                                              ),
-                                              suffixWidget: const Icon(
-                                                Icons.date_range_outlined,
-                                                color: ColorsManager.grey400,
-                                              ),
+                                          controller.now.year
+                                      ? RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            text: ddmmyyyyFormat,
+                                            color: ColorsManager.grey400,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 16.0,
+                                          ),
+                                          suffixWidget: const Icon(
+                                            Icons.date_range_outlined,
+                                            color: ColorsManager.grey400,
+                                          ),
+                                        )
+                                      : RowContentInputWidget(
+                                          centerWidget: CustomTextWidget(
+                                            //marginLeft: 4.0,
+                                            text: dateFormatSlashDDMMYYYY(
+                                              date: controller
+                                                  .selectedBirthday
+                                                  .value,
                                             ),
+                                            color: ColorsManager.black,
+                                            fontSize: 16.0,
+                                          ),
+                                          suffixWidget: const Icon(
+                                            Icons.date_range_outlined,
+                                            color: ColorsManager.grey400,
+                                          ),
+                                        ),
                                 ),
                               ),
                             //===== Bottom of Birthday Component =====//
@@ -295,9 +294,7 @@ class SignUpForm extends GetView<SignUpController> {
                                         textAlign: TextAlign.left,
                                         // marginBottom: AppSize.s4,
                                       ),
-                                      const SizedBox(
-                                        height: 3.0,
-                                      ),
+                                      const SizedBox(height: 3.0),
                                       GestureDetector(
                                         onTap: () => Get.bottomSheet(
                                           Container(
@@ -306,12 +303,8 @@ class SignUpForm extends GetView<SignUpController> {
                                               color: ColorsManager.white,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(
-                                                    16,
-                                                  ),
-                                                  topRight: Radius.circular(
-                                                    16,
-                                                  ),
+                                                  topLeft: Radius.circular(16),
+                                                  topRight: Radius.circular(16),
                                                 ),
                                               ),
                                             ),
@@ -321,12 +314,13 @@ class SignUpForm extends GetView<SignUpController> {
                                                   .value,
                                               countrylist: countryList,
                                               selectedCountry: controller
-                                                  .selectedCountry.value,
+                                                  .selectedCountry
+                                                  .value,
                                               onTap: (country) {
                                                 controller
                                                     .selectedCountryOnClick(
-                                                  country,
-                                                );
+                                                      country,
+                                                    );
                                                 Get.back();
                                               },
                                             ),
@@ -338,70 +332,70 @@ class SignUpForm extends GetView<SignUpController> {
                                           child: FormField(
                                             validator: (_) => controller
                                                 .isPhoneNumberValidate(),
-                                            builder: (
-                                              FormFieldState<String> state,
-                                            ) {
+                                            builder: (FormFieldState<String> state) {
                                               return InputDecorator(
                                                 // alignedDropdown: true,
                                                 decoration: InputDecoration(
                                                   contentPadding:
                                                       const EdgeInsets.fromLTRB(
-                                                    12,
-                                                    0,
-                                                    4,
-                                                    0,
-                                                  ),
+                                                        12,
+                                                        0,
+                                                        4,
+                                                        0,
+                                                      ),
                                                   fillColor:
                                                       ColorsManager.grey100,
                                                   filled: true,
                                                   border: OutlineInputBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                      AppSize.s8,
-                                                    ),
+                                                          AppSize.s8,
+                                                        ),
                                                   ),
                                                   errorText: state.hasError
                                                       ? state.errorText
                                                       : null,
                                                   enabledBorder:
                                                       OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              AppSize.s8,
+                                                            ),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                              color:
+                                                                  ColorsManager
+                                                                      .grey100,
+                                                            ),
+                                                      ),
+                                                  errorBorder: OutlineInputBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                      AppSize.s8,
-                                                    ),
+                                                          AppSize.s8,
+                                                        ),
                                                     borderSide:
                                                         const BorderSide(
-                                                      color:
-                                                          ColorsManager.grey100,
-                                                    ),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      AppSize.s8,
-                                                    ),
-                                                    borderSide:
-                                                        const BorderSide(
-                                                      color:
-                                                          ColorsManager.red900,
-                                                    ),
+                                                          color: ColorsManager
+                                                              .red900,
+                                                        ),
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      AppSize.s8,
-                                                    ),
-                                                    borderSide:
-                                                        const BorderSide(
-                                                      color:
-                                                          ColorsManager.grey300,
-                                                    ),
-                                                  ),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              AppSize.s8,
+                                                            ),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                              color:
+                                                                  ColorsManager
+                                                                      .grey300,
+                                                            ),
+                                                      ),
                                                 ),
                                                 child: Obx(
-                                                  () => controller
+                                                  () =>
+                                                      controller
                                                               .selectedCountry
                                                               .value
                                                               .phoneCode ==
@@ -409,20 +403,21 @@ class SignUpForm extends GetView<SignUpController> {
                                                       ? RowContentInputWidget(
                                                           centerWidget:
                                                               CustomTextWidget(
-                                                            text:
-                                                                'auth.countryCode'
-                                                                    .tr,
-                                                            color: ColorsManager
-                                                                .grey400,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 16.0,
-                                                          ),
+                                                                text:
+                                                                    'auth.countryCode'
+                                                                        .tr,
+                                                                color:
+                                                                    ColorsManager
+                                                                        .grey400,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 16.0,
+                                                              ),
                                                         )
                                                       : RowContentInputWidget(
                                                           prefixWidgetFlex: 25,
-                                                          prefixWidget:
-                                                              CircleFlag(
+                                                          prefixWidget: CircleFlag(
                                                             controller
                                                                 .selectedCountry
                                                                 .value
@@ -434,15 +429,16 @@ class SignUpForm extends GetView<SignUpController> {
                                                           centerWidgetFlex: 75,
                                                           centerWidget:
                                                               CustomTextWidget(
-                                                            //marginLeft: 4.0,
-                                                            text: controller
-                                                                .selectedCountry
-                                                                .value
-                                                                .phoneCode,
-                                                            color: ColorsManager
-                                                                .black,
-                                                            fontSize: 16.0,
-                                                          ),
+                                                                //marginLeft: 4.0,
+                                                                text: controller
+                                                                    .selectedCountry
+                                                                    .value
+                                                                    .phoneCode,
+                                                                color:
+                                                                    ColorsManager
+                                                                        .black,
+                                                                fontSize: 16.0,
+                                                              ),
                                                         ),
                                                 ),
                                               );
@@ -461,7 +457,7 @@ class SignUpForm extends GetView<SignUpController> {
                                     hintText:
                                         'phone'.tr, //'auth.phoneNumberHint'.tr,
                                     keyboardType: //TextInputType.phone,
-                                        const TextInputType.numberWithOptions(
+                                    const TextInputType.numberWithOptions(
                                       signed: true,
                                       decimal: true,
                                     ),
@@ -471,8 +467,8 @@ class SignUpForm extends GetView<SignUpController> {
                                     leftPadding: AppSize.s4,
                                     validator: (_) =>
                                         controller.isPhoneNumberValidate(
-                                      isPhoneNumberField: true,
-                                    ),
+                                          isPhoneNumberField: true,
+                                        ),
                                     maxLength: 13,
                                     inputFormatterList: [
                                       FilterTextInputFormat().digitsOnly(),
@@ -527,20 +523,19 @@ class SignUpForm extends GetView<SignUpController> {
                                   isConstraints: true,
                                   iconWidget:
                                       controller.isCheckMarketing.value == true
-                                          ? const Icon(
-                                              Icons.check_box,
-                                              color: ColorsManager.primary,
-                                            )
-                                          : const Icon(
-                                              Icons
-                                                  .check_box_outline_blank_sharp,
-                                              color: ColorsManager.grey,
-                                            ),
+                                      ? const Icon(
+                                          Icons.check_box,
+                                          color: ColorsManager.primary,
+                                        )
+                                      : const Icon(
+                                          Icons.check_box_outline_blank_sharp,
+                                          color: ColorsManager.grey,
+                                        ),
                                   onClick: () =>
                                       controller.checkingBoolMarketing(
-                                    boolValue:
-                                        controller.isCheckMarketing.value,
-                                  ),
+                                        boolValue:
+                                            controller.isCheckMarketing.value,
+                                      ),
                                 ),
                                 SizedBox(
                                   width: getWidth * 0.7,
@@ -558,8 +553,8 @@ class SignUpForm extends GetView<SignUpController> {
                               children: [
                                 CustomIconButtonWidget(
                                   isConstraints: true,
-                                  iconWidget: controller
-                                              .isCheckTermCondition.value ==
+                                  iconWidget:
+                                      controller.isCheckTermCondition.value ==
                                           true
                                       ? const Icon(
                                           Icons.check_box,
@@ -571,9 +566,10 @@ class SignUpForm extends GetView<SignUpController> {
                                         ),
                                   onClick: () =>
                                       controller.checkingBoolSwitching(
-                                    boolValue:
-                                        controller.isCheckTermCondition.value,
-                                  ),
+                                        boolValue: controller
+                                            .isCheckTermCondition
+                                            .value,
+                                      ),
                                 ),
                                 SizedBox(
                                   width: getWidth * 0.7,
@@ -594,7 +590,7 @@ class SignUpForm extends GetView<SignUpController> {
                                             color: Colors.blue,
                                           ),
                                           recognizer: TapGestureRecognizer()
-                                            ..onTap = () async {
+                                            ..onTap = () {
                                               urlLauncherUtils(
                                                 thingToLaunch: UrlWebsiteStrings
                                                     .privacyPolicy,
@@ -615,7 +611,7 @@ class SignUpForm extends GetView<SignUpController> {
                                             color: Colors.blue,
                                           ),
                                           recognizer: TapGestureRecognizer()
-                                            ..onTap = () async {
+                                            ..onTap = () {
                                               urlLauncherUtils(
                                                 thingToLaunch: UrlWebsiteStrings
                                                     .termsOfUse,
@@ -650,9 +646,7 @@ class SignUpForm extends GetView<SignUpController> {
                               ],
                             ),
 
-                            const SizedBox(
-                              height: 16.0,
-                            ),
+                            const SizedBox(height: 16.0),
                             Obx(
                               () => Visibility(
                                 visible: controller.isSubmitBtnProcessing.value,
@@ -663,7 +657,8 @@ class SignUpForm extends GetView<SignUpController> {
                               () => Visibility(
                                 visible:
                                     !controller.isSubmitBtnProcessing.value,
-                                child: controller.isCheckTermCondition.value ==
+                                child:
+                                    controller.isCheckTermCondition.value ==
                                         true
                                     ? CustomMaterialButton(
                                         text:
@@ -758,9 +753,7 @@ class SignUpForm extends GetView<SignUpController> {
                             //     ),
                             //   ),
                             // ),
-                            const SizedBox(
-                              height: 12.0,
-                            ),
+                            const SizedBox(height: 12.0),
                           ],
                         ),
                       ),
@@ -776,9 +769,7 @@ class SignUpForm extends GetView<SignUpController> {
                   marginBottom: AppSize.s16,
                 ),
                 GestureDetector(
-                  onTap: () => Get.offAllNamed(
-                    Routes.signInRoute,
-                  ),
+                  onTap: () => Get.offAllNamed(Routes.signInRoute),
                   child: CustomTextWidget(
                     text: 'signIn'.tr, // 'auth.logIn'.tr,
                     color: ColorsManager.white,

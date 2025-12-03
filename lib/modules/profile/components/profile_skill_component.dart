@@ -10,11 +10,11 @@ class ProfileSkillComponent extends StatelessWidget {
   final List<SkillModel>? skillList;
 
   const ProfileSkillComponent({
-    Key? key,
+    super.key,
     this.title,
     this.addOrEditSkillRoute,
     this.skillList,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

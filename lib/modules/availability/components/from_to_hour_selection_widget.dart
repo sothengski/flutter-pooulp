@@ -16,7 +16,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
   final bool? isUpdateTrigger;
 
   const FromToHourSelectionWidget({
-    Key? key,
+    super.key,
     required this.dayIndex,
     this.dayLabel = '',
     this.swichingValue = false,
@@ -25,7 +25,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
     this.validatorFunction,
     this.slotList,
     this.isUpdateTrigger,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,17 +53,13 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
             Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppSize.s4,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: AppSize.s4),
                 ),
               ],
             )
           else if (swichingValue == false)
             Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppSize.s4,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: AppSize.s4),
               child: Center(
                 child: CustomTextWidget(
                   text: "$dayLabel ${'notAvailable'.tr}",
@@ -81,9 +77,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
                 children: [
                   ///===== Top of From Date & To Date Component =====//
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppSize.s4,
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: AppSize.s4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -96,8 +90,11 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
                             // validatorFunction: validatorFunction,
                             dialogType: DialogType.timePickerDialog,
                             dateLocale: dateLanguage,
-                            currentTime: DateTime(2022, 02, 22)
-                                .add(Duration(seconds: e.startTime!)),
+                            currentTime: DateTime(
+                              2022,
+                              02,
+                              22,
+                            ).add(Duration(seconds: e.startTime!)),
                             onConfirmDate: (date) {
                               e.startTime = dateTimeConvertToSecond(
                                 hour: date.hour,
@@ -139,9 +136,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
                           ),
                         ),
                         //===== Bottom of From Date Component =====//
-                        const SizedBox(
-                          width: AppSize.s12,
-                        ),
+                        const SizedBox(width: AppSize.s12),
 
                         ///===== Top of To Date Component =====//
                         Expanded(
@@ -151,8 +146,11 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
                             // inputTitleMarginBottom: AppSize.s0,
                             dialogType: DialogType.timePickerDialog,
                             dateLocale: dateLanguage,
-                            currentTime: DateTime(2022, 02, 22)
-                                .add(Duration(seconds: e.endTime!)),
+                            currentTime: DateTime(
+                              2022,
+                              02,
+                              22,
+                            ).add(Duration(seconds: e.endTime!)),
                             // onConfirmDate: onConfirmTimeTo,
                             onConfirmDate: (date) {
                               e.endTime = dateTimeConvertToSecond(
@@ -214,7 +212,7 @@ class FromToHourSelectionWidget extends GetView<AvailabilityController> {
                             ),
                             fontSize: AppSize.s20,
                             onPressed: //modifySlotListFunction,
-                                () {
+                            () {
                               unFocusKeyBoard(context);
                               controller.modifySlotInWeekDay(
                                 isRemove: slotList!.indexOf(e) != 0,

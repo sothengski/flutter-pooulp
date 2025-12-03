@@ -9,12 +9,12 @@ class CustomIndicator extends StatelessWidget {
   final double? spaceBtwIndicator;
 
   const CustomIndicator({
-    Key? key,
+    super.key,
     required this.length,
     required this.location,
     this.size = 12.0,
     this.spaceBtwIndicator = 6.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,9 @@ class CustomIndicator extends StatelessWidget {
           width: size,
           height: size,
           decoration: BoxDecoration(
-            color:
-                index == location ? ColorsManager.primary : ColorsManager.white,
+            color: index == location
+                ? ColorsManager.primary
+                : ColorsManager.white,
             shape: BoxShape.circle,
           ),
         ),

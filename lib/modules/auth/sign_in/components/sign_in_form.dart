@@ -6,7 +6,7 @@ import '../../../../routes/routes.dart';
 import '../../../modules.dart';
 
 class SignInForm extends GetView<SignInController> {
-  const SignInForm({Key? key}) : super(key: key);
+  const SignInForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +72,9 @@ class SignInForm extends GetView<SignInController> {
                   topPadding: AppSize.s12,
                   validator: Validator().passwordValidatorWithMin6Chars,
                   inputFormatterList: [
-                    FilterTextInputFormat()
-                        .deny(regExpString: Validator.avoidSpaceRegExpPattern),
+                    FilterTextInputFormat().deny(
+                      regExpString: Validator.avoidSpaceRegExpPattern,
+                    ),
                     // FilteringTextInputFormatter.deny(
                     //   RegExp(Validator.avoidSpaceRegExpPattern),
                     // ),
@@ -195,9 +196,7 @@ class SignInForm extends GetView<SignInController> {
                 //     ),
                 //   ),
                 // )
-                const SizedBox(
-                  height: 12.0,
-                ),
+                const SizedBox(height: 12.0),
               ],
             ),
           ),

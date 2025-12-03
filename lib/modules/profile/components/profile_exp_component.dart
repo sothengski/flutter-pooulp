@@ -11,12 +11,12 @@ class ProfileExpComponent extends StatelessWidget {
   final List<ExperienceModel>? expList;
 
   const ProfileExpComponent({
-    Key? key,
+    super.key,
     this.title,
     this.addOrEditExpRoute,
     this.expTypeKey,
     this.expList,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -22,7 +22,7 @@ class TextCardClickableWidget extends StatelessWidget {
   final String? rightTopText;
 
   const TextCardClickableWidget({
-    Key? key,
+    super.key,
     required this.text,
     this.backgroundColor = ColorsManager.white,
     this.textColor = ColorsManager.black,
@@ -39,7 +39,7 @@ class TextCardClickableWidget extends StatelessWidget {
     this.itemList,
     this.item,
     this.rightTopText = '',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -5,8 +5,7 @@ class CustomPicker extends CommonPickerModel {
     return '$value'.padLeft(length, "0");
   }
 
-  CustomPicker({DateTime? currentTime, LocaleType? locale})
-      : super(locale: locale) {
+  CustomPicker({DateTime? currentTime, super.locale}) {
     this.currentTime = currentTime ?? DateTime.now();
     setLeftIndex(this.currentTime.hour);
     setMiddleIndex(this.currentTime.minute);
@@ -81,15 +80,10 @@ class CustomPicker extends CommonPickerModel {
 class CustomMonthPicker extends DatePickerModel {
   CustomMonthPicker({
     DateTime? currentTime,
-    DateTime? minTime,
-    DateTime? maxTime,
-    LocaleType? locale,
-  }) : super(
-          locale: locale,
-          minTime: minTime,
-          maxTime: maxTime,
-          currentTime: currentTime ?? DateTime.now(),
-        );
+    super.minTime,
+    super.maxTime,
+    super.locale,
+  }) : super(currentTime: currentTime ?? DateTime.now());
 
   @override
   List<int> layoutProportions() {

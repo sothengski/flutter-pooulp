@@ -9,7 +9,7 @@ import '../modules.dart';
 class MessagingPage extends GetView<MessagingController> {
   // late String? roomUUID = (Get.parameters['id']) ?? '';
 
-  const MessagingPage({Key? key}) : super(key: key);
+  const MessagingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +71,7 @@ class MessagingPage extends GetView<MessagingController> {
             return Obx(
               () => controller.isMessageLoading.value == true
                   ? const Center(
-                      child: LoadingWidget(
-                        isTreeBounceLoading: true,
-                      ),
+                      child: LoadingWidget(isTreeBounceLoading: true),
                     )
                   : Padding(
                       padding: const EdgeInsets.only(bottom: AppSize.s8),
@@ -92,14 +90,17 @@ class MessagingPage extends GetView<MessagingController> {
                                 : Container(),
                           ),
                           Expanded(
-                            child: (controller
-                                    .roomMessagingDetailsRepsonse.isNotEmpty)
+                            child:
+                                (controller
+                                    .roomMessagingDetailsRepsonse
+                                    .isNotEmpty)
                                 ? ListView.builder(
                                     controller:
                                         controller.messagingScrollController,
                                     reverse: true,
                                     itemCount: controller
-                                        .roomMessagingDetailsRepsonse.length,
+                                        .roomMessagingDetailsRepsonse
+                                        .length,
                                     padding: const EdgeInsets.all(10),
                                     itemBuilder: (context, index) {
                                       final chat = controller
@@ -110,25 +111,23 @@ class MessagingPage extends GetView<MessagingController> {
                                                   controller
                                                       .roomMessagingDetailsRepsonse
                                                       .length &&
-                                              chat.createdAt!
-                                                  .toLocal()
-                                                  .isSameDate(
-                                                    other: controller
-                                                        .roomMessagingDetailsRepsonse[
-                                                            index + 1]
-                                                        .createdAt!
-                                                        .toLocal(),
-                                                  ))
+                                              chat.createdAt!.toLocal().isSameDate(
+                                                other: controller
+                                                    .roomMessagingDetailsRepsonse[index +
+                                                        1]
+                                                    .createdAt!
+                                                    .toLocal(),
+                                              ))
                                             Container()
                                           else
                                             Container(
                                               padding:
                                                   const EdgeInsets.fromLTRB(
-                                                6,
-                                                6,
-                                                6,
-                                                6,
-                                              ),
+                                                    6,
+                                                    6,
+                                                    6,
+                                                    6,
+                                                  ),
                                               decoration: BoxDecoration(
                                                 color: ColorsManager.grey100,
                                                 borderRadius:
@@ -136,8 +135,8 @@ class MessagingPage extends GetView<MessagingController> {
                                               ),
                                               child: CustomTextWidget(
                                                 text: dateFormatSlashDDMMYYYY(
-                                                  date:
-                                                      chat.createdAt!.toLocal(),
+                                                  date: chat.createdAt!
+                                                      .toLocal(),
                                                 ),
                                               ),
                                             ),
@@ -151,9 +150,9 @@ class MessagingPage extends GetView<MessagingController> {
                                                     chat.enableDateTime =
                                                         controller
                                                             .switchingBoolValue(
-                                                  boolValue:
-                                                      chat.enableDateTime,
-                                                ),
+                                                              boolValue: chat
+                                                                  .enableDateTime,
+                                                            ),
                                               );
                                             },
                                           ),
@@ -195,8 +194,12 @@ class MessagingPage extends GetView<MessagingController> {
                                     // focusNode: ref.read(messageController).messageFieldNode,
                                     // onTap: ref.read(emojiVisiblityController.notifier).onFieldTap,
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                      contentPadding: const EdgeInsets.fromLTRB(
+                                        8,
+                                        8,
+                                        8,
+                                        8,
+                                      ),
                                       isCollapsed: true,
                                       isDense: true,
                                       hintText: 'messagingHint'.tr,
@@ -217,27 +220,28 @@ class MessagingPage extends GetView<MessagingController> {
                                       ),
                                       child:
                                           controller.enableSendingBtn.value ==
-                                                  false
-                                              ? const IconButton(
-                                                  icon: Icon(Icons.send),
-                                                  onPressed: null,
-                                                  color: ColorsManager.grey,
-                                                )
-                                              : IconButton(
-                                                  icon: const Icon(Icons.send),
-                                                  onPressed: () => {
-                                                    controller
-                                                        .makeRequestToPOSTMessagesAPI(
+                                              false
+                                          ? const IconButton(
+                                              icon: Icon(Icons.send),
+                                              onPressed: null,
+                                              color: ColorsManager.grey,
+                                            )
+                                          : IconButton(
+                                              icon: const Icon(Icons.send),
+                                              onPressed: () => {
+                                                controller
+                                                    .makeRequestToPOSTMessagesAPI(
                                                       roomId: controller
                                                           .selectedRoom
                                                           .value
                                                           .uuid,
                                                       message: controller
-                                                          .sendingTextCtrl.text,
+                                                          .sendingTextCtrl
+                                                          .text,
                                                     ),
-                                                  },
-                                                  color: ColorsManager.primary,
-                                                ),
+                                              },
+                                              color: ColorsManager.primary,
+                                            ),
                                     ),
                                   ),
                                 ),

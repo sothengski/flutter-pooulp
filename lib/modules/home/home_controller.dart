@@ -17,7 +17,7 @@ class HomeController extends GetxController {
   //getConversationStatusResponseProvider() - MessagingController
   RxBool isMessagingBag = false.obs;
   RxString messagingBagLabel = ''.obs;
-  FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
+  // FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
 
   @override
   Future<void> onInit() async {
@@ -27,14 +27,16 @@ class HomeController extends GetxController {
 
   @override
   Future<void> onReady() async {
-    await deepLink();
+    // await deepLink();
     super.onReady();
   }
 
   Future<void> deepLink() async {
     await Future.delayed(
       DurationConstant.d2000,
-      () async => {await firebase.handleDeepLinks()},
+      () => {
+        // await firebase.handleDeepLinks()
+      },
     );
   }
 

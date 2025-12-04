@@ -33,7 +33,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
 
   RxString firstStart = ''.obs;
 
-  FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
+  // FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
 
   // @override
   // void onInit() {
@@ -44,7 +44,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
 
   @override
   Future<void> onReady() async {
-    await deepLink();
+    // await deepLink();
     // await initPlatformState();
     super.onReady();
   }
@@ -52,7 +52,9 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
   Future<void> deepLink() async {
     await Future.delayed(
       DurationConstant.d2000,
-      () async => {await firebase.handleDeepLinks()},
+      () => {
+        // await firebase.handleDeepLinks()
+      },
     );
   }
 
@@ -220,7 +222,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
     if (signInFormKey.currentState!.validate()) {
       swithcingBoolValueLoginBtn(boolValue: true);
       final loginData = ProfileModel(
-        email: emailCtrl.text.trim(),
+        email: emailCtrl.text.trim().toLowerCase(),
         password: passwordCtrl.text.trim(),
       );
       fakeAuthProvider

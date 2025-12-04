@@ -24,7 +24,7 @@ class OfferDetailController extends GetxController
 
   late String deepLink;
 
-  final FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
+  // final FirebaseDynamicLinkService firebase = FirebaseDynamicLinkService();
 
   // final FirebaseDynamicLinkService firebaseDynamicLinkService =
   //     FirebaseDynamicLinkService();
@@ -36,9 +36,9 @@ class OfferDetailController extends GetxController
     Future.delayed(const Duration(milliseconds: 300), () async {
       // print('controller: jobOfferDetail UUID ${jobOfferUUID.value}');
       await getJobOfferDetail(jobOfferUUID: jobOfferUUID.value);
-      deepLink = await firebase.createDynamicLink(
-        jobOfferUUID: jobOfferUUID.value,
-      );
+      // deepLink = await firebase.createDynamicLink(
+      //   jobOfferUUID: jobOfferUUID.value,
+      // );
     });
 
     tabController = TabController(length: 2, vsync: this);

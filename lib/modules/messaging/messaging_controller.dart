@@ -60,11 +60,15 @@ class MessagingController extends GetxController
       //   pageNumber: refresh == true ? 1 : 1 + 1,
       // );
     }
-    roomsAsPageRepsonse.value = await messagingProvider.getMessagingRoomAsPage(
-      pageNumber: refresh == true
-          ? 1
-          : roomsAsPageRepsonse.value.meta!.currentPage! + 1,
-    );
+    // TODO: remove this function after offline testing
+    // roomsAsPageRepsonse.value = await messagingProvider.getMessagingRoomAsPage(
+    //   pageNumber: refresh == true
+    //       ? 1
+    //       : roomsAsPageRepsonse.value.meta!.currentPage! + 1,
+    // );
+    roomsAsPageRepsonse.value = await FakeMessagingProvider()
+        .getMessagingRoomAsPage(pageNumber: refresh == true ? 1 : 1 + 1);
+
     roomListRepsonse.addAll(roomsAsPageRepsonse.value.data!);
     isLoadingIndicator.value = false;
     return roomListRepsonse;
@@ -101,12 +105,20 @@ class MessagingController extends GetxController
       //   pageNumber: 1,
       // );
     }
-    messagesAsPageRepsonse.value = await messagingProvider
+
+    /// TODO: remove this function after offline testing
+    // messagesAsPageRepsonse.value =
+    // await messagingProvider
+    //     .getMessagesAsPageByRoomID(
+    //       roomId: roomId,
+    //       pageNumber: refresh == true
+    //           ? 1
+    //           : messagesAsPageRepsonse.value.meta!.currentPage! + 1,
+    //     );
+    messagesAsPageRepsonse.value = await FakeMessagingProvider()
         .getMessagesAsPageByRoomID(
           roomId: roomId,
-          pageNumber: refresh == true
-              ? 1
-              : messagesAsPageRepsonse.value.meta!.currentPage! + 1,
+          pageNumber: refresh == true ? 1 : 1 + 1,
         );
     isMessageLoading.value = false;
     isLoadingIndicator.value = false;
@@ -173,12 +185,14 @@ class MessagingController extends GetxController
     selectedRoom.value = MessagingModel();
     selectedRoom.value = roomValue!;
     getRoomDetailsResponseProvider(roomId: roomValue.uuid, refresh: true);
-    if (roomValue.unseenMessages! > 0) {
-      makeRequestToPOSTSeenAllMessagesAPI(roomId: roomValue.uuid);
-    }
-    if (roomValue.newConversation! > 0) {
-      makeRequestToPOSTSeenConversationAPI(roomId: roomValue.uuid);
-    }
+
+    /// TODO: remove this function after offline testing
+    // if (roomValue.unseenMessages! > 0) {
+    //   makeRequestToPOSTSeenAllMessagesAPI(roomId: roomValue.uuid);
+    // }
+    // if (roomValue.newConversation! > 0) {
+    //   makeRequestToPOSTSeenConversationAPI(roomId: roomValue.uuid);
+    // }
   }
 
   void onChangedTextCtrl(String? q) {

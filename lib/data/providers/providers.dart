@@ -15,3 +15,4 @@ export 'fake/fake_auth_provider.dart';
 export 'user_info_provider.dart';
 export 'fake/fake_tag_provider.dart';
 export 'fake/fake_offer_provider.dart';
+export 'fake/fake_messaging_provider.dart';

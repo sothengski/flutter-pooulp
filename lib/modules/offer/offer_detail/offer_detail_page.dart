@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pooulp_flutter/routes/routes.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+// import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../core/core.dart';
 import '../offer.dart';
@@ -1352,91 +1352,91 @@ class OfferDetailPage extends GetView<OfferDetailController> {
                                       //===== Description Component =====//
 
                                       ///===== Youtube Link Component =====//
-                                      if (controller.youtubeVideoId != '')
-                                        OutlineContainerWidget(
-                                          horizontalPadding: AppSize.s4,
-                                          title: 'companyVdoInto'.tr,
-                                          titleColor: ColorsManager.primaryBlue,
-                                          titleMarginLeft: AppSize.s12,
-                                          isDivider: false,
-                                          childWidget:
-                                              // CustomTextWidget(
-                                              //   text: '${controller.jobOfferDetail!.value.enterprise!.youtubeLink}',
-                                              //   fontWeight: FontWeightManager.regular,
-                                              //   maxLine: 200,
-                                              // ),
-                                              SizedBox(
-                                                height: 350,
-                                                child: YoutubePlayerControllerProvider(
-                                                  // Passing controller to widgets below.
-                                                  controller: controller
-                                                      .youtubeController,
-                                                  child: LayoutBuilder(
-                                                    builder: (context, constraints) {
-                                                      //  if (kIsWeb && constraints.maxWidth > 800) {
-                                                      return ListView(
-                                                        children: [
-                                                          Stack(
-                                                            children: [
-                                                              // player,
-                                                              Positioned.fill(
-                                                                child: YoutubeValueBuilder(
-                                                                  controller:
-                                                                      controller
-                                                                          .youtubeController,
-                                                                  builder:
-                                                                      (
-                                                                        context,
-                                                                        value,
-                                                                      ) {
-                                                                        return const SizedBox.shrink();
-                                                                        // return AnimatedCrossFade(
-                                                                        //   firstChild:
-                                                                        //       const SizedBox.shrink(),
-                                                                        //   secondChild: Material(
-                                                                        //     child: DecoratedBox(
-                                                                        //       decoration: BoxDecoration(
-                                                                        //         image: DecorationImage(
-                                                                        //           image: NetworkImage(
+                                      // if (controller.youtubeVideoId != '')
+                                      //   OutlineContainerWidget(
+                                      //     horizontalPadding: AppSize.s4,
+                                      //     title: 'companyVdoInto'.tr,
+                                      //     titleColor: ColorsManager.primaryBlue,
+                                      //     titleMarginLeft: AppSize.s12,
+                                      //     isDivider: false,
+                                      //     childWidget:
+                                      //         // CustomTextWidget(
+                                      //         //   text: '${controller.jobOfferDetail!.value.enterprise!.youtubeLink}',
+                                      //         //   fontWeight: FontWeightManager.regular,
+                                      //         //   maxLine: 200,
+                                      //         // ),
+                                      //         SizedBox(
+                                      //           height: 350,
+                                      //           child: YoutubePlayerControllerProvider(
+                                      //             // Passing controller to widgets below.
+                                      //             controller: controller
+                                      //                 .youtubeController,
+                                      //             child: LayoutBuilder(
+                                      //               builder: (context, constraints) {
+                                      //                 //  if (kIsWeb && constraints.maxWidth > 800) {
+                                      //                 return ListView(
+                                      //                   children: [
+                                      //                     Stack(
+                                      //                       children: [
+                                      //                         // player,
+                                      //                         Positioned.fill(
+                                      //                           child: YoutubeValueBuilder(
+                                      //                             controller:
+                                      //                                 controller
+                                      //                                     .youtubeController,
+                                      //                             builder:
+                                      //                                 (
+                                      //                                   context,
+                                      //                                   value,
+                                      //                                 ) {
+                                      //                                   return const SizedBox.shrink();
+                                      //                                   // return AnimatedCrossFade(
+                                      //                                   //   firstChild:
+                                      //                                   //       const SizedBox.shrink(),
+                                      //                                   //   secondChild: Material(
+                                      //                                   //     child: DecoratedBox(
+                                      //                                   //       decoration: BoxDecoration(
+                                      //                                   //         image: DecorationImage(
+                                      //                                   //           image: NetworkImage(
 
-                                                                        //             YoutubePlayerController.getThumbnail(
-                                                                        //               videoId: controller.youtubeController.params.playlist.last,
-                                                                        //               quality: ThumbnailQuality.medium,
-                                                                        //             ),
-                                                                        //           ),
-                                                                        //           fit: BoxFit.fitWidth,
-                                                                        //         ),
-                                                                        //       ),
-                                                                        //       child: const Center(
-                                                                        //         child: CircularProgressIndicator(),
-                                                                        //       ),
-                                                                        //     ),
-                                                                        //   ),
-                                                                        //   crossFadeState:
-                                                                        //       value.isReady
-                                                                        //       ? CrossFadeState.showFirst
-                                                                        //       : CrossFadeState.showSecond,
-                                                                        //   duration: const Duration(
-                                                                        //     milliseconds:
-                                                                        //         300,
-                                                                        //   ),
-                                                                        // );
-                                                                      },
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          // const Controls(),
-                                                        ],
-                                                      );
-                                                      // }
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                        )
-                                      else
-                                        Container(),
+                                      //                                   //             YoutubePlayerController.getThumbnail(
+                                      //                                   //               videoId: controller.youtubeController.params.playlist.last,
+                                      //                                   //               quality: ThumbnailQuality.medium,
+                                      //                                   //             ),
+                                      //                                   //           ),
+                                      //                                   //           fit: BoxFit.fitWidth,
+                                      //                                   //         ),
+                                      //                                   //       ),
+                                      //                                   //       child: const Center(
+                                      //                                   //         child: CircularProgressIndicator(),
+                                      //                                   //       ),
+                                      //                                   //     ),
+                                      //                                   //   ),
+                                      //                                   //   crossFadeState:
+                                      //                                   //       value.isReady
+                                      //                                   //       ? CrossFadeState.showFirst
+                                      //                                   //       : CrossFadeState.showSecond,
+                                      //                                   //   duration: const Duration(
+                                      //                                   //     milliseconds:
+                                      //                                   //         300,
+                                      //                                   //   ),
+                                      //                                   // );
+                                      //                                 },
+                                      //                           ),
+                                      //                         ),
+                                      //                       ],
+                                      //                     ),
+                                      //                     // const Controls(),
+                                      //                   ],
+                                      //                 );
+                                      //                 // }
+                                      //               },
+                                      //             ),
+                                      //           ),
+                                      //         ),
+                                      //   )
+                                      // else
+                                      Container(),
                                       // SizedBox(
                                       //   height: 350,
                                       //   child: YoutubePlayerControllerProvider(

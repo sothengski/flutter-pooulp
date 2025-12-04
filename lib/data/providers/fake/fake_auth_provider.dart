@@ -211,7 +211,26 @@ class FakeUserInfoProvider implements IUserInfoProvider {
           'level': 1,
         },
       ],
-      'spoken_languages': [],
+      'spoken_languages': [
+        {
+          "id": 427,
+          "tag_id": 1,
+          "label": "English",
+          'spoken': 3,
+          'written': 2,
+          "level": 1,
+          "video_url": null,
+        },
+        {
+          "id": 428,
+          "tag_id": 2,
+          "label": "French",
+          'spoken': 1,
+          'written': 1,
+          "level": 1,
+          "video_url": null,
+        },
+      ],
       'educations': [
         {
           'id': 1,

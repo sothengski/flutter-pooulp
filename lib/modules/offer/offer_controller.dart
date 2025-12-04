@@ -78,8 +78,7 @@ class OfferController extends GetxController
     Future<List<JobOfferModel>>? getListFomProvider,
     bool? isStateFilter = true,
   }) async {
-    jobOfferList = RxList<JobOfferModel>([]);
-    // jobOfferList!.clear();
+    jobOfferList!.clear();
     jobOfferListFilter?.clear();
     jobOfferList.value = await getListFomProvider!;
     int itemCount = 0;

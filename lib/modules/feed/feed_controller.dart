@@ -57,10 +57,7 @@ class FeedController extends GetxController
         change(resp, status: RxStatus.success());
       },
       onError: (err) {
-        change(
-          null,
-          status: RxStatus.error('Error'),
-        );
+        change(null, status: RxStatus.error('Error'));
       },
     );
   }
@@ -72,8 +69,11 @@ class FeedController extends GetxController
     // applyButtonStateList.clear();
     // savedButtonStateList.clear();
     // hideButtonStateList.clear();
-    feedListRepsonse.value = await offerProvider.getFeedOffers();
+    /// TODO: remove this function after offline testing
+    // feedListRepsonse.value = await offerProvider.getFeedOffers();
+    feedListRepsonse.value = await FakeOfferProvider().getFeedOffers();
     addTypesIntoSet(jobOfferTrxData: feedListRepsonse);
+    debugPrint('feedListRepsonse: ${feedListRepsonse.length}');
     return feedListRepsonse;
   }
 
@@ -108,9 +108,7 @@ class FeedController extends GetxController
 
     if (actionType == OfferStrings.applyAction) {
       await offerProvider
-          .postApplyOffer(
-            jobOfferId: jobOfferId,
-          )
+          .postApplyOffer(jobOfferId: jobOfferId)
           .then(
             (value) => offerHelper.removeItemFromJobOfferList(
               jobOfferList: feedListRepsonse,
@@ -125,9 +123,7 @@ class FeedController extends GetxController
           );
       await offerController.onRefresh();
     } else if (actionType == OfferStrings.saveAction) {
-      await offerProvider.postSaveOffer(
-        jobOfferId: jobOfferId,
-      );
+      await offerProvider.postSaveOffer(jobOfferId: jobOfferId);
       offerHelper.removeItemFromJobOfferList(
         jobOfferList: feedListRepsonse,
         jobOfferId: jobOfferId,
@@ -139,9 +135,7 @@ class FeedController extends GetxController
       await offerController.onRefresh();
     } else if (actionType == OfferStrings.hideAction) {
       await offerProvider
-          .postHideOffer(
-            jobOfferId: jobOfferId,
-          )
+          .postHideOffer(jobOfferId: jobOfferId)
           .then(
             (value) => offerHelper.removeItemFromJobOfferList(
               jobOfferList: feedListRepsonse,
@@ -164,18 +158,13 @@ class FeedController extends GetxController
       tempType = type!;
     }
     typeSelected = tempType;
-    filterFeedlist(
-      feedList: feedListRepsonse,
-      type: tempType,
-    );
+    filterFeedlist(feedList: feedListRepsonse, type: tempType);
   }
 
   void addTypesIntoSet({List<JobOfferModel>? jobOfferTrxData}) {
     listFilterTypes.clear();
     setOfListTypes.clear();
-    listFilterTypes.add(
-      allType,
-    );
+    listFilterTypes.add(allType);
     selectType(type: listFilterTypes[0]);
     // typeSelected = listFilterTypes[0];
 
@@ -196,9 +185,6 @@ class FeedController extends GetxController
         }
       }
     }
-    filterFeedlist(
-      feedList: jobOfferTrxData,
-      type: allType,
-    );
+    filterFeedlist(feedList: jobOfferTrxData, type: allType);
   }
 }

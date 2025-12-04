@@ -125,8 +125,7 @@ class OfferFeedController extends GetxController
   Future<void> onInit() async {
     super.onInit();
 
-    /// TODO: remove this function after offline testing
-    // await getSearchPreferenceResponseProvider();
+    await getSearchPreferenceResponseProvider();
     await getjobOfferTypesListResponseProvider();
     await getFieldsListResponseProvider();
     await getLanguagesListResponseProvider();
@@ -437,7 +436,9 @@ class OfferFeedController extends GetxController
     bool? refresh = false,
   }) async {
     // searchPreferenceData.value = await offerProvider.getSearchPreferences();
-    searchedList.value = await offerProvider.getSavedSearchList();
+    searchedList.value = RxList<SearchModel>(
+      [],
+    ); //await offerProvider.getSavedSearchList();
     if (searchedList != []) {
       searchedListAsFieldModel.clear();
       searchedListAsFieldModel.add(allType);
@@ -689,11 +690,19 @@ class OfferFeedController extends GetxController
       /// TODO: remove this function after offline testing
       // await getSearchPreferenceResponseProvider();
 
-      feedListPaginationRepsonse = await offerProvider
-          .postSearchOfferWithPagination(
-            pageNumber: 1,
-            jobOfferForSearch: jobOfferToBeSearch.value,
-          );
+      // feedListPaginationRepsonse = await offerProvider
+      //     .postSearchOfferWithPagination(
+      //       pageNumber: 1,
+      //       jobOfferForSearch: jobOfferToBeSearch.value,
+      //     );
+
+      /// TODO: remove this function after offline testing
+      feedListPaginationRepsonse = PaginationModel(
+        data: await FakeOfferProvider().getSearchOfferWithPagination(
+          pageNumber: 1,
+          jobOfferForSearch: jobOfferToBeSearch.value,
+        ),
+      );
       feedListPagination.value = feedListPaginationRepsonse;
       feedTempListResponse.addAll(feedListPagination.value.data!);
       feedListRepsonse.value = feedTempListResponse;

@@ -82,9 +82,21 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
 ### 🔐 Authentication & Onboarding
 
 <div align="center">
+  <img src="screenshots/Splash-Screen.png" width="200" alt="Splash Screen" />
   <img src="screenshots/Login-Page.png" width="200" alt="Login Page" />
+  <img src="screenshots/Login-Page-1.png" width="200" alt="Login Page Alternative" />
+</div>
+
+<div align="center">
+  <img src="screenshots/Register-Page.png" width="200" alt="Register Page" />
+  <img src="screenshots/Register-Page-2.png" width="200" alt="Register Page 2" />
+  <img src="screenshots/Register-Student-Page.png" width="200" alt="Register Student Page" />
+</div>
+
+<div align="center">
+  <img src="screenshots/Register-Enterprise-Page-.png" width="200" alt="Register Enterprise Page" />
+  <img src="screenshots/Forget-Password-Page.png" width="200" alt="Forget Password Page" />
   <img src="screenshots/Onboarding-Page.png" width="200" alt="Onboarding Page" />
-  <img src="screenshots/splash-screen.png" width="200" alt="Splash Screen" />
 </div>
 
 ### 💼 Job Discovery & Offers
@@ -96,9 +108,21 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
 </div>
 
 <div align="center">
+  <img src="screenshots/Feed-Page-3.png" width="200" alt="Feed Page 3" />
+  <img src="screenshots/Feed-Loading-Page.png" width="200" alt="Feed Loading Page" />
+  <img src="screenshots/Feed-And-Profile-Page.png" width="200" alt="Feed And Profile Page" />
+</div>
+
+<div align="center">
   <img src="screenshots/Job-detail-Page.png" width="200" alt="Job Detail Page" />
   <img src="screenshots/Job-detail-Page-1.png" width="200" alt="Job Detail Page 1" />
   <img src="screenshots/Search-Preferences.png" width="200" alt="Search Preferences" />
+</div>
+
+<div align="center">
+  <img src="screenshots/Search-Preferences-1.png" width="200" alt="Search Preferences 1" />
+  <img src="screenshots/Search-Preferences-3.png" width="200" alt="Search Preferences 3" />
+  <img src="screenshots/Search-Preferences-4.png" width="200" alt="Search Preferences 4" />
 </div>
 
 <div align="center">
@@ -118,7 +142,13 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
 <div align="center">
   <img src="screenshots/Profile-Page-3.png" width="200" alt="Profile Page 3" />
   <img src="screenshots/Profile-Page-4.png" width="200" alt="Profile Page 4" />
+  <img src="screenshots/Profile-Page-5.png" width="200" alt="Profile Page 5" />
+</div>
+
+<div align="center">
   <img src="screenshots/Profile-Edit-Info-Page.png" width="200" alt="Profile Edit Info Page" />
+  <img src="screenshots/Profile-Edit-Info-Page-1.png" width="200" alt="Profile Edit Info Page 1" />
+  <img src="screenshots/Profile-Availability-Page.png" width="200" alt="Profile Availability Page" />
 </div>
 
 ### 🎓 Profile Building Features
@@ -141,6 +171,10 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
   <img src="screenshots/Language-Add-Page.png" width="200" alt="Language Add Page" />
 </div>
 
+<div align="center">
+  <img src="screenshots/Language-Dialog.png" width="200" alt="Language Dialog" />
+</div>
+
 ### 💬 Messaging & Communication
 
 <div align="center">
@@ -149,11 +183,9 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
   <img src="screenshots/Chatting-Page.png" width="200" alt="Chatting Page" />
 </div>
 
-### 🔍 Additional Views
+### 🔍 Additional Views & Features
 
 <div align="center">
-  <img src="screenshots/Feed-And-Profile-Page.png" width="200" alt="Feed And Profile Page" />
-  <img src="screenshots/Search-Preferences-1.png" width="200" alt="Search Preferences 1" />
   <img src="screenshots/Promotion-popup.png" width="200" alt="Promotion Popup" />
 </div>
 
@@ -170,8 +202,6 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
 - **Firebase Core**: ^3.15.2
 - **Firebase Dynamic Links**: ^6.1.10
 - **Get Storage**: ^2.1.1 - Local storage
-- **HTTP**: ^1.6.0 - API communication
-
 ### UI & Design
 - **Material Design**: Custom theming
 - **Shimmer**: ^3.0.0 - Loading animations
@@ -179,8 +209,6 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
 - **Cached Network Image**: ^3.2.0 - Image caching
 
 ### Authentication
-- **Google Sign-In**: ^7.2.0
-- **LinkedIn Login**: ^3.1.3
 - **Flutter Keychain**: ^2.2.1 - Secure storage
 
 ### Media & Files
@@ -188,7 +216,6 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
 - **Image Cropper**: ^11.0.0
 - **PDF**: ^3.8.0 - PDF generation
 - **Printing**: ^5.9.0
-- **YouTube Player**: ^5.2.0
 
 ### Utilities
 - **Connectivity Plus**: ^7.0.0 - Network status

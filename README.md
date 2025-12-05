@@ -99,36 +99,51 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
   <img src="screenshots/Onboarding-Page.png" width="200" alt="Onboarding Page" />
 </div>
 
-### 💼 Job Discovery & Offers
+### 💼 Job Discovery & Feed
 
 <div align="center">
   <img src="screenshots/Feed-Page.png" width="200" alt="Feed Page" />
+    <img src="screenshots/Feed-Page-2.png" width="200" alt="Feed Page 2" />
   <img src="screenshots/Feed-Page-1.png" width="200" alt="Feed Page 1" />
-  <img src="screenshots/Feed-Page-2.png" width="200" alt="Feed Page 2" />
 </div>
 
 <div align="center">
   <img src="screenshots/Feed-Page-3.png" width="200" alt="Feed Page 3" />
   <img src="screenshots/Feed-Loading-Page.png" width="200" alt="Feed Loading Page" />
-  <img src="screenshots/Feed-And-Profile-Page.png" width="200" alt="Feed And Profile Page" />
+    <img src="screenshots/Feed-And-Profile-Page.png" width="200" alt="Feed And Profile Page" />
 </div>
 
+### 🔍 Search & Filter Preferences
+
 <div align="center">
-  <img src="screenshots/Job-detail-Page.png" width="200" alt="Job Detail Page" />
-  <img src="screenshots/Job-detail-Page-1.png" width="200" alt="Job Detail Page 1" />
   <img src="screenshots/Search-Preferences.png" width="200" alt="Search Preferences" />
-</div>
-
-<div align="center">
   <img src="screenshots/Search-Preferences-1.png" width="200" alt="Search Preferences 1" />
   <img src="screenshots/Search-Preferences-3.png" width="200" alt="Search Preferences 3" />
+</div>
+
+<div align="center">
   <img src="screenshots/Search-Preferences-4.png" width="200" alt="Search Preferences 4" />
 </div>
 
+### 📋 Job Offer Details
+
+<div align="center">
+  <img src="screenshots/Job-Detail-Page.png" width="200" alt="Job Detail Page" />
+  <img src="screenshots/Job-Detail-Page-3.png" width="200" alt="Job Detail Page 3" />
+  <img src="screenshots/Job-Offer-Detail-Page.png" width="200" alt="Job Offer Detail Page" />
+</div>
+
+<div align="center">
+  <img src="screenshots/Job-Offer-Detail-Page-1.png" width="200" alt="Job Offer Detail Page 1" />
+  <img src="screenshots/Job-Offer-Detail-Page-3.png" width="200" alt="Job Offer Detail Page 3" />
+</div>
+
+### 💼 My Offers & Applications
+
 <div align="center">
   <img src="screenshots/MyOffers-Page-Matched.png" width="200" alt="My Offers - Matched" />
-  <img src="screenshots/MyOffers-Page-Matched1.png" width="200" alt="My Offers - Matched 1" />
-  <img src="screenshots/MyOffers-Page-Pending.png" width="200" alt="My Offers - Pending" />
+  <img src="screenshots/MyOffers-Page-Matched-1.png" width="200" alt="My Offers - Matched 1" />
+    <img src="screenshots/MyOffers-Page-Pending.png" width="200" alt="My Offers - Pending" />
 </div>
 
 ### 👤 Profile Management
@@ -146,33 +161,55 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
 </div>
 
 <div align="center">
+
   <img src="screenshots/Profile-Edit-Info-Page.png" width="200" alt="Profile Edit Info Page" />
   <img src="screenshots/Profile-Edit-Info-Page-1.png" width="200" alt="Profile Edit Info Page 1" />
   <img src="screenshots/Profile-Availability-Page.png" width="200" alt="Profile Availability Page" />
 </div>
 
-### 🎓 Profile Building Features
+### ⚙️ Profile Settings
+
+<div align="center">
+  <img src="screenshots/Profile-Settings-Page-1.png" width="200" alt="Profile Settings Page 1" />
+  <img src="screenshots/Profile-Settings-Page-2.png" width="200" alt="Profile Settings Page 2" />
+  <img src="screenshots/Profile-Settings-Page.png" width="200" alt="Profile Settings Page" />
+</div>
+
+### 🎓 Education Management
 
 <div align="center">
   <img src="screenshots/Education-Add-Page.png" width="200" alt="Education Add Page" />
   <img src="screenshots/Education-Add-Page-1.png" width="200" alt="Education Add Page 1" />
-  <img src="screenshots/Experience-Add-Page.png" width="200" alt="Experience Add Page" />
 </div>
 
+### 💼 Experience Management
+
 <div align="center">
+  <img src="screenshots/Experience-Add-Page.png" width="200" alt="Experience Add Page" />
   <img src="screenshots/Experience-Add-Page-1.png" width="200" alt="Experience Add Page 1" />
+</div>
+
+### 🏆 Achievements & 📜 Certificates
+
+<div align="center">
   <img src="screenshots/Achievement-Add-Page.png" width="200" alt="Achievement Add Page" />
   <img src="screenshots/Achievement-Add-Page-1.png" width="200" alt="Achievement Add Page 1" />
 </div>
 
+### 🎯 Skills Management
+
 <div align="center">
   <img src="screenshots/Skill-Add-Page.png" width="200" alt="Skill Add Page" />
   <img src="screenshots/Skill-Add-Page-1.png" width="200" alt="Skill Add Page 1" />
-  <img src="screenshots/Language-Add-Page.png" width="200" alt="Language Add Page" />
+  <img src="screenshots/Skills-Add-Edit-Page.png" width="200" alt="Skills Add Edit Page" />
 </div>
 
+### 🌍 Language Proficiency
+
 <div align="center">
-  <img src="screenshots/Language-Dialog.png" width="200" alt="Language Dialog" />
+  <img src="screenshots/Language-Add-Page.png" width="200" alt="Language Add Page" />
+  <img src="screenshots/Language-Add-Edit-Page.png" width="200" alt="Language Add Edit Page" />
+  <img src="screenshots/Language--Settings-Dialog.png" width="200" alt="Language Settings Dialog" />
 </div>
 
 ### 💬 Messaging & Communication
@@ -183,7 +220,7 @@ Pooulp is a mobile application designed to bridge the gap between students seeki
   <img src="screenshots/Chatting-Page.png" width="200" alt="Chatting Page" />
 </div>
 
-### 🔍 Additional Views & Features
+### 🎁 Additional Features
 
 <div align="center">
   <img src="screenshots/Promotion-popup.png" width="200" alt="Promotion Popup" />

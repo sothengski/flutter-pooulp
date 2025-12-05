@@ -72,17 +72,10 @@ class API {
 
   // factory API.dev() => API(apiKey: APIKeys.pooulpDevKey);
   // Front Web domains
-  static const String webDomain = 'http://app.dev-lamp-01.srv.pooulp.eu';
-  // 'http://uat.pooulp.eu';
-  // 'https://app.pooulp.com';
+  static const String webDomain = 'https://192.168.1.200:3000';
 
   /// Based API End Point URLs
-  static const String host =
-      //'localhost:80'; //Local BASEURL
-      // 'https://pooulp_api.test'; //Local Valet BASEURL
-      // 'http://api.dev-lamp-01.srv.pooulp.eu'; //Development BASEURL
-      // 'http://uat-api.pooulp.eu'; //UAT BASEURL
-      'https://api.pooulp.com'; //Production BASEURL
+  static const String host = 'https://192.168.1.200:3000';
 
   /// API End Point Path URLs
   static final Map<Endpoint, String> paths = {
@@ -173,8 +166,7 @@ class API {
   static String putOrDeleteSkillByCategoryAndID({
     required String? skillCategory,
     required int? skillId,
-  }) =>
-      '/users/me/student_profile/$skillCategory/$skillId';
+  }) => '/users/me/student_profile/$skillCategory/$skillId';
 
   static String putOrDeleteAvailabilities({required int? availabilityId}) =>
       '/users/me/student_profile/availabilities/$availabilityId';
@@ -185,8 +177,7 @@ class API {
   static String getMessagesByRoomID({
     required String? roomId,
     int? pageNumber = 1,
-  }) =>
-      '/rooms/$roomId/messages?page=$pageNumber';
+  }) => '/rooms/$roomId/messages?page=$pageNumber';
 
   static String postMessageByRoomID({required String? roomId}) =>
       '/rooms/$roomId/messages';

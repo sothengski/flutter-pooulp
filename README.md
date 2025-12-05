@@ -303,11 +303,19 @@ lib/
 
 ## 🧪 Testing
 
-The project includes fake data providers for local testing:
-- `FakeAuthProvider` - Mock authentication
-- `FakeUserInfoProvider` - Mock user data
+The GitHub version of this project includes fake data providers that enable full navigation and feature demonstration without backend dependencies:
+
+- `FakeAuthProvider` - Mock authentication for testing login/signup flows
+- `FakeUserInfoProvider` - Mock user data for profile management
 - `FakeTagProvider` - Mock tags and categories
-- `FakeOfferProvider` - Mock job offers
+- `FakeOfferProvider` - Mock job offers for feed and detail pages
+- `FakeMessagingProvider` - Mock messaging data for chat functionality
+
+These providers allow you to:
+- Navigate through all screens and features
+- Test UI components and user flows
+- Demonstrate the application's design and functionality
+- Run the app locally without API dependencies
 
 ## 📝 Configuration
 
@@ -336,6 +344,74 @@ This project is proprietary software.
 ## 👥 Contributing
 
 This is a private project. For contributions, please contact the project maintainers.
+
+## 📊 Project Statistics & Contribution Analysis
+
+### Git History Analysis
+
+Based on comprehensive git history analysis, here's the contribution breakdown:
+
+#### Contribution Breakdown
+- **Total Commits**: 488
+- **Sotheng Chheang's Commits**: 488 (100%)
+
+**By Name Variation:**
+- **Chheang Sotheng**: 268 commits (54.9%)
+- **Sotheng Chheang**: 206 commits (42.2%)
+- **sothengski**: 14 commits (2.9%)
+
+#### Timeline Overview
+
+**Active Development Period**: December 2021 - February 2023
+
+**Project History:**
+- **Original Repository**: The project was originally developed in Bitbucket as a private repository
+- **GitHub Migration**: The project was migrated to GitHub and made public in December 2025
+- **Current Status**: The GitHub version includes fake data providers that allow navigation through screens and demonstrate key features
+
+**Monthly Commit Distribution (Original Development Period):**
+
+**2021:**
+- December 2021: 26 commits
+
+**2022:**
+- January: 24 commits
+- February: 22 commits
+- March: 25 commits
+- April: 19 commits
+- May: 28 commits
+- **June: 63 commits** (peak month)
+- July: 9 commits
+- August: 20 commits
+- September: 20 commits
+- October: 23 commits
+- November: 38 commits
+- **December: 103 commits** (highest activity month)
+
+**2023:**
+- January: 53 commits
+- February: Final commits before project transition
+
+**2025:**
+- December: 15 commits (project migration to GitHub)
+
+#### Activity Patterns
+- **Active Development Period**: December 2021 - February 2023
+- **Most Active Period**: December 2022 (103 commits) and January 2023 (53 commits)
+- **Second Peak**: June 2022 (63 commits)
+- **Project Transition**: My chapter on this project closed in February 2023 as I advanced my career to pursue a new opportunity
+- **GitHub Migration**: December 2025 - Project migrated from Bitbucket to GitHub as a public repository with fake data providers
+
+#### Project Migration Notes
+- **Original Location**: Bitbucket (private repository)
+- **Current Location**: GitHub (public repository)
+- **Key Changes**: The GitHub version includes fake data providers (`FakeAuthProvider`, `FakeUserInfoProvider`, `FakeTagProvider`, `FakeOfferProvider`, `FakeMessagingProvider`) that enable:
+  - Full navigation through all screens
+  - Demonstration of key features and UI components
+  - Local testing without backend dependencies
+  - Showcase of the application's design and user experience
+
+**Summary**: This project was actively developed by Sotheng Chheang from December 2021 to February 2023, with 100% of commits attributed to the same developer (using different name formats). The most intensive development period was from June 2022 through January 2023. After completing the active development phase, the project was migrated from Bitbucket to GitHub in December 2025 as a public repository, featuring fake data providers that allow full navigation and feature demonstration.
 
 ## 📞 Support
 

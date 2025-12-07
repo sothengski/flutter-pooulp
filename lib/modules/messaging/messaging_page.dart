@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pooulp_flutter/routes/routes.dart';
 
 import '../../core/core.dart';
 import '../modules.dart';
@@ -22,16 +21,22 @@ class MessagingPage extends GetView<MessagingController> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.toNamed(
-                "${Routes.offerdetailRoute}?id=${controller.selectedRoom.value.jobOfferMatching!.jobOfferId}",
-                // arguments: [
-                //   // jobOfferItem
-                //   controller.selectedRoom.value.uuid,
-                //   // jobOfferItem!.uuid,
-                //   null,
-                //   false,
-                // ],
+              customSnackbar(
+                msgTitle: "Sorry, we can't launch the detail page",
+                msgContent: "Unable to launch to detail page",
+                bgColor: ColorsManager.red,
               );
+              // TODO: Add logic to launch the URL if backend is ready
+              // Get.toNamed(
+              //   "${Routes.offerdetailRoute}?id=${controller.selectedRoom.value.jobOfferMatching!.jobOfferId}",
+              // arguments: [
+              //   // jobOfferItem
+              //   controller.selectedRoom.value.uuid,
+              //   // jobOfferItem!.uuid,
+              //   null,
+              //   false,
+              // ],
+              // );
             },
             icon: const Icon(Icons.more_vert_rounded),
           ),

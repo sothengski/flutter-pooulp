@@ -7,7 +7,10 @@ import '../modules.dart';
 
 class AvailabilityController extends GetxController {
   final profileController = Get.find<ProfileController>();
-  final studentProvider = Get.put(StudentProvider());
+  // final studentProvider = Get.put(StudentProvider());
+  final studentProvider = Get.put(
+    FakeStudentProvider(),
+  ); // TODO: Change to StudentProvider() when backend is ready
 
   String? title;
   int availabilityId = 0;
@@ -125,11 +128,11 @@ class AvailabilityController extends GetxController {
     if (isRemove!) {
       // print('[Remove]');
       weeklyAvailability
-              .firstWhere((element) => element.day == dayIndex)
-              .slots!
-              .removeAt(removeIndex!)
-          // .printInfo(info: 'dayIndex:: $dayIndex')
-          ;
+          .firstWhere((element) => element.day == dayIndex)
+          .slots!
+          .removeAt(removeIndex!)
+      // .printInfo(info: 'dayIndex:: $dayIndex')
+      ;
     }
     // [Add]
     else {
@@ -165,14 +168,10 @@ class AvailabilityController extends GetxController {
       final PeriodModel periodToBeAddOrUpdate = PeriodModel(
         from: selectedFromDateString.value == ''
             ? null
-            : DateTime.tryParse(
-                selectedFromDateString.value,
-              ),
+            : DateTime.tryParse(selectedFromDateString.value),
         to: selectedToDateString.value == ''
             ? null
-            : DateTime.tryParse(
-                selectedToDateString.value,
-              ),
+            : DateTime.tryParse(selectedToDateString.value),
         isCustom: isCustomAvailability.value == true ? 1 : 0,
         weekly: tempWeeklyAvailability,
       );
@@ -217,12 +216,13 @@ class AvailabilityController extends GetxController {
       customSnackbar(
         msgTitle: 'core.success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'successfullyAdded'.tr //'profile.availabilityAddSuccessMsg'.tr
+            ? 'successfullyAdded'
+                  .tr //'profile.availabilityAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'successfullyUpdated'
-                    .tr //'profile.availabilityEditSuccessMsg'.tr
-                : 'successfullyDeleted'
-                    .tr, //'profile.availabilityDeleteSuccessMsg'.tr,
+            ? 'successfullyUpdated'
+                  .tr //'profile.availabilityEditSuccessMsg'.tr
+            : 'successfullyDeleted'
+                  .tr, //'profile.availabilityDeleteSuccessMsg'.tr,
         //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Availability Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

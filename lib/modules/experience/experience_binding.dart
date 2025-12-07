@@ -6,16 +6,15 @@ import '../modules.dart';
 class ExperienceBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<StudentProvider>(
-      () => StudentProvider(),
-    );
-    Get.lazyPut<ProfileController>(
-      () => ProfileController(),
-    );
+    Get.lazyPut<StudentProvider>(() => StudentProvider());
+    Get.lazyPut<ProfileController>(() => ProfileController());
     Get.lazyPut<ExperienceController>(
       () => ExperienceController(
-          // ExperienceRepository(MyApi()),
-          ),
+        // ExperienceRepository(MyApi()),
+      ),
     );
+    Get.lazyPut<FakeUserInfoProvider>(
+      () => FakeUserInfoProvider(),
+    ); // TODO: Change to UserInfoProvider() when backend is ready
   }
 }

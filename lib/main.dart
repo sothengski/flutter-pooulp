@@ -69,6 +69,7 @@ Future<void> main() async {
 
 class MyApp extends StatefulWidget {
   final StorageServices? storageServices;
+
   const MyApp({super.key, this.storageServices});
 
   @override

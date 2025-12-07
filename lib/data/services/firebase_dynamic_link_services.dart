@@ -11,63 +11,63 @@ import 'package:pooulp_flutter/routes/routes.dart';
 class FirebaseDynamicLinkService {
   final FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
-//   Future<void> initLinks() async {
-//     final PendingDynamicLinkData? initialLink =
-//         await dynamicLinks.getInitialLink();
+  //   Future<void> initLinks() async {
+  //     final PendingDynamicLinkData? initialLink =
+  //         await dynamicLinks.getInitialLink();
 
-//     if (initialLink != null) {
-//       // print("initialLink != null");
+  //     if (initialLink != null) {
+  //       // print("initialLink != null");
 
-//       // await proccessLink(initialLink);
-//     }
+  //       // await proccessLink(initialLink);
+  //     }
 
-//     dynamicLinks.onLink.listen((PendingDynamicLinkData? dynamicLink) async {
-//       // print("initialLink listen");
-//       final Uri uri = dynamicLink!.link;
-//       // final queryParams = uri.queryParameters;
-//       if (uri.path == '/joboffers/') {
-//         Get.offNamed(Routes.profileRoute);
-//         // print("====profileRoute====");
-//       }
-//       // await proccessLink(dynamicLink);
-//       // Navigator.pushNamed(context, dynamicLinkData.link.path);
-//     }).onError((error) {
-//       // print(error.toString());
-//     });
-//   }
+  //     dynamicLinks.onLink.listen((PendingDynamicLinkData? dynamicLink) async {
+  //       // print("initialLink listen");
+  //       final Uri uri = dynamicLink!.link;
+  //       // final queryParams = uri.queryParameters;
+  //       if (uri.path == '/joboffers/') {
+  //         Get.offNamed(Routes.profileRoute);
+  //         // print("====profileRoute====");
+  //       }
+  //       // await proccessLink(dynamicLink);
+  //       // Navigator.pushNamed(context, dynamicLinkData.link.path);
+  //     }).onError((error) {
+  //       // print(error.toString());
+  //     });
+  //   }
 
-//   Future<void> proccessLink(PendingDynamicLinkData? dynamicLinkData) async {
-//     if (dynamicLinkData != null) {
-//       final Uri uri = dynamicLinkData.link;
-//       // final queryParams = uri.queryParameters;
-//       if (uri.path == '/joboffers/') {
-//         Get.offNamed(Routes.profileRoute);
-//       }
-//       // if (queryParams.isNotEmpty) {
-//       //   final String userName = queryParams["username"]!;
-//       //   // verify the username is parsed correctly
-//       //   print("My users username is: $userName");
-//       // }
-//     }
-//   }
+  //   Future<void> proccessLink(PendingDynamicLinkData? dynamicLinkData) async {
+  //     if (dynamicLinkData != null) {
+  //       final Uri uri = dynamicLinkData.link;
+  //       // final queryParams = uri.queryParameters;
+  //       if (uri.path == '/joboffers/') {
+  //         Get.offNamed(Routes.profileRoute);
+  //       }
+  //       // if (queryParams.isNotEmpty) {
+  //       //   final String userName = queryParams["username"]!;
+  //       //   // verify the username is parsed correctly
+  //       //   print("My users username is: $userName");
+  //       // }
+  //     }
+  //   }
   Future<void> handleDeepLinks() async {
     // debugPrint('handleDeepLinks');
-    dynamicLinks.onLink.listen(
-      (dynamicLinkData) {
-        // print('deeplink data: ${dynamicLinkData.link.pathSegments.last}');
+    dynamicLinks.onLink
+        .listen((dynamicLinkData) {
+          // print('deeplink data: ${dynamicLinkData.link.pathSegments.last}');
 
-        Future.delayed(
-          DurationConstant.d2000,
-          () => {
-            Get.toNamed(
-              "${Routes.offerdetailRoute}?id=${dynamicLinkData.link.pathSegments.last}",
-            ),
-          },
-        );
-      },
-    ).onError((error) {
-      // Handle errors
-    });
+          Future.delayed(
+            DurationConstant.d2000,
+            () => {
+              Get.toNamed(
+                "${Routes.offerdetailRoute}?id=${dynamicLinkData.link.pathSegments.last}",
+              ),
+            },
+          );
+        })
+        .onError((error) {
+          // Handle errors
+        });
   }
 
   Future<String> createDynamicLink({

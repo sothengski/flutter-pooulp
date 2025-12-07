@@ -23,68 +23,47 @@ class CachedNetworkImgWidget extends StatelessWidget {
     this.logoAsText = '',
     this.defaultImg = '',
     this.isCircle = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return imgUrl != null && imgUrl != '' //&& imgUrl != 'null'
+    return imgUrl != null &&
+            imgUrl !=
+                '' //&& imgUrl != 'null'
         ? CachedNetworkImage(
             imageUrl: isHost == true ? '${API.host}$imgUrl' : imgUrl!,
-            imageBuilder: (
-              context,
-              imageProvider,
-            ) =>
-                DecoratedBox(
+            imageBuilder: (context, imageProvider) => DecoratedBox(
               decoration: BoxDecoration(
                 shape: isCircle == true ? BoxShape.circle : BoxShape.rectangle,
-                border: Border.all(
-                  color: ColorsManager.white,
-                  width: 0,
-                ),
+                border: Border.all(color: ColorsManager.white, width: 0),
                 borderRadius: isCircle == true
                     ? null
-                    : BorderRadius.circular(
-                        borderRadius!,
-                      ),
+                    : BorderRadius.circular(borderRadius!),
                 image: DecorationImage(
                   image: imageProvider,
                   fit: BoxFit.fitHeight,
                 ),
               ),
             ),
-            placeholder: (context, url) => LoadingWidget(
-              size: iconSize,
-            ),
-            errorWidget: (
-              context,
-              url,
-              error,
-            ) =>
-                Icon(
-              Icons.error,
-              color: ColorsManager.grey,
-              size: iconSize,
-            ),
+            placeholder: (context, url) => LoadingWidget(size: iconSize),
+            errorWidget: (context, url, error) =>
+                Icon(Icons.error, color: ColorsManager.grey, size: iconSize),
           )
         : logoAsText != ''
-            ? Center(
-                child: CustomTextWidget(
-                  text: logoAsText,
-                  fontSize: AppSize.s20,
-                  fontWeight: FontWeight.w800,
-                  textAlign: TextAlign.center,
-                ),
-              )
-            : defaultImg != ''
-                ? Image(
-                    // height: 80,
-                    image: AssetImage(defaultImg!),
-                  )
-                : Icon(
-                    iconData,
-                    color: ColorsManager.grey,
-                    size: iconSize,
-                  );
+        ? Center(
+            child: CustomTextWidget(
+              text: logoAsText,
+              fontSize: AppSize.s20,
+              fontWeight: FontWeight.w800,
+              textAlign: TextAlign.center,
+            ),
+          )
+        : defaultImg != ''
+        ? Image(
+            // height: 80,
+            image: AssetImage(defaultImg!),
+          )
+        : Icon(iconData, color: ColorsManager.grey, size: iconSize);
   }
 }

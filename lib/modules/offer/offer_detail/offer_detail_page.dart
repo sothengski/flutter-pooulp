@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pooulp_flutter/routes/routes.dart';
+
 // import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../core/core.dart';
@@ -63,20 +64,29 @@ class OfferDetailPage extends GetView<OfferDetailController> {
             iconData: IconsManager.share,
             iconColor: ColorsManager.white,
             tooltip: AppStrings.removeText,
-            onClick: () async => {
-              // print(
-              //   'link: ${controller.deepLink}',
-              // ),
-              await shareUtils(
-                context: context,
-                text: 'POOULP Job Offer',
-                urlPreview: controller.deepLink,
-                // '${API.webDomain}/joboffers/${controller.jobOfferDetail!.value.uuid}',
-                // urlPreview: controller.firebaseDynamicLinkService
-                //     .createDynamicLink()
-                //     .toString(),
-              ),
-            },
+            onClick:
+                ()
+                // async
+                => {
+                  // print(
+                  //   'link: ${controller.deepLink}',
+                  // ),
+                  customSnackbar(
+                    msgTitle: "Sorry, we can't share the offer",
+                    msgContent: "Unable to share the offer",
+                    bgColor: ColorsManager.red,
+                  ),
+                  // TODO: Add logic to launch the URL if backend is ready
+                  // await shareUtils(
+                  //   context: context,
+                  //   text: 'POOULP Job Offer',
+                  //   urlPreview: controller.deepLink,
+                  //   // '${API.webDomain}/joboffers/${controller.jobOfferDetail!.value.uuid}',
+                  //   // urlPreview: controller.firebaseDynamicLinkService
+                  //   //     .createDynamicLink()
+                  //   //     .toString(),
+                  // ),
+                },
           ),
         ],
       ),

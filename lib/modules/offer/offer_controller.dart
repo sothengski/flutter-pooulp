@@ -9,8 +9,15 @@ class OfferController extends GetxController
   final profileController = Get.put(ProfileController());
   // final settingController = Get.put(SettingController());
 
-  final offerProvider = Get.find<OfferProvider>();
-  final notificationMessageProvider = Get.put(NotificationMessagesProvider());
+  // final offerProvider = Get.find<OfferProvider>();
+  // final notificationMessageProvider = Get.put(NotificationMessagesProvider());
+  final offerProvider =
+      Get.find<
+        FakeOfferProvider
+      >(); // TODO: Change to OfferProvider() when backend is ready
+  final notificationMessageProvider = Get.put(
+    FakeNotificationMessagesProvider(),
+  ); // TODO: Change to NotificationMessagesProvider() when backend is ready
 
   final offerHelper = OfferHelper();
 
@@ -52,8 +59,7 @@ class OfferController extends GetxController
     // .then((value) => isProcessingStudentInfoRepsonse.value = true)
     ;
 
-    /// TODO: remove this function after offline testing
-    // await getNotificationMessagesProvider();
+    await getNotificationMessagesProvider();
   }
 
   bool jobOfferOnClickBoolSwitching({bool? boolValue}) {

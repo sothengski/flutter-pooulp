@@ -6,9 +6,7 @@ import 'package:get/get.dart';
 import '../data.dart';
 
 class AuthProvider extends BaseProvider {
-  Future<LoginModel> logInAPI({
-    required ProfileModel? loginData,
-  }) async {
+  Future<LoginModel> logInAPI({required ProfileModel? loginData}) async {
     try {
       final Response dataResponse = await post(
         API.paths[Endpoint.signIn],
@@ -86,10 +84,10 @@ class AuthProvider extends BaseProvider {
 
   Object responseBodyHandler({Response? resp}) {
     return (resp!.body as Map<String, dynamic>)['message'] != null
-            ? "\n- ${(resp.body as Map<String, dynamic>)['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}"
-            : ""
-        // ''' "${resp.body['code'] != null ? "\n- ${resp.body!['code']}" : ""}"'''
-        ;
+        ? "\n- ${(resp.body as Map<String, dynamic>)['message']} ${resp.statusCode == 429 ? '' : ': Please Check your email and Password.'}"
+        : ""
+    // ''' "${resp.body['code'] != null ? "\n- ${resp.body!['code']}" : ""}"'''
+    ;
   }
 
   ///===== Top of Change Password Section =====//
@@ -101,14 +99,12 @@ class AuthProvider extends BaseProvider {
     required String? newPasswordConfirmation,
   }) async {
     try {
-      final dataResponse = await put(
-        API.paths[Endpoint.putChangePassword].toString(),
-        {
-          "password": currentPassword,
-          "newPassword": newPassword,
-          "newPassword_confirmation": newPasswordConfirmation,
-        },
-      );
+      final dataResponse =
+          await put(API.paths[Endpoint.putChangePassword].toString(), {
+            "password": currentPassword,
+            "newPassword": newPassword,
+            "newPassword_confirmation": newPasswordConfirmation,
+          });
       // debugPrint(
       //   '''
       //   ${API.paths[Endpoint.putChangePassword].toString()},
@@ -139,15 +135,11 @@ class AuthProvider extends BaseProvider {
   ///===== Top of Forgot Password Section =====//
   ///
   ///POST Method for Forgot Password
-  Future<JsonResponse> postForgotPassword({
-    required String? email,
-  }) async {
+  Future<JsonResponse> postForgotPassword({required String? email}) async {
     try {
       final dataResponse = await post(
         API.paths[Endpoint.postForgotPassword].toString(),
-        {
-          "email": email,
-        },
+        {"email": email},
       );
       // debugPrint(
       //   '''
@@ -195,15 +187,11 @@ class AuthProvider extends BaseProvider {
   ///===== Top of Verify Email Section =====//
   ///
   ///POST Method for Verify Email
-  Future<JsonResponse> verifyEmail({
-    required String? email,
-  }) async {
+  Future<JsonResponse> verifyEmail({required String? email}) async {
     try {
       final dataResponse = await post(
         API.paths[Endpoint.postVerifyEmail].toString(),
-        {
-          "email": email,
-        },
+        {"email": email},
       );
       final JsonResponse response = JsonResponse(
         success: dataResponse.status.isOk,
@@ -224,19 +212,16 @@ class AuthProvider extends BaseProvider {
       final Response dataResponse = await post(
         '${API.host}${API.paths[Endpoint.postRefreshToken]}',
         {},
-        headers: {
-          'Authorization': 'Bearer ${getUserToken()}',
-        },
+        headers: {'Authorization': 'Bearer ${getUserToken()}'},
       );
       if (dataResponse.hasError) {
         throw "(resp: ${dataResponse.bodyString})";
       } else {
         final data = json.decode(dataResponse.bodyString.toString());
-        final LoginModel loginData =
-            LoginModel.fromJson(data as Map<String, dynamic>);
-        await AuthServices().saveUserToken(
-          bodyData: loginData,
+        final LoginModel loginData = LoginModel.fromJson(
+          data as Map<String, dynamic>,
         );
+        await AuthServices().saveUserToken(bodyData: loginData);
         return loginData; //LoginModel.fromJson(data as Map<String, dynamic>);
       }
     } catch (e) {
@@ -244,7 +229,6 @@ class AuthProvider extends BaseProvider {
     }
   }
 }
-
 
 // RESPONSE CODES#
 // 200: Success

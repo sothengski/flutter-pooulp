@@ -195,7 +195,7 @@ class EditUserInformationController extends GetxController {
             toolbarWidgetColor: ColorsManager.white,
             toolbarColor: ColorsManager.primary,
             toolbarTitle: "Crop Image",
-            statusBarColor: ColorsManager.grey400,
+            statusBarLight: true,
             backgroundColor: ColorsManager.white,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false,

@@ -2,7 +2,18 @@ import 'dart:async';
 
 import '../../data.dart';
 
+/// Fake OfferProvider that mimics the real OfferProvider interface
+/// without requiring a backend connection.
+///
+/// Best practices:
+/// 1. Match the exact method signatures from the real provider
+/// 2. Use Future.delayed to simulate network latency
+/// 3. Return properly structured mock data using model classes
+/// 4. Handle error cases appropriately
+/// 5. Make it easy to switch between real and fake providers
 class FakeOfferProvider implements IOfferProvider {
+  // Simulated network delay (adjust as needed)
+  static const Duration _networkDelay = Duration(milliseconds: 500);
   @override
   /// Fake getSavedOffers API that returns mock data for local testing
   Future<List<JobOfferModel>> getSavedOffers() async {
@@ -4809,107 +4820,301 @@ class FakeOfferProvider implements IOfferProvider {
     });
   }
 
+  /// Fake getMatchedOffers API that returns mock matched offers
+  /// Matches: OfferProvider.getMatchedOffers()
   @override
-  Future<List<JobOfferModel>> getMatchedOffers() {
-    // TODO: implement getMatchedOffers
-    throw UnimplementedError();
+  Future<List<JobOfferModel>> getMatchedOffers() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return empty list or reuse getPendingOffers mock data
+    // You can customize this to return specific matched offers
+    return getPendingOffers();
   }
 
+  /// Fake getRejectedOffers API that returns mock rejected offers
+  /// Matches: OfferProvider.getRejectedOffers()
   @override
-  Future<List<JobOfferModel>> getRejectedOffers() {
-    // TODO: implement getRejectedOffers
-    throw UnimplementedError();
+  Future<List<JobOfferModel>> getRejectedOffers() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return empty list for rejected offers
+    return <JobOfferModel>[];
   }
 
+  /// Fake getSavedSearchList API that returns mock saved searches
+  /// Matches: OfferProvider.getSavedSearchList()
   @override
-  Future<List<SearchModel>> getSavedSearchList() {
-    // TODO: implement getSavedSearchList
-    throw UnimplementedError();
+  Future<List<SearchModel>> getSavedSearchList() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return mock saved search list
+    return [
+      SearchModel.fromJson({
+        'id': 1,
+        'name': 'Software Engineering Internships',
+        'created_at': DateTime.now()
+            .subtract(const Duration(days: 5))
+            .toIso8601String(),
+      }),
+      SearchModel.fromJson({
+        'id': 2,
+        'name': 'Design Positions in Paris',
+        'created_at': DateTime.now()
+            .subtract(const Duration(days: 10))
+            .toIso8601String(),
+      }),
+    ];
   }
 
+  /// Fake getSearchPreferences API that returns mock search preferences
+  /// Matches: OfferProvider.getSearchPreferences()
   @override
-  Future<SearchPreferencesModel> getSearchPreferences() {
-    // TODO: implement getSearchPreferences
-    throw UnimplementedError();
+  Future<SearchPreferencesModel> getSearchPreferences() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return mock search preferences
+    return SearchPreferencesModel.fromJson({
+      'radius': 50,
+      'telecommuting': true,
+      'shifting': false,
+      'driving_license': false,
+    });
   }
 
+  /// Fake postApplyOffer API that simulates applying to a job offer
+  /// Matches: OfferProvider.postApplyOffer()
   @override
-  Future<JobOfferModel> postApplyOffer({required int? jobOfferId}) {
-    // TODO: implement postApplyOffer
-    throw UnimplementedError();
+  Future<JobOfferModel> postApplyOffer({required int? jobOfferId}) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate job offer ID
+    if (jobOfferId == null) {
+      return Future.error('Job offer ID is required');
+    }
+
+    // Return the job offer with applyState set to true
+    final offer = await getJobOfferDetailByID(
+      jobOfferID: jobOfferId.toString(),
+    );
+    offer.applyState = true;
+    return offer;
   }
 
+  /// Fake postCreateSavedSearch API that simulates creating a saved search
+  /// Matches: OfferProvider.postCreateSavedSearch()
   @override
   Future<SearchModel> postCreateSavedSearch({
     JobOfferModel? jobOfferForSearch,
-  }) {
-    // TODO: implement postCreateSavedSearch
-    throw UnimplementedError();
+  }) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate input
+    if (jobOfferForSearch == null) {
+      return Future.error('Job offer for search is required');
+    }
+
+    // Return mock saved search
+    return SearchModel.fromJson({
+      'id': DateTime.now().millisecondsSinceEpoch,
+      'name': jobOfferForSearch.searchName ?? 'New Saved Search',
+      'created_at': DateTime.now().toIso8601String(),
+    });
   }
 
+  /// Fake postHideOffer API that simulates hiding a job offer
+  /// Matches: OfferProvider.postHideOffer()
   @override
-  Future<JobOfferModel> postHideOffer({required int? jobOfferId}) {
-    // TODO: implement postHideOffer
-    throw UnimplementedError();
+  Future<JobOfferModel> postHideOffer({required int? jobOfferId}) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate job offer ID
+    if (jobOfferId == null) {
+      return Future.error('Job offer ID is required');
+    }
+
+    // Return the job offer (hiding is typically handled on backend)
+    return getJobOfferDetailByID(jobOfferID: jobOfferId.toString());
   }
 
+  /// Fake postJobOfferViewCount API that simulates incrementing view count
+  /// Matches: OfferProvider.postJobOfferViewCount()
   @override
-  Future<JsonResponse> postJobOfferViewCount({required String? jobOfferUUID}) {
-    // TODO: implement postJobOfferViewCount
-    throw UnimplementedError();
+  Future<JsonResponse> postJobOfferViewCount({
+    required String? jobOfferUUID,
+  }) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate UUID
+    if (jobOfferUUID == null || jobOfferUUID.isEmpty) {
+      return const JsonResponse(
+        status: 400,
+        message: 'Job offer UUID is required',
+        data: {'error': 'Job offer UUID is required'},
+      );
+    }
+
+    // Simulate successful view count increment
+    return const JsonResponse(
+      success: true,
+      status: 200,
+      message: 'View count updated',
+      data: {'message': 'View count updated successfully'},
+    );
   }
 
+  /// Fake postSaveOffer API that simulates saving a job offer
+  /// Matches: OfferProvider.postSaveOffer()
   @override
-  Future<JobOfferModel> postSaveOffer({required int? jobOfferId}) {
-    // TODO: implement postSaveOffer
-    throw UnimplementedError();
+  Future<JobOfferModel> postSaveOffer({required int? jobOfferId}) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate job offer ID
+    if (jobOfferId == null) {
+      return Future.error('Job offer ID is required');
+    }
+
+    // Return the job offer with savedState set to true
+    final offer = await getJobOfferDetailByID(
+      jobOfferID: jobOfferId.toString(),
+    );
+    offer.savedState = true;
+    return offer;
   }
 
+  /// Fake postSearchOffer API that returns mock search results
+  /// Matches: OfferProvider.postSearchOffer()
   @override
   Future<List<JobOfferModel>> postSearchOffer({
     int? pageNumber = 1,
     JobOfferModel? jobOfferForSearch,
-  }) {
-    // TODO: implement postSearchOffer
-    throw UnimplementedError();
+  }) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Get paginated results and return the data list
+    final pagination = await postSearchOfferWithPagination(
+      pageNumber: pageNumber,
+      jobOfferForSearch: jobOfferForSearch,
+    );
+    return pagination.data ?? [];
   }
 
+  /// Fake postSearchOfferWithPagination API that returns mock paginated search results
+  /// Matches: OfferProvider.postSearchOfferWithPagination()
   @override
   Future<PaginationModel> postSearchOfferWithPagination({
     int? pageNumber = 1,
     JobOfferModel? jobOfferForSearch,
-  }) {
-    // TODO: implement postSearchOfferWithPagination
-    throw UnimplementedError();
+  }) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return mock paginated results (reuse getPendingOffers data)
+    final offers = await getPendingOffers();
+    return PaginationModel.fromJson({
+      'data': offers.map((e) => e.toJson()).toList(),
+      'current_page': pageNumber ?? 1,
+      'last_page': 1,
+      'per_page': 20,
+      'total': offers.length,
+    });
   }
 
+  /// Fake postUnApplyOffer API that simulates unapplying from a job offer
+  /// Matches: OfferProvider.postUnApplyOffer()
   @override
-  Future<JobOfferModel> postUnApplyOffer({required int? jobOfferId}) {
-    // TODO: implement postUnApplyOffer
-    throw UnimplementedError();
+  Future<JobOfferModel> postUnApplyOffer({required int? jobOfferId}) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate job offer ID
+    if (jobOfferId == null) {
+      return Future.error('Job offer ID is required');
+    }
+
+    // Return the job offer with applyState set to false
+    final offer = await getJobOfferDetailByID(
+      jobOfferID: jobOfferId.toString(),
+    );
+    offer.applyState = false;
+    return offer;
   }
 
+  /// Fake postUnHideOffer API that simulates unhiding a job offer
+  /// Matches: OfferProvider.postUnHideOffer()
   @override
-  Future<JobOfferModel> postUnHideOffer({required int? jobOfferId}) {
-    // TODO: implement postUnHideOffer
-    throw UnimplementedError();
+  Future<JobOfferModel> postUnHideOffer({required int? jobOfferId}) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate job offer ID
+    if (jobOfferId == null) {
+      return Future.error('Job offer ID is required');
+    }
+
+    // Return the job offer
+    return getJobOfferDetailByID(jobOfferID: jobOfferId.toString());
   }
 
+  /// Fake postUnSaveOffer API that simulates unsaving a job offer
+  /// Matches: OfferProvider.postUnSaveOffer()
   @override
-  Future<JobOfferModel> postUnSaveOffer({required int? jobOfferId}) {
-    // TODO: implement postUnSaveOffer
-    throw UnimplementedError();
+  Future<JobOfferModel> postUnSaveOffer({required int? jobOfferId}) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate job offer ID
+    if (jobOfferId == null) {
+      return Future.error('Job offer ID is required');
+    }
+
+    // Return the job offer with savedState set to false
+    final offer = await getJobOfferDetailByID(
+      jobOfferID: jobOfferId.toString(),
+    );
+    offer.savedState = false;
+    return offer;
   }
 
+  /// Fake putEditSavedSearch API that simulates editing a saved search
+  /// Matches: OfferProvider.putEditSavedSearch()
   @override
-  Future<SearchModel> putEditSavedSearch({JobOfferModel? jobOfferForSearch}) {
-    // TODO: implement putEditSavedSearch
-    throw UnimplementedError();
+  Future<SearchModel> putEditSavedSearch({
+    JobOfferModel? jobOfferForSearch,
+  }) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate input
+    if (jobOfferForSearch == null) {
+      return Future.error('Job offer for search is required');
+    }
+
+    // Return mock updated saved search
+    return SearchModel.fromJson({
+      'id': jobOfferForSearch.searchId ?? 1,
+      'name': jobOfferForSearch.searchName ?? 'Updated Saved Search',
+      'created_at': DateTime.now().toIso8601String(),
+    });
   }
 
+  /// Fake getFeedOffers API that returns mock feed offers
+  /// Matches: OfferProvider.getFeedOffers()
   @override
-  Future<List<JobOfferModel>> getFeedOffers() {
-    // TODO: implement getFeedOffers
-    throw UnimplementedError();
+  Future<List<JobOfferModel>> getFeedOffers() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return mock feed offers (reuse getPendingOffers data)
+    return getPendingOffers();
   }
 }

@@ -7,16 +7,12 @@ import 'feed.dart';
 class FeedBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<FeedController>(
-      () => FeedController(),
-    );
+    Get.lazyPut<FeedController>(() => FeedController());
 
-    Get.lazyPut<OfferController>(
-      () => OfferController(),
-    );
+    Get.lazyPut<OfferController>(() => OfferController());
 
-    Get.lazyPut<OfferProvider>(
-      () => OfferProvider(),
-    );
+    Get.lazyPut<OfferProvider>(() => OfferProvider());
+    // TODO: Change to OfferProvider() when backend is ready
+    Get.lazyPut<FakeOfferProvider>(() => FakeOfferProvider());
   }
 }

@@ -12,9 +12,7 @@ class FeedListComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       // shrinkWrap: true,
-      padding: const EdgeInsets.only(
-        bottom: kFloatingActionButtonMargin + 10,
-      ),
+      padding: const EdgeInsets.only(bottom: kFloatingActionButtonMargin + 10),
       itemCount: feedController.feedFilterList.length,
       physics: const BouncingScrollPhysics(),
       // scrollDirection: Axis.vertical,
@@ -39,9 +37,9 @@ class FeedListComponent extends StatelessWidget {
                     );
                     feedController.feedFilterList[index].applyState =
                         feedController.jobOfferOnClickBoolSwitching(
-                      boolValue:
-                          feedController.feedFilterList[index].applyState,
-                    );
+                          boolValue:
+                              feedController.feedFilterList[index].applyState,
+                        );
                   },
                 ),
               ),
@@ -61,9 +59,9 @@ class FeedListComponent extends StatelessWidget {
                     );
                     feedController.feedFilterList[index].savedState =
                         feedController.jobOfferOnClickBoolSwitching(
-                      boolValue:
-                          feedController.feedFilterList[index].savedState,
-                    );
+                          boolValue:
+                              feedController.feedFilterList[index].savedState,
+                        );
                   },
                 ),
               ),
@@ -85,9 +83,10 @@ class FeedListComponent extends StatelessWidget {
                     );
                     feedController.feedFilterList[index].rejectedState =
                         feedController.jobOfferOnClickBoolSwitching(
-                      boolValue:
-                          feedController.feedFilterList[index].rejectedState,
-                    );
+                          boolValue: feedController
+                              .feedFilterList[index]
+                              .rejectedState,
+                        );
                   },
                 ),
               ),

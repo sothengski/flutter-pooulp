@@ -6,12 +6,12 @@ import 'profile.dart';
 class ProfileBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ProfileController>(
-      () => ProfileController(),
-    );
+    Get.lazyPut<ProfileController>(() => ProfileController());
 
-    Get.lazyPut<UserInfoProvider>(
-      () => UserInfoProvider(),
-    );
+    Get.lazyPut<UserInfoProvider>(() => UserInfoProvider());
+
+    Get.lazyPut<FakeUserInfoProvider>(
+      () => FakeUserInfoProvider(),
+    ); // TODO: Change to UserInfoProvider() when backend is ready
   }
 }

@@ -5,9 +5,21 @@ import '../../data/data.dart';
 import '../modules.dart';
 
 class SettingController extends GetxController {
-  final userInfoProvider = Get.find<UserInfoProvider>();
-  final authProvider = Get.find<AuthProvider>();
-  final tagProvider = Get.find<TagProvider>();
+  // final userInfoProvider = Get.find<UserInfoProvider>();
+  // final authProvider = Get.find<AuthProvider>();
+  // final tagProvider = Get.find<TagProvider>();
+  final userInfoProvider =
+      Get.find<
+        FakeUserInfoProvider
+      >(); // TODO: Change to UserInfoProvider() when backend is ready
+  final authProvider =
+      Get.find<
+        FakeAuthProvider
+      >(); // TODO: Change to AuthProvider() when backend is ready
+  final tagProvider =
+      Get.find<
+        FakeTagProvider
+      >(); // TODO: Change to TagProvider() when backend is ready
 
   final languageController = Get.put(LanguageController());
 
@@ -56,12 +68,7 @@ class SettingController extends GetxController {
             .isNotEmpty
         ? profileController.studentInfoRepsonse.value.internshipPeriods!.first
         : FieldModel(id: 9999, label: '');
-    internshipPeriodList.addAll(
-      /// TODO: remove this function after offline testing
-      // await tagProvider.getInternshipPeriodTags(),
-      // await FakeTagProvider().getInternshipPeriodTags(),
-      [],
-    );
+    internshipPeriodList.addAll(await tagProvider.getInternshipPeriodTags());
     languageRxString.value =
         profileController.userProfileInfo.value.uiLanguage!;
     super.onInit();

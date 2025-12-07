@@ -6,8 +6,11 @@ import '../home/home.dart';
 
 class MessagingController extends GetxController
     with StateMixin<RxList<MessagingModel>> {
-  final messagingProvider = Get.find<MessagingProvider>();
-
+  // final messagingProvider = Get.find<MessagingProvider>();
+  final messagingProvider =
+      Get.find<
+        FakeMessagingProvider
+      >(); // TODO: Change to MessagingProvider() when backend is ready
   final homeController = Get.put(HomeController());
 
   final ScrollController roomScrollController = ScrollController();
@@ -93,7 +96,7 @@ class MessagingController extends GetxController
   // }
 
   Future<RxList<MessagingModel>> getRoomDetailsResponseProvider({
-    required String? roomId,
+    String? roomId = 'TestRoomID',
     bool? refresh = false,
   }) async {
     if (refresh == true) {
@@ -186,7 +189,7 @@ class MessagingController extends GetxController
     selectedRoom.value = roomValue!;
     getRoomDetailsResponseProvider(roomId: roomValue.uuid, refresh: true);
 
-    /// TODO: remove this function after offline testing
+    // TODO: uncomment this function if backend is ready
     // if (roomValue.unseenMessages! > 0) {
     //   makeRequestToPOSTSeenAllMessagesAPI(roomId: roomValue.uuid);
     // }

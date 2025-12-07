@@ -1,12 +1,28 @@
+import 'dart:async';
+
 import '../../data.dart';
 
+/// Fake MessagingProvider that mimics the real MessagingProvider interface
+/// without requiring a backend connection.
+///
+/// Best practices:
+/// 1. Match the exact method signatures from the real provider
+/// 2. Use Future.delayed to simulate network latency
+/// 3. Return properly structured mock data using model classes
+/// 4. Handle error cases appropriately
+/// 5. Make it easy to switch between real and fake providers
 class FakeMessagingProvider implements IMessagingProvider {
+  // Simulated network delay (adjust as needed)
+  static const Duration _networkDelay = Duration(milliseconds: 500);
+
+  /// Fake getMessagingRoomList API that returns mock messaging room list
+  /// Matches: MessagingProvider.getMessagingRoomList()
   @override
   Future<List<MessagingModel>> getMessagingRoomList({
     required int? pageNumber,
   }) async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock messaging room list response
     final paginationModel = await getMessagingRoomAsPage(
@@ -15,12 +31,14 @@ class FakeMessagingProvider implements IMessagingProvider {
     return paginationModel.data ?? [];
   }
 
+  /// Fake getMessagingRoomAsPage API that returns mock messaging room pagination
+  /// Matches: MessagingProvider.getMessagingRoomAsPage()
   @override
   Future<MessagingPaginationModel> getMessagingRoomAsPage({
     required int? pageNumber,
   }) async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock messaging room pagination response
     return MessagingPaginationModel.fromJson({
@@ -115,13 +133,20 @@ class FakeMessagingProvider implements IMessagingProvider {
     });
   }
 
+  /// Fake getMessagesListByRoomID API that returns mock messages list by room ID
+  /// Matches: MessagingProvider.getMessagesListByRoomID()
   @override
   Future<List<MessagingModel>> getMessagesListByRoomID({
     required String? roomId,
     required int? pageNumber,
   }) async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
+
+    // Validate roomId (optional)
+    if (roomId == null || roomId.isEmpty) {
+      return Future.error('Room ID is required');
+    }
 
     // Return mock messages list response
     final paginationModel = await getMessagesAsPageByRoomID(
@@ -131,13 +156,20 @@ class FakeMessagingProvider implements IMessagingProvider {
     return paginationModel.data ?? [];
   }
 
+  /// Fake getMessagesAsPageByRoomID API that returns mock messages pagination by room ID
+  /// Matches: MessagingProvider.getMessagesAsPageByRoomID()
   @override
   Future<MessagingPaginationModel> getMessagesAsPageByRoomID({
     required String? roomId,
     required int? pageNumber,
   }) async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
+
+    // Validate roomId (optional)
+    if (roomId == null || roomId.isEmpty) {
+      return Future.error('Room ID is required');
+    }
 
     // Return mock messages pagination response
     return MessagingPaginationModel.fromJson({
@@ -293,29 +325,107 @@ class FakeMessagingProvider implements IMessagingProvider {
     });
   }
 
+  /// Fake postMessageByRoomID API that simulates sending a message
+  /// Matches: MessagingProvider.postMessageByRoomID()
   @override
   Future<JsonResponse> postMessageByRoomID({
     required String? roomId,
     required String? message,
   }) async {
-    return const JsonResponse();
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate inputs (optional)
+    if (roomId == null || roomId.isEmpty) {
+      return const JsonResponse(
+        status: 400,
+        message: 'Room ID is required',
+        data: {'error': 'Room ID is required'},
+      );
+    }
+
+    if (message == null || message.isEmpty) {
+      return const JsonResponse(
+        status: 400,
+        message: 'Message cannot be empty',
+        data: {'error': 'Message cannot be empty'},
+      );
+    }
+
+    // Simulate successful message sent
+    return const JsonResponse(
+      success: true,
+      status: 200,
+      message: 'Message sent successfully',
+      data: {'message': 'Message sent successfully'},
+    );
   }
 
+  /// Fake postSeenAllMessagesByRoomID API that simulates marking all messages as seen
+  /// Matches: MessagingProvider.postSeenAllMessagesByRoomID()
   @override
   Future<JsonResponse> postSeenAllMessagesByRoomID({
     required String? roomId,
   }) async {
-    return const JsonResponse();
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate roomId (optional)
+    if (roomId == null || roomId.isEmpty) {
+      return const JsonResponse(
+        status: 400,
+        message: 'Room ID is required',
+        data: {'error': 'Room ID is required'},
+      );
+    }
+
+    // Simulate successful seen status update
+    return const JsonResponse(
+      success: true,
+      status: 200,
+      message: 'All messages marked as seen',
+      data: {'message': 'All messages marked as seen'},
+    );
   }
 
+  /// Fake getConversationStatus API that returns mock conversation status
+  /// Matches: MessagingProvider.getConversationStatus()
   @override
   Future<ConversationModel> getConversationStatus() async {
-    return ConversationModel();
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return mock conversation status
+    return ConversationModel.fromJson({
+      'nbr_new_conversation': 2,
+      'nbr_new_messages': 5,
+    });
   }
 
+  /// Fake postSeenConversationByRoomID API that simulates marking conversation as seen
+  /// Matches: MessagingProvider.postSeenConversationByRoomID()
   @override
-  Future<JsonResponse> postSeenConversationByRoomID({required String? roomId}) {
-    // TODO: implement postSeenConversationByRoomID
-    throw UnimplementedError();
+  Future<JsonResponse> postSeenConversationByRoomID({
+    required String? roomId,
+  }) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate roomId (optional)
+    if (roomId == null || roomId.isEmpty) {
+      return const JsonResponse(
+        status: 400,
+        message: 'Room ID is required',
+        data: {'error': 'Room ID is required'},
+      );
+    }
+
+    // Simulate successful conversation seen status update
+    return const JsonResponse(
+      success: true,
+      status: 200,
+      message: 'Conversation marked as seen',
+      data: {'message': 'Conversation marked as seen'},
+    );
   }
 }

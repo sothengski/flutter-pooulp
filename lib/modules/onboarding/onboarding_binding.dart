@@ -6,15 +6,12 @@ import '../modules.dart';
 class OnboardingBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<OnboardingController>(
-      () => OnboardingController(),
-    );
+    Get.lazyPut<OnboardingController>(() => OnboardingController());
 
-    Get.lazyPut<OnboardingProvider>(
-      () => OnboardingProvider(),
-    );
-    Get.lazyPut<TagProvider>(
-      () => TagProvider(),
-    );
+    Get.lazyPut<OnboardingProvider>(() => OnboardingProvider());
+    Get.lazyPut<TagProvider>(() => TagProvider());
+    // TODO: Change to OnboardingProvider() and TagProvider() when backend is ready
+    Get.lazyPut<FakeOnboardingProvider>(() => FakeOnboardingProvider());
+    Get.lazyPut<FakeTagProvider>(() => FakeTagProvider());
   }
 }

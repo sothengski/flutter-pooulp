@@ -8,23 +8,20 @@ import 'offer_feed_controller.dart';
 class OfferFeedBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<OfferFeedController>(
-      () => OfferFeedController(),
-    );
+    Get.lazyPut<OfferFeedController>(() => OfferFeedController());
 
-    Get.lazyPut<OfferController>(
-      () => OfferController(),
-    );
+    Get.lazyPut<OfferController>(() => OfferController());
 
-    Get.lazyPut<HomeController>(
-      () => HomeController(),
-    );
+    Get.lazyPut<HomeController>(() => HomeController());
 
-    Get.lazyPut<OfferProvider>(
-      () => OfferProvider(),
-    );
-    Get.lazyPut<TagProvider>(
-      () => TagProvider(),
-    );
+    Get.lazyPut<OfferProvider>(() => OfferProvider());
+    Get.lazyPut<TagProvider>(() => TagProvider());
+
+    Get.lazyPut<FakeOfferProvider>(
+      () => FakeOfferProvider(),
+    ); // TODO: Change to OfferProvider() when backend is ready
+    Get.lazyPut<FakeTagProvider>(
+      () => FakeTagProvider(),
+    ); // TODO: Change to TagProvider() when backend is ready
   }
 }

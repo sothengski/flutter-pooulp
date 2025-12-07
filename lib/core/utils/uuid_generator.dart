@@ -17,10 +17,7 @@ class UuidGenerator {
 
   // Generate a v5 (namespace-name-sha1-based) id
   String? uuidV5({String? nameSpace, String? name = ''}) {
-    return uuid.v5(
-      Uuid.NAMESPACE_URL,
-      name,
-    );
+    return uuid.v5(Uuid.NAMESPACE_URL, name);
     // -> 'c74a196f-f19d-5ea9-bffd-a2742432fc9c'
   }
 }

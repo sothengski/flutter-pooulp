@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keychain/flutter_keychain.dart';
 import 'package:get/get.dart';
+
 // import 'package:linkedin_login/linkedin_login.dart';
 
 import '../../../core/core.dart';
@@ -9,8 +10,9 @@ import '../../../routes/routes.dart';
 import '../../modules.dart';
 
 class SignInController extends GetxController with StateMixin<LoginModel> {
-  final authProvider = Get.find<AuthProvider>();
-  final fakeAuthProvider = FakeAuthProvider();
+  final authProvider = Get.find<FakeAuthProvider>();
+  final fakeAuthProvider =
+      FakeAuthProvider(); // TODO: Change to AuthProvider() when backend is ready
   final languageController = Get.put(LanguageController());
 
   final signInFormKey = GlobalKey<FormState>();
@@ -226,7 +228,7 @@ class SignInController extends GetxController with StateMixin<LoginModel> {
         password: passwordCtrl.text.trim(),
       );
       fakeAuthProvider
-          .loginAPI(loginData: loginData)
+          .logInAPI(loginData: loginData)
           .then(
             (value) async {
               swithcingBoolValueLoginBtn(boolValue: false);

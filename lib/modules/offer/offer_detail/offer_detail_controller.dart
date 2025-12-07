@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 // import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../data/data.dart';
@@ -8,8 +9,11 @@ class OfferDetailController extends GetxController
     with GetTickerProviderStateMixin {
   late final TabController? tabController;
   final ScrollController scrollController = ScrollController();
-  final offerProvider = Get.find<OfferProvider>();
-
+  // final offerProvider = Get.find<OfferProvider>();
+  final offerProvider =
+      Get.find<
+        FakeOfferProvider
+      >(); // TODO: Change to OfferProvider() when backend is ready
   // final offerController = Get.put(OfferController());
 
   RxInt currentIndexRx = 0.obs;
@@ -102,35 +106,31 @@ class OfferDetailController extends GetxController
   Future<void> getJobOfferDetail({required String? jobOfferUUID}) async {
     JobOfferModel tempResp;
 
-    tempResp = await FakeOfferProvider().getJobOfferDetailByUUID(
-      jobOfferUUID: jobOfferUUID,
-    );
-
-    /// TODO: remove this function after offline testing
-    // if (jobOfferUUID!.contains('-')) {
-    //   tempResp = await offerProvider.getJobOfferDetailByUUID(
-    //     jobOfferUUID: jobOfferUUID,
-    //   );
-    // } else {
-    //   tempResp = await offerProvider.getJobOfferDetailByID(
-    //     jobOfferID: jobOfferUUID,
-    //   );
-    // }
-    // if (tempResp.uuid!.isNotEmpty) {
-    // debugPrint(
-    //   "getJobOfferDetail: $tempResp",
+    // tempResp = await FakeOfferProvider().getJobOfferDetailByUUID(
+    //   jobOfferUUID: jobOfferUUID,
     // );
-    jobOfferDetail!.value = tempResp;
-    // TODO: remove this function after offline testing
-    // if (jobOfferDetail!.value.uuid!.isNotEmpty) {
-    //   youtubeVideoId = jobOfferDetail!.value.enterprise!.youtubeLink == null
-    //       ? ''
-    //       : jobOfferDetail!.value.enterprise!.youtubeLink!.split('=').last;
-    //   makeRequestToPOSTJobOfferViewCountAPI(
-    //     jobOfferUUID: jobOfferDetail!.value.uuid,
-    //   );
-    // }
-    // }
+
+    if (jobOfferUUID!.contains('-')) {
+      tempResp = await offerProvider.getJobOfferDetailByUUID(
+        jobOfferUUID: jobOfferUUID,
+      );
+    } else {
+      tempResp = await offerProvider.getJobOfferDetailByID(
+        jobOfferID: jobOfferUUID,
+      );
+    }
+    if (tempResp.uuid!.isNotEmpty) {
+      // debugPrint("getJobOfferDetail: $tempResp");
+      jobOfferDetail!.value = tempResp;
+      if (jobOfferDetail!.value.uuid!.isNotEmpty) {
+        youtubeVideoId = jobOfferDetail!.value.enterprise!.youtubeLink == null
+            ? ''
+            : jobOfferDetail!.value.enterprise!.youtubeLink!.split('=').last;
+        makeRequestToPOSTJobOfferViewCountAPI(
+          jobOfferUUID: jobOfferDetail!.value.uuid,
+        );
+      }
+    }
   }
 
   Future<void> makeRequestToPOSTJobOfferViewCountAPI({

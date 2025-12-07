@@ -7,9 +7,17 @@ import '../../routes/routes.dart';
 
 class OnboardingController extends GetxController
     with StateMixin<Rx<OnboardingModel>> {
-  final onboardingProvider = Get.find<OnboardingProvider>();
+  // final onboardingProvider = Get.find<OnboardingProvider>();
   final placeApiProvider = Get.put(PlaceApiProvider());
-  final tagProvider = Get.find<TagProvider>();
+  // final tagProvider = Get.find<TagProvider>();
+  final tagProvider =
+      Get.find<
+        FakeTagProvider
+      >(); // TODO: Change to TagProvider() when backend is ready
+  final onboardingProvider =
+      Get.find<
+        FakeOnboardingProvider
+      >(); // TODO: Change to OnboardingProvider() when backend is ready
 
   PageController pageController = PageController();
   RxInt selectedPageIndex = 0.obs;
@@ -27,8 +35,9 @@ class OnboardingController extends GetxController
   RxList<FieldModel> schoolDegreeList = <FieldModel>[].obs;
 
   RxList<OnboardingPageModel> onboardingPages = <OnboardingPageModel>[].obs;
-  Rx<OnboardingModel> onboardingPagesAPIData =
-      const OnboardingModel(totalPage: 0).obs;
+  Rx<OnboardingModel> onboardingPagesAPIData = const OnboardingModel(
+    totalPage: 0,
+  ).obs;
 
   RxList<FieldModel> lookingForSelectedList = <FieldModel>[].obs;
 
@@ -39,8 +48,9 @@ class OnboardingController extends GetxController
   Rx<PlaceDetailModel>? internshipPlaceDetail = PlaceDetailModel().obs;
   RxInt internshipRadiusRxInt = 50.obs;
   TextEditingController internshipAddressCtrl = TextEditingController();
-  TextEditingController internshipOtherTextCtrl =
-      TextEditingController(text: '');
+  TextEditingController internshipOtherTextCtrl = TextEditingController(
+    text: '',
+  );
 
   RxList<FieldModel> studentJobInterestedInSelectedList = <FieldModel>[].obs;
   RxList<FieldModel> studentJobLanguageSelectedList = <FieldModel>[].obs;
@@ -51,7 +61,7 @@ class OnboardingController extends GetxController
   RxList<FieldModel>? goodAtfieldSelectedList = <FieldModel>[].obs;
   RxList<FieldModel>? knowFromSourceSelectedList = <FieldModel>[].obs;
 
-// language variable
+  // language variable
   RxInt newLangaugeId = 0.obs;
   final editLangaugeFormKey = GlobalKey<FormState>();
   final editMontherTongueLangaugeFormKey = GlobalKey<FormState>();
@@ -60,10 +70,16 @@ class OnboardingController extends GetxController
   Rx<FieldModel> selectedMotherTongueLanguage = FieldModel().obs;
   // Rx<FieldModel> selectedProficiency =
   //     FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
-  Rx<FieldModel> selectedSpokenProficiency =
-      FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
-  Rx<FieldModel> selectedWrittenProficiency =
-      FieldModel(id: 1, label: LevelStrings.beginner, level: 1).obs;
+  Rx<FieldModel> selectedSpokenProficiency = FieldModel(
+    id: 1,
+    label: LevelStrings.beginner,
+    level: 1,
+  ).obs;
+  Rx<FieldModel> selectedWrittenProficiency = FieldModel(
+    id: 1,
+    label: LevelStrings.beginner,
+    level: 1,
+  ).obs;
   RxList<FieldModel> selectedlanguageTypes = <FieldModel>[].obs;
   RxList<FieldModel> proficiencyList = <FieldModel>[
     // FieldModel(id: 0, label: LanguageLevelStrings.levelUndefined, level: 0),
@@ -159,10 +175,7 @@ class OnboardingController extends GetxController
         change(resp, status: RxStatus.success());
       },
       onError: (err) {
-        change(
-          null,
-          status: RxStatus.error('Error'),
-        );
+        change(null, status: RxStatus.error('Error'));
       },
     );
   }
@@ -170,8 +183,8 @@ class OnboardingController extends GetxController
   Future<Rx<OnboardingModel>> getOnboardingDataListResponseProvider({
     bool? refresh = false,
   }) async {
-    onboardingPagesAPIData.value =
-        await onboardingProvider.getOnboardingDataList();
+    onboardingPagesAPIData.value = await onboardingProvider
+        .getOnboardingDataList();
     // debugPrint(
     //   'onboardingPagesAPIData: $onboardingPagesAPIData',
     // );
@@ -305,8 +318,9 @@ class OnboardingController extends GetxController
       /// page 10 = hear about Pooulp list
       if (page == goodAtPageNum || page == knowFromSourcePageNum) {
         final OnboardingPageModel temp = OnboardingPageModel(
-          pageIndex:
-              page == goodAtPageNum ? goodAtPageNum : knowFromSourcePageNum,
+          pageIndex: page == goodAtPageNum
+              ? goodAtPageNum
+              : knowFromSourcePageNum,
           title: onboardingData[page == goodAtPageNum ? 2 : 5].title,
           // subtitle: page == 4 ? 'stage' : 'student job',
           isSkippable:
@@ -335,10 +349,7 @@ class OnboardingController extends GetxController
     return onboardingPagesAPIData;
   }
 
-  bool haveitemInList(
-    List<FieldModel>? list,
-    FieldModel? item,
-  ) {
+  bool haveitemInList(List<FieldModel>? list, FieldModel? item) {
     for (final element in list!) {
       if (item!.id == element.id) {
         return true;
@@ -348,16 +359,10 @@ class OnboardingController extends GetxController
   }
 
   void updateNumberPage({int? newValue}) {
-    final bool isSelectInternshipInLookingFor = haveitemInList(
-          lookingForSelectedList,
-          FieldModel(id: 1),
-        ) ==
-        true;
-    final bool isSelectStudentJobInLookingFor = haveitemInList(
-          lookingForSelectedList,
-          FieldModel(id: 3),
-        ) ==
-        true;
+    final bool isSelectInternshipInLookingFor =
+        haveitemInList(lookingForSelectedList, FieldModel(id: 1)) == true;
+    final bool isSelectStudentJobInLookingFor =
+        haveitemInList(lookingForSelectedList, FieldModel(id: 3)) == true;
     if (isSelectInternshipInLookingFor && isSelectStudentJobInLookingFor) {
       numPage.value = totalPage;
     } else if (isSelectInternshipInLookingFor) {
@@ -374,69 +379,63 @@ class OnboardingController extends GetxController
   bool get isLastPage => selectedPageIndex.value == numPage.value - 1;
 
   bool isDisableOnNextButton() {
-    final bool isSelectInternshipInLookingFor = haveitemInList(
-          lookingForSelectedList,
-          FieldModel(id: 1),
-        ) ==
-        true;
-    final bool isSelectStudentJobInLookingFor = haveitemInList(
-          lookingForSelectedList,
-          FieldModel(id: 3),
-        ) ==
-        true;
+    final bool isSelectInternshipInLookingFor =
+        haveitemInList(lookingForSelectedList, FieldModel(id: 1)) == true;
+    final bool isSelectStudentJobInLookingFor =
+        haveitemInList(lookingForSelectedList, FieldModel(id: 3)) == true;
     // condition on matching selection in page 1
     // condition on selection in page 8
     // condition on empty internshipInterestedInSelectedList in page 3
     // condition on empty studentJobInterestedInSelectedList in page 5
     if (
-        // if we didn't found or selected internship and StudentJob in page 1
-        isFirstPage ||
-            isLastPage ||
-            (!isSelectInternshipInLookingFor &&
-                !isSelectStudentJobInLookingFor &&
-                selectedPageIndex.value == lokkingForPageNum) ||
-            // if we didn't found or selected internship Type in page 2
-            (isSelectInternshipInLookingFor &&
-                selectedPageIndex.value == specificInternshipPageNum &&
-                internshipTypeSelectedList.isEmpty) ||
-            // if we didn't found or selected internship Period in page 2
-            (isSelectInternshipInLookingFor &&
-                selectedPageIndex.value == specificInternshipPageNum &&
-                internshipPeriodSelectedList.isEmpty) ||
-            // if we didn't found or selected internship and internshipInterested in page 3
-            ((selectedPageIndex.value == internshipInterestedInPageNum) &&
-                isSelectInternshipInLookingFor &&
-                internshipInterestedInSelectedList.isEmpty) ||
-            // if we didn't found or selected internship and internshipAddress in page 4
-            ((selectedPageIndex.value == internshipLocationPageNum) &&
-                isSelectInternshipInLookingFor &&
-                internshipPlaceDetail!.value.fullAddress == null) ||
-            // if we didn't found or selected StudentJob and StudentJobInterested in page 5
-            ((selectedPageIndex.value == studentJobInterestedInPageNum) &&
+    // if we didn't found or selected internship and StudentJob in page 1
+    isFirstPage ||
+        isLastPage ||
+        (!isSelectInternshipInLookingFor &&
+            !isSelectStudentJobInLookingFor &&
+            selectedPageIndex.value == lokkingForPageNum) ||
+        // if we didn't found or selected internship Type in page 2
+        (isSelectInternshipInLookingFor &&
+            selectedPageIndex.value == specificInternshipPageNum &&
+            internshipTypeSelectedList.isEmpty) ||
+        // if we didn't found or selected internship Period in page 2
+        (isSelectInternshipInLookingFor &&
+            selectedPageIndex.value == specificInternshipPageNum &&
+            internshipPeriodSelectedList.isEmpty) ||
+        // if we didn't found or selected internship and internshipInterested in page 3
+        ((selectedPageIndex.value == internshipInterestedInPageNum) &&
+            isSelectInternshipInLookingFor &&
+            internshipInterestedInSelectedList.isEmpty) ||
+        // if we didn't found or selected internship and internshipAddress in page 4
+        ((selectedPageIndex.value == internshipLocationPageNum) &&
+            isSelectInternshipInLookingFor &&
+            internshipPlaceDetail!.value.fullAddress == null) ||
+        // if we didn't found or selected StudentJob and StudentJobInterested in page 5
+        ((selectedPageIndex.value == studentJobInterestedInPageNum) &&
+            isSelectStudentJobInLookingFor &&
+            studentJobInterestedInSelectedList.isEmpty) ||
+        // if we didn't found or selected only StudentJob and StudentJobInterested in page 2
+        (((selectedPageIndex.value == specificInternshipPageNum) &&
                 isSelectStudentJobInLookingFor &&
-                studentJobInterestedInSelectedList.isEmpty) ||
-            // if we didn't found or selected only StudentJob and StudentJobInterested in page 2
-            (((selectedPageIndex.value == specificInternshipPageNum) &&
+                !isSelectInternshipInLookingFor) &&
+            studentJobInterestedInSelectedList.isEmpty) ||
+        // if we didn't found or selected only StudentJob and StudentJobAddress in page 2
+        ((selectedPageIndex.value == internshipInterestedInPageNum) &&
+            isSelectStudentJobInLookingFor &&
+            !isSelectInternshipInLookingFor &&
+            studentJobPlaceDetail!.value.fullAddress == null) ||
+        // if we didn't found or selected knowFromSourceSelectedList in page 6(only studentJob)
+        // page 7(only Internship) // page 9 for select both
+        (((selectedPageIndex.value == 7 &&
                     isSelectStudentJobInLookingFor &&
-                    !isSelectInternshipInLookingFor) &&
-                studentJobInterestedInSelectedList.isEmpty) ||
-            // if we didn't found or selected only StudentJob and StudentJobAddress in page 2
-            ((selectedPageIndex.value == internshipInterestedInPageNum) &&
-                isSelectStudentJobInLookingFor &&
-                !isSelectInternshipInLookingFor &&
-                studentJobPlaceDetail!.value.fullAddress == null) ||
-            // if we didn't found or selected knowFromSourceSelectedList in page 6(only studentJob)
-            // page 7(only Internship) // page 9 for select both
-            (((selectedPageIndex.value == 7 &&
-                        isSelectStudentJobInLookingFor &&
-                        !isSelectInternshipInLookingFor) ||
-                    (selectedPageIndex.value == 8 &&
-                        isSelectInternshipInLookingFor &&
-                        !isSelectStudentJobInLookingFor) ||
-                    (selectedPageIndex.value == 10 &&
-                        isSelectInternshipInLookingFor &&
-                        isSelectStudentJobInLookingFor)) &&
-                knowFromSourceSelectedList!.isEmpty)) {
+                    !isSelectInternshipInLookingFor) ||
+                (selectedPageIndex.value == 8 &&
+                    isSelectInternshipInLookingFor &&
+                    !isSelectStudentJobInLookingFor) ||
+                (selectedPageIndex.value == 10 &&
+                    isSelectInternshipInLookingFor &&
+                    isSelectStudentJobInLookingFor)) &&
+            knowFromSourceSelectedList!.isEmpty)) {
       return true;
     } else {
       return false;
@@ -450,11 +449,11 @@ class OnboardingController extends GetxController
             curve: Curves.easeInSine,
           )
         : isLastPage
-            ? validateData()
-            : pageController.nextPage(
-                duration: 500.milliseconds,
-                curve: Curves.easeInSine,
-              );
+        ? validateData()
+        : pageController.nextPage(
+            duration: 500.milliseconds,
+            curve: Curves.easeInSine,
+          );
   }
 
   void addOrRemoveDataInList({
@@ -482,9 +481,8 @@ class OnboardingController extends GetxController
 
   /// Education Page
 
-  void getUpdate() => isUpdate.value = switchingBooleanValue(
-        boolValue: isUpdate.value,
-      );
+  void getUpdate() =>
+      isUpdate.value = switchingBooleanValue(boolValue: isUpdate.value);
   // update();
 
   SchoolModel selectedSchoolOnClick({SchoolModel? selectedItem}) {
@@ -539,9 +537,7 @@ class OnboardingController extends GetxController
             degreeId: educationList[i].degreeTag!.id ?? 0,
             dateStart: selectedStartedDateString[i] == ''
                 ? null
-                : DateTime.tryParse(
-                    selectedStartedDateString[i],
-                  ),
+                : DateTime.tryParse(selectedStartedDateString[i]),
             studyingYear: 0, //int.tryParse(currentStudyYearTextCtrl[i].text),
             completed: educationList[i].completed,
           ),
@@ -569,11 +565,7 @@ class OnboardingController extends GetxController
       educations: eduToBeAdd,
       languages: languageToBeAdd,
       searches: [
-        if (haveitemInList(
-              lookingForSelectedList,
-              FieldModel(id: 1),
-            ) ==
-            true)
+        if (haveitemInList(lookingForSelectedList, FieldModel(id: 1)) == true)
           SearchPreferencesModel(
             types: [FieldModel(id: 1)],
             internshipTypes: internshipTypeSelectedList,
@@ -591,11 +583,7 @@ class OnboardingController extends GetxController
             range: internshipRadiusRxInt.value,
             telecommuting: 2,
           ),
-        if (haveitemInList(
-              lookingForSelectedList,
-              FieldModel(id: 3),
-            ) ==
-            true)
+        if (haveitemInList(lookingForSelectedList, FieldModel(id: 3)) == true)
           SearchPreferencesModel(
             types: [FieldModel(id: 3)],
             internshipTypes: [],
@@ -654,8 +642,9 @@ class OnboardingController extends GetxController
   }
 
   Future<void> submitDataToAPI({OnboardingModel? onboardingData}) async {
-    final JsonResponse responseData =
-        await onboardingProvider.postOnboarding(onboardingData: onboardingData);
+    final JsonResponse responseData = await onboardingProvider.postOnboarding(
+      onboardingData: onboardingData,
+    );
 
     if (responseData.success!) {
       // debugPrint('=====success=====');
@@ -732,10 +721,16 @@ class OnboardingController extends GetxController
     selectedLanguage.value = FieldModel();
     // selectedProficiency.value =
     //     FieldModel(id: 1, label: LevelStrings.beginner, level: 1);
-    selectedSpokenProficiency.value =
-        FieldModel(id: 1, label: LevelStrings.beginner, level: 1);
-    selectedWrittenProficiency.value =
-        FieldModel(id: 1, label: LevelStrings.beginner, level: 1);
+    selectedSpokenProficiency.value = FieldModel(
+      id: 1,
+      label: LevelStrings.beginner,
+      level: 1,
+    );
+    selectedWrittenProficiency.value = FieldModel(
+      id: 1,
+      label: LevelStrings.beginner,
+      level: 1,
+    );
     selectedlanguageTypes.value = [];
 
     for (final item in languageSelectedList) {
@@ -805,8 +800,6 @@ class OnboardingController extends GetxController
       languageSelectedList.removeAt(indexForEditOrDelete);
     }
     clearDataFromForm();
-    isUpdate.value = switchingBooleanValue(
-      boolValue: isUpdate.value,
-    );
+    isUpdate.value = switchingBooleanValue(boolValue: isUpdate.value);
   }
 }

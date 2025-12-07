@@ -13,6 +13,7 @@ class RoomListPage extends GetView<MessagingController> {
   RoomListPage({super.key});
 
   void btnOnClick({MessagingModel? roomValue}) {
+    // TODO: uncomment this function if backend is ready
     controller.roomOnClick(roomValue: roomValue);
     Get.toNamed(Routes.roomDetailsRoute);
   }

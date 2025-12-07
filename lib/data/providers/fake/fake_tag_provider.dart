@@ -2,11 +2,25 @@ import 'dart:async';
 
 import '../../data.dart';
 
+/// Fake TagProvider that mimics the real TagProvider interface
+/// without requiring a backend connection.
+///
+/// Best practices:
+/// 1. Match the exact method signatures from the real provider
+/// 2. Use Future.delayed to simulate network latency
+/// 3. Return properly structured mock data using model classes
+/// 4. Handle error cases appropriately
+/// 5. Make it easy to switch between real and fake providers
 class FakeTagProvider implements ITagProvider {
+  // Simulated network delay (adjust as needed)
+  static const Duration _networkDelay = Duration(milliseconds: 500);
+
+  /// Fake getJobOfferTypes API that returns mock job offer types
+  /// Matches: TagProvider.getJobOfferTypes()
   @override
   Future<List<FieldModel>> getJobOfferTypes() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock job offer types response
     final List<Map<String, dynamic>> mockData = [
@@ -43,11 +57,12 @@ class FakeTagProvider implements ITagProvider {
     return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
-  /// Fake getAllFields API that returns mock data for local testing
+  /// Fake getAllFields API that returns mock all fields
+  /// Matches: TagProvider.getAllFields()
   @override
   Future<List<FieldModel>> getAllFields() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock all fields response
     final List<Map<String, dynamic>> mockData = [
@@ -209,10 +224,12 @@ class FakeTagProvider implements ITagProvider {
     return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
+  /// Fake getAvailabilitiesTags API that returns mock availability tags
+  /// Matches: TagProvider.getAvailabilitiesTags()
   @override
   Future<List<FieldModel>> getAvailabilitiesTags() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock availability tags response
     final List<Map<String, dynamic>> mockData = [
@@ -226,10 +243,12 @@ class FakeTagProvider implements ITagProvider {
     return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
+  /// Fake getExperienceTypes API that returns mock experience types
+  /// Matches: TagProvider.getExperienceTypes()
   @override
   Future<List<FieldModel>> getExperienceTypes() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock experience types response
     final List<Map<String, dynamic>> mockData = [
@@ -266,28 +285,116 @@ class FakeTagProvider implements ITagProvider {
     return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
+  /// Fake getHardAndSoftSkills API that returns mock hard and soft skills
+  /// Matches: TagProvider.getHardAndSoftSkills()
   @override
-  Future<List<FieldModel>> getHardAndSoftSkills() {
-    // TODO: implement getHardAndSoftSkills
-    throw UnimplementedError();
+  Future<List<FieldModel>> getHardAndSoftSkills() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Combine hard and soft skills
+    final hardSkills = await getOnlyHardSkills();
+    final softSkills = await getOnlySoftSkills();
+    return [...hardSkills, ...softSkills];
   }
 
+  /// Fake getInternshipPeriodTags API that returns mock internship period tags
+  /// Matches: TagProvider.getInternshipPeriodTags()
   @override
-  Future<List<FieldModel>> getInternshipPeriodTags() {
-    // TODO: implement getInternshipPeriodTags
-    throw UnimplementedError();
+  Future<List<FieldModel>> getInternshipPeriodTags() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return mock internship period tags
+    final List<Map<String, dynamic>> mockData = [
+      {
+        'id': 1,
+        'type': 'internship_period',
+        'label': 'Summer (June - August)',
+        'category_id': 25,
+        'category': 'Internship Periods',
+      },
+      {
+        'id': 2,
+        'type': 'internship_period',
+        'label': 'Fall (September - November)',
+        'category_id': 25,
+        'category': 'Internship Periods',
+      },
+      {
+        'id': 3,
+        'type': 'internship_period',
+        'label': 'Winter (December - February)',
+        'category_id': 25,
+        'category': 'Internship Periods',
+      },
+      {
+        'id': 4,
+        'type': 'internship_period',
+        'label': 'Spring (March - May)',
+        'category_id': 25,
+        'category': 'Internship Periods',
+      },
+      {
+        'id': 5,
+        'type': 'internship_period',
+        'label': 'Full Year',
+        'category_id': 25,
+        'category': 'Internship Periods',
+      },
+    ];
+
+    return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
+  /// Fake getInternshipTypeTags API that returns mock internship type tags
+  /// Matches: TagProvider.getInternshipTypeTags()
   @override
-  Future<List<FieldModel>> getInternshipTypeTags() {
-    // TODO: implement getInternshipTypeTags
-    throw UnimplementedError();
+  Future<List<FieldModel>> getInternshipTypeTags() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return mock internship type tags
+    final List<Map<String, dynamic>> mockData = [
+      {
+        'id': 1,
+        'type': 'internship_type',
+        'label': 'Paid Internship',
+        'category_id': 24,
+        'category': 'Internship Types',
+      },
+      {
+        'id': 2,
+        'type': 'internship_type',
+        'label': 'Unpaid Internship',
+        'category_id': 24,
+        'category': 'Internship Types',
+      },
+      {
+        'id': 3,
+        'type': 'internship_type',
+        'label': 'Part-time Internship',
+        'category_id': 24,
+        'category': 'Internship Types',
+      },
+      {
+        'id': 4,
+        'type': 'internship_type',
+        'label': 'Full-time Internship',
+        'category_id': 24,
+        'category': 'Internship Types',
+      },
+    ];
+
+    return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
+  /// Fake getLanguages API that returns mock languages
+  /// Matches: TagProvider.getLanguages()
   @override
   Future<List<FieldModel>> getLanguages() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock languages response
     final List<Map<String, dynamic>> mockData = [
@@ -387,10 +494,12 @@ class FakeTagProvider implements ITagProvider {
     return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
+  /// Fake getOnlyHardSkills API that returns mock hard skills
+  /// Matches: TagProvider.getOnlyHardSkills()
   @override
   Future<List<FieldModel>> getOnlyHardSkills() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock hard skills response
     final List<Map<String, dynamic>> mockData = [
@@ -944,10 +1053,12 @@ class FakeTagProvider implements ITagProvider {
     return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
+  /// Fake getOnlySoftSkills API that returns mock soft skills
+  /// Matches: TagProvider.getOnlySoftSkills()
   @override
   Future<List<FieldModel>> getOnlySoftSkills() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock soft skills response
     final List<Map<String, dynamic>> mockData = [
@@ -1538,15 +1649,137 @@ class FakeTagProvider implements ITagProvider {
     return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
+  /// Fake getSchoolDegreeTags API that returns mock school degree tags
+  /// Matches: TagProvider.getSchoolDegreeTags()
   @override
-  Future<List<FieldModel>> getSchoolDegreeTags() {
-    // TODO: implement getSchoolDegreeTags
-    throw UnimplementedError();
+  Future<List<FieldModel>> getSchoolDegreeTags() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return mock school degree tags
+    final List<Map<String, dynamic>> mockData = [
+      {
+        'id': 1,
+        'type': 'degree',
+        'label': 'High School Diploma',
+        'category_id': 26,
+        'category': 'School Degrees',
+      },
+      {
+        'id': 2,
+        'type': 'degree',
+        'label': "Bachelor's Degree",
+        'category_id': 26,
+        'category': 'School Degrees',
+      },
+      {
+        'id': 3,
+        'type': 'degree',
+        'label': "Master's Degree",
+        'category_id': 26,
+        'category': 'School Degrees',
+      },
+      {
+        'id': 4,
+        'type': 'degree',
+        'label': 'PhD',
+        'category_id': 26,
+        'category': 'School Degrees',
+      },
+      {
+        'id': 5,
+        'type': 'degree',
+        'label': 'Associate Degree',
+        'category_id': 26,
+        'category': 'School Degrees',
+      },
+    ];
+
+    return mockData.map((json) => FieldModel.fromJson(json)).toList();
   }
 
+  /// Fake getSchools API that returns mock schools
+  /// Matches: TagProvider.getSchools()
   @override
-  Future<List<SchoolModel>> getSchools() {
-    // TODO: implement getSchools
-    throw UnimplementedError();
+  Future<List<SchoolModel>> getSchools() async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Return mock schools
+    final List<Map<String, dynamic>> mockData = [
+      {
+        'id': 1,
+        'name': 'University of Brussels',
+        'description': 'A leading university in Belgium',
+        'website': 'https://www.ulb.be',
+        'address_street': 'Avenue Franklin Roosevelt 50',
+        'address_city': 'Brussels',
+        'address_zip': '1050',
+        'address_country': 'Belgium',
+        'fields': [
+          {
+            'id': 104,
+            'type': 'field',
+            'label': 'Finance',
+            'category_id': 16,
+            'category': 'Business',
+          },
+          {
+            'id': 207,
+            'type': 'field',
+            'label': 'Information Technology',
+            'category_id': 17,
+            'category': 'Science',
+          },
+        ],
+      },
+      {
+        'id': 2,
+        'name': 'KU Leuven',
+        'description': 'Catholic University of Leuven',
+        'website': 'https://www.kuleuven.be',
+        'address_street': 'Oude Markt 13',
+        'address_city': 'Leuven',
+        'address_zip': '3000',
+        'address_country': 'Belgium',
+        'fields': [
+          {
+            'id': 109,
+            'type': 'field',
+            'label': 'Communication',
+            'category_id': 16,
+            'category': 'Business',
+          },
+          {
+            'id': 215,
+            'type': 'field',
+            'label': 'Art',
+            'category_id': 17,
+            'category': 'Arts',
+          },
+        ],
+      },
+      {
+        'id': 3,
+        'name': 'Ghent University',
+        'description': 'Public research university in Ghent',
+        'website': 'https://www.ugent.be',
+        'address_street': 'Sint-Pietersnieuwstraat 33',
+        'address_city': 'Ghent',
+        'address_zip': '9000',
+        'address_country': 'Belgium',
+        'fields': [
+          {
+            'id': 208,
+            'type': 'field',
+            'label': 'Business management',
+            'category_id': 16,
+            'category': 'Business',
+          },
+        ],
+      },
+    ];
+
+    return mockData.map((json) => SchoolModel.fromJson(json)).toList();
   }
 }

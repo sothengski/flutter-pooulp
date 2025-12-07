@@ -6,14 +6,11 @@ import '../modules.dart';
 class EducationBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<StudentProvider>(
-      () => StudentProvider(),
-    );
-    Get.lazyPut<ProfileController>(
-      () => ProfileController(),
-    );
-    Get.lazyPut<EducationController>(
-      () => EducationController(),
-    );
+    Get.lazyPut<StudentProvider>(() => StudentProvider());
+    Get.lazyPut<ProfileController>(() => ProfileController());
+    Get.lazyPut<EducationController>(() => EducationController());
+    Get.lazyPut<FakeUserInfoProvider>(
+      () => FakeUserInfoProvider(),
+    ); // TODO: Change to UserInfoProvider() when backend is ready
   }
 }

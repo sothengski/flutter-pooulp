@@ -2,36 +2,210 @@ import 'dart:async';
 
 import '../../data.dart';
 
+/// Fake AuthProvider that mimics the real AuthProvider interface
+/// without requiring a backend connection.
+///
+/// Best practices:
+/// 1. Match the exact method signatures from the real provider
+/// 2. Use Future.delayed to simulate network latency
+/// 3. Return properly structured mock data using model classes
+/// 4. Handle error cases appropriately
+/// 5. Make it easy to switch between real and fake providers
 class FakeAuthProvider {
-  /// Fake login API that returns mock data for local testing
-  Future<LoginModel> loginAPI({required ProfileModel? loginData}) async {
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+  // Simulated network delay (adjust as needed)
+  static const Duration _networkDelay = Duration(milliseconds: 500);
 
-    // Validate credentials (optional - you can remove this if you want to always succeed)
-    if (loginData?.email == 'john.appleseed@example.com' &&
-        loginData?.password == '123456') {
-      // Return mock login response
+  /// Fake login API that returns mock data for local testing
+  /// Matches: AuthProvider.logInAPI()
+  Future<LoginModel> logInAPI({required ProfileModel? loginData}) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Optional: Validate credentials (remove validation to always succeed)
+    if (loginData?.email == 'test@example.com' &&
+        loginData?.password == 'password123') {
+      // Return mock successful login response
       return LoginModel.fromJson({
         'token':
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuZGV2LWxhbXAtMDEuc3J2LnBvb3VscC5ldVwvbG9naW4iLCJpYXQiOjE2MzkwMzA3NDQsImV4cCI6MTYzOTExNzE0NCwibmJmIjoxNjM5MDMwNzQ0LCJqdGkiOiJhTDZxcVFvQXFva3R3MmFGIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.eQlxq-xcBssX02jB8OaP3hquQn_TuA-Nw5iXtFRIDZ4',
         'token_type': 'bearer',
         'expires_in': 86400,
         'account_type': 'student',
+        'token_expiration_date': DateTime.now()
+            .add(const Duration(days: 100))
+            .toIso8601String(),
       });
     } else {
-      // Return error for invalid credentials
+      // Return error for invalid credentials (matches real API behavior)
       return Future.error('Invalid email or password');
     }
   }
+
+  /// Fake logout API
+  /// Matches: AuthProvider.logOutAPI()
+  Future<JsonResponse> logOutAPI({required String? token}) async {
+    await Future.delayed(_networkDelay);
+
+    // Simulate successful logout
+    return const JsonResponse(
+      success: true,
+      status: 200,
+      message: 'Logged out successfully',
+      data: {'message': 'Logged out successfully'},
+    );
+  }
+
+  /// Fake register new user API
+  /// Matches: AuthProvider.registerNewUserAPI()
+  Future<LoginModel> registerNewUserAPI({
+    required ProfileModel? registrationData,
+  }) async {
+    await Future.delayed(_networkDelay);
+
+    // Validate required fields (optional)
+    if (registrationData?.email == null ||
+        (registrationData?.email?.isEmpty ?? true)) {
+      return Future.error('Email is required');
+    }
+
+    // Return mock successful registration response
+    return LoginModel.fromJson({
+      'token':
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuZGV2LWxhbXAtMDEuc3J2LnBvb3VscC5ldVwvcmVnaXN0ZXIiLCJpYXQiOjE2Mzk0NjgwNzcsImV4cCI6MTYzOTU1NDQ3NywibmJmIjoxNjM5NDY4MDc3LCJqdGkiOiJ2elBmeEFQVTF2OHRSaThPIiwic3ViIjoxMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.YFxmdILgFcxtA-xKbVZFd-fW79kjOdAKjES9qAkP7N4',
+      'token_type': 'bearer',
+      'expires_in': 86400,
+      'account_type': 'student',
+      'token_expiration_date': DateTime.now()
+          .add(const Duration(days: 100))
+          .toIso8601String(),
+    });
+  }
+
+  /// Fake change password API
+  /// Matches: AuthProvider.putChangePassword()
+  Future<JsonResponse> putChangePassword({
+    required String? currentPassword,
+    required String? newPassword,
+    required String? newPasswordConfirmation,
+  }) async {
+    await Future.delayed(_networkDelay);
+
+    // Optional: Validate passwords match
+    if (newPassword != newPasswordConfirmation) {
+      return const JsonResponse(
+        status: 400,
+        message: 'New passwords do not match',
+        data: {'error': 'New passwords do not match'},
+      );
+    }
+
+    // Simulate successful password change
+    return const JsonResponse(
+      success: true,
+      status: 200,
+      message: 'Password changed successfully',
+      data: {'message': 'Password changed successfully'},
+    );
+  }
+
+  /// Fake forgot password API
+  /// Matches: AuthProvider.postForgotPassword()
+  Future<JsonResponse> postForgotPassword({required String? email}) async {
+    await Future.delayed(_networkDelay);
+
+    // Optional: Validate email format
+    if (email == null || !email.contains('@')) {
+      return const JsonResponse(
+        status: 400,
+        message: 'Invalid email address',
+        data: {'error': 'Invalid email address'},
+      );
+    }
+
+    // Simulate successful password reset email sent
+    return const JsonResponse(
+      success: true,
+      status: 200,
+      message: 'Password reset email sent',
+      data: {'message': 'Password reset email sent successfully'},
+    );
+  }
+
+  /// Fake delete user account API
+  /// Matches: AuthProvider.deleteUserAccount()
+  Future<JsonResponse> deleteUserAccount() async {
+    await Future.delayed(_networkDelay);
+
+    // Simulate successful account deletion
+    return const JsonResponse(
+      success: true,
+      status: 200,
+      message: 'Account deleted successfully',
+      data: {'message': 'Account deleted successfully'},
+    );
+  }
+
+  /// Fake verify email API
+  /// Matches: AuthProvider.verifyEmail()
+  Future<JsonResponse> verifyEmail({required String? email}) async {
+    await Future.delayed(_networkDelay);
+
+    // Optional: Validate email format
+    if (email == null || !email.contains('@')) {
+      return const JsonResponse(
+        status: 400,
+        message: 'Invalid email address',
+        data: {'error': 'Invalid email address'},
+      );
+    }
+
+    // Simulate successful verification email sent
+    return const JsonResponse(
+      success: true,
+      status: 200,
+      message: 'Verification email sent',
+      data: {'message': 'Verification email sent successfully'},
+    );
+  }
+
+  /// Fake refresh token API
+  /// Matches: AuthProvider.refreshTokenAPI()
+  Future<LoginModel> refreshTokenAPI() async {
+    await Future.delayed(_networkDelay);
+
+    // Return new token with extended expiration
+    return LoginModel.fromJson({
+      'token':
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuZGV2LWxhbXAtMDEuc3J2LnBvb3VscC5ldVwvcmVmcmVzaCIsImlhdCI6MTYzOTAzMDc0NCwiZXhwIjoxNjM5MTE3MTQ0LCJuYmYiOjE2MzkwMzA3NDQsImp0aSI6ImFMNnFxUW9BcW9rdHcyYUYiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.new_refresh_token_here',
+      'token_type': 'bearer',
+      'expires_in': 86400,
+      'account_type': 'student',
+      'token_expiration_date': DateTime.now()
+          .add(const Duration(days: 1))
+          .toIso8601String(),
+    });
+  }
 }
 
+/// Fake UserInfoProvider that mimics the real UserInfoProvider interface
+/// without requiring a backend connection.
+///
+/// Best practices:
+/// 1. Match the exact method signatures from the real provider
+/// 2. Use Future.delayed to simulate network latency
+/// 3. Return properly structured mock data using model classes
+/// 4. Handle error cases appropriately
+/// 5. Make it easy to switch between real and fake providers
 class FakeUserInfoProvider implements IUserInfoProvider {
-  /// Fake getUserInfo API that returns mock data for local testing
+  // Simulated network delay (adjust as needed)
+  static const Duration _networkDelay = Duration(milliseconds: 500);
+
+  /// Fake getUserInfo API that returns mock user info
+  /// Matches: UserInfoProvider.getUserInfo()
   @override
   Future<UserModel> getUserInfo() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock user info response
     return UserModel.fromJson({
@@ -84,10 +258,12 @@ class FakeUserInfoProvider implements IUserInfoProvider {
     });
   }
 
+  /// Fake getStudentProfileInfo API that returns mock student profile info
+  /// Matches: UserInfoProvider.getStudentProfileInfo()
   @override
   Future<StudentProfileModel> getStudentProfileInfo() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(_networkDelay);
 
     // Return mock student profile info response
     return StudentProfileModel.fromJson({
@@ -656,23 +832,81 @@ class FakeUserInfoProvider implements IUserInfoProvider {
     });
   }
 
+  /// Fake putUpdateStudentProfileInfo API that simulates updating student profile
+  /// Matches: UserInfoProvider.putUpdateStudentProfileInfo()
   @override
   Future<StudentProfileModel> putUpdateStudentProfileInfo({
     StudentProfileModel? data,
-  }) {
-    // TODO: implement putUpdateStudentProfileInfo
-    throw UnimplementedError();
+  }) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate input
+    if (data == null) {
+      return Future.error('Student profile data is required');
+    }
+
+    // Return the updated student profile (in real scenario, this would be the updated data from server)
+    return getStudentProfileInfo();
   }
 
+  /// Fake putUpdateUserProfileInfo API that simulates updating user profile
+  /// Matches: UserInfoProvider.putUpdateUserProfileInfo()
   @override
-  Future<ProfileModel> putUpdateUserProfileInfo({ProfileModel? data}) {
-    // TODO: implement putUpdateUserProfileInfo
-    throw UnimplementedError();
+  Future<ProfileModel> putUpdateUserProfileInfo({ProfileModel? data}) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate input
+    if (data == null) {
+      return Future.error('Profile data is required');
+    }
+
+    // Return the updated profile (in real scenario, this would be the updated data from server)
+    final userInfo = await getUserInfo();
+    return userInfo.profile!;
   }
 
+  /// Fake uploadImage API that simulates uploading a profile picture
+  /// Matches: UserInfoProvider.uploadImage()
   @override
-  Future<ProfileModel> uploadImage({String? filepath}) {
-    // TODO: implement uploadImage
-    throw UnimplementedError();
+  Future<ProfileModel> uploadImage({String? filepath}) async {
+    // Simulate network delay
+    await Future.delayed(_networkDelay);
+
+    // Validate input
+    if (filepath == null || filepath.isEmpty) {
+      return Future.error('File path is required');
+    }
+
+    // Return updated profile with new picture URL
+    final userInfo = await getUserInfo();
+    final profile = userInfo.profile!;
+
+    // In a real scenario, the server would return the updated profile with the new picture URL
+    // For fake provider, we'll return the existing profile
+    return ProfileModel(
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      email: profile.email,
+      description: profile.description,
+      phone1CountryCode: profile.phone1CountryCode,
+      phone1: profile.phone1,
+      phone2CountryCode: profile.phone2CountryCode,
+      phone2: profile.phone2,
+      uiLanguage: profile.uiLanguage,
+      accountType: profile.accountType,
+      birthDate: profile.birthDate,
+      pictureUrl:
+          '/uploads/images/profile_picture/mock_${DateTime.now().millisecondsSinceEpoch}.jpg',
+      emailNotification: profile.emailNotification,
+      newsLetterNotification: profile.newsLetterNotification,
+      addressStreet: profile.addressStreet,
+      addressCity: profile.addressCity,
+      addressZip: profile.addressZip,
+      addressCountry: profile.addressCountry,
+      addressLatitude: profile.addressLatitude,
+      addressLongitude: profile.addressLongitude,
+    );
   }
 }

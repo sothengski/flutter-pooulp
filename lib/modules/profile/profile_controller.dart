@@ -8,7 +8,11 @@ class ProfileController extends GetxController {
   final homeController = Get.put(HomeController());
   final languageController = Get.put(LanguageController());
 
-  final userInfoProvider = Get.find<UserInfoProvider>();
+  // final userInfoProvider = Get.find<UserInfoProvider>();
+  final userInfoProvider =
+      Get.find<
+        FakeUserInfoProvider
+      >(); // TODO: Change to UserInfoProvider() when backend is ready
 
   final cvGenerate = CVGenerate();
 
@@ -65,9 +69,7 @@ class ProfileController extends GetxController {
   Future<Rx<UserModel>> getUserInfoResponseProvider({
     bool? refresh = false,
   }) async {
-    /// TODO: remove this function after offline testing
-    // userInfoRepsonse.value = await userInfoProvider.getUserInfo();
-    userInfoRepsonse.value = await FakeUserInfoProvider().getUserInfo();
+    userInfoRepsonse.value = await userInfoProvider.getUserInfo();
     userProfileInfo.value = userInfoRepsonse.value.profile!;
     // debugPrint('userInfoRepsonse: $userInfoRepsonse');
     changeLanguageBasedOnProfileLanguage(
@@ -80,10 +82,7 @@ class ProfileController extends GetxController {
     bool? refresh = false,
   }) async {
     if (homeController.userToken!.accountType == 'student') {
-      /// TODO: remove this function after offline testing
-      // studentInfoRepsonse.value = await userInfoProvider
-      //     .getStudentProfileInfo();
-      studentInfoRepsonse.value = await FakeUserInfoProvider()
+      studentInfoRepsonse.value = await userInfoProvider
           .getStudentProfileInfo();
       return studentInfoRepsonse;
     }

@@ -45,7 +45,6 @@ dependencies:
   firebase_dynamic_links: ^6.1.10
   flutter_keychain: 2.2.1
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

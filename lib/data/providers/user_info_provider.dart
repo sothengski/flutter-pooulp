@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-import '../data.dart';
+import '../../data/data.dart';
 
 abstract class IUserInfoProvider {
   Future<UserModel> getUserInfo();

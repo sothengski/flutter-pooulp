@@ -11,6 +11,10 @@ import '../../routes/routes.dart';
 
 class SplashController extends GetxController {
   final appBasicProvider = Get.find<AppBasicProvider>();
+  final fakeAppBasicProvider =
+      Get.find<
+        FakeAppBasicProvider
+      >(); // TODO: Change to AppBasicProvider() when backend is ready
   // ignore: cancel_subscriptions
   StreamSubscription? sub;
 

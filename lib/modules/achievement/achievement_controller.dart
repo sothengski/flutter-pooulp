@@ -7,7 +7,10 @@ import '../modules.dart';
 
 class AchievementController extends GetxController {
   final profileController = Get.find<ProfileController>();
-  final studentProvider = Get.put(StudentProvider());
+  // final studentProvider = Get.put(StudentProvider());
+  final studentProvider = Get.put(
+    FakeStudentProvider(),
+  ); // TODO: Change to StudentProvider() when backend is ready
 
   String? title;
   int achievementId = 0;
@@ -33,8 +36,8 @@ class AchievementController extends GetxController {
       descriptionTextCtrl.text = achievementDataArg.description!;
       selectedCompletionDateString.value =
           achievementDataArg.dateCompletion == null
-              ? ''
-              : achievementDataArg.dateCompletion.toString();
+          ? ''
+          : achievementDataArg.dateCompletion.toString();
     }
   }
 
@@ -47,9 +50,7 @@ class AchievementController extends GetxController {
         name: achievementNameTextCtrl.text.trim(),
         dateCompletion: selectedCompletionDateString.value == ''
             ? null
-            : DateTime.tryParse(
-                selectedCompletionDateString.value,
-              ),
+            : DateTime.tryParse(selectedCompletionDateString.value),
         description: descriptionTextCtrl.text.trim(),
       );
       makeRequestToAchievementAPI(
@@ -93,12 +94,13 @@ class AchievementController extends GetxController {
       customSnackbar(
         msgTitle: 'core.success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'successfullyAdded'.tr //'profile.achievementAddSuccessMsg'.tr
+            ? 'successfullyAdded'
+                  .tr //'profile.achievementAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'successfullyUpdated'
-                    .tr //'profile.achievementEditSuccessMsg'.tr
-                : 'successfullyDeleted'
-                    .tr, //'profile.achievementDeleteSuccessMsg'.tr,
+            ? 'successfullyUpdated'
+                  .tr //'profile.achievementEditSuccessMsg'.tr
+            : 'successfullyDeleted'
+                  .tr, //'profile.achievementDeleteSuccessMsg'.tr,
         //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Achievement Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

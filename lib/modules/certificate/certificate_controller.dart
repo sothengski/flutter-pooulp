@@ -7,7 +7,10 @@ import '../modules.dart';
 
 class CertificateController extends GetxController {
   final profileController = Get.find<ProfileController>();
-  final studentProvider = Get.put(StudentProvider());
+  // final studentProvider = Get.put(StudentProvider());
+  final studentProvider = Get.put(
+    FakeStudentProvider(),
+  ); // TODO: Change to StudentProvider() when backend is ready
 
   String? title;
   int certificateId = 0;
@@ -50,14 +53,10 @@ class CertificateController extends GetxController {
         title: certificateTitleTextCtrl.text.trim(),
         receivedDate: selectedReceivedDateString.value == ''
             ? null
-            : DateTime.tryParse(
-                selectedReceivedDateString.value,
-              ),
+            : DateTime.tryParse(selectedReceivedDateString.value),
         expirationDate: selectedExpireDateString.value == ''
             ? null
-            : DateTime.tryParse(
-                selectedExpireDateString.value,
-              ),
+            : DateTime.tryParse(selectedExpireDateString.value),
         description: descriptionTextCtrl.text.trim(),
       );
       makeRequestToCertificateAPI(
@@ -101,12 +100,13 @@ class CertificateController extends GetxController {
       customSnackbar(
         msgTitle: 'success'.tr,
         msgContent: operation == Keys.addOperation
-            ? 'successfullyAdded'.tr //'profile.certificateAddSuccessMsg'.tr
+            ? 'successfullyAdded'
+                  .tr //'profile.certificateAddSuccessMsg'.tr
             : operation == Keys.editOperation
-                ? 'successfullyUpdated'
-                    .tr //'profile.certificateEditSuccessMsg'.tr
-                : 'successfullyDeleted'
-                    .tr, //'profile.certificateDeleteSuccessMsg'.tr,
+            ? 'successfullyUpdated'
+                  .tr //'profile.certificateEditSuccessMsg'.tr
+            : 'successfullyDeleted'
+                  .tr, //'profile.certificateDeleteSuccessMsg'.tr,
         //    'Successfully $operation${operation == Keys.deleteOperation ? 'd' : 'ed'} Certificate Information',
         bgColor: ColorsManager.green,
         duration: DurationConstant.d1500,

@@ -6,14 +6,11 @@ import '../modules.dart';
 class LanguageUsageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<StudentProvider>(
-      () => StudentProvider(),
-    );
-    Get.lazyPut<ProfileController>(
-      () => ProfileController(),
-    );
-    Get.lazyPut<LanguageUsageController>(
-      () => LanguageUsageController(),
-    );
+    Get.lazyPut<StudentProvider>(() => StudentProvider());
+    Get.lazyPut<ProfileController>(() => ProfileController());
+    Get.lazyPut<LanguageUsageController>(() => LanguageUsageController());
+    Get.lazyPut<FakeUserInfoProvider>(
+      () => FakeUserInfoProvider(),
+    ); // TODO: Change to UserInfoProvider() when backend is ready
   }
 }

@@ -5,7 +5,11 @@ import '../../data/data.dart';
 import '../../routes/routes.dart';
 
 class HomeController extends GetxController {
-  final authProvider = Get.find<AuthProvider>();
+  // final authProvider = Get.find<AuthProvider>();
+  final authProvider =
+      Get.find<
+        FakeAuthProvider
+      >(); // TODO: Change to AuthProvider() when backend is ready
 
   late LoginModel? userToken;
 

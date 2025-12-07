@@ -35,13 +35,8 @@ class OfferTypesListComponent extends StatelessWidget {
             child: FilterChip(
               // padding: EdgeInsets.zero,
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(AppSize.s16),
-                ),
-                side: BorderSide(
-                  width: 0.3,
-                  color: ColorsManager.primary50,
-                ),
+                borderRadius: BorderRadius.all(Radius.circular(AppSize.s16)),
+                side: BorderSide(width: 0.3, color: ColorsManager.primary50),
               ),
               labelPadding: const EdgeInsets.symmetric(
                 horizontal: AppSize.s16,
@@ -63,9 +58,7 @@ class OfferTypesListComponent extends StatelessWidget {
                 isTextColor: false,
               ),
               onSelected: (_) {
-                controller.selectType(
-                  type: controller.listFilterTypes[index],
-                );
+                controller.selectType(type: controller.listFilterTypes[index]);
               },
             ),
           );

@@ -8,8 +8,16 @@ import '../../modules.dart';
 class OfferFeedController extends GetxController
     with StateMixin<RxList<JobOfferModel>> {
   // final feedProvider = Get.find<FeedProvider>();
-  final offerProvider = Get.find<OfferProvider>();
-  final tagProvider = Get.find<TagProvider>();
+  // final offerProvider = Get.find<OfferProvider>();
+  // final tagProvider = Get.find<TagProvider>();
+  final offerProvider =
+      Get.find<
+        FakeOfferProvider
+      >(); // TODO: Change to OfferProvider() when backend is ready
+  final tagProvider =
+      Get.find<
+        FakeTagProvider
+      >(); // TODO: Change to TagProvider() when backend is ready
   final placeApiProvider = Get.put(PlaceApiProvider());
 
   final offerHelper = OfferHelper();
@@ -521,18 +529,14 @@ class OfferFeedController extends GetxController
   }) async {
     selectType(type: allType, isRefresh: false);
     // listJobOfferTypes.add(allType);
-    /// TODO: remove this function after offline testing
-    // listJobOfferTypes.addAll(await tagProvider.getJobOfferTypes());
-    listJobOfferTypes.addAll(await FakeTagProvider().getJobOfferTypes());
+    listJobOfferTypes.addAll(await tagProvider.getJobOfferTypes());
     return listJobOfferTypes;
   }
 
   Future<List<FieldModel>> getFieldsListResponseProvider({
     bool? refresh = false,
   }) async {
-    /// TODO: remove this function after offline testing
-    // fieldListForSearch.addAll(await tagProvider.getAllFields());
-    fieldListForSearch.addAll(await FakeTagProvider().getAllFields());
+    fieldListForSearch.addAll(await tagProvider.getAllFields());
     // debugPrint(
     //   'fieldListForSearch:: ${fieldListForSearch.map((element) => '${element.label}\n')}',
     // );
@@ -542,8 +546,7 @@ class OfferFeedController extends GetxController
   Future<List<FieldModel>> getLanguagesListResponseProvider({
     bool? refresh = false,
   }) async {
-    /// TODO: remove this function after offline testing
-    languageListForSearch.addAll(await FakeTagProvider().getLanguages());
+    languageListForSearch.addAll(await tagProvider.getLanguages());
     // debugPrint(
     //   'languageListForSearch:: ${languageListForSearch.map((element) => '${element.label}\n')}',
     // );
@@ -554,9 +557,7 @@ class OfferFeedController extends GetxController
     bool? refresh = false,
   }) async {
     availabilitiesTagListForSearch.addAll(
-      /// TODO: remove this function after offline testing
-      // await tagProvider.getAvailabilitiesTags(),
-      await FakeTagProvider().getAvailabilitiesTags(),
+      await tagProvider.getAvailabilitiesTags(),
     );
     // debugPrint(
     //   'availabilitiesTagListForSearch:: ${availabilitiesTagListForSearch.map((element) => '${element.label}\n')}',
@@ -568,10 +569,7 @@ class OfferFeedController extends GetxController
     bool? refresh = false,
   }) async {
     internshipTypeTagListForSearch.addAll(
-      [],
-
-      /// TODO: remove this function after offline testing
-      // await tagProvider.getInternshipTypeTags(),
+      await tagProvider.getInternshipTypeTags(),
     );
     return internshipTypeTagListForSearch;
   }
@@ -580,10 +578,7 @@ class OfferFeedController extends GetxController
     bool? refresh = false,
   }) async {
     internshipPeriodTagListForSearch.addAll(
-      [],
-
-      /// TODO: remove this function after offline testing
-      // await tagProvider.getInternshipPeriodTags(),
+      await tagProvider.getInternshipPeriodTags(),
     );
     return internshipPeriodTagListForSearch;
   }
@@ -687,8 +682,7 @@ class OfferFeedController extends GetxController
         await offerProvider.deleteSavedSearch(savedSearchId: 1);
       }
 
-      /// TODO: remove this function after offline testing
-      // await getSearchPreferenceResponseProvider();
+      await getSearchPreferenceResponseProvider();
 
       // feedListPaginationRepsonse = await offerProvider
       //     .postSearchOfferWithPagination(
@@ -696,9 +690,8 @@ class OfferFeedController extends GetxController
       //       jobOfferForSearch: jobOfferToBeSearch.value,
       //     );
 
-      /// TODO: remove this function after offline testing
       feedListPaginationRepsonse = PaginationModel(
-        data: await FakeOfferProvider().getSearchOfferWithPagination(
+        data: await offerProvider.getSearchOfferWithPagination(
           pageNumber: 1,
           jobOfferForSearch: jobOfferToBeSearch.value,
         ),

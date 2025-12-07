@@ -7,8 +7,14 @@ import '../modules.dart';
 
 class SkillController extends GetxController {
   final profileController = Get.find<ProfileController>();
-  final studentProvider = Get.put(StudentProvider());
-  final tagProvider = Get.find<TagProvider>();
+  // final studentProvider = Get.put(StudentProvider());
+  // final tagProvider = Get.find<TagProvider>();
+  final studentProvider = Get.put(
+    FakeStudentProvider(),
+  ); // TODO: Change to StudentProvider() when backend is ready
+  final tagProvider = Get.put(
+    FakeTagProvider(),
+  ); // TODO: Change to TagProvider() when backend is ready
 
   String? title;
 

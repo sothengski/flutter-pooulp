@@ -8,7 +8,11 @@ import '../modules.dart';
 class FeedController extends GetxController
     with StateMixin<RxList<JobOfferModel>> {
   // final feedProvider = Get.find<FeedProvider>();
-  final offerProvider = Get.find<OfferProvider>();
+  // final offerProvider = Get.find<OfferProvider>();
+  final offerProvider =
+      Get.find<
+        FakeOfferProvider
+      >(); // TODO: Change to OfferProvider() when backend is ready
 
   final offerHelper = OfferHelper();
 
@@ -69,9 +73,7 @@ class FeedController extends GetxController
     // applyButtonStateList.clear();
     // savedButtonStateList.clear();
     // hideButtonStateList.clear();
-    /// TODO: remove this function after offline testing
-    // feedListRepsonse.value = await offerProvider.getFeedOffers();
-    feedListRepsonse.value = await FakeOfferProvider().getFeedOffers();
+    feedListRepsonse.value = await offerProvider.getFeedOffers();
     addTypesIntoSet(jobOfferTrxData: feedListRepsonse);
     debugPrint('feedListRepsonse: ${feedListRepsonse.length}');
     return feedListRepsonse;
